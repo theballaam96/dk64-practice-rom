@@ -514,7 +514,7 @@ Start:
 		J       0x805FC15C // retroben's hook but up a few functions
 		NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/PositionSavestates.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/PositionSavestates.asm"
 
 CodedSetPermFlag:
 	// a0 is parameter for encoded flag
@@ -539,7 +539,7 @@ CodedPlaySFX:
 	JR 		ra
 	NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Savestate.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Savestate.asm"
 
 // Check if in Bad Map
 CheckMapType:
@@ -704,9 +704,9 @@ ChangeColour:
 		NOP
 
 .org 0x805DAE00
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Watch/Watches.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Watches.asm"
 .align
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Watch/Input.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Input.asm"
 .align
 
 // Loops through a flag array and sets all of them
@@ -765,7 +765,7 @@ ClearAllFlags:
 		JR
 		ADDIU	sp, sp, 0x18
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/TagAnywhere.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/TagAnywhere.asm"
 .align
 
 GiveCoins:
@@ -806,9 +806,9 @@ PopulateSpecialFlagsArray:
 		JR 		ra
 		NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Sandstorm.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Sandstorm.asm"
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Watch/GiantKosha.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/GiantKosha.asm"
 
 AutoPhaseState:
 	LBU 	a0, @AutoPhaseStateOn
@@ -901,7 +901,7 @@ CopyTextToWatch:
 		JR 		ra
 		NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/FormatTextForWatch.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/FormatTextForWatch.asm"
 
 ConvertCodePointerForWatchText:
 	// a1 = New Address
@@ -927,7 +927,7 @@ InfiniteHealth:
 		JR 		ra
 		NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/FileStates.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/FileStates.asm"
 .align
 
 LToLevitate:
@@ -1035,7 +1035,7 @@ KongCode:
 		J 		0x806F3758
 		NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Watch/Timer.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Timer.asm"
 
 GiveMoves:
 	LI 		a0, 4
@@ -1261,13 +1261,13 @@ HandleEnemySpawnPrevent:
 		JR 		ra
 		NOP
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/LZLooper.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/LZLooper.asm"
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/FrameControl.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/FrameControl.asm"
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Watch/WatchControl.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/WatchControl.asm"
 
-.incasm "./Docs/DK64 ASM Hacking/Practice ROM/Practice ROM v1_4/Features/Active Menu/base.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Active Menu/base.asm"
 
 ActiveMenu_OpenMapWarper:
 	SW 		ra, @ReturnAddress3
