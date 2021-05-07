@@ -9,7 +9,7 @@ Practice ROM for Donkey Kong 64 that assists with practising the game. Written i
 ## Development Setup
 1. Setup a version of [BizHawk](http://tasvideos.org/Bizhawk) (Some version between 1.11.8.1 and 1.13.2 works best for DK64)
 2. Download [ScriptHawk](https://github.com/Isotarge/ScriptHawk)
-3. Run [personaliseASM.py](https://github.com/theballaam96/dk64-practice-rom/blob/main/personaliseasm.py), this will open a few file directory prompts
+3. Run [personaliseASM.py](https://github.com/theballaam96/dk64-practice-rom/blob/main/personaliseASM.py), this will open a few file directory prompts
 	a. For the first prompt, select your **ScriptHawk** directory
 	b. For the second prompt, select your **Practice ROM** directory
 	This will modify the master assembler file to account for your system file structure. You will need to re-run this script every time you shift your ScriptHawk folder or your Practice ROM folder
