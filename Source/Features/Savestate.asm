@@ -225,3 +225,19 @@ GlobalSavestateHandler:
 		LW 	ra, @ReturnAddress4
 		JR 	ra
 		NOP
+
+.align
+Savestate_0:
+	.space 0x34C
+
+.align
+Savestate_1:
+	.space 0x34C
+
+.align
+Savestate_2:
+	.space 0x34C
+
+.align
+Savestate_3:
+	.space 0x34C
