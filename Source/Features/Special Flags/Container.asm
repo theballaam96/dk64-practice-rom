@@ -35,12 +35,12 @@ Menu_Flags_Functions:
 	.word ActiveMenu_OpenFlagMenu_Kong
 	.word ActiveMenu_OpenFlagMenu_KeyIn
 	.word ActiveMenu_OpenFlagMenu_KeyHave
-	.word 0
-	.word 0
-	.word 0
-	.word 0
-	.word 0
-	.word 0
+	.word ActiveMenu_OpenFlagMenu_LevelIntro
+	.word ActiveMenu_OpenFlagMenu_LevelTnS
+	.word ActiveMenu_OpenFlagMenu_BossIntro
+	.word ActiveMenu_OpenFlagMenu_Cutscenes
+	.word ActiveMenu_OpenFlagMenu_Modifiers
+	.word ActiveMenu_OpenFlagMenu_Misc
 
 .align
 Menu_Flags_Struct:
@@ -54,6 +54,12 @@ Menu_Flags_DataStruct:
 	.word Menu_Flags_KongStruct
 	.word Menu_Flags_KeyInStruct
 	.word Menu_Flags_KeyHaveStruct
+	.word Menu_Flags_LevelIntroStruct
+	.word Menu_Flags_LevelTnSStruct
+	.word Menu_Flags_BossIntroStruct
+	.word Menu_Flags_CutscenesStruct
+	.word Menu_Flags_ModifiersStruct
+	.word Menu_Flags_MiscStruct
 
 .align
 ActiveMenu_OpenFlagMenu:

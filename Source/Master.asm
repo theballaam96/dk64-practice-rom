@@ -57,6 +57,8 @@
 [LoadedActorCount]: 0x807FBB35
 [SpawnerArray]: 0x807FDC8C
 [SpawnerCount]: 0x807FDC88
+[MenuSkyTopRGB]: 0x80754F4C
+[MenuSkyRGB]: 0x80754F4F
 
 // Buttons
 [L_Button]: 0x0020
@@ -98,7 +100,7 @@
 [PauseMenuPointer]: 0x807FC640
 [MaxCooldown]: 6
 [MinCooldown]: 2
-[SpecialFlagCategories]: 3
+[SpecialFlagCategories]: 9
 
 // ISG
 [ISGActive]: 0x80755070
@@ -227,6 +229,8 @@
 [SelectedMapCap]: 0x807FFFCD // u8
 [MenuSlide]: 0x807FFFCC // u8
 [FrameAdvanceStart]: 0x807FFFC8 // u32
+[DisableStartupSkip]: 0x807FFFC7 // u8
+[DisableForcedStorySkip]: 0x807FFFC6 // u8
 [SandstormAddress]: 0x807FFDFC // u32
 [SandstormActive]: 0x807FFDFB // u8
 [SandstormChange]: 0x807FFDFA // u8
@@ -390,36 +394,19 @@ Start:
 		// //
 		// LI 		a1, 0x28410020
 		// SW 		a1, 0x8068C364
-		// Skip Rap/DK TV
-		LBU 	t3, @Gamemode
-		LI 		a1, 1 		// Nin/RW Skip
-		LI 		a2, 0x50 	// Dest Map
-		BEQ 	a1, t3, SetSkip
-		LI 		a3, 5 		// Dest GM
-		LI 		a1, 0 		// Nin/RW Skip
 
-		SetSkip:
-			SB 		a1, @BetaNinRWSkip
-			SB 		a2, 0x807132BF // Set Destination Map after N/R Logos to Main Menu
-			SB 		a3, 0x807132CB // Set Gamemode after N/R Logos to Main Menu Mode
-			// Story Skip On
-			LI 		t3, 1
-			SB 		t3, @StorySkip
-			// Turn off BoM Timer
-			SB 		r0, @HelmTimerPaused
-			SW 		r0, 0x80713DE0 // NOP out a line so that helm timeout is prevented
-			// Unlock Mystery Menu
-			LI      t6, 0x807ED558
-			LI      t0, -1
-			SD      t0, 0(t6)
-			// Set K Rool to round 11 (Cause the sound effect is the best one)
-			LBU 	t0, @InCutscene
-			LI 		t6, 6
-			BEQ 	t0, t6, TransitionFunctions
-			LUI 	t6, 0x3F80 // f32 = 1
-			LW 		t0, @TransitionSpeed
-			BNE 	t0, t6, EveryFrameFunctions
-			NOP
+		// Unlock Mystery Menu
+		LI      t6, 0x807ED558
+		LI      t0, -1
+		SD      t0, 0(t6)
+		// Set K Rool to round 11 (Cause the sound effect is the best one)
+		LBU 	t0, @InCutscene
+		LI 		t6, 6
+		BEQ 	t0, t6, TransitionFunctions
+		LUI 	t6, 0x3F80 // f32 = 1
+		LW 		t0, @TransitionSpeed
+		BNE 	t0, t6, EveryFrameFunctions
+		NOP
 
 	TransitionFunctions:
 		LW 		t6, @RNG
@@ -494,6 +481,12 @@ Start:
 		JAL 	FrameControl_FrameAdvanceInit
 		NOP
 		JAL 	FrameControl_FrameAdvanceExit
+		NOP
+		JAL 	ColourSky
+		NOP
+		JAL 	StartupSkip
+		NOP
+		JAL 	ForceStorySkip
 		NOP
 
 		// JAL 	HandleTimer
@@ -786,29 +779,6 @@ GiveCoins:
 	LW 		ra, @ReturnAddress4
 	JR 		ra
 	NOP
-
-PopulateSpecialFlagsArray:
-	LI 		a0, @SpecialFlagsCount
-	LA 		a1, SpecialFlags_text
-	LA 		a2, SpecialFlags_length
-	LI 		a3, @SpecialFlagsArray
-
-	SpecialFlagsPopulate:
-		SW 		a1, 0x0 (a3)
-		ADDIU 	a3, a3, 4 // Array pointer slot
-		ADDI 	a0, a0, -1 // Counter
-		LBU 	t6, 0x0 (a2)
-		ADDIU 	t6, t6, 1
-		ADD 	a1, a1, t6 // Text location
-		ADDIU	a2, a2, 1 // Focused length
-		BEQZ 	a0, FinishSpecialFlagsPopulation
-		NOP
-		B 		SpecialFlagsPopulate
-		NOP
-
-	FinishSpecialFlagsPopulation:
-		JR 		ra
-		NOP
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Sandstorm.asm"
 
@@ -1182,46 +1152,6 @@ SkewCheat:
 	SH 		a1, 0xE8 (a0)
 
 	SkewCheat_Finish:
-		JR 		ra
-		NOP
-
-// Toggle special flag
-ToggleSpecialFlag:
-	SW 		ra, @ReturnAddress
-	LBU 	a1, @MenuOpen
-	BEQZ 	a1, FinishWarp // Menu not open
-	NOP
-	LBU 	a1, @MenuSlide
-	BNEZ 	a1, FinishWarp // Not on slide 1
-	NOP
-	LBU 	a1, @MenuPosition
-	BNEZ 	a1, FinishWarp // Menu not in position 0
-	NOP
-	LH 		a1, @NewlyPressedControllerInput
-	ANDI 	a1, a1, @A_Button
-	BEQZ 	a1, FinishWarp // A not pressed
-	
-	LA 		a1, SpecialFlags_flags
-	LBU 	a2, @SpecialFlagIndex
-	SLL 	a3, a2, 1
-	ADD 	a1, a1, a3
-	LHU		a0, 0x0 (a1)
-	LA 		a3, SpecialFlags_flagType
-	ADD 	a3, a3, a2
-	LBU 	a1, 0x0 (a3)
-	SW 		a0, @VarStorage0
-	SW 		a1, @VarStorage1
-	JAL 	@CheckFlag
-	NOP
-	LW 		a1, @VarStorage1
-	LW 		a0, @VarStorage0
-	LI 		t6, 1
-	ADDIU 	a2, a1, 0
-	JAL     @SetFlag
-	SUBU 	a1, t6, v0
-
-	FinishWarp:
-		LW 		ra, @ReturnAddress
 		JR 		ra
 		NOP
 
@@ -2260,233 +2190,12 @@ Maps_WarpingStruct:
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Kongs.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/KeysIn.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/KeysHave.asm"
-
-.align
-SpecialFlags_text:
-	// Kongs
-	.asciiz "DK FREED - OFF"
-	.asciiz "DIDDY FREED - OFF"
-	.asciiz "LANKY FREED - OFF"
-	.asciiz "TINY FREED - OFF"
-	.asciiz "CHUNKY FREED - OFF"
-	// K. Lumsy & Keys
-	.asciiz "K. LUMSY INTRO - OFF"
-	.asciiz "KEY 1 - OFF"
-	.asciiz "KEY 1 TURNED - OFF"
-	.asciiz "KEY 2 - OFF"
-	.asciiz "KEY 2 TURNED - OFF"
-	.asciiz "KEY 3 - OFF"
-	.asciiz "KEY 3 TURNED - OFF"
-	.asciiz "KEY 4 - OFF"
-	.asciiz "KEY 4 TURNED - OFF"
-	.asciiz "KEY 5 - OFF"
-	.asciiz "KEY 5 TURNED - OFF"
-	.asciiz "KEY 6 - OFF"
-	.asciiz "KEY 6 TURNED - OFF"
-	.asciiz "KEY 7 - OFF"
-	.asciiz "KEY 7 TURNED - OFF"
-	.asciiz "KEY 8 - OFF"
-	.asciiz "KEY 8 TURNED - OFF"
-	// Level Intros
-	.asciiz "JAPES INTRO - OFF"
-	.asciiz "AZTEC INTRO - OFF"
-	.asciiz "FACTORY INTRO - OFF"
-	.asciiz "GALLEON INTRO - OFF"
-	.asciiz "FUNGI INTRO - OFF"
-	.asciiz "CAVES INTRO - OFF"
-	.asciiz "CASTLE INTRO - OFF"
-	// T&S Cleared
-	.asciiz "JAPES TNS CLEAR - OFF"
-	.asciiz "AZTEC TNS CLEAR - OFF"
-	.asciiz "FACTORY TNS CLEAR - OFF"
-	.asciiz "GALLEON TNS CLEAR - OFF"
-	.asciiz "FUNGI TNS CLEAR - OFF"
-	.asciiz "CAVES TNS CLEAR - OFF"
-	.asciiz "CASTLE TNS CLEAR - OFF"
-	// Boss Intros
-	.asciiz "ARMY DILLO 1 INTRO - OFF"
-	.asciiz "DOGADON 1 INTRO - OFF"
-	.asciiz "MAD JACK INTRO - OFF"
-	.asciiz "PUFFTOSS INTRO - OFF"
-	.asciiz "DOGADON 2 INTRO - OFF"
-	.asciiz "ARMY DILLO 2 INTRO - OFF"
-	.asciiz "KUT OUT INTRO - OFF"
-	// FTTs
-	.asciiz "B. LOCKER FIRST TEXT - OFF"
-	// Level Altering Flags
-	.asciiz "LLAMA CUTSCENE - OFF"
-	.asciiz "PRODUCTION ROOM - OFF"
-	.asciiz "GALLEON WATER RAISED - OFF"
-	.asciiz "GALLEON SHIP SPAWNED - OFF"
-	.asciiz "RABBIT RACE 1 BEAT - OFF"
-	.asciiz "FUNGI NIGHTTIME - OFF"
-	.asciiz "CAVES KOSHA DEAD - OFF"
-	.asciiz "BOM DEACTIVATED - OFF"
-
-.align
-SpecialFlags_length:
-	.byte 14 // DK Free
-	.byte 17 // Diddy Free
-	.byte 17 // Lanky Free
-	.byte 16 // Tiny Free
-	.byte 18 // Chunky Free
-	.byte 20 // K. Lumsy Intro
-	.byte 11 // Key 1
-	.byte 18 // Key 1 Turned
-	.byte 11 // Key 2
-	.byte 18 // Key 2 Turned
-	.byte 11 // Key 3
-	.byte 18 // Key 3 Turned
-	.byte 11 // Key 4
-	.byte 18 // Key 4 Turned
-	.byte 11 // Key 5
-	.byte 18 // Key 5 Turned
-	.byte 11 // Key 6
-	.byte 18 // Key 6 Turned
-	.byte 11 // Key 7
-	.byte 18 // Key 7 Turned
-	.byte 11 // Key 8
-	.byte 18 // Key 8 Turned
-	.byte 17 // Japes Intro
-	.byte 17 // Aztec Intro
-	.byte 19 // Factory Intro
-	.byte 19 // Galleon Intro
-	.byte 17 // Fungi Intro
-	.byte 17 // Caves Intro
-	.byte 18 // Castle Intro
-	.byte 21 // Japes T&S Clear
-	.byte 21 // Aztec T&S Clear
-	.byte 23 // Factory T&S Clear
-	.byte 23 // Galleon T&S Clear
-	.byte 21 // Fungi T&S Clear
-	.byte 21 // Caves T&S Clear
-	.byte 22 // Castle T&S Clear
-	.byte 24 // AD1 Intro
-	.byte 21 // Dog1 Intro
-	.byte 20 // MJ Intro
-	.byte 20 // Puff Intro
-	.byte 21 // Dog2 Intro
-	.byte 24 // AD2 Intro
-	.byte 19 // Kut Out Intro
-	.byte 26 // B. Locker FTT
-	.byte 20 // Llama CS
-	.byte 21 // Prod Room
-	.byte 26 // Galleon Water Raised
-	.byte 26 // Galleon Ship
-	.byte 24 // Fungi Rabbit Race 1
-	.byte 21 // Fungi Nighttime
-	.byte 22 // Giant Kosha Dead
-	.byte 21 // BoM Off
-
-.align
-SpecialFlags_flags:
-	.half 0x181 // DK Free 
-	.half 0x6 // Diddy Free
-	.half 0x46 // Lanky Free
-	.half 0x42 // Tiny Free
-	.half 0x75 // Chunky Free
-	.half 0x1BB // K. Lumsy Intro
-	.half 0x1A // Key 1
-	.half 0x1BC // Key 1 Turned
-	.half 0x4A // Key 2
-	.half 0x1BD // Key 2 Turned
-	.half 0x8A // Key 3
-	.half 0x1BE // Key 3 Turned
-	.half 0xA8 // Key 4
-	.half 0x1BF // Key 4 Turned
-	.half 0xEC // Key 5
-	.half 0x1C0 // Key 5 Turned
-	.half 0x124 // Key 6
-	.half 0x1C1 // Key 6 Turned
-	.half 0x13D // Key 7
-	.half 0x1C2 // Key 7 Turned
-	.half 0x17C // Key 8
-	.half 0x1C3 // Key 8 Turned
-	.half 0x1B // Japes Intro
-	.half 0x5F // Aztec Intro
-	.half 0x8C // Factory Intro
-	.half 0xC2 // Galleon Intro
-	.half 0x101 // Fungi Intro
-	.half 0x11A // Caves Intro
-	.half 0x15D // Castle Intro
-	.half 0x2E // Japes T&S Clear
-	.half 0x6C // Aztec T&S Clear
-	.half 0x98 // Factory T&S Clear
-	.half 0xCB // Galleon T&S Clear
-	.half 0x102 // Fungi T&S Clear
-	.half 0x12E // Caves T&S Clear
-	.half 0x160 // Castle T&S Clear
-	.half 0x68 // AD1 Intro
-	.half 0x67 // Dog1 Intro
-	.half 0x6A // MJ Intro
-	.half 0x6B // Puff Intro
-	.half 0x69 // Dog2 Intro
-	.half 0x6D // AD2 Intro
-	.half 0x6C // Kut Out Intro
-	.half 0x17E // B. Locker FTT
-	.half 0x5C // Llama CS
-	.half 0x6F // Prod Room
-	.half 0xA0 // Galleon Water
-	.half 0x9C // Galleon Ship
-	.half 0xF8 // Fungi Rabbit Race 1
-	.half 0xCE // Fungi Nighttime
-	.half 0x12C // Giant Kosha
-	.half 0x302 // BoM Off
-
-.align
-SpecialFlags_flagType:
-	.byte 0 // DK Free
-	.byte 0 // Diddy Free
-	.byte 0 // Lanky Free
-	.byte 0 // Tiny Free
-	.byte 0 // Chunky Free
-	.byte 0 // K. Lumsy Intro
-	.byte 0 // Key 1
-	.byte 0 // Key 1 Turned
-	.byte 0 // Key 2
-	.byte 0 // Key 2 Turned
-	.byte 0 // Key 3
-	.byte 0 // Key 3 Turned
-	.byte 0 // Key 4
-	.byte 0 // Key 4 Turned
-	.byte 0 // Key 5
-	.byte 0 // Key 5 Turned
-	.byte 0 // Key 6
-	.byte 0 // Key 6 Turned
-	.byte 0 // Key 7
-	.byte 0 // Key 7 Turned
-	.byte 0 // Key 8
-	.byte 0 // Key 8 Turned
-	.byte 0 // Japes Intro
-	.byte 0 // Aztec Intro
-	.byte 0 // Factory Intro
-	.byte 0 // Galleon Intro
-	.byte 0 // Fungi Intro
-	.byte 0 // Caves Intro
-	.byte 0 // Castle Intro
-	.byte 0 // Japes T&S Clear
-	.byte 0 // Aztec T&S Clear
-	.byte 0 // Factory T&S Clear
-	.byte 0 // Galleon T&S Clear
-	.byte 0 // Fungi T&S Clear
-	.byte 0 // Caves T&S Clear
-	.byte 0 // Castle T&S Clear
-	.byte 2 // AD1 Intro
-	.byte 2 // Dog1 Intro
-	.byte 2 // MJ Intro
-	.byte 2 // Puff Intro
-	.byte 2 // Dog2 Intro
-	.byte 2 // AD2 Intro
-	.byte 2 // Kut Out Intro
-	.byte 0 // B. Locker FTT
-	.byte 0 // Llama CS
-	.byte 0 // Prod Room
-	.byte 0 // Galleon Water Raised
-	.byte 0 // Galleon Ship
-	.byte 0 // Fungi Rabbit Race 1
-	.byte 0 // Fungi Nighttime
-	.byte 0 // Giant Kosha Dead
-	.byte 0 // BoM Off
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/LevelIntros.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/LevelTnS.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Bosses.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Cutscenes.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Modifiers.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Misc.asm"
 
 .align
 BadSavestateMaps:
@@ -3980,8 +3689,20 @@ Menu_Screens:
 	.word Menu_Flags_Kong_Struct
 	.word Menu_Flags_KeyIn_Struct // 38
 	.word Menu_Flags_KeyHave_Struct
+	.word Menu_Flags_LevelIntro_Struct // 40
+	.word Menu_Flags_LevelTnS_Struct
+	.word Menu_Flags_BossIntro_Struct // 42
+	.word Menu_Flags_Cutscenes_Struct
+	.word Menu_Flags_Modifiers_Struct // 44
+	.word Menu_Flags_Misc_Struct
+	.word Menu_QOL_Control_Struct // 46
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Active Menu/Warps/Container.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Aesthetic/MenuSky.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Quality of Life/StartupSkip.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Quality of Life/ForcedStorySkip.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Quality of Life/QOLControl.asm"
 
 .align
 Menu_Savestate_SelectedSavestate:
@@ -4399,17 +4120,19 @@ Menu_Watch_Struct:
 
 .align
 Menu_Settings_HorizontalDPad:
-	.asciiz "D-PAD LEFT, D-PAD RIGHT"
+	.asciiz "D-PAD LEFT AND RIGHT FUNCTION"
 Menu_Settings_DDown:
-	.asciiz "D-DOWN"
+	.asciiz "D-DOWN FUNCTION"
 Menu_Settings_Sound:
 	.asciiz "SOUND"
 Menu_Settings_Music:
 	.asciiz "MUSIC"
-Menu_Settings_Sound:
+Menu_Settings_ScreenRatio:
 	.asciiz "SCREEN RATIO"
-Menu_Settings_Sound:
+Menu_Settings_Camera:
 	.asciiz "CAMERA MODE"
+Menu_Settings_QOLChanges:
+	.asciiz "QUALITY OF LIFE CHANGES"
 
 .align
 Menu_Settings_Array:
@@ -4417,8 +4140,9 @@ Menu_Settings_Array:
 	.word Menu_Settings_DDown
 	.word Menu_Settings_Sound
 	.word Menu_Settings_Music
-	.word Menu_Settings_Sound
-	.word Menu_Settings_Sound
+	.word Menu_Settings_ScreenRatio
+	.word Menu_Settings_Camera
+	.word Menu_Settings_QOLChanges
 
 .align
 Menu_Settings_Functions:
@@ -4428,12 +4152,13 @@ Menu_Settings_Functions:
 	.word 0
 	.word 0
 	.word 0
+	.word ActiveMenu_OpenQOLMenu
 
 .align
 Menu_Settings_Struct:
 	.word Menu_Settings_Array // Text Array
 	.word Menu_Settings_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 7 // Array Items
 	.byte 0 // Parent Screen
 
 .align
