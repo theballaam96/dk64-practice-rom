@@ -430,8 +430,6 @@ Start:
 		NOP
 		
 	EveryFrameFunctions2:
-		JAL 	ToggleSpecialFlag // Safe
-		NOP
 		JAL 	GlobalSavestateHandler // Safe
 		NOP
 		JAL 	CheckMapType // Safe
@@ -3895,6 +3893,8 @@ Menu_MovesMaster_Funky:
 	.asciiz "FUNKY"
 Menu_MovesMaster_Candy:
 	.asciiz "CANDY"
+Menu_MovesMaster_Training:
+	.asciiz "TRAINING BARRELS"
 Menu_MovesMaster_CameraOn:
 	.asciiz "CAMERA AND SHOCKWAVE: ON"
 Menu_MovesMaster_CameraOff:
@@ -3907,6 +3907,7 @@ Menu_MovesMaster_Array:
 	.word Menu_MovesMaster_Cranky
 	.word Menu_MovesMaster_Funky
 	.word Menu_MovesMaster_Candy
+	.word Menu_MovesMaster_Training
 	.word Menu_MovesMaster_CameraOff
 
 .align
@@ -3917,12 +3918,13 @@ Menu_MovesMaster_Functions:
 	.word 0
 	.word 0
 	.word 0
+	.word 0
 
 .align
 Menu_MovesMaster_Struct:
 	.word Menu_MovesMaster_Array // Text Array
 	.word Menu_MovesMaster_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 7 // Array Items
 	.byte 30 // Parent Screen
 
 .align
@@ -4254,131 +4256,4 @@ Savestate_Array:
 
 .align
 GraphicalOverlaySpace:
-	// GO1-1
-	.word 0
-	.word 0
-	.word 0
-	// GO1-2
-	.word 0
-	.word 0
-	.word 0
-	// GO1-3
-	.word 0
-	.word 0
-	.word 0
-	// GO1-4
-	.word 0
-	.word 0
-	.word 0
-	// GO1-5
-	.word 0
-	.word 0
-	.word 0
-	// GO1-6
-	.word 0
-	.word 0
-	.word 0
-	// GO1-7
-	.word 0
-	.word 0
-	.word 0
-	// GO1-8
-	.word 0
-	.word 0
-	.word 0
-	// GO2-1
-	.word 0
-	.word 0
-	.word 0
-	// GO2-2
-	.word 0
-	.word 0
-	.word 0
-	// GO2-3
-	.word 0
-	.word 0
-	.word 0
-	// GO2-4
-	.word 0
-	.word 0
-	.word 0
-	// GO2-5
-	.word 0
-	.word 0
-	.word 0
-	// GO2-6
-	.word 0
-	.word 0
-	.word 0
-	// GO2-7
-	.word 0
-	.word 0
-	.word 0
-	// GO2-8
-	.word 0
-	.word 0
-	.word 0
-	// GO3-1
-	.word 0
-	.word 0
-	.word 0
-	// GO3-2
-	.word 0
-	.word 0
-	.word 0
-	// GO3-3
-	.word 0
-	.word 0
-	.word 0
-	// GO3-4
-	.word 0
-	.word 0
-	.word 0
-	// GO3-5
-	.word 0
-	.word 0
-	.word 0
-	// GO3-6
-	.word 0
-	.word 0
-	.word 0
-	// GO3-7
-	.word 0
-	.word 0
-	.word 0
-	// GO3-8
-	.word 0
-	.word 0
-	.word 0
-	// GO4-1
-	.word 0
-	.word 0
-	.word 0
-	// GO4-2
-	.word 0
-	.word 0
-	.word 0
-	// GO4-3
-	.word 0
-	.word 0
-	.word 0
-	// GO4-4
-	.word 0
-	.word 0
-	.word 0
-	// GO4-5
-	.word 0
-	.word 0
-	.word 0
-	// GO4-6
-	.word 0
-	.word 0
-	.word 0
-	// GO4-7
-	.word 0
-	.word 0
-	.word 0
-	// GO4-8
-	.word 0
-	.word 0
-	.word 0
+	.space 0x180
