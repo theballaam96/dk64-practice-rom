@@ -24,25 +24,25 @@ Menu_Flags_KongStruct:
 
 .align
 Menu_Flags_Kong_DK_Set:
-	.asciiz "DK - FREED"
+	.asciiz "DK: FREED"
 Menu_Flags_Kong_DK_Clear:
-	.asciiz "DK - LOCKED"
+	.asciiz "DK: LOCKED"
 Menu_Flags_Kong_Diddy_Set:
-	.asciiz "DIDDY - FREED"
+	.asciiz "DIDDY: FREED"
 Menu_Flags_Kong_Diddy_Clear:
-	.asciiz "DIDDY - LOCKED"
+	.asciiz "DIDDY: LOCKED"
 Menu_Flags_Kong_Lanky_Set:
-	.asciiz "LANKY - FREED"
+	.asciiz "LANKY: FREED"
 Menu_Flags_Kong_Lanky_Clear:
-	.asciiz "LANKY - LOCKED"
+	.asciiz "LANKY: LOCKED"
 Menu_Flags_Kong_Tiny_Set:
-	.asciiz "TINY - FREED"
+	.asciiz "TINY: FREED"
 Menu_Flags_Kong_Tiny_Clear:
-	.asciiz "TINY - LOCKED"
+	.asciiz "TINY: LOCKED"
 Menu_Flags_Kong_Chunky_Set:
-	.asciiz "CHUNKY - FREED"
+	.asciiz "CHUNKY: FREED"
 Menu_Flags_Kong_Chunky_Clear:
-	.asciiz "CHUNKY - LOCKED"
+	.asciiz "CHUNKY: LOCKED"
 
 .align
 Menu_Flags_Kong_DK_Struct:

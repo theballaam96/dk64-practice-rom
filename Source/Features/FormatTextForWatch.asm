@@ -3,6 +3,7 @@ FormatTextForWatch:
 	// a1 = value (u32)
 	// a2 = format_type
 		// 0 = int
+		// 1 = float
 	// a3 = header_length (u8)
 
 	// Clear Watch Space

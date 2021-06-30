@@ -40,10 +40,6 @@ ToggleAztecSandstorm:
 	ANDI 	a0, a0, 2
 	BNEZ 	a0, FinishTogglingSandstorm // Pause Menu
 	NOP
-	LH 		a0, @NewlyPressedControllerInput
-	ANDI 	a0, a0, @L_Button
-	BEQZ 	a0, FinishTogglingSandstorm
-	NOP
 	LW 		a0, @SandstormAddress
 	BEQZ 	a0, FinishTogglingSandstorm
 	NOP
@@ -52,6 +48,8 @@ ToggleAztecSandstorm:
 	LI 		a2, 1
 	SUBU 	a1, a2, a1
 	SB 		a1, 0x0 (a0)
+	JAL 	ActiveMenu_OpenCheatsMenu
+	NOP
 
 	ToggleSandstorm_NotAztec:
 
@@ -59,3 +57,9 @@ ToggleAztecSandstorm:
 		LW 		ra, @ReturnAddress
 		JR 		ra
 		NOP
+
+.align
+Sandstorm_TextPointers:
+	.word Menu_Cheats_SandstormUnknown
+	.word Menu_Cheats_SandstormOff
+	.word Menu_Cheats_SandstormOn

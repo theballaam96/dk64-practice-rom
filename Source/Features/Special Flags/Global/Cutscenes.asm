@@ -38,53 +38,53 @@ Menu_Flags_GlobalCSStruct:
 
 .align
 Menu_Flags_GlobalCS_Japes_Set:
-	.asciiz "JAPES INTRO - UNLOCKED"
+	.asciiz "JAPES INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Japes_Clear:
-	.asciiz "JAPES INTRO - LOCKED"
+	.asciiz "JAPES INTRO: LOCKED"
 Menu_Flags_GlobalCS_Aztec_Set:
-	.asciiz "AZTEC INTRO - UNLOCKED"
+	.asciiz "AZTEC INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Aztec_Clear:
-	.asciiz "AZTEC INTRO - LOCKED"
+	.asciiz "AZTEC INTRO: LOCKED"
 Menu_Flags_GlobalCS_Factory_Set:
-	.asciiz "FACTORY INTRO - UNLOCKED"
+	.asciiz "FACTORY INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Factory_Clear:
-	.asciiz "FACTORY INTRO - LOCKED"
+	.asciiz "FACTORY INTRO: LOCKED"
 Menu_Flags_GlobalCS_Galleon_Set:
-	.asciiz "GALLEON INTRO - UNLOCKED"
+	.asciiz "GALLEON INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Galleon_Clear:
-	.asciiz "GALLEON INTRO - LOCKED"
+	.asciiz "GALLEON INTRO: LOCKED"
 Menu_Flags_GlobalCS_Fungi_Set:
-	.asciiz "FUNGI INTRO - UNLOCKED"
+	.asciiz "FUNGI INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Fungi_Clear:
-	.asciiz "FUNGI INTRO - LOCKED"
+	.asciiz "FUNGI INTRO: LOCKED"
 Menu_Flags_GlobalCS_Caves_Set:
-	.asciiz "CAVES INTRO - UNLOCKED"
+	.asciiz "CAVES INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Caves_Clear:
-	.asciiz "CAVES INTRO - LOCKED"
+	.asciiz "CAVES INTRO: LOCKED"
 Menu_Flags_GlobalCS_Castle_Set:
-	.asciiz "CASTLE INTRO - UNLOCKED"
+	.asciiz "CASTLE INTRO: UNLOCKED"
 Menu_Flags_GlobalCS_Castle_Clear:
-	.asciiz "CASTLE INTRO - LOCKED"
+	.asciiz "CASTLE INTRO: LOCKED"
 Menu_Flags_GlobalCS_Hideout_Set:
-	.asciiz "ENTER HIDEOUT - UNLOCKED"
+	.asciiz "ENTER HIDEOUT: UNLOCKED"
 Menu_Flags_GlobalCS_Hideout_Clear:
-	.asciiz "ENTER HIDEOUT - LOCKED"
+	.asciiz "ENTER HIDEOUT: LOCKED"
 Menu_Flags_GlobalCS_KRPB_Set:
-	.asciiz "PRESS BUTTON - UNLOCKED"
+	.asciiz "PRESS BUTTON: UNLOCKED"
 Menu_Flags_GlobalCS_KRPB_Clear:
-	.asciiz "PRESS BUTTON - LOCKED"
+	.asciiz "PRESS BUTTON: LOCKED"
 Menu_Flags_GlobalCS_Takeoff_Set:
-	.asciiz "TAKEOFF - UNLOCKED"
+	.asciiz "TAKEOFF: UNLOCKED"
 Menu_Flags_GlobalCS_Takeoff_Clear:
-	.asciiz "TAKEOFF - LOCKED"
+	.asciiz "TAKEOFF: LOCKED"
 Menu_Flags_GlobalCS_Muahaha_Set:
-	.asciiz "GAME OVER - UNLOCKED"
+	.asciiz "GAME OVER: UNLOCKED"
 Menu_Flags_GlobalCS_Muahaha_Clear:
-	.asciiz "GAME OVER - LOCKED"
+	.asciiz "GAME OVER: LOCKED"
 Menu_Flags_GlobalCS_EndSeq_Set:
-	.asciiz "END SEQUENCE - UNLOCKED"
+	.asciiz "END SEQUENCE: UNLOCKED"
 Menu_Flags_GlobalCS_EndSeq_Clear:
-	.asciiz "END SEQUENCE - LOCKED"
+	.asciiz "END SEQUENCE: LOCKED"
 
 .align
 Menu_Flags_GlobalCS_Japes_Struct:

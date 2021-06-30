@@ -13,6 +13,10 @@ TagAnywhere:
 	NOP
 
 	TagAnywhere_CheckDDown:
+		LBU 	a1, @Character
+	    SLTIU   a1, a1, 5
+	    BEQZ    a1, TagAnywhere_Finish
+	    NOP
 		LH 		a1, @NewlyPressedControllerInput
 		ANDI 	a1, a1, @D_Down
 		BEQZ 	a1, TagAnywhere_Finish // Not Pressing DDown

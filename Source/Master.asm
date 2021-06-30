@@ -100,7 +100,7 @@
 [PauseMenuPointer]: 0x807FC640
 [MaxCooldown]: 6
 [MinCooldown]: 2
-[SpecialFlagCategories]: 9
+[SpecialFlagCategories]: 10
 
 // ISG
 [ISGActive]: 0x80755070
@@ -136,8 +136,22 @@
 [PlaySong]: 0x80602A94
 [DeleteActor]: 0x806785D4
 [SpawnActor]: 0x80677fa8 // a0 = Actor Type
-[SpawnTextOverlay]: 0x8069D0F8 // a0 = z?, a1 = x (s16), a2 = y (s16), a3 = textpointer
+[SpawnTextOverlay]: 0x8069D0F8
+// a0 = style
+	// 0 = Centered
+	// 1 = DK Font
+	// 2 = Thick Computer
+	// 3 = Timer
+	// 4 = Thin Computer
+	// 5 = V. Thin Computer
+	// 6 = Comic Sans-Esque
+	// 7 - 9 = Crash
+	// 10 = K Rool Intro
+// a1 = x (s16)
+// a2 = y (s16)
+// a3 = textpointer
 [SQRT]: 0x8000AC60 // f12 = val to sqrt, return f0
+[StrFormat]: 0x800031E0
 
 // Sound Effects
 [Banana]: 0x2A0
@@ -263,6 +277,10 @@
 [WatchActor]: 0x807FFDB8 // u32
 [PhaseChecker_PreviousMagnitude]: 0x807FFDB7 // u8
 [WatchTextSpace]: 0x807FFD80 // 0x30 (47 characters)
+[CustomFlagByte]: 0x807FFF80 // u16
+[CustomFlagBit]: 0x807FFF82 // u8
+[CustomFlagType]: 0x807FFF83 // u8
+[CustomFlagSet]: 0x807FFF84 // u8
 
 // OSD Arrays
 [LevelsArray]: 0x807FFF80 // 0x38
@@ -440,8 +458,6 @@ Start:
 		NOP
 		JAL 	GrabSandstormAddress
 		NOP
-		JAL 	ToggleAztecSandstorm
-		NOP
 		JAL 	GetGKTimer
 		NOP
 		JAL 	UpdateMovementStateText
@@ -485,6 +501,8 @@ Start:
 		JAL 	StartupSkip
 		NOP
 		JAL 	ForceStorySkip
+		NOP
+		JAL 	ChangeEncodedFlag
 		NOP
 
 		// JAL 	HandleTimer
@@ -564,15 +582,6 @@ CheckMapType:
 	FinishMapCheck:
 		JR 		ra
 		NOP
-
-MultBy60:
-	// Input = 60
-	SLL 	a2, a1, 2 // a2 = 4 * a1 ; a1 = Original counter
-	SUBU 	a2, a2, a1 // a2 = a2 - a1 ; a2 = 3 * Original
-	SLL 	a1, a2, 2 // a1 = 4 * a2 ; a1 = 12 * Original
-	ADD 	a1, a1, a2 // a1 = a1 + a2 ; a1 = 15 * Original
-	JR 		ra
-	SLL 	a1, a1, 2 // a1 = a1 * 4 ; a1 = 60 * Original
 
 .org 0x80000A30 // 0x000A30 > 0x0010BC
 
@@ -667,36 +676,10 @@ UpdateSlamSnipe:
 	JR 		ra
 	SB 		a2, 0x17A(a0)
 
-UpdateLag:
-	// Our Code
-	LW 		a0, @FrameReal
-	LW 		a1, @FrameLag
-	SUBU 	a1, a0, a1
-	SW 		a1, @StoredLag
-	// Run code we replaced
-	LUI 	t6, 0x8077
-	J 		0x8060067C
-	LBU 	t6, 0xAF14(t6)
-
-// Who says it's only Link's tunic which can change colour
-ChangeColour:
-	SW 		ra, @ReturnAddress
-	LUI 	a0, 0x8069	
-	SB 		r0, 0xA62F(a0) // 0x8068A62F // Enable colouring for 1-player gameplay
-	SW 		r0, 0xA450(a0) // 0x8068A450 // Disable shading
-	JAL 	0x8068A508
-	// NOP
-	SW 		r0, 0xA458(a0) // 0x8068A458 // Turn off low poly models
-	LA 		a0, KongColours
-	LBU 	a1, @Character
-	ADD 	a0, a0, a1
-	LBU 	a1, 0x0 (a0)
-	SW 		a1, @PlayerOneColour
-
-	FinishColourChange:
-		LW 		ra, @ReturnAddress
-		JR 		ra
-		NOP
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Lag.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/ColorKong.asm"
 
 .org 0x805DAE00
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Watches.asm"
@@ -779,7 +762,7 @@ GiveCoins:
 	NOP
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Sandstorm.asm"
-
+.align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/GiantKosha.asm"
 
 AutoPhaseState:
@@ -901,92 +884,10 @@ InfiniteHealth:
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/FileStates.asm"
 .align
-
-LToLevitate:
-	LBU 	a0, @LToLevitateOn
-	BEQZ 	a0, LToLevitate_Finish
-	NOP
-	LBU 	a0, @TBVoidByte
-	ANDI 	a0, a0, 2
-	BNEZ 	a0, LToLevitate_Finish // Pause Menu
-	NOP
-	LH 		a0, @ControllerInput
-	ANDI 	a0, a0, @L_Button
-	BEQZ 	a0, LToLevitate_Finish
-	NOP
-	LW 		a0, @Player
-	BEQZ 	a0, LToLevitate_Finish
-	NOP
-	LH 		a1, @ControllerInput
-	ANDI 	a1, a1, @R_Button
-	BNEZ 	a1, FastLevitate
-	NOP
-	LH 		a1, @ControllerInput
-	ANDI 	a1, a1, @Z_Button
-	BNEZ 	a1, SlowLevitate
-	NOP
-	B 		NormalLevitate
-	NOP
-
-	FastLevitate:
-		B 		IncrementHeight
-		LUI 	a1, 0x41A0 // 20 as float
-
-	SlowLevitate:
-		B 		IncrementHeight
-		LUI 	a1, 0x40A0 // 10 as float
-
-	NormalLevitate:
-		LUI 	a1, 0x4120 // 10 as float
-
-	IncrementHeight:
-		MTC1 	a1, f2
-		SW 		r0, 0xC0 (a0) // Set Y Veloc
-		LW 		a1, 0x80 (a0)
-		MTC1 	a1, f0
-		ADD.S 	f0, f0, f2
-		MFC1 	a1, f0
-		SW 		a1, 0x80 (a0)
-
-	LToLevitate_Finish:
-		JR 		ra
-		NOP
-
-CancelCutscene:
-	SW 		ra, @ReturnAddress4
-	LBU 	a0, @TBVoidByte
-	ANDI 	a0, a0, 2
-	BNEZ 	a0, CancelCutscene_Finish // Pause Menu
-	NOP
-	LBU 	a0, @CutsceneActive
-	BEQZ 	a0, CancelCutscene_Finish
-	NOP
-	LH 		a0, @CutsceneIndex
-	LW 		a1, @CutsceneTypePointer
-	BEQZ 	a1, CancelCutscene_Finish
-	NOP
-	LW  	a1, 0xD0 (a1) // Cutscene Databank
-	BEQZ 	a1, CancelCutscene_Finish
-	NOP
-	LI 		a2, 0xC
-	MULTU 	a0, a2
-	MFLO 	a2
-	ADD 	a1, a1, a2
-	LH 		a1, 0x0 (a1) // Required Cam State
-	SH 		a1, @CurrentCameraState
-	SH 		a1, @PreviousCameraState
-	ADDI 	a1, a1, -1
-	SH 		r0, @CameraStateChangeTimer
-	LW 		a0, @Player
-	BEQZ 	a0, CancelCutscene_Finish
-	NOP
-	LI 		a1, 0xC
-	SB 		a1, 0x154 (a0)
-
-	CancelCutscene_Finish:
-		LW 		ra, @ReturnAddress4
-		JR 		ra
-		NOP
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Levitate.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/CutsceneCancel.asm"
+.align
 
 KongCode:
 	SW 		ra, @ReturnAddress2
@@ -1007,108 +908,13 @@ KongCode:
 		J 		0x806F3758
 		NOP
 
+.align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Timer.asm"
-
-GiveMoves:
-	LI 		a0, 4
-	LI 		a1, @MovesBase
-	GiveMoves_WriteMoves:
-		LI 		t3, 0x0303
-		SH 		t3, 0x0 (a1) // Special | Slam Level | Guns | Ammo Belt
-		LI 		t3, 0x0702
-		SH 		t3, 0x2 (a1) // Gun Bitfield, Ammo belt
-		LI 		t3, 15
-		SB 		t3, 0x4 (a1) // Instrument
-		BEQZ 	a0, GiveMoves_WriteMoveFlags
-		ADDI 	a0, a0, -1 // Decrement Value for next kong
-		B 		GiveMoves_WriteMoves
-		ADDIU 	a1, a1, 0x5E // Next kong base
-	
-	GiveMoves_WriteMoveFlags:
-		SW 		ra, @ReturnAddress4
-		LI 		a0, @CollectableBase
-		// Melons
-		LI 		a1, 3
-		SB 		a1, 0xC(a0)
-		// Health
-		LI 		a1, 12
-		SB 		a1, 0xB(a0)
-		// How were your trading barrels this run?
-		LA 		a0, MoveFlags
-		JAL 	SetAllFlags
-		NOP
-		LA 		a0, Menu_MovesMaster_CameraOn
-		LA 		a1, Menu_MovesMaster_Array
-		SW 		a0, 0x14 (a1)
-		LBU 	a1, @NewMenuOpen
-		BEQZ 	a1, GiveMoves_PlaySFX
-		LI 		a0, 31
-		LBU 	a1, @NewMenu_Screen
-		BNE 	a0, a1, GiveMoves_PlaySFX
-		NOP
-		JAL 	ActiveMenu_ClearMenu
-		NOP
-		LI 		a0, 31
-		SB 		a0, @NewMenu_Screen
-		JAL 	ActiveMenu_SpawnMenu
-		NOP
-
-	GiveMoves_PlaySFX:
-		// Sound Effect
-		JAL 	CodedPlaySFX
-		LI 		a0, @Potion
-		LW 		ra, @ReturnAddress4
-		JR 		ra
-		NOP
-
-ClearMoves:
-	LI 		a0, 4
-	LI 		a1, @MovesBase
-	ClearMoves_WriteMoves:
-		SH 		r0, 0x0 (a1) // Special | Slam Level | Guns | Ammo Belt
-		SH 		r0, 0x2 (a1) // Gun Bitfield, Ammo belt
-		SB 		r0, 0x4 (a1) // Instrument
-		BEQZ 	a0, ClearMoves_WriteMoveFlags
-		ADDI 	a0, a0, -1 // Decrement Value for next kong
-		B 		ClearMoves_WriteMoves
-		ADDIU 	a1, a1, 0x5E // Next kong base
-	
-	ClearMoves_WriteMoveFlags:
-		SW 		ra, @ReturnAddress4
-		LI 		a0, @CollectableBase
-		// Melons
-		LI 		a1, 1
-		SB 		a1, 0xC(a0)
-		// Health
-		LI 		a1, 4
-		SB 		a1, 0xB(a0)
-		// How were your trading barrels this run?
-		LA 		a0, MoveFlags
-		JAL 	ClearAllFlags
-		NOP
-		LA 		a0, Menu_MovesMaster_CameraOff
-		LA 		a1, Menu_MovesMaster_Array
-		SW 		a0, 0x14 (a1)
-		LBU 	a1, @NewMenuOpen
-		BEQZ 	a1, ClearMoves_PlaySFX
-		LI 		a0, 31
-		LBU 	a1, @NewMenu_Screen
-		BNE 	a0, a1, ClearMoves_PlaySFX
-		NOP
-		JAL 	ActiveMenu_ClearMenu
-		NOP
-		LI 		a0, 31
-		SB 		a0, @NewMenu_Screen
-		JAL 	ActiveMenu_SpawnMenu
-		NOP
-
-	ClearMoves_PlaySFX:
-		// Sound Effect
-		JAL 	CodedPlaySFX
-		LI 		a0, @MatchingSound
-		LW 		ra, @ReturnAddress4
-		JR 		ra
-		NOP
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Moves/GiveAll.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Moves/ClearAll.asm"
+.align
 
 RestockInventory:
 	SW 		ra, @ReturnAddress4
@@ -1142,56 +948,10 @@ RestockInventory:
 	JR 		ra
 	NOP
 
-SkewCheat:
-	LW 		a0, @Player
-	BEQZ 	a0, SkewCheat_Finish
-	NOP
-	LI 		a1, 0xC00
-	SH 		a1, 0xE8 (a0)
-
-	SkewCheat_Finish:
-		JR 		ra
-		NOP
-
-HandleEnemySpawnPrevent:
-	LW 		a0, @ObjectModel2Timer
-	LI 		a1, 1
-	BNE 	a0, a1, HandleEnemySpawnPrevent_Finish
-	NOP
-	LBU 	a0, @EnemySpawnOff
-	BEQZ 	a0, HandleEnemySpawnPrevent_Finish
-	NOP
-	LW 		a0, @SpawnerArray
-	LHU 	a1, @SpawnerCount
-
-	HandleEnemySpawnPrevent_Loop:
-		LBU 	t9, 0x0 (a0)
-		LA 		t3, SpawnEnemyTypeAvoid
-
-	HandleEnemySpawnPrevent_TypeLoop:
-		LBU 	t6, 0x0 (t3)
-		BEQZ 	t6, HandleEnemySpawnPrevent_Toggle
-		ADDIU 	t3, t3, 1
-		BEQ 	t6, t9, HandleEnemySpawnPrevent_Increment
-		NOP
-		B 		HandleEnemySpawnPrevent_TypeLoop
-		NOP
-
-	HandleEnemySpawnPrevent_Toggle:
-		LBU 	t9, 0x42 (a0)
-		ADDIU 	t9, t9, 8
-		SB 		t9, 0x42 (a0)
-
-	HandleEnemySpawnPrevent_Increment:
-		ADDI 	a1, a1, -1
-		BEQZ 	a1, HandleEnemySpawnPrevent_Finish
-		ADDIU 	a0, a0, 0x48
-		B 		HandleEnemySpawnPrevent_Loop
-		NOP
-
-	HandleEnemySpawnPrevent_Finish:
-		JR 		ra
-		NOP
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Skew.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/NoSpawn.asm"
+.align
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/LZLooper.asm"
 
@@ -1569,14 +1329,31 @@ ActiveMenu_OpenMovesMenu:
 	SW 		ra, @ReturnAddress3
 	JAL 	ActiveMenu_ClearMenu
 	NOP
-	LI 		a0, 31
-	SB 		a0, @NewMenu_Screen
-	SB 		r0, @NewMenu_Position
-	JAL 	ActiveMenu_SpawnMenu
+	LI 		a0, 0x179
+	JAL 	@CheckFlag
+	LI 		a1, 0
+	ADDIU 	t0, v0, 0
+	LA 		a0, Menu_MovesMaster_CameraOff
+	BEQZ 	t0, ActiveMenu_OpenMovesMenu_WriteText
 	NOP
-	LW 		ra, @ReturnAddress3
-	JR 		ra
-	NOP
+	LA 		a0, Menu_MovesMaster_CameraOn
+
+	ActiveMenu_OpenMovesMenu_WriteText:
+		LA 		a1, Menu_MovesMaster_Array
+		SW 		a0, 0x18 (a1)
+		LBU 	a1, @NewMenu_Screen
+		LI 		a0, 31
+		BEQ 	a0, a1, ActiveMenu_OpenMovesMenu_Spawn
+		NOP
+		SB 		r0, @NewMenu_Position
+
+	ActiveMenu_OpenMovesMenu_Spawn:
+		SB 		a0, @NewMenu_Screen
+		JAL 	ActiveMenu_SpawnMenu
+		NOP
+		LW 		ra, @ReturnAddress3
+		JR 		ra
+		NOP
 
 ActiveMenu_ChangeSavestate:
 	SW 		ra, @ReturnAddress3
@@ -1602,14 +1379,38 @@ ActiveMenu_OpenCheatsMenu:
 	SW 		ra, @ReturnAddress3
 	JAL 	ActiveMenu_ClearMenu
 	NOP
-	LI 		a0, 30
-	SB 		a0, @NewMenu_Screen
-	SB 		r0, @NewMenu_Position
-	JAL 	ActiveMenu_SpawnMenu
-	NOP
-	LW 		ra, @ReturnAddress3
-	JR 		ra
-	NOP
+
+	ActiveMenu_OpenCheatsMenu_Sandstorm:
+		LW 		a0, @CurrentMap
+		LI 		a1, 0x26 // Aztec
+		BNE 	a0, a1, ActiveMenu_OpenCheatsMenu_WriteSandstormText
+		LI 		t0, 0
+		LW 		a0, @SandstormAddress
+		BEQZ 	a0, ActiveMenu_OpenCheatsMenu_WriteSandstormText
+		LI 		t0, 0
+		LBU 	a1, 0x0 (a0)
+		ADDIU 	t0, a1, 1
+
+	ActiveMenu_OpenCheatsMenu_WriteSandstormText:
+		LA 		a0, Sandstorm_TextPointers
+		SLL 	t0, t0, 2
+		ADD 	a0, a0, t0
+		LW 		a0, 0x0 (a0)
+		LA 		a1, Menu_Cheats_Array
+		SW 		a0, 0x1C (a1)
+		LI 		a0, 30
+		LBU 	a1, @NewMenu_Screen
+		BEQ 	a0, a1, ActiveMenu_OpenCheatsMenu_Spawn 
+		NOP
+		SB 		r0, @NewMenu_Position
+
+	ActiveMenu_OpenCheatsMenu_Spawn:
+		SB 		a0, @NewMenu_Screen
+		JAL 	ActiveMenu_SpawnMenu
+		NOP
+		LW 		ra, @ReturnAddress3
+		JR 		ra
+		NOP
 
 ActiveMenu_OpenGamemodeMenu:
 	SW 		ra, @ReturnAddress3
@@ -2084,7 +1885,6 @@ ActiveMenu_ToggleEnemySpawn:
 
 ActiveMenu_ChangeWatch:
 	SW 		ra, @ReturnAddress3
-	SB 		r0, 0x807FFDBC
 	LBU 	a3, @VariableDisplayOn // Old Variable Display Value
 	LBU 	a0, @NewMenu_Position
 	ADDI 	a0, a0, -1 // Change display options start at position 1, so offset back
@@ -2114,7 +1914,6 @@ ActiveMenu_ChangeWatch:
 		JAL 	Watch_SpawnWatch
 		NOP
 		LI 		a0, 1
-		SB 		a0, 0x807FFDBC
 		B 		ActiveMenu_ChangeWatch_Reload
 		NOP
 
@@ -2122,7 +1921,6 @@ ActiveMenu_ChangeWatch:
 		JAL 	Watch_DestroyWatch
 		NOP
 		LI 		a0, 2
-		SB 		a0, 0x807FFDBC
 
 	ActiveMenu_ChangeWatch_Reload:
 		LI 		a0, 0xFFFFFF
@@ -2135,6 +1933,23 @@ ActiveMenu_ChangeWatch:
 		LW 		ra, @ReturnAddress3
 		JR 		ra
 		NOP
+
+ActiveMenu_ToggleCamera:
+	SW 		ra, @ReturnAddress5
+	LI 		a0, 0x179
+	JAL 	@CheckFlag
+	LI 		a1, 0
+	ADDIU 	a1, v0, 0
+	LI 		a0, 1
+	SUBU 	a1, a0, a1
+	LI 		a2, 0
+	JAL 	@SetFlag
+	LI 		a0, 0x179
+	JAL 	ActiveMenu_OpenMovesMenu
+	NOP
+	LW 		ra, @ReturnAddress5
+	JR 		ra
+	NOP
 
 .align
 ROM_Name:
@@ -2194,6 +2009,9 @@ Maps_WarpingStruct:
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Cutscenes.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Modifiers.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Misc.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Custom.asm"
+.align
 
 .align
 BadSavestateMaps:
@@ -2364,14 +2182,6 @@ PauseMenu_ScreenMode_Wide:
 PauseMenu_ScreenMode_Array:
 	.word PauseMenu_ScreenMode_Normal
 	.word PauseMenu_ScreenMode_Wide
-
-.align
-KongColours:
-	.byte 0x02 // DK - Green Body
-	.byte 0x02 // Diddy - Yellow Cap
-	.byte 0x01 // Lanky - Green Straps
-	.byte 0x02 // Tiny - Purple Suit
-	.byte 0x01 // Chunky - Red Suit
 
 .align
 PauseMenu_Warp_Length:
@@ -3694,6 +3504,11 @@ Menu_Screens:
 	.word Menu_Flags_Modifiers_Struct // 44
 	.word Menu_Flags_Misc_Struct
 	.word Menu_QOL_Control_Struct // 46
+	.word Menu_Cranky_Struct
+	.word Menu_Funky_Struct // 48
+	.word Menu_Candy_Struct
+	.word Menu_Flags_Training_Struct // 50
+	.word Menu_Flags_Custom_Struct
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Active Menu/Warps/Container.asm"
 .align
@@ -3701,6 +3516,16 @@ Menu_Screens:
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Quality of Life/StartupSkip.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Quality of Life/ForcedStorySkip.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Quality of Life/QOLControl.asm"
+
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Moves/Cranky.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Moves/Funky.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Moves/Candy.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Moves/Training.asm"
+.align
 
 .align
 Menu_Savestate_SelectedSavestate:
@@ -3869,7 +3694,7 @@ Menu_Cheats_Functions:
 	.word CancelCutscene
 	.word SkewCheat
 	.word ActiveMenu_ToggleLToLevitate
-	.word 0
+	.word ToggleAztecSandstorm
 	.word ActiveMenu_ToggleAutoPhaseState
 	.word ActiveMenu_ToggleAutoMoonkick
 	.word ActiveMenu_ToggleInfHealth
@@ -3914,11 +3739,11 @@ Menu_MovesMaster_Array:
 Menu_MovesMaster_Functions:
 	.word GiveMoves
 	.word ClearMoves
-	.word 0
-	.word 0
-	.word 0
-	.word 0
-	.word 0
+	.word ActiveMenu_OpenCrankyMenu
+	.word ActiveMenu_OpenFunkyMenu
+	.word ActiveMenu_OpenCandyMenu
+	.word ActiveMenu_OpenFlagMenu_Training
+	.word ActiveMenu_ToggleCamera
 
 .align
 Menu_MovesMaster_Struct:
@@ -4088,13 +3913,6 @@ Menu_Watch_Struct:
 	.byte 0 // Parent Screen
 
 // TO ADD:
-// Special Flags
-	// Special Flags Toggle
-// Cheats
-	// Moves
-		// Sniper Scope
-		// Slam Level
-	// Toggle Sandstorm
 // File Status
 	// 101%
 	// Max%
@@ -4103,18 +3921,7 @@ Menu_Watch_Struct:
 	// Set/Clear Individual
 	// Set/Clear Level
 	// Set/Clear All
-// Watches
-	// Lag
-	// Cumulative Lag
-	// Speed
-	// Timer
-	// Giant Kosha Timer
-	// Movement State
-	// Angle
-	// Input
 // Settings
-	// Disable Position Buttons
-	// Disable Tag Anywhere
 	// Sound
 	// Music
 	// Screen Ratio

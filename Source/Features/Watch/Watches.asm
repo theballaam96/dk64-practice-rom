@@ -172,6 +172,7 @@ VariableDisplay:
 		BEQZ 	a0, VDispAngle_Text
 		LI 		a1, 0
 		LH 		a1, 0xE6 (a0)
+		SLTIU 	t0, a1, 4096
 		MTC1 	a1, f6
 		CVT.S.W f0, f6 // f0 = angle
 		LUI		t6, 0x4580
@@ -181,6 +182,17 @@ VariableDisplay:
 		DIV.S 	f0, f0, f2
 		MUL.S 	f0, f0, f4
 		MFC1 	a1, f0
+		LI 		a0, 0xFFFFFF
+		SW 		a1, @VarStorage0
+		BNEZ 	t0, VDispAngle_TextColourWrite
+		NOP
+		LI 		a0, @KoshaRGB_Frozen
+
+
+	VDispAngle_TextColourWrite:
+		JAL 	Watch_ColourWatch
+		NOP
+		LW 		a1, @VarStorage0
 
 	VDispAngle_Text:
 		LA 		a0, Watch_Header_Angle

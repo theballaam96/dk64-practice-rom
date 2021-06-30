@@ -26,29 +26,29 @@ Menu_Flags_ModifiersStruct:
 
 .align
 Menu_Flags_Modifiers_ProdRoom_Set:
-	.asciiz "PRODUCTION ROOM - ON"
+	.asciiz "PRODUCTION ROOM: ON"
 Menu_Flags_Modifiers_ProdRoom_Clear:
-	.asciiz "PRODUCTION ROOM - OFF"
+	.asciiz "PRODUCTION ROOM: OFF"
 Menu_Flags_Modifiers_GalleonWater_Set:
-	.asciiz "GALLEON WATER LEVEL - RAISED"
+	.asciiz "GALLEON WATER LEVEL: RAISED"
 Menu_Flags_Modifiers_GalleonWater_Clear:
-	.asciiz "GALLEON WATER LEVEL - LOWERED"
+	.asciiz "GALLEON WATER LEVEL: LOWERED"
 Menu_Flags_Modifiers_GalleonShip_Set:
-	.asciiz "GALLEON SHIP - SPAWNED"
+	.asciiz "GALLEON SHIP: SPAWNED"
 Menu_Flags_Modifiers_GalleonShip_Clear:
-	.asciiz "GALLEON SHIP - NOT SPAWNED"
+	.asciiz "GALLEON SHIP: NOT SPAWNED"
 Menu_Flags_Modifiers_FungiNighttime_Set:
-	.asciiz "FUNGI TIME OF DAY - NIGHT"
+	.asciiz "FUNGI TIME OF DAY: NIGHT"
 Menu_Flags_Modifiers_FungiNighttime_Clear:
-	.asciiz "FUNGI TIME OF DAY - DAY"
+	.asciiz "FUNGI TIME OF DAY: DAY"
 Menu_Flags_Modifiers_KoshaDead_Set:
-	.asciiz "GIANT KOSHA - DEAD"
+	.asciiz "GIANT KOSHA: DEAD"
 Menu_Flags_Modifiers_KoshaDead_Clear:
-	.asciiz "GIANT KOSHA - ALIVE"
+	.asciiz "GIANT KOSHA: ALIVE"
 Menu_Flags_Modifiers_BoMOff_Set:
-	.asciiz "BLAST O MATIC - OFF"
+	.asciiz "BLAST O MATIC: OFF"
 Menu_Flags_Modifiers_BoMOff_Clear:
-	.asciiz "BLAST O MATIC - ON"
+	.asciiz "BLAST O MATIC: ON"
 
 .align
 Menu_Flags_Modifiers_ProdRoom_Struct:

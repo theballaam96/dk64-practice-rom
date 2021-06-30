@@ -30,37 +30,37 @@ Menu_Flags_KeyHaveStruct:
 
 .align
 Menu_Flags_KeyHave_Key1_Set:
-	.asciiz "KEY 1 - OBTAINED"
+	.asciiz "KEY 1: OBTAINED"
 Menu_Flags_KeyHave_Key1_Clear:
-	.asciiz "KEY 1 - NOT OBTAINED"
+	.asciiz "KEY 1: NOT OBTAINED"
 Menu_Flags_KeyHave_Key2_Set:
-	.asciiz "KEY 2 - OBTAINED"
+	.asciiz "KEY 2: OBTAINED"
 Menu_Flags_KeyHave_Key2_Clear:
-	.asciiz "KEY 2 - NOT OBTAINED"
+	.asciiz "KEY 2: NOT OBTAINED"
 Menu_Flags_KeyHave_Key3_Set:
-	.asciiz "KEY 3 - OBTAINED"
+	.asciiz "KEY 3: OBTAINED"
 Menu_Flags_KeyHave_Key3_Clear:
-	.asciiz "KEY 3 - NOT OBTAINED"
+	.asciiz "KEY 3: NOT OBTAINED"
 Menu_Flags_KeyHave_Key4_Set:
-	.asciiz "KEY 4 - OBTAINED"
+	.asciiz "KEY 4: OBTAINED"
 Menu_Flags_KeyHave_Key4_Clear:
-	.asciiz "KEY 4 - NOT OBTAINED"
+	.asciiz "KEY 4: NOT OBTAINED"
 Menu_Flags_KeyHave_Key5_Set:
-	.asciiz "KEY 5 - OBTAINED"
+	.asciiz "KEY 5: OBTAINED"
 Menu_Flags_KeyHave_Key5_Clear:
-	.asciiz "KEY 5 - NOT OBTAINED"
+	.asciiz "KEY 5: NOT OBTAINED"
 Menu_Flags_KeyHave_Key6_Set:
-	.asciiz "KEY 6 - OBTAINED"
+	.asciiz "KEY 6: OBTAINED"
 Menu_Flags_KeyHave_Key6_Clear:
-	.asciiz "KEY 6 - NOT OBTAINED"
+	.asciiz "KEY 6: NOT OBTAINED"
 Menu_Flags_KeyHave_Key7_Set:
-	.asciiz "KEY 7 - OBTAINED"
+	.asciiz "KEY 7: OBTAINED"
 Menu_Flags_KeyHave_Key7_Clear:
-	.asciiz "KEY 7 - NOT OBTAINED"
+	.asciiz "KEY 7: NOT OBTAINED"
 Menu_Flags_KeyHave_Key8_Set:
-	.asciiz "KEY 8 - OBTAINED"
+	.asciiz "KEY 8: OBTAINED"
 Menu_Flags_KeyHave_Key8_Clear:
-	.asciiz "KEY 8 - NOT OBTAINED"
+	.asciiz "KEY 8: NOT OBTAINED"
 
 .align
 Menu_Flags_KeyHave_Key1_Struct:

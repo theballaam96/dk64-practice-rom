@@ -28,33 +28,33 @@ Menu_Flags_GlobalMysteryStruct:
 
 .align
 Menu_Flags_GlobalMystery_Mystery_Set:
-	.asciiz "MYSTERY MENU - UNLOCKED"
+	.asciiz "MYSTERY MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_Mystery_Clear:
-	.asciiz "MYSTERY MENU - LOCKED"
+	.asciiz "MYSTERY MENU: LOCKED"
 Menu_Flags_GlobalMystery_CSMenu_Set:
-	.asciiz "CUTSCENE MENU - UNLOCKED"
+	.asciiz "CUTSCENE MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_CSMenu_Clear:
-	.asciiz "CUTSCENE MENU - LOCKED"
+	.asciiz "CUTSCENE MENU: LOCKED"
 Menu_Flags_GlobalMystery_MgMenu_Set:
-	.asciiz "MINIGAME MENU - UNLOCKED"
+	.asciiz "MINIGAME MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_MgMenu_Clear:
-	.asciiz "MINIGAME MENU - LOCKED"
+	.asciiz "MINIGAME MENU: LOCKED"
 Menu_Flags_GlobalMystery_BossMenu_Set:
-	.asciiz "BOSSES MENU - UNLOCKED"
+	.asciiz "BOSSES MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_BossMenu_Clear:
-	.asciiz "BOSSES MENU - LOCKED"
+	.asciiz "BOSSES MENU: LOCKED"
 Menu_Flags_GlobalMystery_KrushaMenu_Set:
-	.asciiz "KRUSHA MENU - UNLOCKED"
+	.asciiz "KRUSHA MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_KrushaMenu_Clear:
-	.asciiz "KRUSHA MENU - LOCKED"
+	.asciiz "KRUSHA MENU: LOCKED"
 Menu_Flags_GlobalMystery_CheatMenu_Set:
-	.asciiz "CHEAT MENU - UNLOCKED"
+	.asciiz "CHEAT MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_CheatMenu_Clear:
-	.asciiz "CHEAT MENU - LOCKED"
+	.asciiz "CHEAT MENU: LOCKED"
 Menu_Flags_GlobalMystery_MultiMenu_Set:
-	.asciiz "MULTIPLAYER MENU - UNLOCKED"
+	.asciiz "MULTIPLAYER MENU: UNLOCKED"
 Menu_Flags_GlobalMystery_MultiMenu_Clear:
-	.asciiz "MULTIPLAYER MENU - LOCKED"
+	.asciiz "MULTIPLAYER MENU: LOCKED"
 
 .align
 Menu_Flags_GlobalMystery_Mystery_Struct:

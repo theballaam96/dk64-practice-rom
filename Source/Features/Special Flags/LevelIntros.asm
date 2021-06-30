@@ -28,33 +28,33 @@ Menu_Flags_LevelIntroStruct:
 
 .align
 Menu_Flags_LevelIntro_Japes_Set:
-	.asciiz "JAPES INTRO - WATCHED"
+	.asciiz "JAPES INTRO: WATCHED"
 Menu_Flags_LevelIntro_Japes_Clear:
-	.asciiz "JAPES INTRO - NOT WATCHED"
+	.asciiz "JAPES INTRO: NOT WATCHED"
 Menu_Flags_LevelIntro_Aztec_Set:
-	.asciiz "AZTEC INTRO - WATCHED"
+	.asciiz "AZTEC INTRO: WATCHED"
 Menu_Flags_LevelIntro_Aztec_Clear:
-	.asciiz "AZTEC INTRO - NOT WATCHED"
+	.asciiz "AZTEC INTRO: NOT WATCHED"
 Menu_Flags_LevelIntro_Factory_Set:
-	.asciiz "FACTORY INTRO - WATCHED"
+	.asciiz "FACTORY INTRO: WATCHED"
 Menu_Flags_LevelIntro_Factory_Clear:
-	.asciiz "FACTORY INTRO - NOT WATCHED"
+	.asciiz "FACTORY INTRO: NOT WATCHED"
 Menu_Flags_LevelIntro_Galleon_Set:
-	.asciiz "GALLEON INTRO - WATCHED"
+	.asciiz "GALLEON INTRO: WATCHED"
 Menu_Flags_LevelIntro_Galleon_Clear:
-	.asciiz "GALLEON INTRO - NOT WATCHED"
+	.asciiz "GALLEON INTRO: NOT WATCHED"
 Menu_Flags_LevelIntro_Fungi_Set:
-	.asciiz "FUNGI INTRO - WATCHED"
+	.asciiz "FUNGI INTRO: WATCHED"
 Menu_Flags_LevelIntro_Fungi_Clear:
-	.asciiz "FUNGI INTRO - NOT WATCHED"
+	.asciiz "FUNGI INTRO: NOT WATCHED"
 Menu_Flags_LevelIntro_Caves_Set:
-	.asciiz "CAVES INTRO - WATCHED"
+	.asciiz "CAVES INTRO: WATCHED"
 Menu_Flags_LevelIntro_Caves_Clear:
-	.asciiz "CAVES INTRO - NOT WATCHED"
+	.asciiz "CAVES INTRO: NOT WATCHED"
 Menu_Flags_LevelIntro_Castle_Set:
-	.asciiz "CASTLE INTRO - WATCHED"
+	.asciiz "CASTLE INTRO: WATCHED"
 Menu_Flags_LevelIntro_Castle_Clear:
-	.asciiz "CASTLE INTRO - NOT WATCHED"
+	.asciiz "CASTLE INTRO: NOT WATCHED"
 
 .align
 Menu_Flags_LevelIntro_Japes_Struct:

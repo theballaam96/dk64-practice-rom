@@ -28,33 +28,33 @@ Menu_Flags_LevelTnSStruct:
 
 .align
 Menu_Flags_LevelTnS_Japes_Set:
-	.asciiz "JAPES TNS - CLEAR"
+	.asciiz "JAPES TNS: CLEAR"
 Menu_Flags_LevelTnS_Japes_Clear:
-	.asciiz "JAPES TNS - SPAWNED"
+	.asciiz "JAPES TNS: SPAWNED"
 Menu_Flags_LevelTnS_Aztec_Set:
-	.asciiz "AZTEC TNS - CLEAR"
+	.asciiz "AZTEC TNS: CLEAR"
 Menu_Flags_LevelTnS_Aztec_Clear:
-	.asciiz "AZTEC TNS - SPAWNED"
+	.asciiz "AZTEC TNS: SPAWNED"
 Menu_Flags_LevelTnS_Factory_Set:
-	.asciiz "FACTORY TNS - CLEAR"
+	.asciiz "FACTORY TNS: CLEAR"
 Menu_Flags_LevelTnS_Factory_Clear:
-	.asciiz "FACTORY TNS - SPAWNED"
+	.asciiz "FACTORY TNS: SPAWNED"
 Menu_Flags_LevelTnS_Galleon_Set:
-	.asciiz "GALLEON TNS - CLEAR"
+	.asciiz "GALLEON TNS: CLEAR"
 Menu_Flags_LevelTnS_Galleon_Clear:
-	.asciiz "GALLEON TNS - SPAWNED"
+	.asciiz "GALLEON TNS: SPAWNED"
 Menu_Flags_LevelTnS_Fungi_Set:
-	.asciiz "FUNGI TNS - CLEAR"
+	.asciiz "FUNGI TNS: CLEAR"
 Menu_Flags_LevelTnS_Fungi_Clear:
-	.asciiz "FUNGI TNS - SPAWNED"
+	.asciiz "FUNGI TNS: SPAWNED"
 Menu_Flags_LevelTnS_Caves_Set:
-	.asciiz "CAVES TNS - CLEAR"
+	.asciiz "CAVES TNS: CLEAR"
 Menu_Flags_LevelTnS_Caves_Clear:
-	.asciiz "CAVES TNS - SPAWNED"
+	.asciiz "CAVES TNS: SPAWNED"
 Menu_Flags_LevelTnS_Castle_Set:
-	.asciiz "CASTLE TNS - CLEAR"
+	.asciiz "CASTLE TNS: CLEAR"
 Menu_Flags_LevelTnS_Castle_Clear:
-	.asciiz "CASTLE TNS - SPAWNED"
+	.asciiz "CASTLE TNS: SPAWNED"
 
 .align
 Menu_Flags_LevelTnS_Japes_Struct:

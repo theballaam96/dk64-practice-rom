@@ -32,41 +32,41 @@ Menu_Flags_KeyInStruct:
 
 .align
 Menu_Flags_KeyIn_JapesOpen_Set:
-	.asciiz "JAPES - OPEN"
+	.asciiz "JAPES: OPEN"
 Menu_Flags_KeyIn_JapesOpen_Clear:
-	.asciiz "JAPES - NOT OPEN"
+	.asciiz "JAPES: NOT OPEN"
 Menu_Flags_KeyIn_Key1In_Set:
-	.asciiz "KEY 1 - TURNED"
+	.asciiz "KEY 1: TURNED"
 Menu_Flags_KeyIn_Key1In_Clear:
-	.asciiz "KEY 1 - NOT TURNED"
+	.asciiz "KEY 1: NOT TURNED"
 Menu_Flags_KeyIn_Key2In_Set:
-	.asciiz "KEY 2 - TURNED"
+	.asciiz "KEY 2: TURNED"
 Menu_Flags_KeyIn_Key2In_Clear:
-	.asciiz "KEY 2 - NOT TURNED"
+	.asciiz "KEY 2: NOT TURNED"
 Menu_Flags_KeyIn_Key3In_Set:
-	.asciiz "KEY 3 - TURNED"
+	.asciiz "KEY 3: TURNED"
 Menu_Flags_KeyIn_Key3In_Clear:
-	.asciiz "KEY 3 - NOT TURNED"
+	.asciiz "KEY 3: NOT TURNED"
 Menu_Flags_KeyIn_Key4In_Set:
-	.asciiz "KEY 4 - TURNED"
+	.asciiz "KEY 4: TURNED"
 Menu_Flags_KeyIn_Key4In_Clear:
-	.asciiz "KEY 4 - NOT TURNED"
+	.asciiz "KEY 4: NOT TURNED"
 Menu_Flags_KeyIn_Key5In_Set:
-	.asciiz "KEY 5 - TURNED"
+	.asciiz "KEY 5: TURNED"
 Menu_Flags_KeyIn_Key5In_Clear:
-	.asciiz "KEY 5 - NOT TURNED"
+	.asciiz "KEY 5: NOT TURNED"
 Menu_Flags_KeyIn_Key6In_Set:
-	.asciiz "KEY 6 - TURNED"
+	.asciiz "KEY 6: TURNED"
 Menu_Flags_KeyIn_Key6In_Clear:
-	.asciiz "KEY 6 - NOT TURNED"
+	.asciiz "KEY 6: NOT TURNED"
 Menu_Flags_KeyIn_Key7In_Set:
-	.asciiz "KEY 7 - TURNED"
+	.asciiz "KEY 7: TURNED"
 Menu_Flags_KeyIn_Key7In_Clear:
-	.asciiz "KEY 7 - NOT TURNED"
+	.asciiz "KEY 7: NOT TURNED"
 Menu_Flags_KeyIn_Key8In_Set:
-	.asciiz "KEY 8 - TURNED"
+	.asciiz "KEY 8: TURNED"
 Menu_Flags_KeyIn_Key8In_Clear:
-	.asciiz "KEY 8 - NOT TURNED"
+	.asciiz "KEY 8: NOT TURNED"
 
 .align
 Menu_Flags_KeyIn_JapesOpen_Struct:

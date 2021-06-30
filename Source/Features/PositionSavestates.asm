@@ -1,6 +1,9 @@
 // Position Savestate
 PositionSavestates:
 	SW 		ra, @ReturnAddress
+	LBU 	a0, @NewMenuOpen
+	BNEZ 	a0, FinishPositionWrite
+	NOP
 
 	CheckLeft:
 		LH 		a1, @NewlyPressedControllerInput

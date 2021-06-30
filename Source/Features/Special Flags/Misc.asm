@@ -18,13 +18,13 @@ Menu_Flags_MiscStruct:
 
 .align
 Menu_Flags_Misc_ArcadeR1_Set:
-	.asciiz "ARCADE ROUND 1 - BEATEN"
+	.asciiz "ARCADE ROUND 1: BEATEN"
 Menu_Flags_Misc_ArcadeR1_Clear:
-	.asciiz "ARCADE ROUND 1 - NOT BEATEN"
+	.asciiz "ARCADE ROUND 1: NOT BEATEN"
 Menu_Flags_Misc_RabbitR1_Set:
-	.asciiz "RABBIT RACE 1 - BEATEN"
+	.asciiz "RABBIT RACE 1: BEATEN"
 Menu_Flags_Misc_RabbitR1_Clear:
-	.asciiz "RABBIT RACE 1 - NOT BEATEN"
+	.asciiz "RABBIT RACE 1: NOT BEATEN"
 
 .align
 Menu_Flags_Misc_ArcadeR1_Struct:

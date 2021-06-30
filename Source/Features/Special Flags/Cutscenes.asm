@@ -22,21 +22,21 @@ Menu_Flags_CutscenesStruct:
 
 .align
 Menu_Flags_Cutscenes_BLockerFTT_Set:
-	.asciiz "B LOCKER FIRST TIME TEXT - WATCHED"
+	.asciiz "B LOCKER FIRST TIME TEXT: WATCHED"
 Menu_Flags_Cutscenes_BLockerFTT_Clear:
-	.asciiz "B LOCKER FIRST TIME TEXT - NOT WATCHED"
+	.asciiz "B LOCKER FIRST TIME TEXT: NOT WATCHED"
 Menu_Flags_Cutscenes_DiddyHelpMe_Set:
-	.asciiz "DIDDY HELP ME CUTSCENE - WATCHED"
+	.asciiz "DIDDY HELP ME CUTSCENE: WATCHED"
 Menu_Flags_Cutscenes_DiddyHelpMe_Clear:
-	.asciiz "DIDDY HELP ME CUTSCENE - NOT WATCHED"
+	.asciiz "DIDDY HELP ME CUTSCENE: NOT WATCHED"
 Menu_Flags_Cutscenes_LlamaCS_Set:
-	.asciiz "LLAMA CUTSCENE - WATCHED"
+	.asciiz "LLAMA CUTSCENE: WATCHED"
 Menu_Flags_Cutscenes_LlamaCS_Clear:
-	.asciiz "LLAMA CUTSCENE - NOT WATCHED"
+	.asciiz "LLAMA CUTSCENE: NOT WATCHED"
 Menu_Flags_Cutscenes_Kosha_Set:
-	.asciiz "GIANT KOSHA CUTSCENE - WATCHED"
+	.asciiz "GIANT KOSHA CUTSCENE: WATCHED"
 Menu_Flags_Cutscenes_Kosha_Clear:
-	.asciiz "GIANT KOSHA CUTSCENE - NOT WATCHED"
+	.asciiz "GIANT KOSHA CUTSCENE: NOT WATCHED"
 
 .align
 Menu_Flags_Cutscenes_BLockerFTT_Struct:

@@ -22,21 +22,21 @@ Menu_Flags_GlobalMGStruct:
 
 .align
 Menu_Flags_GlobalMG_Rambi_Set:
-	.asciiz "RAMBI ARENA - UNLOCKED"
+	.asciiz "RAMBI ARENA: UNLOCKED"
 Menu_Flags_GlobalMG_Rambi_Clear:
-	.asciiz "RAMBI ARENA - LOCKED"
+	.asciiz "RAMBI ARENA: LOCKED"
 Menu_Flags_GlobalMG_Enguarde_Set:
-	.asciiz "ENGUARDE ARENA - UNLOCKED"
+	.asciiz "ENGUARDE ARENA: UNLOCKED"
 Menu_Flags_GlobalMG_Enguarde_Clear:
-	.asciiz "ENGUARDE ARENA - LOCKED"
+	.asciiz "ENGUARDE ARENA: LOCKED"
 Menu_Flags_GlobalMG_Arcade_Set:
-	.asciiz "DK ARCADE - UNLOCKED"
+	.asciiz "DK ARCADE: UNLOCKED"
 Menu_Flags_GlobalMG_Arcade_Clear:
-	.asciiz "DK ARCADE - LOCKED"
+	.asciiz "DK ARCADE: LOCKED"
 Menu_Flags_GlobalMG_Jetpac_Set:
-	.asciiz "JETPAC - UNLOCKED"
+	.asciiz "JETPAC: UNLOCKED"
 Menu_Flags_GlobalMG_Jetpac_Clear:
-	.asciiz "JETPAC - LOCKED"
+	.asciiz "JETPAC: LOCKED"
 
 .align
 Menu_Flags_GlobalMG_Rambi_Struct:

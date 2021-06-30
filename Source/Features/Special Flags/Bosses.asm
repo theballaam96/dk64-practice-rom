@@ -28,33 +28,33 @@ Menu_Flags_BossIntroStruct:
 
 .align
 Menu_Flags_BossIntro_Japes_Set:
-	.asciiz "ARMY DILLO 1 INTRO - WATCHED"
+	.asciiz "ARMY DILLO 1 INTRO: WATCHED"
 Menu_Flags_BossIntro_Japes_Clear:
-	.asciiz "ARMY DILLO 1 INTRO - NOT WATCHED"
+	.asciiz "ARMY DILLO 1 INTRO: NOT WATCHED"
 Menu_Flags_BossIntro_Aztec_Set:
-	.asciiz "DOGADON 1 INTRO - WATCHED"
+	.asciiz "DOGADON 1 INTRO: WATCHED"
 Menu_Flags_BossIntro_Aztec_Clear:
-	.asciiz "DOGADON 1 INTRO - NOT WATCHED"
+	.asciiz "DOGADON 1 INTRO: NOT WATCHED"
 Menu_Flags_BossIntro_Factory_Set:
-	.asciiz "MAD JACK INTRO - WATCHED"
+	.asciiz "MAD JACK INTRO: WATCHED"
 Menu_Flags_BossIntro_Factory_Clear:
-	.asciiz "MAD JACK INTRO - NOT WATCHED"
+	.asciiz "MAD JACK INTRO: NOT WATCHED"
 Menu_Flags_BossIntro_Galleon_Set:
-	.asciiz "PUFFTOSS INTRO - WATCHED"
+	.asciiz "PUFFTOSS INTRO: WATCHED"
 Menu_Flags_BossIntro_Galleon_Clear:
-	.asciiz "PUFFTOSS INTRO - NOT WATCHED"
+	.asciiz "PUFFTOSS INTRO: NOT WATCHED"
 Menu_Flags_BossIntro_Fungi_Set:
-	.asciiz "DOGADON 2 INTRO - WATCHED"
+	.asciiz "DOGADON 2 INTRO: WATCHED"
 Menu_Flags_BossIntro_Fungi_Clear:
-	.asciiz "DOGADON 2 INTRO - NOT WATCHED"
+	.asciiz "DOGADON 2 INTRO: NOT WATCHED"
 Menu_Flags_BossIntro_Caves_Set:
-	.asciiz "ARMY DILLO 2 INTRO - WATCHED"
+	.asciiz "ARMY DILLO 2 INTRO: WATCHED"
 Menu_Flags_BossIntro_Caves_Clear:
-	.asciiz "ARMY DILLO 2 INTRO - NOT WATCHED"
+	.asciiz "ARMY DILLO 2 INTRO: NOT WATCHED"
 Menu_Flags_BossIntro_Castle_Set:
-	.asciiz "KUT OUT INTRO - WATCHED"
+	.asciiz "KUT OUT INTRO: WATCHED"
 Menu_Flags_BossIntro_Castle_Clear:
-	.asciiz "KUT OUT INTRO - NOT WATCHED"
+	.asciiz "KUT OUT INTRO: NOT WATCHED"
 
 .align
 Menu_Flags_BossIntro_Japes_Struct:

@@ -1,6 +1,6 @@
 Watch_SpawnWatch:
 	SW 		ra, @ReturnAddress2
-	LI 		a0, 0 // 0 = Center, 10 = Use X Value
+	LI 		a0, 0
 	LI 		a1, 100
 	LI 		a2, 200
 	LA 		a3, Display_Calibrating

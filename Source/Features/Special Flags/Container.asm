@@ -17,6 +17,8 @@ Menu_Flags_Modifiers:
 	.asciiz "LEVEL MODIFIERS"
 Menu_Flags_Misc:
 	.asciiz "MISCELLANEOUS"
+Menu_Flags_Custom:
+	.asciiz "CUSTOM"
 
 .align
 Menu_Flags_Array:
@@ -29,6 +31,7 @@ Menu_Flags_Array:
 	.word Menu_Flags_Cutscenes
 	.word Menu_Flags_Modifiers
 	.word Menu_Flags_Misc
+	.word Menu_Flags_Custom
 
 .align
 Menu_Flags_Functions:
@@ -41,12 +44,13 @@ Menu_Flags_Functions:
 	.word ActiveMenu_OpenFlagMenu_Cutscenes
 	.word ActiveMenu_OpenFlagMenu_Modifiers
 	.word ActiveMenu_OpenFlagMenu_Misc
+	.word ActiveMenu_OpenFlagMenu_Custom
 
 .align
 Menu_Flags_Struct:
 	.word Menu_Flags_Array ; Text Array
 	.word Menu_Flags_Functions ; Function Array
-	.byte 9 ; Array Items
+	.byte 10 ; Array Items
 	.byte 0 ; Parent Screen
 
 .align
@@ -60,6 +64,7 @@ Menu_Flags_DataStruct:
 	.word Menu_Flags_CutscenesStruct
 	.word Menu_Flags_ModifiersStruct
 	.word Menu_Flags_MiscStruct
+	.word Menu_Flags_TrainingStruct
 
 .align
 ActiveMenu_OpenFlagMenu:
