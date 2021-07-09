@@ -1,6 +1,8 @@
 import subprocess
 import os
 import shutil
+import gzip
+from compressFile import compressGZipFile
 
 StaticCodeFile = "StaticCode_Copy.bin"
 
@@ -18,3 +20,5 @@ with open(StaticCodeFile, "r+b") as fh:
 	fh.write(bytearray([0x22])) # File Start Map
 	fh.seek(0x11925B)
 	fh.write(bytearray([0x0])) # File Start Exit
+
+compressGZipFile("StaticCode_Copy.bin","StaticCode_Copy.bin.gz",False)

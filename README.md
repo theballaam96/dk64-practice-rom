@@ -1,6 +1,16 @@
 # Donkey Kong 64 Practice ROM
 Practice ROM for Donkey Kong 64 that assists with practising the game. Written in assembler but segmented into modular files.
 
+## Building Pre-requisites
+```
+1. Python (version 3 or higher) or a text editor that can run a python terminal
+2. Lua for windows 5.1.5 (https://github.com/rjpcomputing/luaforwindows/releases)
+```
+
+## Build Setup
+1. Run build.py in the "Build" directory
+2. In the "Build" directory should be a fully converted practice ROM (Note that this will be a development version of the practice ROM. As such, the build may be buggy depending on the state of the ASM at the time)
+
 ## Development Pre-requisites
 ```
 1. Python (version 3 or higher) or a text editor that can run a python terminal

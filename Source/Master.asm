@@ -382,36 +382,7 @@ Start:
 	NOP
 
 	SetOtherVariables:
-		// // Lag Hook - NOTE: UPDATE ON EVERY REVISION
-		// LI 		a1, 0x080002DD
-		// SW 		a1, 0x80600674
-		// SW 		r0, 0x80600678
-		// // GK Timer Hook - NOTE: UPDATE ON EVERY REVISION
-		// LI 		a1, 0x08176D2A
-		// SW 		a1, 0x80646074
-		// SW 		r0, 0x80646078
-		// // Kong Hook - NOTE: UPDATE ON EVERY REVISION
-		// LI 		a1, 0x08176EBB
-		// SW 		a1, 0x806F3750
-		// SW 		r0, 0x806F3754
-		// // Graphical Overlay Space Expansion - NOTE: UPDATE ON EVERY REVISION
-		// LI 		a1, 0x3C18805E
-		// SW 		a1, 0x8068C374
-		// LI 		a1, 0x2718103C
-		// SW 		a1, 0x8068C378
-		// //
-		// LI 		a1, 0x3C06805E
-		// SW 		a1, 0x8068C310
-		// LI 		a1, 0x24C6103C
-		// SW 		a1, 0x8068C314
-		// //
-		// LI 		a1, 0x3C12805E
-		// SW 		a1, 0x8068C240
-		// LI 		a1, 0x2652103C
-		// SW 		a1, 0x8068C244
-		// //
-		// LI 		a1, 0x28410020
-		// SW 		a1, 0x8068C364
+		.incasm "./../../Development/dk64-practice-rom/Source/Features/OtherVars.asm"
 
 		// Unlock Mystery Menu
 		LI      t6, 0x807ED558
@@ -551,9 +522,6 @@ CodedPlaySFX:
 	JR 		ra
 	NOP
 
-.incasm "./../../Development/dk64-practice-rom/Source/Features/Savestate.asm"
-.align
-
 // Check if in Bad Map
 CheckMapType:
 	LW 		a0, @CurrentMap
@@ -588,7 +556,7 @@ CheckMapType:
 LoadInAdditionalFile:
     JAL     @DMAFileTransfer
     ADDIU   a0, a0, 0x13F0
-    LI      a1, 0x20070EA
+    .incasm "./../../Development/dk64-practice-rom/Source/Features/EndLoadingSpot.asm"
     LI      a2, 0x805DAE00
     JAL     @DMAFileTransfer       
     LUI     a0, 0x200 // 0x2000000
@@ -681,8 +649,11 @@ UpdateSlamSnipe:
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/ColorKong.asm"
 
+
 .org 0x805DAE00
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Watches.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Savestate.asm"
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Input.asm"
 .align

@@ -70,3 +70,7 @@ def compressGZipFile(inputFile, outputFile, byteFlipCompressed):
 							curr_size = len(outputFileName.read())
 							outputFileName.seek(curr_size)
 							outputFileName.write(bytearray(writeBuffer))
+	if os.path.exists("tempgh9.bin"):
+		os.remove("tempgh9.bin")
+	if os.path.exists("tempgh9.bin.gz"):
+		os.remove("tempgh9.bin.gz")
