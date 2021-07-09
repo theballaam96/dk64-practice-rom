@@ -35,7 +35,9 @@ def compressGZipFile(inputFile, outputFile, byteFlipCompressed):
 					new_file_bytes = inputFileName.read()
 					for x in range(len(new_file_bytes)):
 						tempBufferNew[x] = new_file_bytes[x]
-					with open(outputFile, "r+b") as outputFileName:
+					if os.path.exists(outputFile):
+						os.remove(outputFile)
+					with open(outputFile, "w+b") as outputFileName:
 						start = 0x16
 						# DK64-Specific stuff
 						start = start - 0xA
@@ -68,5 +70,3 @@ def compressGZipFile(inputFile, outputFile, byteFlipCompressed):
 							curr_size = len(outputFileName.read())
 							outputFileName.seek(curr_size)
 							outputFileName.write(bytearray(writeBuffer))
-
-#compressGZipFile("StaticCode_Copy.bin","StaticCode_Copy.bin.gz",False)
