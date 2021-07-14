@@ -71,6 +71,7 @@ Menu_Flags_Training_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Flags_Training_Functions:
@@ -78,12 +79,13 @@ Menu_Flags_Training_Functions:
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Flags_Training_Struct:
 	.word Menu_Flags_Training_Array // Text Array
 	.word Menu_Flags_Training_Functions // Function Array
-	.byte 4 // Array Items
+	.byte 5 // Array Items
 	.byte 31 // Parent Screen
 
 .align

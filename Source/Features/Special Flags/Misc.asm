@@ -43,17 +43,19 @@ Menu_Flags_Misc_TextStruct:
 Menu_Flags_Misc_Array:
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Flags_Misc_Functions:
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
+	.word ActiveMenu_PreviousScreen
 	
 .align
 Menu_Flags_Misc_Struct:
 	.word Menu_Flags_Misc_Array // Text Array
 	.word Menu_Flags_Misc_Functions // Function Array
-	.byte 2 // Array Items
+	.byte 3 // Array Items
 	.byte 36 // Parent Screen
 
 .align

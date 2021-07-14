@@ -7,6 +7,7 @@ FormatTextForWatch:
 	// a3 = header_length (u8)
 
 	// Clear Watch Space
+	SW 		ra, @ReturnAddress3
 	LI 		t3, @WatchTextSpace
 	SD 		r0, 0x00 (t3)
 	SD 		r0, 0x08 (t3)
@@ -36,6 +37,11 @@ FormatTextForWatch:
 		SB 		t6, 0x1 (t9)
 		BEQZ 	a2, FormatText_IsInt
 		LI 		t8, 1
+		LA 		t7, WatchFormat_FloatFormat_1
+		BEQ 	a2, t8, FormatText_IsFloat
+		NOP
+		LI 		t8, 2
+		LA 		t7, WatchFormat_FloatFormat_2
 		BEQ 	a2, t8, FormatText_IsFloat
 		NOP
 		B 		FinishFormattingText
@@ -100,77 +106,44 @@ FormatTextForWatch:
 		CVT.W.S f4, f0 // Dec as Int
 		MFC1 	t6, f4 // Dec Portion
 		MFC1 	t9, f2 // Int Portion
-		SW 		t6, @VarStorage1
-		SW 		t9, @VarStorage0
-		LI 		t8, @WatchTextSpace
-		ADDIU 	t8, t8, 0x2C
-		// t9 = remaining
-		LI 		t6, 0 // Length
+		LI 		a0, 100
+		BNE 	t6, a0, FormatText_IsFloat_StringFormat
+		NOP
 
-		FormatText_FloatLoop_Int:
-			LI 		t3, 10
-			DDIVU 	t9, t3
-			MFHI 	t3 // Remainder
-			ADDIU 	t3, t3, 0x30 // ASCII
-			SB 		t3, 0x0 (t8)
-			ADDIU 	t6, t6, 1
-			ADDI 	t8, t8, -1
-			MFLO 	t9 // Copy Quotient to remaining
-			BEQZ 	t9, FormatText_FloatInt_Finish
-			NOP
-			SLTIU 	t3, t6, 5
-			BEQZ 	t3, FormatText_FloatInt_Finish
-			NOP
-			B 		FormatText_FloatLoop_Int
-			NOP
-
-		FormatText_FloatInt_Finish:
-			LI 		t8, @WatchTextSpace
-			LI 		t9, 0x2E // "."
-			SB 		t9, 0xD (t8)
-			LW 		t9, @VarStorage1
-			LI 		t3, 10
-			DDIVU 	t9, t3
-			MFLO 	t3 // 10th
-			LI 		t9, 10
-			BEQ 	t3, t9, FormatText_FloatInt_99
-			ADDIU 	t3, t3, 0x30
-			SB 		t3, 0xE (t8)
-			MFHI 	t3 // 100th
-			ADDIU 	t3, t3, 0x30
-			B 		FormatText_FloatInt_GetRewriteAddresses
-			SB 		t3, 0xF (t8)
-
-		FormatText_FloatInt_99:
-			LI 		t3, 0x39
-			SB 		t3, 0xE (t8)
-			SB 		t3, 0xF (t8)
-			
-		FormatText_FloatInt_GetRewriteAddresses:
-			ADDIU 	t6, t6, 3 // Length
-			LI 		t3, @WatchTextSpace
-			ADD 	t3, t3, a3
-			ADDIU 	t9, t3, 2 // Start of text area to write
-			LI 		t3, @WatchTextSpace
-			LI 		t8, 0x30
-			ADD 	t8, t8, t3
-			SUBU 	t8, t8, t6 // Start of written text area
-
-		FormatText_FloatInt_FinishLoop:
-			LBU 	t3, 0x0 (t8)
-			SB 		t3, 0x0 (t9)
+		FormatText_IsFloat_Correct100Error:
+			LI 		t6, 0
 			ADDIU 	t9, t9, 1
-			ADDIU 	t8, t8, 1
-			ADDI 	t6, t6, -1
-			BEQZ 	t6, FormatText_FloatInt_FinishCap
-			NOP
-			B 		FormatText_FloatInt_FinishLoop
-			NOP
 
-		FormatText_FloatInt_FinishCap:
-			B 		FinishFormattingText
-			SB 		r0, 0x0 (t9)
+		FormatText_IsFloat_StringFormat:
+			LA 		a0, WatchFormat_TextSpace
+			ADDIU 	a2, t9, 0
+			ADDIU 	a3, t6, 0
+			ADDIU 	a1, t7, 0
+			SW 		t3, @VarStorage0
+			JAL 	@StrFormat
+			NOP
+			LW 		t3, @VarStorage0
+			ADDIU 	t3, t3, 1
+			LA 		t6, WatchFormat_TextSpace
+
+		FormatText_FloatLoop:
+			LBU 	t9, 0x0 (t6)
+			BEQZ 	t9, FinishFormattingText
+			SB 		t9, 0x0 (t3)
+			ADDIU 	t3, t3, 1
+			B 		FormatText_FloatLoop
+			ADDIU 	t6, t6, 1
 
 	FinishFormattingText:
+		LW 		ra, @ReturnAddress3
 		JR 		ra
 		NOP
+
+.align
+WatchFormat_FloatFormat_1:
+	.asciiz "%3d.%02d"
+WatchFormat_FloatFormat_2:
+	.asciiz "%02d.%02d"
+.align
+WatchFormat_TextSpace:
+	.space 0x10

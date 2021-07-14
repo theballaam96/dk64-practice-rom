@@ -1,67 +1,26 @@
 CalculateISGTime:
 	SW 		ra, @ReturnAddress4
+	JAL 	GetISGTimer
+	NOP
 	LBU 	a1, @ISGActive
-	LI 		t0, 0 // Float representation
 	BEQZ 	a1, CalculateISGTime_Format
 	LI 		a1, 0 // Default time when ISG not on
-	LD 		t9, @CurrentTimestamp
-	LD 		a3, @ISGTimestamp
-	BEQZ 	a3, CalculateISGTime_Format
-	LI 		a1, 0 // Default time when ISG timestamp is inactive
-	DSUBU 	a1, t9, a3
-	LI 		a3, @ISGTimer
-	SD 		a1, 0x0(a3)
-	LW 		a2, 0x0(a3)
-	LW 		a1, 0x4(a3)
-	MTC1 	a2, f0
-	MTC1 	a1, f10
-	CVT.S.W f0, f0 // Major as float
-	CVT.S.W f10, f10 // Minor as float
-	LI 		a2, 0x4F800000 // 2^32 as float
-	MTC1 	a2, f6 
-	LI 		a2, 0x41AA7302 // 21.306156158447265625
-	MTC1 	a2, f2
-	LI 		a3, 0x3089705F // 10^-9
-	MTC1 	a3, f4
-	LI 		a3, 0x42B704BC // Minor Overflow Addition (91.509246826171875) = (2 ^ 32) * (10 ^ -9) * scalar
-	MTC1 	a3, f12
-	MTC1 	r0, f8 // r0
-	MUL.S 	f0, f0, f4 // Major * magnitude
-	MUL.S 	f10, f10, f4 // Minor * ticks
-	MUL.S 	f0, f0, f2 // Major * magnitude * ticks
-	MUL.S 	f10, f10, f2 // Minor * magnitude * ticks
-	MUL.S 	f0, f0, f6 // Major * magnitude * ticks * 2^32
-	C.LE.S 	f10, f8
-	BC1TL 	AddISGStamps
-	ADD.S 	f10, f10, f12
-
-	AddISGStamps:
-		ADD.S 	f0, f0, f10 // Major + Minor
-		LI 		a2, 0x40049375 // Offset for "Real time" timing method. 2.0715
-		MTC1 	a2, f10
-		ADD.S 	f0, f0, f10 // Time + Realtime Offset
-		MFC1 	t0, f0
-		LUI 	a2, 0x3EFF // f32 - 0.498 (Close to 0.5)
-		MTC1 	a2, f10
-		SUB.S 	f0, f0, f10
-		CVT.W.S f0, f0
-		MFC1 	a1, f0
+	LW 		a1, @ISGTimer
+	ADDIU 	a1, a1, 200
 
 	CalculateISGTime_Format:
-		LI 		a2, 60
+		LI 		a2, 6000
 		DIVU 	a1, a2
 		MFLO 	a2 // Minutes
-		MTC1 	a2, f0
+		MFHI 	a1 // Seconds
+		MTC1 	a1, f0
 		CVT.S.W f0, f0
-		LUI 	a3, 0x4270
+		LUI 	a3, 0x42C8 // 100
 		MTC1 	a3, f2
-		MUL.S 	f2, f0, f2
-		MTC1 	t0, f0
-		SUB.S 	f0, f0, f2 // Seconds
+		DIV.S 	f0, f0, f2
 		MFC1 	a3, f0
 		SW 		a3, @VarStorage0
 		LA 		a0, ISGWatch_Header_Space
-		//LI 		a0, @WatchTextSpace
 		LA 		a1, ISGWatch_Header_Format
 		JAL 	@StrFormat
 		NOP
@@ -74,21 +33,91 @@ CalculateISGTime:
 		JR 		ra
 		NOP
 
-		// MTC1 	a1, f0
-		// CVT.S.W f0, f0
-		// LUI 	a2, 0x4270
-		// MTC1 	a2, f2
-		// DIV.S 	f0, f0, f2
-		// LUI 	a3, 0x3EFF
-		// MTC1 	a3, f4
-
 GetISGTimer:
-	ADDU 	a2, t9, t0
-	SW 		v1, @ISGTimer
-	LW 		t2, 0x0 (a2)
-	J 		0x8061B568
+	SW 		ra, @ReturnAddress3
+	LBU	 	a1, @ISGActive
+	SW 		r0, @ISGTimer
+	BEQZ 	a1, GetISGTimer_Finish
 	NOP
+	JAL 	@GetTimestamp
+	NOP
+	LI 		t6, @ISGTimestamp
+	LW 		t7, 0x4 (t6)
+	LW 		t6, 0x0 (t6)
+	LI 		a2, 0
+	SLTU 	at, v1, t7
+	SUBU 	a0, v0, t6
+	SUBU 	a0, a0, at
+	LI 		a3, 0x40
+	JAL 	@Multiply
+	SUBU 	a1, v1, t7
+	OR 		a0, v0, r0
+	OR 		a1, v1, r0
+	LI 		a2, 0
+	JAL 	@ConvertTimestamp
+	LI 		a3, 3000
+	OR 		a0, v0, r0
+	OR 		a1, v1, r0
+	LI 		a2, 0
+	JAL 	@ConvertTimestamp
+	LI 		a3, 10000
+	SW 		v1, @ISGTimer
 
+	GetISGTimer_Finish:
+		LW 		ra, @ReturnAddress3
+		JR 		ra
+		NOP
+
+ColourISGTimer:
+	SW 		ra, @ReturnAddress4
+	LI 		a0, 0xFFFFFF // Default Colour
+	LBU 	a1, @ISGActive
+	BEQZ 	a1, ColourISGTimer_Finish
+	NOP
+	LW 		t6, @ISGTimer
+	LI 		t3, @ISGFadeoutArray
+	SB 		r0, @ISGStage
+	LI 		t0, 0
+
+	ColourISGTimer_Loop:
+		LwU 	t8, 0x0 (t3)
+		SLTU 	t8, t6, t8
+		BEQZ 	t8, ColourISGTimer_Increment
+		NOP
+
+	ColourISGTimer_SetStage:
+		SB 		t0, @ISGStage
+		BEQZ 	t0, ColourISGTimer_DetectFade
+		NOP
+		LBU 	a1, @ISGPreviousFadeout
+		BEQ 	t0, a1, ColourISGTimer_Finish
+		NOP
+		LI 		a0, @ISGRGB_FadeoutPending
+		B  		ColourISGTimer_DetectFade
+		NOP
+
+	ColourISGTimer_Increment:
+		ADDIU 	t0, t0, 1
+		LI 		t8, 7
+		BEQ 	t0, t8, ColourISGTimer_Finish
+		ADDIU 	t3, t3, 8
+		B 		ColourISGTimer_Loop
+		NOP
+
+	ColourISGTimer_DetectFade:
+		LBU 	t8, 0x4 (t3) // Expected Destination Map
+		LW 		t0, @DestMap
+		BNE 	t0, t8, ColourISGTimer_Finish
+		NOP
+		LI 		a0, @ISGRGB_Fading
+
+	ColourISGTimer_Finish:
+		JAL 	Watch_ColourWatch
+		NOP
+		LW 		ra, @ReturnAddress4
+		JR 		ra
+		NOP
+		
 .align
 ISGWatch_Header_Format:
 	.asciiz "ISG TIME: %1d"

@@ -4,16 +4,19 @@ ActiveMenu_Open:
 	ANDI 	a0, a0, 2
 	BNEZ 	a0, ActiveMenu_Open_Finish
 	NOP
+	LBU 	a0, @IsPauseMenuOpen
+	BNEZ 	a0, ActiveMenu_Open_Finish
+	NOP
 	LW 		a0, @CurrentMap
 	LI 		a1, 0x50
 	BEQ 	a0, a1, ActiveMenu_Open_Finish // Can't open in main menu
 	NOP
 	LH 		a0, @NewlyPressedControllerInput
-	ANDI 	a1, a0, @D_Up
+	ANDI 	a1, a0, @L_Button
 	BEQZ 	a1, ActiveMenu_Open_Finish
 	NOP
 	LH 		a0, @ControllerInput
-	ANDI 	a1, a0, @L_Button
+	ANDI 	a1, a0, @R_Button
 	BEQZ 	a1, ActiveMenu_Open_Finish
 	NOP
 	SB 		r0, @NewMenu_Screen
@@ -41,6 +44,9 @@ ActiveMenu_MoveSlot:
 	NOP
 	LBU 	a0, @TBVoidByte
 	ANDI 	a0, a0, 2
+	BNEZ 	a0, ActiveMenu_MoveSlot_Finish
+	NOP
+	LBU 	a0, @IsPauseMenuOpen
 	BNEZ 	a0, ActiveMenu_MoveSlot_Finish
 	NOP
 	LH 		a0, @ControllerInput
@@ -92,15 +98,21 @@ ActiveMenu_MoveSlot:
 		LBU 	a2, @NewMenu_Position
 		BNE 	a0, a2, ActiveMenu_MoveSlot_UpdateColouring_LoopWhite
 		NOP
-		LI 		a2, @SelectedRGB
-		ANDI 	a2, a2, 0xFF
+		LW 		t6, 0x178 (a3)
+		LW 		t6, 0x0 (t6)
+		LI 		t8, 0x52455455
+		LI 		t9, @SelectedRGB
+		BNE 	t6, t8, ActiveMenu_MoveSlot_UpdateColouring_LoopSelect
+		NOP
+		LI 		t9, @ReturnRGB
+
+	ActiveMenu_MoveSlot_UpdateColouring_LoopSelect:
+		ANDI 	a2, t9, 0xFF
 		SB 		a2, 0x16C (a3)
-		LI 		a2, @SelectedRGB
-		SRA 	a2, a2, 8
+		SRA 	a2, t9, 8
 		ANDI 	a2, a2, 0xFF
 		SB 		a2, 0x16B (a3)
-		LI 		a2, @SelectedRGB
-		SRA 	a2, a2, 16
+		SRA 	a2, t9, 16
 		ANDI 	a2, a2, 0xFF
 		B 		ActiveMenu_MoveSlot_UpdateColouring_LoopEnumerate
 		SB 		a2, 0x16A (a3)
@@ -301,18 +313,25 @@ ActiveMenu_EmergencyClose:
 		JR 		ra
 		NOP
 
-ActiveMenu_PressA:
+ActiveMenu_ConfirmOption:
 	SW 		ra, @ReturnAddress
 	LBU 	a0, @NewMenuOpen
-	BEQZ 	a0, ActiveMenu_PressA_Finish
+	BEQZ 	a0, ActiveMenu_ConfirmOption_Finish
 	NOP
 	LBU 	a0, @TBVoidByte
 	ANDI 	a0, a0, 2
-	BNEZ 	a0, ActiveMenu_PressA_Finish
+	BNEZ 	a0, ActiveMenu_ConfirmOption_Finish
+	NOP
+	LBU 	a0, @IsPauseMenuOpen
+	BNEZ 	a0, ActiveMenu_ConfirmOption_Finish
 	NOP
 	LH 		a0, @NewlyPressedControllerInput
-	ANDI 	a0, a0, @A_Button
-	BEQZ 	a0, ActiveMenu_PressA_Finish
+	ANDI 	a0, a0, @L_Button
+	BEQZ 	a0, ActiveMenu_ConfirmOption_Finish
+	NOP
+	LH 		a0, @ControllerInput
+	ANDI 	a0, a0, @R_Button
+	BNEZ 	a0, ActiveMenu_ConfirmOption_Finish
 	NOP
 	LA 		a0, Menu_Screens
 	LBU 	a1, @NewMenu_Screen
@@ -324,33 +343,20 @@ ActiveMenu_PressA:
 	SLL 	a1, a1, 2
 	ADD 	a0, a0, a1
 	LW 		a0, 0x0 (a0) // Selected Function
-	BEQZ 	a0, ActiveMenu_PressA_Finish
+	BEQZ 	a0, ActiveMenu_ConfirmOption_Finish
 	NOP
 	JALR 	a0
 	NOP
 
-	ActiveMenu_PressA_Finish:
+	ActiveMenu_ConfirmOption_Finish:
 		LW 		ra, @ReturnAddress
 		JR 		ra
 		NOP
 
-ActiveMenu_PressB:
-	SW 		ra, @ReturnAddress
-	LBU 	a0, @NewMenuOpen
-	BEQZ 	a0, ActiveMenu_PressB_Finish
-	NOP
-	LBU 	a0, @TBVoidByte
-	ANDI 	a0, a0, 2
-	BNEZ 	a0, ActiveMenu_PressB_Finish
-	NOP
-	LH 		a0, @NewlyPressedControllerInput
-	ANDI 	a1, a0, @B_Button
-	BEQZ 	a1, ActiveMenu_PressB_Finish
-	ANDI 	a1, a0, @A_Button
-	BNEZ 	a1, ActiveMenu_PressB_Finish
-	NOP
+ActiveMenu_PreviousScreen:
+	SW 		ra, @ReturnAddress3
 	LBU 	a1, @NewMenu_Screen
-	BEQZ 	a1, ActiveMenu_PressB_IsHome
+	BEQZ 	a1, ActiveMenu_PreviousScreen_IsHome
 	NOP
 	LA 		a0, Menu_Screens
 	SLL 	a1, a1, 2
@@ -365,14 +371,14 @@ ActiveMenu_PressB:
 	SB 		r0, @NewMenu_Position
 	JAL 	ActiveMenu_SpawnMenu
 	NOP
-	B 		ActiveMenu_PressB_Finish
+	B 		ActiveMenu_PreviousScreen_Finish
 	NOP
 
-	ActiveMenu_PressB_IsHome:
+	ActiveMenu_PreviousScreen_IsHome:
 		JAL 	ActiveMenu_ClearMenu
 		NOP
 
-	ActiveMenu_PressB_Finish:
-		LW 		ra, @ReturnAddress
+	ActiveMenu_PreviousScreen_Finish:
+		LW 		ra, @ReturnAddress3
 		JR 		ra
 		NOP

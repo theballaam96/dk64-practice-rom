@@ -5,10 +5,10 @@ TagAnywhere:
 	BNEZ 	a1, TagAnywhere_Finish // Pause Menu
 	NOP
 	LBU 	a1, @NewMenuOpen
-	BEQZ 	a1, TagAnywhere_CheckDDown // If menu is open, require L as an input
+	BEQZ 	a1, TagAnywhere_CheckDDown // If menu is open, require R as an input
 	NOP
 	LH 		a1, @ControllerInput
-	ANDI 	a1, a1, @L_Button
+	ANDI 	a1, a1, @R_Button
 	BEQZ 	a1, TagAnywhere_Finish
 	NOP
 

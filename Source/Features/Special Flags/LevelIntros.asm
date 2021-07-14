@@ -104,6 +104,7 @@ Menu_Flags_LevelIntro_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Flags_LevelIntro_Functions:
@@ -114,12 +115,13 @@ Menu_Flags_LevelIntro_Functions:
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Flags_LevelIntro_Struct:
 	.word Menu_Flags_LevelIntro_Array // Text Array
 	.word Menu_Flags_LevelIntro_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 8 // Array Items
 	.byte 36 // Parent Screen
 
 .align

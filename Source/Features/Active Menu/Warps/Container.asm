@@ -29,6 +29,7 @@ Menu_MapWarp_Array:
 	.word Menu_Castle
 	.word Menu_HelmAndKRool
 	.word Menu_Isles
+	.word Menu_Return
 
 .align
 Menu_MapWarp_Functions:
@@ -41,10 +42,11 @@ Menu_MapWarp_Functions:
 	.word ActiveMenu_OpenMapWarper_Castle
 	.word ActiveMenu_OpenMapWarper_HelmKRool
 	.word ActiveMenu_OpenMapWarper_Isles
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapWarp_Struct:
 	.word Menu_MapWarp_Array // Text Array
 	.word Menu_MapWarp_Functions // Function Array
-	.byte 9 // Array Items
+	.byte 10 // Array Items
 	.byte 0 // Parent Screen

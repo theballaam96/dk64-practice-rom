@@ -6,6 +6,9 @@ LToLevitate:
 	ANDI 	a0, a0, 2
 	BNEZ 	a0, LToLevitate_Finish // Pause Menu
 	NOP
+	LBU 	a0, @NewMenuOpen
+	BNEZ 	a0, LToLevitate_Finish
+	NOP
 	LH 		a0, @ControllerInput
 	ANDI 	a0, a0, @L_Button
 	BEQZ 	a0, LToLevitate_Finish

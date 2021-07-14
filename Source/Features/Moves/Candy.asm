@@ -235,6 +235,7 @@ Menu_Candy_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Candy_Functions:
@@ -245,6 +246,7 @@ Menu_Candy_Functions:
 	.word UpdateCandyKongInstrument
 	.word UpdateCandyUpgrade
 	.word UpdateCandyMelons
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Candy_Kong_Lists:
@@ -258,5 +260,5 @@ Menu_Candy_Kong_Lists:
 Menu_Candy_Struct:
 	.word Menu_Candy_Array // Text Array
 	.word Menu_Candy_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 8 // Array Items
 	.byte 31 // Parent Screen

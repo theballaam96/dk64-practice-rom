@@ -56,6 +56,7 @@ Menu_MapHelmKRool_Array:
 	.word Menu_Maps_HideoutHelmKRool_LankyPhase
 	.word Menu_Maps_HideoutHelmKRool_TinyPhase
 	.word Menu_Maps_HideoutHelmKRool_ChunkyPhase
+	.word Menu_Return
 
 .align
 Menu_MapHelmKRool_Functions:
@@ -67,10 +68,11 @@ Menu_MapHelmKRool_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapHelmKRool_Struct:
 	.word Menu_MapHelmKRool_Array // Text Array
 	.word Menu_MapHelmKRool_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 9 // Array Items
 	.byte 1 // Parent Screen

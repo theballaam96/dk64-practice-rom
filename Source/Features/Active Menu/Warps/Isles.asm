@@ -99,6 +99,7 @@ Menu_MapIsles_Array:
 	.word Menu_Maps_Isles_Snides
 	.word Menu_Maps_Isles_TGrounds
 	.word Menu_Maps_Isles_Treehouse
+	.word Menu_Return
 
 .align
 Menu_MapIsles_Functions:
@@ -109,12 +110,13 @@ Menu_MapIsles_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapIsles_Struct:
 	.word Menu_MapIsles_Array // Text Array
 	.word Menu_MapIsles_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 8 // Array Items
 	.byte 1 // Parent Screen
 
 .align
@@ -136,6 +138,7 @@ Menu_MapIslesMain_Array:
 	.word Menu_Maps_Isles_W3
 	.word Menu_Maps_Isles_KrocIsle
 	.word Menu_Maps_Isles_TopOfDKIsle
+	.word Menu_Return
 
 .align
 Menu_MapIslesMain_Functions:
@@ -144,12 +147,13 @@ Menu_MapIslesMain_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapIslesMain_Struct:
 	.word Menu_MapIslesMain_Array // Text Array
 	.word Menu_MapIslesMain_Functions // Function Array
-	.byte 5 // Array Items
+	.byte 6 // Array Items
 	.byte 10 // Parent Screen
 
 .align
@@ -180,6 +184,7 @@ Menu_MapIslesLobbies_Array:
 	.word Menu_Maps_Isles_LobbyCaves
 	.word Menu_Maps_Isles_LobbyCastle
 	.word Menu_Maps_Isles_LobbyHelm
+	.word Menu_Return
 
 .align
 Menu_MapIslesLobbies_Functions:
@@ -191,10 +196,11 @@ Menu_MapIslesLobbies_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapIslesLobbies_Struct:
 	.word Menu_MapIslesLobbies_Array // Text Array
 	.word Menu_MapIslesLobbies_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 9 // Array Items
 	.byte 10 // Parent Screen

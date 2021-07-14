@@ -188,6 +188,7 @@ Menu_Cranky_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Cranky_Functions:
@@ -197,6 +198,7 @@ Menu_Cranky_Functions:
 	.word UpdateCrankyKongMove
 	.word UpdateCrankyKongMove
 	.word UpdateCrankyKongMove
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Cranky_Kong_Lists:
@@ -210,5 +212,5 @@ Menu_Cranky_Kong_Lists:
 Menu_Cranky_Struct:
 	.word Menu_Cranky_Array // Text Array
 	.word Menu_Cranky_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 7 // Array Items
 	.byte 31 // Parent Screen

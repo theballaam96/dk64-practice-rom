@@ -1,6 +1,7 @@
 .align
 Maps_AngryAztec_DestMap:
 	.byte 0x0 // Null for main
+	.byte 0xC5
 	.byte 0x29
 	.byte 0xE
 	.byte 0x0 // Null for 5DTs
@@ -10,6 +11,7 @@ Maps_AngryAztec_DestMap:
 .align
 Maps_AngryAztec_DestExit:
 	.byte 0x0 // Null for main
+	.byte 0
 	.byte 0
 	.byte 0
 	.byte 0x0 // Null for 5DTS
@@ -77,30 +79,36 @@ Menu_Maps_Aztec_LlamaTemple:
 	.asciiz "LLAMA TEMPLE"
 Menu_Maps_Aztec_TinyTemple:	
 	.asciiz "TINY TEMPLE"
+Menu_Maps_Aztec_Dogadon:
+	.asciiz "DOGADON 1"
 
 .align
 Menu_MapAztec_Array:
 	.word Menu_Maps_Aztec_Main
+	.word Menu_Maps_Aztec_Dogadon
 	.word Menu_Maps_Aztec_BBlast
 	.word Menu_Maps_Aztec_Beetle
 	.word Menu_Maps_Aztec_5DTs
 	.word Menu_Maps_Aztec_LlamaTemple
 	.word Menu_Maps_Aztec_TinyTemple
+	.word Menu_Return
 
 .align
 Menu_MapAztec_Functions:
 	.word ActiveMenu_OpenMapWarper_AztecMain // Open Main
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_OpenMapWarper_Aztec5DT // Open 5DT
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapAztec_Struct:
 	.word Menu_MapAztec_Array // Text Array
 	.word Menu_MapAztec_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 8 // Array Items
 	.byte 1 // Parent Screen
 
 .align
@@ -119,6 +127,7 @@ Menu_MapAztecMain_Array:
 	.word Menu_Maps_Aztec_Totem
 	.word Menu_Maps_Aztec_Oasis
 	.word Menu_Maps_Aztec_Snake
+	.word Menu_Return
 
 .align
 Menu_MapAztecMain_Functions:
@@ -126,12 +135,13 @@ Menu_MapAztecMain_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapAztecMain_Struct:
 	.word Menu_MapAztecMain_Array // Text Array
 	.word Menu_MapAztecMain_Functions // Function Array
-	.byte 4 // Array Items
+	.byte 5 // Array Items
 	.byte 3 // Parent Screen
 
 .align
@@ -153,6 +163,7 @@ Menu_MapAztec5DTs_Array:
 	.word Menu_Maps_Aztec_5DTLanky
 	.word Menu_Maps_Aztec_5DTTiny
 	.word Menu_Maps_Aztec_5DTChunky
+	.word Menu_Return
 
 .align
 Menu_MapAztec5DTs_Functions:
@@ -161,10 +172,11 @@ Menu_MapAztec5DTs_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapAztec5DTs_Struct:
 	.word Menu_MapAztec5DTs_Array // Text Array
 	.word Menu_MapAztec5DTs_Functions // Function Array
-	.byte 5 // Array Items
+	.byte 6 // Array Items
 	.byte 3 // Parent Screen

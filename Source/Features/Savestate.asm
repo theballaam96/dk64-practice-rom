@@ -10,29 +10,33 @@ GlobalSavestateHandler:
 	JAL 	@GetFlagBlockAddress
 	ADDIU 	a0, r0, 0 // Flag Type 0 (Permanent)
 	LI 		a0, 0x13C
-	LBU 	t9, @FocusedSavestate
-	SLL 	t9, t9, 2
-	LA 		a1, Savestate_Array
-	ADD 	t9, a1, t9
-	LW 		t9, 0x0 (t9) // Focused Savestate Struct
-	LBU 	a1, 0x1F (t9) // Save Bool
-	ADDIU 	a3, v0, 0 // Copy v0
-	SRA 	a2, a3, 16
-	SLTIU 	a2, a2, 0x8000
-	BNEZ 	a2, FinishStateHandler
-	NOP
-	SRA 	a2, a3, 16
-	SLTIU 	a2, a2, 0x8080
-	BEQZ 	a2, FinishStateHandler
-	NOP
-	LBU 	t6, @MenuSavestateAction
-	LI 		t3, 1 // Save Action
-	BEQ 	t3, t6, Handler_Save
-	NOP
-	BEQZ 	a1, Nope
-	NOP
-	B 		Handler_Load
-	NOP
+
+	GlobalSavestateHandler_GetSavestateBlock:
+		LBU 	t9, @FocusedSavestate
+		SLL 	t9, t9, 2
+		LA 		a1, Savestate_Array
+		ADD 	t9, a1, t9
+		LW 		t9, 0x0 (t9) // Focused Savestate Struct
+		LBU 	a1, 0x1F (t9) // Save Bool
+
+	GlobalSavestateHandler_CheckPointer:
+		ADDIU 	a3, v0, 0 // Copy v0
+		SRA 	a2, a3, 16
+		SLTIU 	a2, a2, 0x8000
+		BNEZ 	a2, FinishStateHandler
+		NOP
+		SRA 	a2, a3, 16
+		SLTIU 	a2, a2, 0x8080
+		BEQZ 	a2, FinishStateHandler
+		NOP
+		LBU 	t6, @MenuSavestateAction
+		LI 		t3, 1 // Save Action
+		BEQ 	t3, t6, Handler_Save
+		NOP
+		BEQZ 	a1, Nope
+		NOP
+		B 		Handler_Load
+		NOP
 
 	Nope:
 		JAL 	CodedPlaySFX
@@ -81,10 +85,10 @@ GlobalSavestateHandler:
 			NOP
 			SRA 	a1, a0, 16
 			SLTIU 	a2, a1, 0x8000
-			BNEZ 	a2, FinishStateHandler
+			BNEZ 	a2, SaveMapVars
 			NOP
 			SLTIU 	a2, a1, 0x8080
-			BEQZ 	a2, FinishStateHandler
+			BEQZ 	a2, SaveMapVars
 			NOP
 			ADDIU 	a2, t9, @SavestateStruct_PositionTuple
 			LW 		a1, 0x7C (a0)
@@ -97,26 +101,39 @@ GlobalSavestateHandler:
 		SaveMapVars:
 			// Store Map & Kong variables
 			LW 		a1, @CurrentMap
-			SB 		a1, @SavestateStruct_Map (t9)
+			ADDIU 	a0, t9, @SavestateStruct_Map
+			SB 		a1, 0x0 (a0)
 			LW 		a1, @DestExit
-			SB 		a1, @SavestateStruct_Exit (t9)
+			ADDIU 	a0, t9, @SavestateStruct_Exit
+			SB 		a1, 0x0 (a0)
 			LBU		a1, @Character
-			SB 		a1, @SavestateStruct_Character (t9)
+			ADDIU 	a0, t9, @SavestateStruct_Character
+			SB 		a1, 0x0 (a0)
+			// Bug after this point
 			// Collectable Base
 			LI 		a0, @CollectableBase
 			ADDIU	a2, t9, @SavestateStruct_CollectableBase
-			LD 		a1, 0x0 (a0)
-			SD 		a1, 0x0 (a2)
-			LD 		a1, 0x8 (a0)
-			SD 		a1, 0x8 (a2)
+			LW 		a1, 0x0 (a0)
+			SW 		a1, 0x0 (a2)
+			LW 		a1, 0x4 (a0)
+			SW 		a1, 0x4 (a2)
+			LW 		a1, 0x8 (a0)
+			SW 		a1, 0x8 (a2)
+			LW 		a1, 0xC (a0)
+			SW 		a1, 0xC (a2)
+			// Bug before this point
 			// Temp Flag Block
 			LI 		a0, @TempFlagBlock
 			ADDIU 	a1, t9, @SavestateStruct_TempFlagBlock
-			LD 		a2, 0x0(a0)
-			LD 		a3, 0x8(a0)
-			SD 		a2, 0x0(a1)
+			LW 		a2, 0x0(a0)
+			LW 		a3, 0x4(a0)
+			SW 		a2, 0x0(a1)
+			SW 		a3, 0x4(a1)
+			LW 		a2, 0x8(a0)
+			LW 		a3, 0xC(a0)
+			SW 		a2, 0x8(a1)
 			B 		FinishStateHandler
-			SD 		a3, 0x8(a1)
+			SW 		a3, 0xC(a1)
 
 	Handler_Load:
 		// t9 = Focused Savestate Struct
@@ -157,17 +174,21 @@ GlobalSavestateHandler:
 			// Load Map & Kong Variables
 			ADDIU	a0, t9, @SavestateStruct_TempFlagBlock
 			LI 		a1, @TempFlagBlock
-			LD 		a2, 0x0(a0)
-			LD 		a3, 0x8(a0)
-			SD 		a2, 0x0(a1)
-			SD 		a3, 0x8(a1)
+			LW 		a2, 0x0(a0)
+			LW 		a3, 0x4(a0)
+			SW 		a2, 0x0(a1)
+			SW 		a3, 0x4(a1)
+			LW 		a2, 0x8(a0)
+			LW 		a3, 0xC(a0)
+			SW 		a2, 0x8(a1)
+			SW 		a3, 0xC(a1)
 			// LBU		a0, @SavedInSubmap
 			// SB 		a0, @InSubmap
 			// LBU 	a0, @SavedParentMap
 			// SH		a0, @ParentMap
 			// LBU 	a0, @SavedParentExit
 			// SB		a0, @ParentExit
-			JAL 	0x805FFFC8
+			JAL 	@ResetMap
 			NOP
 			LBU 	a0, @SavestateStruct_Character (t9)
 			SB 		a0, @Character
@@ -180,10 +201,14 @@ GlobalSavestateHandler:
 			// Collectable Base
 			LI 		a0, @CollectableBase
 			ADDIU	a2, t9, @SavestateStruct_CollectableBase
-			LD 		a1, 0x0 (a2)
-			SD 		a1, 0x0 (a0)
-			LD 		a1, 0x8 (a2)
-			SD 		a1, 0x8 (a0)
+			LW 		a1, 0x0 (a2)
+			SW 		a1, 0x0 (a0)
+			LW 		a1, 0x4 (a2)
+			SW 		a1, 0x4 (a0)
+			LW 		a1, 0x8 (a2)
+			SW 		a1, 0x8 (a0)
+			LW 		a1, 0xC (a2)
+			SW 		a1, 0xC (a0)
 
 		LoadKongPosition:
 			ADDIU	a0, t9, @SavestateStruct_PositionTuple
@@ -226,6 +251,51 @@ GlobalSavestateHandler:
 		JR 	ra
 		NOP
 
+Savestate_ShorthandCombo:
+	SW 		ra, @ReturnAddress4
+	LHU 	a0, @ControllerInput
+	ANDI 	a1, a0, @L_Button
+	BEQZ 	a1, Savestate_ShorthandCombo_Finish
+	ANDI 	a1, a0, @R_Button
+	BEQZ 	a1, Savestate_ShorthandCombo_Finish
+	NOP
+	LHU 	a0, @NewlyPressedControllerInput
+	ANDI 	a1, a0, @D_Up
+	BEQZ 	a1, Savestate_ShorthandCombo_Finish
+	NOP
+	LBU 	a0, @LastLoadStateAction
+	BNEZ 	a0, Savestate_ShorthandCombo_CheckState
+	NOP
+	LI 		a0, 2 // Default = Load from Position
+
+	Savestate_ShorthandCombo_CheckState:
+		LBU 	a1, @InBadMap
+		BNEZ 	a1, Savestate_ShorthandCombo_Nope
+		NOP
+		LBU 	t9, @FocusedSavestate
+		SLL 	t9, t9, 2
+		LA 		a1, Savestate_Array
+		ADD 	t9, a1, t9
+		LW 		t9, 0x0 (t9) // Focused Savestate Struct
+		LBU 	a1, 0x1F (t9) // Save Bool
+		BEQZ 	a1, Savestate_ShorthandCombo_Nope
+		NOP
+		SB 		a0, @MenuSavestateAction
+		B 		Savestate_ShorthandCombo_Finish
+		NOP
+
+	Savestate_ShorthandCombo_Nope:
+		JAL 	CodedPlaySFX
+		LI 		a0, @Wrong
+		B 		FinishStateHandler
+		NOP
+
+	Savestate_ShorthandCombo_Finish:
+		LW 		ra, @ReturnAddress4
+		JR 		ra
+		NOP
+
+
 .align
 Savestate_0:
 	.space 0x34C
@@ -241,3 +311,10 @@ Savestate_2:
 .align
 Savestate_3:
 	.space 0x34C
+
+.align
+Savestate_Array:
+	.word Savestate_0
+	.word Savestate_1
+	.word Savestate_2
+	.word Savestate_3

@@ -1,6 +1,7 @@
 .align
 Maps_CrystalCaves_DestMap:
 	.byte 0x0 // Null for main
+	.byte 0xC4
 	.byte 0xBA
 	.byte 0x52
 	.byte 0x0 // Null for 5DCs
@@ -12,6 +13,7 @@ Maps_CrystalCaves_DestMap:
 .align
 Maps_CrystalCaves_DestExit:
 	.byte 0x0 // Null for Main
+	.byte 0
 	.byte 0
 	.byte 0
 	.byte 0x0 // Null for 5DCs
@@ -111,10 +113,13 @@ Menu_Maps_Caves_RotatingRoom:
 	.asciiz "ROTATING ROOM"
 Menu_Maps_Caves_1DC:	
 	.asciiz "SPRINT CABIN"
+Menu_Maps_Caves_AD2:
+	.asciiz "ARMY DILLO 2"
 
 .align
 Menu_MapCaves_Array:
 	.word Menu_Maps_Caves_Main
+	.word Menu_Maps_Caves_AD2
 	.word Menu_Maps_Caves_BBlast
 	.word Menu_Maps_Caves_Beetle
 	.word Menu_Maps_Caves_5DCs
@@ -122,10 +127,12 @@ Menu_MapCaves_Array:
 	.word Menu_Maps_Caves_IceCastleMap
 	.word Menu_Maps_Caves_RotatingRoom
 	.word Menu_Maps_Caves_1DC
+	.word Menu_Return
 
 .align
 Menu_MapCaves_Functions:
 	.word ActiveMenu_OpenMapWarper_CavesMain // Open Main
+	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_OpenMapWarper_Caves5DC // Open 5DCs
@@ -133,12 +140,13 @@ Menu_MapCaves_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapCaves_Struct:
 	.word Menu_MapCaves_Array // Text Array
 	.word Menu_MapCaves_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 10 // Array Items
 	.byte 1 // Parent Screen
 
 .align
@@ -163,6 +171,7 @@ Menu_MapCavesMain_Array:
 	.word Menu_Maps_Caves_IceCastleArea
 	.word Menu_Maps_Caves_IglooArea
 	.word Menu_Maps_Caves_Waterfall
+	.word Menu_Return
 
 .align
 Menu_MapCavesMain_Functions:
@@ -172,12 +181,13 @@ Menu_MapCavesMain_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapCavesMain_Struct:
 	.word Menu_MapCavesMain_Array // Text Array
 	.word Menu_MapCavesMain_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 7 // Array Items
 	.byte 7 // Parent Screen
 
 .align
@@ -199,6 +209,7 @@ Menu_MapCaves5DC_Array:
 	.word Menu_Maps_Caves_5DCDiddyEnemy
 	.word Menu_Maps_Caves_5DCTiny
 	.word Menu_Maps_Caves_5DCChunky
+	.word Menu_Return
 
 .align
 Menu_MapCaves5DC_Functions:
@@ -207,12 +218,13 @@ Menu_MapCaves5DC_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapCaves5DC_Struct:
 	.word Menu_MapCaves5DC_Array // Text Array
 	.word Menu_MapCaves5DC_Functions // Function Array
-	.byte 5 // Array Items
+	.byte 6 // Array Items
 	.byte 7 // Parent Screen
 
 .align
@@ -234,6 +246,7 @@ Menu_MapCaves5DI_Array:
 	.word Menu_Maps_Caves_5DILanky
 	.word Menu_Maps_Caves_5DITiny
 	.word Menu_Maps_Caves_5DIChunky
+	.word Menu_Return
 
 .align
 Menu_MapCaves5DI_Functions:
@@ -242,10 +255,11 @@ Menu_MapCaves5DI_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapCaves5DI_Struct:
 	.word Menu_MapCaves5DI_Array // Text Array
 	.word Menu_MapCaves5DI_Functions // Function Array
-	.byte 5 // Array Items
+	.byte 6 // Array Items
 	.byte 7 // Parent Screen

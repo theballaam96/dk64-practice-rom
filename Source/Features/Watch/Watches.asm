@@ -4,6 +4,10 @@ VariableDisplay:
 	BEQZ 	a0, HandleKRoolTimer
 	LUI 	a3, 0x42FA // K Rool Timer X (125)
 	// Change Helm Timer Format
+	LI 		a2, 10
+	BEQ 	a0, a2, VDispISG
+	LI 		a1, 9
+	BEQ 	a0, a1, VDispHeldActor
 	LI 		a2, 8
 	BEQ 	a0, a2, VDispInput
 	LI 		a1, 7
@@ -173,6 +177,11 @@ VariableDisplay:
 		LI 		a1, 0
 		LH 		a1, 0xE6 (a0)
 		SLTIU 	t0, a1, 4096
+		BNEZ 	t0, VDispAngle_Convert
+		NOP
+		ADDI 	a1, a1, -4096
+
+	VDispAngle_Convert:
 		MTC1 	a1, f6
 		CVT.S.W f0, f6 // f0 = angle
 		LUI		t6, 0x4580
@@ -186,8 +195,7 @@ VariableDisplay:
 		SW 		a1, @VarStorage0
 		BNEZ 	t0, VDispAngle_TextColourWrite
 		NOP
-		LI 		a0, @KoshaRGB_Frozen
-
+		LI 		a0, @AngleRGB_PhaseState
 
 	VDispAngle_TextColourWrite:
 		JAL 	Watch_ColourWatch
@@ -206,6 +214,20 @@ VariableDisplay:
 
 	VDispInput:
 		JAL 	Input_HandleString
+		NOP
+		B 		UpdateVDispText
+		NOP
+
+	VDispHeldActor:
+		JAL 	ViewHeldObject
+		NOP
+		B 		UpdateVDispText
+		NOP
+
+	VDispISG:
+		JAL 	CalculateISGTime
+		NOP
+		JAL 	ColourISGTimer
 		NOP
 		B 		UpdateVDispText
 		NOP

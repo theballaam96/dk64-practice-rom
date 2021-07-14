@@ -114,6 +114,10 @@ def processHookInfo(addr,val):
         diff = addr - 0x68C364
         graphhook_364[diff] = val
         foundHookBytes[0] = foundHookBytes[0] + 1;
+    elif addr >= 0x73129C and addr < 0x7312A0:
+        diff = addr - 0x73129C
+        flaghook[diff] = val;
+        foundHookBytes[0] = foundHookBytes[0] + 1;
 
 def arrToInt(arr):
     total = 0;
@@ -126,6 +130,7 @@ f = open("codeOutput.txt", "r")
 laghook = [0,0,0,0];
 gkhook = [0,0,0,0];
 konghook = [0,0,0,0];
+flaghook = [0,0,0,0];
 graphhook_374 = [0,0,0,0];
 graphhook_378 = [0,0,0,0];
 graphhook_310 = [0,0,0,0];
@@ -160,7 +165,7 @@ graphhooks = [
 ]
 
 if foundHookBytes[0] >= 40:
-    updateOtherVars(arrToInt(laghook),arrToInt(gkhook),arrToInt(konghook),graphhooks,False)
+    updateOtherVars(arrToInt(laghook),arrToInt(gkhook),arrToInt(konghook),arrToInt(flaghook),graphhooks,False)
 
     result = subprocess.check_output(["lua", "-l", "loadASM", "-e", "loadASMPatch('../Source/master-copy.asm')"])
     with open("codeOutput.txt","r") as f:
@@ -168,6 +173,7 @@ if foundHookBytes[0] >= 40:
             line = x
             segs = line.split(":")
             processBytePatch(int(segs[0]), int(segs[1]))
+    updateOtherVars(arrToInt(laghook),arrToInt(gkhook),arrToInt(konghook),arrToInt(flaghook),graphhooks,True)
     if os.path.exists("codeOutput.txt"):
         os.remove("codeOutput.txt")
     if os.path.exists("../Source/master-copy.asm"):

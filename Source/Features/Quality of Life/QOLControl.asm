@@ -37,17 +37,19 @@ Menu_QOL_Control_TextStruct:
 Menu_QOL_Control_Array:
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_QOL_Control_Functions:
 	.word ActiveMenu_ToggleAddress
 	.word ActiveMenu_ToggleAddress
+	.word ActiveMenu_PreviousScreen
 	
 .align
 Menu_QOL_Control_Struct:
 	.word Menu_QOL_Control_Array // Text Array
 	.word Menu_QOL_Control_Functions // Function Array
-	.byte 2 // Array Items
+	.byte 3 // Array Items
 	.byte 34 // Parent Screen
 
 .align

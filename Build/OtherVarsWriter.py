@@ -1,6 +1,6 @@
 import os
 
-def updateOtherVars(lag_hook,gktimer_hook,kong_hook,graphicalhooks,comment_out):
+def updateOtherVars(lag_hook,gktimer_hook,kong_hook,flag_hook,graphicalhooks,comment_out):
 	lines = [];
 	lines.append("// Lag Hook - NOTE: UPDATE ON EVERY REVISION")
 	lines.append("LI 	a1, " + hex(lag_hook))
@@ -16,6 +16,11 @@ def updateOtherVars(lag_hook,gktimer_hook,kong_hook,graphicalhooks,comment_out):
 	lines.append("LI 	a1, " + hex(kong_hook))
 	lines.append("SW 	a1, 0x806F3750")
 	lines.append("SW 	r0, 0x806F3754")
+
+	lines.append("// Flag Hook - NOTE: UPDATE ON EVERY REVISION")
+	lines.append("LI 	a1, " + hex(flag_hook))
+	lines.append("SW 	a1, 0x8073129C")
+	lines.append("SW 	r0, 0x807312A0")
 
 	lines.append("// Graphical Overlay Space Expansion - NOTE: UPDATE ON EVERY REVISION")
 	lines.append("LI 	a1, " + hex(graphicalhooks[0]))

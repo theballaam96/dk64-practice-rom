@@ -59,6 +59,12 @@
 [SpawnerCount]: 0x807FDC88
 [MenuSkyTopRGB]: 0x80754F4C
 [MenuSkyRGB]: 0x80754F4F
+[ActorArray]: 0x807FBFF0
+[ActorCount]: 0x807FC3F0
+[ButtonsEnabledBitfield]: 0x80755308
+[JoystickEnabledX]: 0x8075530C
+[JoystickEnabledY]: 0x80755310
+[MapState]: 0x8076A0B1
 
 // Buttons
 [L_Button]: 0x0020
@@ -100,13 +106,14 @@
 [PauseMenuPointer]: 0x807FC640
 [MaxCooldown]: 6
 [MinCooldown]: 2
-[SpecialFlagCategories]: 10
+[SpecialFlagCategories]: 11
 
 // ISG
 [ISGActive]: 0x80755070
 [ISGTimestamp]: 0x807F5CE0
 [ISGPreviousFadeout]: 0x807F5D14
 [CurrentTimestamp]: 0x80014FE0
+[ISGFadeoutArray]: 0x80747708
 
 // Tag Anywhere
 [Player]: 0x807FBB4C
@@ -152,6 +159,10 @@
 // a3 = textpointer
 [SQRT]: 0x8000AC60 // f12 = val to sqrt, return f0
 [StrFormat]: 0x800031E0
+[GetTimestamp]: 0x800060B0
+[Multiply]: 0x80005918
+[ConvertTimestamp]: 0x80005818
+[ResetMap]: 0x805FFFC8
 
 // Sound Effects
 [Banana]: 0x2A0
@@ -174,7 +185,7 @@
 [CameraPull]: 441
 
 // Variables
-[MasterLevelCount]: 25
+[MasterLevelCount]: 28
 [SlideCap]: 4
 [SpecialFlagsCount]: 52
 [Slot3OptionCount]: 13
@@ -189,14 +200,23 @@
 [TimerStartCount]: 3
 [TimerFinishCount]: 4
 [WarpMasterCount]: 12
-[SelectedRGB]: 0x2E8B57 // CSS SeaGreen
 [MaxMenuItems]: 23 // 32 (practice rom cap) - 8 (normal cap) - 1 (watch)
 [EmergencyCloseLoadedAmount]: 60
 [ErrorLength]: 180
+
+// Colours - Menu
+[SelectedRGB]: 0x2E8B57 // CSS SeaGreen
+[ReturnRGB]: 0xFF4500 // CSS OrangeRed
+// Colours - Kosha Timer
 [KoshaRGB_Frozen]: 0x008B8B // CSS DarkCyan
 [KoshaRGB_CancelRange]: 0xFFD700 // CSS Gold
 [KoshaRGB_Music]: 0xD2691E // CSS Chocolate
 [KoshaRGB_Tantrum]: 0x8B0000 // CSS DarkRed
+// Colours - ISG
+[ISGRGB_FadeoutPending]: 0x4B0082 // CSS Indigo
+[ISGRGB_Fading]: 0xFF0000 // CSS Red
+// Colours - Angle
+[AngleRGB_PhaseState]: 0x0000FF // CSS Blue
 
 // Savestate Struct
 [SavestateStruct_CollectableBase]: 0x0
@@ -281,6 +301,14 @@
 [CustomFlagBit]: 0x807FFF82 // u8
 [CustomFlagType]: 0x807FFF83 // u8
 [CustomFlagSet]: 0x807FFF84 // u8
+[ISGStage]: 0x807FFF85 // u8
+[IsPauseMenuOpen]: 0x807FFF86 // u8
+[PreviousFrameButtons]: 0x807FFF88 // u16
+[UndoFlag_EncodedFlag]: 0x807FFF8A // u16
+[UndoFlag_OutputBool]: 0x807FFF8C // u8
+[UndoFlag_FlagType]: 0x807FFF8D // u8
+[UndoFlag_FlagStored]: 0x807FFF8E // u8
+[LastLoadStateAction]: 0x807FFF8F // u8
 
 // OSD Arrays
 [LevelsArray]: 0x807FFF80 // 0x38
@@ -354,6 +382,10 @@ NOP
 J 	KongCode
 NOP
 
+.org 0x8073129C // Set Flag Hook
+J 	WriteLastUpdatedFlags
+NOP
+
 //Graphical Overlay Space Expansion
 .org 0x8068C374
 LA 		t8, GraphicalOverlaySpace
@@ -404,11 +436,19 @@ Start:
 		MFHI 	t6
 		ADDIU 	t6, t6, 1 // Add offset of 1
 		SB 		t6, @StoredRound
+		LI 		a0, 378 // Waterfall CS
+		JAL 	@CheckFlag
+		LI 		a1, 0
+		ADDIU 	a0, v0, 0
+		BNEZ 	a0, EveryFrameFunctions 	
+		NOP
 		LA 		a0, Transition_Flags
 		JAL 	SetAllFlags // Safe
 		NOP
 
 	EveryFrameFunctions:
+		JAL 	IsPaused
+		NOP
 		JAL 	ChangeColour // Safe
 		NOP
 		LBU 	a0, @StoredRound
@@ -437,19 +477,17 @@ Start:
 		NOP
 		JAL 	LToLevitate
 		NOP
-		JAL  	ActiveMenu_Open
-		NOP
 		JAL 	ActiveMenu_MoveSlot
 		NOP
 		JAL 	ActiveMenu_CloseOnTransition
 		NOP
 		JAL 	ActiveMenu_EmergencyClose
 		NOP
-		JAL 	ActiveMenu_PressA
-		NOP
-		JAL 	ActiveMenu_PressB
+		JAL 	ActiveMenu_ConfirmOption
 		NOP
 		JAL 	ActiveMenu_UpdateSavestateText
+		NOP
+		JAL  	ActiveMenu_Open
 		NOP
 		JAL 	Watch_CloseOnTransition
 		NOP
@@ -475,6 +513,8 @@ Start:
 		NOP
 		JAL 	ChangeEncodedFlag
 		NOP
+		JAL 	Savestate_ShorthandCombo
+		NOP
 
 		// JAL 	HandleTimer
 		// NOP
@@ -498,6 +538,7 @@ Start:
 		NOP
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/PositionSavestates.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/isPaused.asm"
 
 CodedSetPermFlag:
 	// a0 is parameter for encoded flag
@@ -647,6 +688,12 @@ UpdateSlamSnipe:
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Lag.asm"
 .align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/HeldObject.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/ISG.asm"
+.align
+//.incasm "./../../Development/dk64-practice-rom/Source/Features/Watch/Position.asm"
+//.align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/ColorKong.asm"
 
 
@@ -715,6 +762,10 @@ ClearAllFlags:
 		ADDIU	sp, sp, 0x18
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/TagAnywhere.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Main Menu Variables/ScreenRatio.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Main Menu Variables/ChimpyCam.asm"
 .align
 
 GiveCoins:
@@ -857,8 +908,14 @@ InfiniteHealth:
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Levitate.asm"
 .align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/TBVoid.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/SpawnSnagCheats.asm"
+.align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/CutsceneCancel.asm"
 .align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/UndoFlagWrite.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/GainControl.asm"
 
 KongCode:
 	SW 		ra, @ReturnAddress2
@@ -1114,6 +1171,19 @@ ActiveMenu_OpenMapWarper_FungiGMush:
 	JR 		ra
 	NOP
 
+ActiveMenu_OpenMapWarper_FungiMills:
+	SW 		ra, @ReturnAddress3
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+	LI 		a0, 55
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
+
 ActiveMenu_OpenMapWarper_Caves:
 	SW 		ra, @ReturnAddress3
 	JAL 	ActiveMenu_ClearMenu
@@ -1210,6 +1280,32 @@ ActiveMenu_OpenMapWarper_CastleTunnel:
 	JAL 	ActiveMenu_ClearMenu
 	NOP
 	LI 		a0, 24
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
+
+ActiveMenu_OpenMapWarper_CastleOutside:
+	SW 		ra, @ReturnAddress3
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+	LI 		a0, 56
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
+
+ActiveMenu_OpenMapWarper_CastleRooms:
+	SW 		ra, @ReturnAddress3
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+	LI 		a0, 57
 	SB 		a0, @NewMenu_Screen
 	SB 		r0, @NewMenu_Position
 	JAL 	ActiveMenu_SpawnMenu
@@ -1350,32 +1446,58 @@ ActiveMenu_OpenCheatsMenu:
 	SW 		ra, @ReturnAddress3
 	JAL 	ActiveMenu_ClearMenu
 	NOP
+	LI 		a0, 30
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
 
-	ActiveMenu_OpenCheatsMenu_Sandstorm:
+ActiveMenu_OpenCheatsSnagMenu:
+	SW 		ra, @ReturnAddress3
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+	LI 		a0, 59
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
+
+ActiveMenu_OpenCheatsTogglesMenu:
+	SW 		ra, @ReturnAddress3
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+
+	ActiveMenu_OpenCheatsTogglesMenu_Sandstorm:
 		LW 		a0, @CurrentMap
 		LI 		a1, 0x26 // Aztec
-		BNE 	a0, a1, ActiveMenu_OpenCheatsMenu_WriteSandstormText
+		BNE 	a0, a1, ActiveMenu_OpenCheatsTogglesMenu_WriteSandstormText
 		LI 		t0, 0
 		LW 		a0, @SandstormAddress
-		BEQZ 	a0, ActiveMenu_OpenCheatsMenu_WriteSandstormText
+		BEQZ 	a0, ActiveMenu_OpenCheatsTogglesMenu_WriteSandstormText
 		LI 		t0, 0
 		LBU 	a1, 0x0 (a0)
 		ADDIU 	t0, a1, 1
 
-	ActiveMenu_OpenCheatsMenu_WriteSandstormText:
+	ActiveMenu_OpenCheatsTogglesMenu_WriteSandstormText:
 		LA 		a0, Sandstorm_TextPointers
 		SLL 	t0, t0, 2
 		ADD 	a0, a0, t0
 		LW 		a0, 0x0 (a0)
-		LA 		a1, Menu_Cheats_Array
-		SW 		a0, 0x1C (a1)
-		LI 		a0, 30
+		LA 		a1, Menu_CheatsToggles_Array
+		SW 		a0, 0x4 (a1)
+		LI 		a0, 58
 		LBU 	a1, @NewMenu_Screen
-		BEQ 	a0, a1, ActiveMenu_OpenCheatsMenu_Spawn 
+		BEQ 	a0, a1, ActiveMenu_OpenCheatsTogglesMenu_Spawn 
 		NOP
 		SB 		r0, @NewMenu_Position
 
-	ActiveMenu_OpenCheatsMenu_Spawn:
+	ActiveMenu_OpenCheatsTogglesMenu_Spawn:
 		SB 		a0, @NewMenu_Screen
 		JAL 	ActiveMenu_SpawnMenu
 		NOP
@@ -1452,12 +1574,14 @@ ActiveMenu_PerformSavestateAction_Save:
 ActiveMenu_PerformSavestateAction_LoadFromPosition:
 	LI 		a1, 2
 	SB 		a1, @MenuSavestateAction
+	SB 		a1, @LastLoadStateAction
 	JR 		ra
 	NOP
 
 ActiveMenu_PerformSavestateAction_LoadFromExit:
 	LI 		a1, 3
 	SB 		a1, @MenuSavestateAction
+	SB 		a1, @LastLoadStateAction
 	JR 		ra
 	NOP
 
@@ -1494,6 +1618,8 @@ ActiveMenu_WarpToMap:
 	SW 		ra, @ReturnAddress4
 	LBU		a1, @InBadMap
 	BNEZ 	a1, ActiveMenu_WarpToMap_Error
+	NOP
+	JAL 	@ResetMap
 	NOP
 	LA 		a0, Maps_WarpingStruct
 	LI 		a1, @MasterLevelCount
@@ -1686,7 +1812,7 @@ ActiveMenu_ToggleLToLevitate:
 	LBU 	a0, @LToLevitateOn
 	SUBU 	a0, a1, a0
 	SB 		a0, @LToLevitateOn
-	LA 		a2, Menu_Cheats_Array 
+	LA 		a2, Menu_CheatsToggles_Array
 	BEQZ 	a0, ActiveMenu_ToggleLToLevitate_IsOff
 	NOP
 	LA 		a1, Menu_Cheats_LToLevitateOn
@@ -1697,11 +1823,11 @@ ActiveMenu_ToggleLToLevitate:
 		LA 		a1, Menu_Cheats_LToLevitateOff
 
 	ActiveMenu_ToggleLToLevitate_Finish:
-		SW 		a1, 0x18 (a2)
+		SW 		a1, 0x0 (a2)
 		SW 		ra, @ReturnAddress3
 		JAL 	ActiveMenu_ClearMenu
 		NOP
-		LI 		a0, 30
+		LI 		a0, 58
 		SB 		a0, @NewMenu_Screen
 		JAL 	ActiveMenu_SpawnMenu
 		NOP
@@ -1714,7 +1840,7 @@ ActiveMenu_ToggleAutoPhaseState:
 	LBU 	a0, @AutoPhaseStateOn
 	SUBU 	a0, a1, a0
 	SB 		a0, @AutoPhaseStateOn
-	LA 		a2, Menu_Cheats_Array 
+	LA 		a2, Menu_CheatsToggles_Array
 	BEQZ 	a0, ActiveMenu_ToggleAutoPhaseState_IsOff
 	NOP
 	LA 		a1, Menu_Cheats_AutoPhaseOn
@@ -1725,11 +1851,11 @@ ActiveMenu_ToggleAutoPhaseState:
 		LA 		a1, Menu_Cheats_AutoPhaseOff
 
 	ActiveMenu_ToggleAutoPhaseState_Finish:
-		SW 		a1, 0x20 (a2)
+		SW 		a1, 0x8 (a2)
 		SW 		ra, @ReturnAddress3
 		JAL 	ActiveMenu_ClearMenu
 		NOP
-		LI 		a0, 30
+		LI 		a0, 58
 		SB 		a0, @NewMenu_Screen
 		JAL 	ActiveMenu_SpawnMenu
 		NOP
@@ -1742,7 +1868,7 @@ ActiveMenu_ToggleAutoMoonkick:
 	LBU 	a0, @AutoMoonkickOn
 	SUBU 	a0, a1, a0
 	SB 		a0, @AutoMoonkickOn
-	LA 		a2, Menu_Cheats_Array 
+	LA 		a2, Menu_CheatsToggles_Array 
 	BEQZ 	a0, ActiveMenu_ToggleAutoMoonkick_IsOff
 	NOP
 	LA 		a1, Menu_Cheats_AutoMoonkickOn
@@ -1753,11 +1879,11 @@ ActiveMenu_ToggleAutoMoonkick:
 		LA 		a1, Menu_Cheats_AutoMoonkickOff
 
 	ActiveMenu_ToggleAutoMoonkick_Finish:
-		SW 		a1, 0x24 (a2)
+		SW 		a1, 0x0C (a2)
 		SW 		ra, @ReturnAddress3
 		JAL 	ActiveMenu_ClearMenu
 		NOP
-		LI 		a0, 30
+		LI 		a0, 58
 		SB 		a0, @NewMenu_Screen
 		JAL 	ActiveMenu_SpawnMenu
 		NOP
@@ -1770,7 +1896,7 @@ ActiveMenu_ToggleInfHealth:
 	LBU 	a0, @InfiniteHealthCheatOn
 	SUBU 	a0, a1, a0
 	SB 		a0, @InfiniteHealthCheatOn
-	LA 		a2, Menu_Cheats_Array 
+	LA 		a2, Menu_CheatsToggles_Array
 	BEQZ 	a0, ActiveMenu_ToggleInfHealth_IsOff
 	NOP
 	LA 		a1, Menu_Cheats_InfHealthOn
@@ -1781,11 +1907,11 @@ ActiveMenu_ToggleInfHealth:
 		LA 		a1, Menu_Cheats_InfHealthOff
 
 	ActiveMenu_ToggleInfHealth_Finish:
-		SW 		a1, 0x28 (a2)
+		SW 		a1, 0x10 (a2)
 		SW 		ra, @ReturnAddress3
 		JAL 	ActiveMenu_ClearMenu
 		NOP
-		LI 		a0, 30
+		LI 		a0, 58
 		SB 		a0, @NewMenu_Screen
 		JAL 	ActiveMenu_SpawnMenu
 		NOP
@@ -1798,7 +1924,7 @@ ActiveMenu_ToggleEnemySpawn:
 	LBU 	a0, @EnemySpawnOff
 	SUBU 	a0, a1, a0
 	SB 		a0, @EnemySpawnOff
-	LA 		a2, Menu_Cheats_Array 
+	LA 		a2, Menu_CheatsToggles_Array
 	BEQZ 	a0, ActiveMenu_ToggleEnemySpawn_IsOn
 	NOP
 	LA 		a1, Menu_Cheats_EnemySpawnOff
@@ -1809,7 +1935,7 @@ ActiveMenu_ToggleEnemySpawn:
 		LA 		a1, Menu_Cheats_EnemySpawnOn
 
 	ActiveMenu_ToggleEnemySpawn_DefineLoop:
-		SW 		a1, 0x2C (a2)
+		SW 		a1, 0x14 (a2)
 		LW 		a0, @SpawnerArray
 		LHU 	a1, @SpawnerCount
 		LBU 	a2, @EnemySpawnOff
@@ -1846,7 +1972,7 @@ ActiveMenu_ToggleEnemySpawn:
 		SW 		ra, @ReturnAddress3
 		JAL 	ActiveMenu_ClearMenu
 		NOP
-		LI 		a0, 30
+		LI 		a0, 58
 		SB 		a0, @NewMenu_Screen
 		JAL 	ActiveMenu_SpawnMenu
 		NOP
@@ -1969,6 +2095,9 @@ Maps_WarpingStruct:
 	.word Maps_CreepyCastleTunnel_Struct
 	.word Maps_IslesMain_Struct
 	.word Maps_IslesLobbies_Struct
+	.word Maps_FungiForestMills_Struct
+	.word Maps_CreepyCastleOutsideBuildings_Struct
+	.word Maps_CreepyCastleRooms_Struct
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Container.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Kongs.asm"
@@ -1980,6 +2109,7 @@ Maps_WarpingStruct:
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Cutscenes.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Modifiers.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Misc.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/FTT.asm"
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Special Flags/Custom.asm"
 .align
@@ -1989,7 +2119,6 @@ BadSavestateMaps:
 	.byte 0x01 // Funky's
 	.byte 0x03 // Lanky's Maze
 	.byte 0x05 // Cranky's Lab
-	.byte 0x08 // Japes: Dillo
 	.byte 0x0A // KKosh (V Easy)
 	.byte 0x0F // Snide's
 	.byte 0x12 // TTTrouble (V Easy)
@@ -2010,16 +2139,13 @@ BadSavestateMaps:
 	.byte 0x4D // MMayhem (Easy)
 	.byte 0x4E // BBBarrage (Easy)
 	.byte 0x4F // BBBarrage (Normal)
-	.byte 0x53 // Fungi: Dogadon
 	.byte 0x60 // SSSalvage (Normal)
 	.byte 0x63 // SSSortie (Easy)
 	.byte 0x65 // Krazy KK (Easy)
 	.byte 0x66 // BBBash (V Easy)
 	.byte 0x67 // SSeek (V Easy)
 	.byte 0x68 // BBother (Easy)
-	.byte 0x6F // Galleon: Pufftoss
 	// All values between 0x73 and 0x96 (Inclusive). Various bonus minigames
-	.byte 0x9A // Factory: Jack
 	.byte 0x9B // Crown - Arena Ambush
 	.byte 0x9C // Crown - More Kritter Karnage
 	.byte 0x9D // Crown - Forest Fracas
@@ -2029,9 +2155,6 @@ BadSavestateMaps:
 	.byte 0xA1 // Crown - Pinnacle Palaver
 	.byte 0xA2 // Crown - Shockwave Showdown
 	.byte 0xA5 // Diddy Kremling Game
-	.byte 0xC4 // Caves: Dillo
-	.byte 0xC5 // Aztec: Dogadon
-	.byte 0xC7 // Castle: Kut Out
 	.byte 0xC9 // Diddy Rocketbarrel Game
 	.byte 0xCA // Lanky Shooting Game
 	.byte 0xD1 // Chunky ? Box Game
@@ -3380,6 +3503,8 @@ Transition_Flags:
 .align
 Menu_ForceClose:
 	.asciiz "EMERGENCY - ERROR 01"
+Menu_Return:
+	.asciiz "RETURN"
 Menu_WarpMenu:
 	.asciiz "WARP TO MAP"
 Menu_SpecialFlags:
@@ -3407,6 +3532,7 @@ Menu_Main_Array:
 	.word Menu_Cheats
 	.word Menu_Bananaports
 	.word Menu_Settings
+	.word Menu_Return
 
 .align
 Menu_Main_Functions:
@@ -3418,12 +3544,13 @@ Menu_Main_Functions:
 	.word ActiveMenu_OpenCheatsMenu
 	.word 0
 	.word ActiveMenu_OpenSettingsMenu
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Main_Struct:
 	.word Menu_Main_Array // Text Array
 	.word Menu_Main_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 9 // Array Items
 	.byte 0 // Parent Screen
 
 .align
@@ -3480,6 +3607,14 @@ Menu_Screens:
 	.word Menu_Candy_Struct
 	.word Menu_Flags_Training_Struct // 50
 	.word Menu_Flags_Custom_Struct
+	.word Menu_Flags_FTT_Struct // 52
+	.word Menu_ScreenRatio_Struct
+	.word Menu_ChimpyCam_Struct // 54
+	.word Menu_MapFungiMills_Struct
+	.word Menu_MapCastleOutsideBuildings_Struct // 56
+	.word Menu_MapCastleRooms_Struct
+	.word Menu_CheatsToggles_Struct // 58
+	.word Menu_CheatsSnag_Struct
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Active Menu/Warps/Container.asm"
 .align
@@ -3520,6 +3655,7 @@ Menu_Savestate_Array:
 	.word Menu_Savestate_LoadPosition
 	.word Menu_Savestate_LoadExit
 	.word Menu_Savestate_LZLooper
+	.word Menu_Return
 
 .align
 Menu_Savestate_Functions:
@@ -3529,12 +3665,13 @@ Menu_Savestate_Functions:
 	.word ActiveMenu_PerformSavestateAction_LoadFromPosition
 	.word ActiveMenu_PerformSavestateAction_LoadFromExit
 	.word ActiveMenu_OpenLooperMenu
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Savestate_Struct:
 	.word Menu_Savestate_Array // Text Array
 	.word Menu_Savestate_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 7 // Array Items
 	.byte 0 // Parent Screen
 
 .align
@@ -3553,6 +3690,7 @@ Menu_ChangeSavestate_Array:
 	.word Menu_Savestate_SetTo2
 	.word Menu_Savestate_SetTo3
 	.word Menu_Savestate_SetTo4
+	.word Menu_Return
 
 .align
 Menu_ChangeSavestate_Functions:
@@ -3560,12 +3698,13 @@ Menu_ChangeSavestate_Functions:
 	.word ActiveMenu_ChangeSavestate
 	.word ActiveMenu_ChangeSavestate
 	.word ActiveMenu_ChangeSavestate
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_ChangeSavestate_Struct:
 	.word Menu_ChangeSavestate_Array // Text Array
 	.word Menu_ChangeSavestate_Functions // Function Array
-	.byte 4 // Array Items
+	.byte 5 // Array Items
 	.byte 27 // Parent Screen
 
 .align
@@ -3587,18 +3726,20 @@ Menu_LZLooperSettings_Array:
 	.word Menu_LZLooperSettings_TurnOnLooper
 	.word Menu_LZLooperSettings_Record
 	.word Menu_LZLooperSettings_ModePosition
+	.word Menu_Return
 
 .align
 Menu_LZLooperSettings_Functions:
 	.word ActiveMenu_LZLooper_ToggleOn
 	.word ActiveMenu_LZLooper_StartRecording
 	.word ActiveMenu_LZLooper_ToggleMode
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_LZLooperSettings_Struct:
 	.word Menu_LZLooperSettings_Array // Text Array
 	.word Menu_LZLooperSettings_Functions // Function Array
-	.byte 3 // Array Items
+	.byte 4 // Array Items
 	.byte 27 // Parent Screen
 
 .align
@@ -3640,6 +3781,20 @@ Menu_Cheats_EnemySpawnOff:
 	.asciiz "ENEMY SPAWNING: OFF"
 Menu_Cheats_EnemySpawnOn:
 	.asciiz "ENEMY SPAWNING: ON"
+Menu_Cheats_TBVoid:
+	.asciiz "TOGGLE TAG BARREL VOID"
+Menu_Cheats_VisifySnag:
+	.asciiz "VISIFY SPAWN SNAG COLLECTABLES"
+Menu_Cheats_ResetSnag:
+	.asciiz "RESET SPAWN SNAG COLLECTABLES"
+Menu_Cheats_UndoFlag:
+	.asciiz "UNDO LAST FLAG WRITE"
+Menu_Cheats_GainControl:
+	.asciiz "GAIN CONTROL"
+Menu_Cheats_Toggles:
+	.asciiz "TOGGLES"
+Menu_Cheats_SnagCheats:
+	.asciiz "SPAWN SNAG CHEATS"
 
 .align
 Menu_Cheats_Array:
@@ -3649,12 +3804,11 @@ Menu_Cheats_Array:
 	.word Menu_Cheats_Gamemode
 	.word Menu_Cheats_CancelCutscene
 	.word Menu_Cheats_Skew
-	.word Menu_Cheats_LToLevitateOff
-	.word Menu_Cheats_SandstormUnknown
-	.word Menu_Cheats_AutoPhaseOff
-	.word Menu_Cheats_AutoMoonkickOff
-	.word Menu_Cheats_InfHealthOff
-	.word Menu_Cheats_EnemySpawnOn
+	.word Menu_Cheats_SnagCheats
+	.word Menu_Cheats_Toggles
+	.word Menu_Cheats_UndoFlag
+	.word Menu_Cheats_GainControl
+	.word Menu_Return
 
 .align
 Menu_Cheats_Functions:
@@ -3664,19 +3818,66 @@ Menu_Cheats_Functions:
 	.word ActiveMenu_OpenGamemodeMenu
 	.word CancelCutscene
 	.word SkewCheat
+	.word ActiveMenu_OpenCheatsSnagMenu
+	.word ActiveMenu_OpenCheatsTogglesMenu
+	.word UndoLastFlagWrite
+	.word GainControl
+	.word ActiveMenu_PreviousScreen
+
+.align
+Menu_Cheats_Struct:
+	.word Menu_Cheats_Array // Text Array
+	.word Menu_Cheats_Functions // Function Array
+	.byte 11 // Array Items
+	.byte 0 // Parent Screen
+
+.align
+Menu_CheatsToggles_Array:
+	.word Menu_Cheats_LToLevitateOff
+	.word Menu_Cheats_SandstormUnknown
+	.word Menu_Cheats_AutoPhaseOff
+	.word Menu_Cheats_AutoMoonkickOff
+	.word Menu_Cheats_InfHealthOff
+	.word Menu_Cheats_EnemySpawnOn
+	.word Menu_Cheats_TBVoid
+	.word Menu_Return
+
+.align
+Menu_CheatsToggles_Functions:
 	.word ActiveMenu_ToggleLToLevitate
 	.word ToggleAztecSandstorm
 	.word ActiveMenu_ToggleAutoPhaseState
 	.word ActiveMenu_ToggleAutoMoonkick
 	.word ActiveMenu_ToggleInfHealth
 	.word ActiveMenu_ToggleEnemySpawn
+	.word ActiveMenu_ToggleTBVoid
+	.word ActiveMenu_PreviousScreen
 
 .align
-Menu_Cheats_Struct:
-	.word Menu_Cheats_Array // Text Array
-	.word Menu_Cheats_Functions // Function Array
-	.byte 12 // Array Items
-	.byte 0 // Parent Screen
+Menu_CheatsToggles_Struct:
+	.word Menu_CheatsToggles_Array // Text Array
+	.word Menu_CheatsToggles_Functions // Function Array
+	.byte 8 // Array Items
+	.byte 30 // Parent Screen
+
+.align
+Menu_CheatsSnag_Array:
+	.word Menu_Cheats_VisifySnag
+	.word Menu_Cheats_ResetSnag
+	.word Menu_Return
+
+.align
+Menu_CheatsSnag_Functions:
+	.word VisifySnagGBs
+	.word ResetSnagGBs
+	.word ActiveMenu_PreviousScreen
+
+.align
+Menu_CheatsSnag_Struct:
+	.word Menu_CheatsSnag_Array // Text Array
+	.word Menu_CheatsSnag_Functions // Function Array
+	.byte 3 // Array Items
+	.byte 30 // Parent Screen
 
 .align
 Menu_MovesMaster_GiveAll:
@@ -3705,6 +3906,7 @@ Menu_MovesMaster_Array:
 	.word Menu_MovesMaster_Candy
 	.word Menu_MovesMaster_Training
 	.word Menu_MovesMaster_CameraOff
+	.word Menu_Return
 
 .align
 Menu_MovesMaster_Functions:
@@ -3715,12 +3917,13 @@ Menu_MovesMaster_Functions:
 	.word ActiveMenu_OpenCandyMenu
 	.word ActiveMenu_OpenFlagMenu_Training
 	.word ActiveMenu_ToggleCamera
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MovesMaster_Struct:
 	.word Menu_MovesMaster_Array // Text Array
 	.word Menu_MovesMaster_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 8 // Array Items
 	.byte 30 // Parent Screen
 
 .align
@@ -3772,6 +3975,7 @@ Menu_Gamemodes_Array:
 	.word Menu_Gamemodes_Bosses
 	.word Menu_Gamemodes_Snides
 	.word Menu_Gamemodes_EndSeqDKT
+	.word Menu_Return
 
 .align
 Menu_Gamemodes_Functions:
@@ -3790,12 +3994,13 @@ Menu_Gamemodes_Functions:
 	.word ActiveMenu_SetGamemode
 	.word ActiveMenu_SetGamemode
 	.word ActiveMenu_SetGamemode
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Gamemodes_Struct:
 	.word Menu_Gamemodes_Array // Text Array
 	.word Menu_Gamemodes_Functions // Function Array
-	.byte 15 // Array Items
+	.byte 16 // Array Items
 	.byte 30 // Parent Screen
 
 .align
@@ -3817,6 +4022,10 @@ Menu_Watch_Viewed_Angle:
 	.asciiz "WATCHED: ANGLE"
 Menu_Watch_Viewed_Input:
 	.asciiz "WATCHED: INPUT"
+Menu_Watch_Viewed_HeldObject:
+	.asciiz "WATCHED: HELD ACTOR"
+Menu_Watch_Viewed_ISG:
+	.asciiz "WATCHED: INTRO STORY TIMER"
 
 .align
 Menu_Watch_Viewed_Array:
@@ -3829,6 +4038,8 @@ Menu_Watch_Viewed_Array:
 	.word Menu_Watch_Viewed_Movement
 	.word Menu_Watch_Viewed_Angle
 	.word Menu_Watch_Viewed_Input
+	.word Menu_Watch_Viewed_HeldObject
+	.word Menu_Watch_Viewed_ISG
 
 .align
 Menu_Watch_ToggleOff:
@@ -3849,6 +4060,10 @@ Menu_Watch_Angle:
 	.asciiz "ANGLE"
 Menu_Watch_Input:
 	.asciiz "INPUT"
+Menu_Watch_HeldObject:
+	.asciiz "HELD ACTOR"
+Menu_Watch_ISG:
+	.asciiz "INTRO STORY TIMER"
 
 .align
 Menu_Watch_Array:
@@ -3862,6 +4077,9 @@ Menu_Watch_Array:
 	.word Menu_Watch_Movement
 	.word Menu_Watch_Angle
 	.word Menu_Watch_Input
+	.word Menu_Watch_HeldObject
+	.word Menu_Watch_ISG
+	.word Menu_Return
 
 .align
 Menu_Watch_Functions:
@@ -3875,12 +4093,15 @@ Menu_Watch_Functions:
 	.word ActiveMenu_ChangeWatch
 	.word ActiveMenu_ChangeWatch
 	.word ActiveMenu_ChangeWatch
+	.word ActiveMenu_ChangeWatch
+	.word ActiveMenu_ChangeWatch
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Watch_Struct:
 	.word Menu_Watch_Array // Text Array
 	.word Menu_Watch_Functions // Function Array
-	.byte 10 // Array Items
+	.byte 13 // Array Items
 	.byte 0 // Parent Screen
 
 // TO ADD:
@@ -3895,7 +4116,6 @@ Menu_Watch_Struct:
 // Settings
 	// Sound
 	// Music
-	// Screen Ratio
 	// Camera Mode
 
 .align
@@ -3923,6 +4143,7 @@ Menu_Settings_Array:
 	.word Menu_Settings_ScreenRatio
 	.word Menu_Settings_Camera
 	.word Menu_Settings_QOLChanges
+	.word Menu_Return
 
 .align
 Menu_Settings_Functions:
@@ -3930,15 +4151,16 @@ Menu_Settings_Functions:
 	.word 0
 	.word 0
 	.word 0
-	.word 0
-	.word 0
+	.word ActiveMenu_OpenScreenRatioMenu
+	.word ActiveMenu_OpenChimpyCamMenu
 	.word ActiveMenu_OpenQOLMenu
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Settings_Struct:
 	.word Menu_Settings_Array // Text Array
 	.word Menu_Settings_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 8 // Array Items
 	.byte 0 // Parent Screen
 
 .align
@@ -3961,6 +4183,7 @@ Menu_HorizontalDPad_Array:
 	.word Menu_HorizontalDPad_PositionWarp
 	.word Menu_HorizontalDPad_FrameAdvance
 	.word Menu_HorizontalDPad_Nothing
+	.word Menu_Return
 
 .align
 Menu_HorizontalDPad_Mode_Array:
@@ -3974,12 +4197,13 @@ Menu_HorizontalDPad_Functions:
 	.word ActiveMenu_SetDPadLR
 	.word ActiveMenu_SetDPadLR
 	.word ActiveMenu_SetDPadLR
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_HorizontalDPad_Struct:
 	.word Menu_HorizontalDPad_Array // Text Array
 	.word Menu_HorizontalDPad_Functions // Function Array
-	.byte 4 // Array Items
+	.byte 5 // Array Items
 	.byte 34 // Parent Screen
 
 .align
@@ -4024,13 +4248,6 @@ SpawnEnemyTypeAvoid:
 	.byte 0x6F // BFI Fairy
 	.byte 0x70 // Ice Tomato
 	.byte 0 // Null Terminator
-
-.align
-Savestate_Array:
-	.word Savestate_0
-	.word Savestate_1
-	.word Savestate_2
-	.word Savestate_3
 
 .align
 GraphicalOverlaySpace:

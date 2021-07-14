@@ -84,6 +84,7 @@ Menu_Flags_Kong_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Flags_Kong_Functions:
@@ -92,12 +93,13 @@ Menu_Flags_Kong_Functions:
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Flags_Kong_Struct:
 	.word Menu_Flags_Kong_Array // Text Array
 	.word Menu_Flags_Kong_Functions // Function Array
-	.byte 5 // Array Items
+	.byte 6 // Array Items
 	.byte 36 // Parent Screen
 
 .align

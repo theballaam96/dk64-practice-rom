@@ -1,6 +1,7 @@
 .align
 Maps_JungleJapes_DestMap:
 	.byte 0x0 // Null for Main Map
+	.byte 0x8
 	.byte 0x25
 	.byte 0x6
 	.byte 0x4
@@ -11,6 +12,7 @@ Maps_JungleJapes_DestMap:
 .align
 Maps_JungleJapes_DestExit:
 	.byte 0x0 // Null for Main Map
+	.byte 0
 	.byte 0
 	.byte 0
 	.byte 0
@@ -63,16 +65,20 @@ Menu_Maps_Japes_Shellhive:
 	.asciiz "SHELLHIVE"
 Menu_Maps_Japes_Underground:
 	.asciiz "UNDERGROUND"
+Menu_Maps_Japes_ArmyDillo:
+	.asciiz "ARMY DILLO 1"
 
 .align
 Menu_MapJapes_Array:
 	.word Menu_Maps_Japes_Main
+	.word Menu_Maps_Japes_ArmyDillo
 	.word Menu_Maps_Japes_BBlast
 	.word Menu_Maps_Japes_Minecart
 	.word Menu_Maps_Japes_Mountain
 	.word Menu_Maps_Japes_Painting
 	.word Menu_Maps_Japes_Shellhive
 	.word Menu_Maps_Japes_Underground
+	.word Menu_Return
 
 .align
 Menu_MapJapes_Functions:
@@ -83,15 +89,15 @@ Menu_MapJapes_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapJapes_Struct:
 	.word Menu_MapJapes_Array // Text Array
 	.word Menu_MapJapes_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 9 // Array Items
 	.byte 1 // Parent Screen
-
-
 
 .align
 Menu_Maps_Japes_Portal:
@@ -115,6 +121,7 @@ Menu_MapJapesMain_Array:
 	.word Menu_Maps_Japes_RiverHigh
 	.word Menu_Maps_Japes_Storm
 	.word Menu_Maps_Japes_Zinger
+	.word Menu_Return
 
 .align
 Menu_MapJapesMain_Functions:
@@ -123,10 +130,12 @@ Menu_MapJapesMain_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapJapesMain_Struct:
 	.word Menu_MapJapesMain_Array // Text Array
 	.word Menu_MapJapesMain_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 7 // Array Items
 	.byte 2 // Parent Screen

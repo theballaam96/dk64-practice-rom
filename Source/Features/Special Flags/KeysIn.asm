@@ -136,6 +136,7 @@ Menu_Flags_KeyIn_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Flags_KeyIn_Functions:
@@ -148,12 +149,13 @@ Menu_Flags_KeyIn_Functions:
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
 	.word ActiveMenu_ToggleFlag
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Flags_KeyIn_Struct:
 	.word Menu_Flags_KeyIn_Array // Text Array
 	.word Menu_Flags_KeyIn_Functions // Function Array
-	.byte 9 // Array Items
+	.byte 10 // Array Items
 	.byte 36 // Parent Screen
 
 .align

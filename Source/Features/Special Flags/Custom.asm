@@ -148,6 +148,7 @@ Menu_Flags_Custom_Array:
 	.word CustomFlag_Type0
 	.word CustomFlag_CurrentState_Clear
 	.word CustomFlag_Set
+	.word Menu_Return
 
 .align
 Menu_Flags_Custom_Functions:
@@ -156,12 +157,13 @@ Menu_Flags_Custom_Functions:
 	.word CustomFlag_Change
 	.word 0
 	.word CustomFlag_Change
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Flags_Custom_Struct:
 	.word Menu_Flags_Custom_Array // Text Array
 	.word Menu_Flags_Custom_Functions // Function Array
-	.byte 5 // Array Items
+	.byte 6 // Array Items
 	.byte 36 // Parent Screen
 
 .align

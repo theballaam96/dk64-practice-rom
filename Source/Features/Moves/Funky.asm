@@ -263,6 +263,7 @@ Menu_Funky_Array:
 	.word 0
 	.word 0
 	.word 0
+	.word Menu_Return
 
 .align
 Menu_Funky_Functions:
@@ -274,6 +275,7 @@ Menu_Funky_Functions:
 	.word UpdateFunkyAmmoBelt
 	.word UpdateFunkyHoming
 	.word UpdateFunkySniper
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Funky_Kong_Lists:
@@ -287,5 +289,5 @@ Menu_Funky_Kong_Lists:
 Menu_Funky_Struct:
 	.word Menu_Funky_Array // Text Array
 	.word Menu_Funky_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 9 // Array Items
 	.byte 31 // Parent Screen

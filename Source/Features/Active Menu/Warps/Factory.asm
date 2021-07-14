@@ -1,6 +1,7 @@
 .align
 Maps_FranticFactory_DestMap:
 	.byte 0x0 // Null for Main
+	.byte 0x9A
 	.byte 0x2
 	.byte 0x6E
 	.byte 0x1B
@@ -10,6 +11,7 @@ Maps_FranticFactory_DestMap:
 .align
 Maps_FranticFactory_DestExit:
 	.byte 0x0 // Null for Main
+	.byte 0
 	.byte 0
 	.byte 0
 	.byte 0
@@ -65,15 +67,19 @@ Menu_Maps_Factory_Crusher:
 	.asciiz "CRUSHER ROOM"
 Menu_Maps_Factory_PowerShed:	
 	.asciiz "POWER SHED"
+Menu_Maps_Factory_MadJack:
+	.asciiz "MAD JACK"
 
 .align
 Menu_MapFactory_Array:
 	.word Menu_Maps_Factory_Main
+	.word Menu_Maps_Factory_MadJack
 	.word Menu_Maps_Factory_ArcadeMap
 	.word Menu_Maps_Factory_BBlast
 	.word Menu_Maps_Factory_Car
 	.word Menu_Maps_Factory_Crusher
 	.word Menu_Maps_Factory_PowerShed
+	.word Menu_Return
 
 .align
 Menu_MapFactory_Functions:
@@ -83,12 +89,14 @@ Menu_MapFactory_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapFactory_Struct:
 	.word Menu_MapFactory_Array // Text Array
 	.word Menu_MapFactory_Functions // Function Array
-	.byte 6 // Array Items
+	.byte 8 // Array Items
 	.byte 1 // Parent Screen
 
 .align
@@ -122,6 +130,7 @@ Menu_MapFactoryMain_Array:
 	.word Menu_Maps_Factory_RnD
 	.word Menu_Maps_Factory_Snides
 	.word Menu_Maps_Factory_Storage
+	.word Menu_Return
 
 .align
 Menu_MapFactoryMain_Functions:
@@ -134,10 +143,11 @@ Menu_MapFactoryMain_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapFactoryMain_Struct:
 	.word Menu_MapFactoryMain_Array // Text Array
 	.word Menu_MapFactoryMain_Functions // Function Array
-	.byte 9 // Array Items
+	.byte 10 // Array Items
 	.byte 4 // Parent Screen

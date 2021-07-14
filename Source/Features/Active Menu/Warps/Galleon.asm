@@ -1,6 +1,7 @@
 .align
 Maps_GloomyGalleon_DestMap:
 	.byte 0x0 // Null for Main
+	.byte 0x67
 	.byte 0x36
 	.byte 0x0 // Null for Shipwrecks
 	.byte 0x1F
@@ -14,6 +15,7 @@ Maps_GloomyGalleon_DestMap:
 .align
 Maps_GloomyGalleon_DestExit:
 	.byte 0x0 // Null for Main
+	.byte 0
 	.byte 0
 	.byte 0x0 // Null for Shipwrecks
 	.byte 0
@@ -97,10 +99,13 @@ Menu_Maps_Galleon_Submarine:
 	.asciiz "SUBMARINE"
 Menu_Maps_Galleon_TreasureChest:	
 	.asciiz "TREASURE CHEST"
+Menu_Maps_Galleon_Pufftoss:
+	.asciiz "PUFFTOSS"
 
 .align
 Menu_MapGalleon_Array:
 	.word Menu_Maps_Galleon_Main
+	.word Menu_Maps_Galleon_Pufftoss
 	.word Menu_Maps_Galleon_BBlast
 	.word Menu_Maps_Galleon_Shipwrecks
 	.word Menu_Maps_Galleon_Seasick
@@ -110,10 +115,12 @@ Menu_MapGalleon_Array:
 	.word Menu_Maps_Galleon_Seal
 	.word Menu_Maps_Galleon_Submarine
 	.word Menu_Maps_Galleon_TreasureChest
+	.word Menu_Return
 
 .align
 Menu_MapGalleon_Functions:
 	.word ActiveMenu_OpenMapWarper_GalleonMain // Open Main Menu
+	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_OpenMapWarper_GalleonShipwrecks // Open Shipwrecks Menu
 	.word ActiveMenu_WarpToMap
@@ -123,12 +130,13 @@ Menu_MapGalleon_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapGalleon_Struct:
 	.word Menu_MapGalleon_Array // Text Array
 	.word Menu_MapGalleon_Functions // Function Array
-	.byte 10 // Array Items
+	.byte 12 // Array Items
 	.byte 1 // Parent Screen
 
 .align
@@ -147,6 +155,7 @@ Menu_MapGalleonMain_Array:
 	.word Menu_Maps_Galleon_Cranky
 	.word Menu_Maps_Galleon_LighthouseArea
 	.word Menu_Maps_Galleon_Shipwreck
+	.word Menu_Return
 
 .align
 Menu_MapGalleonMain_Functions:
@@ -154,12 +163,13 @@ Menu_MapGalleonMain_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapGalleonMain_Struct:
 	.word Menu_MapGalleonMain_Array // Text Array
 	.word Menu_MapGalleonMain_Functions // Function Array
-	.byte 4 // Array Items
+	.byte 5 // Array Items
 	.byte 5 // Parent Screen
 
 .align
@@ -187,6 +197,7 @@ Menu_MapGalleonShipwrecks_Array:
 	.word Menu_Maps_Galleon_5DSChunky
 	.word Menu_Maps_Galleon_2DSLanky
 	.word Menu_Maps_Galleon_2DSTiny
+	.word Menu_Return
 
 .align
 Menu_MapGalleonShipwrecks_Functions:
@@ -197,10 +208,11 @@ Menu_MapGalleonShipwrecks_Functions:
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
 	.word ActiveMenu_WarpToMap
+	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_MapGalleonShipwrecks_Struct:
 	.word Menu_MapGalleonShipwrecks_Array // Text Array
 	.word Menu_MapGalleonShipwrecks_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 8 // Array Items
 	.byte 5 // Parent Screen
