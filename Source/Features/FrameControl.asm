@@ -1,4 +1,5 @@
 FrameControl_Toggle:
+	SW 		ra, @ReturnAddress4
 	LBU 	a0, @ArtificialPauseOn
 	BNEZ 	a0, FrameControl_CheckOtherInputs
 	NOP
@@ -31,6 +32,11 @@ FrameControl_Toggle:
 		SB 		a1, @TBVoidByte
 		LI 		a2, 1
 		SB 		a2, @ArtificialPauseOn
+		JAL 	@GetTimestamp
+		NOP
+		LI 		a0, @PauseTimestamp
+		SW 		v0, 0x0 (a0)
+		SW 		v1, 0x4 (a0)
 		B 		FrameControl_Toggle_Finish
 		NOP
 
@@ -40,12 +46,34 @@ FrameControl_Toggle:
 		ANDI 	a1, a1, 0xFD
 		SB 		a1, @TBVoidByte
 		SB 		r0, @ArtificialPauseOn
+		LBU 	a0, @HelmTimerShown
+		BEQZ  	a0, FrameControl_Toggle_Play_ResetTimestamp
+		NOP
+		JAL 	@GetTimestamp
+		NOP
+		LI 		a0, @TempTimestampStorage
+		SW 		v0, 0x0 (a0)
+		SW 		v1, 0x4 (a0)
+		LD 		a1, 0x0 (a0)
+		LD 		a2, @PauseTimestamp
+		BEQZ 	a2, FrameControl_Toggle_Play_ResetTimestamp
+		NOP
+		DSUBU 	a1, a1, a2
+		LD 		a2, @HelmStartTimestamp
+		DADDU 	a2, a1, a2
+		SD 		a2, @HelmStartTimestamp
+	FrameControl_Toggle_Play_ResetTimestamp:
+		LI 		a0, @PauseTimestamp
+		SW 		r0, 0x0 (a0)
+		SW 		r0, 0x4 (a0)
 
 	FrameControl_Toggle_Finish:
+		LW 		ra, @ReturnAddress4
 		JR 		ra
 		NOP
 
 FrameControl_FrameAdvanceInit:
+	SW 		ra, @ReturnAddress4
 	LBU 	a0, @DisablePositionButtons
 	LI 		a1, 1
 	BNE 	a0, a1, FrameControl_FrameAdvanceInit_Finish
@@ -60,20 +88,55 @@ FrameControl_FrameAdvanceInit:
 	ANDI 	a0, a0, @D_Left
 	BEQZ 	a0, FrameControl_FrameAdvanceInit_Finish
 	NOP
-	LI 		a0, 1
-	SB 		a0, @FrameAdvancing
-	LW 		a0, @FrameLag
-	SW 		a0, @FrameAdvanceStart
-	LBU 	a1, @TBVoidByte
-	ANDI 	a1, a1, 0xFD
-	SB 		a1, @TBVoidByte
-	SB 		r0, @ArtificialPauseOn
+	LBU 	a0, @FrameAdvancing
+	BNEZ 	a0, FrameControl_FrameAdvanceInit_SetVars
+	NOP
+	LHU 	a1, @ControllerInput
+	SH 		a1, @PreviousFrameButtons
+
+	FrameControl_FrameAdvanceInit_SetVars:
+		LI 		a0, 1
+		SB 		a0, @FrameAdvancing
+		LW 		a0, @FrameLag
+		SW 		a0, @FrameAdvanceStart
+		LBU 	a1, @TBVoidByte
+		ANDI 	a1, a1, 0xFD
+		SB 		a1, @TBVoidByte
+		SB 		r0, @ArtificialPauseOn
+		LHU 	a0, @BackgroundHeldInput
+		LHU 	a1, @PreviousFrameButtons
+		ORI 	a1, a1, 0x0F00
+		AND 	a0, a0, a1 // Reset non DPad buttons
+		SH 		a0, @BackgroundHeldInput
+		LBU 	a0, @HelmTimerShown
+		BEQZ  	a0, FrameControl_FrameAdvanceInit_ResetTimestamp
+		NOP
+		JAL 	@GetTimestamp
+		NOP
+		LI 		a0, @TempTimestampStorage
+		SW 		v0, 0x0 (a0)
+		SW 		v1, 0x4 (a0)
+		LD 		a1, 0x0 (a0)
+		LD 		a2, @PauseTimestamp
+		BEQZ 	a2, FrameControl_FrameAdvanceInit_ResetTimestamp
+		NOP
+		DSUBU 	a1, a1, a2
+		LD 		a2, @HelmStartTimestamp
+		DADDU 	a2, a1, a2
+		SD 		a2, @HelmStartTimestamp
+
+	FrameControl_FrameAdvanceInit_ResetTimestamp:
+		LI 		a0, @PauseTimestamp
+		SW 		r0, 0x0 (a0)
+		SW 		r0, 0x4 (a0)
 
 	FrameControl_FrameAdvanceInit_Finish:
+		LW 		ra, @ReturnAddress4
 		JR 		ra
 		NOP
 
 FrameControl_FrameAdvanceExit:
+	SW 		ra, @ReturnAddress4
 	LBU 	a0, @FrameAdvancing
 	BEQZ 	a0, FrameControl_FrameAdvanceExit_Finish
 	NOP
@@ -94,6 +157,11 @@ FrameControl_FrameAdvanceExit:
 	NOP
 	LHU 	a2, @ControllerInput
 	SH 		a2, @PreviousFrameButtons
+	JAL 	@GetTimestamp
+	NOP
+	LI 		a0, @PauseTimestamp
+	SW 		v0, 0x0 (a0)
+	SW 		v1, 0x4 (a0)
 
 	FrameControl_FrameAdvanceExit_Repause:
 		ORI 	a1, a1, 2
@@ -102,5 +170,6 @@ FrameControl_FrameAdvanceExit:
 		SB 		a2, @ArtificialPauseOn
 
 	FrameControl_FrameAdvanceExit_Finish:
+		LW 		ra, @ReturnAddress4
 		JR 		ra
 		NOP

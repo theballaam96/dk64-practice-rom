@@ -2,23 +2,30 @@
 Menu_QOL_Addresses:
 	.word @DisableStartupSkip // Startup
 	.word @DisableForcedStorySkip // Story Skip
+	.word @PauseMenuMusicSetting // Pause Volume
 
 .align
 Menu_QOL_ControlStruct:
 	.word Menu_QOL_Addresses ; Addresses
 	.word Menu_QOL_Control_TextStruct ; Text Information
 	.byte 46 ; Associated Screen
-	.byte 2 ; Flag Count
+	.byte 3 ; Flag Count
 
 .align
 Menu_QOL_Control_Startup_Set:
-	.asciiz "QUICK STARTUP - OFF"
+	.asciiz "QUICK STARTUP: OFF"
 Menu_QOL_Control_Startup_Clear:
-	.asciiz "QUICK STARTUP - ON"
+	.asciiz "QUICK STARTUP: ON"
 Menu_QOL_Control_Story_Set:
-	.asciiz "FORCED STORY SKIP - OFF"
+	.asciiz "FORCED STORY SKIP: OFF"
 Menu_QOL_Control_Story_Clear:
-	.asciiz "FORCED STORY SKIP - ON"
+	.asciiz "FORCED STORY SKIP: ON"
+Menu_QOL_Control_PauseVolume_Normal:
+	.asciiz "PAUSE VOLUME: NORMAL"
+Menu_QOL_Control_PauseVolume_Quiet:
+	.asciiz "PAUSE VOLUME: QUIET"
+Menu_QOL_Control_PauseVolume_Silent:
+	.asciiz "PAUSE VOLUME: SILENT"
 
 .align
 Menu_QOL_Control_Startup_Struct:
@@ -27,14 +34,20 @@ Menu_QOL_Control_Startup_Struct:
 Menu_QOL_Control_Story_Struct:
 	.word Menu_QOL_Control_Story_Clear
 	.word Menu_QOL_Control_Story_Set
+Menu_QOL_Control_PauseVolume_Struct:
+	.word Menu_QOL_Control_PauseVolume_Normal
+	.word Menu_QOL_Control_PauseVolume_Quiet
+	.word Menu_QOL_Control_PauseVolume_Silent
 
 .align
 Menu_QOL_Control_TextStruct:
 	.word Menu_QOL_Control_Startup_Struct
 	.word Menu_QOL_Control_Story_Struct
+	.word Menu_QOL_Control_PauseVolume_Struct
 
 .align
 Menu_QOL_Control_Array:
+	.word 0
 	.word 0
 	.word 0
 	.word Menu_Return
@@ -43,13 +56,14 @@ Menu_QOL_Control_Array:
 Menu_QOL_Control_Functions:
 	.word ActiveMenu_ToggleAddress
 	.word ActiveMenu_ToggleAddress
+	.word ActiveMenu_TogglePauseSound
 	.word ActiveMenu_PreviousScreen
 	
 .align
 Menu_QOL_Control_Struct:
 	.word Menu_QOL_Control_Array // Text Array
 	.word Menu_QOL_Control_Functions // Function Array
-	.byte 3 // Array Items
+	.byte 4 // Array Items
 	.byte 34 // Parent Screen
 
 .align
@@ -121,7 +135,6 @@ ActiveMenu_ToggleAddress:
 	ADD 	t6, t6, t9 ; Focused Address
 	LW		a0, 0x0 (t6)
 	LI 		t0, 1
-	SW 		a0, 0x807FFA10
 	LBU		a1, 0x0 (a0)
 	SUBU 	a1, t0, a1
 	SB 		a1, 0x0 (a0)
@@ -131,3 +144,20 @@ ActiveMenu_ToggleAddress:
 	LW 		ra, @ReturnAddress5
 	JR 		ra
 	NOP
+
+ActiveMenu_TogglePauseSound:
+	SW 		ra, @ReturnAddress5
+	LBU 	a0, @PauseMenuMusicSetting
+	ADDIU 	a0, a0, 1
+	LI 		a1, 3
+	BNE 	a0, a1, ActiveMenu_TogglePauseSound_Write
+	NOP
+	LI 		a0, 0
+
+	ActiveMenu_TogglePauseSound_Write:
+		SB 		a0, @PauseMenuMusicSetting
+		JAL 	ActiveMenu_RefreshQOLMenu
+		NOP
+		LW 		ra, @ReturnAddress5
+		JR 		ra
+		NOP

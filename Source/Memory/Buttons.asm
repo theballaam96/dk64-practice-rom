@@ -1,0 +1,15 @@
+// Buttons
+[L_Button]: 0x0020
+[D_Up]: 0x0800
+[D_Down]: 0x0400
+[D_Left]: 0x0200
+[D_Right]: 0x0100
+[B_Button]: 0x4000
+[A_Button]: 0x8000
+[Z_Button]: 0x2000
+[R_Button]: 0x0010
+[Start_Button]: 0x1000
+[C_Up]: 0x0008
+[C_Down]: 0x0004
+[C_Left]: 0x0002
+[C_Right]: 0x0001

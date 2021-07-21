@@ -1,5 +1,4 @@
 CancelCutscene:
-	SW 		ra, @ReturnAddress4
 	LBU 	a0, @TBVoidByte
 	ANDI 	a0, a0, 2
 	BNEZ 	a0, CancelCutscene_Finish // Pause Menu
@@ -30,6 +29,56 @@ CancelCutscene:
 	SB 		a1, 0x154 (a0)
 
 	CancelCutscene_Finish:
+		JR 		ra
+		NOP
+
+ToggleCSCancelLMode:
+	LI 		a1, 1
+	LBU 	a0, @LToCancelCSOn
+	SUBU 	a0, a1, a0
+	SB 		a0, @LToCancelCSOn
+	LA 		a2, Menu_CheatsToggles_Array
+	BEQZ 	a0, ToggleCSCancel_IsOff
+	NOP
+	LA 		a1, Menu_Cheats_LToCancelCS_On
+	B 		ToggleCSCancel_Finish
+	NOP
+
+	ToggleCSCancel_IsOff:
+		LA 		a1, Menu_Cheats_LToCancelCS_Off
+
+	ToggleCSCancel_Finish:
+		SW 		a1, 0x20 (a2)
+		SW 		ra, @ReturnAddress3
+		JAL 	ActiveMenu_ClearMenu
+		NOP
+		LI 		a0, 58
+		SB 		a0, @NewMenu_Screen
+		JAL 	ActiveMenu_SpawnMenu
+		NOP
+		LW 		ra, @ReturnAddress3
+		JR 		ra
+		NOP
+
+LTo_CancelCS:
+	SW 		ra, @ReturnAddress4
+	LBU 	a0, @LToCancelCSOn
+	BEQZ 	a0, LTo_CancelCS_Finish
+	NOP
+	LBU 	a0, @NewMenuOpen
+	BNEZ 	a0, LTo_CancelCS_Finish // Active Menu
+	NOP
+	LBU 	a0, @ClosingMenu
+	BNEZ 	a0, LTo_CancelCS_Finish
+	NOP
+	LHU 	a0, @NewlyPressedControllerInput
+	ANDI 	a0, a0, @L_Button
+	BEQZ 	a0, LTo_CancelCS_Finish
+	NOP
+	JAL 	CancelCutscene
+	NOP
+
+	LTo_CancelCS_Finish:
 		LW 		ra, @ReturnAddress4
 		JR 		ra
 		NOP

@@ -137,8 +137,12 @@ GlobalSavestateHandler:
 
 	Handler_Load:
 		// t9 = Focused Savestate Struct
-		SW 		r0, @StoredTime
 		SB 		r0, @StoredTimerMode
+		SW 		r0, @StoredTime
+		SW 		r0, @StoredStart
+		SW 		r0, @TimerReduction
+		SW 		r0, @TimerAfterReduction
+		SB 		r0, @HasNeutralStickInput
 		// Reset LZ Recording
 		SB 		r0, @LZLooper_IsRecording
 		LA 		a2, Menu_LZLooperSettings_Array
@@ -294,7 +298,6 @@ Savestate_ShorthandCombo:
 		LW 		ra, @ReturnAddress4
 		JR 		ra
 		NOP
-
 
 .align
 Savestate_0:

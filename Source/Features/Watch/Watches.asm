@@ -26,8 +26,6 @@ VariableDisplay:
 
 	VDispLag:
 		LI 		a1, @WatchTextSpace
-		JAL 	ConvertCodePointerForWatchText
-		NOP
 		LA 		a0, Watch_Header_Lag
 		LW 		a1, @StoredLag // Value
 		LI 		a2, 0 // Display Type
@@ -39,8 +37,6 @@ VariableDisplay:
 
 	VDispSpd:
 		LI 		a1, @WatchTextSpace
-		JAL 	ConvertCodePointerForWatchText
-		NOP
 		LW 		a0, @Player // Player pointer
 		BEQZ 	a0, VDispSpdFormat // Player pointer null
 		LI 		a1, 0
@@ -58,8 +54,6 @@ VariableDisplay:
 
 	VDispCLag:
 		LI 		a1, @WatchTextSpace
-		JAL 	ConvertCodePointerForWatchText
-		NOP
 		LW 		a1, @StoredLag
 		LW 		a2, @CumulativeLag
 		ADD 	a1, a1, a2 // Lag + Old Lag
@@ -76,8 +70,6 @@ VariableDisplay:
 
 	VDispTimer:
 		LI 		a1, @WatchTextSpace
-		JAL 	ConvertCodePointerForWatchText
-		NOP
 		LWU 	a1, @TimerAfterReduction
 		MTC1 	a1, f0
 		LUI 	t6, 0x4270 // 60 as float
@@ -89,8 +81,6 @@ VariableDisplay:
 		LI 		a2, 1 // Display Type
 		JAL 	FormatTextForWatch
 		LI 		a3, 5 // Header Length
-		LI 		a1, 0
-		LI 		a0, 0
 		B 		UpdateVDispText
 		NOP
 

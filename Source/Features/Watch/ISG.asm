@@ -44,24 +44,30 @@ GetISGTimer:
 	LI 		t6, @ISGTimestamp
 	LW 		t7, 0x4 (t6)
 	LW 		t6, 0x0 (t6)
-	LI 		a2, 0
-	SLTU 	at, v1, t7
-	SUBU 	a0, v0, t6
-	SUBU 	a0, a0, at
-	LI 		a3, 0x40
-	JAL 	@Multiply
-	SUBU 	a1, v1, t7
-	OR 		a0, v0, r0
-	OR 		a1, v1, r0
-	LI 		a2, 0
-	JAL 	@ConvertTimestamp
-	LI 		a3, 3000
-	OR 		a0, v0, r0
-	OR 		a1, v1, r0
-	LI 		a2, 0
-	JAL 	@ConvertTimestamp
-	LI 		a3, 10000
-	SW 		v1, @ISGTimer
+	BNEZ 	t7, GetISGTimer_Convert
+	NOP
+	BEQZ 	t6, GetISGTimer_Finish
+	NOP
+
+	GetISGTimer_Convert:
+		LI 		a2, 0
+		SLTU 	at, v1, t7
+		SUBU 	a0, v0, t6
+		SUBU 	a0, a0, at
+		LI 		a3, 0x40
+		JAL 	@Multiply
+		SUBU 	a1, v1, t7
+		OR 		a0, v0, r0
+		OR 		a1, v1, r0
+		LI 		a2, 0
+		JAL 	@ConvertTimestamp
+		LI 		a3, 3000
+		OR 		a0, v0, r0
+		OR 		a1, v1, r0
+		LI 		a2, 0
+		JAL 	@ConvertTimestamp
+		LI 		a3, 10000
+		SW 		v1, @ISGTimer
 
 	GetISGTimer_Finish:
 		LW 		ra, @ReturnAddress3
@@ -107,6 +113,10 @@ ColourISGTimer:
 	ColourISGTimer_DetectFade:
 		LBU 	t8, 0x4 (t3) // Expected Destination Map
 		LW 		t0, @DestMap
+		BNE 	t0, t8, ColourISGTimer_Finish
+		NOP
+		LW 		t0, @TransitionSpeed
+		LUI 	r8, 0x3F80 // f32 = 1
 		BNE 	t0, t8, ColourISGTimer_Finish
 		NOP
 		LI 		a0, @ISGRGB_Fading

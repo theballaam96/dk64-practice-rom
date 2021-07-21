@@ -32,6 +32,8 @@ ActiveMenu_Open:
 	ActiveMenu_Open_ActorExist:
 		JAL 	ActiveMenu_ClearMenu
 		NOP
+		LI 		a1, 1
+		SB 		a1, @ClosingMenu
 
 	ActiveMenu_Open_Finish:
 		LW 		ra, @ReturnAddress
@@ -154,9 +156,25 @@ ActiveMenu_ClearMenu:
 		SW 		r0, 0x0 (t6)
 		ADDIU 	t6, t6, 4
 		ADDI 	t9, t9, -1
-		BEQZ 	t9, ActiveMenu_ClearMenu_Finish
+		BEQZ 	t9, ActiveMenu_ClearMenu_ClearTitle
 		NOP
 		B 		ActiveMenu_ClearMenu_Loop
+		NOP
+
+	ActiveMenu_ClearMenu_ClearTitle:
+		LI 		a1, @HackTitle
+		LW 		a0, 0x0 (a1)
+		BEQZ 	a0, ActiveMenu_ClearMenu_ClearVersion
+		SW 		r0, 0x0 (a1)
+		JAL 	@DeleteActor
+		NOP
+
+	ActiveMenu_ClearMenu_ClearVersion:
+		LI 		a1, @HackVersion
+		LW 		a0, 0x0 (a1)
+		BEQZ 	a0, ActiveMenu_ClearMenu_Finish
+		SW 		r0, 0x0 (a1)
+		JAL 	@DeleteActor
 		NOP
 
 	ActiveMenu_ClearMenu_Finish:
@@ -250,10 +268,41 @@ ActiveMenu_SpawnMenu:
 		ADDIU 	t6, t6, 4
 		ADDIU 	t8, t8, 4
 		ADDI 	t9, t9, -1
-		BEQZ 	t9, ActiveMenu_SpawnMenu_Finish
+		BEQZ 	t9, ActiveMenu_SpawnMenu_CheckScreen
 		NOP
 		B 		ActiveMenu_SpawnMenu_Loop
 		NOP
+
+	ActiveMenu_SpawnMenu_CheckScreen:
+		LBU 	a0, @NewMenu_Screen
+		BNEZ 	a0, ActiveMenu_SpawnMenu_Finish
+		NOP
+
+	ActiveMenu_SpawnMenu_Title:
+		LI 		a0, 10
+		LI 		a1, 180
+		LA 		a3, ROM_Title
+		JAL 	@SpawnTextOverlay
+		LI 		a2, 25
+		LW 		a0, @CurrentActorPointer
+		BEQZ 	a0, ActiveMenu_SpawnMenu_Version
+		NOP
+		SW 		a0, @HackTitle
+		LI 		a1, 0xFF
+		SB 		a1, 0x15F (a0) // Opacity
+
+	ActiveMenu_SpawnMenu_Version:
+		LI 		a0, 10
+		LI 		a1, 228
+		LA 		a3, ROM_Version
+		JAL 	@SpawnTextOverlay
+		LI 		a2, 35
+		LW 		a0, @CurrentActorPointer
+		BEQZ 	a0, ActiveMenu_SpawnMenu_Finish
+		NOP
+		SW 		a0, @HackVersion
+		LI 		a1, 0xFF
+		SB 		a1, 0x15F (a0) // Opacity
 
 	ActiveMenu_SpawnMenu_Finish:	
 		LI 		a0, 1
@@ -377,6 +426,8 @@ ActiveMenu_PreviousScreen:
 	ActiveMenu_PreviousScreen_IsHome:
 		JAL 	ActiveMenu_ClearMenu
 		NOP
+		LI 		a1, 1
+		SB 		a1, @ClosingMenu
 
 	ActiveMenu_PreviousScreen_Finish:
 		LW 		ra, @ReturnAddress3

@@ -78,6 +78,23 @@ ChangeEncodedFlag:
 
 	ChangeEncodedFlag_TypeWrite:
 		LBU 	a0, @CustomFlagType
+		LI 		t7, -1
+		BNE 	t3, t7, CustomEncodedFlag_TypeWrite_Standard
+		NOP
+		LI 		t7, 1
+		BNE 	a0, t7, ChangeEncodedFlag_TypeWrite_CheckTemp
+		NOP
+		B 		ChangeEncodedFlag_TypeWriteToMem
+		LI 		t7, 0
+
+	ChangeEncodedFlag_TypeWrite_CheckTemp:
+		LI 		t7, 2
+		BNE 	a0, t7, CustomEncodedFlag_TypeWrite_Standard
+		NOP
+		B 		ChangeEncodedFlag_TypeWriteToMem
+		LI 		t7, 1
+
+	CustomEncodedFlag_TypeWrite_Standard:
 		ADD 	a0, a0, t3
 		LI 		a1, 3
 		BEQ 	a0, a1, ChangeEncodedFlag_TypeWriteToMem
@@ -93,6 +110,18 @@ ChangeEncodedFlag:
 		NOP
 
 	ChangeEncodedFlag_Update:
+		LA 		a0, CustomFlag_MaxFlagByteValues
+		LBU 	t7, @CustomFlagType
+		SLL 	t7, t7, 1
+		ADD 	a0, a0, t7
+		LHU 	a0, 0x0 (a0) // Max Flag Cap
+		LHU 	t7, @CustomFlagByte
+		SLTU 	a1, t7, a0
+		BNEZ 	a1, ChangeEncodedFlag_Update_Spawn
+		NOP
+		SH 		a0, @CustomFlagByte
+
+	ChangeEncodedFlag_Update_Spawn:
 		JAL 	ActiveMenu_OpenFlagMenu_Custom
 		NOP
 

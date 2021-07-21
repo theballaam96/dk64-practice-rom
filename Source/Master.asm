@@ -2,104 +2,20 @@
 // By theballaam96
 // http://www.twitter.com/tjballaam
 
-[InCutscene]: 0x807444EC
-[TransitionSpeed]: 0x807FD88C
-[CutsceneWillPlay]: 0x8075533B
-[MysteryWriteOffset]: 0x29C
-[CurrentCharacter]: 0x36F
-[KRoolRound]: 0x80750AD4
-[MovesBase]:  0x807FC950 // End: 0x807FCB28
-[MovesBaseSize]: 0x1D8
-[PlayerOneColour]: 0x807552F4
-[Mode]: 0x80755318
-[TBVoidByte]: 0x807FBB63
-[CurrentMap]: 0x8076A0A8
-[DestMap]: 0x807444E4
-[DestExit]: 0x807444E8
-[StorySkip]: 0x8074452C
-[HelmTimerDisplay]: 0x80755348 // u32
-[HelmTimerShown]: 0x80755350 // u8
-[TempFlagBlock]: 0x807FDD90
-[InSubmap]: 0x8076A170
-[ParentMap]: 0x8076A172
-[ParentExit]: 0x8076A174
-[HelmTimer]: 0x80755348 // u32
-[HelmTimerPaused]: 0x80713C9B // u8
-[Lag]: 0x80744478 // u32
-[KRoolTimerText]: 0x80754AD0
-[FrameLag]: 0x8076AF10
-[FrameReal]: 0x80767CC4
-[RNG]: 0x80746A40 // u32
-[BetaNinRWSkip]: 0x80755324 // u8
-[Gamemode]: 0x80755314 // u8
-[ObjectModel2Pointer]: 0x807F6000
-[ObjectModel2Timer]: 0x8076A064
-[ObjectModel2Count]: 0x807F6004
-[ObjectModel2Count_Dupe]: 0x80747D70
-[LoadingZoneArray]: 0x807FDCB4
-[LoadingZoneArraySize]: 0x807FDCB0
-[CutsceneIndex]: 0x807476F4
-[CutsceneActive]: 0x807444EC
-[CutsceneTypePointer]: 0x807476FC
-[PreviousCameraState]: 0x807F5CF0
-[CurrentCameraState]: 0x807F5CF2
-[CameraStateChangeTimer]: 0x807F5CEC
-[AutowalkPointer]: 0x807FD70C
-[IsAutowalking]: 0x807463B8
-[PositionWarpInfo]: 0x807FC918
-[PositionWarpBitfield]: 0x8076AEE2
-[PositionFloatWarps]: 0x8076AEE4 // f32 x 3
-[SFXVolume]: 0x8074583C
-[MusicVolume]: 0x80745840
-[ChimpyCam]: 0x80744530
-[ScreenRatio]: 0x807444C0
-[CurrentActorPointer]: 0x807FBB44
-[LoadedActorCount]: 0x807FBB35
-[SpawnerArray]: 0x807FDC8C
-[SpawnerCount]: 0x807FDC88
-[MenuSkyTopRGB]: 0x80754F4C
-[MenuSkyRGB]: 0x80754F4F
-[ActorArray]: 0x807FBFF0
-[ActorCount]: 0x807FC3F0
-[ButtonsEnabledBitfield]: 0x80755308
-[JoystickEnabledX]: 0x8075530C
-[JoystickEnabledY]: 0x80755310
-[MapState]: 0x8076A0B1
-
-// Buttons
-[L_Button]: 0x0020
-[D_Up]: 0x0800
-[D_Down]: 0x0400
-[D_Left]: 0x0200
-[D_Right]: 0x0100
-[B_Button]: 0x4000
-[A_Button]: 0x8000
-[Z_Button]: 0x2000
-[R_Button]: 0x0010
-[Start_Button]: 0x1000
-[C_Up]: 0x0008
-[C_Down]: 0x0004
-[C_Left]: 0x0002
-[C_Right]: 0x0001
-
-// MIPS ASM
-[ReturnAddress]: 0x807FFFB0
-[ReturnAddress2]: 0x807FFFB4
-[ReturnAddress3]: 0x807FFFB8 // Compact Functions
-[ReturnAddress4]: 0x807FFFBC
-[ReturnAddress5]: 0x807FFFC0
-
-[VarStorage0]: 0x807FF5E0
-[VarStorage1]: 0x807FF5E4
-[VarStorage2]: 0x807FF5E8
-[VarStorage3]: 0x807FF5EC
-[VarStorage4]: 0x807FF5F0
-[VarStorage5]: 0x807FF5F4
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/GameVars.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/Buttons.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/AddressStorage.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/Functions.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/SFX.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/Colors.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/Hack.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/SavestateStruct.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/PositionSavestate.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/LZLooper.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Memory/ActiveMenu.asm"
 
 // OSD
 [WriteTextZone]: 0x807FCAA0
-[ControllerInput]: 0x80014DC4
-[NewlyPressedControllerInput]: 0x807ECD66
 [WarpY]: 69
 [WipeY]: 117
 [PauseMenuTextPointer]: 0x807FC7E0
@@ -107,82 +23,6 @@
 [MaxCooldown]: 6
 [MinCooldown]: 2
 [SpecialFlagCategories]: 11
-
-// ISG
-[ISGActive]: 0x80755070
-[ISGTimestamp]: 0x807F5CE0
-[ISGPreviousFadeout]: 0x807F5D14
-[CurrentTimestamp]: 0x80014FE0
-[ISGFadeoutArray]: 0x80747708
-
-// Tag Anywhere
-[Player]: 0x807FBB4C
-[SwapObject]: 0x807FC924
-[Character]: 0x8074E77C
-[Camera]: 0x807FB968
-[StaticCamera]: 0x80764EBC // Is this in the stack?
-
-// FUNCTIONS
-[SetFlag]: 0x8073129C
-[CheckFlag]: 0x8073110C
-[PrintText]: 0x806ABB98
-// a0 = HUD Pointer?
-// a1 = x
-// a2 = y
-// a3 = scale
-// sp[0x10] = String
-[Malloc]: 0x80610FE8 // a0 = size
-[SetHUDPointer]: 0x806A921C // a0 = malloc outcome
-[PlaySFX]: 0x80609140 // a0 = Sound Effect, a1 = 0x7FFF, a2 = 427C0000, a3 = 0x3f800000, sp+0x10 = 0, sp + 0x14 = 0
-[InitiateTransition]: 0x805FF378
-[GetFlagBlockAddress]: 0x8060E25C
-[IsAddressActor]: 0x8067AF44 // a0 = InputAddress, v0 = Output Bool
-[GetTimestamp]: 0x800060B0 // v0 = Output u64
-[DMAFileTransfer]: 0x80000450
-[SpawnObjectModelTwo]: 0x80632630
-[PlaySong]: 0x80602A94
-[DeleteActor]: 0x806785D4
-[SpawnActor]: 0x80677fa8 // a0 = Actor Type
-[SpawnTextOverlay]: 0x8069D0F8
-// a0 = style
-	// 0 = Centered
-	// 1 = DK Font
-	// 2 = Thick Computer
-	// 3 = Timer
-	// 4 = Thin Computer
-	// 5 = V. Thin Computer
-	// 6 = Comic Sans-Esque
-	// 7 - 9 = Crash
-	// 10 = K Rool Intro
-// a1 = x (s16)
-// a2 = y (s16)
-// a3 = textpointer
-[SQRT]: 0x8000AC60 // f12 = val to sqrt, return f0
-[StrFormat]: 0x800031E0
-[GetTimestamp]: 0x800060B0
-[Multiply]: 0x80005918
-[ConvertTimestamp]: 0x80005818
-[ResetMap]: 0x805FFFC8
-
-// Sound Effects
-[Banana]: 0x2A0
-[Okay]: 0x23C
-[UhOh]: 0x150
-[Bell]: 0x1F
-[KLumsy]: 0x31C
-[Wrong]: 0x98
-[Potion]: 0x214
-[AmmoPickup]: 0x157
-[Coin]: 0x1D1
-[BeepHigh]: 116
-[BeepLow]: 117
-[FeedMe]: 601
-[Bounce]: 458
-[TimerTock]: 143
-[ChunkyFallTooFar]: 197
-[Fire]: 234
-[MatchingSound]: 171
-[CameraPull]: 441
 
 // Variables
 [MasterLevelCount]: 28
@@ -203,165 +43,6 @@
 [MaxMenuItems]: 23 // 32 (practice rom cap) - 8 (normal cap) - 1 (watch)
 [EmergencyCloseLoadedAmount]: 60
 [ErrorLength]: 180
-
-// Colours - Menu
-[SelectedRGB]: 0x2E8B57 // CSS SeaGreen
-[ReturnRGB]: 0xFF4500 // CSS OrangeRed
-// Colours - Kosha Timer
-[KoshaRGB_Frozen]: 0x008B8B // CSS DarkCyan
-[KoshaRGB_CancelRange]: 0xFFD700 // CSS Gold
-[KoshaRGB_Music]: 0xD2691E // CSS Chocolate
-[KoshaRGB_Tantrum]: 0x8B0000 // CSS DarkRed
-// Colours - ISG
-[ISGRGB_FadeoutPending]: 0x4B0082 // CSS Indigo
-[ISGRGB_Fading]: 0xFF0000 // CSS Red
-// Colours - Angle
-[AngleRGB_PhaseState]: 0x0000FF // CSS Blue
-
-// Savestate Struct
-[SavestateStruct_CollectableBase]: 0x0
-[SavestateStruct_PositionTuple]: 0x10
-[SavestateStruct_Map]: 0x1C
-[SavestateStruct_Exit]: 0x1D
-[SavestateStruct_Character]: 0x1E
-[SavestateStruct_SavedData]: 0x1F
-[SavestateStruct_TempFlagBlock]: 0x20
-[SavestateStruct_KongBase]: 0x30
-[SavestateStruct_PermFlagBlock]: 0x210
-
-// COLLECTABLES
-[CollectableBase]: 0x807FCC40
-
-// INTERNAL
-[MenuOpen]: 0x807FFFFF // u8
-[SpecialFlagIndex]: 0x807FFFFE // u8
-[Slot3Position]: 0x807FFFFD // u8
-[MenuPosition]: 0x807FFFFB // u8
-[MenuActionCooldown]: 0x807FFFFA // u8 - Prevents crashes
-[PauseMenuNextScreen]: 0x807FFFF9 // u8
-[HasASavestate]: 0x807FFFF8 // u8 - Bool
-[InBadMap]: 0x807FFFF7 // u8 - Bool
-[MenuSavestateAction]: 0x807FFFF6 // u8 - 0 = Save, 1 = Load
-[StickWasNonNeutral]: 0x807FFFF5 // u8 - Bool
-[PauseMenuScreen]: 0x807FFFF4 // u8
-[StoredMainMenuTextPointer]: 0x807FFFF0 // u32 pointer
-[VariableDisplayOn]: 0x807FFFEF // u8
-[ExtraSlotPosition]: 0x807FFFEE // u8
-[SniperOn]: 0x807FFFED // u8
-[SlamLevel]: 0x807FFFEC // u8
-[CumulativeLag]: 0x807FFFE8 // u32
-[ISGTimer]: 0x807FFFE0 // u64
-[StoredLag]: 0x807FFFDC // u32
-[StoredTime]: 0x807FFFD8 // u32
-[StoredStart]: 0x807FFFD4 // u32
-[StoredTimerMode]: 0x807FFFD3 // u8 - 0: Reset/Zeroed, 1: Started, 2: Stopped
-[StoredRound]: 0x807FFFD2 // u8
-[DisablePositionButtons]: 0x807FFFD1 // u8
-[DisableTagAnywhere]: 0x807FFFD0 // u8
-[SelectedMasterLevelIndex]: 0x807FFFCF // u8
-[SelectedMapIndex]: 0x807FFFCE // u8
-[SelectedMapCap]: 0x807FFFCD // u8
-[MenuSlide]: 0x807FFFCC // u8
-[FrameAdvanceStart]: 0x807FFFC8 // u32
-[DisableStartupSkip]: 0x807FFFC7 // u8
-[DisableForcedStorySkip]: 0x807FFFC6 // u8
-[SandstormAddress]: 0x807FFDFC // u32
-[SandstormActive]: 0x807FFDFB // u8
-[SandstormChange]: 0x807FFDFA // u8
-[SandstormChangeCountdown]: 0x807FFDF9 // u8
-[AutoPhaseStateOn]: 0x807FFDF8 // u8
-[GiantKoshaTimerAddress]: 0x807FFDF4 // u32
-[GiantKoshaTimerValue]: 0x807FFDF2 // u16
-[DisplayText]: 0x807FFDE0 // 0x10
-[FrameAdvancing]: 0x807FFDDA // u8
-[ArtificialPauseOn]: 0x807FFDD9 // u8
-[InfiniteHealthCheatOn]: 0x807FFDD8 // u8
-[LToLevitateOn]: 0x807FFDD7 // u8
-[SelectedFileStatus]: 0x807FFDD6 // u8
-[SelectedLMode]: 0x807FFDD5 // u8
-[SelectedIndependentCheat]: 0x807FFDD4 // u8
-[TimerStartMode]: 0x807FFDD3 // u8
-[TimerPauseMode]: 0x807FFDD2 // u8
-[TimerFinishMode]: 0x807FFDD1 // u8
-[SelectedMasterWarpLevel]: 0x807FFDD0 // u8
-[TimerReduction]: 0x807FFDCC // u32 - Pause Menu
-[TimerAfterReduction]: 0x807FFDC8 // u32
-[SelectedSubWarpLevel]: 0x807FFDC7 // u8
-[NewMenuOpen]: 0x807FFDC6 // u8
-[NewMenu_Position]: 0x807FFDC5 // u8
-[NewMenu_Screen]: 0x807FFDC4 // u8
-[NewMenu_ErrorStart]: 0x807FFDC0 // u32
-[FocusedSavestate]: 0x807FFDBF // u8
-[AutoMoonkickOn]: 0x807FFDBE // u8
-[EnemySpawnOff]: 0x807FFDBD // u8
-[WatchActor]: 0x807FFDB8 // u32
-[PhaseChecker_PreviousMagnitude]: 0x807FFDB7 // u8
-[WatchTextSpace]: 0x807FFD80 // 0x30 (47 characters)
-[CustomFlagByte]: 0x807FFF80 // u16
-[CustomFlagBit]: 0x807FFF82 // u8
-[CustomFlagType]: 0x807FFF83 // u8
-[CustomFlagSet]: 0x807FFF84 // u8
-[ISGStage]: 0x807FFF85 // u8
-[IsPauseMenuOpen]: 0x807FFF86 // u8
-[PreviousFrameButtons]: 0x807FFF88 // u16
-[UndoFlag_EncodedFlag]: 0x807FFF8A // u16
-[UndoFlag_OutputBool]: 0x807FFF8C // u8
-[UndoFlag_FlagType]: 0x807FFF8D // u8
-[UndoFlag_FlagStored]: 0x807FFF8E // u8
-[LastLoadStateAction]: 0x807FFF8F // u8
-
-// OSD Arrays
-[LevelsArray]: 0x807FFF80 // 0x38
-[SniperArray]: 0x807FF900 // 0x8
-[SlamArray]: 0x807FF908 // 0x4
-[Slot3Array]: 0x807FF90C // 0x20
-[SandstormText]: 0x807FF990 // 0x4
-[MovementStateText]: 0x807FF994 // 0x4
-[LoadingZoneTypes]: 0x807FF998 // 0x14
-[LoadingZoneMass]: 0x807FF9AC // 0x8
-
-[ActiveTools_Error]: 0x807FFF1C // 0x4
-[ActiveToolsMenu]: 0x807FFF20 // 0x60
-
-[MapsArray_Japes]: 0x807FF600 // 0x30
-[MapsArray_Aztec]: 0x807FF630 // 0x38
-[MapsArray_Factory]: 0x807FF668 // 0x3C
-[MapsArray_Galleon]: 0x807FF6A4 // 0x50
-[MapsArray_Fungi]: 0x807FF6F4 // 0x5C
-[MapsArray_Caves]: 0x807FF750 // 0x58
-[MapsArray_Castle]: 0x807FF7A8 // 0x5C
-[MapsArray_HelmRool]: 0x807FF804 // 0x20
-[MapsArray_Isles]: 0x807FF824 // 0x48
-[MapsArray_Master]: 0x807FF86C // 0x30
-
-[SpecialFlagsArray]: 0x807FF500
-
-// SAVEPOSITION STORAGE
-[SavedCameraPosition]: 0x807FFEA4 // 3x f32
-[SavedVerticalSpeedComponents]: 0x807FFEB0 // 2x f32 (Velocity then Accel)
-[SavedHVelocity]: 0x807FFEB4 // f32
-[SavedFloor]: 0x807FFEBC // f32
-[SavedStoredPosition1]: 0x807FFEC0 // 3x s16
-[SavedStoredPosition2]: 0x807FFEC6 // 3x s16
-[SavedRotations]: 0x807FFECC // u16 Rot Y (Facing), u16 Rot Z
-[SavedPositions]: 0x807FFED0 // 3x f32
-[SavedMovement]: 0x807FFEDC // u8
-[SavedMovementProgress]: 0x807FFEDD // u8
-[SavedPositionMap]: 0x807FFEDE // u8
-[SavedBoneArrayCounter]: 0x807FFEDF // u8 (Temp for loading)
-
-// Looper
-[LZLooper_On]: 0x807FFA00 // u8
-[LZLooper_DestinationMap]: 0x807FFA01 // u8
-[LZLooper_DestinationExit]: 0x807FFA02 // u8
-[LZLooper_CurrentMap]: 0x807FFA03 // u8
-[LZLooper_Mode]: 0x807FFA04 // u8 - 0 = From Position, 1 = From Exit
-[LZLooper_HasSavedData]: 0x807FFA05 // u8
-[LZLooper_IsRecording]: 0x807FFA06 // u8
-[LZLooper_TransitionIndicator]: 0x807FFA07 // u8 - 0 = Not expecting change, 1 = Expecting change
-
-// BUGS LIST:
-	// Loading a state from position with savestate 4 causes a crash
 
 .org 0x805FC164 // retroben's hook but up a few functions
 J Start
@@ -384,6 +65,14 @@ NOP
 
 .org 0x8073129C // Set Flag Hook
 J 	WriteLastUpdatedFlags
+NOP
+
+.org 0x805FC890 // Pause Menu Volume Hook
+J 	SetPauseMenuVolume
+NOP
+
+.org 0x80665354 // Movement speed hook
+J 	ControlSuperspeed
 NOP
 
 //Graphical Overlay Space Expansion
@@ -412,6 +101,7 @@ Start:
 	// Run the code we replaced
 	JAL     0x805FC2B0
 	NOP
+	SB 		r0, @ClosingMenu
 
 	SetOtherVariables:
 		.incasm "./../../Development/dk64-practice-rom/Source/Features/OtherVars.asm"
@@ -515,9 +205,13 @@ Start:
 		NOP
 		JAL 	Savestate_ShorthandCombo
 		NOP
+		JAL 	HandleTimer
+		NOP
+		JAL 	LTo_CancelCS
+		NOP
+		JAL 	LTo_ToggleTB
+		NOP
 
-		// JAL 	HandleTimer
-		// NOP
 		// JAL 	MenuHeader
 		// NOP
 		// LA 		s0, List_EveryFrameFunctions
@@ -603,38 +297,6 @@ LoadInAdditionalFile:
     LUI     a0, 0x200 // 0x2000000
     J       0x80000734
     NOP
-
-// Setup Takeoff Skip Flags
-TakeoffSkip:
-	SW 		ra, @ReturnAddress
-	// Set all relevant flags
-	LA 		a0, TakeoffSkipSetFlags
-	JAL 	SetAllFlags
-	NOP
-	// Clear key 3 & 8 turned in
-	LI      a0, 446 // Key 3 Turned In
-	LI      a1, 0
-	JAL     @SetFlag
-	LI      a2, 0
-	LI      a0, 451 // Key 8 Turned In
-	LI      a1, 0
-	JAL     @SetFlag
-	LI      a2, 0
-	// Clear Rainbow Coin FTT
-	LI      a0, 364
-	LI      a1, 0
-	JAL     @SetFlag
-	LI      a2, 0
-	// Clear K. Lumsy Patch
-	LI 		a0, 718
-	LI 		a1, 0
-	JAL 	@SetFlag
-	LI 		a2, 0
-	JAL 	CodedPlaySFX
-	LI 		a0, @KLumsy
-	LW 		ra, @ReturnAddress
-	JR 		ra
-	NOP
 
 ResetCLagCounter:
 	LH 		a1, @NewlyPressedControllerInput
@@ -882,12 +544,6 @@ CopyTextToWatch:
 
 ConvertCodePointerForWatchText:
 	// a1 = New Address
-	SRL 	a2, a1, 16
-	ANDI 	a0, a1, 0xFFFF
-	SLTIU 	a1, a0, 0x8000
-	ADD 	a2, a2, a1
-	SH 		a2, 0x8068E80A
-	SH 		a0, 0x8068E812
 	JR 		ra
 	NOP
 
@@ -904,8 +560,17 @@ InfiniteHealth:
 		JR 		ra
 		NOP
 
-.incasm "./../../Development/dk64-practice-rom/Source/Features/FileStates.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/File States/Container.asm"
 .align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/File States/General/101.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/File States/General/Max.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/File States/General/clean.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/File States/NLE/TakeoffSkip.asm"
+.align
+
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Levitate.asm"
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/TBVoid.asm"
@@ -914,8 +579,13 @@ InfiniteHealth:
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/CutsceneCancel.asm"
 .align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/EndMinigame.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/TagAllWarps.asm"
+.align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/UndoFlagWrite.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/GainControl.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Superspeed.asm"
 
 KongCode:
 	SW 		ra, @ReturnAddress2
@@ -979,6 +649,8 @@ RestockInventory:
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Skew.asm"
 .align
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/NoSpawn.asm"
+.align
+.incasm "./../../Development/dk64-practice-rom/Source/Features/PauseMenu.asm"
 .align
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/LZLooper.asm"
@@ -1557,6 +1229,19 @@ ActiveMenu_OpenDPadLRMenu:
 	JR 		ra
 	NOP
 
+ActiveMenu_OpenDPadDMenu:
+	SW 		ra, @ReturnAddress3
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+	LI 		a0, 62
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
+
 ActiveMenu_UpdateSavestateText:
 	LA 		a1, Menu_Savestate_SelectedSavestate
 	LBU 	a0, @FocusedSavestate
@@ -1716,6 +1401,30 @@ ActiveMenu_SetDPadLR:
 	JAL 	ActiveMenu_ClearMenu
 	NOP
 	LI 		a0, 35
+	SB 		a0, @NewMenu_Screen
+	SB 		r0, @NewMenu_Position
+	JAL 	ActiveMenu_SpawnMenu
+	NOP
+	LW 		ra, @ReturnAddress3
+	JR 		ra
+	NOP
+
+ActiveMenu_SetDPadD:
+	SW 		ra, @ReturnAddress3
+	LBU 	a0, @NewMenu_Position
+	ADDI 	a0, a0, -1
+	SB 		a0, @DisableTagAnywhere
+	// Array
+	LA 		a1, Menu_DPadDown_Mode_Array
+	SLL 	a2, a0, 2
+	ADD 	a1, a1, a2
+	LW 		a1, 0x0 (a1)
+	// Setting into
+	LA 		a2, Menu_DPadDown_Array
+	SW 		a1, 0x0 (a2)
+	JAL 	ActiveMenu_ClearMenu
+	NOP
+	LI 		a0, 62
 	SB 		a0, @NewMenu_Screen
 	SB 		r0, @NewMenu_Position
 	JAL 	ActiveMenu_SpawnMenu
@@ -2164,19 +1873,6 @@ BadSavestateMaps:
 	.byte 0x0 // Terminator
 
 .align
-TakeoffSkipSetFlags:
-	.half 444 // Key 1 Turned In
-	.half 445 // Key 2 Turned In
-	.half 447 // Key 4 Turned In
-	.half 448 // Key 5 Turned In
-	.half 449 // Key 6 Turned In
-	.half 450 // Key 7 Turned In
-	.half 443 // Japes Rock Destroyed
-	.half 138 // Key 3
-	.half 380 // Key 8
-	.half 0 // Terminator
-
-.align
 MoveFlags:
 	.half 386 // Dive Barrel
 	.half 387 // Vine Barrel
@@ -2190,109 +1886,11 @@ MoveFlags:
 	.half 385 // DK
 	.half 0 // Terminator
 
-PauseMenu_Slam:
-	.asciiz "SLAM LEVEL - 0" // Replace last char with 0/1/2/3
-
 .align
-PauseMenu_Sniper_Off:
-	.asciiz "SNIPER SCOPE - OFF"
-
-.align
-PauseMenu_Sniper_On:
-	.asciiz "SNIPER SCOPE - ON"
-
-.align
-PauseMenu_Takeoff:
-	.asciiz "SETUP TAKEOFF SKIP"
-
-// DISABLE POSITION BUTTONS
-.align
-PauseMenu_DisablePositionLoad_Off:
-	.asciiz "POSITION LOAD - ENABLED"
-PauseMenu_DisablePositionLoad_On:
-	.asciiz "POSITION LOAD - DISABLED"
-
-.align
-PauseMenu_DisablePositionLoad_Array:
-	.word PauseMenu_DisablePositionLoad_Off
-	.word PauseMenu_DisablePositionLoad_On
-
-// DISABLE TAG ANYWHERE BUTTONS
-.align
-PauseMenu_DisableTagAnywhere_Off:
-	.asciiz "TAG ANYWHERE - ENABLED"
-PauseMenu_DisableTagAnywhere_On:
-	.asciiz "TAG ANYWHERE - DISABLED"
-
-.align
-PauseMenu_DisableTagAnywhere_Array:
-	.word PauseMenu_DisableTagAnywhere_Off
-	.word PauseMenu_DisableTagAnywhere_On
-
-// DISABLE SOUND EFFECTS
-.align
-PauseMenu_Sound_On:
-	.asciiz "SOUND EFFECTS - ON"
-PauseMenu_Sound_Off:
-	.asciiz "SOUND EFFECTS - OFF"
-
-.align
-PauseMenu_Sound_Array:
-	.word PauseMenu_Sound_Off
-	.word PauseMenu_Sound_On
-
-// DISABLE MUSIC
-.align
-PauseMenu_Music_On:
-	.asciiz "MUSIC - ON"
-PauseMenu_Music_Off:
-	.asciiz "MUSIC - OFF"
-
-.align
-PauseMenu_Music_Array:
-	.word PauseMenu_Music_Off
-	.word PauseMenu_Music_On
-
-// TOGGLE CAMERA
-.align
-PauseMenu_CameraMode_Free:
-	.asciiz "CAMERA MODE - FREE"
-PauseMenu_CameraMode_Follow:
-	.asciiz "CAMERA MODE - FOLLOW"
-
-.align
-PauseMenu_CameraMode_Array:
-	.word PauseMenu_CameraMode_Free
-	.word PauseMenu_CameraMode_Follow
-
-// TOGGLE SCREEN
-.align
-PauseMenu_ScreenMode_Normal:
-	.asciiz "SCREEN RATIO - 4:3"
-PauseMenu_ScreenMode_Wide:
-	.asciiz "SCREEN RATIO - 16:9"
-
-.align
-PauseMenu_ScreenMode_Array:
-	.word PauseMenu_ScreenMode_Normal
-	.word PauseMenu_ScreenMode_Wide
-
-.align
-PauseMenu_Warp_Length:
-	.byte 9  //11
-	.byte 9  //11
-	.byte 9  //11
-	.byte 11 //13
-	.byte 11 //13
-	.byte 9  //11
-	.byte 9  //11
-	.byte 10 //12
-	.byte 8  //10
-	.byte 12 //14
-	.byte 15 //17
-	.byte 15 //17
-	.byte 14 //16
-	//.byte 17 //18 - Chunky phase, not needed
+ROM_Title:
+	.asciiz "DK64 PRACTICE ROM"
+ROM_Version:
+	.asciiz "VERSION 1.4"
 
 .align
 MovementStates:
@@ -2593,78 +2191,6 @@ MovementStates_length:
 	.byte 14 // "EXITING PORTAL"
 
 .align
-FileStatus_Custom_text:
-	.asciiz "FILE STATUS - CUSTOM"
-
-.align
-FileStatus_101_text:
-	.asciiz "FILE STATUS - 101%"
-	
-.align
-FileStatus_Max_text:
-	.asciiz "FILE STATUS - MAX%"
-
-.align
-FileStatus_array_text:
-	.word FileStatus_Custom_text
-	.word FileStatus_101_text
-	.word FileStatus_Max_text
-
-.align
-Timer_Start_OnL:
-	.asciiz "START - ON L"
-
-.align
-Timer_Start_OnMapLoad:
-	.asciiz "START - ON MAP LOAD"
-
-.align
-Timer_Start_OnInput:
-	.asciiz "START - ON INPUT"
-
-.align
-Timer_Start_Array:
-	.word Timer_Start_OnL
-	.word Timer_Start_OnMapLoad
-	.word Timer_Start_OnInput
-
-.align
-Timer_Pause_On:
-	.asciiz "PAUSE ON PAUSE - ON"
-
-.align
-Timer_Pause_Off:
-	.asciiz "PAUSE ON PAUSE - OFF"
-
-.align
-Timer_Pause_Array:
-	.word Timer_Pause_Off
-	.word Timer_Pause_On
-
-.align
-Timer_Finish_OnL:
-	.asciiz "FINISH - ON L"
-
-.align
-Timer_Finish_OnTransition:
-	.asciiz "FINISH - ON TRANSITION"
-
-.align
-Timer_Finish_OnCutscene:
-	.asciiz "FINISH - ON CUTSCENE"
-
-.align
-Timer_Finish_OnGBGrab:
-	.asciiz "FINISH - ON GB DANCE"
-
-.align
-Timer_Finish_Array:
-	.word Timer_Finish_OnL
-	.word Timer_Finish_OnTransition
-	.word Timer_Finish_OnCutscene
-	.word Timer_Finish_OnGBGrab
-
-.align
 FTT_Flags:
 	.half 355
 	.half 358
@@ -2715,780 +2241,7 @@ FTT_Flags:
 	.half 255
 	.half 277
 	.half 299
-	.half 378
-
-
-// WARPS
-// Japes
-.align
-Warps_Japes_W1Portal:
-	.asciiz "WARP 1 - PORTAL"
-
-.align
-Warps_Japes_W1Tunnel:
-	.asciiz "WARP 1 - TUNNEL"
-
-.align
-Warps_Japes_W2Lower:
-	.asciiz "WARP 2 - LOWER"
-
-.align
-Warps_Japes_W2Mountain:
-	.asciiz "WARP 2 - MOUNTAIN"
-
-.align
-Warps_Japes_W3BBlast:
-	.asciiz "WARP 3 - BBLAST"
-
-.align
-Warps_Japes_W3DiddyBP:
-	.asciiz "WARP 3 - DIDDY BP"
-
-.align
-Warps_Japes_W4Tunnel:
-	.asciiz "WARP 4 - TUNNEL"
-
-.align
-Warps_Japes_W4Cranky:
-	.asciiz "WARP 4 - CRANKY"
-
-.align
-Warps_Japes_W5Shell:
-	.asciiz "WARP 5 - SHELLHIVE"
-
-.align
-Warps_Japes_W5Mountain:
-	.asciiz "WARP 5 - MOUNTAIN"
-
-// Aztec
-.align
-Warps_Aztec_W1Portal:
-	.asciiz "WARP 1 - PORTAL"
-
-.align
-Warps_Aztec_W1Oasis:
-	.asciiz "WARP 1 - OASIS"
-
-.align
-Warps_Aztec_W2Oasis:
-	.asciiz "WARP 2 - OASIS"
-
-.align
-Warps_Aztec_W2Tunnel:
-	.asciiz "WARP 2 - TUNNEL"
-
-.align
-Warps_Aztec_W3Cranky:
-	.asciiz "WARP 3 - CRANKY"
-
-.align
-Warps_Aztec_W3Tunnel:
-	.asciiz "WARP 3 - TUNNEL"
-
-.align
-Warps_Aztec_W4Funky:
-	.asciiz "WARP 4 - FUNKY"
-
-.align
-Warps_Aztec_W4Tunnel:
-	.asciiz "WARP 4 - TUNNEL"
-
-.align
-Warps_Aztec_W5Totem:
-	.asciiz "WARP 5 - TOTEM"
-
-.align
-Warps_Aztec_W5BonusRoom:
-	.asciiz "WARP 5 - BONUS ROOM"
-
-// Llama Temple
-.align
-Warps_Llama_W1Entrance:
-	.asciiz "WARP 1 - ENTRANCE"
-
-.align
-Warps_Llama_W1Matching:
-	.asciiz "WARP 1 - MATCHING GAME"
-
-.align
-Warps_Llama_W2Entrance:
-	.asciiz "WARP 2 - ENTRANCE"
-
-.align
-Warps_Llama_W2LavaRoom:
-	.asciiz "WARP 2 - LAVA ROOM"
-
-// Factory
-.align
-Warps_Factory_W1Lobby:
-	.asciiz "WARP 1 - LOBBY"
-
-.align
-Warps_Factory_W1Storage:
-	.asciiz "WARP 1 - STORAGE ROOM"
-
-.align
-Warps_Factory_W2Lobby:
-	.asciiz "WARP 2 - LOBBY"
-
-.align
-Warps_Factory_W2RND:
-	.asciiz "WARP 2 - RND"
-
-.align
-Warps_Factory_W3Lobby:
-	.asciiz "WARP 3 - LOBBY"
-
-.align
-Warps_Factory_W3Snide:
-	.asciiz "WARP 3 - SNIDES"
-
-.align
-Warps_Factory_W4Low:
-	.asciiz "WARP 4 - LOW"
-
-.align
-Warps_Factory_W4High:
-	.asciiz "WARP 4 - HIGH"
-
-.align
-Warps_Factory_W5Arcade:
-	.asciiz "WARP 5 - ARCADE"
-
-.align
-Warps_Factory_W5Funky:
-	.asciiz "WARP 5 - FUNKY"
-
-// Galleon
-.align
-Warps_Galleon_W1Portal:
-	.asciiz "WARP 1 - PORTAL"
-
-.align
-Warps_Galleon_W1Lighthouse:
-	.asciiz "WARP 1 - LIGHTHOUSE"
-
-.align
-Warps_Galleon_W2Tunnel:
-	.asciiz "WARP 2 - TUNNEL"
-
-.align
-Warps_Galleon_W25DS:
-	.asciiz "WARP 2 - SHIPWRECK"
-
-.align
-Warps_Galleon_W3Cranky:
-	.asciiz "WARP 3 - CRANKY"
-
-.align
-Warps_Galleon_W3Snide:
-	.asciiz "WARP 3 - SNIDES"
-
-.align
-Warps_Galleon_W45DS:
-	.asciiz "WARP 4 - SHIPWRECK"
-
-.align
-Warps_Galleon_W4GoldTower:
-	.asciiz "WARP 4 - GOLD TOWER"
-
-.align
-Warps_Galleon_W5Lighthouse:
-	.asciiz "WARP 5 - LIGHTHOUSE"
-
-.align
-Warps_Galleon_W55DS:
-	.asciiz "WARP 5 - SHIPWRECK"
-
-// Fungi
-.align
-Warps_Fungi_W1Clock:
-	.asciiz "WARP 1 - CLOCK"
-
-.align
-Warps_Fungi_W1Mill:
-	.asciiz "WARP 1 - MILL"
-
-.align
-Warps_Fungi_W2Clock:
-	.asciiz "WARP 2 - CLOCK"
-
-.align
-Warps_Fungi_W2Funky:
-	.asciiz "WARP 2 - FUNKY"
-
-.align
-Warps_Fungi_W3Clock:
-	.asciiz "WARP 3 - CLOCK"
-
-.align
-Warps_Fungi_W3Mushroom:
-	.asciiz "WARP 3 - MUSHROOM"
-
-.align
-Warps_Fungi_W4Clock:
-	.asciiz "WARP 4 - CLOCK"
-
-.align
-Warps_Fungi_W4Tree:
-	.asciiz "WARP 4 - TREE"
-
-.align
-Warps_Fungi_W5Low:
-	.asciiz "WARP 5 - LOW"
-
-.align
-Warps_Fungi_W5High:
-	.asciiz "WARP 5 - HIGH"
-
-// Caves
-.align
-Warps_Caves_W1Near:
-	.asciiz "WARP 1 - NEAR"
-
-.align
-Warps_Caves_W15DI:
-	.asciiz "WARP 1 - IGLOOS"
-
-.align
-Warps_Caves_W2Near:
-	.asciiz "WARP 2 - NEAR"
-
-.align
-Warps_Caves_W2Cabins:
-	.asciiz "WARP 2 - CABINS"
-
-.align
-Warps_Caves_W35DI:
-	.asciiz "WARP 3 - IGLOOS"
-
-.align
-Warps_Caves_W3Cave:
-	.asciiz "WARP 3 - CAVERN"
-
-.align
-Warps_Caves_W4Pillar:
-	.asciiz "WARP 4 - PILLAR"
-
-.align
-Warps_Caves_W4Cave:
-	.asciiz "WARP 4 - CAVERN"
-
-.align
-Warps_Caves_W5Cabins:
-	.asciiz "WARP 5 - CABINS"
-
-.align
-Warps_Caves_W5LankyBP:
-	.asciiz "WARP 5 - LANKY BP"
-
-// Castle
-.align
-Warps_Castle_W1Near:
-	.asciiz "WARP 1 - NEAR"
-
-.align
-Warps_Castle_W1Far:
-	.asciiz "WARP 1 - FAR"
-
-.align
-Warps_Castle_W2Near:
-	.asciiz "WARP 2 - NEAR"
-
-.align
-Warps_Castle_W2Upper:
-	.asciiz "WARP 2 - UPPER"
-
-.align
-Warps_Castle_W3Near:
-	.asciiz "WARP 3 - NEAR"
-
-.align
-Warps_Castle_W3Cranky:
-	.asciiz "WARP 3 - CRANKY"
-
-.align
-Warps_Castle_W4Near:
-	.asciiz "WARP 4 - NEAR"
-
-.align
-Warps_Castle_W4Trash:
-	.asciiz "WARP 4 - TRASH CAN"
-
-.align
-Warps_Castle_W5Near:
-	.asciiz "WARP 5 - NEAR"
-
-.align
-Warps_Castle_W5WindTower:
-	.asciiz "WARP 5 - WIND TOWER"
-
-// Crypt
-.align
-Warps_Crypt_W1Near:
-	.asciiz "WARP 1 - NEAR"
-
-.align
-Warps_Crypt_W1DiddyCoffin:
-	.asciiz "WARP 1 - DIDDY COFFIN"
-
-.align
-Warps_Crypt_W2Near:
-	.asciiz "WARP 2 - NEAR"
-
-.align
-Warps_Crypt_W2Minecart:
-	.asciiz "WARP 2 - MINECART"
-
-.align
-Warps_Crypt_W3Near:
-	.asciiz "WARP 3 - NEAR"
-
-.align
-Warps_Crypt_W3ChunkyCoffin:
-	.asciiz "WARP 3 - CHUNKY COFFINS"
-
-// Isles
-.align
-Warps_Isles_W1Ring:
-	.asciiz "WARP 1 - RING"
-
-.align
-Warps_Isles_W1KLumsy:
-	.asciiz "WARP 1 - K. LUMSY"
-
-.align
-Warps_Isles_W2Ring:
-	.asciiz "WARP 2 - RING"
-
-.align
-Warps_Isles_W2Aztec:
-	.asciiz "WARP 2 - AZTEC LOBBY"
-
-.align
-Warps_Isles_W3Ring:
-	.asciiz "WARP 3 - RING"
-
-.align
-Warps_Isles_W3KRool:
-	.asciiz "WARP 3 - K. ROOL"
-
-.align
-Warps_Isles_W4Ring:
-	.asciiz "WARP 4 - RING"
-
-.align
-Warps_Isles_W4Factory:
-	.asciiz "WARP 4 - FACTORY LOBBY"
-
-.align
-Warps_Isles_W5Ring:
-	.asciiz "WARP 5 - RING"
-
-.align
-Warps_Isles_W5BFI:
-	.asciiz "WARP 5 - BFI"
-
-// Helm
-.align
-Warps_Helm_W1Entrance:
-	.asciiz "WARP 1 - ENTRANCE"
-
-.align
-Warps_Helm_W1Navigation:
-	.asciiz "WARP 1 - NAVIGATION ROOM"
-
-// Helm
-.align
-Warps_HelmLobby_W1Near:
-	.asciiz "WARP 1 - NEAR"
-
-.align
-Warps_HelmLobby_W1Far:
-	.asciiz "WARP 1 - FAR"
-
-// Text Arrays & Flag Arrays
-.align
-Warps_Japes_Array:
-	.word Warps_Japes_W1Portal
-	.word Warps_Japes_W1Tunnel
-	.word Warps_Japes_W2Lower
-	.word Warps_Japes_W2Mountain
-	.word Warps_Japes_W3BBlast
-	.word Warps_Japes_W3DiddyBP
-	.word Warps_Japes_W4Tunnel
-	.word Warps_Japes_W4Cranky
-	.word Warps_Japes_W5Shell
-	.word Warps_Japes_W5Mountain
-
-.align
-Warps_Japes_Flags:
-	.half 0x20
-	.half 0x21
-	.half 0x23
-	.half 0x22
-	.half 0x25
-	.half 0x24
-	.half 0x28
-	.half 0x29
-	.half 0x26
-	.half 0x27
-
-.align
-Warps_Aztec_Array:
-	.word Warps_Aztec_W1Portal
-	.word Warps_Aztec_W1Oasis
-	.word Warps_Aztec_W2Oasis
-	.word Warps_Aztec_W2Tunnel
-	.word Warps_Aztec_W3Cranky
-	.word Warps_Aztec_W3Tunnel
-	.word Warps_Aztec_W4Tunnel
-	.word Warps_Aztec_W4Funky
-	.word Warps_Aztec_W5Totem
-	.word Warps_Aztec_W5BonusRoom
-
-.align
-Warps_Aztec_Flags:
-	.half 0x4F
-	.half 0x50
-	.half 0x51
-	.half 0x52
-	.half 0x53
-	.half 0x54
-	.half 0x55
-	.half 0x56
-	.half 0x57
-	.half 0x3E
-
-.align
-Warps_Llama_Array:
-	.word Warps_Llama_W1Entrance
-	.word Warps_Llama_W1Matching
-	.word Warps_Llama_W2Entrance
-	.word Warps_Llama_W2LavaRoom
-
-.align
-Warps_Llama_Flags:
-	.half 0x59
-	.half 0x58
-	.half 0x5B
-	.half 0x5A
-
-.align
-Warps_Factory_Array:
-	.word Warps_Factory_W1Lobby
-	.word Warps_Factory_W1Storage
-	.word Warps_Factory_W2Lobby
-	.word Warps_Factory_W2RND
-	.word Warps_Factory_W3Lobby
-	.word Warps_Factory_W3Snide
-	.word Warps_Factory_W4Low
-	.word Warps_Factory_W4High
-	.word Warps_Factory_W5Arcade
-	.word Warps_Factory_W5Funky
-
-.align
-Warps_Factory_Flags:
-	.half 0x8D
-	.half 0x8E
-	.half 0x8F
-	.half 0x90
-	.half 0x91
-	.half 0x92
-	.half 0x94
-	.half 0x93
-	.half 0x96
-	.half 0x95
-
-.align
-Warps_Galleon_Array:
-	.word Warps_Galleon_W1Portal
-	.word Warps_Galleon_W1Lighthouse
-	.word Warps_Galleon_W2Tunnel
-	.word Warps_Galleon_W25DS
-	.word Warps_Galleon_W3Cranky
-	.word Warps_Galleon_W3Snide
-	.word Warps_Galleon_W45DS
-	.word Warps_Galleon_W4GoldTower
-	.word Warps_Galleon_W55DS
-	.word Warps_Galleon_W5Lighthouse
-
-.align
-Warps_Galleon_Flags:
-	.half 0xB2
-	.half 0xB1
-	.half 0xAC
-	.half 0xAB
-	.half 0xAE
-	.half 0xAD
- 	.half 0xAF
- 	.half 0xA3
-	.half 0xA9
-	.half 0xAA
-
-.align
-Warps_Fungi_Array:
-	.word Warps_Fungi_W1Clock
-	.word Warps_Fungi_W1Mill
-	.word Warps_Fungi_W2Clock
-	.word Warps_Fungi_W2Funky
-	.word Warps_Fungi_W3Clock
-	.word Warps_Fungi_W3Mushroom
-	.word Warps_Fungi_W4Clock
-	.word Warps_Fungi_W4Tree
-	.word Warps_Fungi_W5Low
-	.word Warps_Fungi_W5High
-
-.align
-Warps_Fungi_Flags:
-	.half 0xEE
-	.half 0xED
-	.half 0xEF
-	.half 0xF0
-	.half 0xF1
-	.half 0xF2
-	.half 0xF3
-	.half 0xF4
-	.half 0xF5
-	.half 0xF6
-
-.align
-Warps_Caves_Array:
-	.word Warps_Caves_W1Near
-	.word Warps_Caves_W15DI
-	.word Warps_Caves_W2Near
-	.word Warps_Caves_W2Cabins
-	.word Warps_Caves_W35DI
-	.word Warps_Caves_W3Cave
-	.word Warps_Caves_W4Pillar
-	.word Warps_Caves_W4Cave
-	.word Warps_Caves_W5Cabins
-	.word Warps_Caves_W5LankyBP
-
-.align
-Warps_Caves_Flags:
-	.half 0x11C
-	.half 0x11B
-	.half 0x11D
-	.half 0x11E
-	.half 0x123
-	.half 0x127
-	.half 0x120
-	.half 0x11F
-	.half 0x121
-	.half 0x122
-
-.align
-Warps_Castle_Array:
-	.word Warps_Castle_W1Near
-	.word Warps_Castle_W1Far
-	.word Warps_Castle_W2Near
-	.word Warps_Castle_W2Upper
-	.word Warps_Castle_W3Near
-	.word Warps_Castle_W3Cranky
-	.word Warps_Castle_W4Near
-	.word Warps_Castle_W4Trash
-	.word Warps_Castle_W5Near
-	.word Warps_Castle_W5WindTower
-
-.align
-Warps_Castle_Flags:
-	.half 0x147
-	.half 0x148
-	.half 0x149
-	.half 0x14A
-	.half 0x14B
-	.half 0x14C
-	.half 0x14D
-	.half 0x14E
-	.half 0x14F
-	.half 0x150
-
-.align
-Warps_Crypt_Array:
-	.word Warps_Crypt_W1Near
-	.word Warps_Crypt_W1DiddyCoffin
-	.word Warps_Crypt_W2Near
-	.word Warps_Crypt_W2Minecart
-	.word Warps_Crypt_W3Near
-	.word Warps_Crypt_W3ChunkyCoffin
-
-.align
-Warps_Crypt_Flags:
-	.half 0x151
-	.half 0x152
-	.half 0x153
-	.half 0x154
-	.half 0x155
-	.half 0x156
-
-.align
-Warps_Helm_Array:
-	.word Warps_Helm_W1Entrance
-	.word Warps_Helm_W1Navigation
-
-.align
-Warps_Helm_Flags:
-	.half 0x305
-	.half 0x306
-
-.align
-Warps_Isles_Array:
-	.word Warps_Isles_W1Ring
-	.word Warps_Isles_W1KLumsy
-	.word Warps_Isles_W2Ring
-	.word Warps_Isles_W2Aztec
-	.word Warps_Isles_W3Ring
-	.word Warps_Isles_W3KRool
-	.word Warps_Isles_W4Ring
-	.word Warps_Isles_W4Factory
-	.word Warps_Isles_W5Ring
-	.word Warps_Isles_W5BFI
-
-.align
-Warps_Isles_Flags:
-	.half 0x1B1
-	.half 0x1B2
-	.half 0x1B3
-	.half 0x1B4
-	.half 0x1B5
-	.half 0x1B6
-	.half 0x1B7
-	.half 0x1B8
-	.half 0x1BA
-	.half 0x1B9
-
-.align
-Warps_HelmLobby_Array:
-	.word Warps_HelmLobby_W1Near
-	.word Warps_HelmLobby_W1Far
-
-.align
-Warps_HelmLobby_Flags:
-	.half 0x1A1
-	.half 0x1A2
-
-// Master
-.align
-Warps_Master_Japes:
-	.asciiz "JUNGLE JAPES"
-
-.align
-Warps_Master_Aztec:
-	.asciiz "ANGRY AZTEC"
-
-.align
-Warps_Master_Llama:
-	.asciiz "LLAMA TEMPLE"
-
-.align
-Warps_Master_Factory:
-	.asciiz "FRANTIC FACTORY"
-
-.align
-Warps_Master_Galleon:
-	.asciiz "GLOOMY GALLEON"
-
-.align
-Warps_Master_Fungi:
-	.asciiz "FUNGI FOREST"
-
-.align
-Warps_Master_Caves:
-	.asciiz "CRYSTAL CAVES"
-
-.align
-Warps_Master_Castle:
-	.asciiz "CREEPY CASTLE"
-
-.align
-Warps_Master_Crypt:
-	.asciiz "CASTLE CRYPT"
-
-.align
-Warps_Master_Helm:
-	.asciiz "HIDEOUT HELM"
-
-.align
-Warps_Master_Isles:
-	.asciiz "DK ISLES"
-
-.align
-Warps_Master_HelmLobby:
-	.asciiz "HELM LOBBY"
-
-.align
-Warps_Master_Array:
-	.word Warps_Master_Japes
-	.word Warps_Master_Aztec
-	.word Warps_Master_Llama
-	.word Warps_Master_Factory
-	.word Warps_Master_Galleon
-	.word Warps_Master_Fungi
-	.word Warps_Master_Caves
-	.word Warps_Master_Castle
-	.word Warps_Master_Crypt
-	.word Warps_Master_Helm
-	.word Warps_Master_Isles
-	.word Warps_Master_HelmLobby
-
-.align
-Warps_Text_Array:
-	.word Warps_Japes_Array
-	.word Warps_Aztec_Array
-	.word Warps_Llama_Array
-	.word Warps_Factory_Array
-	.word Warps_Galleon_Array
-	.word Warps_Fungi_Array
-	.word Warps_Caves_Array
-	.word Warps_Castle_Array
-	.word Warps_Crypt_Array
-	.word Warps_Helm_Array
-	.word Warps_Isles_Array
-	.word Warps_HelmLobby_Array
-
-.align
-Warps_Flag_Array:
-	.word Warps_Japes_Flags
-	.word Warps_Aztec_Flags
-	.word Warps_Llama_Flags
-	.word Warps_Factory_Flags
-	.word Warps_Galleon_Flags
-	.word Warps_Fungi_Flags
-	.word Warps_Caves_Flags
-	.word Warps_Castle_Flags
-	.word Warps_Crypt_Flags
-	.word Warps_Helm_Flags
-	.word Warps_Isles_Flags
-	.word Warps_HelmLobby_Flags
-
-.align
-Warps_Master_Length:
-	.byte 10 // Japes
-	.byte 10 // Aztec
-	.byte 4 // Llama Temple
-	.byte 10 // Factory
-	.byte 10 // Galleon
-	.byte 10 // Fungi
-	.byte 10 // Caves
-	.byte 10 // Castle
-	.byte 6 // Crypt
-	.byte 2 // Helm
-	.byte 10 // Isles
-	.byte 2 // Helm Lobby
-
-.align
-Warps_FlagControl_Set:
-	.asciiz "SET"
-
-.align
-Warps_FlagControl_Unset:
-	.asciiz "CLEAR"
-
-.align
-Warps_FlagControl_Array:
-	.word Warps_FlagControl_Set
-	.word Warps_FlagControl_Unset
+	.half 378	
 
 .align
 Transition_Flags:
@@ -3513,12 +2266,12 @@ Menu_Savestates:
 	.asciiz "SAVE STATES"
 Menu_Display:
 	.asciiz "WATCHES"
+Menu_TimerSettings:
+	.asciiz "TIMER SETTINGS"
 Menu_FileStates:
 	.asciiz "FILE STATES"
 Menu_Cheats:
 	.asciiz "CHEATS"
-Menu_Bananaports:
-	.asciiz "BANANAPORTS"
 Menu_Settings:
 	.asciiz "SETTINGS"
 
@@ -3528,9 +2281,9 @@ Menu_Main_Array:
 	.word Menu_SpecialFlags
 	.word Menu_Savestates
 	.word Menu_Display
+	.word Menu_TimerSettings
 	.word Menu_FileStates
 	.word Menu_Cheats
-	.word Menu_Bananaports
 	.word Menu_Settings
 	.word Menu_Return
 
@@ -3540,9 +2293,9 @@ Menu_Main_Functions:
 	.word ActiveMenu_OpenFlagMenu
 	.word ActiveMenu_OpenSavestateMenu
 	.word ActiveMenu_OpenWatchMenu
-	.word 0
+	.word ActiveMenu_OpenTimerSettingsMenu
+	.word ActiveMenu_OpenFileStatesMenu
 	.word ActiveMenu_OpenCheatsMenu
-	.word 0
 	.word ActiveMenu_OpenSettingsMenu
 	.word ActiveMenu_PreviousScreen
 
@@ -3615,6 +2368,9 @@ Menu_Screens:
 	.word Menu_MapCastleRooms_Struct
 	.word Menu_CheatsToggles_Struct // 58
 	.word Menu_CheatsSnag_Struct
+	.word Menu_TimerSettings_Struct // 60
+	.word Menu_FileStates_Struct
+	.word Menu_DPadDown_Struct // 62
 
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Active Menu/Warps/Container.asm"
 .align
@@ -3654,7 +2410,6 @@ Menu_Savestate_Array:
 	.word Menu_Savestate_Save
 	.word Menu_Savestate_LoadPosition
 	.word Menu_Savestate_LoadExit
-	.word Menu_Savestate_LZLooper
 	.word Menu_Return
 
 .align
@@ -3664,14 +2419,13 @@ Menu_Savestate_Functions:
 	.word ActiveMenu_PerformSavestateAction_Save
 	.word ActiveMenu_PerformSavestateAction_LoadFromPosition
 	.word ActiveMenu_PerformSavestateAction_LoadFromExit
-	.word ActiveMenu_OpenLooperMenu
 	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Savestate_Struct:
 	.word Menu_Savestate_Array // Text Array
 	.word Menu_Savestate_Functions // Function Array
-	.byte 7 // Array Items
+	.byte 6 // Array Items
 	.byte 0 // Parent Screen
 
 .align
@@ -3795,6 +2549,22 @@ Menu_Cheats_Toggles:
 	.asciiz "TOGGLES"
 Menu_Cheats_SnagCheats:
 	.asciiz "SPAWN SNAG CHEATS"
+Menu_Cheats_ForceEndMinigame:
+	.asciiz "FORCE END MINIGAME"
+Menu_Cheats_Superspeed_Off:
+	.asciiz "SUPERSPEED: OFF"
+Menu_Cheats_Superspeed_On:
+	.asciiz "SUPERSPEED: ON"
+Menu_Cheats_LToCancelCS_Off:
+	.asciiz "L TO CANCEL CUTSCENE: OFF"
+Menu_Cheats_LToCancelCS_On:
+	.asciiz "L TO CANCEL CUTSCENE: ON"
+Menu_Cheats_LToToggleTB_Off:
+	.asciiz "L TO TOGGLE TB VOID: OFF"
+Menu_Cheats_LToToggleTB_On:
+	.asciiz "L TO TOGGLE TB VOID: ON"
+Menu_Cheats_TagWarps:
+	.asciiz "TAG ALL WARPS"
 
 .align
 Menu_Cheats_Array:
@@ -3808,6 +2578,8 @@ Menu_Cheats_Array:
 	.word Menu_Cheats_Toggles
 	.word Menu_Cheats_UndoFlag
 	.word Menu_Cheats_GainControl
+	.word Menu_Cheats_ForceEndMinigame
+	.word Menu_Cheats_TagWarps
 	.word Menu_Return
 
 .align
@@ -3822,13 +2594,15 @@ Menu_Cheats_Functions:
 	.word ActiveMenu_OpenCheatsTogglesMenu
 	.word UndoLastFlagWrite
 	.word GainControl
+	.word EndMinigame
+	.word TagAllWarpsCheat
 	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Cheats_Struct:
 	.word Menu_Cheats_Array // Text Array
 	.word Menu_Cheats_Functions // Function Array
-	.byte 11 // Array Items
+	.byte 13 // Array Items
 	.byte 0 // Parent Screen
 
 .align
@@ -3840,6 +2614,9 @@ Menu_CheatsToggles_Array:
 	.word Menu_Cheats_InfHealthOff
 	.word Menu_Cheats_EnemySpawnOn
 	.word Menu_Cheats_TBVoid
+	.word Menu_Cheats_Superspeed_Off
+	.word Menu_Cheats_LToCancelCS_Off
+	.word Menu_Cheats_LToToggleTB_Off
 	.word Menu_Return
 
 .align
@@ -3851,13 +2628,16 @@ Menu_CheatsToggles_Functions:
 	.word ActiveMenu_ToggleInfHealth
 	.word ActiveMenu_ToggleEnemySpawn
 	.word ActiveMenu_ToggleTBVoid
+	.word ToggleSuperspeed
+	.word ToggleCSCancelLMode
+	.word ToggleTBVoidLMode
 	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_CheatsToggles_Struct:
 	.word Menu_CheatsToggles_Array // Text Array
 	.word Menu_CheatsToggles_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 11 // Array Items
 	.byte 30 // Parent Screen
 
 .align
@@ -4123,10 +2903,6 @@ Menu_Settings_HorizontalDPad:
 	.asciiz "D-PAD LEFT AND RIGHT FUNCTION"
 Menu_Settings_DDown:
 	.asciiz "D-DOWN FUNCTION"
-Menu_Settings_Sound:
-	.asciiz "SOUND"
-Menu_Settings_Music:
-	.asciiz "MUSIC"
 Menu_Settings_ScreenRatio:
 	.asciiz "SCREEN RATIO"
 Menu_Settings_Camera:
@@ -4138,8 +2914,6 @@ Menu_Settings_QOLChanges:
 Menu_Settings_Array:
 	.word Menu_Settings_HorizontalDPad
 	.word Menu_Settings_DDown
-	.word Menu_Settings_Sound
-	.word Menu_Settings_Music
 	.word Menu_Settings_ScreenRatio
 	.word Menu_Settings_Camera
 	.word Menu_Settings_QOLChanges
@@ -4148,9 +2922,7 @@ Menu_Settings_Array:
 .align
 Menu_Settings_Functions:
 	.word ActiveMenu_OpenDPadLRMenu
-	.word 0
-	.word 0
-	.word 0
+	.word ActiveMenu_OpenDPadDMenu
 	.word ActiveMenu_OpenScreenRatioMenu
 	.word ActiveMenu_OpenChimpyCamMenu
 	.word ActiveMenu_OpenQOLMenu
@@ -4160,7 +2932,7 @@ Menu_Settings_Functions:
 Menu_Settings_Struct:
 	.word Menu_Settings_Array // Text Array
 	.word Menu_Settings_Functions // Function Array
-	.byte 8 // Array Items
+	.byte 6 // Array Items
 	.byte 0 // Parent Screen
 
 .align
@@ -4204,6 +2976,37 @@ Menu_HorizontalDPad_Struct:
 	.word Menu_HorizontalDPad_Array // Text Array
 	.word Menu_HorizontalDPad_Functions // Function Array
 	.byte 5 // Array Items
+	.byte 34 // Parent Screen
+
+.align
+Menu_DPadDown_Mode_TagAnywhere:
+	.asciiz "ACTION: TAG ANYWHERE"
+Menu_DPadDown_Mode_Nothing:
+	.asciiz "ACTION: NOTHING"
+Menu_DPadDown_TagAnywhere:
+	.asciiz "TAG ANYWHERE"
+Menu_DPadDown_Nothing:
+	.asciiz "NOTHING"
+
+.align
+Menu_DPadDown_Array:
+	.word Menu_DPadDown_Mode_TagAnywhere
+	.word Menu_DPadDown_TagAnywhere
+	.word Menu_DPadDown_Nothing
+	.word Menu_Return
+Menu_DPadDown_Mode_Array:
+	.word Menu_DPadDown_Mode_TagAnywhere
+	.word Menu_DPadDown_Mode_Nothing
+Menu_DPadDown_Functions:
+	.word 0
+	.word ActiveMenu_SetDPadD
+	.word ActiveMenu_SetDPadD
+	.word ActiveMenu_PreviousScreen
+.align
+Menu_DPadDown_Struct:
+	.word Menu_DPadDown_Array
+	.word Menu_DPadDown_Functions
+	.byte 4 // Array Items
 	.byte 34 // Parent Screen
 
 .align
