@@ -1,0 +1,235 @@
+.viewmap.backdrop {
+	height: 100%;
+	width: -webkit-fill-available;
+	background-color: black;
+}
+
+.viewmap.map {
+	background-repeat: no-repeat;
+	height: 100%;
+	width: -webkit-fill-available;
+	margin-left: auto;
+	margin-right:auto;
+	background-position: center center;
+	background-size: contain;
+}
+
+.viewmap.viewbox {
+	position: relative;
+	height: 100%;
+}
+
+.viewmap.star_location, .viewmap.center_location, .viewmap.rod_location {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border: 2px solid black;
+	border-radius: 20px;
+	text-align: center;
+	color: rgba(0,0,0,0);
+	cursor: default;
+	z-index: 20;
+	font-size: 0.9em;
+}
+
+.viewmap.rod_location {
+	background-color: powderblue;
+	font-size: 0.7em;
+	border-color: teal;
+}
+
+.viewmap.rod_location.hidden {
+	display: none;
+}
+
+.viewmap.line {
+	position: absolute;
+	background-color: white;
+	width: 100%;
+	height: 3px;
+	border-radius: 2px;
+	border: 1px solid black;
+}
+
+.viewmap.line .viewmap.line_head {
+	max-width: 10px;
+	width: 33%;
+	height: 3px;
+	background-color: white;
+	right: 10px;
+	position: absolute;
+	border-radius: 2px;
+}
+
+.viewmap.line .viewmap.line_head.upper {
+	transform: rotate(-20deg);
+	margin-top: 3px;
+	z-index: 9;
+	border: 1px solid black;
+}
+
+.viewmap.line_head.lower {
+	transform: rotate(20deg);
+	margin-top: -5px;
+	z-index: 9;
+	border: 1px solid black;
+}
+
+.viewmap.line_head.center {
+	z-index: 10;
+	border-width: 0px;
+	max-height: 1px;
+}
+
+.viewmap.star_location.coloured[phase="1"] {
+	background-color: burlywood;
+}
+
+.viewmap.star_location.coloured[phase="2"] {
+	background-color: indianred;
+}
+
+.viewmap.star_location.coloured[phase="3"] {
+	background-color: cadetblue;
+}
+
+.viewmap.star_location.coloured[phase="4"] {
+	background-color: mediumpurple;
+}
+
+.viewmap.star_location.coloured[phase="5"] {
+	background-color: mediumaquamarine;
+}
+
+.viewmap.line.coloured[phase_in="1"], .viewmap.line.coloured[phase_in="1"] .viewmap.line_head {
+	background-color: darkgoldenrod;
+}
+
+.viewmap.line.coloured[phase_in="2"], .viewmap.line.coloured[phase_in="2"] .viewmap.line_head {
+	background-color: firebrick;
+}
+
+.viewmap.line.coloured[phase_in="3"], .viewmap.line.coloured[phase_in="3"] .viewmap.line_head {
+	background-color: dodgerblue;
+}
+
+.viewmap.line.coloured[phase_in="4"], .viewmap.line.coloured[phase_in="4"] .viewmap.line_head {
+	background-color: indigo;
+}
+
+.viewmap.line.coloured[phase_in="5"], .viewmap.line.coloured[phase_in="5"] .viewmap.line_head {
+	background-color: green;
+}
+
+.viewmap.line.hidden {
+	display: none;
+}
+
+.viewmap.center_location.hidden {
+	display: none;
+}
+
+.viewmap.infobox {
+	position:absolute;
+	transform: translate(-40%, -102%);
+	border-radius: 5px;
+	z-index:40;
+
+	-webkit-animation: fadein 0.5s;
+	-moz-animation: fadein 0.5s;
+	-ms-animation: fadein 0.5s;
+	-o-animation: fadein 0.5s;
+	animation: fadein 0.5s;
+}
+
+@-webkit-keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-moz-keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-ms-keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.viewmap.infobox.fading {
+	-webkit-animation: fadeout 0.5s;
+	-moz-animation: fadeout 0.5s;
+	-ms-animation: fadeout 0.5s;
+	-o-animation: fadeout 0.5s;
+	animation: fadeout 0.5s;
+}
+
+@-webkit-keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-moz-keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-ms-keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+.viewmap.infobox .title {
+	background-color:#333;
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 3px solid darkgoldenrod;
+}
+
+.viewmap.infobox .info {
+	background-color: white;
+}
+
+.viewmap.infobox .info table {
+	border-collapse: collapse;
+	font-size: 0.9em;
+	min-width: 200px;
+}
+
+
+.viewmap.infobox .info table thead {
+	background-color: darkslategray;
+	color: white;
+	text-align: left;
+}
+
+.viewmap.infobox .info table thead tr th {
+	padding: 5px;
+}
+
+.viewmap.infobox .info table tr td {
+	padding: 5px;
+	border-bottom: 3px solid #ddd;
+}
+
+.viewmap.infobox .info table tr:nth-of-type(even) {
+	background-color: #e5e5e5;
+}
+
+.viewmap.infobox .info table tr:hover {
+	background-color: #ccc;
+}

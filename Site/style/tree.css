@@ -1,0 +1,44 @@
+.tree, .tree ul {
+	list-style-type: none;
+	color: white;
+}
+
+.tree {
+	margin: 0;
+	padding: 10px;
+}
+
+a.hovergold {
+	transition: 0.5s;
+}
+a.hovergold:hover {
+	color: darkgoldenrod;
+}
+
+.caret {
+	cursor: pointer;
+	user-select: none;
+}
+
+.caret::before {
+	content: "\25B6";
+	color: darkgoldenrod;
+	display: inline-block;
+	margin-right: 6px;
+}
+
+.caret-down::before {
+	transform: rotate(90deg);
+}
+
+.nested {
+	display: none;
+}
+
+.active {
+	display: block;
+}
+
+.tree li {
+	padding-top: 1px;
+}

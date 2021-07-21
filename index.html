@@ -1,8 +1,687 @@
 <html>
 	<head>
-		
+		<title>Donkey Kong 64 Practice ROM</title>
+		<link rel="stylesheet" href="Site/style/nav.css">
+		<link rel="stylesheet" href="Site/style/main.css">
+		<link rel="stylesheet" href="Site/style/home.css">
+		<link rel="stylesheet" href="Site/style/maps.css">
+		<link rel="stylesheet" href="Site/style/tree.css">
+		<link rel="stylesheet" href="Site/style/mj.css">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+		<meta name="description" content="" />
+		<style>
+			.homebox {
+				transition: 0.5s ease-in-out;
+				cursor: default;
+			}
+			.homebox.clickable:hover {
+				border-color:red;
+			}
+			.changelog.container {
+				color: white;
+				padding-top: 10px;
+				padding-left: 20px;
+			}
+			.changelog.version {
+				font-weight: bold;
+			}
+			.changelog.warning {
+				padding-top: 5px;
+				padding-bottom: 5px;
+				color: red;
+			}
+			.changelog.asmHeader {
+				font-weight: bold;
+				margin-top: 10px;
+			}
+			.changelog.docbox {
+				padding: 10px;
+			}
+			.buttoncontainer {
+				padding: 10px;
+				flex: 33%;
+			}
+			.ytcontainer {
+				margin-left: auto;
+				margin-right: auto;
+				width: fit-content;
+				width: -moz-fit-content;
+				padding: 15px;
+			}
+			.sidebutton_container {
+				padding: 5px;
+			}
+			.asm.pad {
+				height: 15px;
+			}
+			.asm.label {
+				color: darkcyan;
+			}
+			.asm.comment {
+				color: gainsboro;
+			}
+			.asm.func {
+				color: firebrick;
+			}
+			.asm.param {
+				color: orange;
+			}
+			.asm.hex {
+				color: mediumaquamarine;
+			}
+			.asm.pointer {
+				color: cornflowerblue;
+			}
+			.asm.array {
+				color: salmon;
+			}
+			.asm.first {
+				padding-left: 50px;
+			}
+			h2, h3 {
+				margin-top: 5px;
+			}
+			.banner {
+				background-image: url("./Site/assets/banner.png");
+				background-repeat: no-repeat;
+				background-size: 100%;
+				background-position: center center;
+				height: 60%;
+				width: 100%;
+				position: absolute;
+				left:0;
+				top:60px;
+			}
+			.banner ul {
+				list-style-type: none;
+				padding:0;
+				height:100%;
+			}
+			.banner ul li {
+				height:100%;
+			}
+			.banner ul li img.logo {
+				max-height:70%;
+				max-width:70%;
+				top:45%;
+				transform:translateY(-50%);
+				position:absolute;
+			}
+			.bottom {
+				background-color: rgba(0,0,0,0.95);
+				border-top: 2px solid darkgoldenrod;
+				height: 40%;
+				width: 100%;
+				position: absolute;
+				left:0;
+				bottom:0;
+				color: white;
+			}
+			.bottom .partition {
+				padding: 10px;
+				text-align: center;
+				margin-top: 4%;
+				margin-bottom: 4%;
+				position: relative;
+			}
+			.bottom .partition.bordered {
+				border-right: 1px solid white;
+			}
+			.bottom .partition .txtbody {
+				padding-top: 10px;
+				padding-bottom: 20px;
+				font-size: 130%;
+				max-width: 70%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.bottom .partition button {
+				width: fit-content;
+				width: -moz-fit-content;
+				border-radius: 100px;
+				position: absolute;
+				bottom: 0;
+				left:50%;
+				transform: translateX(-50%);
+			}
+			.parallax {
+				min-height: 92%;
+				background-attachment: fixed;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			.parallax.parallax_1 {
+				background-image: url("./Site/assets/banner_2.png");
+			}
+			.parallax.parallax_2 {
+				background-image: url("./Site/assets/banner_1.png");
+			}
+			@media only screen and (max-device-width: 1366px) {
+				.parallax {
+					background-attachment: scroll;
+				}
+			}
+			.bar {
+				height: 400px;
+				background-color: black;
+				border-top: 2px solid white;
+				border-bottom: 2px solid white;
+				padding-top: 10px;
+			}
+			.bar.copyright {
+				height: 80px;
+				border-bottom: none;
+				color: white;
+			}
+			body {
+				margin: 0px;
+			}
+			.split_section {
+				padding: 20px;
+			}
+			.split_section .info_box {
+				background-color: dimgrey;
+				padding: 10px;
+				width: 300px;
+				max-width: 85%;
+				margin-left: auto;
+				margin-right: auto;
+				border-radius: 20px;
+				color: white;
+				text-align: center;
+			}
+			.split_section .info_box .header_img {
+				width: 15%;
+				margin-bottom: 10px;
+			}
+			.footer_img {
+				height: 40px;
+			}
+			.split_section .info_box .info_head {
+				font-size: 24px;
+				font-family: "Trebuchet MS", sans-serif;
+				padding-bottom: 10px;
+				margin-bottom: 20px;
+				border-bottom: 2px solid darkgoldenrod;
+				width: 70%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			button {
+				border-color: white;
+				color: white;
+			}
+			button:hover {
+				border-color: rgba(0,0,0,0);
+				color: black;
+				background-color: rgba(255,255,255,0.6);
+			}
+			.page_head_info {
+				color: white;
+				font-size: 36px;
+				font-family: "Trebuchet MS", sans-serif;
+				text-align: right;
+				width: 90%;
+			}
+		</style>
 	</head>
 	<body>
-		Hi
+		<nav id="navigation"></nav>
+		<div class="v_spacer">
+		</div>
+		<div class="parallax parallax_1">
+			<div class="page_head_info">
+				<div style="font-size:60px;font-weight:bold;padding-top:15%">
+					Donkey Kong 64
+				</div>
+				<div style="padding-bottom:20px">
+					Practice ROM
+				</div>
+				<a href="#info" class="excluded_link">
+					<button style="width:200px">
+						See More
+					</button>
+				</a>
+			</div>
+		</div>
+		<div id="info" class="bar">
+			<div class="flexsplitter" style="width: 80%;margin-left: auto;margin-right: auto">
+				<div class="split_section" style="flex:1">
+					<div class="info_box">
+						<img src="./Site/assets/practicerom_download.png" class="header_img">
+						<div class="info_head">
+							DOWNLOAD
+						</div>
+						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
+							Nintendo 64
+							<ul style="margin-top:5px">
+								<li>ROM Version: NTSC-U</li>
+								<li>Expansion Pak Required</li>
+								<li>Loaded on: Flash Cart</li>
+							</ul>
+							Wii U Virtual Console
+							<ul style="margin-top:5px">
+								<li>ROM Version: NTSC-U</li>
+								<li>Loaded on: Homebrew</li>
+							</ul>
+							<button onclick="goTo('./practicerom/versions.html?version=latest')">
+								Download Latest
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="split_section" style="flex:1">
+					<div class="info_box">
+						<img src="./Site/assets/practicerom_guide.png" class="header_img">
+						<div class="info_head">
+							INSTALLATION
+						</div>
+						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
+							Learn how to install the Practice ROM for your console below
+							<button onclick="goTo('./practicerom/install.html')">
+								Installation Guide
+							</button> 
+						</div>
+					</div>
+				</div>
+				<div class="split_section" style="flex:1">
+					<div class="info_box">
+						<img src="./Site/assets/practicerom_features.png" class="header_img">
+						<div class="info_head">
+							FEATURES MANUAL
+						</div>
+						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
+							Learn how to install the Practice ROM for your console below
+						</div>
+						<button onclick="goTo('./practicerom/features.html')">
+							Features Manual
+						</button> 
+					</div>
+				</div>
+				<div class="split_section" style="flex:1">
+					<div class="info_box">
+						<img src="./Site/assets/practicerom_discord.png" class="header_img">
+						<div class="info_head">
+							DISCORD
+						</div>
+						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
+							Learn how to install the Practice ROM for your console below
+						</div>
+						<button onclick="goTo('https://discord.gg/955MmbtQBP')">
+							DK64 Discord
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="parallax parallax_2"></div>
+		<div class="bar copyright">
+			<div style="text-align: center">
+				<a href="https://discord.gg/955MmbtQBP" class="excluded_link">
+					<img src="./Site/assets/practicerom_discord.png" class="footer_img">
+				</a>
+				<a href="https://github.com/theballaam96/dk64-practice-rom" class="excluded_link">
+					<img src="./Site/assets/practicerom_github.png" class="footer_img">
+				</a>
+				<br>
+				In-game pictures Copyright &copy; Nintendo & Rareware Ltd, 1999 - <span id="current_year"></span> | Practice ROM made by Ballaam
+			</div>
+		</div>
+		<!-- <div class="flexsplitter banner">
+			<div style="flex:50%">
+				<ul style="">
+					<li style="height:100%">
+						<img src="assets/practiceromlogo.png" class="logo">					
+					</li>
+				</ul>
+			</div>
+			<div style="flex:50%">
+
+			</div>
+		</div>
+		<div class="flexsplitter bottom">
+			<div class="partition bordered" style="flex:1">
+				<h2>Download</h2>
+				<div class="txtbody">
+					Acquire the latest version of the Practice ROM for your banana hoard below
+				</div>
+				<a href="./practicerom/versions.html?version=latest">
+					<img src="./assets/practicerom_download.png" width="15%">
+				</a>
+				 <button onclick="goTo('./practicerom/versions.html?version=latest')">
+					Download Latest
+				</button>
+			</div>
+			<div class="partition bordered" style="flex:1">
+				<h2>Installation Guide</h2>
+				<div class="txtbody">
+					Learn how to install the Practice ROM for your console below
+				</div>
+				<a href="./practicerom/install.html">
+					<img src="./assets/practicerom_guide.png" width="15%">
+				</a>
+				 <button onclick="goTo('./practicerom/install.html')">
+					Installation Guide
+				</button> 
+			</div>
+			<div class="partition bordered" style="flex:1">
+				<h2>Features</h2>
+				<div class="txtbody">
+					Learn about the tools provided with the Practice ROM
+				</div>
+				<a href="./practicerom/features.html">
+					<img src="./assets/practicerom_features.png" width="15%">
+				</a>
+				 <button>
+				<button onclick="goTo('./practicerom/features.html')">
+					Coming Soon
+				</button> 
+			</div>
+			<div class="partition bordered" style="flex:1">
+				<h2>Discord</h2>
+				<div class="txtbody">
+					Join to hear about updates and future plans for the Practice ROM
+				</div>
+				<a href="https://discord.gg/955MmbtQBP">
+					<img src="./assets/practicerom_discord.png" width="15%">
+				</a>
+				 <button onclick="goTo('https://discord.gg/955MmbtQBP')">
+					DK64 Discord
+				</button> 
+			</div>
+			<div class="partition" style="flex:1">
+				<h2>GitHub Repo</h2>
+				<div class="txtbody">
+					View and keep up-to-date with the source code for the DK64 Practice ROM
+				</div>
+				<a href="https://github.com/theballaam96/dk64-practice-rom">
+					<img src="./assets/practicerom_github.png" width="15%">
+				</a>
+				 <button onclick="goTo('https://github.com/theballaam96/dk64-practice-rom')">
+					GitHub
+				</button> 
+			</div>
+		</div> -->
 	</body>
+	<script src="Site/script/nav.js"></script>
+	<script src="Site/script/tree.js"></script>
+	<script>
+		var xhttp = new XMLHttpRequest();
+		var romData = [];
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				responseJSON = JSON.parse(xhttp.responseText).data;
+				romData = responseJSON.versions.slice();
+				console.log(romData)
+				populate()
+				checkParams()
+			}
+		}
+		xhttp.open("GET", "https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/data/practicerom_versions.json", true);
+		xhttp.send(null)
+
+		var d = new Date();
+		var n = d.getFullYear();
+		document.getElementById("current_year").innerText = n
+
+		function goTo(url) {
+			window.location.href = url
+		}
+
+		function visit(linkType, version) {
+			var toggleBoxes = document.getElementsByClassName("toggleable")
+			for (i = 0; i < toggleBoxes.length; i++) {
+				var focusId = toggleBoxes[i].getAttribute("tiedVersion")
+				if (focusId == version) {
+					toggleBoxes[i].classList.add("hide")
+				}
+			}
+			if (linkType != "web") {
+				var focusObj = romData.find(item => item.version == version)
+				var url = focusObj[linkType]
+			} else {
+				var url = "https://patch.wedarobi.com/dk_practice_rom";
+			}
+
+			goTo(url)
+		}
+
+		function toggleBox(indic) {
+			var toggleBoxes = document.getElementsByClassName("toggleable")
+			for (i = 0; i < toggleBoxes.length; i++) {
+				var focusId = toggleBoxes[i].getAttribute("tiedVersion")
+				if (focusId == indic) {
+					toggleBoxes[i].classList.toggle("hide")
+				}
+			}
+		}
+
+		function toggleInfo(indic) {
+			var toggleBoxes = document.getElementsByClassName("infoContainer")
+			for (i = 0; i < toggleBoxes.length; i++) {
+				var focusId = toggleBoxes[i].getAttribute("box")
+				if (focusId == indic) {
+					toggleBoxes[i].classList.remove("hide")
+				} else {
+					toggleBoxes[i].classList.add("hide")
+				}
+			}
+		}
+
+		function formatASMCode() {
+			var codeBlocks = document.getElementsByClassName("asmcode")
+			for (i = 0; i < codeBlocks.length; i++) {
+				var init = codeBlocks[i].innerHTML;
+				var init_array = init.split("\n").filter(item => item != "").map(item => item.trim())
+				var codeAsObjs = []
+				init_array.forEach(line => {
+					var splitLine = line.split("	").filter(item => item != "").map(item => item.trim())
+					var isLabel = line.substring(line.length - 1) == ":"
+					var isComment = line.substring(0,2) == "//"
+					if (splitLine.length == 2) {
+						var commentLocation = splitLine[1].indexOf("//") - 1
+						var nonFunc = [];
+						if (commentLocation > -2) {
+							nonFunc = [splitLine[1].substring(0,commentLocation),splitLine[1].substring(commentLocation)]
+						} else {
+							nonFunc = [splitLine[1]]
+						}
+						//nonFunc[0] = nonFunc[0].split(", ")
+						splitLine = [splitLine[0],nonFunc]
+					}
+					var lineType = ""
+					var funcList = {}
+					var isAlign = false;
+					if (line == ".align") {
+						isAlign = true;
+					}
+					if (isLabel) {
+						lineType = "label"
+					} else if (isComment) {
+						lineType = "comment"
+					} else if (isAlign) {
+						lineType = "align"
+					} else {
+						lineType = "func"
+						var paramsLine = []
+						var commentLine = ""
+						if (splitLine[1]) {
+							if (splitLine[1][0]) {
+								paramsLine = splitLine[1][0].split(", ")
+								commentLine = splitLine[1][1]
+							} else {
+								paramsLine = splitLine[1].split(", ")
+							}
+						}
+						funcList = {
+							"func": splitLine[0],
+							"params": paramsLine,
+							"comment": commentLine,
+						}
+					}
+					if (line != "") {
+						codeAsObjs.push({
+							"fullLine": line,
+							"lineType": lineType,
+							"funcDetails": funcList,
+
+						})
+					}
+				})
+				console.log(codeAsObjs)
+				codeBlocks[i].innerHTML = ""
+				var preTag = document.createElement("pre")
+				var codeTag = document.createElement("code")
+				var indentLevel = 0;
+				codeAsObjs.forEach(line => {
+					if (line.lineType == "label") {
+						if (indentLevel > 0) {
+							var codePad = document.createElement("div")
+							codePad.classList.add("asm")
+							codePad.classList.add("pad")
+							codeTag.appendChild(codePad)
+						}
+						if (indentLevel > 1) {
+							indentLevel = 1;
+						}
+					}
+					if (line.lineType == "align") {
+						var codePad = document.createElement("div")
+						codePad.classList.add("asm")
+						codePad.classList.add("pad")
+						codeTag.appendChild(codePad)
+						indentLevel = 0
+					}
+					var codeContainer = document.createElement("div")
+					var indentPad = (20 * indentLevel) + "px"
+					codeContainer.style["padding-left"] = indentPad
+					if (line.lineType == "label" || line.lineType == "align") {
+						var span = document.createElement("span")
+						span.classList.add("asm")
+						span.classList.add("label")
+						var spanText = document.createTextNode(line.fullLine)
+						// Cleanup
+						if (line.lineType == "label") {
+							indentLevel += 1;
+						} else {
+							indentLevel = 0;
+						}
+						span.appendChild(spanText)
+						codeContainer.appendChild(span)
+					}
+					if (line.lineType == "comment") {
+						var span = document.createElement("span")
+						span.classList.add("asm")
+						span.classList.add("comment")
+						var spanText = document.createTextNode(line.fullLine)
+						// Cleanup
+						span.appendChild(spanText)
+						codeContainer.appendChild(span)
+					}
+					if (line.lineType == "func") {
+						// Function
+						var spanFunc = document.createElement("span")
+						spanFunc.classList.add("asm")
+						spanFunc.classList.add("func")
+						var spanFuncText = document.createTextNode(line.funcDetails.func)
+						// Function Cleanup
+						spanFunc.appendChild(spanFuncText)
+						codeContainer.appendChild(spanFunc)
+
+						// Parameters
+						if (line.funcDetails.params) {
+							line.funcDetails.params.forEach((param, index) => {
+								var splitParam = param.split("(")
+								var spanParam = document.createElement("span")
+								spanParam.classList.add("asm")
+								if (splitParam[0].substring(0,1) == "-" || !isNaN(parseInt(splitParam[0].substring(0,1)))) {
+									spanParam.classList.add("hex")
+								} else if (splitParam[0].substring(0,1) == "@") {
+									spanParam.classList.add("pointer")
+								} else if (splitParam[0].substring(0,1) == "$") {
+									spanParam.classList.add("param")
+								} else {
+									spanParam.classList.add("array")
+								}
+								if (index == 0) {
+									spanParam.classList.add("first")
+									var funcLength = line.funcDetails.func.length
+									var paramOffset = (7 - funcLength) * 7
+									spanParam.style["margin-left"] = paramOffset + "px"
+								}
+								var spanParamText = document.createTextNode(splitParam[0])
+								// Cleanup
+								spanParam.appendChild(spanParamText)
+								codeContainer.appendChild(spanParam)
+								if (splitParam.length > 1) {
+									// Open Bracket
+									var spanOpenBracket = document.createElement("span")
+									spanOpenBracket.classList.add("asm")
+									spanOpenBracket.classList.add("delimiter")
+									var spanOpenBracketText = document.createTextNode(" (")
+									// Cleanup
+									spanOpenBracket.appendChild(spanOpenBracketText)
+									codeContainer.appendChild(spanOpenBracket)
+									// Bracketed Param
+									var innerParam = splitParam[1].substring(0, splitParam[1].length - 1)
+									var spanInnerParam = document.createElement("span")
+									spanInnerParam.classList.add("asm")
+									spanInnerParam.classList.add("param")
+									var spanInnerParamText = document.createTextNode(innerParam)
+									// Cleanup
+									spanInnerParam.appendChild(spanInnerParamText)
+									codeContainer.appendChild(spanInnerParam)
+									// Close Bracket
+									var spanCloseBracket = document.createElement("span")
+									spanCloseBracket.classList.add("asm")
+									spanCloseBracket.classList.add("delimiter")
+									var spanCloseBracketText = document.createTextNode(")")
+									// Cleanup
+									spanCloseBracket.appendChild(spanCloseBracketText)
+									codeContainer.appendChild(spanCloseBracket)
+								}
+
+								// Comma Check
+								if (index != line.funcDetails.params.length - 1) {
+									var spanComma = document.createElement("span")
+									spanComma.classList.add("asm")
+									spanComma.classList.add("delimiter")
+									var spanCommaText = document.createTextNode(", ")
+									// Cleanup
+									spanComma.appendChild(spanCommaText)
+									codeContainer.appendChild(spanComma)
+								}
+							})
+
+							// Comment
+							if (line.funcDetails.comment) {
+								var spanComment = document.createElement("span")
+								spanComment.classList.add("asm")
+								spanComment.classList.add("comment")
+								var spanCommentText = document.createTextNode(line.funcDetails.comment)
+								// Cleanup
+								spanComment.appendChild(spanCommentText)
+								codeContainer.appendChild(spanComment)
+							}
+						}
+						
+						
+					}
+					codeTag.appendChild(codeContainer)
+				})
+				preTag.appendChild(codeTag)
+				codeBlocks[i].appendChild(preTag)
+			}
+		}
+		formatASMCode()
+		//document.getElementsByClassName("navbar")[0].getElementsByTagName("ul")[0].innerHTML = ""
+	</script>
 </html>

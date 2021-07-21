@@ -1,0 +1,150 @@
+.n64buttons {
+	font-weight: bold;
+	cursor: default;
+	user-select: none;
+}
+
+.n64buttons.z::after {
+	content: "Z";
+	display: inline-block;
+	padding: 3px;
+	padding-bottom: 2px;
+	padding-top: 4px;
+	background-color: dimgrey;
+	color: gainsboro;
+	border-radius: 2px;
+	transform: translateX(5px);
+	margin-right: 7px;
+}
+
+.n64buttons.r::after {
+	content: "R";
+	display: inline-block;
+	padding: 2px;
+	padding-bottom: 0px;
+	padding-right: 20px;
+	padding-left: 5px;
+	background-color: dimgrey;
+	color: gainsboro;
+	border-radius: 2px;
+	border-top-right-radius: 16px;
+	transform: translateX(5px);
+	margin-right: 7px;
+}
+
+.n64buttons.l::after {
+	content: "L";
+	display: inline-block;
+	padding: 2px;
+	padding-bottom: 0px;
+	padding-left: 20px;
+	padding-right: 5px;
+	background-color: dimgrey;
+	color: gainsboro;
+	border-radius: 2px;
+	border-top-left-radius: 16px;
+	transform: translateX(5px);
+	margin-right: 7px;
+}
+
+.n64buttons.a::after {
+	content: "A";
+	display: inline-block;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	background-color: darkblue;
+	color: dodgerblue;
+	border-radius: 10px;
+	transform: translateX(5px);
+	margin-right: 7px;
+}
+
+.n64buttons.b::after {
+	content: "B";
+	display: inline-block;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	background-color: green;
+	color: limegreen;
+	border-radius: 10px;
+	transform: translateX(5px);
+	margin-right: 7px;
+}
+
+.n64buttons.start::after {
+	content: "S";
+	display: inline-block;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	background-color: darkred;
+	color: salmon;
+	border-radius: 10px;
+	transform: translateX(5px);
+	margin-right: 7px;
+}
+
+.n64buttons.analog::after {
+	content: "\2022";
+	display: inline-block;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: -2px;
+	background-color: gainsboro;
+	color: dimgrey;
+	border-radius: 10px;
+	transform: translateX(5px);
+	margin-right: 7px;
+	border: 2px solid dimgrey;
+	box-shadow: 0 0 0px 3px gainsboro;
+}
+
+.n64buttons.ddown::after, .n64buttons.dup::after, .n64buttons.dleft::after, .n64buttons.dright::after {
+	content: "\25B6";
+	display: inline-block;
+	padding: 4px;
+	padding-top: 2px;
+	padding-bottom: 0px;
+	background-color: dimgrey;
+	color: gainsboro;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+.n64buttons.cdown::after, .n64buttons.cup::after, .n64buttons.cleft::after, .n64buttons.cright::after {
+	content: "\25B6";
+	display: inline-block;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	background-color: orange;
+	color: yellow;
+	border-radius: 10px;
+}
+
+.n64buttons.ddown::after, .n64buttons.cdown::after {
+	transform: rotate(90deg)translateY(-5px);
+	margin-right:7px;
+}
+
+.n64buttons.dup::after, .n64buttons.cup::after {
+	transform: rotate(-90deg)translateY(5px);
+	margin-right:7px;
+}
+
+.n64buttons.dleft::after, .n64buttons.cleft::after {
+	transform: rotate(180deg)translateX(-5px);
+	margin-right:7px;
+}
+
+.n64buttons.dright::after, .n64buttons.cright::after {
+	transform: rotate(0deg)translateX(5px);
+	margin-right:7px;
+}

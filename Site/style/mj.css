@@ -1,0 +1,124 @@
+.mad_jack_board {
+	width: -webkit-fill-available;
+}
+
+.mad_jack_board tbody tr td div {
+	/*border: 5px solid grey;*/
+	/*height: 100px;*/
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin: 10px;
+}
+
+.square {
+	height: 100%;
+	padding-top: 25%;
+}
+
+/*DIM SQUARES*/
+.mad_jack_board tbody tr:nth-child(2n) td:nth-child(2n) .square {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20blue%20dim.png");
+}
+
+.mad_jack_board tbody tr:nth-child(2n) td:nth-child(2n+1) .square {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20white%20dim.png");
+}
+
+.mad_jack_board tbody tr:nth-child(2n+1) td:nth-child(2n+1) .square {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20blue%20dim.png");
+}
+
+.mad_jack_board tbody tr:nth-child(2n+1) td:nth-child(2n) .square {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20white%20dim.png");
+}
+
+/*LIT SQUARES*/
+.mad_jack_board tbody tr:nth-child(2n) td:nth-child(2n) .square.lit {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20blue%20lit.png");
+}
+
+.mad_jack_board tbody tr:nth-child(2n) td:nth-child(2n+1) .square.lit {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20white%20lit.png");
+}
+
+.mad_jack_board tbody tr:nth-child(2n+1) td:nth-child(2n+1) .square.lit {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20blue%20lit.png");
+}
+
+.mad_jack_board tbody tr:nth-child(2n+1) td:nth-child(2n) .square.lit {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/square%20white%20lit.png");
+}
+
+.mad_jack_board tbody tr td div .icons {
+	height: 50%;
+}
+
+.mad_jack_board tbody tr td div .countDisplay {
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.mad_jack_board tbody tr td div .icons .flex40.has_mj {
+	background-image: url('https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/jack.png');
+	background-position: center center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+
+.mad_jack_board tbody tr td div .icons .flex40.has_kong {
+	background-image: url('https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/kong.png');
+	background-position: center center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+
+.mad_jack_board tbody tr td div .icons .flex40.adj_to_kong {
+	background-image: url('https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/mj_board/invalid.png');
+	background-position: center center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+
+.input_info {
+	padding: 10px;
+}
+
+.input_info .label {
+	color: white;
+}
+
+.input_info .hint {
+	color: white;
+	font-size: 12px;
+}
+
+.input_info select {
+	padding: 5px;
+}
+
+.input_info input {
+	padding: 5px;
+}
+
+.button_container {
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.start_button {
+	padding: 10px;
+	border: 2px solid gold;
+	color: gold;
+	background-color: rgba(0,0,0,0);
+	width: -webkit-fill-available;
+}
+
+.mj_calc_desc h2 {
+	color: white;
+	margin-top: 20px;
+}
+
+.mj_calc_desc .desc {
+	color: white;
+}

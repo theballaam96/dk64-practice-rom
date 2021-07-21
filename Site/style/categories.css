@@ -1,0 +1,52 @@
+.categorybox {
+	max-width: 25%;
+	margin: 10px;
+}
+
+.categorybox a .img {
+	height: 300px;
+	border-radius: 5px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.categorybox a .img .name {
+	background-color: rgba(0,0,0,0.8);
+	position: relative;
+	height: 75px;
+	top: 225px;
+	transition: 0.5s ease-in-out;
+}
+
+.categorybox a .img .name .nametag {
+	color: white;
+	padding-top: 25px;
+	padding-left: 5%;
+	font-size: 25px;
+}
+
+.categorybox:hover > a .img .name {
+	background-color: rgba(100,100,100,0.8);
+}
+
+.category_wr_container {
+	margin: 5px;
+}
+
+.category_wr_container .wr {
+	color: white;
+	text-decoration: none;
+}
+
+.category_wr_container .wr:hover {
+	background-color: rgba(100,100,100,0.8);
+}
+
+.category_info {
+	padding-left: 10px;
+	color: white;
+}
+
+.category_info h1, h2, h3 {
+	padding-left: 5px;
+}

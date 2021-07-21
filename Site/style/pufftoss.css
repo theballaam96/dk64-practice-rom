@@ -1,0 +1,236 @@
+.pufftoss.backdrop {
+	height: 100%;
+	width: -webkit-fill-available;
+	background-color: black;
+}
+
+.pufftoss.arena {
+	background-image: url("https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/assets/pufftoss/arena.png");
+	background-repeat: no-repeat;
+	height: 100%;
+	width: -webkit-fill-available;
+	margin-left: auto;
+	margin-right:auto;
+	background-position: center center;
+	background-size: contain;
+}
+
+.pufftoss.viewbox {
+	position: relative;
+	height: 100%;
+}
+
+.pufftoss.star_location, .pufftoss.center_location, .pufftoss.rod_location {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border: 2px solid black;
+	border-radius: 20px;
+	text-align: center;
+	color: rgba(0,0,0,0);
+	cursor: default;
+	z-index: 20;
+	font-size: 0.9em;
+}
+
+.pufftoss.rod_location {
+	background-color: powderblue;
+	font-size: 0.7em;
+	border-color: teal;
+}
+
+.pufftoss.rod_location.hidden {
+	display: none;
+}
+
+.pufftoss.line {
+	position: absolute;
+	background-color: white;
+	width: 100%;
+	height: 3px;
+	border-radius: 2px;
+	border: 1px solid black;
+}
+
+.pufftoss.line .pufftoss.line_head {
+	max-width: 10px;
+	width: 33%;
+	height: 3px;
+	background-color: white;
+	right: 10px;
+	position: absolute;
+	border-radius: 2px;
+}
+
+.pufftoss.line .pufftoss.line_head.upper {
+	transform: rotate(-20deg);
+	margin-top: 3px;
+	z-index: 9;
+	border: 1px solid black;
+}
+
+.pufftoss.line_head.lower {
+	transform: rotate(20deg);
+	margin-top: -5px;
+	z-index: 9;
+	border: 1px solid black;
+}
+
+.pufftoss.line_head.center {
+	z-index: 10;
+	border-width: 0px;
+	max-height: 1px;
+}
+
+.pufftoss.star_location.coloured[phase="1"] {
+	background-color: burlywood;
+}
+
+.pufftoss.star_location.coloured[phase="2"] {
+	background-color: indianred;
+}
+
+.pufftoss.star_location.coloured[phase="3"] {
+	background-color: cadetblue;
+}
+
+.pufftoss.star_location.coloured[phase="4"] {
+	background-color: mediumpurple;
+}
+
+.pufftoss.star_location.coloured[phase="5"] {
+	background-color: mediumaquamarine;
+}
+
+.pufftoss.line.coloured[phase_in="1"], .pufftoss.line.coloured[phase_in="1"] .pufftoss.line_head {
+	background-color: darkgoldenrod;
+}
+
+.pufftoss.line.coloured[phase_in="2"], .pufftoss.line.coloured[phase_in="2"] .pufftoss.line_head {
+	background-color: firebrick;
+}
+
+.pufftoss.line.coloured[phase_in="3"], .pufftoss.line.coloured[phase_in="3"] .pufftoss.line_head {
+	background-color: dodgerblue;
+}
+
+.pufftoss.line.coloured[phase_in="4"], .pufftoss.line.coloured[phase_in="4"] .pufftoss.line_head {
+	background-color: indigo;
+}
+
+.pufftoss.line.coloured[phase_in="5"], .pufftoss.line.coloured[phase_in="5"] .pufftoss.line_head {
+	background-color: green;
+}
+
+.pufftoss.line.hidden {
+	display: none;
+}
+
+.pufftoss.center_location.hidden {
+	display: none;
+}
+
+.pufftoss.infobox {
+	position:absolute;
+	transform: translate(-40%, -102%);
+	border-radius: 5px;
+	z-index:40;
+
+	-webkit-animation: fadein 0.5s;
+	-moz-animation: fadein 0.5s;
+	-ms-animation: fadein 0.5s;
+	-o-animation: fadein 0.5s;
+	animation: fadein 0.5s;
+}
+
+@-webkit-keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-moz-keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-ms-keyframes fadein {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.pufftoss.infobox.fading {
+	-webkit-animation: fadeout 0.5s;
+	-moz-animation: fadeout 0.5s;
+	-ms-animation: fadeout 0.5s;
+	-o-animation: fadeout 0.5s;
+	animation: fadeout 0.5s;
+}
+
+@-webkit-keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-moz-keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-ms-keyframes fadeout {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+.pufftoss.infobox .title {
+	background-color:#333;
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 3px solid darkgoldenrod;
+}
+
+.pufftoss.infobox .info {
+	background-color: white;
+}
+
+.pufftoss.infobox .info table {
+	border-collapse: collapse;
+	font-size: 0.9em;
+	min-width: 200px;
+}
+
+
+.pufftoss.infobox .info table thead {
+	background-color: darkslategray;
+	color: white;
+	text-align: left;
+}
+
+.pufftoss.infobox .info table thead tr th {
+	padding: 5px;
+}
+
+.pufftoss.infobox .info table tr td {
+	padding: 5px;
+	border-bottom: 3px solid #ddd;
+}
+
+.pufftoss.infobox .info table tr:nth-of-type(even) {
+	background-color: #e5e5e5;
+}
+
+.pufftoss.infobox .info table tr:hover {
+	background-color: #ccc;
+}

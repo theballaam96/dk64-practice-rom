@@ -1,0 +1,80 @@
+.homebox {
+	background: rgba(0,0,0,0.8);
+	border: 2px solid gold;
+	border-radius: 5px;
+	width: 100%;
+	margin: 10px;
+	padding: 5px;
+}
+
+.homebox .header {
+	text-align: center;
+	color: white;
+	font-size: 24px;
+	margin-bottom: 10px;
+
+}
+
+.homebox .header.master_header {
+	text-align: left;
+	padding: 10px;
+	padding-bottom: 0px;
+}
+
+.homebox .homebox_internal {
+	padding: 10px;
+}
+
+.homebox .homebox_internal .content {
+	padding: 10px;
+	color: white;
+}
+
+.wrinfo {
+	color: white;
+}
+
+.wrentry {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.wrentry:hover {
+	background-color: rgba(255,255,255,0.2);
+}
+
+.wrentry a {
+	text-decoration: none;
+}
+
+#wrs_loading .inprogress {
+	background-image: url("../assets/arcade.gif");
+	background-repeat: no-repeat;
+	background-size: 150px;
+	height: 200px;
+	background-position: center
+}
+
+#wrs_loading .loadingFailed {
+	background-image: url("../assets/arcadeRIP.png");
+}
+
+#wrs_loading .loading_caption {
+	color: white;
+	text-align:center;
+	font-weight: bold;
+}
+
+#wrbox {
+	min-width: 450px;
+	max-width: 450px;
+}
+
+.home_image {
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center center;
+}

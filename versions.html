@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Versions | Donkey Kong 64 Practice ROM</title>
+	<link rel="stylesheet" href="./Site/style/nav.css">
+	<link rel="stylesheet" href="./Site/style/main.css">
+	<link rel="stylesheet" href="./Site/style/home.css">
+	<link rel="stylesheet" href="./Site/style/maps.css">
+	<link rel="stylesheet" href="./Site/style/mj.css">
+	<link rel="stylesheet" href="./Site/style/tree.css">
+	<link rel="stylesheet" href="./Site/style/n64buttons.css">
+	<link rel="stylesheet" href="./Site/style/manual.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+	<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+	<link rel="manifest" href="./site.webmanifest">
+	<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="description" content="" />
+	<style type="text/css">
+		.homebox {
+			transition: 0.5s ease-in-out;
+			cursor: default;
+		}
+		.homebox.clickable:hover {
+			border-color:red;
+		}
+		.hide {
+			display: none;
+		}
+		download-buttons {
+			display: block;
+			padding: 10px;
+		}
+		download-buttons .isdownload::before {
+			content: "\203A";
+			cursor: pointer;
+			user-select: none;
+			color: darkgoldenrod;
+			display: inline-block;
+		}
+		.changelog {
+			list-style-type: none;
+			margin:0;
+			padding:0;
+			padding-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<nav id="navigation"></nav>
+	<div class="flexsplitter max">
+		<div class="leftbox" style="flex:20%">
+			<div class="v_spacer"></div>
+			<ul class="tree">
+				<li><a class="excluded_link hovergold" onclick="treeshow('latest')">Latest</a></li>
+				<li>
+					<span class="caret">1.4</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_140')">1.4.0</a></li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">1.3</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_133')">1.3.3</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_132')">1.3.2</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_131')">1.3.1</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_130')">1.3.0</a></li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">1.2</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_125')">1.2.5</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_124')">1.2.4</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_123')">1.2.3</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_122')">1.2.2</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_121')">1.2.1</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_120')">1.2.0</a></li>
+					</ul>
+				</li>		
+				<li>
+					<span class="caret">1.1</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_113')">1.1.3</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_112')">1.1.2</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_111')">1.1.1</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_110')">1.1.0</a></li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">1.0</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_100')">1.0.0</a></li>
+					</ul>
+				</li>				
+				<li>
+					<span class="caret">Pre-Release</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_020')">0.2</a></li>
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_010')">0.1</a></li>
+					</ul>
+				</li>				
+			</ul>
+		</div>
+		<div class="rightbox" style="flex:80%">
+			<div class="v_spacer"></div>
+			<div class="treebox hide" tree-id="version_010" version="0.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 0.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<span class="warning">The OSD in this version crashes on N64</span>
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li><strong>First Version</strong></li>
+						<li>Additions</li>
+						<ul>
+							<li>Position Warping</li>
+							<li>On-Screen Display</li>
+							<ul>
+								<li>Warp to Map</li>
+							</ul>
+							<li>All kongs/moves unlocked by default</li>
+							<li>Basic Tag Anywhere</li>
+							<li>Alternate Kong colouring</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_020" version="0.2">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 0.2</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>On-Screen Display shifted to pause screen</li>
+							<li>Basic savestate to save & load flags</li>
+							<li>Facing angle, velocities and acceleration added to position storage</li>
+							<li>Tiny & Chunky colours changed</li>
+							<li>Dinosaur-related easter egg</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>OSD no longer crashes on N64</li>
+							<li>Moves granted to every kong</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_100" version="1.0">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.0</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>All inventory items (crystals, ammo etc.) granted at the start</li>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Position Warping works only when the storage took place on the same map</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Pause Menu action + D-Up on the same frame no longer causes a softlock</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_110" version="1.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Savestates now store collectable counts</li>
+							<li>3 Melons of health are granted on every loading zone</li>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Position warping no longer requires holding L</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Savestating prevented in bonus barrels, T&S, Character shops, Crowns and bosses to prevent a crash</li>
+							<li>Warping to a map with a value greater than <em>0xCF</em> no longer crashes the game</li>
+							<li>Blast-o-Matic is on again to prevent the Helm Medals bug</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_111" version="1.1.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.1.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Savestates now store temporary flags</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_112" version="1.1.2">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.1.2</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Move Toggles</li>
+							<ul>
+								<li>Added option to toggle 'Simian Slam' level between 0 and 3 (No Slam, 'Simian Slam', 'Super Simian Slam', 'Super Duper Simian Slam')</li>
+								<li>Added option to toggle Sniper Scoper</li>
+							</ul>
+							<li>Variable Display</li>
+							<ul>
+								<li>Added variable display</li>
+								<li>Added option to display lag</li>
+								<li>K. Rool timer will be shifted to the right when display is on</li>
+							</ul>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>K. Lumsy Easter egg removed for space reasons</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_113" version="1.1.3">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.1.3</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Loading a stored position no longer crashes the game</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_120" version="1.2.0">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.2</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Position storage stores both of the Kong's <em>'Stored Positions'</em> (in the context of TBS)</li>
+							<li>Tools Menu Buttons</li>
+							<ul>
+								<li>Added button to set up flags for Takeoff skip (No excuses now Zoru)</li>
+								<li>Added button to grant all the moves and kongs</li>
+								<li>Added button to grant a host of inventory items</li>
+								<li>Added button to grant 50 coins to every kong</li>
+							</ul>
+							<li>Variable Displays</li>
+							<ul>
+								<li>Added display for Intro Story Timer</li>
+								<li>Added display for the player's horizontal speed</li>
+								<li>Added display for the cumulative lag</li>
+								<li>L resets cumulative lag counter to 0</li>
+							</ul>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>Moves, kongs and inventory items are no longer granted by default</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_121" version="1.2.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.2.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Changes</li>
+						<ul>
+							<li>Intro Story timer scalar has been changed, making it more accurate</li>
+							<li>Intro Story timer is offset to align itself with RTA standards</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Speed watch no longer crashes</li>
+							<li>Intro Story timer displays correctly</li>
+							<li>Lag/Cumulative lag watches now display lag instead of lag boost</li>
+							<li>Graphical Spiking when loading a kong position fixed</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_122" version="1.2.2">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.2.2</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Added timer display</li>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Intro Story timer scalar has been changed, making it more accurate</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_123" version="1.2.3">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.2.3</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Framebuffer no longer overwrites data</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_124" version="1.2.4">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.2.4</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Quality of life</li>
+							<ul>
+								<li>On boot, after the Rareware Logo, you will be warped to the Main Menu</li>
+								<li>After the 'Game Over' cutscene, you will be warped to the Main Menu
+								<li>New files start in DK Isles</li>
+							</ul>
+							<li>Melons and health are now granted for unlocking all moves rather than give collectables</li>
+							<li>K. Rool round number is now random</li>
+							<li>Minor text changes</li>
+							<ul>
+								<li>This won't be reflected in patches done with Lunar IPS</li>
+							</ul>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Lagometer is now more accurate, directly pulling from the lag calculation function</li>
+							<li>Warping to a map through map warp/load state is no longer permitted in situations where you cannot save state</li>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>The ISG timer has been removed</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Framebuffer no longer overwrites data</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_125" version="1.2.5">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.2.5</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Added option to disable D-Left/D-Right buttons</li>
+							<li>Text Changes</li>
+							<ul>
+								<li>Wrinkly has learned how to glitch Donkey Kong 64, and will provide you hints and tips on how to improve your game</li>
+								<li>3 other text boxes changed</li>
+							</ul>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Fixed a bug where there would be a 1-in-12 chance of K. Rool auto-kicing you out</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_130" version="1.3">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.3</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Map warping extended from 14 maps to 102 maps</li>
+							<li>Added options to toggle some important flags</li>
+							<li>Additional screens of the tools menu added (accessible with Z/R)</li>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Heap shrunk by 128kb</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Python text generation bug fixed, which fixes a typographical error with Diddy's Aztec Wrinkly door</li>
+							<li>B. Locker FTT auto-cleared, which prevents auto-kick out when exiting a level</li>
+							<li>Slam Level/Sniper Toggle is only written to file when changing the toggles, instead of constantly</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_131" version="1.3.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.3.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<span class="warning">This version has some stability issues. It is advised to use the most recent stable version instead</span>
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Cheats Menu</li>
+							<ul>
+								<li>Added a cheats menu</li>
+								<li>Added a cheat to constantly give the kong the <em>'Phase State'</em>. After turning on, perform an action which would normally persist the Phase State (eg. Crouching/Jumping) to go through a wall</li>
+								<li>Added a cheat to set file status to either a 101% or a Max% file</li>
+								<li>Added a cheat to provide infinite health</li>
+								<li>Added a cheat which allows you to hold L to levitate. Holding R as well as L doubles the speed, Holding Z halves the speed</li>
+								<li>Added a cheat which allows you to press L to cancel a cutscene</li>
+								<li>Added a cheat where you can press L to toggle the Aztec sandstorm On/Off</li>
+							</ul>
+							<li>Variable Display</li>
+							<ul>
+								<li>Variable displays are now a little prettier</li>
+								<li>Time display is shown in seconds instead of frames</li>
+								<li>Speed display now displays the decimal portion of kong speed</li>
+								<li>Added angle display</li>
+								<li>Added Movement State display</li>
+								<li>Added a Giant Kosha timer display</li>
+							</ul>
+							<li>Timer</li>
+							<ul>
+								<li>Timer has been overhauled to allow you to start and stop the timer automatically when various events occur</li>
+								<li>Added option to pause timer when the pause menu is open</li>
+							</ul>
+							<li>Added a trigger viewer, which enables you to view the location and horizontal radius of various in-game triggers</li>
+							<li>Other Menu Options</li>
+							<ul>
+								<li>Added options to toggle Sound, Music, Camera Mode (Free/Follow cam) and Screen Ratio (16:9/4:3)</li>
+								<li>Added option to toggle Tag Anywhere functionality On/Off</li>
+								<li>Added a screen to set/clear warp flags</li>
+							</ul>
+							<li>Special Flags</li>
+							<ul>
+								<li>Added the following flags as special flags:</li>
+								<ul>
+									<li>Japes Open/Talked to K. Lumsy</li>
+									<li>Rabbit Race 1 Complete</li>
+									<li>Llama Intro Cutscene cleared</li>
+									<li>B. Locker FTT</li>
+									<li>All T&S Portals open</li>
+									<li>All level boss intros watched</li>
+								</ul>
+							</ul>
+							<li>Map Warping</li>
+							<ul>
+								<li>Arcade & Jetpac added to warp list</li>
+								<li>Various areas around the game added to the map list where the map is large enough to warrant spawning in various places to speed up travel</li>
+								<li>Treehouse warp now takes you to the location you spawn in after Intro Story</li>
+								<li>Training Grounds warp now takes you to the location you spawn in after leaving the treehouse</li>
+								<li>Warps to the two Lanky Mushroom rooms in Fungi have been renamed to align with RTA Naming Standards</li>
+							</ul>
+							<li>Savestates</li>
+							<ul>
+								<li>Savestates now store the amount of inventory items you have</li>
+								<li>Savestates now store the Kong position</li>
+								<li>Added option to warp to the position where the savestate was created</li>
+							</ul>
+							<li>Other minor features</li>
+							<ul>
+								<li>Tools Menu now brings you to the same screen as you were on previously</li>
+								<li>Holding L in the tools menu speeds up left/right scrolling speed by a factor of 3</li>
+								<li>'Restock Inventory' refills health</li>
+								<li>Loading a position cancels autowalks</li>
+							</ul>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Positions can now be loaded when standing on an object</li>
+							<li>Blast-o-Matic music will no longer play when the display is on</li>
+							<li>Non-Diddy kongs have regained their right hand</li>
+							<li>Attempting to open the tools menu whilst transitioning to a different screen no longer pulls up the tools menu</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_132" version="1.3.2">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.3.2</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<span class="warning">This version has some stability issues. It is advised to use the most recent stable version instead</span>
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>L can be used to start/stop/reset the timer regardless of the start/stop triggers</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Exiting submaps no longer crashes the game</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_133" version="1.3.3">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.3.3</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Kong FTTs are now auto-cleared</li>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Load state now fully reloads the map</li>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>Trigger viewer has been removed due to bug complexities introduced</li>
+						</ul>
+						<li>Bug Fixes</li>
+						<ul>
+							<li>Game no longer crashes in various maps</li>
+							<li>Loading a position no longer crashes in some K. Rool phases</li>
+							<li>Loading a position no longer randomly crashes from an invalid autowalk pointer</li>
+							<li>Fixed a crash regarding the Giant Kosha timer</li>
+							<li>Lots of other crashes fixed, thanks to the QA work from '<em>Horhay the Dragon</em>', '<em>2dos</em>' and <em>Adam Whitmore</em></li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_140" version="1.4">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.4</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Active Menu</li>
+							<ul>
+								<li>Pressing <span class="n64buttons r">&nbsp;</span> then<span class="n64buttons l">&nbsp;</span> opens the tools menu when the game isn't paused. Pressing that sequence again closes the menu</li>
+								<li>Navigation is done with<span class="n64buttons l">&nbsp;</span> and <span class="n64buttons dup">&nbsp;</span><span class="n64buttons ddown">&nbsp;</span><span class="n64buttons dleft">&nbsp;</span><span class="n64buttons dright">&nbsp;</span></li>
+								<li>When the active menu is open, Tag anywhere require R to perform it's functionality. Position savestates are not permitted</li>
+							</ul>
+							<li>Savestates</li>
+							<ul>
+								<li>Support for 4 savestates has been added</li>
+							</ul>
+							<li>New Cheats</li>
+							<ul>
+								<li><strong>Instant Skew:</strong> Changes the kong's rotation to match a perfect traditonal skew</li>
+								<li><strong>Revoke all moves:</strong> Revokes all moves/training barrels etc</li>
+								<li><strong>Cancel Cutscene:</strong> Already existed in 1.3.3, but now a menu button has been added to do this in conjunction with the option to press L</li>
+								<li><strong>Auto Moonkick:</strong> Changes the kong's gravity any time a kick is performed to match the gravity of a moonkick</li>
+								<li><strong>Undo last flag write:</strong> Undoes the last flag write, whether it be clearing a flag or setting a flag</li>
+								<li><strong>Gain Control:</strong> Regrants control of the kong to the player</li>
+								<li><strong>Force End Minigame:</strong> Auto-completes the minigame that you are currently playing. Works for bonus barrels, training barrels and Helm barrels. If you hear a "quack" sound, either you are not in a minigame or the function cannot autocomplete the barrel yet for technical reasons.</li>
+								<li><strong>Tag All Warps:</strong> Tags all bananaports in the game</li>
+								<li><strong>Change Gamemode:</strong> Allows you to change the gamemode to any of the 15 gamemodes available. Useful for practising sections affected by MMM</li>
+								<li><strong>Spawn Snag Cheats</strong></li>
+								<ul>
+									<li><strong>Visify:</strong> Makes all "Spawn Snag" collectables in the map visible/collectable. Useful for practising tricks such as Rabbit Race Skip</li>
+									<li><strong>Reset:</strong> Resets all "Spawn Snag" collectables in the map to their default state if they have not been collected</li>
+								</ul>
+								<li><strong>Enemy Spawning:</strong> Toggles the ability for most enemies to spawn from their spawner</li>
+								<li><strong>Toggle Tag Barrel Void:</strong> Toggles the black void that appears when entering the tag barrel, as shown in LOTADs. There is also an option to tie this option to the<span class="n64buttons l">&nbsp;</span> button</li>
+								<li><strong>Superspeed:</strong> Multiplies the kong's horizontal speed by 5</li>
+							</ul>
+							<li>Watches</li>
+							<ul>
+								<li><strong>Input:</strong> Shows the inputs that are being pressed by Player 1</li>
+								<li><strong>Held Actor:</strong> Shows the index of the held actor</li>
+								<li><strong>Intro Story Timer:</strong> Re-added from a previous version of the <em>Practice ROM</em>, and now 100% accurate (2 seconds being added to the actual background timer to align itself with RTA timing standards). Colours purple if a fadeout is pending, colours red if fading into a fadeout</li>
+							</ul>
+							<li>Special Flags</li>
+							<ul>
+								<li>Various flags added</li>
+								<ul>
+									<li>Diddy "Help Me" cutscene</li>
+									<li>Giant Kosha cutscene</li>
+									<li>All 4 kong FTTs</li>
+									<li>Bananaport, Crown Pad, and transformation barrel FTTs</li>
+									<li>Arcade Round 1 Beaten</li>
+									<li>Rabbit Race Round 1 Beaten</li>
+								</ul>
+								<li>Added a custom flag setter menu</li>
+							</ul>
+							<li>Frame Advance</li>
+							<ul>
+								<li>Added an option to tie the<span class="n64buttons dleft">&nbsp;</span> and<span class="n64buttons dright">&nbsp;</span> buttons to a frame advance function.</li>
+								<ul>
+									<li><span class="n64buttons dleft">&nbsp;</span>: Frame advance</li>
+									<li><span class="n64buttons dright">&nbsp;</span>: Pause/Play gameplay</li>
+								</ul>
+							</ul>
+							<li>Other minor things</li>
+							<ul>
+								<li>Warps to all 7 main bosses have been added to their respective levels</li>
+								<li>Timer End Trigger: Added "End Transition" trigger</li>
+								<li>Added "Clean File" file state</li>
+								<li>Added an option to change pause menu volume</li>
+								<li><span class="n64buttons l">&nbsp;</span> +<span class="n64buttons r">&nbsp;</span> +<span class="n64buttons dup">&nbsp;</span> to load state</li>
+							</ul>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Load state now fully reloads the map</li>
+							<li>"Toggle Aztec Sandstorm" has been shifted to a menu action rather than tied to a button</li>
+							<li>The "Giant Kosha Timer" watch now changes colour depending on various scenarios</li>
+							<li>The "Angle" watch is now truncated to be within 0 &gt; 360 degrees. The watch colours itself blue when you have the phase state</li>
+							<li>The "Speed" and "Angle" watches are now shown as decimals</li>
+							<li>Added dance skips to the "GB Collection" timer end trigger</li>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>Pause Menu tools menu has been removed</li>
+							<li>The ability to tag individual warps with the menu has been removed</li>
+							<li>"From Intro" warp point in Castle Main has been removed</li>
+							<li>Removed music/sound changer</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+		</div>
+	</div>
+	<script src="./Site/script/nav.js"></script>
+	<script src="./Site/script/tree.js"></script>
+	<script>
+		function treeshow(treeid) {
+			if (treeid == "latest") {
+				var versions = document.getElementsByClassName("isversion")
+				var versionFunc = versions[0].getAttribute("onclick");
+				var versionFuncArray = versionFunc.split("'");
+				treeid = versionFuncArray[1];
+			}
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+
+			for (t = 0; t < treeboxes.length; t++) {
+				var found_treeid = treeboxes[t].getAttribute("tree-id")
+				var found_ver = treeboxes[t].getAttribute("version")
+				if (found_treeid == treeid) {
+					treeboxes[t].classList.remove("hide")
+					window.history.replaceState(null, null, "?version=" + found_ver)
+				} else {
+					treeboxes[t].classList.add("hide")
+				}
+			}
+		}
+
+		var xhttp = new XMLHttpRequest();
+		var romData = [];
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				responseJSON = JSON.parse(xhttp.responseText).data;
+				romData = responseJSON.versions.slice();
+				console.log(romData)
+				populateButtons()
+				goThroughParams()
+			}
+		}
+		xhttp.open("GET", "https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/data/practicerom_versions.json", true);
+		xhttp.send(null)
+
+		function populateButtons() {
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+			var version = "";
+
+			for (t = 0; t < treeboxes.length; t++) {
+				version = treeboxes[t].getAttribute("version")
+				// var link_button = treeboxes[t].getElementsByTagName("link-button")[0]
+				// link_button.childNodes[1].setAttribute("onclick","getLink('" + "?version=" + version + "')");
+				var list_items = [
+					{
+						"text": "Web Patcher",
+						"link": "https://patch.wedarobi.com/dk_practice_rom",
+					}
+				];
+				var foundData = romData.find(item => item["version"] == version)
+				if (foundData) {
+					var release_date = treeboxes[t].getElementsByTagName("release-date")[0]
+					var release_strong = document.createElement("strong")
+					var release_text = document.createTextNode("Release date: " + foundData.release_date)
+					release_strong.appendChild(release_text)
+					release_date.appendChild(release_strong)
+					if (foundData.beat) {
+						if (foundData.beat != "") {
+							list_items.push({
+								"text": "Beat",
+								"link": foundData.beat
+							})
+						}
+					}
+					if (foundData.lunar) {
+						if (foundData.lunar != "") {
+							list_items.push({
+								"text": "Lunar IPS",
+								"link": foundData.lunar
+							})
+						}
+					}
+					if (foundData.source) {
+						if (foundData.source != "") {
+							list_items.push({
+								"text": "Source Code",
+								"link": foundData.source
+							})
+						}
+					}
+				}
+
+				var download_block = treeboxes[t].getElementsByTagName("download-buttons")[0]
+				var horizontal_line = document.createElement("hr")
+				var strong_el = document.createElement("strong")
+				var strong_text = document.createTextNode("Download")
+
+				var list = document.createElement("ul")
+				list.style["list-style-type"] = "none";
+				list.style["margin"] = "0px";
+				list.style["padding-left"] = "0px";
+				list_items.forEach(item => {
+					var li = document.createElement("li")
+					var link = document.createElement("a")
+					link.classList.add("excluded_link")
+					link.classList.add("hovergold")
+					link.classList.add("isdownload")
+					link.setAttribute("href",item.link)
+
+					var link_text = document.createTextNode(item.text)
+
+					link.appendChild(link_text)
+					li.appendChild(link)
+					list.appendChild(li)
+				})
+				strong_el.appendChild(strong_text)
+				download_block.appendChild(horizontal_line)
+				download_block.appendChild(strong_el)
+				download_block.appendChild(list)
+			}
+		}
+
+		function goTo(url) {
+			window.location.href = url;
+		}
+
+		function copyToClipboard(text) {
+		    var dummy = document.createElement("textarea");
+		    document.body.appendChild(dummy);
+		    dummy.value = text;
+		    dummy.select();
+		    document.execCommand("copy");
+		    document.body.removeChild(dummy);
+		}
+
+		function getLink(param) {
+			window.history.replaceState(null, null, param)
+			copyToClipboard(window.location.origin + window.location.pathname + param)
+		}
+
+		function goThroughParams() {
+			var queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString)
+			const versionnum = urlParams.get("version");
+			console.log("Detected Version: " + versionnum)
+			if (versionnum == "latest") {
+				treeshow('latest')
+			} else {
+				var treeboxes = document.getElementsByClassName("treebox")
+				var t;
+				var version = "";
+
+				for (t = 0; t < treeboxes.length; t++) {
+					version = treeboxes[t].getAttribute("version")
+					if (version == versionnum) {
+						treeboxes[t].classList.remove("hide")
+					} else {
+						treeboxes[t].classList.add("hide")
+					}
+				}
+			}
+		}
+
+		function toggleImage(el,hover) {
+			var img_node = el.getElementsByTagName("img")[0]
+			var new_img = "./Site/assets/link.png";
+			if (hover) {
+				new_img = "./Site/assets/link_black.png"
+			}
+			img_node.setAttribute("src",new_img)
+		}
+	</script>
+</body>
+</html>

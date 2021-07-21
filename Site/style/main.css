@@ -1,0 +1,81 @@
+body {
+	background-image: url("../assets/bckgrnd.png");
+	background-repeat: repeat, repeat;
+	font-family: Arial;
+}
+
+.flexsplitter {
+	display: flex;
+}
+
+.flex30 {
+	flex: 30%;
+}
+
+.flex40 {
+	flex: 40%;
+}
+
+.hide {
+	display: none;
+}
+
+.box {
+	background: rgba(0,0,0,0.8);
+	border: 2px solid gold;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 5px;
+}
+
+.box .header {
+	text-align: center;
+	color: white;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.indent {
+	padding-left: 20px;
+}
+
+.description {
+	padding-left: 5px;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:not(.nav_link):not(.linkcontroller):not(.excluded_link):hover {
+	background-color: rgba(100,100,100,0.8);
+}
+
+button {
+	padding: 10px;
+	text-align: center;
+	border: 2px solid gold;
+	border-radius: 5px;
+	color: gold;
+	background-color: rgba(0,0,0,0);
+	width: 100%;
+	transition: 0.5s ease-in-out;
+	font-size: 18px;
+}
+
+button:hover {
+	border-color: black;
+	color: black;
+	background-color: gold;
+}
+.hovergold {
+	cursor: default;
+}
+.ytcontainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: fit-content;
+	width: -moz-fit-content;
+	padding: 15px;
+}

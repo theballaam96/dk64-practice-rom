@@ -1,0 +1,85 @@
+.lookup {
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+.results_list {
+	border-collapse: collapse;
+}
+
+.results_list thead tr th {
+	padding: 10px;
+}
+
+.results_list tbody tr td {
+	padding: 10px;
+}
+
+.results_list tbody tr:hover {
+	background-color: lightgrey;
+	cursor: default;
+}
+
+.float {
+	position: absolute;
+}
+
+#object_display {
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#object_display table {
+	color: white;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#object_display table thead tr th {
+	padding: 10px;
+}
+
+#object_display table tbody tr td {
+	padding: 10px;
+}
+
+#object_display table tbody tr:hover {
+	background-color: rgba(255,255,255,0.2);
+	cursor: default;
+}
+
+.right_justified {
+	text-align: right;
+}
+
+.left_justified {
+	text-align: left;
+}
+
+.results_more {
+	background-color: white;
+	text-align: center;
+	padding: 10px;
+}
+
+.crash {
+	background-color: rgba(255,0,0,0.3);
+}
+
+.does_action {
+	padding: 10px;
+}
+
+.does_action.true {
+	background-color: rgba(0,255,0,0.2);
+}
+
+.does_action.false {
+	background-color: rgba(255,0,0,0.2);
+}
+
+.comment_column {
+	width: 25%;
+}

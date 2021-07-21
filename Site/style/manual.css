@@ -1,0 +1,86 @@
+body {
+	margin-left:0;
+	margin-right:0;
+	margin-bottom:0;
+	min-height:100%;
+}
+.max {
+	position:absolute;
+	top:0;
+	width:100%;
+	min-height:100%;
+}
+.leftbox {
+	background-color: rgba(0,0,0,0.8);
+	border-right: 2px solid darkgoldenrod;
+}
+.rightbox {
+	/*background-color: #1d2936;*/
+	background-color: rgb(15,20,26);
+	padding: 20px;
+}
+.warning {
+	color: red;
+}
+.warning::before {
+	content: "\26A0 \20";
+	font-size: 150%;
+}
+hr {
+	border-color: darkgoldenrod;
+}
+.link_button {
+	width:fit-content;
+	width:-moz-fit-content;
+	padding:5px;
+	padding-bottom: 2px;
+	display: none;
+}
+.treebox {
+	color: gainsboro;
+	padding: 10px;
+	/*background-color: #141d26;*/
+	background-color: rgb(15,20,26);
+	border-radius: 5px;
+	min-width: 60%;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.treebox .treebox_head {
+	font-weight: bold;
+	padding-bottom: 10px;
+	margin-top:10px;
+}
+h2.treebox_head {
+	margin-bottom: 0;
+}
+.treebox .treebox_body {
+	padding-top: 10px;
+	/*padding-left: 10px;*/
+}
+td, th {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 5px;
+}
+.bordertable td, .bordertable th {
+	border: 1px solid white;
+}
+.bordertable {
+	border-collapse: collapse;
+}
+.alternatingtable {
+	border-collapse: collapse;
+}
+.alternatingtable tbody tr:nth-child(2n+1) td:not(.level) {
+	background-color: rgba(100,100,100,0.3);
+}
+.alternatingtable td, .alternatingtable th {
+	padding: 7px;
+	padding-left: 12px;
+}
+.highlight {
+	color: chocolate;
+}
