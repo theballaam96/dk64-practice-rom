@@ -2,7 +2,7 @@ var navHtml = "\
 	<div class='navbar' id='navbar'>\
 		<div class='items'>\
 			<div class='logo'>\
-				<a href='/index.html'>\
+				<a href='/'>\
 					<ul>\
 						<li>\
 							Donkey Kong 64 Practice ROM\
@@ -13,7 +13,7 @@ var navHtml = "\
 			<div class='links'>\
 				<ul class='container text noselect'>\
 					<li>\
-						<a href='/index.html' class='nav_link'>\
+						<a href='/' class='nav_link'>\
 							<span>\
 								<strong>\
 									Home\
@@ -22,7 +22,7 @@ var navHtml = "\
 						</a>\
 					</li>\
 					<li>\
-						<a href='/versions.html' class='nav_link'>\
+						<a href='/versions?version=latest' class='nav_link'>\
 							<span>\
 								<strong>\
 									Download\
@@ -31,7 +31,7 @@ var navHtml = "\
 						</a>\
 					</li>\
 					<li>\
-						<a href='/features.html' class='nav_link'>\
+						<a href='/features' class='nav_link'>\
 							<span>\
 								<strong>\
 									Manual\
