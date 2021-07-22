@@ -48,12 +48,19 @@
 				padding: 10px;
 				flex: 33%;
 			}
-			.ytcontainer {
-				margin-left: auto;
-				margin-right: auto;
-				width: fit-content;
-				width: -moz-fit-content;
-				padding: 15px;
+			.yt_container {
+				position: absolute;
+				text-align: center;
+				top: 50%;
+				left:50%;
+
+				-ms-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50%);
+				-moz-transform:translate(-50%,-50%);
+				-o-transform:translate(-50%,-50%);
+
+				width:fit-content;
+				width:-moz-fit-content;
 			}
 			.sidebutton_container {
 				padding: 5px;
@@ -180,6 +187,7 @@
 				height: 80px;
 				border-bottom: none;
 				color: white;
+				background-color: rgb(50,50,50);
 			}
 			body {
 				margin: 0px;
@@ -231,6 +239,26 @@
 				text-align: right;
 				width: 90%;
 			}
+			.tick_list, .cross_list {
+				list-style: none;
+				margin-top: 5px;
+			}
+			.tick_list li::before {
+				content: "✓";
+				color: chartreuse;
+				font-weight: bold;
+				display: inline-block;
+				width: 1em;
+				margin-left: -2em;
+			}
+			.cross_list li::before {
+				content: "✘";
+				color: red;
+				font-weight: bold;
+				display: inline-block;
+				width: 1em;
+				margin-left: -2em;
+			}
 		</style>
 	</head>
 	<body>
@@ -261,16 +289,15 @@
 							DOWNLOAD
 						</div>
 						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
-							Nintendo 64
-							<ul style="margin-top:5px">
-								<li>ROM Version: NTSC-U</li>
-								<li>Expansion Pak Required</li>
-								<li>Loaded on: Flash Cart</li>
+							Works:
+							<ul class="tick_list">
+								<li>NTSC-U N64</li>
+								<li>NTSC-U Wii U VC</li>
 							</ul>
-							Wii U Virtual Console
-							<ul style="margin-top:5px">
-								<li>ROM Version: NTSC-U</li>
-								<li>Loaded on: Homebrew</li>
+							Doesn't work:
+							<ul class="cross_list">
+								<li>NTSC-J N64/Wii U</li>
+								<li>PAL N64/Wii U</li>
 							</ul>
 							<button onclick="goTo('./versions?version=latest')">
 								Download Latest
@@ -296,7 +323,7 @@
 					<div class="info_box">
 						<img src="./Site/assets/practicerom_features.png" class="header_img">
 						<div class="info_head">
-							FEATURES MANUAL
+							MANUAL
 						</div>
 						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
 							Learn how to install the Practice ROM for your console below
@@ -322,7 +349,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="parallax parallax_2"></div>
+		<div class="parallax parallax_2">
+			<div style="position:relative;height:100%">
+				<div class="yt_container">
+					<iframe width="747" height="420" src="https://www.youtube.com/embed/E7FdKsmujpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
 		<div class="bar copyright">
 			<div style="text-align: center">
 				<a href="https://discord.gg/955MmbtQBP" class="excluded_link">
