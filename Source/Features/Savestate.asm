@@ -144,10 +144,10 @@ GlobalSavestateHandler:
 		SW 		r0, @TimerAfterReduction
 		SB 		r0, @HasNeutralStickInput
 		// Reset LZ Recording
-		SB 		r0, @LZLooper_IsRecording
-		LA 		a2, Menu_LZLooperSettings_Array
-		LA 		a1, Menu_LZLooperSettings_Record
-		SW 		a1, 0x4 (a2)
+		//SB 		r0, @LZLooper_IsRecording
+		//LA 		a2, Menu_LZLooperSettings_Array
+		//LA 		a1, Menu_LZLooperSettings_Record
+		//SW 		a1, 0x4 (a2)
 		ADDIU	a1, t9, @SavestateStruct_PermFlagBlock
 
 		WriteFlags:

@@ -85,3 +85,4 @@
 [TempTimestampStorage]: 0x807FFF98 // u64
 [HackTitle]: 0x807FFFA0 // u32
 [HackVersion]: 0x807FFFA4 // u32
+[AddedCorruptionActorCount]: 0x807FFFA8 // u8

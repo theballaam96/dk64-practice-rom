@@ -586,6 +586,7 @@ InfiniteHealth:
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/UndoFlagWrite.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/GainControl.asm"
 .incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Superspeed.asm"
+.incasm "./../../Development/dk64-practice-rom/Source/Features/Cheats/Corruption.asm"
 
 KongCode:
 	SW 		ra, @ReturnAddress2
@@ -2565,6 +2566,8 @@ Menu_Cheats_LToToggleTB_On:
 	.asciiz "L TO TOGGLE TB VOID: ON"
 Menu_Cheats_TagWarps:
 	.asciiz "TAG ALL WARPS"
+Menu_Cheats_Corruption:
+	.asciiz "CORRUPT"
 
 .align
 Menu_Cheats_Array:
@@ -2580,6 +2583,7 @@ Menu_Cheats_Array:
 	.word Menu_Cheats_GainControl
 	.word Menu_Cheats_ForceEndMinigame
 	.word Menu_Cheats_TagWarps
+	.word Menu_Cheats_Corruption
 	.word Menu_Return
 
 .align
@@ -2596,13 +2600,14 @@ Menu_Cheats_Functions:
 	.word GainControl
 	.word EndMinigame
 	.word TagAllWarpsCheat
+	.word CorruptMe
 	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_Cheats_Struct:
 	.word Menu_Cheats_Array // Text Array
 	.word Menu_Cheats_Functions // Function Array
-	.byte 13 // Array Items
+	.byte 14 // Array Items
 	.byte 0 // Parent Screen
 
 .align
