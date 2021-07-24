@@ -262,3 +262,4 @@ Menu_Candy_Struct:
 	.word Menu_Candy_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 31 // Parent Screen
+	.byte 4 // Parent Position

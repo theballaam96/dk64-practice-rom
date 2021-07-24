@@ -157,6 +157,7 @@ Menu_Flags_KeyIn_Struct:
 	.word Menu_Flags_KeyIn_Functions // Function Array
 	.byte 10 // Array Items
 	.byte 36 // Parent Screen
+	.byte 1 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_KeyIn:

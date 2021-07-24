@@ -146,9 +146,9 @@
 								<li><a class="excluded_link hovergold" onclick="treeshow('watch_timer')">Timer</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('watch_giant_kosha_timer')">Giant Kosha Timer</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('watch_movement_state')">Movement State</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Angle</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Input</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Held Actor</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_angle')">Angle</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_input')">Input</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_held_actor')">Held Actor</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_warptree')">Intro Story Timer</a></li>
 							</ul>
 						</li>
@@ -225,12 +225,14 @@
 										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Superspeed</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">L to Cancel Cutscene</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">L to Toggle TB Void</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">L to End Minigame</a></li>
 									</ul>
 								</li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Undo Last Flag Write</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Gain Control</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Force End Minigame</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Tag All Warps</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Corrupt</a></li>
 							</ul>
 						</li>
 						<li>
@@ -257,6 +259,7 @@
 										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Quick Startup</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Forced Story Skip</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">Pause Volume</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('mapwarp_controls')">D-Left and Right to Navigate Menu</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -267,6 +270,14 @@
 					<span class="caret">Error Codes</span>
 					<ul class="nested">
 						<li><a class="excluded_link hovergold" onclick="treeshow('activemenu_controls')">Error 01</a></li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">Development</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold" onclick="treeshow('activemenu_controls')">Building</a></li>
+						<li><a class="excluded_link hovergold" onclick="treeshow('activemenu_controls')">Developing</a></li>
+						<li><a class="excluded_link hovergold" onclick="treeshow('activemenu_controls')">Workflow</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -437,6 +448,111 @@
 				</div>
 				<div class="treebox_body">
 					Displays the current movement state of the player					
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_angle">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Angle Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the angle of the player converted into degrees rounded to 2 decimal places and truncated to be within 0&rarr;360 degrees (in case of the player having <em>the phase state</em>.
+					<br><br>
+					If the player does have <em>the phase state</em>, the watch will be colored.
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:OrangeRed"><strong>ANGLE: 179.91</strong></span>
+							</td>
+							<td>
+								Kong has <em>the phase state</em>
+							</td>
+						</tr>
+					</table>				
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_input">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Input Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the inputs that are being read from controller 1.
+					<h3>Input Watch Key</h3>
+					<table>
+						<tr>
+							<td>ABZSLR</td>
+							<td>The 
+								<span class="n64buttons a">&nbsp;</span>,
+								<span class="n64buttons b">&nbsp;</span>,
+								<span class="n64buttons z">&nbsp;</span>,
+								<span class="n64buttons start">&nbsp;</span> and
+								two shoulder buttons <span class="n64buttons l">&nbsp;</span><span class="n64buttons r">&nbsp;</span> respectively.
+							</td>
+						</tr>
+						<tr>
+							<td>D: UDLR</td>
+							<td>
+								The D-Pad directions (
+								<span class="n64buttons dup">&nbsp;</span>
+								<span class="n64buttons ddown">&nbsp;</span>
+								<span class="n64buttons dleft">&nbsp;</span>
+								<span class="n64buttons dright">&nbsp;</span>
+								) respectively
+							</td>
+						</tr>
+						<tr>
+							<td>C: UDLR</td>
+							<td>
+								The C Buttons (
+								<span class="n64buttons cup">&nbsp;</span>
+								<span class="n64buttons cdown">&nbsp;</span>
+								<span class="n64buttons cleft">&nbsp;</span>
+								<span class="n64buttons cright">&nbsp;</span>
+								) respectively
+							</td>
+						</tr>
+						<tr>
+							<td>X: -127</td>
+							<td>
+								The horizontal stick (<span class="n64buttons analog">&nbsp;</span> ) reading. The higher the magnitude, the further from the centre the stick is. Negative numbers represent the stick pointing left, positive numbers represent the stick pointing right.
+							</td>
+						</tr>
+						<tr>
+							<td>Y: -127</td>
+							<td>
+								The vertical stick (<span class="n64buttons analog">&nbsp;</span> ) reading. The higher the magnitude, the further from the centre the stick is. Negative numbers represent the stick pointing down, positive numbers represent the stick pointing up.
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_held_actor">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Held Actor Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the actor index of the object that is currently being held by the player. A full list of what each actor index means can be seen <a class="excluded_link hovergold" href="https://github.com/theballaam96/theballaam96.github.io/blob/master/data/actors.json">here</a>.
+					<br><br>
+					If you are performing <em>grabbed item manipulation</em>, then there are some extra pieces of information which can assist you with this. Since, with <em>grabbed item manipulation</em>, the actor may not exist, the actor index of your held actor is pointing to free memory and can be any value from 0&rarr;65,535.
+					<br><br>
+					If the pointer to the object you are holding matches an actor that is loaded into the actor array, the watch will be colored to signify this.
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:OrangeRed"><strong>HELD ACTOR: 98</strong></span>
+							</td>
+							<td>
+								The Kong's held actor pointer is pointing to an instance of an actor where that instance currently exists in the actor array.
+							</td>
+						</tr>
+					</table>				
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="positionstorage_controls">

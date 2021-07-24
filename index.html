@@ -119,6 +119,9 @@
 				max-width:70%;
 				top:45%;
 				transform:translateY(-50%);
+				-ms-transform: translateY(-50%);
+				-moz-transform:translateY(-50%);
+				-o-transform:translateY(-50%);
 				position:absolute;
 			}
 			.bottom {
@@ -157,6 +160,9 @@
 				bottom: 0;
 				left:50%;
 				transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				-moz-transform:translateX(-50%);
+				-o-transform:translateX(-50%);
 			}
 			.parallax {
 				min-height: 92%;
@@ -171,17 +177,14 @@
 			.parallax.parallax_2 {
 				background-image: url("./Site/assets/banner_1.png");
 			}
-			@media only screen and (max-device-width: 1366px) {
-				.parallax {
-					background-attachment: scroll;
-				}
-			}
+			
 			.bar {
 				height: 400px;
 				background-color: black;
 				border-top: 2px solid white;
 				border-bottom: 2px solid white;
 				padding-top: 10px;
+				padding-bottom: 30px;
 			}
 			.bar.copyright {
 				height: 80px;
@@ -205,6 +208,8 @@
 				border-radius: 20px;
 				color: white;
 				text-align: center;
+				height: 100%;
+				position: relative;
 			}
 			.split_section .info_box .header_img {
 				width: 15%;
@@ -214,7 +219,7 @@
 				height: 40px;
 			}
 			.split_section .info_box .info_head {
-				font-size: 24px;
+				font-size: 150%;
 				font-family: "Trebuchet MS", sans-serif;
 				padding-bottom: 10px;
 				margin-bottom: 20px;
@@ -259,6 +264,50 @@
 				width: 1em;
 				margin-left: -2em;
 			}
+			.text_section {
+				text-align: left;
+				width:80%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.info_box button {
+				width: 80%;
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			.info_box button .button_text_min {
+				display: none;
+			}
+			@media only screen and (max-device-width: 1366px) {
+				.parallax {
+					background-attachment: scroll;
+					min-height: 50%;
+				}
+				.text_section {
+					display: none;
+				}
+				.split_section .info_box .info_head {
+					font-size: 100%;
+					font-weight: bold;
+					margin-bottom: 30px;
+				}
+				.bar {
+					height: fit-content;
+					height: -moz-fit-content;
+					height: -o-fit-content;
+				}
+				.info_box button {
+					bottom: 10px;
+				}
+				.info_box button .button_text_max {
+					display: none;
+				}
+				.info_box button .button_text_min {
+					display: block;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -281,14 +330,14 @@
 			</div>
 		</div>
 		<div id="info" class="bar">
-			<div class="flexsplitter" style="width: 80%;margin-left: auto;margin-right: auto">
+			<div class="flexsplitter" style="width: 80%;margin-left: auto;margin-right: auto; height: 100%">
 				<div class="split_section" style="flex:1">
 					<div class="info_box">
 						<img src="./Site/assets/practicerom_download.png" class="header_img">
 						<div class="info_head">
 							DOWNLOAD
 						</div>
-						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
+						<div class="text_section">
 							Works:
 							<ul class="tick_list">
 								<li>NTSC-U N64</li>
@@ -299,10 +348,11 @@
 								<li>NTSC-J N64/Wii U</li>
 								<li>PAL N64/Wii U</li>
 							</ul>
-							<button onclick="goTo('./versions?version=latest')">
-								Download Latest
-							</button>
 						</div>
+						<button onclick="goTo('./versions?version=latest')">
+							<span class="button_text_max">Download Latest</span>
+							<span class="button_text_min">Download</span>
+						</button>
 					</div>
 				</div>
 				<div class="split_section" style="flex:1">
@@ -311,12 +361,14 @@
 						<div class="info_head">
 							INSTALLATION
 						</div>
-						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
-							Learn how to install the Practice ROM for your console below
-							<button onclick="goTo('./install')">
-								Installation Guide
-							</button> 
+						<div class="text_section">
+							The Donkey Kong 64 Practice ROM requires bare minimal setup for the respective console.<br><br>
+							If you are on N64, you will need a flash cart. If you are on Wii U, you will need to homebrew your Wii U.
 						</div>
+						<button onclick="goTo('./install')">
+							<span class="button_text_max">Installation Guide</span>
+							<span class="button_text_min">Guide</span>
+						</button> 
 					</div>
 				</div>
 				<div class="split_section" style="flex:1">
@@ -325,25 +377,29 @@
 						<div class="info_head">
 							MANUAL
 						</div>
-						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
-							Learn how to install the Practice ROM for your console below
+						<div class="text_section">
+							This Practice ROM boasts a whole host of features to assist with your Donkey Kong 64 needs.<br><br>
+							The manual gives further details on how to operate and use the Practice ROM to the fullest extent.
 						</div>
 						<button onclick="goTo('./features')">
-							Features Manual
+							<span class="button_text_max">Features Manual</span>
+							<span class="button_text_min">Manual</span>
 						</button> 
 					</div>
 				</div>
 				<div class="split_section" style="flex:1">
 					<div class="info_box">
-						<img src="./Site/assets/practicerom_discord.png" class="header_img">
+						<img src="./Site/assets/practicerom_discord.png" class="header_img" style="width:20%">
 						<div class="info_head">
 							DISCORD
 						</div>
-						<div style="text-align: left;width:80%;margin-left: auto;margin-right: auto">
-							Learn how to install the Practice ROM for your console below
+						<div class="text_section">
+							Donkey Kong 64 has speedrunning discord with a channel dedicated the Practice ROM.<br><br>
+							If you have any questions, queries or bug reports, feel free to mention it in that channel.
 						</div>
 						<button onclick="goTo('https://discord.gg/955MmbtQBP')">
-							DK64 Discord
+							<span class="button_text_max">DK64 Discord</span>
+							<span class="button_text_min">Link</span>
 						</button>
 					</div>
 				</div>
@@ -364,7 +420,7 @@
 				<a href="https://github.com/theballaam96/dk64-practice-rom" class="excluded_link">
 					<img src="./Site/assets/practicerom_github.png" class="footer_img">
 				</a>
-				<br><br>
+				<br>
 				In-game pictures Copyright &copy; Nintendo & Rareware Ltd, 1999 - <span id="current_year"></span> | Practice ROM made by Ballaam
 			</div>
 		</div>

@@ -157,6 +157,7 @@ Menu_MapFungi_Struct:
 	.word Menu_MapFungi_Functions // Function Array
 	.byte 12 // Array Items
 	.byte 1 // Parent Screen
+	.byte 4 // Parent Position
 
 .align
 Menu_Maps_Fungi_Portal:	
@@ -198,6 +199,7 @@ Menu_MapFungiMain_Struct:
 	.word Menu_MapFungiMain_Functions // Function Array
 	.byte 7 // Array Items
 	.byte 6 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Fungi_MushBottom:	
@@ -239,6 +241,7 @@ Menu_MapFungiGMush_Struct:
 	.word Menu_MapFungiGMush_Functions // Function Array
 	.byte 7 // Array Items
 	.byte 6 // Parent Screen
+	.byte 6 // Parent Position
 
 .align
 Menu_Maps_Fungi_MillFront:	
@@ -268,3 +271,4 @@ Menu_MapFungiMills_Struct:
 	.word Menu_MapFungiMills_Functions // Function Array
 	.byte 4 // Array Items
 	.byte 6 // Parent Screen
+	.byte 8 // Parent Position

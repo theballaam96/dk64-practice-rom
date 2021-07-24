@@ -110,6 +110,7 @@ Menu_MapAztec_Struct:
 	.word Menu_MapAztec_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 1 // Parent Screen
+	.byte 1 // Parent Position
 
 .align
 Menu_Maps_Aztec_Portal:	
@@ -143,6 +144,7 @@ Menu_MapAztecMain_Struct:
 	.word Menu_MapAztecMain_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 3 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Aztec_5DTDK:	
@@ -180,3 +182,4 @@ Menu_MapAztec5DTs_Struct:
 	.word Menu_MapAztec5DTs_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 3 // Parent Screen
+	.byte 4 // Parent Position

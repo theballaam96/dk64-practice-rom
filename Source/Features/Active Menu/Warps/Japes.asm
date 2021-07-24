@@ -98,6 +98,7 @@ Menu_MapJapes_Struct:
 	.word Menu_MapJapes_Functions // Function Array
 	.byte 9 // Array Items
 	.byte 1 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Japes_Portal:
@@ -139,3 +140,4 @@ Menu_MapJapesMain_Struct:
 	.word Menu_MapJapesMain_Functions // Function Array
 	.byte 7 // Array Items
 	.byte 2 // Parent Screen
+	.byte 0 // Parent Position

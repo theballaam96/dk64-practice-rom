@@ -211,6 +211,8 @@ VariableDisplay:
 	VDispHeldActor:
 		JAL 	ViewHeldObject
 		NOP
+		JAL 	ColourHeldObject
+		NOP
 		B 		UpdateVDispText
 		NOP
 

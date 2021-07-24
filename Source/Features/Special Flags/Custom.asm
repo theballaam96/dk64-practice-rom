@@ -194,6 +194,7 @@ Menu_Flags_Custom_Struct:
 	.word Menu_Flags_Custom_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 36 // Parent Screen
+	.byte 10 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_Custom:

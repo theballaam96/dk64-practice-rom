@@ -214,3 +214,4 @@ Menu_Cranky_Struct:
 	.word Menu_Cranky_Functions // Function Array
 	.byte 7 // Array Items
 	.byte 31 // Parent Screen
+	.byte 2 // Parent Position

@@ -104,6 +104,7 @@
 						<ul>
 							<li>Krikzz Store: <a class="excluded_link hovergold" href="https://krikzz.com/store/">Link</a></li>
 						</ul>
+						<br>
 						<li><strong>Donkey Kong 64 ROM: </strong>You will need to possess a vanilla US Donkey Kong 64 ROM.</li>
 						<ul>
 							<li>The ROM will need to have the .z64 file format. The .n64 and .v64 file formats will not work</li>
@@ -134,6 +135,7 @@
 							<li><a class="excluded_link hovergold" href="https://www.youtube.com/watch?v=LW5QVxAlDoY&ab_channel=JackSorrell">Tutorial 1</a></li>
 							<li><a class="excluded_link hovergold" href="https://www.youtube.com/watch?v=3-qnzaxL7Bg">Tutorial 2</a></li>
 						</ul>
+						<br>
 						<li><strong>Donkey Kong 64 ROM: </strong>You will need to possess a vanilla US Donkey Kong 64 ROM.</li>
 						<ul>
 							<li>The ROM will need to have the .z64 file format. The .n64 and .v64 file formats will not work</li>
@@ -158,17 +160,35 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					<div class="warning">Since the Practice ROM is different from a vanilla DK64 ROM, old emulation-exclusive bugs will occur when running on any emulator, such as the "Graphical Spiking" bug</div>
+					<div class="warning">The Donkey Kong 64 speedrun.com leaderboards do not currently allow emulator submissions.</div>
 					<ul>
 						<li>
 							<strong>An N64 Emulator: </strong>
-							If you wish to play this on an emulator, we would recommend that you use TASVideos's emulator, BizHawk. A link for BizHawk can be found below:
+							If you wish to play this on an emulator, there are a couple emulators that you can use:
 							<ul>
-								<li>BizHawk: <a class="excluded_link hovergold" href="http://tasvideos.org/BizHawk.html">Link</a></li>
-								<li>Project64 does not seem to respond correctly to the Practice ROM from testing.</li>
-								<li>Make sure to set your ROM size to 8MB</li>
+								<br>
+								<li>BizHawk - DK64 Edition: <a class="excluded_link hovergold" href="https://github.com/theballaam96/BizHawk-dk64Edition/releases/tag/DK64-1.0">Link</a></li>
+								<ul>
+									<li>This is a special build of the TASVideos BizHawk emulator that fixes some key DK64 emulation bugs for ROMs that are not the 4 vanilla DK64 ROMs</li>
+									<li>Whilst PC-intensive, this emulator is miles ahead of any other emulator right now in terms of accuracy</li>
+								</ul>
+								<br>
+								<li>Project 64 3.0: <a class="excluded_link hovergold" href="https://www.pj64-emu.com/public-releases">Link</a></li>
+								<ul>
+									<li>In order for the Practice ROM to behave correctly on Project64, you will need to tweak a few settings</li>
+									<ol>
+										<li>Go to Options&rarr;Settings to access the settings menu.</li>
+										<li><strong>Uncheck</strong> "Pause emulation when window is not active" and <strong>uncheck</strong> "Hide advanced settings".</li>
+										<li>Click "Advanced". Change the "VI refresh rate" value to 1488.</li>
+										<li>Click "Plugins". Ensure "GlideN64" is the selected video plugin</li>
+										<li>Click "Config: DONKEY KONG 64". Change "Default save type" to <strong>16-kbit EEPROM</strong></li>
+										<li>Click "Recompiler". <strong>Uncheck</strong> "Advanced block linking".</li>
+									</ol>
+									<li>Project64 has the benefit of not being PC intensive at all. However, it suffers when it comes to inaccuracies and the settings listed above are patch-work at best</li>
+								</ul>
 							</ul>
 						</li>
+						<br>
 						<li><strong>Donkey Kong 64 ROM: </strong>You will need to possess a vanilla US Donkey Kong 64 ROM.</li>
 						<ul>
 							<li>The ROM will need to have the .z64 file format. The .n64 and .v64 file formats will not work</li>
@@ -322,10 +342,13 @@
 					<uL>
 						<li>Donkey Kong 64 Discord: <a class="excluded_link hovergold" href="https://discord.gg/955MmbtQBP">Link</a></li>
 					</uL>
-					Response times are usually very quick (within an hour), however may take longer depending on time of day/other circumstances. To assist us as much as possible, please mention the following in your post:
+					To assist us as much as possible, please mention the following in your post:
 					<ul>
 						<li>What platform are you trying to set up the Practice ROM on (Wii U, Nintendo 64, Emulator).</li>
 						<li>What problem you are experiencing.</li>
+						<ul>
+							<li>If it is a bug report, please list the steps you performed to cause the bug</li>
+						</ul>
 						<li>What patching method (Beat, Lunar, Web Patcher) & version of the Practice ROM you are trying to use.</li>
 					</ul>
 				</div>

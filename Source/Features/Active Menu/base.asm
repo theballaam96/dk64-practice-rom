@@ -382,6 +382,8 @@ ActiveMenu_ConfirmOption:
 	ANDI 	a0, a0, @R_Button
 	BNEZ 	a0, ActiveMenu_ConfirmOption_Finish
 	NOP
+ActiveMenu_ConfirmOption_Background:
+	SW 		ra, @ReturnAddress
 	LA 		a0, Menu_Screens
 	LBU 	a1, @NewMenu_Screen
 	SLL 	a1, a1, 2
@@ -410,14 +412,17 @@ ActiveMenu_PreviousScreen:
 	LA 		a0, Menu_Screens
 	SLL 	a1, a1, 2
 	ADD 	a0, a0, a1
-	LW 		a0, 0x0 (a0) // Screen Struct
-	LBU 	a0, 0x9 (a0) // Parent Screen
+	LW 		t0, 0x0 (a0) // Screen Struct
+	LBU 	a0, 0x9 (t0) // Parent Screen
+	LBU 	t3, 0xA (t0) // Parent Position
 	SW 		a0, @VarStorage2
+	SW 		t3, @VarStorage3
 	JAL 	ActiveMenu_ClearMenu
 	NOP
 	LW 		a0, @VarStorage2
+	LW 		t3, @VarStorage3
 	SB 		a0, @NewMenu_Screen
-	SB 		r0, @NewMenu_Position
+	SB 		t3, @NewMenu_Position
 	JAL 	ActiveMenu_SpawnMenu
 	NOP
 	B 		ActiveMenu_PreviousScreen_Finish
@@ -431,5 +436,48 @@ ActiveMenu_PreviousScreen:
 
 	ActiveMenu_PreviousScreen_Finish:
 		LW 		ra, @ReturnAddress3
+		JR 		ra
+		NOP
+
+ActiveMenu_ShortcutButtons:
+	SW 		ra, @ReturnAddress6
+	LBU 	a0, @MenuShortcutButtonsOff
+	BNEZ 	a0, ActiveMenu_ShortcutButtons_Finish
+	NOP
+	LHU 	a1, @NewlyPressedControllerInput
+	ANDI 	a0, a1, @L_Button
+	BNEZ 	a0, ActiveMenu_ShortcutButtons_Finish
+	NOP
+	LBU 	a0, @NewMenuOpen
+	BEQZ 	a0, ActiveMenu_ShortcutButtons_Finish
+	NOP
+	LBU 	a0, @ClosingMenu
+	BNEZ 	a0, ActiveMenu_ShortcutButtons_Finish
+	NOP
+	LBU 	a0, @NewMenu_Screen
+	LI 		t0, 51
+	BEQ 	a0, t0, ActiveMenu_ShortcutButtons_Finish
+	NOP
+	ANDI 	a0, a1, @D_Left
+	BNEZ 	a0, ActiveMenu_ShortcutButtons_Return
+	NOP
+	ANDI 	a0, a1, @D_Right
+	BNEZ 	a0, ActiveMenu_ShortcutButtons_Confirm
+	NOP
+	B 		ActiveMenu_ShortcutButtons_Finish
+	NOP
+
+	ActiveMenu_ShortcutButtons_Return:
+		JAL 	ActiveMenu_PreviousScreen
+		NOP
+		B 		ActiveMenu_ShortcutButtons_Finish
+		NOP
+
+	ActiveMenu_ShortcutButtons_Confirm:	
+		JAL 	ActiveMenu_ConfirmOption_Background
+		NOP
+
+	ActiveMenu_ShortcutButtons_Finish:
+		LW 		ra, @ReturnAddress6
 		JR 		ra
 		NOP

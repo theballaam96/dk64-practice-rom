@@ -123,6 +123,7 @@ Menu_Flags_LevelTnS_Struct:
 	.word Menu_Flags_LevelTnS_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 36 // Parent Screen
+	.byte 4 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_LevelTnS:

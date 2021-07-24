@@ -4,6 +4,7 @@
 [ReturnAddress3]: 0x807FFFB8 // Compact Functions
 [ReturnAddress4]: 0x807FFFBC
 [ReturnAddress5]: 0x807FFFC0
+[ReturnAddress6]: 0x807FF5F8
 
 [VarStorage0]: 0x807FF5E0
 [VarStorage1]: 0x807FF5E4

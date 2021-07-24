@@ -87,6 +87,7 @@ Menu_Flags_Training_Struct:
 	.word Menu_Flags_Training_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 31 // Parent Screen
+	.byte 5 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_Training:

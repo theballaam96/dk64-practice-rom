@@ -175,6 +175,7 @@ Menu_Flags_FTT_Struct:
 	.word Menu_Flags_FTT_Functions // Function Array
 	.byte 12 // Array Items
 	.byte 36 // Parent Screen
+	.byte 8 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_FTT:

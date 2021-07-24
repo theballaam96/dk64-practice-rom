@@ -3,13 +3,14 @@ Menu_QOL_Addresses:
 	.word @DisableStartupSkip // Startup
 	.word @DisableForcedStorySkip // Story Skip
 	.word @PauseMenuMusicSetting // Pause Volume
+	.word @MenuShortcutButtonsOff // Shortcut Buttons
 
 .align
 Menu_QOL_ControlStruct:
 	.word Menu_QOL_Addresses ; Addresses
 	.word Menu_QOL_Control_TextStruct ; Text Information
 	.byte 46 ; Associated Screen
-	.byte 3 ; Flag Count
+	.byte 4 ; Flag Count
 
 .align
 Menu_QOL_Control_Startup_Set:
@@ -26,6 +27,10 @@ Menu_QOL_Control_PauseVolume_Quiet:
 	.asciiz "PAUSE VOLUME: QUIET"
 Menu_QOL_Control_PauseVolume_Silent:
 	.asciiz "PAUSE VOLUME: SILENT"
+Menu_QOL_Control_ShortcutButtons_On:
+	.asciiz "D-LEFT AND RIGHT TO NAVIGATE MENU: ON"
+Menu_QOL_Control_ShortcutButtons_Off:
+	.asciiz "D-LEFT AND RIGHT TO NAVIGATE MENU: OFF"
 
 .align
 Menu_QOL_Control_Startup_Struct:
@@ -38,15 +43,20 @@ Menu_QOL_Control_PauseVolume_Struct:
 	.word Menu_QOL_Control_PauseVolume_Normal
 	.word Menu_QOL_Control_PauseVolume_Quiet
 	.word Menu_QOL_Control_PauseVolume_Silent
+Menu_QOL_Control_ShortcutButtons_Struct:
+	.word Menu_QOL_Control_ShortcutButtons_On
+	.word Menu_QOL_Control_ShortcutButtons_Off
 
 .align
 Menu_QOL_Control_TextStruct:
 	.word Menu_QOL_Control_Startup_Struct
 	.word Menu_QOL_Control_Story_Struct
 	.word Menu_QOL_Control_PauseVolume_Struct
+	.word Menu_QOL_Control_ShortcutButtons_Struct
 
 .align
 Menu_QOL_Control_Array:
+	.word 0
 	.word 0
 	.word 0
 	.word 0
@@ -57,14 +67,16 @@ Menu_QOL_Control_Functions:
 	.word ActiveMenu_ToggleAddress
 	.word ActiveMenu_ToggleAddress
 	.word ActiveMenu_TogglePauseSound
+	.word ActiveMenu_ToggleAddress
 	.word ActiveMenu_PreviousScreen
 	
 .align
 Menu_QOL_Control_Struct:
 	.word Menu_QOL_Control_Array // Text Array
 	.word Menu_QOL_Control_Functions // Function Array
-	.byte 4 // Array Items
+	.byte 5 // Array Items
 	.byte 34 // Parent Screen
+	.byte 4 // Parent Position
 
 .align
 ActiveMenu_OpenQOLMenu:
@@ -92,16 +104,12 @@ ActiveMenu_RefreshQOLMenu:
 		LW 		t3, 0x4 (t0) ; Text Struct
 		ADD 	t3, t3, t8
 		LW 		t3, 0x0 (t3) ; Focused Text Info
+		ADDIU 	t7, a0, 0
 		LBU 	a0, 0x0 (a0) ; Address Value
 		SLL 	a0, a0, 2
 		ADD 	t3, t3, a0
 		LW 		t3, 0x0 (t3) ; Focused Text Pointer
-		LI 		a0, 46 ; QOL Menu Screen
-		LA 		a1, Menu_Screens
-		SLL 	a0, a0, 2
-		ADD 	a1, a1, a0
-		LW 		a1, 0x0 (a1) ; Focused Menu Screen Struct
-		LW 		a1, 0x0 (a1) ; Focused Text Array
+		LA 		a1, Menu_QOL_Control_Array
 		ADD 	a1, a1, t8 ; Focused Text Item
 		SW 		t3, 0x0 (a1)
 		LBU 	t8, 0x9 (t0) ; Flag Count

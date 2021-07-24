@@ -184,6 +184,7 @@ Menu_MapCastle_Struct:
 	.word Menu_MapCastle_Functions // Function Array
 	.byte 11 // Array Items
 	.byte 1 // Parent Screen
+	.byte 6 // Parent Position
 
 .align
 Menu_Maps_Castle_Portal:	
@@ -221,6 +222,7 @@ Menu_MapCastleMain_Struct:
 	.word Menu_MapCastleMain_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 8 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Castle_CryptDDC:	
@@ -254,6 +256,7 @@ Menu_MapCastleCrypt_Struct:
 	.word Menu_MapCastleCrypt_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 8 // Parent Screen
+	.byte 4 // Parent Position
 
 .align
 Menu_Maps_Castle_TunnelNear:	
@@ -279,6 +282,7 @@ Menu_MapCastleTunnel_Struct:
 	.word Menu_MapCastleTunnel_Functions // Function Array
 	.byte 3 // Array Items
 	.byte 8 // Parent Screen
+	.byte 6 // Parent Position
 
 .align
 Menu_Maps_Castle_Greenhouse:	
@@ -312,6 +316,7 @@ Menu_MapCastleOutsideBuildings_Struct:
 	.word Menu_MapCastleOutsideBuildings_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 8 // Parent Screen
+	.byte 8 // Parent Position
 
 .align
 Menu_Maps_Castle_Ballroom:	
@@ -345,3 +350,4 @@ Menu_MapCastleRooms_Struct:
 	.word Menu_MapCastleRooms_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 8 // Parent Screen
+	.byte 9 // Parent Position

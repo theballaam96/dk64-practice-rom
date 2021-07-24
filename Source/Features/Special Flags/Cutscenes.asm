@@ -71,6 +71,7 @@ Menu_Flags_Cutscenes_Struct:
 	.word Menu_Flags_Cutscenes_Functions // Function Array
 	.byte 4 // Array Items
 	.byte 36 // Parent Screen
+	.byte 6 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_Cutscenes:

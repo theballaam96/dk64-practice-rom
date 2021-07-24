@@ -192,8 +192,10 @@ GlobalSavestateHandler:
 			// SH		a0, @ParentMap
 			// LBU 	a0, @SavedParentExit
 			// SB		a0, @ParentExit
+			SW 		t9, @VarStorage0
 			JAL 	@ResetMap
 			NOP
+			LW 		t9, @VarStorage0
 			LBU 	a0, @SavestateStruct_Character (t9)
 			SB 		a0, @Character
 			LBU 	a0, @SavestateStruct_Map (t9) // Destination Map

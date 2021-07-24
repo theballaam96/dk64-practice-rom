@@ -118,6 +118,7 @@ Menu_MapIsles_Struct:
 	.word Menu_MapIsles_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 1 // Parent Screen
+	.byte 8 // Parent Position
 
 .align
 Menu_Maps_Isles_Escape:	
@@ -155,6 +156,7 @@ Menu_MapIslesMain_Struct:
 	.word Menu_MapIslesMain_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 10 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Isles_LobbyJapes:	
@@ -204,3 +206,4 @@ Menu_MapIslesLobbies_Struct:
 	.word Menu_MapIslesLobbies_Functions // Function Array
 	.byte 9 // Array Items
 	.byte 10 // Parent Screen
+	.byte 3 // Parent Position

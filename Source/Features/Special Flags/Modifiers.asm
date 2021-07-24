@@ -105,6 +105,7 @@ Menu_Flags_Modifiers_Struct:
 	.word Menu_Flags_Modifiers_Functions // Function Array
 	.byte 7 // Array Items
 	.byte 36 // Parent Screen
+	.byte 7 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_Modifiers:

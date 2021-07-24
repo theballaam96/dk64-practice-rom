@@ -57,6 +57,7 @@ Menu_Flags_Misc_Struct:
 	.word Menu_Flags_Misc_Functions // Function Array
 	.byte 3 // Array Items
 	.byte 36 // Parent Screen
+	.byte 9 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_Misc:

@@ -1,45 +1,3 @@
-// Focused Spawner + 0x14 (byte) => 4 // Acting Like Beaver Bother
-// Minigame Controller + 0x1C5 (Byte) => 0
-	// Beaver Bother
-	// Stealthy Snoop
-	// Speedy Swing Sortie
-	// Splish Splash Salvage
-	// DK Rambi Barrel
-	// DK BBlast Barrel
-	// Lanky Zinger Barrel
-	// Lanky Maze Barrel
-	// Tiny Bounce Barrel
-	// Tiny Floor is lava Barrel
-	// Chunky ? Box Barrel
-	// Chunky Gun Barrel
-	// Diddy Kremling Barrel
-	// Diddy Rocketbarrel Barrel
-	// Busy Barrel Barrage
-	// Mad Maze Maul
-	// Stash Snatch
-// Barrel Gun + 0x1B1 (byte) => 0
-// Barrel Gun + 0x1B3 (byte) => 0
-	// Peril Path Panic - 124
-// Barrel Gun + 0x1BD (byte) => 0
-// Barrel Gun + 0x1BF (byte) => 0
-	// Krazy Kong Klamour - 125
-// Handle + 0x11C > + 0x154 (byte) => 5
-	// Batty Barrel Bandit
-// Fly Swatter + 0x1A1 (byte) => 0
-	// Big Bug Bash
-// Kremling Kosh Controller + 0x1CB (byte) => 0
-	// Kremling Kosh
-// Searchlight + 0x19F (byte) => 0
-	// Searchlight Seek
-// Training Barrel Controller + 0x154 (byte) => 3
-	// Dive Barrel
-	// Orange Barrel
-	// Barrel Barrel
-	// Vine Barrel
-// Timer + 0x154 (byte) => 5
-	// Minecart Mayhem
-	// Teetering Turtle Trouble
-
 EndMinigame:
 	SW 		ra, @ReturnAddress4
 	LA 		a0, EndMinigame_Maps_Spawner
@@ -308,6 +266,57 @@ EndMinigame:
 
 	EndMinigame_Finish:
 		LW 		ra, @ReturnAddress4
+		JR 		ra
+		NOP
+
+LToEndMinigame:
+	SW 	 	ra, @ReturnAddress2
+	LBU 	a0, @LToEndGameOn
+	BEQZ 	a0, LToEndMinigame_Finish
+	NOP
+	LBU 	a0, @NewMenuOpen
+	BNEZ 	a0, LToEndMinigame_Finish
+	NOP
+	LBU 	a0, @ClosingMenu
+	BNEZ 	a0, LToEndMinigame_Finish
+	NOP
+	LHU 	a0, @NewlyPressedControllerInput
+	ANDI 	a0, a0, @L_Button
+	BEQZ 	a0, LToEndMinigame_Finish
+	NOP
+	JAL		EndMinigame
+	NOP
+
+	LToEndMinigame_Finish:
+		LW 		ra, @ReturnAddress2
+		JR 		ra
+		NOP
+
+ToggleEndMinigameWithL:
+	LI 		a1, 1
+	LBU 	a0, @LToEndGameOn
+	SUBU 	a0, a1, a0
+	SB 		a0, @LToEndGameOn
+	LA 		a2, Menu_CheatsToggles_Array
+	BEQZ 	a0, ToggleEndMinigameWithL_IsOff
+	NOP
+	LA 		a1, Menu_Cheats_LToEndMinigame_On
+	B 		ToggleEndMinigameWithL_Finish
+	NOP
+
+	ToggleEndMinigameWithL_IsOff:
+		LA 		a1, Menu_Cheats_LToEndMinigame_Off
+
+	ToggleEndMinigameWithL_Finish:
+		SW 		a1, 0x28 (a2)
+		SW 		ra, @ReturnAddress3
+		JAL 	ActiveMenu_ClearMenu
+		NOP
+		LI 		a0, 58
+		SB 		a0, @NewMenu_Screen
+		JAL 	ActiveMenu_SpawnMenu
+		NOP
+		LW 		ra, @ReturnAddress3
 		JR 		ra
 		NOP
 

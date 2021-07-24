@@ -50,3 +50,4 @@ Menu_MapWarp_Struct:
 	.word Menu_MapWarp_Functions // Function Array
 	.byte 10 // Array Items
 	.byte 0 // Parent Screen
+	.byte 0 // Parent Position

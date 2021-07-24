@@ -291,3 +291,4 @@ Menu_Funky_Struct:
 	.word Menu_Funky_Functions // Function Array
 	.byte 9 // Array Items
 	.byte 31 // Parent Screen
+	.byte 3 // Parent Position

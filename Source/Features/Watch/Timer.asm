@@ -469,3 +469,4 @@ Menu_TimerSettings_Struct:
 	.word Menu_TimerSettings_Functions // Function Array
 	.byte 4 // Array Items
 	.byte 0 // Parent Screen
+	.byte 4 // Parent Position

@@ -148,6 +148,7 @@ Menu_MapCaves_Struct:
 	.word Menu_MapCaves_Functions // Function Array
 	.byte 10 // Array Items
 	.byte 1 // Parent Screen
+	.byte 5 // Parent Position
 
 .align
 Menu_Maps_Caves_Portal:	
@@ -189,6 +190,7 @@ Menu_MapCavesMain_Struct:
 	.word Menu_MapCavesMain_Functions // Function Array
 	.byte 7 // Array Items
 	.byte 7 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Caves_5DCDK:	
@@ -226,6 +228,7 @@ Menu_MapCaves5DC_Struct:
 	.word Menu_MapCaves5DC_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 7 // Parent Screen
+	.byte 4 // Parent Position
 
 .align
 Menu_Maps_Caves_5DIDK:	
@@ -263,3 +266,4 @@ Menu_MapCaves5DI_Struct:
 	.word Menu_MapCaves5DI_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 7 // Parent Screen
+	.byte 5 // Parent Position

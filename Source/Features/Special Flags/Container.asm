@@ -58,6 +58,7 @@ Menu_Flags_Struct:
 	.word Menu_Flags_Functions ; Function Array
 	.byte 12 ; Array Items
 	.byte 0 ; Parent Screen
+	.byte 1 // Parent Position
 
 .align
 Menu_Flags_DataStruct:

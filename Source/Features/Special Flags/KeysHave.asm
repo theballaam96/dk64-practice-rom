@@ -143,6 +143,7 @@ Menu_Flags_KeyHave_Struct:
 	.word Menu_Flags_KeyHave_Functions // Function Array
 	.byte 9 // Array Items
 	.byte 36 // Parent Screen
+	.byte 2 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_KeyHave:

@@ -76,3 +76,4 @@ Menu_MapHelmKRool_Struct:
 	.word Menu_MapHelmKRool_Functions // Function Array
 	.byte 9 // Array Items
 	.byte 1 // Parent Screen
+	.byte 7 // Parent Position

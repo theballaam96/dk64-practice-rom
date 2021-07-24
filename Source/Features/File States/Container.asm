@@ -43,3 +43,4 @@ Menu_FileStates_Struct:
 	.word Menu_FileStates_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 0 // Parent Screen
+	.byte 5 // Parent Position

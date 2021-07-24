@@ -101,6 +101,7 @@ Menu_Flags_Kong_Struct:
 	.word Menu_Flags_Kong_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 36 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_Kong:

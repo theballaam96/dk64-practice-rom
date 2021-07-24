@@ -1,7 +1,7 @@
 .align
 Maps_GloomyGalleon_DestMap:
 	.byte 0x0 // Null for Main
-	.byte 0x67
+	.byte 0x6F
 	.byte 0x36
 	.byte 0x0 // Null for Shipwrecks
 	.byte 0x1F
@@ -138,6 +138,7 @@ Menu_MapGalleon_Struct:
 	.word Menu_MapGalleon_Functions // Function Array
 	.byte 12 // Array Items
 	.byte 1 // Parent Screen
+	.byte 3 // Parent Position
 
 .align
 Menu_Maps_Galleon_Portal:	
@@ -171,6 +172,7 @@ Menu_MapGalleonMain_Struct:
 	.word Menu_MapGalleonMain_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 5 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Maps_Galleon_5DSDK:	
@@ -216,3 +218,4 @@ Menu_MapGalleonShipwrecks_Struct:
 	.word Menu_MapGalleonShipwrecks_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 5 // Parent Screen
+	.byte 3 // Parent Position

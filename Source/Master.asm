@@ -211,6 +211,10 @@ Start:
 		NOP
 		JAL 	LTo_ToggleTB
 		NOP
+		JAL 	LToEndMinigame
+		NOP
+		JAL 	ActiveMenu_ShortcutButtons
+		NOP
 
 		// JAL 	MenuHeader
 		// NOP
@@ -1096,22 +1100,15 @@ ActiveMenu_OpenMovesMenu:
 		NOP
 
 ActiveMenu_ChangeSavestate:
-	SW 		ra, @ReturnAddress3
+	SW 		ra, @ReturnAddress5
 	LBU 	a1, @NewMenu_Position
 	SB 		a1, @FocusedSavestate
 	LA 		a0, Menu_Savestate_SelectedSavestate
 	ADDIU 	a1, a1, 0x31
 	SB 		a1, 0x10 (a0)
-	JAL 	ActiveMenu_ClearMenu
+	JAL 	ActiveMenu_PreviousScreen
 	NOP
-	LI 		a0, 27
-	SB 		a0, @NewMenu_Screen
-	SB 		r0, @NewMenu_Position
-	SB 		r0, @LZLooper_On
-	SB 		r0, @LZLooper_HasSavedData
-	JAL 	ActiveMenu_SpawnMenu
-	NOP
-	LW 		ra, @ReturnAddress3
+	LW 		ra, @ReturnAddress5
 	JR 		ra
 	NOP
 
@@ -2306,6 +2303,7 @@ Menu_Main_Struct:
 	.word Menu_Main_Functions // Function Array
 	.byte 9 // Array Items
 	.byte 0 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Screens:
@@ -2428,6 +2426,7 @@ Menu_Savestate_Struct:
 	.word Menu_Savestate_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 0 // Parent Screen
+	.byte 2 // Parent Position
 
 .align
 Menu_Savestate_SetTo1:
@@ -2461,6 +2460,7 @@ Menu_ChangeSavestate_Struct:
 	.word Menu_ChangeSavestate_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 27 // Parent Screen
+	.byte 1 // Parent Position
 
 .align
 Menu_LZLooperSettings_TurnOnLooper:
@@ -2564,6 +2564,10 @@ Menu_Cheats_LToToggleTB_Off:
 	.asciiz "L TO TOGGLE TB VOID: OFF"
 Menu_Cheats_LToToggleTB_On:
 	.asciiz "L TO TOGGLE TB VOID: ON"
+Menu_Cheats_LToEndMinigame_Off:
+	.asciiz "L TO END MINIGAME: OFF"
+Menu_Cheats_LToEndMinigame_On:
+	.asciiz "L TO END MINIGAME: ON"
 Menu_Cheats_TagWarps:
 	.asciiz "TAG ALL WARPS"
 Menu_Cheats_Corruption:
@@ -2609,6 +2613,7 @@ Menu_Cheats_Struct:
 	.word Menu_Cheats_Functions // Function Array
 	.byte 14 // Array Items
 	.byte 0 // Parent Screen
+	.byte 6 // Parent Position
 
 .align
 Menu_CheatsToggles_Array:
@@ -2622,6 +2627,7 @@ Menu_CheatsToggles_Array:
 	.word Menu_Cheats_Superspeed_Off
 	.word Menu_Cheats_LToCancelCS_Off
 	.word Menu_Cheats_LToToggleTB_Off
+	.word Menu_Cheats_LToEndMinigame_Off
 	.word Menu_Return
 
 .align
@@ -2636,14 +2642,16 @@ Menu_CheatsToggles_Functions:
 	.word ToggleSuperspeed
 	.word ToggleCSCancelLMode
 	.word ToggleTBVoidLMode
+	.word ToggleEndMinigameWithL
 	.word ActiveMenu_PreviousScreen
 
 .align
 Menu_CheatsToggles_Struct:
 	.word Menu_CheatsToggles_Array // Text Array
 	.word Menu_CheatsToggles_Functions // Function Array
-	.byte 11 // Array Items
+	.byte 12 // Array Items
 	.byte 30 // Parent Screen
+	.byte 7 // Parent Position
 
 .align
 Menu_CheatsSnag_Array:
@@ -2663,6 +2671,7 @@ Menu_CheatsSnag_Struct:
 	.word Menu_CheatsSnag_Functions // Function Array
 	.byte 3 // Array Items
 	.byte 30 // Parent Screen
+	.byte 6 // Parent Position
 
 .align
 Menu_MovesMaster_GiveAll:
@@ -2710,6 +2719,7 @@ Menu_MovesMaster_Struct:
 	.word Menu_MovesMaster_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 30 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_Gamemodes_NintendoLogo:
@@ -2787,6 +2797,7 @@ Menu_Gamemodes_Struct:
 	.word Menu_Gamemodes_Functions // Function Array
 	.byte 16 // Array Items
 	.byte 30 // Parent Screen
+	.byte 3 // Parent Position
 
 .align
 Menu_Watch_Viewed_None:
@@ -2888,20 +2899,7 @@ Menu_Watch_Struct:
 	.word Menu_Watch_Functions // Function Array
 	.byte 13 // Array Items
 	.byte 0 // Parent Screen
-
-// TO ADD:
-// File Status
-	// 101%
-	// Max%
-	// Takeoff Skip
-// Warps
-	// Set/Clear Individual
-	// Set/Clear Level
-	// Set/Clear All
-// Settings
-	// Sound
-	// Music
-	// Camera Mode
+	.byte 3 // Parent Position
 
 .align
 Menu_Settings_HorizontalDPad:
@@ -2939,6 +2937,7 @@ Menu_Settings_Struct:
 	.word Menu_Settings_Functions // Function Array
 	.byte 6 // Array Items
 	.byte 0 // Parent Screen
+	.byte 7 // Parent Position
 
 .align
 Menu_HorizontalDPad_Mode_PositionWarp:
@@ -2982,6 +2981,7 @@ Menu_HorizontalDPad_Struct:
 	.word Menu_HorizontalDPad_Functions // Function Array
 	.byte 5 // Array Items
 	.byte 34 // Parent Screen
+	.byte 0 // Parent Position
 
 .align
 Menu_DPadDown_Mode_TagAnywhere:
@@ -3013,6 +3013,7 @@ Menu_DPadDown_Struct:
 	.word Menu_DPadDown_Functions
 	.byte 4 // Array Items
 	.byte 34 // Parent Screen
+	.byte 1 // Parent Position
 
 .align
 SpawnEnemyTypeAvoid:

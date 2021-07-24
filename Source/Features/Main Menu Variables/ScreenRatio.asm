@@ -68,3 +68,4 @@ Menu_ScreenRatio_Struct:
 	.word Menu_ScreenRatio_Functions // Function Array
 	.byte 4 // Array Items
 	.byte 34 // Parent Screen
+	.byte 2 // Parent Position

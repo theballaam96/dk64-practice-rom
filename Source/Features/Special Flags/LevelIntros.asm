@@ -123,6 +123,7 @@ Menu_Flags_LevelIntro_Struct:
 	.word Menu_Flags_LevelIntro_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 36 // Parent Screen
+	.byte 3 // Parent Position
 
 .align
 ActiveMenu_OpenFlagMenu_LevelIntro:

@@ -98,6 +98,7 @@ Menu_MapFactory_Struct:
 	.word Menu_MapFactory_Functions // Function Array
 	.byte 8 // Array Items
 	.byte 1 // Parent Screen
+	.byte 2 // Parent Position
 
 .align
 Menu_Maps_Factory_Portal:	
@@ -151,3 +152,4 @@ Menu_MapFactoryMain_Struct:
 	.word Menu_MapFactoryMain_Functions // Function Array
 	.byte 10 // Array Items
 	.byte 4 // Parent Screen
+	.byte 0 // Parent Position
