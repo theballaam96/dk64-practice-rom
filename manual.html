@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Manual | Donkey Kong 64 Practice ROM</title>
+	<link rel="stylesheet" href="./Site/style/nav.css">
+	<link rel="stylesheet" href="./Site/style/main.css">
+	<link rel="stylesheet" href="./Site/style/home.css">
+	<link rel="stylesheet" href="./Site/style/maps.css">
+	<link rel="stylesheet" href="./Site/style/mj.css">
+	<link rel="stylesheet" href="./Site/style/tree.css">
+	<link rel="stylesheet" href="./Site/style/n64buttons.css">
+	<link rel="stylesheet" href="./Site/style/manual.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="./Site/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./Site/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./Site/favicon-16x16.png">
+	<link rel="shortcut icon" type="image/x-icon" href="./Site/favicon.ico">
+	<link rel="manifest" href="./Site/site.webmanifest">
+	<link rel="mask-icon" href="./Site/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="description" content="" />
+	<style type="text/css">
+		.homebox {
+			transition: 0.5s ease-in-out;
+			cursor: default;
+		}
+		.homebox.clickable:hover {
+			border-color:red;
+		}
+		.hide {
+			display: none;
+		}
+		.treebox {
+			color: white;
+			padding: 10px;
+		}
+		.treebox .treebox_head {
+			font-weight: bold;
+			padding-bottom: 10px;
+		}
+		.treebox .treebox_body {
+			padding-left: 10px;
+		}
+		.treebox .treebox_body table tbody tr td:first-of-type {
+			width: 15%;
+		}
+		td, th {
+			padding-top: 5px;
+			padding-bottom: 5px;
+			padding-right: 10px;
+			padding-left: 5px;
+		}
+		.bordertable td, .bordertable th {
+			border: 1px solid white;
+		}
+		.bordertable {
+			border-collapse: collapse;
+		}
+		.alternatingtable {
+			border-collapse: collapse;
+		}
+		.alternatingtable tbody tr:nth-child(2n+1) td:not(.level) {
+			background-color: rgba(100,100,100,0.3);
+		}
+		.alternatingtable td, .alternatingtable th {
+			padding: 7px;
+			padding-left: 12px;
+		}
+	</style>
+</head>
+<body>
+	<nav id="navigation"></nav>
+	<div class="flexsplitter max">
+		<div class="leftbox" style="flex:20%">
+			<div class="v_spacer"></div>
+			<ul class="tree">
+				<li>
+					<span class="caret">General Controls</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold" onclick="treeshow('activemenu_controls')">Active Menu</a></li>
+						<li><a class="excluded_link hovergold" onclick="treeshow('other_controls')">Other Controls</a></li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">Active Menu Map</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold" onclick="treeshow('warp_map')">Warp to Map</a></li>
+						<li>
+							<span class="caret">Special Flags</span>
+							<ul class="nested">
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_kongs')">Kongs Freed</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_keysin')">Keys Turned In</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_keyshave')">Keys In Possession</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_levelintros')">Level Intros</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_leveltns')">Level Troff 'n' Scoff</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_levelboss')">Level Boss Intros</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_cutscenes')">Cutscenes</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_modifiers')">Level Modifiers</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_ftts')">First Time Texts</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_misc')">Miscellaneous</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('flags_custom')">Custom</a></li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">Save States</span>
+							<ul class="nested">
+								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_change')">Change Savestate</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_save')">Save State</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_load_position')">Load State From Position</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_load_exit')">Load State From Exit</a></li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">Watches</span>
+							<ul class="nested">
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_off')">Turn off Display</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_lag')">Lag</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_lag_cumulative')">Cumulative Lag</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_speed')">Speed</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_timer')">Timer</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_giant_kosha_timer')">Giant Kosha Timer</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_movement_state')">Movement State</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_angle')">Angle</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_input')">Input</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_held_actor')">Held Actor</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_intro_story_timer')">Intro Story Timer</a></li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">Timer Settings</span>
+							<ul class="nested">
+								<li>
+									<span class="caret">Start On</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_start_l')">L Press</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_start_mapload')">Map Load</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_start_input')">Input</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('timer_pause')">Pause Timer on Pause Menu</a></li>
+								<li>
+									<span class="caret">End On</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_finish_l')">L Press</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_finish_transition')">Transition</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_finish_cutscene')">Cutscene</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_finish_gb')">GB Collection</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('timer_finish_transition_end')">Transition Complete</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">File States</span>
+							<ul class="nested">
+								<li><a class="excluded_link hovergold" onclick="treeshow('file_clean')">Clean Cart</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('file_takeoff')">Takeoff Skip</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('file_101')">101%</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('file_max')">Max%</a></li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">Cheats</span>
+							<ul class="nested">
+								<li>
+									<span class="caret">Alter Moveset</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_giveall')">Give All Moves</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_revokeall')">Revoke All Moves</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_cranky')">Cranky</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_funky')">Funky</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_candy')">Candy</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_tbarrels')">Training Barrels</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_camera')">Camera and Shockwave</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_coins')">Give Coins</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_restock')">Restock Inventory</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_gamemode')">Change Gamemode</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_cancelcs')">Cancel Cutscene</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_skew')">Instant Skew</a></li>
+								<li>
+									<span class="caret">Spawn Snag Cheats</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_snag_visify')">Visify Spawn Snag Collectables</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_snag_reset')">Reset Spawn Snag Collectables</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="caret">Toggles</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_levitate')">L to Levitate</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_sandstorm')">Aztec Sandstorm</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_phase')">Auto Phase State</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_moonkick')">Auto Moonkick</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_health')">Infinite Health</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_enemies')">Enemy Spawning</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_tbvoid')">Toggle Tag Barrel Void</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_superspeed')">Superspeed</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_cancelcs')">L to Cancel Cutscene</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_tbvoid')">L to Toggle TB Void</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_endminigame')">L to End Minigame</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_undoflag')">Undo Last Flag Write</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_gaincontrol')">Gain Control</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_endminigame')">Force End Minigame</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_tagallwarps')">Tag All Warps</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_corrupt')">Corrupt</a></li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">Settings</span>
+							<ul class="nested">
+								<li>
+									<span class="caret">D-Pad Left and Right Function</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_dpad_position')">Position Savestates</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_dpad_frameadvance')">Frame Advance</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="caret">D-Down Function</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_dpad_taganywhere')">Tag Anywhere</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('settings_screenratio')">Screen Ratio</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('settings_chimpy')">Camera Mode</a></li>
+								<li>
+									<span class="caret">Quality of Life Changes</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_qol_startup')">Quick Startup</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_qol_storyskip')">Forced Story Skip</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_qol_pause')">Pause Volume</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_qol_navigate')">D-Pad &larr;/&rarr; to Navigate Menu</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">Error Codes</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold" onclick="treeshow('error_01')">Error 01</a></li>
+					</ul>
+				</li>
+				<li>
+					<span class="caret">Development</span>
+					<ul class="nested">
+						<li><a class="excluded_link hovergold" onclick="treeshow('dev_building')">Building</a></li>
+						<li><a class="excluded_link hovergold" onclick="treeshow('dev_developing')">Developing</a></li>
+						<li><a class="excluded_link hovergold" onclick="treeshow('dev_workflow')">Workflow</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="rightbox" style="flex:80%">
+			<div class="v_spacer"></div>
+			<div class="treebox hide" tree-id="activemenu_controls">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Active Menu Controls</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons r">&nbsp;</span>&rarr;<span class="n64buttons l">&nbsp;</span>
+							</td>
+							<td>
+								Toggles the Active Menu being open or not.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons dup">&nbsp;</span> /<span class="n64buttons ddown">&nbsp;</span>
+							</td>
+							<td>
+								Navigate between Active Menu options
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons dleft">&nbsp;</span>
+							</td>
+							<td>
+								Return to the previous screen (Can be toggled off). Any Active Menu screen which uses <span class="n64buttons dleft">&nbsp;</span> to navigate will auto-disable this functionality
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons dright">&nbsp;</span>
+							</td>
+							<td>
+								Confirm the currently selected option (Can be toggled off). Any Active Menu screen which uses <span class="n64buttons dright">&nbsp;</span> to navigate will auto-disable this functionality
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons l">&nbsp;</span>
+							</td>
+							<td>
+								Selects Active Menu option
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="other_controls">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Other Controls</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<table>
+						<tr>
+							<td style="width:25%">
+								<span class="n64buttons l">&nbsp;</span>&rarr;<span class="n64buttons r">&nbsp;</span>&rarr;<span class="n64buttons dup">&nbsp;</span>
+							</td>
+							<td>
+								Loads the selected state with the last mode that was performed (From position/From exit).
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_off">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Turn Off Display</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Turns off the currently viewed watch. The watch will no longer appear at the bottom of the screen and the value behind it will no longer be updated unless it is naturally updated by the game's code (eg. with lag)
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_lag">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Lag Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the amount of lag currently present during gameplay. For those familiar with ScriptHawk, the conversion from Practice ROM lag watch to ScriptHawk lag watch is:<br><br>
+					<div style="text-align: center">
+						lag_scripthawk = lag_practicerom - 2
+					</div>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_lag_cumulative">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cumulative Lag Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the cumulative lag present since loading up the watch.
+					<h3>Controls</h3>
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons l">&nbsp;</span>
+							</td>
+							<td>
+								Reset the cumulative lag to 0
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_speed">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Speed Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the speed of the player, irrespective of lag.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_timer">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays a timer which is controllable by the player, and also allows for automatic triggers for timer start and end. See <a class="excluded_link hovergold" onclick="treeshow('timer_start_l')">Timer Settings</a> for more on triggers.
+					<h3>Controls</h3>
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons l">&nbsp;</span>
+							</td>
+							<td>
+								Start, Stop and reset the timer, irrespective of selected triggers.
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_giant_kosha_timer">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Giant Kosha Timer Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the timer responsible for controlling Giant Kosha's tantrums within Crystal Caves. For extensive information on how this works, look at this pastebin: <a href="https://pastebin.com/s04eUr0g" class="excluded_link hovergold">Click Here</a>.<br><br>
+					The watch colors itself based on various factors about the timer.
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:DarkCyan"><strong>KOSHA TIMER: 800</strong></span>
+							</td>
+							<td>
+								Timer is frozen as the kong is within a certain subset of chunks (Chunk is the game's way of dividing up a map to reduce amount of map geometry to load)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:Gold"><strong>KOSHA TIMER: 200</strong></span>
+							</td>
+							<td>
+								Timer is within a range where entering a Tag Barrel or Rocketbarrel will reset the timer back to 800
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:Chocolate"><strong>KOSHA TIMER: 100</strong></span>
+							</td>
+							<td>
+								Timer is within range of where the tantrum music will commence
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:DarkRed"><strong>KOSHA TIMER: 50</strong></span>
+							</td>
+							<td>
+								Timer is within range of where, if the Giant Kosha cutscene has not been viewed, the cutscene will be called up.
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_movement_state">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Movement State Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the current movement state of the player					
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_angle">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Angle Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the angle of the player converted into degrees rounded to 2 decimal places and truncated to be within 0&rarr;360 degrees (in case of the player having <em>the phase state</em>.
+					<br><br>
+					If the player does have <em>the phase state</em>, the watch will be colored.
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:OrangeRed"><strong>ANGLE: 179.91</strong></span>
+							</td>
+							<td>
+								Kong has <em>the phase state</em>
+							</td>
+						</tr>
+					</table>				
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_input">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Input Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the inputs that are being read from controller 1.
+					<h3>Input Watch Key</h3>
+					<table>
+						<tr>
+							<td>ABZSLR</td>
+							<td>The 
+								<span class="n64buttons a">&nbsp;</span>,
+								<span class="n64buttons b">&nbsp;</span>,
+								<span class="n64buttons z">&nbsp;</span>,
+								<span class="n64buttons start">&nbsp;</span> and
+								two shoulder buttons <span class="n64buttons l">&nbsp;</span><span class="n64buttons r">&nbsp;</span> respectively.
+							</td>
+						</tr>
+						<tr>
+							<td>D: UDLR</td>
+							<td>
+								The D-Pad directions (
+								<span class="n64buttons dup">&nbsp;</span>
+								<span class="n64buttons ddown">&nbsp;</span>
+								<span class="n64buttons dleft">&nbsp;</span>
+								<span class="n64buttons dright">&nbsp;</span>
+								) respectively
+							</td>
+						</tr>
+						<tr>
+							<td>C: UDLR</td>
+							<td>
+								The C Buttons (
+								<span class="n64buttons cup">&nbsp;</span>
+								<span class="n64buttons cdown">&nbsp;</span>
+								<span class="n64buttons cleft">&nbsp;</span>
+								<span class="n64buttons cright">&nbsp;</span>
+								) respectively
+							</td>
+						</tr>
+						<tr>
+							<td>X: -127</td>
+							<td>
+								The horizontal stick (<span class="n64buttons analog">&nbsp;</span> ) reading. The higher the magnitude, the further from the centre the stick is. Negative numbers represent the stick pointing left, positive numbers represent the stick pointing right.
+							</td>
+						</tr>
+						<tr>
+							<td>Y: -127</td>
+							<td>
+								The vertical stick (<span class="n64buttons analog">&nbsp;</span> ) reading. The higher the magnitude, the further from the centre the stick is. Negative numbers represent the stick pointing down, positive numbers represent the stick pointing up.
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_held_actor">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Held Actor Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the actor index of the object that is currently being held by the player. A full list of what each actor index means can be seen <a class="excluded_link hovergold" href="https://github.com/theballaam96/theballaam96.github.io/blob/master/data/actors.json">here</a>.
+					<br><br>
+					If you are performing <em>grabbed item manipulation</em>, then there are some extra pieces of information which can assist you with this. Since, with <em>grabbed item manipulation</em>, the actor may not exist, the actor index of your held actor is pointing to free memory and can be any value from 0&rarr;65,535.
+					<br><br>
+					If the pointer to the object you are holding matches an actor that is loaded into the actor array, the watch will be colored to signify this.
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:OrangeRed"><strong>HELD ACTOR: 98</strong></span>
+							</td>
+							<td>
+								The Kong's held actor pointer is pointing to an instance of an actor where that instance currently exists in the actor array.
+							</td>
+						</tr>
+					</table>				
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_intro_story_timer">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">ISG Timer Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the timer responsible for controlling the game's Intro Story, mainly used in speedruns for a sequence break called <em>"Intro Story Glitch"</em>
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:OrangeRed"><strong>ISG TIME: 0:55.00</strong></span>
+							</td>
+							<td>
+								An ISG fadeout is pending
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:Red"><strong>ISG TIME: 1:24.50</strong></span>
+							</td>
+							<td>
+								The game is fading into an Intro Story cutscene
+							</td>
+						</tr>
+					</table>				
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_kongs">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Kong Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles the flags tied to whether the kongs are freed			
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_keysin">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Keys Turned In Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles the flags tied to whether the 8 boss keys are turned in or not, likewise toggles which level lobbies are open.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_keyshave">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Keys In Possession Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles the flags tied to whether the player has the 8 boss keys in the game.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_levelintros">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Level Intros Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether the level introductory cutscenes have been watched.
+					<br><br>
+					<strong>NOTE: </strong>The Factory Intro cutscene is only cleared if you have watched the "Chunky Help Me" cutscene.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_leveltns">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Level Troff 'n' Scoff Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether the Troff 'n' Scoff portals are closed in every level
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_levelboss">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Level Boss Intro Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether the long boss introductory cutscenes for each of the 7 boss key bosses have been watched
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_cutscenes">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cutscene Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether you have watched a particular cutscene
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_modifiers">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Level Modifier Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles various flags which control significant aspects of levels (eg. Fungi Daytime, Galleon Water Level)
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_ftts">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">First Time Text Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether various first time texts have been watched/read
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_misc">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Miscellaneous Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles other various flags of notable importance
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_custom">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Custom Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles any flag you desire by modifying the target byte, bit and flag type using <span class="n64buttons dleft">&nbsp;</span> and <span class="n64buttons dright">&nbsp;</span>.
+					<br><br>
+					Documentation for what each byte, bit and flag type means is here:
+					<ul>
+						<li><a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64_flags.lua">Permanent Flags</a>></li>
+						<li><a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64_temp_flags.lua">Temporary Flags</a>></li>
+						<li><a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64.lua#L625">Global Flags</a>></li>
+					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="savestate_change">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Change Savestate</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes which savestate will be referenced when saving and loading state. 4 savestate slots are currently supported.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="savestate_save">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Save State</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Due to the limited amount of memory space available, the Practice ROM stores a limited amount of variables. The <em>"Save State"</em> function stores various game variables to the selected savestate object.
+					<h3>Stored variables</h3>
+					<ul>
+						<li>Inventory Base</li>
+						<ul>
+							<li>Standard Ammo</li>
+							<li>Homing Ammo</li>
+							<li>Oranges</li>
+							<li>Crystals</li>
+							<li>Film</li>
+							<li>Health</li>
+							<li>Melons</li>
+						</ul>
+						<li>Player 1's X, Y and Z co-ordinates</li>
+						<li>Current Map</li>
+						<li>The entrance Player 1 last entered the map from</li>
+						<li>The character Player 1 is playing as</li>
+						<li>Does the savestate have saved data</li>
+						<ul>
+							<li>If there is no saved data within the state, the state cannot be loaded</li>
+						</ul>
+						<li>The temporary flag block</li>
+						<li>The permanent flag block</li>
+						<li>Kong Base</li>
+						<ul>
+							<li>For each Kong:</li>
+							<ul>
+								<li>Special move level</li>
+								<li>Simian slam level</li>
+								<li>Weapon Upgrades bitfield</li>
+								<li>Ammo Belt level</li>
+								<li>Instrument bitfield</li>
+								<li>Coin count</li>
+								<li>Instrument Energy</li>
+								<li>For each level:</li>
+								<ul>
+									<li>Possessed Colored Bananas</li>
+									<li>Colored Bananas turned into Troff 'n' Scoff</li>
+									<li>Possessed Golden Bananas</li>
+								</ul>
+							</ul>
+						</ul>
+					</ul>
+					A savestate cannot be made if the player is within a certain sublist of maps:
+					<ul class="bad_savestate_maps"></ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="savestate_load_position">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Load State from position</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If the selected savestate has save data, this function will load the data from that savestate, reset the map and will cause a transition to the stored map. The kong will spawn in the position indicated by the position data inside the savestate.
+					<br><br>
+					If the selected savestate has no save data, an error sound will play.
+					<br><br>
+					If the map the player is in is within a certain sublist:
+					<ul class="bad_savestate_maps"></ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="savestate_load_exit">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Load State from exit</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If the selected savestate has save data, this function will load the data from that savestate, reset the map and will cause a transition to the stored map. The kong will spawn from the entrance you last entered from when the savestate was created as stored inside the savestate object.
+					<br><br>
+					If the selected savestate has no save data, an error sound will play.
+					<br><br>
+					If the map the player is in is within a certain sublist:
+					<ul class="bad_savestate_maps"></ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="warp_map">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Warp to Map</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Warps to the map selected, resetting the map in the process. A warp to a map cannot be initiated if you are within a certain sublist of maps:
+					<ul class="bad_savestate_maps"></ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_start_l">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Start Trigger: L Press</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will start when Player 1 presses<span class="n64buttons l">&nbsp;</span>.
+					<br><br>
+					<strong>NOTE:</strong><span class="n64buttons l">&nbsp;</span> always starts the timer. This setting depicts that no other game variable will cause the starting of the timer.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_start_mapload">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Start Trigger: Map Load</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will start when a map begins to load after all of the map files from ROM have been transferred to memory.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_start_input">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Start Trigger: Input</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will start when the player presses a new button or moves the analog stick after having a neutral stick input.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_pause">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Pause Timer on Pause Menu</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Determines whether the timer will pause when the game's pause menu is open.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_finish_l">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Finish Trigger: L Press</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will finish when Player 1 presses<span class="n64buttons l">&nbsp;</span>.
+					<br><br>
+					<strong>NOTE:</strong><span class="n64buttons l">&nbsp;</span> always finishes the timer. This setting depicts that no other game variable will cause the finishing of the timer.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_finish_transition">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Finish Trigger: Transition</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will finish when a transition begins (eg. A "DK Spin" transition or a fade transition)
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_finish_cutscene">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Finish Trigger: Cutscene</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will finish when a cutscene is registered as playing
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_finish_gb">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Finish Trigger: GB Collection</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will finish when a kong is registered as touching a golden banana.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="timer_finish_transition_end">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timer Finish Trigger: Transition End</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Timer will finish as soon as a transition is completed (eg. A "DK Spin" transition or a fade transition)
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="file_clean">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">File Status: Clean File</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Sets the file state to match a completely new file, wiping all progress including move purchases
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="file_takeoff">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">File Status: Takeoff Skip</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Sets the file state to setup the flags to practice <em>"Takeoff Skip"</em> for No Levels Early
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="file_101">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">File Status: 101%</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Sets the file state to match the state of a completed 101% file
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="file_max">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">File Status: Max%</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Sets the file state to match the state of a Max%/132%/-124% file
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_giveall">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Give All</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Gives player 1 all moves in the game
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_revokeall">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Revoke All</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Clears all moves from player 1
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_cranky">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Cranky</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes the moves for each kong that are acquired from Cranky
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_candy">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Candy</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes the moves for each kong that are acquired from Candy
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_funky">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Funky</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes the moves for each kong that are acquired from Funky
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_camera">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Camera and Shockwave</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles the possession of the Fairy camera/Shockwave ability that is granted by the Banana Fairy Queen
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_moves_tbarrels">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Moves: Training Barrels</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles the four abilities that are granted from the four training barrels in Training Grounds.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_coins">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Give Coins</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Set each kong's coin count to 50.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_restock">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Restock Inventory</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Set the inventory counts to the following:
+					<ul>
+						<li><strong>Standard Ammo: </strong>200</li>
+						<li><strong>Crystals: </strong>20</li>
+						<li><strong>Film: </strong>20</li>
+						<li><strong>Oranges: </strong>20</li>
+						<li><strong>Health: </strong>4 x Melon Count</li>
+						<li><strong>Instrument Ammo: </strong>10</li>
+					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_gamemode">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Change Gamemode</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Set the game's mode to one of 15 options. For more info, see the following <a class="excluded_link hovergold" href="https://dk64.fandom.com/wiki/Game_Modes">wiki page</a>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_skew">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Instant Skew</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Set the kongs rotation to 90&deg; to match a traditional front-facing skew
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_cancelcs">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Cancel Cutscene</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If a cutscene is playing, selecting this option instantly cancels the cutscene
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_snag_visify">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Spawn Snag Cheats: Visify</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Visifies all spawn snag collectables inside the current map and makes the collectable tangible.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_snag_reset">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Spawn Snag Cheats: Reset</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Resets all spawn snag collectables inside the current map to their default state.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_superspeed">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Superspeed</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Multiplies player 1's horizontal speed by 5.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_tbvoid">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Toggle Tag Barrel Void</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles the black "void" that is produced when you enter Tag Barrels or when a kong plays an instrument.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_enemies">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Toggle Enemy Spawning</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether most characters can spawn from a <em>Character Spawner</em>.<br><br>
+					Here is a list of actors which are on the exception list:
+					<ul>
+						<li>Giant Clam</li>
+						<li>Army Dillo</li>
+						<li>Cranky</li>
+						<li>Funky</li>
+						<li>Candy</li>
+						<li>Beetle</li>
+						<li>Mermaid</li>
+						<li>Cutscene DK</li>
+						<li>Cutscene Diddy</li>
+						<li>Cutscene Lanky</li>
+						<li>Cutscene Tiny</li>
+						<li>Cutscene Chunky</li>
+						<li>T&S Padlock</li>
+						<li>Llama</li>
+						<li>MJ</li>
+						<li>Race Vulture</li>
+						<li>Pufftoss</li>
+						<li>K Rool's Foot</li>
+						<li>Troff</li>
+						<li>Bad Hit Detection Man</li>
+						<li>Toy Box (Bad Hit Detection Man)</li>
+						<li>Scoff</li>
+						<li>Dogadon</li>
+						<li>Mech Fish</li>
+						<li>Fairy</li>
+						<li>Rabbit</li>
+						<li>Owl</li>
+						<li>Rabbit</li>
+						<li>K. Lumsy</li>
+						<li>Spider Boss</li>
+						<li>K. Rool (DK Phase)</li>
+						<li>Enemy Car</li>
+						<li>K. Rool (Diddy Phase)</li>
+						<li>K. Rool (Lanky Phase)</li>
+						<li>K. Rool (Tiny Phase)</li>
+						<li>K. Rool (Chunky Phase)</li>
+						<li>Bug</li>
+						<li>BFI Fairy</li>
+						<li>Ice Tomato</li>
+					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_health">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Infinite Health</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If enabled, the player will receive infinite health. This system has similar flaws to the "infinite health" granted if the game is in "Main Menu Mode".
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_moonkick">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Auto-Moonkick</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If enabled, and DK kicks, the game will modify the gravity of the kick to emulate a moonkick.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_phase">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Auto-Phase State</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If enabled, the game will continually grant the player the <em>"phase state"</em>. Due to various reasons, in order to clip through a wall, you will need to perform a move which would normally be involved in a phase trick.<br>This includes:
+					<ul>
+						<li>Jumping/Falling</li>
+						<li>Crouching</li>
+						<li>Swimming</li>
+					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_sandstorm">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Toggle Sandstorm</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether the sandstorm is active in Angry Aztec. This is only toggleable if the player is in the Angry Aztec map (if the player is not in Aztec, the menu text is displayed as "Aztec Sandstorm: Unknown").
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_levitate">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: L to Levitate</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Moves the player upwards upon holding the<span class="n64buttons l">&nbsp;</span> button. Pressing other buttons can adjust the rate at which you levitate.
+					<h3>Levitate Speeds</h3>
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons l">&nbsp;</span>
+							</td>
+							<td>
+								10 units per frame
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons l">&nbsp;</span> +<span class="n64buttons z">&nbsp;</span>
+							</td>
+							<td>
+								5 units per frame
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons l">&nbsp;</span> +<span class="n64buttons r">&nbsp;</span>
+							</td>
+							<td>
+								20 units per frame
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_l_endminigame">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: L to End Minigame</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Presssing<span class="n64buttons l">&nbsp;</span> performs the "End Minigame" function as documented here: <a class="excluded_link hovergold" onclick="treeshow('cheats_endminigame')">Link</a>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_l_tbvoid">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: L to Toggle TB Void</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Presssing<span class="n64buttons l">&nbsp;</span> performs the "Toggle Tag Barrel Void" function as documented here: <a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_tbvoid')">Link</a>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_l_cancelcs">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: L to Cancel Cutscene</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Presssing<span class="n64buttons l">&nbsp;</span> performs the "Cancel Cutscene" function as documented here: <a class="excluded_link hovergold" onclick="treeshow('cheats_cancelcs')">Link</a>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_endminigame">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: End Minigame</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Artificially causes a successful completion of a minigame. If you are not in a minigame or the minigame isn't ready to be artificially completed, you will hear a quack sound.
+					Causes of the quack sound outside of where you are map-wise include:
+					<h3>Quack reasons</h3>
+					<table class="bordertable">
+						<tr>
+							<td>Beaver Bother</td>
+							<td rowspan="8">The minigame controller hasn't spawned yet</td>
+						</tr>
+						<tr>
+							<td>Stealthy Snoop</td>
+						</tr>
+						<tr>
+							<td>Speedy Swing Sortie</td>
+						</tr>
+						<tr>
+							<td>Splish Splash Salvage</td>
+						</tr>
+						<tr>
+							<td>Helm Minigames</td>
+						</tr>
+						<tr>
+							<td>Busy Barrel Barrage</td>
+						</tr>
+						<tr>
+							<td>Mad Maze Maul</td>
+						</tr>
+						<tr>
+							<td>Stash Snatch</td>
+						</tr>
+						<tr>
+							<td>Minecart Mayhem</td>
+							<td rowspan="2">The timer hasn't spawned yet</td>
+						</tr>
+						<tr>
+							<td>Teetering Turtle Trouble</td>
+						</tr>
+						<tr>
+							<td>Batty Barrel Bandit</td>
+							<td>The starting text hasn't been cancelled yet</td>
+						</tr>
+						<tr>
+							<td>Training Barrels</td>
+							<td>A cutscene is playing</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_corrupt">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Corrupt</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<div class="warning">The corruption glitch is incredibly prone to crashing. Any crashes which result from using this button are a likely side-effect of corruption</div>
+					This function automatically corrupts the game in the same likeness as feather corruption.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_tagallwarps">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Tag All Warps</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					This function sets the flag for all warps in the game.
+					Some warps are tied to Golden Bananas. In these scenarios, the Golden Banana flag is set instead of the warp.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_undoflag">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Undo Last Flag Write</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Reverts the past flag write. Upon every flag write, the Practice ROM writes the flag byte & bit, the flag type and whether the flag was set to true or false. The "Undo last flag write" function writes the same flag byte, bit & type to the opposite boolean value.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_gaincontrol">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Gain Control</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					This function grants control back to the player in situations where the player does not have control.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_dpad_position">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Tie D-Pad to Position Savestates</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Ties<span class="n64buttons dleft">&nbsp;</span> and<span class="n64buttons dright"></span> to Position Savestates.
+					<br>
+					Position Savestates stores the following information for player 1:
+					<ul>
+						<li>X, Y and Z co-ordinates</li>
+						<li>Stored positions</li>
+						<li>Speed and Acceleration vectors</li>
+						<li>Facing angle</li>
+						<li>Skew angle</li>
+						<li>Floor</li>
+					</ul>
+					<h3>Button mapping</h3>
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons dright">&nbsp;</span>
+							</td>
+							<td>
+								Saves position data
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons dleft">&nbsp;</span>
+							</td>
+							<td>
+								Loads position data if the player is currently inside the map where the position savestate was created
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_dpad_frameadvance">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Tie D-Pad to Frame Advance</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Ties<span class="n64buttons dleft">&nbsp;</span> and<span class="n64buttons dright"></span> to Frame Advance.
+					<br>
+					The Practice ROM "frame advance" mimics traditional frame advance found on PC emulators. To do this, the Practice ROM utilises the same mechanics used for traditionally pausing the game plus some additional patches to accomodate other game aspects, including:
+					<ul>
+						<li>Artificially pausing the Helm Timer</li>
+						<li>Artificially pausing the Practice ROM Timer</li>
+						<li>Artificially modifies the games input so an input can be buffered during frame advance to be "pressed" on the next unpaused frame</li> 
+					</ul>
+					These additional patches are work in progress and some things are missing as of right now, including:
+					<ul>
+						<li>Artificially pausing the Intro Story timer</li>
+						<li>Artificially pausing the K. Rool timer</li>
+					</ul>
+					<h3>Button mapping</h3>
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons dright">&nbsp;</span>
+							</td>
+							<td>
+								Pause/Play gameplay
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons dleft">&nbsp;</span>
+							</td>
+							<td>
+								Advance to the next frame (pauses if unpaused)
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_dpad_taganywhere">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Tie D-Down to Tag Anywhere</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Ties<span class="n64buttons ddown">&nbsp;</span> to Tag Anywhere.
+					<br>
+					<em>"Tag Anywhere"</em> allows the player to tag without utilising a Tag Barrel, popularised by the <a class="excluded_link hovergold" href="https://pastebin.com/m82XBvYm">Tag Anywhere ROM Hack</a>.
+					<br>
+					Tag Anywhere cannot be performed under some circumstances:
+					<ul>
+						<li>When playing as a kong who is not part of the main 5. This includes when you have temporarily transformed into an animal buddy</li>
+					</ul>
+					<h3>Button mapping</h3>
+					<table>
+						<tr>
+							<td>
+								<span class="n64buttons ddown">&nbsp;</span>
+							</td>
+							<td>
+								Tags to the next kong in the order (If active menu is not open)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons r">&nbsp;</span>&rarr;<span class="n64buttons ddown">&nbsp;</span>
+							</td>
+							<td>
+								Tags to the next kong in the order (If active menu is open)
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_screenratio">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Screen Ratio</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes the screen ratio between 4:3 and 16:9
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_chimpy">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Chimpy Cam</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes the camera mode between "Free Cam" and "Follow Cam"
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_qol_storyskip">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Story Skip</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles between whether the Practice ROM forces Story Skip to be on
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_qol_pause">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Pause Menu Volume</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Changes the volume of the pause menu background music between the following settings
+					<h3>Pause Menu Volume</h3>
+					<table>
+						<tr>
+							<td>Normal</td>
+							<td>100%</td>
+						</tr>
+						<tr>
+							<td>Quiet</td>
+							<td>50%</td>
+						</tr>
+						<tr>
+							<td>Silent</td>
+							<td>0%</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_qol_startup">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Quick Startup</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether the game skips some of the boot sequence before getting to the main menu.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_qol_navigate">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: D-Left and Right to Navigate Menu</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Toggles whether <span class="n64buttons dleft">&nbsp;</span> and <span class="n64buttons dright">&nbsp;</span> are used to navigate between Active Menu screens.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="error_01">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Error Codes: Error 01</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Game is close to performing corruption, a glitch where too many actors are loaded at the same time. This happens in very rare scenarios. However, if such a circumstance occurs, the game closes the Practice ROM menu to try and avoid it.
+					<br><br>
+					If you are trying to achieve corruption, the Practice ROM has a button to do that: <a class="excluded_link hovergold" onclick="treeshow('cheats_corrupt')">Link</a>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="dev_building">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Development: Building</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					The Practice ROM repo allows any user to build a current development version of the DK64 Practice ROM. In order to build the Practice ROM, you will need the following:
+					<ul>
+						<li>A .z64 Donkey Kong 64 US <strong>Vanilla</strong> ROM</li>
+						<ul>
+							<li>ROM Hash: <span class="highlight">CF806FF2603640A748FCA5026DED28802F1F4A50</span></li>
+							<li>The ROM must be titled "<span class="highlight">dk64.z64</span>" and placed in the parent directory for the repository.</li>
+						</ul>
+						<li>Python 3.x installed or a text editor which can run a python terminal (Eg. Sublime Text)</li>
+						<li>Lua for Windows 5.1.5, which can be found here: <a class="excluded_link hovergold" href="https://github.com/rjpcomputing/luaforwindows/releases">Link</a></li>
+					</ul>
+					Once these are installed, run <span class="highlight">build.py</span> in the Build directory. Assuming your vanilla ROM is in the right directory, everything should build as normal. The output Practice ROM will be in the Build directory titled "<span class="highlight">dk64-practice-rom.z64</span>".
+					<br><br>
+					If you have a problem with building this and have everything listed above, raise it as a GitHub issue.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="dev_developing">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Development: Developing</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					The Practice ROM is completely open source, and allows you to browse the code to see how it works. Additionally, you can develop additional code to add new features or edit existing ones.
+					<br><br>
+					When you want to run the Practice ROM code in ScriptHawk, which is the main tool we use to run test ROM Hack code for DK64 ROM Hacks, you will need to do the following:
+					<ol>
+						<li>Clone the <a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk">ScriptHawk repository</a></li>
+						<li>Run <span class="highlight">personaliseASM.py</span> to modify the ASM in your local copy to your system's file structure</li>
+						<li>Open BizHawk and run your vanilla DK64 ROM. Save an emulator savestate at the file select screen and open up the lua console. Run <span class="highlight">scripthawk.lua</span> in the ScriptHawk Directory. After this, run the following command:
+						<ul>
+							<li>console.clear();loadASMPatch()
+						</ul>
+						<li>After running this, select the <span class="highlight">Master.asm</span> file in the Practice ROM directory</li>
+					</ol>
+					To modify the source code of the Practice ROM, I would advise learning a few languages:
+					<ul>
+						<li>If you wish to modify the code that runs during gameplay (eg. Frame advance, Savestates etc.), you will need to learn MIPS Assembler. Looking at <a class="excluded_link hovergold" href="http://math-atlas.sourceforge.net/devel/assembly/mips-iv.pdf">this manual</a> and some time spent with Project64's debugger should assist you with learning this.</li>
+						<li>If you wish to make modifications to this website, you will need to learn HTML, Javascript and CSS.</li>
+						<li>If you wish to modify the games assets, you will need to learn some Python. Some of the game's assets have been listed on <a class="excluded_link hovergold" href="https://docs.google.com/spreadsheets/d/18gBPArJ2abdR3P9BeQw3OD_PLAjITFaE3r82bWUdC8U/edit#gid=994694719">this excel spreadsheet</a> regarding ROM location.<br>Some assets may need to be decompressed when pulling from ROM. Whilst you can use Gedecompress to extract the assets, and does prove useful for determining file size, the Practice ROM requires that <strong>NOTHING</strong> in terms of copyrighted game assets are stored in the repository, and so the source code must use the GZip Python library.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="dev_workflow">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Development: Workflow</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					If you wish to contribute to the Practice ROM, create a separate branch or a fork of the Practice ROM repository so you can make your updates without altering the main Practice ROM repository/branch.
+					<br><br>
+					Once you are happy with the changes, make a pull request of your changes to the Practice ROM repository/branch. Before an update from an external contributor can be pushed to the main branch, a checklist of the update must be completed:
+					<ul>
+						<li>If the update includes a game code or python change:</li>
+						<ol>
+							<li>The update must work on an original N64 console and produce the intended effect</li>
+							<li>The update must have been tested to a significant degree, including console testing, to ensure it is <strong>at least</strong> 99% bug free</li>
+							<li>The update must provide something of substance and try to be somewhat space efficient (if additional ROM Code has been added)</li>
+							<li>If a new Active Menu option has been added, it must be placed in a sensible spot</li>
+						</ol>
+						<li>If the update includes a website change:</li>
+						<ol>
+							<li>It must work on the following browsers</li>
+							<ul>
+								<li>Google Chrome</li>
+								<li>Mozilla Firefox</li>
+								<li>Microsoft Edge</li>
+							</ul>
+							<li>It must work with a variety of devices and screen resolutions</li>
+							<ul>
+								<li>You can use Chrome Dev tools to mimic devices and screen resolutions</li>
+							</ul>
+						</ol>
+						<li>Irrespective of the purpose of the change:</li>
+						<ul>
+							<li>Any new files must be placed in a sensible location. If your file is classed as a member of an item on the below list, place your file in that location</li>
+							<ul>
+								<li><strong>Site-Only non-HTML files:</strong> "./Site"</li>
+								<li><strong>ROM Hack constants (eg. In-game addresses):</strong> "./Source/Memory"</li>
+								<li><strong>ROM Hack code:</strong> "./Source/Features"</li>
+								<li><strong>ROM Hack assets:</strong> "./Source/Non-Code"</li>
+								<li><strong>Building scripts:</strong> "./Build"</li>
+							</ul>
+						</ul>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./Site/script/nav.js"></script>
+	<script src="./Site/script/tree.js"></script>
+	<script>
+		function treeshow(treeid) {
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+
+			for (t = 0; t < treeboxes.length; t++) {
+				var found_treeid = treeboxes[t].getAttribute("tree-id")
+				if (found_treeid == treeid) {
+					treeboxes[t].classList.remove("hide")
+					window.history.replaceState(null, null, "?guide=" + found_treeid)
+				} else {
+					treeboxes[t].classList.add("hide")
+				}
+			}
+		}
+		function goThroughParams() {
+			var queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString)
+			const guide_num = urlParams.get("guide");
+			console.log("Detected Guide: " + guide_num)
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+			var guide = "";
+
+			for (t = 0; t < treeboxes.length; t++) {
+				guide = treeboxes[t].getAttribute("tree-id")
+				if (guide == guide_num) {
+					treeboxes[t].classList.remove("hide")
+				} else {
+					treeboxes[t].classList.add("hide")
+				}
+			}
+		}
+		goThroughParams()
+
+		function generateBadMapsList() {
+			var bad_maps = [
+				"Character Shops (Funky, Cranky, Candy, Snide)",
+				"Training, Bonus and Helm Barrels",
+				"Troff 'n' Scoff",
+				"Crown Maps",
+			];
+			var lists = document.getElementsByClassName("bad_savestate_maps")
+			for (l = 0; l < lists.length; l++) {
+				bad_maps.forEach(map => {
+					var li = document.createElement("li")
+					var li_text = document.createTextNode(map)
+					li.appendChild(li_text)
+					lists[l].appendChild(li)
+				})
+			}
+		}
+		generateBadMapsList()
+	</script>
+</body>
+</html>

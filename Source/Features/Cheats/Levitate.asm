@@ -33,7 +33,7 @@ LToLevitate:
 
 	SlowLevitate:
 		B 		IncrementHeight
-		LUI 	a1, 0x40A0 // 10 as float
+		LUI 	a1, 0x40A0 // 5 as float
 
 	NormalLevitate:
 		LUI 	a1, 0x4120 // 10 as float

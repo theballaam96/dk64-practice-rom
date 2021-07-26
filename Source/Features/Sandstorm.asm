@@ -48,7 +48,7 @@ ToggleAztecSandstorm:
 	LI 		a2, 1
 	SUBU 	a1, a2, a1
 	SB 		a1, 0x0 (a0)
-	JAL 	ActiveMenu_OpenCheatsMenu
+	JAL 	ActiveMenu_OpenCheatsTogglesMenu
 	NOP
 
 	ToggleSandstorm_NotAztec:

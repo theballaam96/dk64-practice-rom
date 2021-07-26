@@ -31,7 +31,7 @@ var navHtml = "\
 						</a>\
 					</li>\
 					<li>\
-						<a href='/features' class='nav_link'>\
+						<a href='/manual' class='nav_link'>\
 							<span>\
 								<strong>\
 									Manual\
