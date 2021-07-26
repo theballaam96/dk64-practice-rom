@@ -1,45 +1,60 @@
 var navHtml = "\
 	<div class='navbar' id='navbar'>\
 		<div class='items'>\
-			<div class='logo'>\
-				<a href='/'>\
-					<ul>\
-						<li>\
-							Donkey Kong 64 Practice ROM\
-						</li>\
-					</ul>\
-				</a>\
-			</div>\
-			<div class='links'>\
+			<div class='side'>\
 				<ul class='container text noselect'>\
 					<li>\
-						<a href='/' class='nav_link'>\
-							<span>\
-								<strong>\
-									Home\
-								</strong>\
-							</span>\
-						</a>\
-					</li>\
-					<li>\
-						<a href='/versions?version=latest' class='nav_link'>\
-							<span>\
-								<strong>\
-									Download\
-								</strong>\
-							</span>\
-						</a>\
-					</li>\
-					<li>\
-						<a href='/manual' class='nav_link'>\
-							<span>\
-								<strong>\
-									Manual\
-								</strong>\
-							</span>\
-						</a>\
 					</li>\
 				</ul>\
+			</div>\
+			<div class='logo'>\
+				<a href='/'>\
+					<div class='rel_cont'>\
+						<div class='abs_cont drop'>\
+							<div class='head'>\
+								DK64 PRACTICE ROM\
+							</div>\
+							<div class='sub'>\
+								Practice tool for Donkey Kong 64\
+							</div>\
+						</div>\
+					</div>\
+				</a>\
+			</div>\
+			<div class='side'>\
+				<div class='rel_cont'>\
+					<div class='abs_cont mid'>\
+						<ul class='container text noselect'>\
+							<li>\
+								<a href='/' class='nav_link'>\
+									<span>\
+										<strong>\
+											Home\
+										</strong>\
+									</span>\
+								</a>\
+							</li>\
+							<li>\
+								<a href='/versions?version=latest' class='nav_link'>\
+									<span>\
+										<strong>\
+											Download\
+										</strong>\
+									</span>\
+								</a>\
+							</li>\
+							<li>\
+								<a href='/manual' class='nav_link'>\
+									<span>\
+										<strong>\
+											Manual\
+										</strong>\
+									</span>\
+								</a>\
+							</li>\
+						</ul>\
+					</div>\
+				</div>\
 			</div>\
 		</div>\
 	</div>";
