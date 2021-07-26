@@ -237,12 +237,22 @@
 				color: black;
 				background-color: rgba(255,255,255,0.6);
 			}
+			.page_head_parent {
+				position: relative;
+				height: 100%;
+			}
 			.page_head_info {
+				position: absolute;
 				color: white;
 				font-size: 36px;
 				font-family: "Trebuchet MS", sans-serif;
 				text-align: right;
 				width: 90%;
+				top: 30%;
+				transform: translateY(-30%);
+				-moz-transform: translateY(-30%);
+				-ms-transform: translateY(-30%);
+				-o-transform: translateY(-30%);
 			}
 			.tick_list, .cross_list {
 				list-style: none;
@@ -315,18 +325,23 @@
 		<div class="v_spacer">
 		</div>
 		<div class="parallax parallax_1">
-			<div class="page_head_info">
-				<div style="font-size:60px;font-weight:bold;padding-top:15%">
-					Donkey Kong 64
+			<div class="page_head_parent">
+				<div class="page_head_info">
+					<div style="font-size:60px;font-weight:bold;">
+						Donkey Kong 64
+					</div>
+					<div>
+						Practice ROM
+					</div>
+					<div id="latest_version" style="font-size:18px;padding-bottom:20px">
+
+					</div>
+					<a href="#info" class="excluded_link">
+						<button style="width:200px">
+							See More
+						</button>
+					</a>
 				</div>
-				<div style="padding-bottom:20px">
-					Practice ROM
-				</div>
-				<a href="#info" class="excluded_link">
-					<button style="width:200px">
-						See More
-					</button>
-				</a>
 			</div>
 		</div>
 		<div id="info" class="bar">
@@ -424,81 +439,6 @@
 				In-game pictures Copyright &copy; Nintendo & Rareware Ltd, 1999 - <span id="current_year"></span> | Practice ROM made by Ballaam
 			</div>
 		</div>
-		<!-- <div class="flexsplitter banner">
-			<div style="flex:50%">
-				<ul style="">
-					<li style="height:100%">
-						<img src="assets/practiceromlogo.png" class="logo">					
-					</li>
-				</ul>
-			</div>
-			<div style="flex:50%">
-
-			</div>
-		</div>
-		<div class="flexsplitter bottom">
-			<div class="partition bordered" style="flex:1">
-				<h2>Download</h2>
-				<div class="txtbody">
-					Acquire the latest version of the Practice ROM for your banana hoard below
-				</div>
-				<a href="./practicerom/versions.html?version=latest">
-					<img src="./assets/practicerom_download.png" width="15%">
-				</a>
-				 <button onclick="goTo('./practicerom/versions.html?version=latest')">
-					Download Latest
-				</button>
-			</div>
-			<div class="partition bordered" style="flex:1">
-				<h2>Installation Guide</h2>
-				<div class="txtbody">
-					Learn how to install the Practice ROM for your console below
-				</div>
-				<a href="./practicerom/install.html">
-					<img src="./assets/practicerom_guide.png" width="15%">
-				</a>
-				 <button onclick="goTo('./practicerom/install.html')">
-					Installation Guide
-				</button> 
-			</div>
-			<div class="partition bordered" style="flex:1">
-				<h2>Features</h2>
-				<div class="txtbody">
-					Learn about the tools provided with the Practice ROM
-				</div>
-				<a href="./practicerom/features.html">
-					<img src="./assets/practicerom_features.png" width="15%">
-				</a>
-				 <button>
-				<button onclick="goTo('./practicerom/features.html')">
-					Coming Soon
-				</button> 
-			</div>
-			<div class="partition bordered" style="flex:1">
-				<h2>Discord</h2>
-				<div class="txtbody">
-					Join to hear about updates and future plans for the Practice ROM
-				</div>
-				<a href="https://discord.gg/955MmbtQBP">
-					<img src="./assets/practicerom_discord.png" width="15%">
-				</a>
-				 <button onclick="goTo('https://discord.gg/955MmbtQBP')">
-					DK64 Discord
-				</button> 
-			</div>
-			<div class="partition" style="flex:1">
-				<h2>GitHub Repo</h2>
-				<div class="txtbody">
-					View and keep up-to-date with the source code for the DK64 Practice ROM
-				</div>
-				<a href="https://github.com/theballaam96/dk64-practice-rom">
-					<img src="./assets/practicerom_github.png" width="15%">
-				</a>
-				 <button onclick="goTo('https://github.com/theballaam96/dk64-practice-rom')">
-					GitHub
-				</button> 
-			</div>
-		</div> -->
 	</body>
 	<script src="Site/script/nav.js"></script>
 	<script src="Site/script/tree.js"></script>
@@ -509,17 +449,44 @@
 			if (this.readyState == 4 && this.status == 200) {
 				responseJSON = JSON.parse(xhttp.responseText).data;
 				romData = responseJSON.versions.slice();
-				console.log(romData)
-				populate()
-				checkParams()
+				latest_version = getLatestVersion(romData)
+				document.getElementById("latest_version").innerText = "Latest: " + latest_version.version;
 			}
 		}
-		xhttp.open("GET", "https://raw.githubusercontent.com/theballaam96/theballaam96.github.io/master/data/practicerom_versions.json", true);
+		xhttp.open("GET", "https://raw.githubusercontent.com/theballaam96/dk64-practice-rom/main/Site/releases/releases.json", true);
 		xhttp.send(null)
 
 		var d = new Date();
 		var n = d.getFullYear();
 		document.getElementById("current_year").innerText = n
+
+		function convertDate(date) {
+			var date_array = date.split("-").slice()
+			var months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
+			var found_month = 0;
+			months.forEach((month, index) => {
+				if (month == date_array[1]) {
+					found_month = index + 1;
+				}
+			})
+			var date_num = 0;
+			if (found_month == 0) {
+				date_num = Number(date_array[2]) + (found_month/100) + (Number(date_array[0]))
+			}
+			return date_num
+		}
+
+		function getLatestVersion(data) {
+			var found_index = 0;
+			var latest_datenum = 0;
+			data.forEach((version,index) => {
+				new_datenum = convertDate(version.release_date)
+				if (new_datenum >= latest_datenum) {
+					found_index = index;
+				}
+			})
+			return data[found_index]
+		}
 
 		function goTo(url) {
 			window.location.href = url
