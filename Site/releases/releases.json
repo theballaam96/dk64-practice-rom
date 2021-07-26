@@ -1,0 +1,293 @@
+{
+   "data":{
+      "versions":[
+         {
+            "version":"0.1",
+            "release_date":"16-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/0_1/DK64%20Practice%20ROM%20V0_1%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/0_1/DK64%20Practice%20ROM%20V0_1%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V0_1.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "First version",
+               "OSD (Broken on N64)",
+               "Position Warping",
+               "All kongs/moves unlocked",
+               "Tag Anywhere",
+               "Alternate kong colours"
+            ]
+         },
+         {
+            "version":"0.2",
+            "release_date":"18-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/0_2/DK64%20Practice%20ROM%20V0_2%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/0_2/DK64%20Practice%20ROM%20V0_2%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V0_2.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "OSD Shifted to pause screen",
+               "Save & load flags",
+               "Tiny and Chunky's colours changed",
+               "Dinosaur-related easter egg",
+               "Facing Angle, velocities and acceleration added to position storage",
+               "[Bug fix] OSD no longer crashes",
+               "[Bug fix] Moves granted to every kong"
+            ]
+         },
+         {
+            "version":"1.0",
+            "release_date":"18-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_0/DK64%20Practice%20ROM%20V1_0%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_0/DK64%20Practice%20Rom%20V1_0%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_0.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Position warping works only when the storage took place on the same map",
+               "All collectables granted at the start",
+               "[Bug fix] Pause menu action + D-Up causes softlock"
+            ]
+         },
+         {
+            "version":"1.1",
+            "release_date":"19-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1/DK64%20Practice%20ROM%20V1_1%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1/DK64%20Practice%20ROM%20V1_1%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_1.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "The Blast-O-Matic is back on again! (Prevents a bug with the medals in Helm)",
+               "3 Melons-worth of health are now granted to you on every loading zone",
+               "Position saving & loading are now activated by pressing D-Right or D-Left. The L button is no longer required",
+               "Fixed a bug regarding the game crashing warping to a pause menu level when in a map with a map value higher than 0xCF",
+               "Savestates now store counts of main collectables (Golden Bananas, Coloured Bananas, Coloured Bananas turned into Troff 'n' Scoff, Coins)",
+               "Savestating can no longer be performed in global maps (Bonus Barrels, Troff n Scoff, Character shops, Battle Crowns, Bosses) due to a bug regarding null parent maps. This will be properly fixed in the future. Loading a state can still be performed",
+               "Lanky Kong is still, unfortunately, in the game"
+            ]
+         },
+         {
+            "version":"1.1.1",
+            "release_date":"20-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1_1/DK64%20Practice%20ROM%20V1_1_1%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1_1/DK64%20Practice%20ROM%20V1_1_1%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_1_1.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Temporary Flags are now stored by savestates",
+               "Lanky Kong can still, unfortunately, be freed from Angry Aztec"
+            ]
+         },
+         {
+            "version":"1.1.2",
+            "release_date":"21-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1_2/DK64%20Practice%20ROM%20V1_1_2%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1_2/DK64%20Practice%20ROM%20V1_1_2%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_1_2.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Option to toggle 'Simian Slam' level between 0 and 3 (No Slam, 'Simian Slam', 'Super Simian Slam', 'Super Duper Simian Slam')",
+               "Option to toggle 'Sniper Scope' on or off",
+               "Option to turn on a lagometer which appears at the bottom of the screen",
+               "K Rool Timer will shift to the right of the screen if the lagometer is on",
+               "K. Lumsy easter egg has been removed to make space for the above",
+               "Code has been compacted by over 600 bytes!"
+            ]
+         },
+         {
+            "version":"1.1.3",
+            "release_date":"22-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1_3/DK64%20Practice%20ROM%20V1_1_3%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_1_3/DK64%20Practice%20ROM%20V1_1_3%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_1_3.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Fixed a bug regarding the game crashing when loading a stored position"
+            ]
+         },
+         {
+            "version":"1.2",
+            "release_date":"26-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2/DK64%20Practice%20ROM%20V1_2%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2/DK64%20Practice%20ROM%20V1_2%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_2.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Position storage/loading feature now handles the 'Stored Positions' that are relevant to TBS tricks",
+               "Button that sets up the flags for Takeoff skip (No excuses now Zoru)",
+               "Ability to display the Intro Story Timer",
+               "Ability to display the player's horizontal speed",
+               "Ability to display the cumulative lag count since opening up the watch (L resets the count to 0)",
+               "Button to grant player all of the moves & kongs",
+               "Button to grant player a host of inventory items such as Crystals & Standard Ammo",
+               "Button to grant player 50 coins for all 5 kongs",
+               "Moves/Inventory Items are no longer granted by default"
+            ]
+         },
+         {
+            "version":"1.2.1",
+            "release_date":"28-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_1/DK64%20Practice%20ROM%20V1_2_1%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_1/DK64%20Practice%20ROM%20V1_2_1%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_2_1.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Fixed a bug which caused the speed watch to crash",
+               "Fixed a bug which caused problems with the Intro Story timer watch",
+               "Intro Story timer scalar has changed, making it more accurate",
+               "Intro Story timer is offset to align itself with realtime timing methods",
+               "Lag/Cumulative Lag watches fixed to display lag rather than lag boost",
+               "Stored Position will not load from 'Load Position' if the kong is visible, preventing a graphical spike"
+            ]
+         },
+         {
+            "version":"1.2.2",
+            "release_date":"28-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_2/DK64%20Practice%20ROM%20V1_2_2%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_2/DK64%20Practice%20ROM%20V1_2_2%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_2_2.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Intro Story Timer inaccurracies fixed",
+               "Ability to display a timer in frames"
+            ]
+         },
+         {
+            "version":"1.2.3",
+            "release_date":"29-JAN-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_3/DK64%20Practice%20ROM%20V1_2_3%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_3/DK64%20Practice%20ROM%20V1_2_3%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_2_3.asm",
+            "lunar_warning":false,
+            "changelog":[
+               "Fixed a critical bug in 1.2.2 regarding kong colour and text due to the framebuffer overwriting data"
+            ]
+         },
+         {
+            "version":"1.2.4",
+            "release_date":"05-FEB-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_4/DK64%20Practice%20ROM%20V1_2_4%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_4/DK64%20Practice%20ROM%20V1_2_4%20(Lunar%20IPS).ips",
+            "source":"https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/Docs/DK64%20ASM%20Hacking/Practice%20ROM/Practice%20V1_2_4.asm",
+            "lunar_warning":true,
+            "changelog":[
+               "On boot, after the Rareware Logo, you will be warped to the Main Menu",
+               "On selecting game over, after the game over cutscene, you will be warped to the Main Menu",
+               "New files start in DK Isles",
+               "After a vote, the ISG Timer functionality has been removed",
+               "K. Rool Round is now random",
+               "Lagometer has been improved to be more accurate, now pulling the lag directly from the lag calculation function",
+               "Melons/Health now granted for unlocking all moves on the menu rather than give collectables",
+               "You will no longer be able to warp out (Load State/Main Map Warp) of Global Maps, Battle Crowns, Bosses and Bonus Barrels",
+               "Some minor text hacks (IF YOU ARE PATCHING VIA LUNAR, THIS WON'T WORK)"
+            ]
+         },
+         {
+            "version":"1.2.5",
+            "release_date":"15-FEB-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_5/DK64%20Practice%20ROM%20V1_2_5%20(Beat).bps",
+            "lunar":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_2_5/DK64%20Practice%20ROM%20V1_2_5%20(Lunar%20IPS).ips",
+            "source":"https://github.com/theballaam96/theballaam96.github.io/tree/master/practicerom/1_2_5/Source",
+            "lunar_warning":true,
+            "changelog":[
+               "Fixed a bug which presented a 1-in-12 chance of auto kicking you out of K. Rool",
+               "Option to disable the D-Left/D-Right buttons calling anything regarding position saving/loading",
+               "Wrinkly has learned how to glitch Donkey Kong 64, and will provide you hints and tips on how to improve your game",
+               "Three other text changes for the fun of things"
+            ]
+         },
+         {
+            "version":"1.3",
+            "release_date":"28-FEB-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_3/Donkey%20Kong%2064%20Practice%20ROM%20V1_3.bps",
+            "lunar":"",
+            "source":"https://github.com/theballaam96/theballaam96.github.io/tree/master/practicerom/1_3/Source",
+            "lunar_warning":false,
+            "changelog":[
+               "Hired a boy genius and his robot dog to shrink the DK64 heap",
+               "Map warping expanded from 14 maps to 102 maps",
+               "Ability to toggle some important flags that may be useful for emulating certain scenarios",
+               "Tools Menu is now split up into slides, which can be navigated with Z/R",
+               "Fixed the python text generation script, which fixes a typographical error with Diddy's Aztec Wrinkly Text",
+               "Fixed a bug where exiting a level without watching the B. Locker FTT would instantly warp you back to the level",
+               "Fixed a bug where the slam level/sniper scope would cause Cranky move purchase issues"
+            ]
+         },
+         {
+            "version":"1.3.1",
+            "release_date":"11-MAR-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_3_1/Donkey%20Kong%2064%20Practice%20ROM%20V1_3_1.bps",
+            "lunar":"",
+            "source":"https://github.com/theballaam96/theballaam96.github.io/tree/master/practicerom/1_3_1/Source",
+            "lunar_warning":false,
+            "changelog":[
+               "Added a cheats menu",
+               "Added a cheat which constantly gives the kong the 'Phase State'",
+               "Added a cheat which allows you to set your file state to a 101% or Max% file",
+               "Added a cheat which provides you infinite health",
+               "Added a cheat where you can hold L to levitate. Holding R doubles levitation speed. Holding Z halves levitation speed",
+               "Added a cheat where you can press L to cancel a cutscene",
+               "Added a cheat where you can press L to toggle the Aztec Sandstorm on/off",
+               "Variable Displays are now a little prettier",
+               "Time display is now shown in seconds, rather than frames",
+               "Speed Display now displays the decimal portion of the kong speed",
+               "Added Angle Display",
+               "Added Movement State Display",
+               "Added a Giant Kosha Timer Display",
+               "Timer has been overhauled to allow you to start and stop the timer automatically when various events occur",
+               "Added option to pause timer when the pause menu is open",
+               "Added a Trigger viewer, which enables you to view location and horizontal size of various triggers in the game (Note: This does cause a noticeable amount of additional lag due to graphical rendering)",
+               "Added options to toggle Sound, Music, Camera mode (Free/Follow) and Screen Ratio (4:3/16:9)",
+               "Added an option to toggle Tag Anywhere functionality on/off",
+               "Added 'Japes Open', 'Rabbit Race 1 Complete', 'Llama Intro Cutscene' and 'B. Locker FTT' as special flags",
+               "Added 'T&S Portals Open' for all levels as special flags",
+               "Added 'Level Boss Intro Watched' for all levels as special flags",
+               "Arcade & Jetpac added to warp list",
+               "Various areas in Isles Main, Japes Main, Aztec Main, Factory Main, Galleon Main, Both Five-Door Ships, Two-Door Ship, Fungi Main, Giant Mushroom, Caves Main, Castle Main and Helm to the warp list",
+               "Treehouse warp now takes you to the location you spawn in after Intro Story",
+               "Training Grounds warp now takes you to the location you spawn in after leaving the Treehouse",
+               "Warps to the two Lanky mushroom rooms in Fungi have been renamed to align itself with RTA naming policy",
+               "Savestates now store the amount of inventory items you have (eg. Standard Ammo, Crystals, Film)",
+               "Savestates now store the position of where the kong is when the savestate was created",
+               "Option added to warp to the position where the savestate was created",
+               "Tools Menu now brings you to the same screen you were on when you last closed the tools menu",
+               "Holding L in the tools menu speeds up left/right scrolling speed by a factor of 3",
+               "'Restock Inventory' refills health",
+               "Loading a position cancels autowalks",
+               "Fixed a bug where position warping wouldn't behave correctly if the player was standing on an object",
+               "Fixed a bug where the display feature would cause the BoM off music to play",
+               "Fixed a bug where non-Diddy kongs would graphically lose their right hand with Tag Anywhere",
+               "Fixed a bug where opening the tools menu during a transition to a different pause menu screen would cause grpahical bugs"
+            ]
+         },
+         {
+            "version":"1.3.2",
+            "release_date":"13-MAR-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_3_2/Donkey%20Kong%2064%20Practice%20ROM%20V1_3_2.bps",
+            "lunar":"",
+            "source":"https://github.com/theballaam96/theballaam96.github.io/tree/master/practicerom/1_3_2/Source",
+            "lunar_warning":false,
+            "changelog":[
+               "Fixed a critical bug where exiting submaps into a main map (after visiting that main map) would sometimes crash the game",
+               "L can be used to start/stop/reset the timer regardless of the start/stop triggers (in cases of accidental timer starts)"
+            ]
+         },
+         {
+            "version":"1.3.3",
+            "release_date":"28-MAR-2021",
+            "beat":"https://github.com/theballaam96/theballaam96.github.io/raw/master/practicerom/1_3_3/Donkey%20Kong%2064%20Practice%20ROM%20V1_3_3.bps",
+            "lunar":"",
+            "source":"https://github.com/theballaam96/theballaam96.github.io/tree/master/practicerom/1_3_3/Source",
+            "lunar_warning":false,
+            "changelog":[]
+         },
+         {
+            "version":"1.4",
+            "release_date": "27-JUL-2021",
+            "beat":"https://github.com/theballaam96/dk64-practice-rom/blob/main/Site/releases/Practice%20ROM%201_4.bps?raw=true",
+            "lunar":"",
+            "source":"https://github.com/theballaam96/dk64-practice-rom/tree/838379daf31123e47698a9affb83b4167afcc707",
+            "lunar_warning":false,
+            "changelog":[]
+         }
+      ]
+   }
+}
