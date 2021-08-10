@@ -54,6 +54,12 @@ typedef const struct Screen {
 	/* 0x007 */ char ParentPosition;
 } Screen;
 
+typedef const struct MapWarp {
+	/* 0x000 */ const int* maps;
+	/* 0x004 */ const int* exits;
+	/* 0x008 */ char screen;
+} MapWarp;
+
 typedef struct Controller {
 	/* 0x000 */ short Buttons;
 	/* 0x002 */ char stickX;
@@ -122,3 +128,17 @@ typedef struct RGB {
 	/* 0x001 */ char green;
 	/* 0x002 */ char blue;
 } RGB;
+
+typedef struct KongBase {
+	/* 0x000 */ char special_moves;
+	/* 0x001 */ char simian_slam;
+	/* 0x002 */ char weapon_bitfield;
+	/* 0x003 */ char ammo_belt;
+	/* 0x004 */ char instrument_bitfield;
+	/* 0x005 */ char unk_05[0x2];
+	/* 0x007 */ char coins;
+	/* 0x008 */ short instrument_energy;
+	/* 0x00A */ short cb_count[0xE];
+	/* 0x026 */ short tns_cb_count[0xE];
+	/* 0x042 */ short gb_count[0xE];
+} KongBase;

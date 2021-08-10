@@ -3,7 +3,7 @@ extern void setFlag(int flagIndex, int value, char flagType);
 extern int checkFlag(int flagIndex, char flagType);
 extern void* dk_malloc(int size);
 extern void free(void* mallocPtr);
-extern void playSound(short soundIndex, int unk0, float unk1, float unk2);
+extern void playSound(short soundIndex, int unk0, int unk1, int unk2, int unk3, int unk4);
 extern void initiateTransition(int map, int exit);
 extern int getFlagBlockAddress(char flagType);
 extern int isAddressActor(void* address);
@@ -18,12 +18,13 @@ extern void dk_multiply(double val1, double val2);
 extern double convertTimestamp(double unk0, double unk1, unsigned int unk2, unsigned int unk3);
 extern void resetMap();
 extern void prepKongColoring();
+extern void callFunc(int* addr);
 
 //vanilla data
 extern float TransitionSpeed;
 extern char CutsceneWillPlay;
 extern char KRoolRound;
-extern char* MovesBase[5][0x5E];
+extern KongBase MovesBase[5];
 extern int PlayerOneColor;
 extern char Mode;
 extern char TBVoidByte;
@@ -94,7 +95,7 @@ extern double HelmStartTimestamp;
 //hack data
 extern int TestVariable;
 
-extern int* ActiveTools_Error;
+extern TextOverlay* ActiveTools_Error;
 extern TextOverlay* ActiveToolsMenu[];
 extern PosState PositionSavestate;
 extern char InBadMap;
@@ -150,7 +151,7 @@ extern char LToCancelCSOn;
 extern char LToToggleTBOn;
 extern char LToEndGameOn;
 extern double TempTimestampStorage;
-extern int* HackTitle;
-extern int* HackVersion;
+extern TextOverlay* HackTitle;
+extern TextOverlay* HackVersion;
 extern char AddedCorruptionActorCount;
-extern int* graphicalOverlaySpace[32][3]; 
+extern int* graphicalOverlaySpace[32][3];

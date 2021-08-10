@@ -9,6 +9,9 @@ static const char timerSettings[] = "TIMER SETTINGS";
 static const char fileStates[] = "FILE STATES";
 static const char cheats[] = "CHEATS";
 static const char settings[] = "SETTINGS";
+static const char hackTitle[] = "DK64 PRACTICE ROM";
+static const char hackVersion[] = "VERSION 1.4.1";
+static const char forceClose[] = "EMERGENCY: ERROR 01";
 
 static const char* main_array[] = {
 	warp,
@@ -18,32 +21,23 @@ static const char* main_array[] = {
 	timerSettings,
 	fileStates,
 	cheats,
-	settings,
-	returnLine
+	settings
 };
 
-static const int main_functions[] = {
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0
-};
+static const int main_functions[8];
 
 static const Screen main_struct = {
 	.TextArray = (const int*)main_array,
 	.FunctionArray = main_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 8,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };
 
 static const Screen* menu_screens[] = {
-	&main_struct
+	&main_struct,
+	&maps_container_struct,
+	&japes_mapwarp_struct
 };
 
 void spawnMenu(int screenIndex) {
@@ -66,6 +60,21 @@ void spawnMenu(int screenIndex) {
 		}
 		y += 10;
 	}
+	spawnTextOverlay(style,x,y,(char *)returnLine,0,0,2,0);
+	textOverlay = (TextOverlay *)CurrentActorPointer;
+	textOverlay->opacity = 0xFF;
+	ActiveToolsMenu[array_count] = textOverlay;
+	if (screenIndex == 0) {
+		spawnTextOverlay(style,180,25,(char *)hackTitle,0,0,2,0);
+		textOverlay = (TextOverlay *)CurrentActorPointer;
+		textOverlay->opacity = 0xFF;
+		HackTitle = textOverlay;
+		spawnTextOverlay(style,217,35,(char *)hackVersion,0,0,2,0);
+		textOverlay = (TextOverlay *)CurrentActorPointer;
+		textOverlay->opacity = 0xFF;
+		HackVersion = textOverlay;
+	}
+	ActiveMenu.isOpen = 1;
 };
 
 void clearMenu(void) {
@@ -77,12 +86,12 @@ void clearMenu(void) {
 		}
 		ActiveToolsMenu[i] = 0;
 	}
-	textOverlay = HackTitle;
+	textOverlay = (int *)HackTitle;
 	if (textOverlay) {
 		deleteActor(textOverlay);
 	}
 	HackTitle = 0;
-	textOverlay = HackVersion;
+	textOverlay = (int *)HackVersion;
 	if (textOverlay) {
 		deleteActor(textOverlay);
 	}
@@ -99,10 +108,8 @@ void toggleMenu(void) {
 					ActiveMenu.positionIndex = 0;
 					if (ActiveMenu.isOpen == 0) {
 						spawnMenu(0);
-						ActiveMenu.isOpen = 1;
 					} else {
 						clearMenu();
-						ActiveMenu.isOpen = 0;
 						ClosingMenu = 1;
 					}
 				}
@@ -122,7 +129,7 @@ void moveSlot(void) {
 				if ((ControllerInput.Buttons & L_Button) == 0) {
 					int screenIndex = ActiveMenu.screenIndex;
 					Screen* focused_screen = menu_screens[screenIndex];
-					int cap = focused_screen->ArrayItems;
+					int cap = focused_screen->ArrayItems + 1;
 					int _position = ActiveMenu.positionIndex;
 					if (NewlyPressedControllerInput.Buttons & D_Up) {
 						if (_position == 0) {
@@ -165,4 +172,124 @@ void moveSlot(void) {
 			}
 		}
 	}
+};
+
+void closeMenuOnTransition(void) {
+	if (ActiveMenu.isOpen) {
+		if ((TransitionSpeed > 0) || (CutsceneActive == 6)) {
+			clearMenu();
+		}
+	}
+}
+
+void emergencyClose(void) {
+	TextOverlay* textOverlay;
+	if (NewMenu_ErrorStart) {
+		int _time = FrameReal - NewMenu_ErrorStart;
+		if (_time >= ErrorLength) {
+			textOverlay = ActiveTools_Error;
+			deleteActor((int *)textOverlay);
+			NewMenu_ErrorStart = 0;
+		}
+	} else {
+		if (LoadedActorCount >= 60) {
+			if (ActiveMenu.isOpen) {
+				NewMenu_ErrorStart = FrameReal;
+				spawnTextOverlay(10,100,200,(char *)forceClose,0,0,2,0);
+				textOverlay = (TextOverlay *)CurrentActorPointer;
+				textOverlay->opacity = 0xFF;
+				textOverlay->red = 0xFF;
+				textOverlay->green = 0;
+				textOverlay->blue = 0;
+				ActiveTools_Error = textOverlay;
+			}
+		}
+	}
+}
+
+void previousScreen(void) {
+	int screenIndex = ActiveMenu.screenIndex;
+	clearMenu();
+	if (screenIndex == 0) {
+		ClosingMenu = 1;
+	} else {
+		Screen* focused_screen = menu_screens[screenIndex];
+		int newScreen = focused_screen->ParentScreen;
+		int newPosition = focused_screen->ParentPosition;
+		ActiveMenu.screenIndex = newScreen;
+		ActiveMenu.positionIndex = newPosition;
+		spawnMenu(newScreen);
+	}
+}
+
+void confirmOptionBackground(void) {
+	Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
+	int* focused_function_array = (int *)focused_screen->FunctionArray;
+	int cap = focused_screen->ArrayItems;
+	if (ActiveMenu.positionIndex == cap) {
+		previousScreen();
+	} else {
+		int _code = focused_function_array[(int)ActiveMenu.positionIndex];
+		if (_code) {
+			callFunc((int *)_code);
+		}
+	}
+}
+
+void confirmOption(void) {
+	if (ActiveMenu.isOpen) {
+		if ((TBVoidByte & 2) == 0) {
+			if (IsPauseMenuOpen == 0) {
+				if (NewlyPressedControllerInput.Buttons & L_Button) {
+					if ((ControllerInput.Buttons & R_Button) == 0) {
+						confirmOptionBackground();
+					}
+				}
+			}
+		}
+	}
+}
+
+void menuShortcutButtons(void) {
+	if (MenuShortcutButtonsOff == 0) {
+		short _buttons = NewlyPressedControllerInput.Buttons;
+		if ((_buttons & L_Button) == 0) {
+			if (ActiveMenu.isOpen) {
+				if (ClosingMenu == 0) {
+					// Take into account custom flag screen
+					if (_buttons & D_Left) {
+						previousScreen();
+					} else {
+						if (_buttons & D_Right) {
+							confirmOptionBackground();
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void changeMenu(int newScreenIndex) {
+	clearMenu();
+	if (ActiveMenu.screenIndex != newScreenIndex) {
+		ActiveMenu.positionIndex = 0;
+		ActiveMenu.screenIndex = newScreenIndex;
+	}
+	spawnMenu(newScreenIndex);
+}
+
+void endClose() {
+	ClosingMenu = 0;
+}
+
+static const int main_functions[] = {
+	(int)&initWarpMenu,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 };

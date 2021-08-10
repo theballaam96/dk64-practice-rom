@@ -5,12 +5,11 @@
 .headersize 0x7E5EDDE0
 .org 0x805DAE00
 .include "asm/boot.asm" //include modified boot code
-.importobj "obj/aesthetic.o"
+.importobj "obj/lib.o"
+.importobj "obj/mapContainer.o"
+.importobj "obj/japes.o"
+.importobj "obj/mapwarp_list.o"
 .importobj "obj/activeMenu.o"
+.importobj "obj/aesthetic.o"
 .importobj "obj/levitate.o"
-//.importobj "obj/global.o"
-//.importobj "obj/main.o" // Import and link the compiled C object
-//.importobj "obj/warp.o" // Import and link the compiled C object
-//.importobj "obj/ramview.o"
-//.importobj "obj/practice.o"
 .close // Close the ROM file

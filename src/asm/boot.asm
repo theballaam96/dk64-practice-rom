@@ -20,6 +20,8 @@ START:
 mainASMFunction:
 	JAL	0x805FC2B0
 	NOP
+	JAL endClose
+	NOP
 	JAL toggleMenu
 	NOP
 	JAL moveSlot
@@ -29,6 +31,14 @@ mainASMFunction:
 	JAL colorKong
 	NOP
 	JAL levitate
+	NOP
+	JAL closeMenuOnTransition
+	NOP
+	JAL emergencyClose
+	NOP
+	JAL confirmOption
+	NOP
+	JAL menuShortcutButtons
 	NOP
 	J 0x805FC16C
 	NOP
@@ -40,6 +50,16 @@ mainASMFunctionJump:
 mainASMFunctionVanilla:
 	JAL	0x805FC2B0
 	NOP
+
+callFunc:
+	// a0 = function addr
+	ADDI 	sp, sp, -4
+	SW 		ra, 0x0 (sp)
+	JALR 	a0
+	NOP
+	LW 		ra, 0x0 (sp)
+	JR 		ra
+	ADDIU 	sp, sp, 4
 
 .align 0x10
 END:

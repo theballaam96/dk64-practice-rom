@@ -4,6 +4,7 @@
 #include "common_structs.h"
 #include "dk64.h"
 #include "enums.h"
+#include "global.h"
 
 #define NULL 0
 
@@ -63,5 +64,6 @@
 #define CurrentCharacter 0x36C
 #define MovesBaseSize 0x1D8
 #define MaxMenuItems 23 // 32 (practice rom cap) - 8 (normal cap) - 1 (watch)
+#define ErrorLength 180
 
 #endif
