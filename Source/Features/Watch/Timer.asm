@@ -181,7 +181,7 @@ HandleTimer:
 			NOP
 
 		HandleTimer_Running_Cutscene:
-			LBU 	a0, @InCutscene
+			LBU 	a0, @CutsceneActive
 			LI 		a1, 1
 			BEQ 	a0, a1, HandleTimer_RunningTick
 			NOP

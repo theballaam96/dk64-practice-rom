@@ -111,7 +111,7 @@ Start:
 		LI      t0, -1
 		SD      t0, 0(t6)
 		// Set K Rool to round 11 (Cause the sound effect is the best one)
-		LBU 	t0, @InCutscene
+		LBU 	t0, @CutsceneActive
 		LI 		t6, 6
 		BEQ 	t0, t6, TransitionFunctions
 		LUI 	t6, 0x3F80 // f32 = 1

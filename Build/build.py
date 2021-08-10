@@ -105,7 +105,7 @@ for x in file_dict["files"]:
 		os.remove("StaticCode_Copy.bin")
 
 print("[3 / 5] - Loading ASM: This may take some time")
-import asmloader
+#import asmloader
 print("[4 / 5] - ASM Written")
 
 # crc patch
