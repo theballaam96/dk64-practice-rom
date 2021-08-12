@@ -1,3 +1,10 @@
+typedef struct actorData {
+	/* 0x000 */ char unk_00[0x58];
+	/* 0x058 */ int actorType;
+	/* 0x05C */ char unk_5C[0x7C-0x5C];
+	/* 0x07C */ float xPos;
+} actorData;
+
 typedef struct playerData {
 	/* 0x000 */ char unk_00[0x58];
 	/* 0x058 */ int characterID; //02 is dk, 03 is diddy, 04 is lanky, etc
@@ -7,14 +14,28 @@ typedef struct playerData {
 	/* 0x07C */ float xPos;
 	/* 0x080 */ float yPos;
 	/* 0x084 */ float zPos;
-	/* 0x088 */ char unk_88[0x38];
+	/* 0x088 */ char unk_88[0x30];
+	/* 0x0B8 */ float hSpeed;
+	/* 0x0BC */ char unk_BC[0x4];
 	/* 0x0C0 */ float yVelocity;
-	/* 0x0C4 */ char unk_C4[0x90];
+	/* 0x0C4 */ char unk_C4[0xE6 - 0xC4];
+	/* 0x0E6 */ short facing_angle;
+	/* 0x0E8 */ char unk_E8[0x12c-0xE8];
+	/* 0x12C */ short chunk;
+	/* 0x12E */ char unk_12E[0x147 - 0x12E];
+	/* 0x147 */ char hand_state;
+	/* 0x148 */ char unk_148[0x154 - 0x148];
 	/* 0x154 */ char control_state;
 	/* 0x155 */ char control_state_progress;
 	/* 0x156 */ char unk_156[0xB2];
 	/* 0x208 */ int* vehicle_actor_pointer;
-} playerData;//size 0x630
+	/* 0x20C */ char was_gun_out;
+	/* 0x20D */ char unk_20D[0x328 - 0x20D];
+	/* 0x328 */ actorData* krool_timer_pointer;
+	/* 0x32C */ actorData* held_actor;
+	/* 0x330 */ char unk_330[0x36F - 0x330];
+	/* 0x36F */ char new_kong;
+} playerData; //size 0x630
 
 typedef struct TextOverlay {
 	/* 0x000 */ char unk_00[0x15F];
@@ -55,8 +76,8 @@ typedef const struct Screen {
 } Screen;
 
 typedef const struct MapWarp {
-	/* 0x000 */ const int* maps;
-	/* 0x004 */ const int* exits;
+	/* 0x000 */ const unsigned char* maps;
+	/* 0x004 */ const unsigned char* exits;
 	/* 0x008 */ char screen;
 } MapWarp;
 
@@ -142,3 +163,26 @@ typedef struct KongBase {
 	/* 0x026 */ short tns_cb_count[0xE];
 	/* 0x042 */ short gb_count[0xE];
 } KongBase;
+
+typedef struct ISGFadeoutData {
+	/* 0x000 */ int FadeoutTime;
+	/* 0x004 */ char FadeoutMap;
+	/* 0x005 */ char unk_05[0x3];
+} ISGFadeoutData;
+
+typedef struct GiantKoshaData {
+	/* 0x000 */ short timer;
+} GiantKoshaData;
+
+typedef struct SwapObjectData {
+	/* 0x000 */ char unk_00[0x29C];
+	/* 0x29C */ short action_type;
+} SwapObjectData;
+
+typedef struct ModelTwoData {
+	/* 0x000 */ char unk_00[0x84];
+	/* 0x084 */ short object_type;
+	/* 0x086 */ char unk_86[0x4];
+	/* 0x08A */ short object_id;
+	/* 0x08C */ char unk_8C[0x4];
+} ModelTwoData;

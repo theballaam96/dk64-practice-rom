@@ -20,7 +20,7 @@ file_dict = {
 			"compressed_size": 0x6D,
 			"source_file": "Dolby.bin",
 			"output_file": "Dolby_Copy.bin",
-			"name": "Dolby Tet"
+			"name": "Dolby Text"
 		},
 		{
 			"start": 0x11172E8,
@@ -46,12 +46,11 @@ file_dict = {
 	]
 }
 
-print("DONKEY KONG 64 PRACTICE ROM")
-print("ROM and Builder by Ballaam")
-print("[0 / 5] - Building ROM")
-ROMName = "./../dk64.z64"
+print("Practice ROM Extractor")
+print("[0 / 2] - Analyzing ROM")
+ROMName = "./../src/rom/dk64.z64"
 with open(ROMName, "r+b") as fh:
-	print("[1 / 5] - Unzipping files from ROM")
+	print("[1 / 2] - Unzipping files from ROM")
 	for x in file_dict["files"]:
 		fh.seek(x["start"])
 		byte_read = fh.read(x["compressed_size"])
@@ -74,7 +73,7 @@ if os.path.exists(newROMName):
 shutil.copyfile(ROMName, newROMName);
 
 with open(newROMName, "r+b") as fh:
-	print("[2 / 5] - Writing modified compressed files to ROM")
+	print("[2 / 2] - Writing modified compressed files to ROM")
 	for x in file_dict["files"]:
 		binName = x["output_file"]
 		if os.path.exists(binName):
@@ -95,6 +94,14 @@ with open(newROMName, "r+b") as fh:
 		fh.write(thumb_image)
 	if os.path.exists("ThumbCompressed.bin.gz"):
 		os.remove("ThumbCompressed.bin.gz")
+	compressGZipFile("../Source/Non-Code/Dolby/DolbyLogo.bin", "DolbyCompressed.bin.gz", False)
+	with open("DolbyCompressed.bin.gz","rb") as fg:
+		dolby_image = fg.read()
+		#print(len(dolby_image))
+		fh.seek(0x116818C)
+		fh.write(dolby_image)
+	if os.path.exists("DolbyCompressed.bin.gz"):
+		os.remove("DolbyCompressed.bin.gz")
 
 for x in file_dict["files"]:
 	if os.path.exists(x["output_file"]):
@@ -103,16 +110,15 @@ for x in file_dict["files"]:
 		os.remove(x["source_file"])
 	if os.path.exists("StaticCode_Copy.bin"):
 		os.remove("StaticCode_Copy.bin")
-
-print("[3 / 5] - Loading ASM: This may take some time")
 #import asmloader
-print("[4 / 5] - ASM Written")
-
 # crc patch
 with open(newROMName, "r+b") as fh:
     fh.seek(0x3154)
     fh.write(bytearray([0, 0, 0, 0]))
-crcresult = subprocess.check_output(["n64crc", newROMName])
-print("[5 / 5] - CRC Updated")
-print("Your ROM is now built")
+
+if os.path.exists("dk64-practice-rom.z64"):
+	shutil.copyfile("dk64-practice-rom.z64", "./../src/rom/dk64-practice-rom-python.z64");
+	os.remove("dk64-practice-rom.z64")
+# crcresult = subprocess.check_output(["n64crc", newROMName])
+# print("[5 / 5] - CRC Updated")
 exit()

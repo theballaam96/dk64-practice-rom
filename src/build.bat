@@ -5,13 +5,34 @@ mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-point
 mv mapContainer.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/japes.c
 mv japes.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/aztec.c
+mv aztec.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/factory.c
+mv factory.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/galleon.c
+mv galleon.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/mapwarp_list.c
 mv mapwarp_list.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/aesthetic.c
 mv aesthetic.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/levitate.c
 mv levitate.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/watch/timer.c
+mv timer.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/watch/watchContainer.c
+mv watchContainer.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/activeMenu.c
 mv activeMenu.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/tagAnywhere.c
+mv tagAnywhere.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/hooks.c
+mv hooks.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/main.c
+mv main.o obj/
+armips asm/jump_list.asm
+cd ".\..\Build\"
+python build.py
+cd ".\..\src\"
 armips asm/main.asm
+rem python cleanup.py
 n64crc "rom/dk64-practice-rom-test.z64"

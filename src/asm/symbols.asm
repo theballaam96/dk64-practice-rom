@@ -42,6 +42,8 @@
 .definelabel FrameReal, 0x80767CC4
 .definelabel RNG, 0x80746A40 // u32
 .definelabel BetaNinRWSkip, 0x80755324 // u8
+.definelabel LogosDestMap, 0x807132BF // u8
+.definelabel LogosDestMode, 0x807132CB // u8
 .definelabel Gamemode, 0x80755314 // u8
 .definelabel ObjectModel2Pointer, 0x807F6000
 .definelabel ObjectModel2Timer, 0x8076A064
@@ -79,17 +81,21 @@
 .definelabel Character, 0x8074E77C
 .definelabel Camera, 0x807FB968
 .definelabel ISGActive, 0x80755070
-.definelabel ISGTimestamp, 0x807F5CE0
+.definelabel ISGTimestampMajor, 0x807F5CE0
+.definelabel ISGTimestampMinor, 0x807F5CE4
 .definelabel ISGPreviousFadeout, 0x807F5D14
-.definelabel CurrentTimestamp, 0x80014FE0
+.definelabel CurrentTimestampMajor, 0x80014FE0
+.definelabel CurrentTimestampMinor, 0x80014FE4
 .definelabel ISGFadeoutArray, 0x80747708
 .definelabel CollectableBase, 0x807FCC40
 .definelabel ModelTwoTouchCount, 0x807FD798 // u8
 .definelabel ModelTwoTouchArray, 0x807FD790 // u16 array
 .definelabel TransitionProgress, 0x807ECC60 // u8
 .definelabel BackgroundHeldInput, 0x807ECD40 // u32
-.definelabel PauseTimestamp, 0x807445C0 // u64
-.definelabel HelmStartTimestamp, 0x80755340 // u64
+.definelabel PauseTimestampMajor, 0x807445C0 // u32
+.definelabel PauseTimestampMinor, 0x807445C4 // u32
+.definelabel HelmStartTimestampMajor, 0x80755340 // u32
+.definelabel HelmStartTimestampMinor, 0x80755344 // u32
 
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
@@ -100,14 +106,17 @@
 
 .definelabel TestVariable, 0x807FFFFC
 
+.definelabel WatchIndex, 0x807FFFF8 // u32
 .definelabel InBadMap, 0x807FFFF7 // u8 - Bool
 .definelabel MenuSavestateAction, 0x807FFFF6 // u8 - 0 = Save, 1 = Load
-.definelabel WatchIndex, 0x807FFFEF // u8
+.definelabel LoadedHooks, 0x807FFFEF // u8
+.definelabel Precision, 0x807FFFEE // u8
 .definelabel SniperOn, 0x807FFFED // u8
 .definelabel SlamLevel, 0x807FFFEC // u8
-.definelabel CumulativeLag, 0x807FFFE8 // u32
+.definelabel AverageLag, 0x807FFFE8 // f32
 .definelabel ISGTimer, 0x807FFFE0 // u32
-.definelabel StoredLag, 0x807FFFDC // u32
+.definelabel LagDocumentationIndex, 0x807FFFDE // u8
+.definelabel StoredLag, 0x807FFFDC // u16
 .definelabel StoredRound, 0x807FFFDB // u8
 .definelabel DisablePositionButtons, 0x807FFFDA // u8
 .definelabel DisableTagAnywhere, 0x807FFFD9 // u8
@@ -128,9 +137,8 @@
 .definelabel FocusedSavestate, 0x807FFDBF // u8
 .definelabel AutoMoonkickOn, 0x807FFDBE // u8
 .definelabel EnemySpawnOff, 0x807FFDBD // u8
-.definelabel WatchActor, 0x807FFDB8 // u32
+
 .definelabel PhaseChecker, 0x807FFDB7 // 0x1
-.definelabel WatchTextSpace, 0x807FFD80 // 0x30 (47 characters)
 .definelabel CustomFlagByte, 0x807FFF80 // u16
 .definelabel CustomFlagBit, 0x807FFF82 // u8
 .definelabel CustomFlagType, 0x807FFF83 // u8
@@ -152,9 +160,13 @@
 .definelabel LToCancelCSOn, 0x807FFF95 // u8
 .definelabel LToToggleTBOn, 0x807FFF96 // u8
 .definelabel LToEndGameOn, 0x807FFF97 // u8
-.definelabel TempTimestampStorage, 0x807FFF98 // u64
+.definelabel TempTimestampStorageMajor, 0x807FFF98 // u32
+.definelabel TempTimestampStorageMinor, 0x807FFF9C // u32
 .definelabel HackTitle, 0x807FFFA0 // u32
 .definelabel HackVersion, 0x807FFFA4 // u32
 .definelabel AddedCorruptionActorCount, 0x807FFFA8 // u8
+.definelabel PreviousLagArray, 0x807FFFB0; // u8 array
 
 .definelabel graphicalOverlaySpace, 0x807FFA00 // 0x180
+.definelabel WatchActor, 0x807FFB80 // u32 x 4
+.definelabel WatchTextSpace, 0x807FFB90 // 0x30 x 4

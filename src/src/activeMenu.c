@@ -37,7 +37,17 @@ static const Screen main_struct = {
 static const Screen* menu_screens[] = {
 	&main_struct,
 	&maps_container_struct,
-	&japes_mapwarp_struct
+	&japes_mapwarp_struct,
+	&japesmain_mapwarp_struct,
+	&aztec_mapwarp_struct,
+	&aztecmain_mapwarp_struct,
+	&aztecfivedt_mapwarp_struct,
+	&factory_mapwarp_struct,
+	&factorymain_mapwarp_struct,
+	&galleon_mapwarp_struct,
+	&galleonmain_mapwarp_struct,
+	&galleonships_mapwarp_struct,
+	&watch_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -188,7 +198,7 @@ void emergencyClose(void) {
 		int _time = FrameReal - NewMenu_ErrorStart;
 		if (_time >= ErrorLength) {
 			textOverlay = ActiveTools_Error;
-			deleteActor((int *)textOverlay);
+			deleteActor((void *)textOverlay);
 			NewMenu_ErrorStart = 0;
 		}
 	} else {
@@ -287,7 +297,7 @@ static const int main_functions[] = {
 	(int)&initWarpMenu,
 	0,
 	0,
-	0,
+	(int)&openWatchMenu,
 	0,
 	0,
 	0,
