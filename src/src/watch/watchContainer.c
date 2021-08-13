@@ -34,13 +34,24 @@ void destroyWatch(int slot) {
 void spawnWatch(int slot) {
 	TextOverlay* textOverlay;
 	int y = 200 - (slot * 10);
+	if (InputDisplayIndex > -1) {
+		if (slot > InputDisplayIndex) {
+			y += 10;
+		} else {
+			if (slot == InputDisplayIndex) {
+				y = 19;
+			}
+		}
+	}
 	destroyWatch(slot);
 	spawnTextOverlay(10,25,y,"CALIBRATING",0,0,2,0);
 	textOverlay = (TextOverlay *)CurrentActorPointer;
 	if (textOverlay) {
 		WatchActor[slot] = textOverlay;
 		textOverlay->string = (char *)&WatchTextSpace[slot];
-		textOverlay->opacity = 0xFF;
+		if ((InputDisplayIndex == -1) || (slot != InputDisplayIndex)) {
+			textOverlay->opacity = 0xFF;
+		}
 	}
 	
 };
@@ -130,6 +141,9 @@ void setWatch(void) {
 	};
 	if (index_already_spawned) {
 		destroyWatch(i);
+		if (WatchIndex[i] == 8) {
+			InputDisplayIndex = -1;
+		}
 		WatchIndex[i] = 0;
 		watch_array[(int)ActiveMenu.positionIndex] = watch_change_array[(int)ActiveMenu.positionIndex];
 	} else {
@@ -137,6 +151,9 @@ void setWatch(void) {
 		while (i < WatchCount) {
 			if (WatchIndex[i] == 0) {
 				WatchIndex[i] = intended_watch_index;
+				if (intended_watch_index == 8) {
+					InputDisplayIndex = i;
+				}
 				spawnWatch(i);
 				colorWatch(0xFF,0xFF,0xFF,i);
 				watch_array[(int)ActiveMenu.positionIndex] = watch_viewed_array[(int)ActiveMenu.positionIndex];
@@ -442,7 +459,9 @@ void handleWatch(void) {
 	}
 	if ((CurrentMap > 0xCA) && (CurrentMap < 0xD0) && (watch_present)) {
 		if (Player) {
-			Player->krool_timer_pointer->xPos = _KRoolTimerX;
+			if (Player->krool_timer_pointer) {
+				Player->krool_timer_pointer->xPos = _KRoolTimerX;
+			}
 		}
 	}
 }

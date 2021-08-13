@@ -48,7 +48,40 @@ static const Screen* menu_screens[] = {
 	&galleonmain_mapwarp_struct,
 	&galleonships_mapwarp_struct,
 	&watch_struct,
+	&fungi_mapwarp_struct,
+	&fungimain_mapwarp_struct,
+	&fungigmush_mapwarp_struct,
+	&fungimills_mapwarp_struct,
+	&caves_mapwarp_struct,
+	&cavesmain_mapwarp_struct,
+	&caves5dc_mapwarp_struct,
+	&caves5di_mapwarp_struct,
+	&castle_mapwarp_struct,
+	&castlemain_mapwarp_struct,
+	&castlecrypt_mapwarp_struct,
+	&castletunnel_mapwarp_struct,
+	&castleoutside_mapwarp_struct,
+	&castlerooms_mapwarp_struct,
+	&isles_mapwarp_struct,
+	&islesmain_mapwarp_struct,
+	&isleslobbies_mapwarp_struct,
+	&helmrool_mapwarp_struct,
+	&state_struct,
+	&changestate_struct,
+	&timersettings_struct,
 };
+
+void hideInputDisplay(void) {
+	if (InputDisplayIndex > -1) {
+		if (WatchActor[(int)InputDisplayIndex]) {
+			if (ActiveMenu.isOpen) {
+				WatchActor[(int)InputDisplayIndex]->opacity = 0;
+			} else {
+				WatchActor[(int)InputDisplayIndex]->opacity = 0xFF;
+			}
+		}
+	}
+}
 
 void spawnMenu(int screenIndex) {
 	TextOverlay* textOverlay;
@@ -296,9 +329,9 @@ void endClose() {
 static const int main_functions[] = {
 	(int)&initWarpMenu,
 	0,
-	0,
+	(int)&openStateMenu,
 	(int)&openWatchMenu,
-	0,
+	(int)&openTimerSettingsMenu,
 	0,
 	0,
 	0

@@ -58,8 +58,8 @@ typedef struct Savestate {
 	/* 0x010 */ float xPos;
 	/* 0x014 */ float yPos;
 	/* 0x018 */ float zPos;
-	/* 0x01C */ char Map;
-	/* 0x01D */ char Exit;
+	/* 0x01C */ unsigned char Map;
+	/* 0x01D */ unsigned char Exit;
 	/* 0x01E */ char Character;
 	/* 0x01F */ char HasData;
 	/* 0x020 */ char TempFlagBlock[0x10];
@@ -124,19 +124,19 @@ typedef struct PosState {
 } PosState;
 
 typedef struct TimerInfo {
-	/* 0x000 */ int Start;
-	/* 0x004 */ int Timer;
+	/* 0x000 */ unsigned int Start;
+	/* 0x004 */ unsigned int Timer;
 	/* 0x008 */ char Mode;
 	/* 0x009 */ char StartMode;
 	/* 0x00A */ char PauseMode;
 	/* 0x00B */ char FinishMode;
-	/* 0x00C */ int Reduction;
-	/* 0x010 */ int TimerPostReduction;
+	/* 0x00C */ unsigned int Reduction;
+	/* 0x010 */ unsigned int TimerPostReduction;
 } TimerInfo;
 
 typedef struct ActiveMenuData {
-	/* 0x000 */ char screenIndex;
-	/* 0x001 */ char positionIndex;
+	/* 0x000 */ unsigned char screenIndex;
+	/* 0x001 */ unsigned char positionIndex;
 	/* 0x002 */ char isOpen;
 } ActiveMenuData;
 
@@ -145,9 +145,9 @@ typedef struct PhaseCheckerData {
 } PhaseCheckerData;
 
 typedef struct RGB {
-	/* 0x000 */ char red;
-	/* 0x001 */ char green;
-	/* 0x002 */ char blue;
+	/* 0x000 */ unsigned char red;
+	/* 0x001 */ unsigned char green;
+	/* 0x002 */ unsigned char blue;
 } RGB;
 
 typedef struct KongBase {

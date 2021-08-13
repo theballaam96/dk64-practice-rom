@@ -13,16 +13,12 @@ void colorKong(void) {
 	prepKongColoring();
 	// DK = 1 (Blue)
 	// Diddy = 2 (Yellow Cap)
-	// Lanky = 4 (Glitch Straps)
+	// Lanky = 2 (Purple Straps)
 	// Tiny = 2 (Purple)
 	// Chunky = 1 (Red)
-	PlayerOneColor = 1;
-	if ((Character == 1) || (Character == 3)) {
-		PlayerOneColor = 2;
-	} else {
-		if (Character == 3) {
-			PlayerOneColor = 4;
-		}
+	PlayerOneColor = 2;
+	if ((Character == 0) || (Character == 4)) {
+		PlayerOneColor = 1;
 	}
 }
 

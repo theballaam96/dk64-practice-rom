@@ -5,7 +5,7 @@ extern void* dk_malloc(int size);
 extern void free(void* mallocPtr);
 extern void playSound(short soundIndex, int unk0, int unk1, int unk2, int unk3, int unk4);
 extern void initiateTransition(int map, int exit);
-extern int getFlagBlockAddress(char flagType);
+extern int* getFlagBlockAddress(char flagType);
 extern int isAddressActor(void* address);
 extern int getTimestamp();
 extern void dmaFileTransfer(int romStart, int romEnd, int* ramStart);
@@ -21,6 +21,7 @@ extern void prepKongColoring();
 extern void callFunc(int* addr);
 extern int getTimestampDiff(unsigned int major, unsigned int minor);
 extern void patchHook(unsigned int hook_rdram_location, int offset_in_hook_list, char hook_byte_size);
+extern void* dk_memcpy(void* _dest, void* _src, int size);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -168,3 +169,4 @@ extern int* graphicalOverlaySpace[32][3];
 extern char Precision;
 extern char LoadedHooks;
 extern char PreviousLagArray[16];
+extern char InputDisplayIndex;

@@ -18,6 +18,7 @@
 .definelabel convertTimestamp, 0x80005818
 .definelabel resetMap, 0x805FFFC8
 .definelabel prepKongColoring, 0x8068A508
+.definelabel dk_memcpy, 0x80003000
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -106,9 +107,10 @@
 
 .definelabel TestVariable, 0x807FFFFC
 
-.definelabel WatchIndex, 0x807FFFF8 // u32
+.definelabel WatchIndex, 0x807FFFF8 // u8 array (size 4)
 .definelabel InBadMap, 0x807FFFF7 // u8 - Bool
 .definelabel MenuSavestateAction, 0x807FFFF6 // u8 - 0 = Save, 1 = Load
+.definelabel InputDisplayIndex, 0x807FFFF5 // u8
 .definelabel LoadedHooks, 0x807FFFEF // u8
 .definelabel Precision, 0x807FFFEE // u8
 .definelabel SniperOn, 0x807FFFED // u8

@@ -57,5 +57,5 @@
 #define MovesBaseSize 0x1D8
 #define MaxMenuItems 20 // 32 (practice rom cap) - 8 (normal cap) - 4 (watch)
 #define ErrorLength 180
-#define WarpScreens 10
+#define WarpScreens 28
 #define WatchCount 4
