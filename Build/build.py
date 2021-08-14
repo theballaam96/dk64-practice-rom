@@ -116,6 +116,8 @@ with open(newROMName, "r+b") as fh:
     fh.seek(0x3154)
     fh.write(bytearray([0, 0, 0, 0]))
 
+import filestatewriter
+
 if os.path.exists("dk64-practice-rom.z64"):
 	shutil.copyfile("dk64-practice-rom.z64", "./../src/rom/dk64-practice-rom-python.z64");
 	os.remove("dk64-practice-rom.z64")
