@@ -4,7 +4,7 @@
 .headersize 0x7FFFF400
 .org 0x80000764
 LUI a0, hi(bootStart) //start of ROM copy
-ADDIU a1, a0, lo(bootStart + 0xFFFF)
+ORI a1, a0, lo(bootStart + 0xFFF0)
 ADDIU a0, a0, lo(bootStart)
 LUI a2, 0x805D
 JAL dmaFileTransfer

@@ -19,4 +19,5 @@
 .importobj "obj/levitate.o"
 .importobj "obj/tagAnywhere.o"
 .importobj "obj/hooks.o"
+.importobj "obj/ramview.o"
 .importobj "obj/main.o"

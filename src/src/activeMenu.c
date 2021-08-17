@@ -5,6 +5,7 @@ static const char warp[] = "WARP TO MAP";
 static const char flags[] = "SPECIAL FLAGS";
 static const char saves[] = "SAVE STATES";
 static const char watches[] = "WATCHES";
+static const char ramview[] = "RAM VIEWER";
 static const char timerSettings[] = "TIMER SETTINGS";
 static const char fileStates[] = "FILE STATES";
 static const char cheats[] = "CHEATS";
@@ -18,18 +19,19 @@ static const char* main_array[] = {
 	flags,
 	saves,
 	watches,
+	ramview,
 	timerSettings,
 	fileStates,
 	cheats,
 	settings
 };
 
-static const int main_functions[8];
+static const int main_functions[9];
 
 static const Screen main_struct = {
 	.TextArray = (const int*)main_array,
 	.FunctionArray = main_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };
@@ -69,6 +71,7 @@ static const Screen* menu_screens[] = {
 	&state_struct,
 	&changestate_struct,
 	&timersettings_struct,
+	&ramview_struct,
 };
 
 void hideInputDisplay(void) {
@@ -108,6 +111,7 @@ void spawnMenu(int screenIndex) {
 	textOverlay->opacity = 0xFF;
 	ActiveToolsMenu[array_count] = textOverlay;
 	if (screenIndex == 0) {
+		
 		spawnTextOverlay(style,180,25,(char *)hackTitle,0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		textOverlay->opacity = 0xFF;
@@ -331,6 +335,7 @@ static const int main_functions[] = {
 	0,
 	(int)&openStateMenu,
 	(int)&openWatchMenu,
+	(int)&initRamViewerTab,
 	(int)&openTimerSettingsMenu,
 	0,
 	0,
