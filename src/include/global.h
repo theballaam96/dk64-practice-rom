@@ -43,7 +43,7 @@ extern void hideInputDisplay(void);
 extern void savestateHandler(void);
 extern void shorthandSavestate(void);
 extern void initRamViewerTab(void);
-extern void ramViewMain(void);
+extern void ramViewUpdate(void);
 void changeMenu(int newScreenIndex);
 
 extern const Screen maps_container_struct;

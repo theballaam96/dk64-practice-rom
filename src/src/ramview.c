@@ -15,7 +15,6 @@ char formatter08[] = "%02X:%08X %08X %08X %08X";
 char formatter04[] = "%02X:%04X %04X %04X %04X %04X %04X %04X %04X";
 char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X";
 char formatterheaderViewText[] = "ADDR: %08X";
-char testMessage[] = "Test";
 
 char openRamViewText[] = "OPEN RAM VIEW";
 char closeRamViewText[] = "CLOSE RAM VIEW";
@@ -28,7 +27,6 @@ char line5[60] = "5";
 char line6[60] = "6";
 char line7[60] = "7";
 char line8[60] = "8";
-char line9[60] = "8";
 char currentFormat = 0;
 int* printStartAddr = (int*)0x80000000;
 unsigned char headerStyle = 10;
@@ -43,12 +41,7 @@ static char* ramview_array[] = {
     closeRamViewText,
 };
 
-
-void setActorOpacity (TextOverlay* textOverlay, char opacity) {
-    textOverlay->opacity = opacity;
-}
-
-void dk_strFormatWrapper (char* destination, int byteFormat, int* address) {
+void dk_strFormatWrapper(char* destination, int byteFormat, int* address) {
     if (byteFormat == ByteFormat4) {
         dk_strFormat(destination, formatter08, ((unsigned int)address & 0x000000FF), *(address), *(address + 1), *(address + 2), *(address + 3));
     } else if (byteFormat == ByteFormat2) {
@@ -65,17 +58,17 @@ int* spawnTextOverlayWrapper(int style, int x, int y, char* string, int timer1, 
     return CurrentActorPointer;
 }
 
-void initHeader (int* address) {
+void initHeader(int* address) {
     TextOverlay* textOverlay;
 
     dk_strFormat(ramViewTextPtrs[0], formatterheaderViewText, address);
     textOverlay = (TextOverlay*)spawnTextOverlayWrapper(headerStyle, 60, 15, headerViewText, 0, 0, 2, 0);
     textOverlay->string = ramViewTextPtrs[0];
     textOverlayInstances[0] = textOverlay;
-    setActorOpacity(textOverlay, 0xff);
+    textOverlay->opacity = 0xFF;
 }
 
-void updateHeader (int* address) {
+void updateHeader(int* address) {
     dk_strFormat(ramViewTextPtrs[0], formatterheaderViewText, address);
     textOverlayInstances[0]->string = ramViewTextPtrs[0];
 }
@@ -90,12 +83,12 @@ void initTable (int* address) {
         textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, x, y, (ramViewTextPtrs[i+1]), 0, 0, 2, 0);
         textOverlay->string = ramViewTextPtrs[i+1];
         textOverlayInstances[i+1] = textOverlay;
-        setActorOpacity(textOverlay, 0xff);
+        textOverlay->opacity = 0xFF;
         y += 15;
     }
 }
 
-void updateTable (int* address) {
+void updateTable(int* address) {
     for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) { //max of 8 lines
         if (ramViewTextPtrs[i+1] != 0) {
             dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
@@ -110,15 +103,6 @@ void destroyTextObjects(void) {
         if (textOverlayInstances[i] != NULL) {
             deleteActor((int*)textOverlayInstances[i]);
             textOverlayInstances[i] = NULL;
-        }
-    }
-}
-
-void freeRamViewTextPtrs(void) {
-    for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) - 1; i++) {//(sizeof(lines) / sizeof(char*)) - 1 because lines[0] is header
-        if (ramViewTextPtrs[i+1] != 0) {
-            free(ramViewTextPtrs[i+1]); //i+1 because lines[0] is header
-            ramViewTextPtrs[i+1] = 0;
         }
     }
 }
@@ -155,25 +139,7 @@ void checkForFormatChange(void) {
     }
 }
 
-void pickRAMAddr(void) {
-    if (p1PressedButtons & D_Up) {
-        if ( (unsigned int)(printStartAddr - 4) < (unsigned int) validRamReadStart) {
-            //prevents reading from invalid memory
-        } else {
-            printStartAddr -= 0x4;
-        }
-    }
-
-    if (p1PressedButtons & D_Down) {
-        if ( (unsigned int) (printStartAddr + 4) >= (unsigned int) validRamReadEnd) { //we display 0x10 bytes * 8 therefore we stop advancing at 807FFF90
-            //prevents reading from invalid memory
-        } else {
-            printStartAddr += 0x4;
-        }
-    }    
-}
-
-void ramViewMain(void) {
+void ramViewUpdate(void) {
     if (menuFlag == 1) {
         checkForFormatChange();
         scrollRAMViewer();

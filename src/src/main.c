@@ -22,5 +22,5 @@ void cFuncLoop(void) {
 	hideInputDisplay();
 	savestateHandler();
 	shorthandSavestate();
-	ramViewMain();
+	ramViewUpdate();
 }
