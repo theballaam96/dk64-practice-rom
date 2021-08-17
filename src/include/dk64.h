@@ -100,6 +100,8 @@ extern unsigned int PauseTimestampMajor;
 extern unsigned int PauseTimestampMinor;
 extern unsigned int HelmStartTimestampMajor;
 extern unsigned int HelmStartTimestampMinor;
+extern short p1PressedButtons;
+extern short p1HeldButtons;
 
 //hack data
 extern int TestVariable;
@@ -165,7 +167,7 @@ extern unsigned int TempTimestampStorageMinor;
 extern TextOverlay* HackTitle;
 extern TextOverlay* HackVersion;
 extern char AddedCorruptionActorCount;
-extern int* graphicalOverlaySpace[32][3];
+extern int* graphicalOverlaySpace[32];
 extern char Precision;
 extern char LoadedHooks;
 extern char PreviousLagArray[16];

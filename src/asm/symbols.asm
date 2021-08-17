@@ -97,6 +97,8 @@
 .definelabel PauseTimestampMinor, 0x807445C4 // u32
 .definelabel HelmStartTimestampMajor, 0x80755340 // u32
 .definelabel HelmStartTimestampMinor, 0x80755344 // u32
+.definelabel p1PressedButtons, 0x807ECD48
+.definelabel p1HeldButtons, 0x807ECD58
 
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4

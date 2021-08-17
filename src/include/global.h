@@ -42,6 +42,9 @@ extern void handleTimer(void);
 extern void hideInputDisplay(void);
 extern void savestateHandler(void);
 extern void shorthandSavestate(void);
+extern void initRamViewerTab(void);
+extern void ramViewMain(void);
+void changeMenu(int newScreenIndex);
 
 extern const Screen maps_container_struct;
 extern const Screen japes_mapwarp_struct;
@@ -76,6 +79,7 @@ extern const Screen helmrool_mapwarp_struct;
 extern const Screen state_struct;
 extern const Screen changestate_struct;
 extern const Screen timersettings_struct;
+extern const Screen ramview_struct;
 
 extern const MapWarp* warping_struct[WarpScreens];
 extern const int maps_container_functions[9];
