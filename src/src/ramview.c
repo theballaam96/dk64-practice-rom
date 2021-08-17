@@ -69,7 +69,7 @@ void initHeader (int* address) {
     TextOverlay* textOverlay;
 
     dk_strFormat(ramViewTextPtrs[0], formatterheaderViewText, address);
-    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(headerStyle, 25, 20, headerViewText, 0, 0, 2, 0);
+    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(headerStyle, 60, 15, headerViewText, 0, 0, 2, 0);
     textOverlay->string = ramViewTextPtrs[0];
     textOverlayInstances[0] = textOverlay;
     setActorOpacity(textOverlay, 0xff);
@@ -83,9 +83,9 @@ void updateHeader (int* address) {
 void initTable (int* address) {
     TextOverlay* textOverlay;
     int x = 10;
-    int y = 40;
+    int y = 60;
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) {
         dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
         textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, x, y, (ramViewTextPtrs[i+1]), 0, 0, 2, 0);
         textOverlay->string = ramViewTextPtrs[i+1];
@@ -96,7 +96,7 @@ void initTable (int* address) {
 }
 
 void updateTable (int* address) {
-    for (int i = 0; i < 8; i++) { //max of 8 lines
+    for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) { //max of 8 lines
         if (ramViewTextPtrs[i+1] != 0) {
             dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
             textOverlayInstances[i+1]->string = ramViewTextPtrs[i+1];
@@ -124,7 +124,7 @@ void freeRamViewTextPtrs(void) {
 }
 
 void scrollRAMViewer(void) {
-    if (p1PressedButtons & D_Up) {
+    if (p1PressedButtons & D_Up && p1HeldButtons & L_Button) {
         if ( (unsigned int)(printStartAddr - 4) < (unsigned int) validRamReadStart) {
             //prevents reading from invalid memory
         } else {
@@ -132,7 +132,7 @@ void scrollRAMViewer(void) {
         }
     }
 
-    if (p1PressedButtons & D_Down) {
+    if (p1PressedButtons & D_Down && p1HeldButtons & L_Button) {
         if ( (unsigned int) (printStartAddr + 4) >= (unsigned int) validRamReadEnd) { //we display 0x10 bytes * 8 therefore we stop advancing at 807FFF90
             //prevents reading from invalid memory
         } else {
@@ -147,6 +147,7 @@ void checkForFormatChange(void) {
             currentFormat++;
         }
     }
+    
     if (p1PressedButtons & D_Left && p1HeldButtons & L_Button) {
         if ( currentFormat != 0) {
             currentFormat--;
@@ -170,7 +171,6 @@ void pickRAMAddr(void) {
             printStartAddr += 0x4;
         }
     }    
-
 }
 
 void ramViewMain(void) {
