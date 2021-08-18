@@ -87,6 +87,7 @@ with open(newROMName, "r+b") as fh:
 				fh.write(compress)
 		else:
 			print(x["output_file"] + " does not exist")
+	# Thumb
 	compressGZipFile("../Source/Non-Code/Nintendo Logo/Thumb.bin", "ThumbCompressed.bin.gz", False)
 	with open("ThumbCompressed.bin.gz","rb") as fg:
 		thumb_image = fg.read()
@@ -94,10 +95,10 @@ with open(newROMName, "r+b") as fh:
 		fh.write(thumb_image)
 	if os.path.exists("ThumbCompressed.bin.gz"):
 		os.remove("ThumbCompressed.bin.gz")
+	# Dolby Logo
 	compressGZipFile("../Source/Non-Code/Dolby/DolbyLogo.bin", "DolbyCompressed.bin.gz", False)
 	with open("DolbyCompressed.bin.gz","rb") as fg:
 		dolby_image = fg.read()
-		#print(len(dolby_image))
 		fh.seek(0x116818C)
 		fh.write(dolby_image)
 	if os.path.exists("DolbyCompressed.bin.gz"):

@@ -14,6 +14,7 @@
 .importobj "obj/timer_settings.o"
 .importobj "obj/watchContainer.o"
 .importobj "obj/savestate.o"
+.importobj "obj/filestates.o"
 .importobj "obj/activeMenu.o"
 .importobj "obj/aesthetic.o"
 .importobj "obj/levitate.o"

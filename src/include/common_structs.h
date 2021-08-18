@@ -5,6 +5,11 @@ typedef struct actorData {
 	/* 0x07C */ float xPos;
 } actorData;
 
+typedef struct cameraData {
+	/* 0x000 */ char unk_00[0x15F];
+	/* 0x15F */ char facing_angle;
+} cameraData;
+
 typedef struct playerData {
 	/* 0x000 */ char unk_00[0x58];
 	/* 0x058 */ int characterID; //02 is dk, 03 is diddy, 04 is lanky, etc
@@ -20,7 +25,8 @@ typedef struct playerData {
 	/* 0x0C0 */ float yVelocity;
 	/* 0x0C4 */ char unk_C4[0xE6 - 0xC4];
 	/* 0x0E6 */ short facing_angle;
-	/* 0x0E8 */ char unk_E8[0x12c-0xE8];
+	/* 0x0E8 */ short skew_angle;
+	/* 0x0EA */ char unk_EA[0x12c-0xEA];
 	/* 0x12C */ short chunk;
 	/* 0x12E */ char unk_12E[0x147 - 0x12E];
 	/* 0x147 */ char hand_state;
@@ -30,7 +36,9 @@ typedef struct playerData {
 	/* 0x156 */ char unk_156[0xB2];
 	/* 0x208 */ int* vehicle_actor_pointer;
 	/* 0x20C */ char was_gun_out;
-	/* 0x20D */ char unk_20D[0x328 - 0x20D];
+	/* 0x20D */ char unk_20D[0x284 - 0x20D];
+	/* 0x284 */ cameraData* camera_pointer;
+	/* 0x288 */ char unk_288[0x328 - 0x288];
 	/* 0x328 */ actorData* krool_timer_pointer;
 	/* 0x32C */ actorData* held_actor;
 	/* 0x330 */ char unk_330[0x36F - 0x330];
@@ -54,7 +62,10 @@ typedef struct TextOverlay {
 } TextOverlay;
 
 typedef struct Savestate {
-	/* 0x000 */ char InventoryBase[0x10];
+	/* 0x000 */ char InventoryBase[0xC];
+	/* 0x00C */ unsigned short facing_angle;
+	/* 0x00E */ char HelmTimerOn;
+	/* 0x00F */ char ISGOn;
 	/* 0x010 */ float xPos;
 	/* 0x014 */ float yPos;
 	/* 0x018 */ float zPos;
@@ -65,6 +76,16 @@ typedef struct Savestate {
 	/* 0x020 */ char TempFlagBlock[0x10];
 	/* 0x030 */ char KongBase[0x1E0];
 	/* 0x210 */ char PermanentFlagBlock[0x13C];
+	/* 0x34C */ short HelmStart;
+	/* 0x34E */ char ISGPrevFade;
+	/* 0x34F */ unsigned char camera_angle;
+	/* 0x350 */ int HelmTimerDifferenceMajor;
+	/* 0x354 */ int HelmTimerDifferenceMinor;
+	/* 0x358 */ int ISGTimerDifferenceMajor;
+	/* 0x35C */ int ISGTimerDifferenceMinor;
+	/* 0x360 */ short skew_angle;
+	/* 0x362 */ char unused_362[0x2];
+	/* 0x364 */ int createdTime;
 } Savestate;
 
 typedef const struct Screen {
@@ -186,3 +207,13 @@ typedef struct ModelTwoData {
 	/* 0x08A */ short object_id;
 	/* 0x08C */ char unk_8C[0x4];
 } ModelTwoData;
+
+typedef struct WarpInfo {
+	/* 0x000 */ short xPos;
+	/* 0x002 */ short yPos;
+	/* 0x004 */ short zPos;
+	/* 0x006 */ unsigned char facing_angle; // (val / 255) * 4096
+	/* 0x007 */ unsigned char camera_angle; // (player + 0x284)->0x15F
+	/* 0x008 */ char will_autowalk;
+	/* 0x009 */ char spawn_at_origin;
+} WarpInfo;

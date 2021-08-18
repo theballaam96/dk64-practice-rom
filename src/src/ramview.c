@@ -31,7 +31,6 @@ char currentFormat = 0;
 int* printStartAddr = (int*)0x80000000;
 unsigned char headerStyle = 10;
 unsigned char tableStyle = 5;
-char menuFlag;
 
 char* ramViewTextPtrs[] = {headerViewText, line1, line2, line3, line4, line5, line6, line7, line8};
 TextOverlay* textOverlayInstances[9] = {0};
@@ -140,7 +139,7 @@ void checkForFormatChange(void) {
 }
 
 void ramViewUpdate(void) {
-    if (menuFlag == 1) {
+    if (RAMDisplayOpen == 1) {
         checkForFormatChange();
         scrollRAMViewer();
         updateHeader(printStartAddr);
@@ -149,17 +148,17 @@ void ramViewUpdate(void) {
 }
 
 void closeRamViewerDisplay(void){
-    if (menuFlag == 1) {
-        menuFlag = 0;
+    if (RAMDisplayOpen == 1) {
+        RAMDisplayOpen = 0;
         destroyTextObjects();
     }
 }
 
 void startRamViewerDisplay (void) {
-    if (menuFlag == 0) {
+    if (RAMDisplayOpen == 0) {
         initHeader(printStartAddr);
         initTable(printStartAddr);
-        menuFlag = 1;
+        RAMDisplayOpen = 1;
     }
 }
 

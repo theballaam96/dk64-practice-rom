@@ -8,6 +8,27 @@ void setPermFlag(short flagIndex) {
 	setFlag(flagIndex,1,0);
 }
 
+// int getTimestampDiffInTicksMajor(unsigned int major, unsigned int minor) {
+// 	unsigned long diff_major = CurrentTimestampMajor - major;
+// 	int diff_minor = CurrentTimestampMinor - minor;
+// 	if (CurrentTimestampMinor < minor) {
+// 		diff_major += 1;
+// 	}
+// 	unsigned long diff = (diff_major << 0x20) + diff_minor;
+// 	return (diff >> 0x20);
+// }
+
+// int getTimestampDiffInTicksMinor(unsigned int major, unsigned int minor) {
+// 	unsigned long diff_major = CurrentTimestampMajor - major;
+// 	int diff_minor = CurrentTimestampMinor - minor;
+// 	if (CurrentTimestampMinor < minor) {
+// 		diff_major += 1;
+// 	}
+// 	unsigned long diff = (diff_major << 0x20) + diff_minor;
+// 	return (diff & 0xFFFFFFFF);
+// }
+
+
 int convertIDToIndex(short obj_index) {
 	//int _count = ObjectModel2Count;
 	int index = -1;

@@ -194,7 +194,6 @@ void openWatchMenu(void) {
 void getISGTimer(void) {
 	ISGTimer = 0;
 	if (ISGActive) {
-		getTimestamp();
 		if ((ISGTimestampMajor) || (ISGTimestampMinor)) {
 			ISGTimer = getTimestampDiff(ISGTimestampMajor,ISGTimestampMinor);
 		}

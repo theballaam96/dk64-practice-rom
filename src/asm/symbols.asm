@@ -58,9 +58,10 @@
 .definelabel CameraStateChangeTimer, 0x807F5CEC
 .definelabel AutowalkPointer, 0x807FD70C
 .definelabel IsAutowalking, 0x807463B8
-.definelabel PositionWarpInfo, 0x807FC918
+.definelabel PositionWarpInfo, 0x807FC918 // WarpInfo Struct
 .definelabel PositionWarpBitfield, 0x8076AEE2
 .definelabel PositionFloatWarps, 0x8076AEE4 // f32 x 3
+.definelabel PositionFacingAngle, 0x8076AEF0 // u16
 .definelabel ChimpyCam, 0x80744530
 .definelabel ScreenRatio, 0x807444C0
 .definelabel CurrentActorPointer, 0x807FBB44
@@ -97,6 +98,7 @@
 .definelabel PauseTimestampMinor, 0x807445C4 // u32
 .definelabel HelmStartTimestampMajor, 0x80755340 // u32
 .definelabel HelmStartTimestampMinor, 0x80755344 // u32
+.definelabel HelmStartTime, 0x8075534C // u32
 .definelabel p1PressedButtons, 0x807ECD48
 .definelabel p1HeldButtons, 0x807ECD58
 
@@ -113,6 +115,8 @@
 .definelabel InBadMap, 0x807FFFF7 // u8 - Bool
 .definelabel MenuSavestateAction, 0x807FFFF6 // u8 - 0 = Save, 1 = Load
 .definelabel InputDisplayIndex, 0x807FFFF5 // u8
+.definelabel RAMDisplayOpen, 0x807FFFF4 // u8
+.definelabel LoadVarsOnMapLoad, 0x807FFFF3 // u8 - For savestates
 .definelabel LoadedHooks, 0x807FFFEF // u8
 .definelabel Precision, 0x807FFFEE // u8
 .definelabel SniperOn, 0x807FFFED // u8

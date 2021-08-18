@@ -8,6 +8,7 @@ extern void playSFX(short sfxIndex);
 extern void setPermFlag(short flagIndex);
 extern void openStateMenu(void);
 extern void openTimerSettingsMenu(void);
+extern void openFileStateMainMenu(void);
 
 extern void warpToMap(void);
 extern void openJapesMenu(void);
@@ -44,7 +45,7 @@ extern void savestateHandler(void);
 extern void shorthandSavestate(void);
 extern void initRamViewerTab(void);
 extern void ramViewUpdate(void);
-void changeMenu(int newScreenIndex);
+extern void savestateLoadMapLoadVars(void);
 
 extern const Screen maps_container_struct;
 extern const Screen japes_mapwarp_struct;
@@ -80,6 +81,14 @@ extern const Screen state_struct;
 extern const Screen changestate_struct;
 extern const Screen timersettings_struct;
 extern const Screen ramview_struct;
+extern const Screen filestates_main_struct;
+extern const Screen filestates_nle_struct;
+extern const Screen filestates_101main_struct;
+extern const Screen filestates_general_struct;
+extern const Screen filestates_101org_struct;
+extern const Screen filestates_101jfm_struct;
+extern const Screen filestates_101ffm_struct;
+extern const Screen viewstate_struct;
 
 extern const MapWarp* warping_struct[WarpScreens];
 extern const int maps_container_functions[9];

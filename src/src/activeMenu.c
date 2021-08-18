@@ -72,6 +72,14 @@ static const Screen* menu_screens[] = {
 	&changestate_struct,
 	&timersettings_struct,
 	&ramview_struct,
+	&filestates_main_struct,
+	&filestates_nle_struct,
+	&filestates_101main_struct,
+	&filestates_general_struct,
+	&filestates_101org_struct,
+	&filestates_101jfm_struct,
+	&filestates_101ffm_struct,
+	&viewstate_struct,
 };
 
 void hideInputDisplay(void) {
@@ -337,7 +345,7 @@ static const int main_functions[] = {
 	(int)&openWatchMenu,
 	(int)&initRamViewerTab,
 	(int)&openTimerSettingsMenu,
-	0,
+	(int)&openFileStateMainMenu,
 	0,
 	0
 };

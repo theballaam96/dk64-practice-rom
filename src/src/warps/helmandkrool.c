@@ -1,6 +1,6 @@
 #include "../../include/common.h"
 
-static const char mapHelmEntrance[] = "HELM: ENTRACE";
+static const char mapHelmEntrance[] = "HELM: ENTRANCE";
 static const char mapHelmBoMRoom[] = "HELM: BOM ROOM";
 static const char mapHelmNavigationRoom[] = "HELM: NAVIGATION ROOM";
 static const char mapRoolDK[] = "K. ROOL: DK PHASE";

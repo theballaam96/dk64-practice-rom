@@ -23,4 +23,5 @@ void cFuncLoop(void) {
 	savestateHandler();
 	shorthandSavestate();
 	ramViewUpdate();
+	savestateLoadMapLoadVars();
 }

@@ -22,6 +22,8 @@ extern void callFunc(int* addr);
 extern int getTimestampDiff(unsigned int major, unsigned int minor);
 extern void patchHook(unsigned int hook_rdram_location, int offset_in_hook_list, char hook_byte_size);
 extern void* dk_memcpy(void* _dest, void* _src, int size);
+extern void getTimestampDiffInTicks(unsigned int major, unsigned int minor);
+extern int timestampDiffToMilliseconds(unsigned int major, unsigned int minor);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -61,9 +63,10 @@ extern short CurrentCameraState;
 extern short CameraStateChangeTimer;
 extern int* AutowalkPointer;
 extern char IsAutowalking;
-extern short PositionWarpInfo[3];
+extern WarpInfo PositionWarpInfo;
 extern short PositionWarpBitfield;
 extern float PositionFloatWarps[3];
+extern unsigned short PositionFacingAngle;
 extern char ChimpyCam;
 extern char ScreenRatio;
 extern int* CurrentActorPointer;
@@ -100,11 +103,12 @@ extern unsigned int PauseTimestampMajor;
 extern unsigned int PauseTimestampMinor;
 extern unsigned int HelmStartTimestampMajor;
 extern unsigned int HelmStartTimestampMinor;
+extern int HelmStartTime;
 extern short p1PressedButtons;
 extern short p1HeldButtons;
 
 //hack data
-extern int TestVariable;
+extern float TestVariable;
 
 extern TextOverlay* ActiveTools_Error;
 extern TextOverlay* ActiveToolsMenu[];
@@ -167,8 +171,10 @@ extern unsigned int TempTimestampStorageMinor;
 extern TextOverlay* HackTitle;
 extern TextOverlay* HackVersion;
 extern char AddedCorruptionActorCount;
-extern int* graphicalOverlaySpace[32];
+extern int* graphicalOverlaySpace[32][3];
 extern char Precision;
 extern char LoadedHooks;
 extern char PreviousLagArray[16];
 extern char InputDisplayIndex;
+extern char RAMDisplayOpen;
+extern char LoadVarsOnMapLoad;

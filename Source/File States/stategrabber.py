@@ -50,3 +50,4 @@ grabFileState("./No Levels Early/RAM Dump/caves.bin","./No Levels Early/State Fi
 grabFileState("./No Levels Early/RAM Dump/castle.bin","./No Levels Early/State Files/castle.bin")
 grabFileState("./No Levels Early/RAM Dump/helm.bin","./No Levels Early/State Files/helm.bin")
 grabFileState("./No Levels Early/RAM Dump/takeoffskip.bin","./No Levels Early/State Files/takeoffskip.bin")
+grabFileState("./General/RAM Dump/cleanfile.bin","./General/State Files/cleanfile.bin");

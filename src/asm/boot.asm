@@ -22,9 +22,6 @@ mainASMFunction:
 	NOP
 	JAL cFuncLoop
 	NOP
-	NOP
-	NOP
-	NOP
 	J 0x805FC16C
 	NOP
 
@@ -63,6 +60,49 @@ getTimestampDiff:
 	ADDIU 	a3, r0, 0x40
 	JAL 	dk_multiply
 	SUBU 	a1, v1, t7
+	OR 		a0, v0, r0
+	OR 		a1, v1, r0
+	ADDIU 	a2, r0, 0
+	JAL 	convertTimestamp
+	ADDIU 	a3, r0, 3000
+	OR 		a0, v0, r0
+	OR 		a1, v1, r0
+	ADDIU 	a2, r0, 0
+	JAL 	convertTimestamp
+	ADDIU 	a3, r0, 10000
+	LW 		ra, 0x4C (sp)
+	ADDIU 	sp, sp, 0xA8
+	JR 		ra
+	ADDIU 	v0, v1, 0
+
+getTimestampDiffInTicks:
+	// a0 = major timestamp
+	// a1 = minor timestamp
+	ADDIU 	sp, sp, -0xA8
+	SW 		ra, 0x4C (sp)
+	SW 		a0, 0x40 (sp)
+	JAL 	getTimestamp
+	SW 		a1, 0x44 (sp)
+	LW 		t6, 0x40 (sp)
+	LW 		t7, 0x44 (sp)
+	SLTU 	at, v1, t7
+	SUBU 	a0, v0, t6
+	SUBU 	a0, a0, at
+	SUBU 	a1, v1, t7
+	SW 		a0, TempTimestampStorageMajor
+	SW 		a1, TempTimestampStorageMinor
+	LW 		ra, 0x4C (SP)
+	JR 		ra
+	ADDIU 	sp, sp, 0xA8
+
+timestampDiffToMilliseconds:
+	// a0 = major timestamp
+	// a1 = minor timestamp
+	ADDIU 	sp, sp, -0xA8
+	SW 		ra, 0x4C (sp)
+	ADDIU 	a3, r0, 0x40
+	JAL 	dk_multiply
+	ADDIU 	a2, r0, 0
 	OR 		a0, v0, r0
 	OR 		a1, v1, r0
 	ADDIU 	a2, r0, 0

@@ -17,6 +17,12 @@ state_files = [
 			"helm.bin",
 			"takeoffskip.bin",
 		]
+	},
+	{
+		"folder": "General",
+		"files": [
+			"cleanfile.bin",
+		],
 	}
 ]
 

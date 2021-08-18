@@ -1,4 +1,5 @@
 mkdir obj
+@echo Started: %date% %time%
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/lib.c
 mv lib.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/mapContainer.c
@@ -35,6 +36,8 @@ mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-point
 mv watchContainer.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/savestate.c
 mv savestate.o obj/
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/filestates.c
+mv filestates.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/activeMenu.c
 mv activeMenu.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/tagAnywhere.c
@@ -50,5 +53,6 @@ cd ".\..\Build\"
 python build.py
 cd ".\..\src\"
 armips asm/main.asm
-rem python cleanup.py
+python cleanup.py
 n64crc "rom/dk64-practice-rom-test.z64"
+@echo Completed: %date% %time%
