@@ -172,7 +172,7 @@ static const int ramview_functions[] = {
 };
 
 const Screen ramview_struct = {
-	.TextArray = (const int*)ramview_array,
+	.TextArray = (int*)ramview_array,
 	.FunctionArray = ramview_functions,
 	.ArrayItems = 2,
 	.ParentScreen = 0,

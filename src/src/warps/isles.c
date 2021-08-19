@@ -78,7 +78,7 @@ static const int isles_mapwarp_functions[] = {
 };
 
 const Screen isles_mapwarp_struct = {
-	.TextArray = (const int*)isles_mapwarp_array,
+	.TextArray = (int*)isles_mapwarp_array,
 	.FunctionArray = isles_mapwarp_functions,
 	.ArrayItems = 7,
 	.ParentScreen = 1,
@@ -124,7 +124,7 @@ static const int islesmain_mapwarp_functions[] = {
 };
 
 const Screen islesmain_mapwarp_struct = {
-	.TextArray = (const int*)islesmain_mapwarp_array,
+	.TextArray = (int*)islesmain_mapwarp_array,
 	.FunctionArray = islesmain_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 27,
@@ -182,7 +182,7 @@ static const int isleslobbies_mapwarp_functions[] = {
 };
 
 const Screen isleslobbies_mapwarp_struct = {
-	.TextArray = (const int*)isleslobbies_mapwarp_array,
+	.TextArray = (int*)isleslobbies_mapwarp_array,
 	.FunctionArray = isleslobbies_mapwarp_functions,
 	.ArrayItems = 8,
 	.ParentScreen = 27,

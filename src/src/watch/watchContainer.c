@@ -180,7 +180,7 @@ static const int watch_functions[] = {
 };
 
 const Screen watch_struct = {
-	.TextArray = (const int*)watch_array,
+	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
 	.ArrayItems = 11,
 	.ParentScreen = 0,

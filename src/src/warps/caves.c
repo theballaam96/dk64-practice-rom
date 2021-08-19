@@ -96,7 +96,7 @@ static const int caves_mapwarp_functions[] = {
 };
 
 const Screen caves_mapwarp_struct = {
-	.TextArray = (const int*)caves_mapwarp_array,
+	.TextArray = (int*)caves_mapwarp_array,
 	.FunctionArray = caves_mapwarp_functions,
 	.ArrayItems = 9,
 	.ParentScreen = 1,
@@ -146,7 +146,7 @@ static const int cavesmain_mapwarp_functions[] = {
 };
 
 const Screen cavesmain_mapwarp_struct = {
-	.TextArray = (const int*)cavesmain_mapwarp_array,
+	.TextArray = (int*)cavesmain_mapwarp_array,
 	.FunctionArray = cavesmain_mapwarp_functions,
 	.ArrayItems = 6,
 	.ParentScreen = 17,
@@ -192,7 +192,7 @@ static const int caves5dc_mapwarp_functions[] = {
 };
 
 const Screen caves5dc_mapwarp_struct = {
-	.TextArray = (const int*)caves5dc_mapwarp_array,
+	.TextArray = (int*)caves5dc_mapwarp_array,
 	.FunctionArray = caves5dc_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 17,
@@ -239,7 +239,7 @@ static const int caves5di_mapwarp_functions[] = {
 };
 
 const Screen caves5di_mapwarp_struct = {
-	.TextArray = (const int*)caves5di_mapwarp_array,
+	.TextArray = (int*)caves5di_mapwarp_array,
 	.FunctionArray = caves5di_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 17,

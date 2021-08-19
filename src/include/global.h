@@ -9,6 +9,8 @@ extern void setPermFlag(short flagIndex);
 extern void openStateMenu(void);
 extern void openTimerSettingsMenu(void);
 extern void openFileStateMainMenu(void);
+extern void openFlagSubmenu(int screenIndex);
+extern void toggleFlag(void);
 
 extern void warpToMap(void);
 extern void openJapesMenu(void);
@@ -20,6 +22,9 @@ extern void openCavesMenu(void);
 extern void openCastleMenu(void);
 extern void openHelmRoolMenu(void);
 extern void openIslesMenu(void);
+
+extern void openFlagsMainMenu(void);
+extern void openFlagsKongMenu(void);
 
 extern void openWatchMenu(void);
 extern void endClose(void);
@@ -38,7 +43,7 @@ extern void openWatchesOnTransition(void);
 extern void handleWatch(void);
 extern void clampWatchFloats(void);
 extern void tagAnywhere(void);
-extern void patchHooks(void);
+extern void initHack(void);
 extern void handleTimer(void);
 extern void hideInputDisplay(void);
 extern void savestateHandler(void);
@@ -89,9 +94,15 @@ extern const Screen filestates_101org_struct;
 extern const Screen filestates_101jfm_struct;
 extern const Screen filestates_101ffm_struct;
 extern const Screen viewstate_struct;
+extern const Screen flagmain_struct;
+extern const Screen flagmenu_kongs_struct;
 
+extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
+extern const flagMenuData* flag_menus[flagMenuScreenCount];
 extern const int maps_container_functions[9];
+extern const int flagmain_functions[11];
+extern const char kongcolors[];
 
 extern const MapWarp map_japes_struct;
 extern const MapWarp map_japesmain_struct;
@@ -121,3 +132,5 @@ extern const MapWarp map_isles_struct;
 extern const MapWarp map_islesmain_struct;
 extern const MapWarp map_isleslobbies_struct;
 extern const MapWarp map_helmrool_struct;
+
+extern const flagMenuData flagmenu_kongmenu;

@@ -29,14 +29,14 @@ static const char* main_array[] = {
 static const int main_functions[9];
 
 static const Screen main_struct = {
-	.TextArray = (const int*)main_array,
+	.TextArray = (int*)main_array,
 	.FunctionArray = main_functions,
 	.ArrayItems = 9,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };
 
-static const Screen* menu_screens[] = {
+const Screen* menu_screens[] = {
 	&main_struct,
 	&maps_container_struct,
 	&japes_mapwarp_struct,
@@ -80,6 +80,8 @@ static const Screen* menu_screens[] = {
 	&filestates_101jfm_struct,
 	&filestates_101ffm_struct,
 	&viewstate_struct,
+	&flagmain_struct,
+	&flagmenu_kongs_struct,
 };
 
 void hideInputDisplay(void) {
@@ -340,7 +342,7 @@ void endClose() {
 
 static const int main_functions[] = {
 	(int)&initWarpMenu,
-	0,
+	(int)&openFlagsMainMenu,
 	(int)&openStateMenu,
 	(int)&openWatchMenu,
 	(int)&initRamViewerTab,

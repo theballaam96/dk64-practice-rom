@@ -72,7 +72,7 @@ static const int aztec_mapwarp_functions[] = {
 };
 
 const Screen aztec_mapwarp_struct = {
-	.TextArray = (const int*)aztec_mapwarp_array,
+	.TextArray = (int*)aztec_mapwarp_array,
 	.FunctionArray = aztec_mapwarp_functions,
 	.ArrayItems = 7,
 	.ParentScreen = 1,
@@ -114,7 +114,7 @@ static const int aztecmain_mapwarp_functions[] = {
 };
 
 const Screen aztecmain_mapwarp_struct = {
-	.TextArray = (const int*)aztecmain_mapwarp_array,
+	.TextArray = (int*)aztecmain_mapwarp_array,
 	.FunctionArray = aztecmain_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 4,
@@ -160,7 +160,7 @@ static const int aztecfivedt_mapwarp_functions[] = {
 };
 
 const Screen aztecfivedt_mapwarp_struct = {
-	.TextArray = (const int*)aztecfivedt_mapwarp_array,
+	.TextArray = (int*)aztecfivedt_mapwarp_array,
 	.FunctionArray = aztecfivedt_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 4,

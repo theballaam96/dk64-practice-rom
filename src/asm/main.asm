@@ -2,6 +2,9 @@
 .open "rom/dk64-practice-rom-python.z64", "rom/dk64-practice-rom-test.z64", 0 // Open the ROM file
 .include "asm/symbols.asm" // Include dk64.asm to tell armips' linker where to find the game's function(s)
 .include "asm/bootPatch.asm" //patch boot routine to DMA our code from ROM
+.headersize 0x7FFFF400
+.org 0x80000A30
+.include "asm/hookcode.asm" // Hook code
 .headersize 0x7E5EDDE0
 .org 0x805DAE00
 .include "asm/boot.asm" //include modified boot code

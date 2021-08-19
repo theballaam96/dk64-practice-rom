@@ -65,7 +65,7 @@ void portFileStateToMemory(int state_index) {
 	if (_perm_flags) {
 		dmaFileTransfer(_start,_start+0x13C,_perm_flags);
 	}
-	dmaFileTransfer(_start+0x13C,_start+0x13C+0x1E0,(int *)&MovesBase);
+	dmaFileTransfer(_start+0x13C,_start+0x13C+0x1D8,(int *)&MovesBase);
 	dmaFileTransfer(_start+0x13C+0x1E0,_start+0x13C+0x1E0+0xC,(int *)&CollectableBase);
 	playSFX(BeepHigh);
 }
@@ -114,7 +114,7 @@ static const int filestates_main_functions[] = {
 };
 
 const Screen filestates_main_struct = {
-	.TextArray = (const int*)filestates_main_array,
+	.TextArray = (int*)filestates_main_array,
 	.FunctionArray = filestates_main_functions,
 	.ArrayItems = 3,
 	.ParentScreen = 0,
@@ -148,7 +148,7 @@ static const int filestates_nle_functions[] = {
 };
 
 const Screen filestates_nle_struct = {
-	.TextArray = (const int*)filestates_nle_array,
+	.TextArray = (int*)filestates_nle_array,
 	.FunctionArray = filestates_nle_functions,
 	.ArrayItems = 10,
 	.ParentScreen = 35,
@@ -168,7 +168,7 @@ static const int filestates_101main_functions[] = {
 };
 
 const Screen filestates_101main_struct = {
-	.TextArray = (const int*)filestates_101main_array,
+	.TextArray = (int*)filestates_101main_array,
 	.FunctionArray = filestates_101main_functions,
 	.ArrayItems = 3,
 	.ParentScreen = 35,
@@ -184,7 +184,7 @@ static const int filestates_general_functions[] = {
 };
 
 const Screen filestates_general_struct = {
-	.TextArray = (const int*)filestates_general_array,
+	.TextArray = (int*)filestates_general_array,
 	.FunctionArray = filestates_general_functions,
 	.ArrayItems = 1,
 	.ParentScreen = 35,
@@ -218,7 +218,7 @@ static const int filestates_101org_functions[] = {
 };
 
 const Screen filestates_101org_struct = {
-	.TextArray = (const int*)filestates_101org_array,
+	.TextArray = (int*)filestates_101org_array,
 	.FunctionArray = filestates_101org_functions,
 	.ArrayItems = 10,
 	.ParentScreen = 37,
@@ -252,7 +252,7 @@ static const int filestates_101jfm_functions[] = {
 };
 
 const Screen filestates_101jfm_struct = {
-	.TextArray = (const int*)filestates_101jfm_array,
+	.TextArray = (int*)filestates_101jfm_array,
 	.FunctionArray = filestates_101jfm_functions,
 	.ArrayItems = 10,
 	.ParentScreen = 37,
@@ -286,7 +286,7 @@ static const int filestates_101ffm_functions[] = {
 };
 
 const Screen filestates_101ffm_struct = {
-	.TextArray = (const int*)filestates_101ffm_array,
+	.TextArray = (int*)filestates_101ffm_array,
 	.FunctionArray = filestates_101ffm_functions,
 	.ArrayItems = 10,
 	.ParentScreen = 37,

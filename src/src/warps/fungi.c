@@ -105,7 +105,7 @@ static const int fungi_mapwarp_functions[] = {
 };
 
 const Screen fungi_mapwarp_struct = {
-	.TextArray = (const int*)fungi_mapwarp_array,
+	.TextArray = (int*)fungi_mapwarp_array,
 	.FunctionArray = fungi_mapwarp_functions,
 	.ArrayItems = 11,
 	.ParentScreen = 1,
@@ -155,7 +155,7 @@ static const int fungimain_mapwarp_functions[] = {
 };
 
 const Screen fungimain_mapwarp_struct = {
-	.TextArray = (const int*)fungimain_mapwarp_array,
+	.TextArray = (int*)fungimain_mapwarp_array,
 	.FunctionArray = fungimain_mapwarp_functions,
 	.ArrayItems = 6,
 	.ParentScreen = 13,
@@ -205,7 +205,7 @@ static const int fungigmush_mapwarp_functions[] = {
 };
 
 const Screen fungigmush_mapwarp_struct = {
-	.TextArray = (const int*)fungigmush_mapwarp_array,
+	.TextArray = (int*)fungigmush_mapwarp_array,
 	.FunctionArray = fungigmush_mapwarp_functions,
 	.ArrayItems = 6,
 	.ParentScreen = 13,
@@ -244,7 +244,7 @@ static const int fungimills_mapwarp_functions[] = {
 };
 
 const Screen fungimills_mapwarp_struct = {
-	.TextArray = (const int*)fungimills_mapwarp_array,
+	.TextArray = (int*)fungimills_mapwarp_array,
 	.FunctionArray = fungimills_mapwarp_functions,
 	.ArrayItems = 3,
 	.ParentScreen = 13,

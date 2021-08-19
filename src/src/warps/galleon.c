@@ -96,7 +96,7 @@ static const int galleon_mapwarp_functions[] = {
 };
 
 const Screen galleon_mapwarp_struct = {
-	.TextArray = (const int*)galleon_mapwarp_array,
+	.TextArray = (int*)galleon_mapwarp_array,
 	.FunctionArray = galleon_mapwarp_functions,
 	.ArrayItems = 11,
 	.ParentScreen = 1,
@@ -138,7 +138,7 @@ static const int galleonmain_mapwarp_functions[] = {
 };
 
 const Screen galleonmain_mapwarp_struct = {
-	.TextArray = (const int*)galleonmain_mapwarp_array,
+	.TextArray = (int*)galleonmain_mapwarp_array,
 	.FunctionArray = galleonmain_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 9,
@@ -192,7 +192,7 @@ static const int galleonships_mapwarp_functions[] = {
 };
 
 const Screen galleonships_mapwarp_struct = {
-	.TextArray = (const int*)galleonships_mapwarp_array,
+	.TextArray = (int*)galleonships_mapwarp_array,
 	.FunctionArray = galleonships_mapwarp_functions,
 	.ArrayItems = 7,
 	.ParentScreen = 9,

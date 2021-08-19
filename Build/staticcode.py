@@ -15,6 +15,8 @@ jump_data_start = 0x1FFF000
 with open("./../src/rom/dk64-practice-rom-temp.z64", "rb") as fg:
 	fg.seek(jump_data_start + 0x00)
 	patch_gktimer_hook = fg.read(8)
+	fg.seek(jump_data_start + 0x8)
+	patch_lag_hook = fg.read(8)
 
 with open(StaticCodeFile, "r+b") as fh:
 	# RDRAM Address - 0x5FB300 = ROM address
@@ -45,4 +47,8 @@ with open(StaticCodeFile, "r+b") as fh:
 	# GK Timer Hook
 	fh.seek(0x4AD74)
 	fh.write(patch_gktimer_hook)
+	# Lag Hook
+	fh.seek(0x5374)
+	fh.write(patch_lag_hook)
+
 compressGZipFile("StaticCode_Copy.bin","StaticCode_Copy.bin.gz",False)

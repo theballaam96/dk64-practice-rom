@@ -23,7 +23,7 @@ static const char* maps_container_array[] = {
 };
 
 const Screen maps_container_struct = {
-	.TextArray = (const int*)maps_container_array,
+	.TextArray = (int*)maps_container_array,
 	.FunctionArray = maps_container_functions,
 	.ArrayItems = 9,
 	.ParentScreen = 0,

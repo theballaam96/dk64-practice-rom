@@ -89,7 +89,7 @@ typedef struct Savestate {
 } Savestate;
 
 typedef const struct Screen {
-	/* 0x000 */ const int* TextArray;
+	/* 0x000 */ int* TextArray;
 	/* 0x004 */ const int* FunctionArray;
 	/* 0x005 */ char ArrayItems;
 	/* 0x006 */ char ParentScreen;
@@ -217,3 +217,22 @@ typedef struct WarpInfo {
 	/* 0x008 */ char will_autowalk;
 	/* 0x009 */ char spawn_at_origin;
 } WarpInfo;
+
+typedef struct savedSettings {
+	/* 0x000 */ char hasSavedData;
+	/* 0x001 */ char kongColors[5];
+	/* 0x006 */ char quickStartup;
+	/* 0x007 */ char forcedStorySkip;
+	/* 0x008 */ char pauseVolume;
+	/* 0x009 */ char navigateMenuMode;
+	/* 0x00A */ char DPadLRFunction;
+	/* 0x00B */ char DPadUFunction;
+} savedSettings;
+
+typedef struct flagMenuData {
+	/* 0x000 */ const short* flagArray;
+	/* 0x004 */ const char* flagTypeArray;
+	/* 0x008 */ const int* flagText;
+	/* 0x00C */ char screenIndex;
+	/* 0x00D */ char flagCount;
+} flagMenuData;

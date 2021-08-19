@@ -76,7 +76,7 @@ static const int timersettings_functions[] = {
 };
 
 const Screen timersettings_struct = {
-	.TextArray = (const int*)timersettings_array,
+	.TextArray = (int*)timersettings_array,
 	.FunctionArray = timersettings_functions,
 	.ArrayItems = 3,
 	.ParentScreen = 0,

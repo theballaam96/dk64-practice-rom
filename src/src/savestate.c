@@ -185,7 +185,7 @@ static const int state_functions[] = {
 };
 
 const Screen state_struct = {
-	.TextArray = (const int*)state_array,
+	.TextArray = (int*)state_array,
 	.FunctionArray = state_functions,
 	.ArrayItems = 6,
 	.ParentScreen = 0,
@@ -207,7 +207,7 @@ static const int changestate_functions[] = {
 };
 
 const Screen changestate_struct = {
-	.TextArray = (const int*)changestate_array,
+	.TextArray = (int*)changestate_array,
 	.FunctionArray = changestate_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 31,
@@ -217,7 +217,7 @@ const Screen changestate_struct = {
 static const int viewstate_functions[3] = {};
 
 const Screen viewstate_struct = {
-	.TextArray = (const int*)viewstate_array,
+	.TextArray = (int*)viewstate_array,
 	.FunctionArray = viewstate_functions,
 	.ArrayItems = 12,
 	.ParentScreen = 31,
@@ -281,7 +281,7 @@ void savestateHandler(void) {
 							TimerData.TimerPostReduction = 0;
 							HasNeutralStickInput = 0;
 							dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
-							dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1E0);
+							dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
 							dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
 							resetMap();
 							Character = states[_focused_state]->Character;

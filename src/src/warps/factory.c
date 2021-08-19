@@ -68,7 +68,7 @@ static const int factory_mapwarp_functions[] = {
 };
 
 const Screen factory_mapwarp_struct = {
-	.TextArray = (const int*)factory_mapwarp_array,
+	.TextArray = (int*)factory_mapwarp_array,
 	.FunctionArray = factory_mapwarp_functions,
 	.ArrayItems = 7,
 	.ParentScreen = 1,
@@ -130,7 +130,7 @@ static const int factorymain_mapwarp_functions[] = {
 };
 
 const Screen factorymain_mapwarp_struct = {
-	.TextArray = (const int*)factorymain_mapwarp_array,
+	.TextArray = (int*)factorymain_mapwarp_array,
 	.FunctionArray = factorymain_mapwarp_functions,
 	.ArrayItems = 9,
 	.ParentScreen = 7,

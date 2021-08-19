@@ -9,6 +9,8 @@ void colorMenuSky(void) {
 	MenuSkyRGB.blue = 0;
 };
 
+const char kongcolors[] = {1,2,2,2,1};
+
 void colorKong(void) {
 	prepKongColoring();
 	// DK = 1 (Blue)

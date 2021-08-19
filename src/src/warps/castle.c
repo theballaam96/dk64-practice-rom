@@ -114,7 +114,7 @@ static const int castle_mapwarp_functions[] = {
 };
 
 const Screen castle_mapwarp_struct = {
-	.TextArray = (const int*)castle_mapwarp_array,
+	.TextArray = (int*)castle_mapwarp_array,
 	.FunctionArray = castle_mapwarp_functions,
 	.ArrayItems = 10,
 	.ParentScreen = 1,
@@ -160,7 +160,7 @@ static const int castlemain_mapwarp_functions[] = {
 };
 
 const Screen castlemain_mapwarp_struct = {
-	.TextArray = (const int*)castlemain_mapwarp_array,
+	.TextArray = (int*)castlemain_mapwarp_array,
 	.FunctionArray = castlemain_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 21,
@@ -202,7 +202,7 @@ static const int castlecrypt_mapwarp_functions[] = {
 };
 
 const Screen castlecrypt_mapwarp_struct = {
-	.TextArray = (const int*)castlecrypt_mapwarp_array,
+	.TextArray = (int*)castlecrypt_mapwarp_array,
 	.FunctionArray = castlecrypt_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
@@ -237,7 +237,7 @@ static const int castletunnel_mapwarp_functions[] = {
 };
 
 const Screen castletunnel_mapwarp_struct = {
-	.TextArray = (const int*)castletunnel_mapwarp_array,
+	.TextArray = (int*)castletunnel_mapwarp_array,
 	.FunctionArray = castletunnel_mapwarp_functions,
 	.ArrayItems = 2,
 	.ParentScreen = 21,
@@ -279,7 +279,7 @@ static const int castleoutside_mapwarp_functions[] = {
 };
 
 const Screen castleoutside_mapwarp_struct = {
-	.TextArray = (const int*)castleoutside_mapwarp_array,
+	.TextArray = (int*)castleoutside_mapwarp_array,
 	.FunctionArray = castleoutside_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
@@ -321,7 +321,7 @@ static const int castlerooms_mapwarp_functions[] = {
 };
 
 const Screen castlerooms_mapwarp_struct = {
-	.TextArray = (const int*)castlerooms_mapwarp_array,
+	.TextArray = (int*)castlerooms_mapwarp_array,
 	.FunctionArray = castlerooms_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,

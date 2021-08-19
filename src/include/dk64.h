@@ -26,6 +26,7 @@ extern void getTimestampDiffInTicks(unsigned int major, unsigned int minor);
 extern int timestampDiffToMilliseconds(unsigned int major, unsigned int minor);
 
 //vanilla data
+
 extern float TransitionSpeed;
 extern char CutsceneWillPlay;
 extern char KRoolRound;
@@ -108,7 +109,8 @@ extern short p1PressedButtons;
 extern short p1HeldButtons;
 
 //hack data
-extern float TestVariable;
+extern int TestVariable;
+extern savedSettings StoredSettings;
 
 extern TextOverlay* ActiveTools_Error;
 extern TextOverlay* ActiveToolsMenu[];

@@ -60,7 +60,7 @@ static const int helmrool_mapwarp_functions[] = {
 };
 
 const Screen helmrool_mapwarp_struct = {
-	.TextArray = (const int*)helmrool_mapwarp_array,
+	.TextArray = (int*)helmrool_mapwarp_array,
 	.FunctionArray = helmrool_mapwarp_functions,
 	.ArrayItems = 8,
 	.ParentScreen = 1,

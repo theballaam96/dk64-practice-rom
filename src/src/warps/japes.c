@@ -70,7 +70,7 @@ static const int japes_mapwarp_functions[] = {
 };
 
 const Screen japes_mapwarp_struct = {
-	.TextArray = (const int*)japes_mapwarp_array,
+	.TextArray = (int*)japes_mapwarp_array,
 	.FunctionArray = japes_mapwarp_functions,
 	.ArrayItems = 8,
 	.ParentScreen = 1,
@@ -120,7 +120,7 @@ static const int japesmain_mapwarp_functions[] = {
 };
 
 const Screen japesmain_mapwarp_struct = {
-	.TextArray = (const int*)japesmain_mapwarp_array,
+	.TextArray = (int*)japesmain_mapwarp_array,
 	.FunctionArray = japesmain_mapwarp_functions,
 	.ArrayItems = 6,
 	.ParentScreen = 2,

@@ -22,6 +22,7 @@ mainASMFunction:
 	NOP
 	JAL cFuncLoop
 	NOP
+	NOP
 	J 0x805FC16C
 	NOP
 
@@ -134,15 +135,6 @@ getGiantKoshaAddress:
 	getGiantKoshaAddress_Finish:
 		J 		0x8064607c
 		OR 		s0, a0, r0
-
-updateLag:
-	LW 		a0, FrameReal
-	LW 		a1, FrameLag
-	SUBU 	a1, a0, a1
-	SH 		a1, StoredLag
-	LUI 	t6, 0x8077
-	J 		0x8060067C
-	LBU 	t6, 0xAF14 (t6)
 
 patchHook:
 	// a0 = Hook Location

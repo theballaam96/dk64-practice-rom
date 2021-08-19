@@ -105,6 +105,7 @@
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
 .definelabel ActiveToolsMenu, 0x807FFF20 // 0x60
+.definelabel StoredSettings, 0x807FCB30 // Follows savedSettings struct
 
 .definelabel PositionSavestate, 0x807FFEA4 // 0x3C Byttes
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes

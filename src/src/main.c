@@ -18,7 +18,7 @@ void cFuncLoop(void) {
 	handleWatch();
 	clampWatchFloats();
 	tagAnywhere();
-	patchHooks();
+	initHack();
 	hideInputDisplay();
 	savestateHandler();
 	shorthandSavestate();
