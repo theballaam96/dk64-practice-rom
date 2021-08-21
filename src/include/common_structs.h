@@ -226,8 +226,9 @@ typedef struct savedSettings {
 	/* 0x008 */ char pauseVolume;
 	/* 0x009 */ char navigateMenuMode;
 	/* 0x00A */ char DPadLRFunction;
-	/* 0x00B */ char DPadUFunction;
+	/* 0x00B */ char DPadDFunction;
 	/* 0x00C */ char displaySavePrompt;
+	/* 0x00D */ char precision;
 } savedSettings;
 
 typedef struct flagMenuData {

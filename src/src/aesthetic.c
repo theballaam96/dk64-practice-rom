@@ -9,7 +9,7 @@ void colorMenuSky(void) {
 	MenuSkyRGB.blue = 0;
 };
 
-const char kongcolors[] = {1,2,2,2,1};
+char kongcolors[5] = {1,2,2,2,1};
 
 void colorKong(void) {
 	prepKongColoring();
@@ -18,9 +18,10 @@ void colorKong(void) {
 	// Lanky = 2 (Purple Straps)
 	// Tiny = 2 (Purple)
 	// Chunky = 1 (Red)
-	PlayerOneColor = 2;
-	if ((Character == 0) || (Character == 4)) {
-		PlayerOneColor = 1;
+	if (Character < 5) {
+		PlayerOneColor = (int)kongcolors[(int)Character];
+	} else {
+		PlayerOneColor = 0;
 	}
 }
 

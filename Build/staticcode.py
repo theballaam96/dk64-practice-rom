@@ -56,7 +56,7 @@ with open(StaticCodeFile, "r+b") as fh:
 	fh.seek(0x12BCC)
 	fh.write(patch_save_hook)
 	# EEPROM Patch
-	# fh.seek(0x12288)
-	# fh.write(bytearray([0x0,0x0,0x0,0x0])) # Prevents overwrite of other data
+	fh.seek(0x12288)
+	fh.write(bytearray([0x0,0x0,0x0,0x0])) # Prevents overwrite of other data
 
 compressGZipFile("StaticCode_Copy.bin","StaticCode_Copy.bin.gz",False)

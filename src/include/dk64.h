@@ -24,9 +24,9 @@ extern void patchHook(unsigned int hook_rdram_location, int offset_in_hook_list,
 extern void* dk_memcpy(void* _dest, void* _src, int size);
 extern void getTimestampDiffInTicks(unsigned int major, unsigned int minor);
 extern int timestampDiffToMilliseconds(unsigned int major, unsigned int minor);
-extern int ReadFile(int DataIndex, char KongIndex, int levelIndex, int FileIndex);
-extern void SaveToFile(int DataIndex, char KongIndex, int levelIndex, int FileIndex);
-extern void SaveGame();
+extern void SaveToGlobal();
+extern int DetectGameOver();
+extern int DetectAdventure();
 
 //vanilla data
 
@@ -110,6 +110,7 @@ extern unsigned int HelmStartTimestampMinor;
 extern int HelmStartTime;
 extern short p1PressedButtons;
 extern short p1HeldButtons;
+extern char player_count;
 
 //hack data
 extern int TestVariable;

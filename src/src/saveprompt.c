@@ -20,12 +20,18 @@ void displaySavePrompt(void) {
 		} else {
 			if (SavePromptTimer == 0) {
 				if (SavePromptIsSaving) {
-					SavePromptTimer = 60;
-					spawnTextOverlay(10,240,210,"SAVING...",0,0,2,0);
-					textOverlay = (TextOverlay *)CurrentActorPointer;
-					if (textOverlay) {
-						SavePromptActor = textOverlay;
-						textOverlay->opacity = 0xFF;
+					if (player_count == 1) {
+						int _ingameover = DetectGameOver();
+						int _inadventure = DetectAdventure();
+						if ((_ingameover) || (_inadventure)) {
+							SavePromptTimer = 60;
+							spawnTextOverlay(10,240,210,"SAVING...",0,0,2,0);
+							textOverlay = (TextOverlay *)CurrentActorPointer;
+							if (textOverlay) {
+								SavePromptActor = textOverlay;
+								textOverlay->opacity = 0xFF;
+							}
+						}
 					}
 				}
 			} else {

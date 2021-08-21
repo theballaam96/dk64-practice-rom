@@ -39,8 +39,12 @@
 .importobj "obj/gamemode.o"
 .importobj "obj/cheatscontainer.o"
 
-.importobj "obj/saveprompt.o"
+
 .importobj "obj/settings_storage.o"
+.importobj "obj/alterkongcolors.o"
+.importobj "obj/settingscontainer.o"
+
+.importobj "obj/saveprompt.o"
 .importobj "obj/activeMenu.o"
 .importobj "obj/aesthetic.o"
 .importobj "obj/levitate.o"

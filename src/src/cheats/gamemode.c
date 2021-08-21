@@ -6,13 +6,13 @@ static const char gamemodes_02[] = "DK RAP";
 static const char gamemodes_03[] = "DK TV";
 static const char gamemodes_04[] = "GAMEMODE 4";
 static const char gamemodes_05[] = "MAIN MENU";
-static const char gamemodes_06[] = "ADVENTURE MODE & KONG BATTLE";
+static const char gamemodes_06[] = "ADVENTURE MODE AND KONG BATTLE";
 static const char gamemodes_07[] = "LOADING GAME OVER";
 static const char gamemodes_08[] = "GAMEMODE 8";
 static const char gamemodes_09[] = "GAME OVER";
 static const char gamemodes_10[] = "END SEQUENCE (ADVENTURE)";
 static const char gamemodes_11[] = "DK THEATRE";
-static const char gamemodes_12[] = "DK BONUS & BOSSES";
+static const char gamemodes_12[] = "DK BONUS AND BOSSES";
 static const char gamemodes_13[] = "SNIDE'S BONUS MINIGAMES";
 static const char gamemodes_14[] = "END SEQUENCE (DK THEATRE)";
 

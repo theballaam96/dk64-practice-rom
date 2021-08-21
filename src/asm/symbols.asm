@@ -19,9 +19,9 @@
 .definelabel resetMap, 0x805FFFC8
 .definelabel prepKongColoring, 0x8068A508
 .definelabel dk_memcpy, 0x80003000
-.definelabel ReadFile, 0x8060C6B8
-.definelabel SaveToFile, 0x8060C648
-.definelabel SaveGame, 0x8060DEC8
+.definelabel SaveToGlobal, 0x8060DEA8
+.definelabel DetectGameOver, 0x80714394
+.definelabel DetectAdventure, 0x8071432C
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -104,11 +104,12 @@
 .definelabel HelmStartTime, 0x8075534C // u32
 .definelabel p1PressedButtons, 0x807ECD48
 .definelabel p1HeldButtons, 0x807ECD58
+.definelabel player_count, 0x807FC928
 
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
 .definelabel ActiveToolsMenu, 0x807FFF20 // 0x60
-.definelabel StoredSettings, 0x807FCB30 // Follows savedSettings struct
+.definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct
 
 .definelabel PositionSavestate, 0x807FFEA4 // 0x3C Byttes
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes

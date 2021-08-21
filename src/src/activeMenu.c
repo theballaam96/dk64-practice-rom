@@ -93,6 +93,8 @@ const Screen* menu_screens[] = {
 	&flagcustom_struct,
 	&cheats_struct,
 	&gamemode_struct,
+	&settings_struct,
+	&kongcolors_struct,
 };
 
 void hideInputDisplay(void) {
@@ -362,5 +364,5 @@ static const int main_functions[] = {
 	(int)&openTimerSettingsMenu,
 	(int)&openFileStateMainMenu,
 	(int)&openCheatsMenu,
-	0
+	(int)&openSettingsMainMenu,
 };

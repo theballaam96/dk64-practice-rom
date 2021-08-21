@@ -28,5 +28,4 @@ void cFuncLoop(void) {
 	LToCancelCS();
 	displaySavePrompt();
 	clearSavePromptFlag();
-	saveSettings();
 }

@@ -43,6 +43,9 @@ extern void gainControl(void);
 extern void corruptGame(void);
 extern void openGamemodeMenu(void);
 
+extern void openSettingsMainMenu(void);
+extern void openKongColorsMenu(void);
+
 extern void openWatchMenu(void);
 extern void endClose(void);
 extern void toggleMenu(void);
@@ -132,13 +135,15 @@ extern const Screen flagmenu_misc_struct;
 extern const Screen flagcustom_struct;
 extern const Screen cheats_struct;
 extern const Screen gamemode_struct;
+extern const Screen settings_struct;
+extern const Screen kongcolors_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
 extern const flagMenuData* flag_menus[flagMenuScreenCount];
 extern const int maps_container_functions[9];
 extern const int flagmain_functions[11];
-extern const char kongcolors[];
+extern char kongcolors[5];
 
 extern const MapWarp map_japes_struct;
 extern const MapWarp map_japesmain_struct;
