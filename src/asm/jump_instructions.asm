@@ -3,5 +3,7 @@ START_JUMP:
 	NOP
 	J 	updateLag
 	NOP
+	J 	isSaving
+	NOP
 .align 0x10
 END_JUMP:

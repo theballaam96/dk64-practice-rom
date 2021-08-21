@@ -71,6 +71,6 @@ const Screen flagmain_struct = {
 	.TextArray = (int*)flagmain_array,
 	.FunctionArray = flagmain_functions,
 	.ArrayItems = 11,
-	.ParentScreen = 1,
+	.ParentScreen = 0,
 	.ParentPosition = 1
 };

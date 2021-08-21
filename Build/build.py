@@ -83,6 +83,9 @@ with open(newROMName, "r+b") as fh:
 					compress = gzip.compress(byte_read, compresslevel=9)
 				else:
 					compress = byte_read
+					print(hex(len(compress)))
+					if (len(compress) > 0xB15E0):
+						print("ERROR: STATIC CODE BIN IS TOO BIG")
 				fh.seek(x["start"])
 				fh.write(compress)
 		else:

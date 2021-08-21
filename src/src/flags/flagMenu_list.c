@@ -2,18 +2,27 @@
 
 const flagMenuData* flag_menus[] = {
 	&flagmenu_kongmenu,
+	&flagmenu_keysinmenu,
+	&flagmenu_keyshavemenu,
+	&flagmenu_levelintrosmenu,
+	&flagmenu_leveltnsmenu,
+	&flagmenu_levelbossmenu,
+	&flagmenu_cutscenemenu,
+	&flagmenu_modifiermenu,
+	&flagmenu_fttmenu,
+	&flagmenu_miscmenu,
 };
 
 const int flagmain_functions[] = {
 	(int)&openFlagsKongMenu,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	(int)&openFlagsKeysinMenu,
+	(int)&openFlagsKeyshaveMenu,
+	(int)&openFlagsLevelintrosMenu,
+	(int)&openFlagsLeveltnsMenu,
+	(int)&openFlagsLevelbossMenu,
+	(int)&openFlagsCutsceneMenu,
+	(int)&openFlagsModifierMenu,
+	(int)&openFlagsFTTMenu,
+	(int)&openFlagsMiscMenu,
+	(int)&openFlagsCustomMenu,
 };

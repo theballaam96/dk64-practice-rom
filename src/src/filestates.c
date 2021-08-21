@@ -118,7 +118,7 @@ const Screen filestates_main_struct = {
 	.FunctionArray = filestates_main_functions,
 	.ArrayItems = 3,
 	.ParentScreen = 0,
-	.ParentPosition = 5
+	.ParentPosition = 6
 };
 
 static const char* filestates_nle_array[] = {

@@ -2,6 +2,7 @@
 
 void cFuncLoop(void) {
 	endClose();
+	changeCustomFlagVariable();
 	handleTimer();
 	toggleMenu();
 	moveSlot();
@@ -24,4 +25,8 @@ void cFuncLoop(void) {
 	shorthandSavestate();
 	ramViewUpdate();
 	savestateLoadMapLoadVars();
+	LToCancelCS();
+	displaySavePrompt();
+	clearSavePromptFlag();
+	saveSettings();
 }

@@ -19,6 +19,9 @@
 .definelabel resetMap, 0x805FFFC8
 .definelabel prepKongColoring, 0x8068A508
 .definelabel dk_memcpy, 0x80003000
+.definelabel ReadFile, 0x8060C6B8
+.definelabel SaveToFile, 0x8060C648
+.definelabel SaveGame, 0x8060DEC8
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -118,11 +121,15 @@
 .definelabel InputDisplayIndex, 0x807FFFF5 // u8
 .definelabel RAMDisplayOpen, 0x807FFFF4 // u8
 .definelabel LoadVarsOnMapLoad, 0x807FFFF3 // u8 - For savestates
+.definelabel ShowSavePrompts, 0x807FFFF2 // u8
+.definelabel SavePromptTimer, 0x807FFFF1 // u8
+.definelabel SavePromptIsSaving, 0x807FFFF0 // u8
 .definelabel LoadedHooks, 0x807FFFEF // u8
 .definelabel Precision, 0x807FFFEE // u8
 .definelabel SniperOn, 0x807FFFED // u8
 .definelabel SlamLevel, 0x807FFFEC // u8
 .definelabel AverageLag, 0x807FFFE8 // f32
+.definelabel SavePromptActor, 0x807FFFE4 // u32
 .definelabel ISGTimer, 0x807FFFE0 // u32
 .definelabel LagDocumentationIndex, 0x807FFFDE // u8
 .definelabel StoredLag, 0x807FFFDC // u16
@@ -148,10 +155,7 @@
 .definelabel EnemySpawnOff, 0x807FFDBD // u8
 
 .definelabel PhaseChecker, 0x807FFDB7 // 0x1
-.definelabel CustomFlagByte, 0x807FFF80 // u16
-.definelabel CustomFlagBit, 0x807FFF82 // u8
-.definelabel CustomFlagType, 0x807FFF83 // u8
-.definelabel CustomFlagSet, 0x807FFF84 // u8
+.definelabel CustomFlag, 0x807FFF80 // follows customflagdata struct
 
 .definelabel ISGStage, 0x807FFF85 // u8
 .definelabel IsPauseMenuOpen, 0x807FFF86 // u8

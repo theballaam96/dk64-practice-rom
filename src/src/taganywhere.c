@@ -14,7 +14,7 @@ void tagAnywhere(void) {
 						}
 						if (Player) {
 							_weapon_bitfield = MovesBase[_dest_character].weapon_bitfield;
-							if (((_weapon_bitfield & 1) == 0) && (Player->was_gun_out == 0)) {
+							if (((_weapon_bitfield & 1) == 0) || (Player->was_gun_out == 0)) {
 								Player->hand_state = 1;
 								Player->was_gun_out = 0;
 								if (_dest_character == 1) {

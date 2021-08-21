@@ -12,7 +12,6 @@ static const char cheats[] = "CHEATS";
 static const char settings[] = "SETTINGS";
 static const char hackTitle[] = "DK64 PRACTICE ROM";
 static const char hackVersion[] = "VERSION 1.4.1";
-static const char forceClose[] = "EMERGENCY: ERROR 01";
 
 static const char* main_array[] = {
 	warp,
@@ -82,6 +81,18 @@ const Screen* menu_screens[] = {
 	&viewstate_struct,
 	&flagmain_struct,
 	&flagmenu_kongs_struct,
+	&flagmenu_keysin_struct,
+	&flagmenu_keyshave_struct,
+	&flagmenu_levelintros_struct,
+	&flagmenu_leveltns_struct,
+	&flagmenu_levelboss_struct,
+	&flagmenu_cutscene_struct,
+	&flagmenu_modifier_struct,
+	&flagmenu_ftt_struct,
+	&flagmenu_misc_struct,
+	&flagcustom_struct,
+	&cheats_struct,
+	&gamemode_struct,
 };
 
 void hideInputDisplay(void) {
@@ -252,13 +263,14 @@ void emergencyClose(void) {
 		if (LoadedActorCount >= 60) {
 			if (ActiveMenu.isOpen) {
 				NewMenu_ErrorStart = FrameReal;
-				spawnTextOverlay(10,100,200,(char *)forceClose,0,0,2,0);
+				spawnTextOverlay(10,100,200,"EMERGENCY: ERROR 01",0,0,2,0);
 				textOverlay = (TextOverlay *)CurrentActorPointer;
 				textOverlay->opacity = 0xFF;
 				textOverlay->red = 0xFF;
 				textOverlay->green = 0;
 				textOverlay->blue = 0;
 				ActiveTools_Error = textOverlay;
+				clearMenu();
 			}
 		}
 	}
@@ -313,12 +325,13 @@ void menuShortcutButtons(void) {
 		if ((_buttons & L_Button) == 0) {
 			if (ActiveMenu.isOpen) {
 				if (ClosingMenu == 0) {
-					// Take into account custom flag screen
-					if (_buttons & D_Left) {
-						previousScreen();
-					} else {
-						if (_buttons & D_Right) {
-							confirmOptionBackground();
+					if (ActiveMenu.screenIndex != 54) {
+						if (_buttons & D_Left) {
+							previousScreen();
+						} else {
+							if (_buttons & D_Right) {
+								confirmOptionBackground();
+							}
 						}
 					}
 				}
@@ -348,6 +361,6 @@ static const int main_functions[] = {
 	(int)&initRamViewerTab,
 	(int)&openTimerSettingsMenu,
 	(int)&openFileStateMainMenu,
-	0,
+	(int)&openCheatsMenu,
 	0
 };

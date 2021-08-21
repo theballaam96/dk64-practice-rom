@@ -1,12 +1,13 @@
-#include "../include/common.h"
+#include "../../include/common.h"
 
 void cancelCutscene(void) {
 	if ((TBVoidByte & 2) == 0) {
 		if (CutsceneActive != 0) {
 			if (CutsceneTypePointer) {
-				cs_databank = *(int *)(CutsceneTypePointer + 0xD0);
-				if (cs_databank) {
-					short cam_state = *( short*)(cs_databank + (0xC * CutsceneIndex));
+				if (CutsceneTypePointer->cutscene_databank) {
+
+					short cam_state = CutsceneTypePointer->cutscene_databank->csdata[CutsceneIndex];
+					// short cam_state = *( short*)(cs_databank + (0xC * CutsceneIndex));
 					CurrentCameraState = cam_state;
 					PreviousCameraState = cam_state;
 					CameraStateChangeTimer = 0;
@@ -22,7 +23,7 @@ void cancelCutscene(void) {
 void toggleCancelCutsceneWithL(void) {
 	char _mode = LToCancelCSOn;
 	LToCancelCSOn = 1 - _mode;
-	// Finish this
+	// Call menu pullup
 }
 
 void LToCancelCS(void) {

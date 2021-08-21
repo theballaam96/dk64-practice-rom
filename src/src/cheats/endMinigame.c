@@ -1,4 +1,4 @@
-#include "../include/common.h"
+#include "../../include/common.h"
 
 static const char maps_spawner[] = {
 	0x68, // BBother Easy

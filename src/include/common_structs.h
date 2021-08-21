@@ -227,6 +227,7 @@ typedef struct savedSettings {
 	/* 0x009 */ char navigateMenuMode;
 	/* 0x00A */ char DPadLRFunction;
 	/* 0x00B */ char DPadUFunction;
+	/* 0x00C */ char displaySavePrompt;
 } savedSettings;
 
 typedef struct flagMenuData {
@@ -236,3 +237,19 @@ typedef struct flagMenuData {
 	/* 0x00C */ char screenIndex;
 	/* 0x00D */ char flagCount;
 } flagMenuData;
+
+typedef struct customFlagData {
+	/* 0x000 */ short byte;
+	/* 0x002 */ char bit;
+	/* 0x003 */ char type;
+	/* 0x004 */ char set;
+} customFlagData;
+
+typedef struct cutsceneInfo {
+	/* 0x000 */ char csdata[0xC];
+} cutsceneInfo;
+
+typedef struct cutsceneType {
+	/* 0x000 */ char unk_00[0xD0];
+	/* 0x0D0 */ cutsceneInfo* cutscene_databank;
+} cutsceneType;

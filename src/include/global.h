@@ -25,6 +25,23 @@ extern void openIslesMenu(void);
 
 extern void openFlagsMainMenu(void);
 extern void openFlagsKongMenu(void);
+extern void openFlagsKeysinMenu(void);
+extern void openFlagsKeyshaveMenu(void);
+extern void openFlagsLevelintrosMenu(void);
+extern void openFlagsLeveltnsMenu(void);
+extern void openFlagsLevelbossMenu(void);
+extern void openFlagsCutsceneMenu(void);
+extern void openFlagsModifierMenu(void);
+extern void openFlagsFTTMenu(void);
+extern void openFlagsMiscMenu(void);
+extern void openFlagsCustomMenu(void);
+
+extern void openCheatsMenu(void);
+extern void alterSkewAngle(void);
+extern void cancelCutscene(void);
+extern void gainControl(void);
+extern void corruptGame(void);
+extern void openGamemodeMenu(void);
 
 extern void openWatchMenu(void);
 extern void endClose(void);
@@ -51,6 +68,13 @@ extern void shorthandSavestate(void);
 extern void initRamViewerTab(void);
 extern void ramViewUpdate(void);
 extern void savestateLoadMapLoadVars(void);
+extern void changeCustomFlagVariable(void);
+extern void LToCancelCS(void);
+extern void displaySavePrompt(void);
+extern void clearSavePromptFlag(void);
+
+extern void loadSettings(void);
+extern void saveSettings(void);
 
 extern const Screen maps_container_struct;
 extern const Screen japes_mapwarp_struct;
@@ -96,6 +120,18 @@ extern const Screen filestates_101ffm_struct;
 extern const Screen viewstate_struct;
 extern const Screen flagmain_struct;
 extern const Screen flagmenu_kongs_struct;
+extern const Screen flagmenu_keysin_struct;
+extern const Screen flagmenu_keyshave_struct;
+extern const Screen flagmenu_levelintros_struct;
+extern const Screen flagmenu_leveltns_struct;
+extern const Screen flagmenu_levelboss_struct;
+extern const Screen flagmenu_cutscene_struct;
+extern const Screen flagmenu_modifier_struct;
+extern const Screen flagmenu_ftt_struct;
+extern const Screen flagmenu_misc_struct;
+extern const Screen flagcustom_struct;
+extern const Screen cheats_struct;
+extern const Screen gamemode_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
@@ -134,3 +170,12 @@ extern const MapWarp map_isleslobbies_struct;
 extern const MapWarp map_helmrool_struct;
 
 extern const flagMenuData flagmenu_kongmenu;
+extern const flagMenuData flagmenu_keysinmenu;
+extern const flagMenuData flagmenu_keyshavemenu;
+extern const flagMenuData flagmenu_levelintrosmenu;
+extern const flagMenuData flagmenu_leveltnsmenu;
+extern const flagMenuData flagmenu_levelbossmenu;
+extern const flagMenuData flagmenu_cutscenemenu;
+extern const flagMenuData flagmenu_modifiermenu;
+extern const flagMenuData flagmenu_fttmenu;
+extern const flagMenuData flagmenu_miscmenu;
