@@ -95,19 +95,18 @@ const Screen* menu_screens[] = {
 	&gamemode_struct,
 	&settings_struct,
 	&kongcolors_struct,
+	&quadrant_struct,
+	&dpadlr_struct,
+	&dpadd_struct,
+	&transform_struct,
+	&moveset_struct,
+	&cranky_struct,
+	&funky_struct,
+	&candy_struct,
+	&flagmenu_tbarrels_struct,
+	&vanilla_struct,
+	&hack_struct,
 };
-
-void hideInputDisplay(void) {
-	if (InputDisplayIndex > -1) {
-		if (WatchActor[(int)InputDisplayIndex]) {
-			if (ActiveMenu.isOpen) {
-				WatchActor[(int)InputDisplayIndex]->opacity = 0;
-			} else {
-				WatchActor[(int)InputDisplayIndex]->opacity = 0xFF;
-			}
-		}
-	}
-}
 
 void spawnMenu(int screenIndex) {
 	TextOverlay* textOverlay;
@@ -134,7 +133,6 @@ void spawnMenu(int screenIndex) {
 	textOverlay->opacity = 0xFF;
 	ActiveToolsMenu[array_count] = textOverlay;
 	if (screenIndex == 0) {
-		
 		spawnTextOverlay(style,180,25,(char *)hackTitle,0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		textOverlay->opacity = 0xFF;

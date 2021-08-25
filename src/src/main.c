@@ -20,7 +20,6 @@ void cFuncLoop(void) {
 	clampWatchFloats();
 	tagAnywhere();
 	initHack();
-	hideInputDisplay();
 	savestateHandler();
 	shorthandSavestate();
 	ramViewUpdate();
@@ -28,4 +27,14 @@ void cFuncLoop(void) {
 	LToCancelCS();
 	displaySavePrompt();
 	clearSavePromptFlag();
+	openInputOnTransition();
+	closeInputOnTransition();
+	displayInput();
+	handlePositionSavestates();
+	toggleFrameAdvanceState();
+	initFrameAdvance();
+	exitFrameAdvance();
+	LToEndMinigame();
+	forceStorySkip();
+	setKRoolRound();
 }

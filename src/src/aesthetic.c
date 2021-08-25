@@ -40,3 +40,35 @@ void startupSkip(void) {
 	LogosDestMap = _map;
 	LogosDestMode = _mode;
 }
+
+void forceStorySkip(void) {
+	if (DisableForcedStorySkip == 0) {
+		StorySkip = 1;
+	}
+}
+
+void setKRoolRound(void) {
+	switch(KRoolRoundSetting) {
+		case 0:
+			// Random
+			if (((CutsceneActive == 6) && (CurrentMap == 0x50)) || (TransitionSpeed > 0)) {
+				StoredRound = (RNG & 0xF) + 1;
+				if (StoredRound > 11) {
+					StoredRound = 1;
+				} else {
+					if (StoredRound < 1) {
+						StoredRound = 11;
+					}
+				}
+			}
+			KRoolRound = StoredRound;
+			break;
+		case 1:
+			// Forced Sequential
+			if ((CurrentMap > 0xCA) && (CurrentMap < 0xD0)) {
+				KRoolRound = CurrentMap - 0xCA;
+			}
+		break;
+		// Otherwise normal
+	}
+}

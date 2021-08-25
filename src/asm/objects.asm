@@ -1,5 +1,6 @@
 .importobj "obj/lib.o"
 
+.importobj "obj/mapWarpExtra.o"
 .importobj "obj/mapContainer.o"
 .importobj "obj/japes.o"
 .importobj "obj/aztec.o"
@@ -30,6 +31,7 @@
 .importobj "obj/ftt.o"
 .importobj "obj/misc.o"
 .importobj "obj/custom.o"
+.importobj "obj/tbarrels.o"
 .importobj "obj/flagMenu_list.o"
 
 .importobj "obj/instantskew.o"
@@ -37,14 +39,27 @@
 .importobj "obj/gaincontrol.o"
 .importobj "obj/corrupt.o"
 .importobj "obj/gamemode.o"
+.importobj "obj/transform.o"
+.importobj "obj/endminigame.o"
+.importobj "obj/moveset_inventory.o"
+.importobj "obj/cranky.o"
+.importobj "obj/funky.o"
+.importobj "obj/candy.o"
 .importobj "obj/cheatscontainer.o"
-
 
 .importobj "obj/settings_storage.o"
 .importobj "obj/alterkongcolors.o"
+.importobj "obj/alterinputquadrant.o"
+.importobj "obj/dpadlr.o"
+.importobj "obj/dpadd.o"
+.importobj "obj/vanilla_vars.o"
+.importobj "obj/hack_vars.o"
 .importobj "obj/settingscontainer.o"
 
+.importobj "obj/input.o"
 .importobj "obj/saveprompt.o"
+.importobj "obj/positionloading.o"
+.importobj "obj/frameadvance.o"
 .importobj "obj/activeMenu.o"
 .importobj "obj/aesthetic.o"
 .importobj "obj/levitate.o"

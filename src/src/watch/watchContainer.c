@@ -33,25 +33,14 @@ void destroyWatch(int slot) {
 
 void spawnWatch(int slot) {
 	TextOverlay* textOverlay;
-	int y = 200 - (slot * 10);
-	if (InputDisplayIndex > -1) {
-		if (slot > InputDisplayIndex) {
-			y += 10;
-		} else {
-			if (slot == InputDisplayIndex) {
-				y = 19;
-			}
-		}
-	}
+	int y = 210 - (slot * 10);
 	destroyWatch(slot);
 	spawnTextOverlay(10,25,y,"CALIBRATING",0,0,2,0);
 	textOverlay = (TextOverlay *)CurrentActorPointer;
 	if (textOverlay) {
 		WatchActor[slot] = textOverlay;
 		textOverlay->string = (char *)&WatchTextSpace[slot];
-		if ((InputDisplayIndex == -1) || (slot != InputDisplayIndex)) {
-			textOverlay->opacity = 0xFF;
-		}
+		textOverlay->opacity = 0xFF;
 	}
 	
 };
@@ -67,7 +56,7 @@ void colorWatch(char _red, char _green, char _blue, int slot) {
 void closeWatchesOnTransition(void) {
 	for (int i = 0; i < WatchCount; i++) {
 		if (WatchActor[i]) {
-			if ((TransitionSpeed > 0) || (CutsceneActive == 6)) {
+			if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
 				destroyWatch(i);
 			}
 		}
@@ -78,7 +67,7 @@ void openWatchesOnTransition(void) {
 	for (int i = 0; i < WatchCount; i++) {
 		if (WatchIndex[i]) {
 			if (WatchActor[i] == 0) {
-				if (TransitionSpeed < 0) {
+				if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
 					spawnWatch(i);
 				}
 			}
@@ -141,9 +130,6 @@ void setWatch(void) {
 	};
 	if (index_already_spawned) {
 		destroyWatch(i);
-		if (WatchIndex[i] == 8) {
-			InputDisplayIndex = -1;
-		}
 		WatchIndex[i] = 0;
 		watch_array[(int)ActiveMenu.positionIndex] = watch_change_array[(int)ActiveMenu.positionIndex];
 	} else {
@@ -151,9 +137,6 @@ void setWatch(void) {
 		while (i < WatchCount) {
 			if (WatchIndex[i] == 0) {
 				WatchIndex[i] = intended_watch_index;
-				if (intended_watch_index == 8) {
-					InputDisplayIndex = i;
-				}
 				spawnWatch(i);
 				colorWatch(0xFF,0xFF,0xFF,i);
 				watch_array[(int)ActiveMenu.positionIndex] = watch_viewed_array[(int)ActiveMenu.positionIndex];
@@ -163,28 +146,6 @@ void setWatch(void) {
 		}
 	}
 	changeMenu(12);
-};
-
-static const int watch_functions[] = {
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch
-};
-
-const Screen watch_struct = {
-	.TextArray = (int*)watch_array,
-	.FunctionArray = watch_functions,
-	.ArrayItems = 11,
-	.ParentScreen = 0,
-	.ParentPosition = 3
 };
 
 void openWatchMenu(void) {
@@ -198,6 +159,38 @@ void getISGTimer(void) {
 			ISGTimer = getTimestampDiff(ISGTimestampMajor,ISGTimestampMinor);
 		}
 	}
+};
+
+void toggleInputDisplay(void) {
+	InputDisplayOpen = 1 - InputDisplayOpen;
+	if (InputDisplayOpen) {
+		watch_array[7] = watch_viewed_array[7];
+	} else {
+		watch_array[7] = watch_change_array[7];
+	}
+	openWatchMenu();
+}
+
+static const int watch_functions[] = {
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&toggleInputDisplay,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch
+};
+
+const Screen watch_struct = {
+	.TextArray = (int*)watch_array,
+	.FunctionArray = watch_functions,
+	.ArrayItems = 11,
+	.ParentScreen = 0,
+	.ParentPosition = 3
 };
 
 void clampWatchFloats(void) {
@@ -347,51 +340,7 @@ void handleWatch(void) {
 					};
 					break;
 				case 8:
-					// Input
-					dk_strFormat((char *)WatchTextSpace[j],"ABZSLR D:UDLR C:UDLR X:%d Y:%d",(int)ControllerInput.stickX,(int)ControllerInput.stickY);
-					char _replace_char = 0x20;
-					if ((ControllerInput.Buttons & A_Button) == 0) {
-						WatchTextSpace[j][0] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & B_Button) == 0) {
-						WatchTextSpace[j][1] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & Z_Button) == 0) {
-						WatchTextSpace[j][2] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & Start_Button) == 0) {
-						WatchTextSpace[j][3] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & L_Button) == 0) {
-						WatchTextSpace[j][4] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & R_Button) == 0) {
-						WatchTextSpace[j][5] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & D_Up) == 0) {
-						WatchTextSpace[j][9] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & D_Down) == 0) {
-						WatchTextSpace[j][10] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & D_Left) == 0) {
-						WatchTextSpace[j][11] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & D_Right) == 0) {
-						WatchTextSpace[j][12] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & C_Up) == 0) {
-						WatchTextSpace[j][16] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & C_Down) == 0) {
-						WatchTextSpace[j][17] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & C_Left) == 0) {
-						WatchTextSpace[j][18] = _replace_char;
-					}
-					if ((ControllerInput.Buttons & C_Right) == 0) {
-						WatchTextSpace[j][19] = _replace_char;
-					}
+					// Input - Deprecated
 					break;
 				case 9:
 					// Held Actor

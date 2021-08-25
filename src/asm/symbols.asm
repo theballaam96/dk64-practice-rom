@@ -22,6 +22,11 @@
 .definelabel SaveToGlobal, 0x8060DEA8
 .definelabel DetectGameOver, 0x80714394
 .definelabel DetectAdventure, 0x8071432C
+.definelabel displaySprite, 0x806AB4EC
+.definelabel alterSize, 0x806D0468
+.definelabel unkSizeFunction, 0x806CFF9C
+.definelabel spawnRocketbarrel, 0x806C7BAC
+.definelabel playSong, 0x80602A94
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -37,9 +42,7 @@
 .definelabel StorySkip, 0x8074452C
 .definelabel HelmTimerShown, 0x80755350 // u8
 .definelabel TempFlagBlock, 0x807FDD90
-.definelabel InSubmap, 0x8076A170
-.definelabel ParentMap, 0x8076A172
-.definelabel ParentExit, 0x8076A174
+.definelabel SubmapData, 0x8076A160
 .definelabel HelmTimerPaused, 0x80713C9B // u8
 .definelabel LagBoost, 0x80744478 // u32
 .definelabel FrameLag, 0x8076AF10
@@ -69,8 +72,7 @@
 .definelabel ScreenRatio, 0x807444C0
 .definelabel CurrentActorPointer, 0x807FBB44
 .definelabel LoadedActorCount, 0x807FBB35
-.definelabel SpawnerArray, 0x807FDC8C
-.definelabel SpawnerCount, 0x807FDC88
+.definelabel SpawnerMasterData, 0x807FDC88
 .definelabel MenuSkyTopRGB, 0x80754F4C
 .definelabel MenuSkyRGB, 0x80754F4F
 .definelabel ActorArray, 0x807FBFF0
@@ -105,13 +107,15 @@
 .definelabel p1PressedButtons, 0x807ECD48
 .definelabel p1HeldButtons, 0x807ECD58
 .definelabel player_count, 0x807FC928
+.definelabel sprite_table, 0x80755390
+.definelabel sprite_translucency, 0x807FC80F
+.definelabel bbbandit_array, 0x8002DB80
 
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
 .definelabel ActiveToolsMenu, 0x807FFF20 // 0x60
 .definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct
 
-.definelabel PositionSavestate, 0x807FFEA4 // 0x3C Byttes
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes
 
 .definelabel TestVariable, 0x807FFFFC
@@ -137,6 +141,11 @@
 .definelabel StoredRound, 0x807FFFDB // u8
 .definelabel DisablePositionButtons, 0x807FFFDA // u8
 .definelabel DisableTagAnywhere, 0x807FFFD9 // u8
+.definelabel InputDisplayOpen, 0x807FFFD8 // u8
+.definelabel InputDisplayQuadrant, 0x807FFFD7 // u8
+.definelabel InputSpritesSpawned, 0x807FFFD6 // u8
+.definelabel TransformAutoRestockOff, 0x807FFFD5 // u8
+.definelabel KRoolRoundSetting, 0x807FFFD4 // u8
 .definelabel FrameAdvanceStart, 0x807FFFC8 // u32
 .definelabel DisableStartupSkip, 0x807FFFC7 // u8
 .definelabel DisableForcedStorySkip, 0x807FFFC6 // u8
@@ -179,6 +188,7 @@
 .definelabel HackTitle, 0x807FFFA0 // u32
 .definelabel HackVersion, 0x807FFFA4 // u32
 .definelabel AddedCorruptionActorCount, 0x807FFFA8 // u8
+.definelabel SpriteAddress, 0x807FFFAC // u32
 .definelabel PreviousLagArray, 0x807FFFB0; // u8 array
 
 .definelabel graphicalOverlaySpace, 0x807FFA00 // 0x180

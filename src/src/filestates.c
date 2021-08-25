@@ -67,7 +67,6 @@ void portFileStateToMemory(int state_index) {
 	}
 	dmaFileTransfer(_start+0x13C,_start+0x13C+0x1D8,(int *)&MovesBase);
 	dmaFileTransfer(_start+0x13C+0x1E0,_start+0x13C+0x1E0+0xC,(int *)&CollectableBase);
-	playSFX(BeepHigh);
 }
 
 void loadFileState(void) {
@@ -95,10 +94,20 @@ void loadFileState(void) {
 			_stateindex = filestates_101ffm_stateindex[_position];
 		break;
 	}
-	TestVariable = _stateindex;
 	if (_stateindex > -1) {
 		portFileStateToMemory(_stateindex);
 	}
+}
+
+void loadOtherStates(void) {
+	loadFileState();
+	playSFX(BeepHigh);
+}
+
+void takeoffSkip(void) {
+	// Easter Egg
+	loadFileState();
+	playSFX(KLumsy);
 }
 
 static const char* filestates_main_array[] = {
@@ -135,16 +144,16 @@ static const char* filestates_nle_array[] = {
 };
 
 static const int filestates_nle_functions[] = {
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&takeoffSkip
 };
 
 const Screen filestates_nle_struct = {
@@ -180,7 +189,7 @@ static const char* filestates_general_array[] = {
 };
 
 static const int filestates_general_functions[] = {
-	(int)&loadFileState,
+	(int)&loadOtherStates,
 };
 
 const Screen filestates_general_struct = {
@@ -205,16 +214,16 @@ static const char* filestates_101org_array[] = {
 };
 
 static const int filestates_101org_functions[] = {
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates
 };
 
 const Screen filestates_101org_struct = {
@@ -239,16 +248,16 @@ static const char* filestates_101jfm_array[] = {
 };
 
 static const int filestates_101jfm_functions[] = {
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates
 };
 
 const Screen filestates_101jfm_struct = {
@@ -273,16 +282,16 @@ static const char* filestates_101ffm_array[] = {
 };
 
 static const int filestates_101ffm_functions[] = {
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState,
-	(int)&loadFileState
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates
 };
 
 const Screen filestates_101ffm_struct = {

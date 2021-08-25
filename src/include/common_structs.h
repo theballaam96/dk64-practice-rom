@@ -3,6 +3,8 @@ typedef struct actorData {
 	/* 0x058 */ int actorType;
 	/* 0x05C */ char unk_5C[0x7C-0x5C];
 	/* 0x07C */ float xPos;
+	/* 0x080 */ char unk_80[0x154-0x80];
+	/* 0x154 */ char control_state;
 } actorData;
 
 typedef struct cameraData {
@@ -10,39 +12,74 @@ typedef struct cameraData {
 	/* 0x15F */ char facing_angle;
 } cameraData;
 
-typedef struct playerData {
+typedef struct bone_array {
 	/* 0x000 */ char unk_00[0x58];
+	/* 0x058 */ short xPos;
+	/* 0x05A */ short yPos;
+	/* 0x05C */ short zPos;
+} bone_array;
+
+typedef struct rendering_params {
+	/* 0x000 */ char unk_00[0x14];
+	/* 0x014 */ bone_array* bone_array1;
+	/* 0x018 */ bone_array* bone_array2;
+} rendering_params;
+
+typedef struct playerData {
+	/* 0x000 */ char unk_00[0x4];
+	/* 0x004 */ rendering_params* rendering_param_pointer;
+	/* 0x008 */ char unk_08[0x58 - 0x8];
 	/* 0x058 */ int characterID; //02 is dk, 03 is diddy, 04 is lanky, etc
-	/* 0x05C */ char unk_5C[0x07];
-	/* 0x063 */ char visibility;
-	/* 0x064 */ char unk_64[0x18];
+	/* 0x05C */ char unk_5C[0x60-0x5C];
+	/* 0x060 */ int obj_props_bitfield;
+	/* 0x064 */ char unk_64[0x6A-0x64];
+	/* 0x06A */ short grounded_bitfield;
+	/* 0x06C */ short unk_bitfield;
+	/* 0x06E */ char unk_6E[0x7C-0x6E];
 	/* 0x07C */ float xPos;
 	/* 0x080 */ float yPos;
 	/* 0x084 */ float zPos;
-	/* 0x088 */ char unk_88[0x30];
+	/* 0x088 */ char unk_88[0xA4-0x88];
+	/* 0x0A4 */ float floor;
+	/* 0x0A8 */ char unk_A8[0xB8-0xA8];
 	/* 0x0B8 */ float hSpeed;
 	/* 0x0BC */ char unk_BC[0x4];
 	/* 0x0C0 */ float yVelocity;
-	/* 0x0C4 */ char unk_C4[0xE6 - 0xC4];
+	/* 0x0C4 */ float yAccel;
+	/* 0x0C8 */ char unk_C4[0xE6 - 0xC8];
 	/* 0x0E6 */ short facing_angle;
 	/* 0x0E8 */ short skew_angle;
-	/* 0x0EA */ char unk_EA[0x12c-0xEA];
+	/* 0x0EA */ char unk_EA[0x110-0xEA];
+	/* 0x110 */ char touching_object;
+	/* 0x111 */ char unk_111[0x128-0x111];
+	/* 0x128 */ short strong_kong_value;
+	/* 0x12A */ char unk_12A[2];
 	/* 0x12C */ short chunk;
-	/* 0x12E */ char unk_12E[0x147 - 0x12E];
+	/* 0x12E */ char unk_12E[0x13C - 0x12E];
+	/* 0x13C */ int* collision_queue_pointer;
+	/* 0x140 */ char unk_140[0x147-0x140];
 	/* 0x147 */ char hand_state;
 	/* 0x148 */ char unk_148[0x154 - 0x148];
 	/* 0x154 */ char control_state;
 	/* 0x155 */ char control_state_progress;
-	/* 0x156 */ char unk_156[0xB2];
+	/* 0x156 */ char unk_156[0x1D0-0x156];
+	/* 0x1D0 */ short ostand_value;
+	/* 0x1D2 */ char unk_1D2[0x208-0x1D2];
 	/* 0x208 */ int* vehicle_actor_pointer;
 	/* 0x20C */ char was_gun_out;
-	/* 0x20D */ char unk_20D[0x284 - 0x20D];
+	/* 0x20D */ char unk_20D[0x23C - 0x20D];
+	/* 0x23C */ short unk_rocketbarrel_value1;
+	/* 0x23E */ short unk_rocketbarrel_value2;
+	/* 0x240 */ char unk_240[0x284 - 0x240];
 	/* 0x284 */ cameraData* camera_pointer;
-	/* 0x288 */ char unk_288[0x328 - 0x288];
+	/* 0x288 */ char unk_288[0x323 - 0x288];
+	/* 0x323 */ char unk_rocketbarrel_value3;
+	/* 0x324 */ char unk_324[0x328 - 0x324];
 	/* 0x328 */ actorData* krool_timer_pointer;
 	/* 0x32C */ actorData* held_actor;
 	/* 0x330 */ char unk_330[0x36F - 0x330];
 	/* 0x36F */ char new_kong;
+	/* 0x370 */ int strong_kong_ostand_bitfield;
 } playerData; //size 0x630
 
 typedef struct TextOverlay {
@@ -133,8 +170,8 @@ typedef struct PosState {
 	/* 0x022 */ short xStored2;
 	/* 0x024 */ short yStored2;
 	/* 0x026 */ short zStored2;
-	/* 0x028 */ short yRot;
-	/* 0x02A */ short zRot;
+	/* 0x028 */ short facing_angle;
+	/* 0x02A */ short skew_angle;
 	/* 0x02C */ float xPos;
 	/* 0x030 */ float yPos;
 	/* 0x034 */ float zPos;
@@ -160,6 +197,13 @@ typedef struct ActiveMenuData {
 	/* 0x001 */ unsigned char positionIndex;
 	/* 0x002 */ char isOpen;
 } ActiveMenuData;
+
+typedef struct AutowalkData {
+	/* 0x000 */ char unk_00[0x12];
+	/* 0x012 */ short xPos;
+	/* 0x014 */ char unk_14[0x2];
+	/* 0x016 */ short zPos;
+} AutowalkData;
 
 typedef struct PhaseCheckerData {
 	/* 0x000 */ char previousMagnitude;
@@ -229,6 +273,9 @@ typedef struct savedSettings {
 	/* 0x00B */ char DPadDFunction;
 	/* 0x00C */ char displaySavePrompt;
 	/* 0x00D */ char precision;
+	/* 0x00E */ char input_quadrant;
+	/* 0x00F */ char transform_autostock;
+	/* 0x010 */ char krool_round_setting;
 } savedSettings;
 
 typedef struct flagMenuData {
@@ -254,3 +301,120 @@ typedef struct cutsceneType {
 	/* 0x000 */ char unk_00[0xD0];
 	/* 0x0D0 */ cutsceneInfo* cutscene_databank;
 } cutsceneType;
+
+typedef struct spriteDisplay {
+	/* 0x000 */ int disappear;
+	/* 0x004 */ char unk_04[0x11];
+	/* 0x015 */ char unk_15;
+} spriteDisplay;
+
+typedef struct spriteControl {
+	/* 0x000 */ float movement_style;
+	/* 0x004 */ float pointer_offset_0x15;
+	/* 0x008 */ float xPos;
+	/* 0x00C */ float yPos;
+	/* 0x010 */ float scale;
+	/* 0x014 */ float unk_14;
+	/* 0x018 */ int unk_18;
+	/* 0x01C */ int unk_1C;
+} spriteControl;
+
+typedef struct otherSpriteControl {
+	/* 0x000 */ char unk_000[0x28];
+	/* 0x028 */ unsigned char left_stretch;
+	/* 0x029 */ unsigned char right_stretch;
+	/* 0x02A */ unsigned char up_stretch;
+	/* 0x02B */ unsigned char down_stretch;
+	/* 0x02C */ char unk_02C[0x340-0x2C];
+	/* 0x340 */ float xPos;
+	/* 0x344 */ float yPos;
+	/* 0x348 */ char unk_348[8];
+	/* 0x350 */ char gif_update_frequency;
+	/* 0x351 */ char unk_351[0xB];
+	/* 0x35C */ spriteControl* gif_control_pointer;
+	/* 0x360 */ float xScale;
+	/* 0x364 */ float yScale;
+	/* 0x368 */ char unk_368[0x2];
+	/* 0x36A */ char transparency1;
+	/* 0x36B */ char transparency2;
+	/* 0x36C */ char transparency3;
+	/* 0x36D */ char transparency4;
+	/* 0x36E */ char unk_36E[0x384-0x36E];
+	/* 0x384 */ int* some_pointer;
+} otherSpriteControl;
+
+typedef struct submapInfo {
+	/* 0x000 */ char in_submap;
+	/* 0x001 */ char unk_01;
+	/* 0x003 */ short transition_properties_bitfield;
+	/* 0x004 */ char unk_04[0x12-4];
+	/* 0x012 */ short parent_map;
+	/* 0x014 */ char parent_exit;
+} submapInfo;
+
+typedef struct MinigameController {
+	/* 0x000 */ char unk_00[0x1C5];
+	/* 0X000 */ char hit_count;
+} MinigameController;
+
+typedef struct SpawnerInfo {
+	/* 0x000 */ unsigned char enemy_value;
+	/* 0x001 */ char unk_01[0x14-0x1];
+	/* 0x014 */ char respawnTimerInit;
+	/* 0x015 */ char unk_15[0x18-0x15];
+	/* 0x018 */ void* tied_actor;
+	/* 0x01C */ char unk_1C[0x48 - 0x1C];
+} SpawnerInfo;
+
+typedef struct pppanicController {
+	/* 0x000 */ char unk_00[0x1B1];
+	/* 0x1B1 */ char hit_count1;
+	/* 0x1B2 */ char unk_1B2;
+	/* 0x1B3 */ char hit_count2;
+} pppanicController;
+
+typedef struct krazykkcontroller {
+	/* 0x000 */ char unk_00[0x1BD];
+	/* 0x1BD */ char hit_count1;
+	/* 0x1BE */ char unk_1BE;
+	/* 0x1BF */ char hit_count2;
+} krazykkcontroller;
+
+typedef struct slotArray {
+	/* 0x000 */ char unk_10[0x16];
+	/* 0x016 */ short hit_count;
+} slotArray;
+
+typedef struct bbbanditcontroller {
+	/* 0x000 */ char unk_00[0x11C];
+	/* 0x11C */ actorData* slot_pointer;
+	/* 0x120 */ char unk_120[0x154-0x120];
+	/* 0x154 */ char control_state;
+	/* 0x155 */ char unk_155[0x174-0x155];
+	/* 0x174 */ slotArray* handle_pointer;
+} bbbanditcontroller;
+
+typedef struct bbbashcontroller {
+	/* 0x000 */ char unk_00[0x1A1];
+	/* 0x1A1 */ char hit_count;
+} bbbashcontroller;
+
+typedef struct kkoshcontroller {
+	/* 0x000 */ char unk_00[0x1CB];
+	/* 0x1CB */ char hit_count;
+} kkoshcontroller;
+
+typedef struct sseekcontroller {
+	/* 0x000 */ char unk_00[0x19F];
+	/* 0x19F */ char hit_count;
+} sseekcontroller;
+
+typedef struct SpawnerArray {
+	/* 0x000 */ SpawnerInfo SpawnerData[120];
+} SpawnerArray;
+
+typedef struct SpawnerMasterInfo {
+	/* 0x000 */ short count;
+	/* 0x002 */ char unk_02[2];
+	/* 0x004 */ SpawnerArray* array;
+} SpawnerMasterInfo;

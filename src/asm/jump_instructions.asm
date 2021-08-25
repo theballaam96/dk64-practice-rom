@@ -5,5 +5,9 @@ START_JUMP:
 	NOP
 	J 	isSaving
 	NOP
+	J 	logSpriteAddress
+	NOP
+	J 	setPauseVolume
+	NOP
 .align 0x10
 END_JUMP:

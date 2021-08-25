@@ -2,10 +2,6 @@ START:
 	displacedBootCode:
 		LUI v0, 0x8001
 		ADDIU v0, v0, 0xDCC4
-		//set story skip to always be on
-		ORI t3, r0, 0x0001
-		LUI t4, 0x8074
-		SB t3, 0x452C (t4) //set story skip to 1
 		//write per frame hook
 		//
 		LUI t3, hi(mainASMFunctionJump)
@@ -136,6 +132,10 @@ getGiantKoshaAddress:
 		J 		0x8064607c
 		OR 		s0, a0, r0
 
+getOtherSpritePointer:
+	JR 		ra
+	OR 		v0, a1, r0
+
 patchHook:
 	// a0 = Hook Location
 	// a1 = Offset in hook list
@@ -152,6 +152,25 @@ patchHook:
 	LW 	ra, 0x1C (sp)
 	JR 	ra
 	ADDIU sp, sp, 0x38
+
+timestampAdd:
+	// a0 = Timestamp 1 double
+	// a1 = Timestamp 2 double
+	LD		t0, 0x0 (a0)
+	LD 		t3, 0x0 (a1)
+	DADDU 	t0, t0, t3
+	LUI	 	t6, hi(TempTimestampStorageMajor)
+	JR 		ra
+	SD 		t0, lo(TempTimestampStorageMajor) (t6)	
+
+getObjectArrayAddr:
+	// a0 = initial address
+	// a1 = common object size
+	// a2 = index
+	MULTU 	a1, a2
+	MFLO	a1
+	JR 		ra
+	ADD 	v0, a0, a1
 
 .align 0x10
 END:

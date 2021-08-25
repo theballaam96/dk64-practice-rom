@@ -3,6 +3,9 @@ mkdir obj
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/lib.c
 mv lib.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/mapWarpExtra.c
+mv mapWarpExtra.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/mapContainer.c
 mv mapContainer.o obj/
 
@@ -87,6 +90,9 @@ mv ftt.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/flags/misc.c
 mv misc.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/flags/tbarrels.c
+mv tbarrels.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/flags/custom.c
 mv custom.o obj/
 
@@ -111,6 +117,24 @@ mv levitate.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/gamemode.c
 mv gamemode.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/transform.c
+mv transform.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/endminigame.c
+mv endminigame.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moves/cranky.c
+mv cranky.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moves/funky.c
+mv funky.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moves/candy.c
+mv candy.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moveset_inventory.c
+mv moveset_inventory.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/cheatscontainer.c
 mv cheatscontainer.o obj/
 
@@ -123,14 +147,38 @@ mv settings_storage.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/alterkongcolors.c
 mv alterkongcolors.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/alterinputquadrant.c
+mv alterinputquadrant.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/dpadlr.c
+mv dpadlr.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/dpadd.c
+mv dpadd.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/vanilla_vars.c
+mv vanilla_vars.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/hack_vars.c
+mv hack_vars.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/settings/settingscontainer.c
 mv settingscontainer.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/watch/input.c
+mv input.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/activeMenu.c
 mv activeMenu.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/tagAnywhere.c
 mv tagAnywhere.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/positionloading.c
+mv positionloading.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/frameadvance.c
+mv frameadvance.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/init.c
 mv init.o obj/

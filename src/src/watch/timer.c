@@ -16,21 +16,22 @@ void tickTimerReady(void) {
 }
 
 void checkTouchingGB(void) {
-	// unsigned short _touch_id;
-	// short _touch_index;
+	unsigned short _touch_id;
+	short _touch_index;
+	int* m2location = ObjectModel2Pointer;
 	TouchingGB = 0;
 	if (ModelTwoTouchCount) {
-		// for (int i = 0; i < ModelTwoTouchCount; i++) {
-		// 	_touch_id = ModelTwoTouchArray[i];
-		// 	_touch_index = convertIDToIndex(_touch_id);
-		// 	if (_touch_index > -1) {
-		// 		ModelTwoData _object = ObjectModel2Pointer + (_touch_index * 0x90);
-		// 		if (_object.object_type == 0x74) {
-		// 			TouchingGB = 1;
-		// 			return;
-		// 		}
-		// 	}
-		// }
+		for (int i = 0; i < ModelTwoTouchCount; i++) {
+			_touch_id = ModelTwoTouchArray[i];
+			_touch_index = convertIDToIndex(_touch_id);
+			if (_touch_index > -1) {
+				ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,_touch_index);
+				if (_object->object_type == 0x74) {
+					TouchingGB = 1;
+					return;
+				}
+			}
+		}
 	}
 	if (Player) {
 		// Checks for movement, check for collision once I figure a quick way to do this. Collision Queue?

@@ -90,5 +90,5 @@ const Screen kongcolors_struct = {
 	.FunctionArray = kongcolors_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 57,
-	.ParentPosition = 8
+	.ParentPosition = 4
 };

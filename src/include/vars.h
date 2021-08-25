@@ -61,4 +61,4 @@
 #define WatchCount 4
 #define FileStatesROMStart 0x2000000
 #define FileStateSize 0x328
-#define flagMenuScreenCount 10
+#define flagMenuScreenCount 11

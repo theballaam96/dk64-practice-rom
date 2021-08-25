@@ -66,6 +66,6 @@ const Screen gamemode_struct = {
 	.TextArray = (int*)gamemode_array,
 	.FunctionArray = gamemode_functions,
 	.ArrayItems = 15,
-	.ParentScreen = 54,
-	.ParentPosition = 3
+	.ParentScreen = 55,
+	.ParentPosition = 1
 };

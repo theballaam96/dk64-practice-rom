@@ -24,9 +24,17 @@ extern void patchHook(unsigned int hook_rdram_location, int offset_in_hook_list,
 extern void* dk_memcpy(void* _dest, void* _src, int size);
 extern void getTimestampDiffInTicks(unsigned int major, unsigned int minor);
 extern int timestampDiffToMilliseconds(unsigned int major, unsigned int minor);
+extern void timestampAdd(int* timestamp1, int* timestamp2);
 extern void SaveToGlobal();
 extern int DetectGameOver();
 extern int DetectAdventure();
+extern void displaySprite(void* control_pointer, void* sprite, int x, int y, int scale, int gif_updatefrequency, int movement_style);
+extern int* getOtherSpritePointer();
+extern void alterSize(void* object, int size);
+extern void unkSizeFunction(void* object);
+extern void spawnRocketbarrel(void* object, int unk);
+extern void* getObjectArrayAddr(void* init_address, int common_object_size, int index);
+extern void playSong(int songIndex);
 
 //vanilla data
 
@@ -43,9 +51,7 @@ extern int DestExit;
 extern char StorySkip;
 extern char HelmTimerShown;
 extern char TempFlagBlock[0x10];
-extern char InSubmap;
-extern short ParentMap;
-extern char ParentExit;
+extern submapInfo SubmapData;
 extern char HelmTimerPaused;
 extern int LagBoost;
 extern int FrameLag;
@@ -65,7 +71,7 @@ extern cutsceneType* CutsceneTypePointer;
 extern short PreviousCameraState;
 extern short CurrentCameraState;
 extern short CameraStateChangeTimer;
-extern int* AutowalkPointer;
+extern AutowalkData* AutowalkPointer;
 extern char IsAutowalking;
 extern WarpInfo PositionWarpInfo;
 extern short PositionWarpBitfield;
@@ -75,8 +81,7 @@ extern char ChimpyCam;
 extern char ScreenRatio;
 extern int* CurrentActorPointer;
 extern char LoadedActorCount;
-extern int* SpawnerArray;
-extern short SpawnerCount;
+extern SpawnerMasterInfo SpawnerMasterData;
 extern RGB MenuSkyTopRGB;
 extern RGB MenuSkyRGB;
 extern int* ActorArray[];
@@ -111,6 +116,9 @@ extern int HelmStartTime;
 extern short p1PressedButtons;
 extern short p1HeldButtons;
 extern char player_count;
+extern int* sprite_table[0xAF];
+extern char sprite_translucency;
+extern int* bbbandit_array[4];
 
 //hack data
 extern int TestVariable;
@@ -118,7 +126,6 @@ extern savedSettings StoredSettings;
 
 extern TextOverlay* ActiveTools_Error;
 extern TextOverlay* ActiveToolsMenu[];
-extern PosState PositionSavestate;
 extern char InBadMap;
 extern char MenuSavestateAction;
 extern char WatchIndex[4];
@@ -185,3 +192,9 @@ extern char ShowSavePrompts;
 extern unsigned char SavePromptTimer;
 extern TextOverlay* SavePromptActor;
 extern char SavePromptIsSaving;
+extern int* SpriteAddress;
+extern char InputDisplayOpen;
+extern char InputDisplayQuadrant;
+extern char InputSpritesSpawned;
+extern char TransformAutoRestockOff;
+extern char KRoolRoundSetting;

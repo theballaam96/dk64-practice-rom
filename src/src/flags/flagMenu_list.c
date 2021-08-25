@@ -11,6 +11,7 @@ const flagMenuData* flag_menus[] = {
 	&flagmenu_modifiermenu,
 	&flagmenu_fttmenu,
 	&flagmenu_miscmenu,
+	&flagmenu_tbarrelmenu,
 };
 
 const int flagmain_functions[] = {

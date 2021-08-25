@@ -57,6 +57,7 @@ void warpToMap(void) {
 						setFlag(92,1,2);
 					}
 				}
+				handleMapWarping(_map, 0);
 			}
 		}
 	}
