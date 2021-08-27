@@ -134,7 +134,7 @@ void togglePrecision(void) {
 
 void toggleKRoolRoundSetting(void) {
 	KRoolRoundSetting += 1;
-	if (KRoolRoundSetting > 2) {
+	if (KRoolRoundSetting > 1) {
 		KRoolRoundSetting = 0;
 	};
 	saveSettings();

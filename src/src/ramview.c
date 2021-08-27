@@ -28,7 +28,7 @@ char line6[60] = "6";
 char line7[60] = "7";
 char line8[60] = "8";
 char currentFormat = 0;
-int* printStartAddr = (int*)0x80000000;
+int* printStartAddr = (int*)0x807FCC40;
 unsigned char headerStyle = 10;
 unsigned char tableStyle = 5;
 
@@ -138,19 +138,22 @@ void checkForFormatChange(void) {
     }
 }
 
+void closeRamViewerDisplay(void){
+    if (RAMDisplayOpen == 1) {
+        RAMDisplayOpen = 0;
+        destroyTextObjects();
+    }
+}
+
 void ramViewUpdate(void) {
     if (RAMDisplayOpen == 1) {
         checkForFormatChange();
         scrollRAMViewer();
         updateHeader(printStartAddr);
         updateTable(printStartAddr);
-    }
-}
-
-void closeRamViewerDisplay(void){
-    if (RAMDisplayOpen == 1) {
-        RAMDisplayOpen = 0;
-        destroyTextObjects();
+        if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
+            closeRamViewerDisplay();
+        }
     }
 }
 

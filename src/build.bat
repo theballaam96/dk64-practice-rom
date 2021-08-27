@@ -36,6 +36,9 @@ mv helmandkrool.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/isles.c
 mv isles.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/othermaps.c
+mv othermaps.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/warps/mapwarp_list.c
 mv mapwarp_list.o obj/
 
@@ -123,6 +126,24 @@ mv transform.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/endminigame.c
 mv endminigame.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/phase.c
+mv phase.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moonkick.c
+mv moonkick.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/sandstorm.c
+mv sandstorm.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/preventenemyspawning.c
+mv preventenemyspawning.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/tagbarrelvoid.c
+mv tagbarrelvoid.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/autokillboss.c
+mv autokillboss.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moves/cranky.c
 mv cranky.o obj/
 
@@ -131,6 +152,12 @@ mv funky.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moves/candy.c
 mv candy.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/toggles.c
+mv toggles.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/snag.c
+mv snag.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/moveset_inventory.c
 mv moveset_inventory.o obj/

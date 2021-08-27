@@ -67,12 +67,15 @@ void setMoveState(int state) {
 		MovesBase[i].ammo_belt = 2 * state;
 		MovesBase[i].instrument_bitfield = 15 * state;
 	};
-	CollectableBase.Health = (2 * state) + 1;
-	CollectableBase.Melons = (8 * state) + 4;
+	CollectableBase.Melons = (2 * state) + 1;
+	CollectableBase.Health = (8 * state) + 4;
 	for (int i = 0; i < 4; i++) {
-		setFlag(0x182 + i,state,0);
+		setFlag(0x182 + i,state,0); // Training Barrels
 	}
-	setFlag(0x179,state,0);
+	setFlag(0x179,state,0); // Canera
+	setFlag(0x17F,state,0); // Spawned TBarrels
+	setFlag(0x180,state,0); // SSlam purchased from Cranky
+	setFlag(0x187,state,0); // All TBarrels cleared
 	// Kong flags
 	setFlag(0x6,state,0);
 	setFlag(0x42,state,0);

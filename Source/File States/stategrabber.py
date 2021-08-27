@@ -31,13 +31,13 @@ def grabFileState(input_file,output_file):
 			# Get Flag Block Address
 			flag_block_address = 0x7ECEA8 + eeprom_slot * 0x1AC
 			fh.seek(flag_block_address)
-			_perm_flag_block = fh.read(0x13C)
+			_perm_flag_block = fh.read(0x140)
 			fg.write(_perm_flag_block)
 			#print(hex(flag_block_address))
 			fh.seek(0x7FC950)
 			fg.write(fh.read(0x1E0))
 			fh.seek(0x7FCC40)
-			fg.write(fh.read(0xC))
+			fg.write(fh.read(0x10))
 
 
 grabFileState("./No Levels Early/RAM Dump/japes1.bin","./No Levels Early/State Files/japes1.bin")

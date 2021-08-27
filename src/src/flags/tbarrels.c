@@ -12,8 +12,11 @@ static const char flag_barrel_clear[] = "BARREL BARREL: INCOMPLETE";
 static const char flag_vine_set[] = "VINE BARREL: COMPLETE";
 static const char flag_vine_clear[] = "VINE BARREL: INCOMPLETE";
 
-static const short tbarrel_flags[] = {0x0182,0x0184,0x0185,0x0183};
-static const char tbarrel_flag_types[] = {0,0,0,0};
+static const char flag_tbarrelsspawned_set[] = "TRAINING BARRELS: SPAWNED";
+static const char flag_tbarrelsspawned_clear[] = "TRAINING BARRELS: NOT SPAWNED";
+
+static const short tbarrel_flags[] = {0x0182,0x0184,0x0185,0x0183,0x017F};
+static const char tbarrel_flag_types[] = {0,0,0,0,0};
 
 void openFlagsTBarrelMenu(void) {
 	openFlagSubmenu(67);
@@ -33,9 +36,11 @@ static const char* flagmenu_tbarrels_array[] = {
 	flag_orange_clear,
 	flag_barrel_clear,
 	flag_vine_clear,
+	flag_tbarrelsspawned_clear,
 };
 
 static const int flagmenu_tbarrels_functions[] = {
+	(int)&tbarrelSetFlag,
 	(int)&tbarrelSetFlag,
 	(int)&tbarrelSetFlag,
 	(int)&tbarrelSetFlag,
@@ -45,7 +50,7 @@ static const int flagmenu_tbarrels_functions[] = {
 const Screen flagmenu_tbarrels_struct = {
 	.TextArray = (int*)flagmenu_tbarrels_array,
 	.FunctionArray = flagmenu_tbarrels_functions,
-	.ArrayItems = 4,
+	.ArrayItems = 5,
 	.ParentScreen = 63,
 	.ParentPosition = 5
 };
@@ -70,11 +75,17 @@ static const char* flag_vine_array[] = {
 	flag_vine_set,
 };
 
+static const char* flag_tbarrelsspawned_array[] = {
+	flag_tbarrelsspawned_clear,
+	flag_tbarrelsspawned_set,
+};
+
 static const int* flagtbarrel_array[] =  {
 	(int *)flag_dive_array,
 	(int *)flag_orange_array,
 	(int *)flag_barrel_array,
 	(int *)flag_vine_array,
+	(int *)flag_tbarrelsspawned_array,
 };
 
 const flagMenuData flagmenu_tbarrelmenu = {
@@ -82,5 +93,5 @@ const flagMenuData flagmenu_tbarrelmenu = {
 	.flagTypeArray = tbarrel_flag_types,
 	.flagText = (const int*)flagtbarrel_array,
 	.screenIndex = 67,
-	.flagCount = 4,
+	.flagCount = 5,
 };

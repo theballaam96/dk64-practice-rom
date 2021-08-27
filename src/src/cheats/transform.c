@@ -1,10 +1,10 @@
 #include "../../include/common.h"
 
-static const char transform_sk[] = "TRANSFORM INTO STRONG KONG";
-static const char transform_rb[] = "TRANSFORM INTO ROCKETBARREL";
-static const char transform_os[] = "TRANSFORM INTO ORANGSTAND SPRINT";
-static const char transform_mm[] = "TRANSFORM INTO MINI MONKEY";
-static const char transform_hc[] = "TRANSFORM INTO HUNKY CHUNKY";
+static const char transform_sk[] = "STRONG KONG";
+static const char transform_rb[] = "ROCKETBARREL";
+static const char transform_os[] = "ORANGSTAND SPRINT";
+static const char transform_mm[] = "MINI MONKEY";
+static const char transform_hc[] = "HUNKY CHUNKY";
 
 void openTransformMenu(void) {
 	changeMenu(62);
@@ -12,9 +12,10 @@ void openTransformMenu(void) {
 
 void checkCrystals(void) {
 	if (TransformAutoRestockOff == 0) {
-		if (CollectableBase.Crystals < 450) {
-			CollectableBase.Crystals = 3000;
-		}
+	// 	if (CollectableBase.Crystals < 450) {
+	// 		CollectableBase.Crystals = 3000;
+	// 	}
+		setHUDItemAsInfinite(5,0,1);
 	}
 }
 

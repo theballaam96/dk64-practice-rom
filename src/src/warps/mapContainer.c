@@ -9,6 +9,7 @@ static const char mapCaves[] = "CRYSTAL CAVES";
 static const char mapCastle[] = "CREEPY CASTLE";
 static const char mapHelmKRool[] = "HIDEOUT HELM AND K. ROOL";
 static const char mapIsles[] = "DK ISLES";
+static const char mapMisc[] = "MISCELLANEOUS";
 
 static const char* maps_container_array[] = {
 	mapJapes,
@@ -19,13 +20,14 @@ static const char* maps_container_array[] = {
 	mapCaves,
 	mapCastle,
 	mapHelmKRool,
-	mapIsles
+	mapIsles,
+	mapMisc
 };
 
 const Screen maps_container_struct = {
 	.TextArray = (int*)maps_container_array,
 	.FunctionArray = maps_container_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };

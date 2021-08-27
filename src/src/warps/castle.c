@@ -7,7 +7,6 @@ static const char mapCastleCarRace[] = "CAR RACE";
 static const char mapCastleCrypt[] = "CRYPT";
 static const char mapCastleDungeon[] = "DUNGEON";
 static const char mapCastleDungeonTunnel[] = "DUNGEON TUNNEL";
-static const char mapCastleJetpac[] = "JETPAC";
 static const char mapCastleOutsideBuildings[] = "OUTSIDE BUILDINGS";
 static const char mapCastleRooms[] = "ROOMS";
 
@@ -63,7 +62,6 @@ static const unsigned char castle_destmap[] = {
 	0x00, // Null for Crypts
 	0xA3, // Dungeon
 	0x00, // Null for Tunnel
-	0x09, // Jetpac
 	0x00, // Null for Outside Buildings
 	0x00 // Null for Rooms
 };
@@ -76,7 +74,6 @@ static const unsigned char castle_destexit[] = {
 	0x00, // Null for Crypts
 	0x00, // Dungeon
 	0x00, // Null for Tunnel
-	0x00, // Jetpac
 	0x00, // Null for Outside Buildings
 	0x00 // Null for Rooms
 };
@@ -95,7 +92,6 @@ static const char* castle_mapwarp_array[] = {
 	mapCastleCrypt,
 	mapCastleDungeon,
 	mapCastleDungeonTunnel,
-	mapCastleJetpac,
 	mapCastleOutsideBuildings,
 	mapCastleRooms
 };
@@ -108,7 +104,6 @@ static const int castle_mapwarp_functions[] = {
 	(int)&openCastleCryptMenu,
 	(int)&warpToMap,
 	(int)&openCastleDungeonTunnelMenu,
-	(int)&warpToMap,
 	(int)&openCastleOutsideBuildingsMenu,
 	(int)&openCastleRoomsMenu
 };
@@ -116,7 +111,7 @@ static const int castle_mapwarp_functions[] = {
 const Screen castle_mapwarp_struct = {
 	.TextArray = (int*)castle_mapwarp_array,
 	.FunctionArray = castle_mapwarp_functions,
-	.ArrayItems = 10,
+	.ArrayItems = 9,
 	.ParentScreen = 1,
 	.ParentPosition = 6
 };
@@ -283,7 +278,7 @@ const Screen castleoutside_mapwarp_struct = {
 	.FunctionArray = castleoutside_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
-	.ParentPosition = 8
+	.ParentPosition = 7
 };
 
 static const unsigned char castle_rooms_destmap[] = {
@@ -325,7 +320,7 @@ const Screen castlerooms_mapwarp_struct = {
 	.FunctionArray = castlerooms_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
-	.ParentPosition = 9
+	.ParentPosition = 8
 };
 
 void openCastleMenu(void) {

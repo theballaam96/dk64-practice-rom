@@ -52,5 +52,39 @@ START_HOOK:
 			J 		0x805FC898
 			NOP
 
+	kongCode:
+		JAL 	handleAutophase
+		NOP
+		LW 		ra, -0x4C (sp)
+		J 		0x806F3758
+		LW 		s0, -0x50 (sp)
+
+	controlSuperspeed:
+		MUL.D 	f8, f18, f6
+		NOP
+		LUI 	a0, hi(IsSuperspeedOn)
+		LBU 	a0, lo(IsSuperspeedOn) (a0)
+		BEQZ 	a0, controlSuperspeed_Finish
+		NOP
+		MTC1 	a0, f16
+		CVT.D.W f16, f16
+		MUL.D 	f8, f8, f16
+
+		controlSuperspeed_Finish:
+			J 	0x8066535C
+			NOP
+
+	writeLastUpdatedFlags:
+		ADDIU 	sp, sp, -0x30
+		LUI 	t7, hi(UndoFlag)
+		ADDIU 	t7, t7, lo(UndoFlag)
+		ADDIU 	a3, r0, 1
+		SB 		a3, 0x4 (t7)
+		SLL 	a3, a0, 0x10
+		SH 		a0, 0x0 (t7)
+		SB 		a1, 0x2 (t7)
+		J 		0x807312A4
+		SB 		a2, 0x3 (t7)
+
 .align 0x10
 END_HOOK:

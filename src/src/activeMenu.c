@@ -11,7 +11,8 @@ static const char fileStates[] = "FILE STATES";
 static const char cheats[] = "CHEATS";
 static const char settings[] = "SETTINGS";
 static const char hackTitle[] = "DK64 PRACTICE ROM";
-static const char hackVersion[] = "VERSION 1.4.1";
+//static const char hackVersion[] = "VERSION 1.4.1";
+static const char hackVersion[] = "1.4.1 TEST: 27AUG2021";
 
 static const char* main_array[] = {
 	warp,
@@ -106,6 +107,9 @@ const Screen* menu_screens[] = {
 	&flagmenu_tbarrels_struct,
 	&vanilla_struct,
 	&hack_struct,
+	&other_mapwarp_struct,
+	&toggles_struct,
+	&snagcheats_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -137,7 +141,9 @@ void spawnMenu(int screenIndex) {
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		textOverlay->opacity = 0xFF;
 		HackTitle = textOverlay;
-		spawnTextOverlay(style,217,35,(char *)hackVersion,0,0,2,0);
+		//int version_x = 217;
+		int version_x = 163;
+		spawnTextOverlay(style,version_x,35,(char *)hackVersion,0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		textOverlay->opacity = 0xFF;
 		HackVersion = textOverlay;

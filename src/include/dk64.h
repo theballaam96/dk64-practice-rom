@@ -2,13 +2,13 @@
 extern void setFlag(int flagIndex, int value, char flagType);
 extern int checkFlag(int flagIndex, char flagType);
 extern void* dk_malloc(int size);
-extern void free(void* mallocPtr);
+extern void dk_free(void* mallocPtr);
 extern void playSound(short soundIndex, int unk0, int unk1, int unk2, int unk3, int unk4);
 extern void initiateTransition(int map, int exit);
 extern int* getFlagBlockAddress(char flagType);
 extern int isAddressActor(void* address);
 extern int getTimestamp();
-extern void dmaFileTransfer(int romStart, int romEnd, int* ramStart);
+extern void dmaFileTransfer(int romStart, int romEnd, int ramStart);
 extern void deleteActor(void* actor);
 extern int spawnActor(int actorID, int actorBehaviour);
 extern void spawnTextOverlay(int style, int x, int y, char* string, int timer1, int timer2, unsigned char effect, unsigned char speed);
@@ -35,6 +35,11 @@ extern void unkSizeFunction(void* object);
 extern void spawnRocketbarrel(void* object, int unk);
 extern void* getObjectArrayAddr(void* init_address, int common_object_size, int index);
 extern void playSong(int songIndex);
+extern void loadExtraHooks();
+extern void playCutscene(void* actor, int cutscene_index, int cutscene_type);
+extern void setHUDItemAsInfinite(int item_index, int player_index, char isInfinite);
+extern void osWritebackDCacheAll();
+extern void test(int unk1, int unk2);
 
 //vanilla data
 
@@ -119,6 +124,7 @@ extern char player_count;
 extern int* sprite_table[0xAF];
 extern char sprite_translucency;
 extern int* bbbandit_array[4];
+extern char StoredDamage;
 
 //hack data
 extern int TestVariable;
@@ -163,10 +169,7 @@ extern customFlagData CustomFlag;
 extern char ISGStage;
 extern char IsPauseMenuOpen;
 extern short PreviousFrameButtons;
-extern short UndoFlag_EncodedFlag;
-extern char UndoFlag_OutputBool;
-extern char UndoFlag_FlagType;
-extern char UndoFlag_FlagStored;
+extern undoFlagData UndoFlag;
 extern char LastLoadStateAction;
 extern char PauseMenuMusicSetting;
 extern char ClosingMenu;

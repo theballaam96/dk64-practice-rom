@@ -161,7 +161,34 @@ timestampAdd:
 	DADDU 	t0, t0, t3
 	LUI	 	t6, hi(TempTimestampStorageMajor)
 	JR 		ra
-	SD 		t0, lo(TempTimestampStorageMajor) (t6)	
+	SD 		t0, lo(TempTimestampStorageMajor) (t6)
+
+pauseHook:
+	J 	setPauseVolume
+	NOP
+kongHook:
+	J 	kongCode
+	NOP
+flagHook:
+	J 	writeLastUpdatedFlags
+	NOP
+
+loadExtraHooks:
+	LUI t3, hi(pauseHook)
+	LW t3, lo(pauseHook) (t3)
+	LUI t4, 0x8060
+	SW t3, 0xC890 (t4) // Store Hook
+
+	LUI t3, hi(flagHook)
+	LW t3, lo(flagHook) (t3)
+	LUI t4, 0x8073
+	SW t3, 0x129C (t4) // Store Hook
+	
+	LUI t3, hi(kongHook)
+	LW t3, lo(kongHook) (t3)
+	LUI t4, 0x806F
+	JR 	ra
+	SW t3, 0x3750 (t4) // Store Hook
 
 getObjectArrayAddr:
 	// a0 = initial address

@@ -255,6 +255,7 @@ void savestateHandler(void) {
 						states[_focused_state]->HelmTimerOn = HelmTimerShown;
 						states[_focused_state]->ISGOn = ISGActive;
 						states[_focused_state]->createdTime = FrameReal;
+						states[_focused_state]->stored_damage = StoredDamage;
 						if (HelmTimerShown) {
 							getTimestampDiffInTicks(HelmStartTimestampMajor,HelmStartTimestampMinor);
 							states[_focused_state]->HelmTimerDifferenceMajor = TempTimestampStorageMajor;
@@ -285,6 +286,7 @@ void savestateHandler(void) {
 							dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
 							resetMap();
 							Character = states[_focused_state]->Character;
+							StoredDamage = states[_focused_state]->stored_damage;
 							initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
 							dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
 							if (MenuSavestateAction == 2) {
@@ -346,10 +348,12 @@ void savestateLoadMapLoadVars(void) {
 			ISGPreviousFadeout = states[_focused_state]->ISGPrevFade;
 		}
 		if (Player) {
-			Player->facing_angle = states[_focused_state]->facing_angle;
-			Player->skew_angle = states[_focused_state]->skew_angle;
-			if (Player->camera_pointer) {
-				Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
+			if (LastLoadStateAction == 2) {
+				Player->facing_angle = states[_focused_state]->facing_angle;
+				Player->skew_angle = states[_focused_state]->skew_angle;
+				if (Player->camera_pointer) {
+					Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
+				}
 			}
 		}
 		LoadVarsOnMapLoad = 0;

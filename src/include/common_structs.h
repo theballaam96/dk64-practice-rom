@@ -5,6 +5,7 @@ typedef struct actorData {
 	/* 0x07C */ float xPos;
 	/* 0x080 */ char unk_80[0x154-0x80];
 	/* 0x154 */ char control_state;
+	/* 0x155 */ char control_state_progress;
 } actorData;
 
 typedef struct cameraData {
@@ -49,20 +50,24 @@ typedef struct playerData {
 	/* 0x0C8 */ char unk_C4[0xE6 - 0xC8];
 	/* 0x0E6 */ short facing_angle;
 	/* 0x0E8 */ short skew_angle;
-	/* 0x0EA */ char unk_EA[0x110-0xEA];
+	/* 0x0EA */ char unk_EA[0xEE - 0xEA];
+	/* 0x0EE */ short next_facing_angle;
+	/* 0x0F0 */ char unk_F0[0x110 - 0xF0];
 	/* 0x110 */ char touching_object;
-	/* 0x111 */ char unk_111[0x128-0x111];
+	/* 0x111 */ char unk_111[0x128 - 0x111];
 	/* 0x128 */ short strong_kong_value;
 	/* 0x12A */ char unk_12A[2];
 	/* 0x12C */ short chunk;
 	/* 0x12E */ char unk_12E[0x13C - 0x12E];
 	/* 0x13C */ int* collision_queue_pointer;
-	/* 0x140 */ char unk_140[0x147-0x140];
+	/* 0x140 */ char unk_140[0x147 - 0x140];
 	/* 0x147 */ char hand_state;
 	/* 0x148 */ char unk_148[0x154 - 0x148];
 	/* 0x154 */ char control_state;
 	/* 0x155 */ char control_state_progress;
-	/* 0x156 */ char unk_156[0x1D0-0x156];
+	/* 0x156 */ char unk_156[0x18A-0x156];
+	/* 0x18A */ short moving_angle;
+	/* 0x18C */ char unk_18C[0x1D0-0x18C];
 	/* 0x1D0 */ short ostand_value;
 	/* 0x1D2 */ char unk_1D2[0x208-0x1D2];
 	/* 0x208 */ int* vehicle_actor_pointer;
@@ -123,6 +128,7 @@ typedef struct Savestate {
 	/* 0x360 */ short skew_angle;
 	/* 0x362 */ char unused_362[0x2];
 	/* 0x364 */ int createdTime;
+	/* 0x365 */ char stored_damage;
 } Savestate;
 
 typedef const struct Screen {
@@ -244,8 +250,24 @@ typedef struct SwapObjectData {
 	/* 0x29C */ short action_type;
 } SwapObjectData;
 
+typedef struct sandstormData {
+	/* 0x000 */ char unk_00[0x54];
+	/* 0x054 */ char sandstorm_active;
+} sandstormData;
+
+typedef struct snagData {
+	/* 0x000 */ char unk_00[0x48];
+	/* 0x048 */ char reset;
+	/* 0x049 */ char unk_49[0x54-0x49];
+	/* 0x054 */ char check;
+	/* 0x055 */ char unk_55[0x60 - 0x55];
+	/* 0x060 */ char state;
+} snagData;
+
 typedef struct ModelTwoData {
-	/* 0x000 */ char unk_00[0x84];
+	/* 0x000 */ char unk_00[0x7C];
+	/* 0x07C */ void* behaviour_pointer;
+	/* 0x080 */ char unk_80[0x84-0x80];
 	/* 0x084 */ short object_type;
 	/* 0x086 */ char unk_86[0x4];
 	/* 0x08A */ short object_id;
@@ -363,7 +385,9 @@ typedef struct SpawnerInfo {
 	/* 0x014 */ char respawnTimerInit;
 	/* 0x015 */ char unk_15[0x18-0x15];
 	/* 0x018 */ void* tied_actor;
-	/* 0x01C */ char unk_1C[0x48 - 0x1C];
+	/* 0x01C */ char unk_1C[0x42-0x1C];
+	/* 0x042 */ char spawn_state;
+	/* 0x043 */ char unk_43[0x48 - 0x43];
 } SpawnerInfo;
 
 typedef struct pppanicController {
@@ -418,3 +442,10 @@ typedef struct SpawnerMasterInfo {
 	/* 0x002 */ char unk_02[2];
 	/* 0x004 */ SpawnerArray* array;
 } SpawnerMasterInfo;
+
+typedef struct undoFlagData {
+	/* 0x000 */ short encoded_flag;
+	/* 0x002 */ char output;
+	/* 0x003 */ char flag_type;
+	/* 0x004 */ char flag_stored;
+} undoFlagData;

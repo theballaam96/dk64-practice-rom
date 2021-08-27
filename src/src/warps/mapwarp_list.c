@@ -29,6 +29,7 @@ const MapWarp* warping_struct[] = {
 	&map_islesmain_struct,
 	&map_isleslobbies_struct,
 	&map_helmrool_struct,
+	&map_other_struct,
 };
 
 const int maps_container_functions[] = {
@@ -40,5 +41,6 @@ const int maps_container_functions[] = {
 	(int)&openCavesMenu,
 	(int)&openCastleMenu,
 	(int)&openHelmRoolMenu,
-	(int)&openIslesMenu
+	(int)&openIslesMenu,
+	(int)&openOtherMapsMenu,
 };

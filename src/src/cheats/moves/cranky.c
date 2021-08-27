@@ -30,6 +30,9 @@ static const char cranky_ch1[] = "CHUNKY: HUNKY CHUNKY";
 static const char cranky_ch2[] = "CHUNKY: HUNKY CHUNKY AND PPUNCH";
 static const char cranky_ch3[] = "CHUNKY: ALL";
 
+static const char cranky_ssflag_on[] = "SIMIAN SLAM PURCHASED: TRUE";
+static const char cranky_ssflag_off[] = "SIMIAN SLAM PURCHASED: FALSE";
+
 static const char* cranky_array[] = {
 	cranky_slam0,
 	cranky_dk0,
@@ -37,6 +40,7 @@ static const char* cranky_array[] = {
 	cranky_la0,
 	cranky_ti0,
 	cranky_ch0,
+	cranky_ssflag_off,
 };
 
 static const char* cranky_list_slam[] = {
@@ -94,8 +98,20 @@ void openCrankyMenu(void) {
 	for (int i = 0; i < 5; i++) {
 		cranky_array[i + 1] = (char*)cranky_list_kong[i][(int)MovesBase[i].special_moves];
 	}
+	char _flag = checkFlag(0x180,0);
+	if (_flag) {
+		cranky_array[6] = cranky_ssflag_on;
+	} else {
+		cranky_array[6] = cranky_ssflag_off;
+	}
 	changeMenu(64);
 };
+
+void toggleSlamFlag(void) {
+	char _flag = checkFlag(0x180,0);
+	setFlag(0x180,1 - _flag,0);
+	openCrankyMenu();
+}
 
 void toggleSlam(void) {
 	char _base = MovesBase[0].simian_slam + 1;
@@ -124,12 +140,13 @@ static const int cranky_functions[] = {
 	(int)&toggleKongMove,
 	(int)&toggleKongMove,
 	(int)&toggleKongMove,
+	(int)&toggleSlamFlag,
 };
 
 const Screen cranky_struct = {
 	.TextArray = (int*)cranky_array,
 	.FunctionArray = cranky_functions,
-	.ArrayItems = 6,
+	.ArrayItems = 7,
 	.ParentScreen = 63,
 	.ParentPosition = 2
 };

@@ -138,12 +138,7 @@ void endMinigame(void) {
 		break;
 	};
 	if (_actorSearchOn) {
-		for (int i = 0; i < ActorCount; i++) {
-			actorData* _actor_ = (actorData*)ActorArray[i];
-			if (_actor_->actorType == _actor) {
-				_actor_addr = _actor_;
-			}
-		}
+		_actor_addr = findActorWithType(_actor);
 		if (_actor_addr) {
 			switch(_index) {
 				case 1:
@@ -204,8 +199,4 @@ void LToEndMinigame(void) {
 			}
 		}
 	}
-};
-
-void ToggleEndMinigameWithL(void) {
-	// Needs finishing
 };

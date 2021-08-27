@@ -50,6 +50,7 @@
 #define Quack 170
 #define TagWarp 612
 #define TakeWarp 230
+#define Splat 22
 
 // Other
 #define MysteryWriteOffset 0x29C
@@ -57,8 +58,8 @@
 #define MovesBaseSize 0x1D8
 #define MaxMenuItems 20 // 32 (practice rom cap) - 8 (normal cap) - 4 (watch)
 #define ErrorLength 180
-#define WarpScreens 28
+#define WarpScreens 29
 #define WatchCount 4
 #define FileStatesROMStart 0x2000000
-#define FileStateSize 0x328
+#define FileStateSize 0x330
 #define flagMenuScreenCount 11

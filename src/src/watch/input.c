@@ -43,7 +43,9 @@ void openInputOnTransition(void) {
 		if (spriteSlots[0] == 0) {
 			if (InputDisplayQuadrant < 4) {
 				for (int i = 0; i < 10; i++) {
-					displaySlots[i]->disappear = 0;
+					if (displaySlots[i]) {
+						displaySlots[i]->disappear = 0;
+					}
 					sprite_translucency = 0;
 					_movement_style = 4;
 					displaySprite(displaySlots[i],sprite_table[(int)sprite_table_indexes[i]],root_x[(int)InputDisplayQuadrant] + x_positions[i],root_y[(int)InputDisplayQuadrant] + y_positions[i],(int)target_size[i],0,_movement_style);
@@ -71,10 +73,9 @@ void closeInputOnTransition(void) {
 	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
 		for (int i = 0; i < 12; i++) {
 			spriteSlots[i] = 0;
-			displaySlots[i]->disappear = -1;
 			otherSpriteData[i] = 0;
-			InputSpritesSpawned = 0;
 		}
+		InputSpritesSpawned = 0;
 	}
 };
 

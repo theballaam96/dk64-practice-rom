@@ -27,6 +27,10 @@
 .definelabel unkSizeFunction, 0x806CFF9C
 .definelabel spawnRocketbarrel, 0x806C7BAC
 .definelabel playSong, 0x80602A94
+.definelabel playCutscene, 0x8061CC40
+.definelabel setHUDItemAsInfinite, 0x806FB370
+.definelabel osWritebackDCacheAll, 0x800052E0
+.definelabel test, 0x80004870
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -110,6 +114,7 @@
 .definelabel sprite_table, 0x80755390
 .definelabel sprite_translucency, 0x807FC80F
 .definelabel bbbandit_array, 0x8002DB80
+.definelabel StoredDamage, 0x807FCC4D // s8
 
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
@@ -170,10 +175,7 @@
 .definelabel ISGStage, 0x807FFF85 // u8
 .definelabel IsPauseMenuOpen, 0x807FFF86 // u8
 .definelabel PreviousFrameButtons, 0x807FFF88 // u16
-.definelabel UndoFlag_EncodedFlag, 0x807FFF8A // u16
-.definelabel UndoFlag_OutputBool, 0x807FFF8C // u8
-.definelabel UndoFlag_FlagType, 0x807FFF8D // u8
-.definelabel UndoFlag_FlagStored, 0x807FFF8E // u8
+.definelabel UndoFlag, 0x807FFF8A // u16
 .definelabel LastLoadStateAction, 0x807FFF8F // u8
 .definelabel PauseMenuMusicSetting, 0x807FFF90 // u8
 .definelabel ClosingMenu, 0x807FFF91 // u8

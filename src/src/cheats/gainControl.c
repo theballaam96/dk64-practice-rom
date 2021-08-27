@@ -2,7 +2,7 @@
 
 void gainControl(void) {
 	if (Player) {
-		char _visibility = Player->obj_props_bitfield;
+		int _visibility = Player->obj_props_bitfield;
 		_visibility = _visibility | 0x8;
 		Player->obj_props_bitfield = _visibility;
 		Player->control_state = 0xC;

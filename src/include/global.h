@@ -13,6 +13,7 @@ extern void openFlagSubmenu(int screenIndex);
 extern void toggleFlag(void);
 extern void handleMapWarping(int map, int levelIndex);
 extern int convertIDToIndex(short obj_index);
+extern void* findActorWithType(int search_actor_type);
 
 extern void warpToMap(void);
 extern void openJapesMenu(void);
@@ -24,6 +25,7 @@ extern void openCavesMenu(void);
 extern void openCastleMenu(void);
 extern void openHelmRoolMenu(void);
 extern void openIslesMenu(void);
+extern void openOtherMapsMenu(void);
 
 extern void openFlagsMainMenu(void);
 extern void openFlagsKongMenu(void);
@@ -51,6 +53,12 @@ extern void openMovesetInventoryMenu(void);
 extern void openCrankyMenu(void);
 extern void openFunkyMenu(void);
 extern void openCandyMenu(void);
+extern void openTogglesMenu(void);
+extern void toggleSandstorm(void);
+extern void toggleSpawnPrevention(void);
+extern void toggleTBVoid(void);
+extern void openSnagMenu(void);
+extern void killBoss(void);
 
 extern void openSettingsMainMenu(void);
 extern void openKongColorsMenu(void);
@@ -99,6 +107,14 @@ extern void exitFrameAdvance(void);
 extern void LToEndMinigame(void);
 extern void forceStorySkip(void);
 extern void setKRoolRound(void);
+extern void handleAutophase(void);
+extern void handleAutomoonkick(void);
+extern void getSandstormAddress(void);
+extern void handleSpawnPrevention(void);
+extern void handleLToTBV(void);
+extern void infiniteHealth(void);
+extern void isPaused(void);
+extern void checkMapType(void);
 
 extern void loadSettings(void);
 extern void saveSettings(void);
@@ -173,11 +189,14 @@ extern const Screen candy_struct;
 extern const Screen flagmenu_tbarrels_struct;
 extern const Screen vanilla_struct;
 extern const Screen hack_struct;
+extern const Screen other_mapwarp_struct;
+extern const Screen toggles_struct;
+extern const Screen snagcheats_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
 extern const flagMenuData* flag_menus[flagMenuScreenCount];
-extern const int maps_container_functions[9];
+extern const int maps_container_functions[10];
 extern const int flagmain_functions[11];
 extern char kongcolors[5];
 
@@ -209,6 +228,7 @@ extern const MapWarp map_isles_struct;
 extern const MapWarp map_islesmain_struct;
 extern const MapWarp map_isleslobbies_struct;
 extern const MapWarp map_helmrool_struct;
+extern const MapWarp map_other_struct;
 
 extern const flagMenuData flagmenu_kongmenu;
 extern const flagMenuData flagmenu_keysinmenu;

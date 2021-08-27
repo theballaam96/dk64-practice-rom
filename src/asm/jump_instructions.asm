@@ -7,7 +7,7 @@ START_JUMP:
 	NOP
 	J 	logSpriteAddress
 	NOP
-	J 	setPauseVolume
+	J 	controlSuperspeed
 	NOP
 .align 0x10
 END_JUMP:

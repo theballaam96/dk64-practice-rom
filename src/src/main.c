@@ -3,6 +3,8 @@
 void cFuncLoop(void) {
 	endClose();
 	changeCustomFlagVariable();
+	isPaused();
+	checkMapType();
 	handleTimer();
 	toggleMenu();
 	moveSlot();
@@ -25,6 +27,7 @@ void cFuncLoop(void) {
 	ramViewUpdate();
 	savestateLoadMapLoadVars();
 	LToCancelCS();
+
 	displaySavePrompt();
 	clearSavePromptFlag();
 	openInputOnTransition();
@@ -34,7 +37,13 @@ void cFuncLoop(void) {
 	toggleFrameAdvanceState();
 	initFrameAdvance();
 	exitFrameAdvance();
+
 	LToEndMinigame();
 	forceStorySkip();
 	setKRoolRound();
+	handleAutomoonkick();
+	getSandstormAddress();
+	handleSpawnPrevention();
+	handleLToTBV();
+	infiniteHealth();
 }
