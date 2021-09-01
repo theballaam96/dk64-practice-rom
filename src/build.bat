@@ -141,6 +141,9 @@ mv preventenemyspawning.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/tagbarrelvoid.c
 mv tagbarrelvoid.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/visify.c
+mv visify.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/cheats/autokillboss.c
 mv autokillboss.o obj/
 
@@ -206,6 +209,9 @@ mv positionloading.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/frameadvance.c
 mv frameadvance.o obj/
+
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/file_init.c
+mv file_init.o obj/
 
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/init.c
 mv init.o obj/

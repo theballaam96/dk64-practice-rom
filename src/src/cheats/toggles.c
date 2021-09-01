@@ -25,11 +25,13 @@ static const char toggles_ltoendminigame_on[] = "L TO END MINIGAME: ON";
 static const char toggles_levitate_off[] = "L TO LEVITATE: OFF";
 static const char toggles_levitate_on[] = "L TO LEVITATE: ON";
 
-static const char toggles_ltotoggletb_off[] = "L TO TOGGLE TB: OFF";
-static const char toggles_ltotoggletb_on[] = "L TO TOGGLE TB: ON";
+static const char toggles_ltotoggletb_off[] = "L TO TOGGLE TAG BARREL VOID: OFF";
+static const char toggles_ltotoggletb_on[] = "L TO TOGGLE TAG BARREL VOID: ON";
 
-static const char toggles_superspeed[16] = "SUPERSPEED: 1x";
-static const char toggles_toggletb[] = "TOGGLE TB VOID";
+static const char toggles_superspeed_off[] = "L TO SUPERSPEED: OFF";
+static const char toggles_superspeed[20] = "L TO SUPERSPEED: 1x";
+static const char toggles_toggletb[] = "TOGGLE TAG BARREL VOID";
+static const char toggles_visify[] = "TOGGLE VISIBILITY";
 static const char toggles_turnoffall[] = "TURN OFF ALL CHEATS";
 
 static const char* toggles_array[] = {
@@ -41,9 +43,10 @@ static const char* toggles_array[] = {
 	toggles_ltocancelcs_off,
 	toggles_ltoendminigame_off,
 	toggles_levitate_off,
-	toggles_ltotoggletb_off,
 	toggles_superspeed,
+	toggles_ltotoggletb_off,
 	toggles_toggletb,
+	toggles_visify,
 	toggles_turnoffall,
 };
 
@@ -92,12 +95,17 @@ void openTogglesMenu(void) {
 	} else {
 		toggles_array[7] = toggles_levitate_off;
 	}
-	if (LToToggleTBOn) {
-		toggles_array[8] = toggles_ltotoggletb_on;
+	dk_strFormat((char *)toggles_superspeed,"L TO SUPERSPEED: %dx",IsSuperspeedOn);
+	if (IsSuperspeedOn == 1) {
+		toggles_array[8] = toggles_superspeed_off;
 	} else {
-		toggles_array[8] = toggles_ltotoggletb_off;
+		toggles_array[8] = toggles_superspeed;
 	}
-	dk_strFormat((char *)toggles_superspeed,"SUPERSPEED: %dx",IsSuperspeedOn);
+	if (LToToggleTBOn) {
+		toggles_array[9] = toggles_ltotoggletb_on;
+	} else {
+		toggles_array[9] = toggles_ltotoggletb_off;
+	}
 	changeMenu(71);
 }
 
@@ -179,16 +187,17 @@ static const int toggles_functions[] = {
 	(int)&toggleLToCancelCS,
 	(int)&toggleLToEndGame,
 	(int)&toggleLevitate,
-	(int)&toggleLtoTB,
 	(int)&toggleSuperspeed,
+	(int)&toggleLtoTB,
 	(int)&toggleTBVoid,
+	(int)&toggleVisify,
 	(int)&resetAllCheats,
 };
 
 const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
-	.ArrayItems = 12,
+	.ArrayItems = 13,
 	.ParentScreen = 55,
 	.ParentPosition = 5
 };

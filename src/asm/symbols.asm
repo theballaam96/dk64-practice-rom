@@ -2,7 +2,7 @@
 .definelabel setFlag, 0x8073129C
 .definelabel checkFlag, 0x8073110C
 .definelabel dk_malloc, 0x80610FE8
-.definelabel free, 0x80611408
+.definelabel dk_free, 0x80611408
 .definelabel playSound, 0x80609140
 .definelabel initiateTransition, 0x805FF378
 .definelabel getFlagBlockAddress, 0x8060E25C
@@ -30,7 +30,7 @@
 .definelabel playCutscene, 0x8061CC40
 .definelabel setHUDItemAsInfinite, 0x806FB370
 .definelabel osWritebackDCacheAll, 0x800052E0
-.definelabel test, 0x80004870
+.definelabel copyFromROM, 0x8060B140
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -151,6 +151,8 @@
 .definelabel InputSpritesSpawned, 0x807FFFD6 // u8
 .definelabel TransformAutoRestockOff, 0x807FFFD5 // u8
 .definelabel KRoolRoundSetting, 0x807FFFD4 // u8
+.definelabel FileInitQOLOff, 0x807FFFD3 // u8
+.definelabel InputStickMax, 0x807FFFD2 // u8
 .definelabel FrameAdvanceStart, 0x807FFFC8 // u32
 .definelabel DisableStartupSkip, 0x807FFFC7 // u8
 .definelabel DisableForcedStorySkip, 0x807FFFC6 // u8

@@ -163,6 +163,8 @@ void handleTimer(void) {
 				}
 				if (TimerData.Mode == 1) {
 					// Pause
+					TimerData.Reduction = TimerData.Reduction + StoredLag;
+					TimerData.Timer = FrameReal - TimerData.Start;
 				}
 				writeTimer();
 				return;

@@ -61,22 +61,18 @@ void openFileState101FFMMenu(void) {
 
 void portFileStateToMemory(int state_index) {
 	unsigned int _start = FileStatesROMStart + (state_index * FileStateSize);
-	int* copy_space = dk_malloc(FileStateSize);
-	dmaFileTransfer(_start,_start+FileStateSize,(int)copy_space);
-	osWritebackDCacheAll();
-	//test(0,0);
-	// int* _perm_flags = getFlagBlockAddress(0);
-	// if (_perm_flags) {
-	// 	TestVariable = (int)_start+0x140+0x1E0;
-	// 	//dmaFileTransfer(_start,_start+0x140,(int)_perm_flags);
-	// }
-	// dmaFileTransfer(_start+0x140,_start+0x140+0x1E0,(int)&MovesBase);
-	// *(short *)(&MovesBase + 0x1D6) = 0;
-	// *(int *)(&MovesBase + 0x1D8) = 0;
-	// *(int *)(&MovesBase + 0x1DC) = 0;
-	// dmaFileTransfer(_start+0x140+0x1E0,_start+0x140+0x1E0+0x10,(int)&CollectableBase);
-	// *(char *)(&CollectableBase + 0xD) = 0;
-	// *(short *)(&CollectableBase + 0xE) = 0;
+	filestateInfo* copy_space = dk_malloc(FileStateSize);
+	int* file_size;
+	*(int*)(&file_size) = FileStateSize;
+	copyFromROM(_start,copy_space,&file_size,0,0,0,0);
+	int* _perm_flags = getFlagBlockAddress(0);
+	if (_perm_flags) {
+		dk_memcpy(_perm_flags,copy_space,0x13C);
+	}
+	dk_memcpy(&MovesBase,&copy_space->moves_base,0x1D6);
+	dk_memcpy(&CollectableBase,&copy_space->inventory,0xD);
+	dk_memcpy(&TempFlagBlock,&copy_space->temp_flags,0x10);
+	dk_free(copy_space);
 }
 
 void loadFileState(void) {

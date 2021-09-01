@@ -214,7 +214,7 @@ const Screen changestate_struct = {
 	.ParentPosition = 1
 };
 
-static const int viewstate_functions[3] = {};
+static const int viewstate_functions[12] = {};
 
 const Screen viewstate_struct = {
 	.TextArray = (int*)viewstate_array,

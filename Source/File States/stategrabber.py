@@ -38,6 +38,8 @@ def grabFileState(input_file,output_file):
 			fg.write(fh.read(0x1E0))
 			fh.seek(0x7FCC40)
 			fg.write(fh.read(0x10))
+			fh.seek(0x7FDD90)
+			fg.write(fh.read(0x10))
 
 
 grabFileState("./No Levels Early/RAM Dump/japes1.bin","./No Levels Early/State Files/japes1.bin")

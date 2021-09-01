@@ -10,6 +10,6 @@ void gainControl(void) {
 		JoystickEnabledX = 0xFF;
 		JoystickEnabledY = 0xFF;
 		MapState = 8;
-		Player->vehicle_actor_pointer = (int *)&Player;
+		Player->vehicle_actor_pointer = &Player;
 	}
 };

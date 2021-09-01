@@ -12,7 +12,7 @@ extern void dmaFileTransfer(int romStart, int romEnd, int ramStart);
 extern void deleteActor(void* actor);
 extern int spawnActor(int actorID, int actorBehaviour);
 extern void spawnTextOverlay(int style, int x, int y, char* string, int timer1, int timer2, unsigned char effect, unsigned char speed);
-extern void dk_sqrt(double __x);
+extern float dk_sqrt(float __x);
 extern void dk_strFormat(char* destination, char* source, ...);
 extern void dk_multiply(double val1, double val2, int unk1, int unk2);
 extern double convertTimestamp(double unk0, double unk1, unsigned int unk2, unsigned int unk3);
@@ -39,7 +39,7 @@ extern void loadExtraHooks();
 extern void playCutscene(void* actor, int cutscene_index, int cutscene_type);
 extern void setHUDItemAsInfinite(int item_index, int player_index, char isInfinite);
 extern void osWritebackDCacheAll();
-extern void test(int unk1, int unk2);
+extern void copyFromROM(int rom_start, void* write_Location, void* file_size_location, int unk1, int unk2, int unk3, int unk4);
 
 //vanilla data
 
@@ -100,7 +100,7 @@ extern Controller NewlyPressedControllerInput;
 extern playerData* Player;
 extern SwapObjectData* SwapObject;
 extern char Character;
-extern int* Camera;
+extern cameraData* Camera;
 extern char ISGActive;
 extern unsigned int ISGTimestampMajor;
 extern unsigned int ISGTimestampMinor;
@@ -127,7 +127,7 @@ extern int* bbbandit_array[4];
 extern char StoredDamage;
 
 //hack data
-extern int TestVariable;
+extern unsigned char TestVariable[4];
 extern savedSettings StoredSettings;
 
 extern TextOverlay* ActiveTools_Error;
@@ -201,3 +201,5 @@ extern char InputDisplayQuadrant;
 extern char InputSpritesSpawned;
 extern char TransformAutoRestockOff;
 extern char KRoolRoundSetting;
+extern char FileInitQOLOff;
+extern char InputStickMax;

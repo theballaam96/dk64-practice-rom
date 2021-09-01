@@ -5,12 +5,12 @@ void initHack(void) {
 		InputDisplayIndex = -1;
 		IsSuperspeedOn = 1;
 		loadExtraHooks();
-		loadSettings();
 		if (StoredSettings.hasSavedData == 0) {
 			*(int *)(0x807ED558) = -1;
 			*(int *)(0x807ED55C) = -1;
 			SaveToGlobal();
 		}
+		loadSettings();
 		LoadedHooks = 1;
 	}
 }

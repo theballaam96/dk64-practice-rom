@@ -36,6 +36,13 @@ void transformRocketbarrel(void) {
 		Player->unk_rocketbarrel_value3 = 1;
 		Player->control_state = 99;
 		Player->control_state_progress = 0;
+		if (Player->grounded_bitfield & 1) {
+			Player->yVelocity = 200;
+			Player->yPos = Player->yPos + 10;
+			Player->grounded_bitfield = 0;
+			Player->unk_bitfield = 0;
+		}
+		Player->velocity_cap = 300;
 		checkCrystals();
 	}
 };

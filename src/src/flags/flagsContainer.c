@@ -62,8 +62,8 @@ static const char* flagmain_array[] = {
 	flag_levelBoss,
 	flag_cutscenes,
 	flag_modifiers,
-	flag_misc,
 	flag_ftt,
+	flag_misc,
 	flag_custom,
 };
 

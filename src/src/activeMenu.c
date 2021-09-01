@@ -5,14 +5,14 @@ static const char warp[] = "WARP TO MAP";
 static const char flags[] = "SPECIAL FLAGS";
 static const char saves[] = "SAVE STATES";
 static const char watches[] = "WATCHES";
-static const char ramview[] = "RAM VIEWER";
+static const char ramview[] = "RAM VIEWER (WIP)";
 static const char timerSettings[] = "TIMER SETTINGS";
 static const char fileStates[] = "FILE STATES";
 static const char cheats[] = "CHEATS";
 static const char settings[] = "SETTINGS";
 static const char hackTitle[] = "DK64 PRACTICE ROM";
 //static const char hackVersion[] = "VERSION 1.4.1";
-static const char hackVersion[] = "1.4.1 TEST: 27AUG2021";
+static const char hackVersion[] = "1.4.1 TEST: 30AUG2021";
 
 static const char* main_array[] = {
 	warp,
@@ -364,7 +364,7 @@ static const int main_functions[] = {
 	(int)&openFlagsMainMenu,
 	(int)&openStateMenu,
 	(int)&openWatchMenu,
-	(int)&initRamViewerTab,
+	0, //(int)&initRamViewerTab,
 	(int)&openTimerSettingsMenu,
 	(int)&openFileStateMainMenu,
 	(int)&openCheatsMenu,

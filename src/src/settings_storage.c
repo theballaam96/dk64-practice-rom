@@ -18,6 +18,8 @@ void resetSettings(void) {
 	StoredSettings.input_quadrant = 0;
 	StoredSettings.transform_autostock = 0;
 	StoredSettings.krool_round_setting = 0;
+	StoredSettings.file_init_qol = 0;
+	StoredSettings.input_max = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -38,6 +40,8 @@ void loadSettings(void) {
 		InputDisplayQuadrant = StoredSettings.input_quadrant;
 		TransformAutoRestockOff = StoredSettings.transform_autostock;
 		KRoolRoundSetting = StoredSettings.krool_round_setting;
+		FileInitQOLOff = StoredSettings.file_init_qol;
+		InputStickMax = StoredSettings.input_max;
 	} else {
 		resetSettings();
 	}
@@ -58,5 +62,7 @@ void saveSettings(void) {
 	StoredSettings.input_quadrant = InputDisplayQuadrant;
 	StoredSettings.transform_autostock = TransformAutoRestockOff;
 	StoredSettings.krool_round_setting = KRoolRoundSetting;
+	StoredSettings.file_init_qol = FileInitQOLOff;
+	StoredSettings.input_max = InputStickMax;
 	SaveToGlobal();
 }

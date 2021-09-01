@@ -27,7 +27,6 @@ void cFuncLoop(void) {
 	ramViewUpdate();
 	savestateLoadMapLoadVars();
 	LToCancelCS();
-
 	displaySavePrompt();
 	clearSavePromptFlag();
 	openInputOnTransition();
@@ -37,7 +36,6 @@ void cFuncLoop(void) {
 	toggleFrameAdvanceState();
 	initFrameAdvance();
 	exitFrameAdvance();
-
 	LToEndMinigame();
 	forceStorySkip();
 	setKRoolRound();
@@ -46,4 +44,5 @@ void cFuncLoop(void) {
 	handleSpawnPrevention();
 	handleLToTBV();
 	infiniteHealth();
+	fileInit();
 }

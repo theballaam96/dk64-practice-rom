@@ -3,8 +3,8 @@
 static const char cheats_altermoveset[] = "MOVESET AND INVENTORY";
 static const char cheats_changegamemode[] = "CHANGE GAMEMODE";
 static const char cheats_cancelcs[] = "CANCEL CUTSCENE";
-static const char cheats_instantskew[] = "INSTANT SKEW: SKEW";
-static const char cheats_instantskew_inverse[] = "INSTANT SKEW: INVERSE SKEW";
+static const char cheats_instantskew[] = "ACQUIRE REGULAR SKEW";
+static const char cheats_instantskew_inverse[] = "ACQUIRE CANNON SKEW";
 static const char cheats_snagcheats[] = "SPAWN SNAG CHEATS";
 static const char cheats_toggles[] = "TOGGLES";
 static const char cheats_undoflag[] = "UNDO LAST FLAG WRITE";

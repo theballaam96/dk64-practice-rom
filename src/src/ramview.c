@@ -28,7 +28,7 @@ char line6[60] = "6";
 char line7[60] = "7";
 char line8[60] = "8";
 char currentFormat = 0;
-int* printStartAddr = (int*)0x807FCC40;
+int* printStartAddr = (int*)0x80000000;
 unsigned char headerStyle = 10;
 unsigned char tableStyle = 5;
 

@@ -1,16 +1,36 @@
+typedef struct floatPos {
+	/* 0x000 */ float xPos;
+	/* 0x004 */ float yPos;
+	/* 0x008 */ float zPos;
+} floatPos;
+
 typedef struct actorData {
 	/* 0x000 */ char unk_00[0x58];
 	/* 0x058 */ int actorType;
 	/* 0x05C */ char unk_5C[0x7C-0x5C];
 	/* 0x07C */ float xPos;
-	/* 0x080 */ char unk_80[0x154-0x80];
+	/* 0x080 */ char unk_80[0xB8-0x80];
+	/* 0x0B8 */ float hSpeed;
+	/* 0x0BC */ char unk_BC[0x154-0xBC];
 	/* 0x154 */ char control_state;
 	/* 0x155 */ char control_state_progress;
 } actorData;
 
 typedef struct cameraData {
-	/* 0x000 */ char unk_00[0x15F];
+	/* 0x000 */ char unk_00[0x7C];
+	/* 0x07C */ float xPos;
+	/* 0x080 */ float yPos;
+	/* 0x084 */ float zPos;
+	/* 0x088 */ char unk_88[0x15F-0x88];
 	/* 0x15F */ char facing_angle;
+	/* 0x160 */ char unk_160[0x1FC-0x160];
+	/* 0x1FC */ float viewportX;
+	/* 0x200 */ float viewportY;
+	/* 0x204 */ float viewportZ;
+	/* 0x208 */ char unk_208[0x22A-0x208];
+	/* 0x22A */ short viewportRotation;
+	/* 0x22C */ char unk_22C[0x26B-0x22C];
+	/* 0x26B */ char camera_state;
 } cameraData;
 
 typedef struct bone_array {
@@ -67,10 +87,12 @@ typedef struct playerData {
 	/* 0x155 */ char control_state_progress;
 	/* 0x156 */ char unk_156[0x18A-0x156];
 	/* 0x18A */ short moving_angle;
-	/* 0x18C */ char unk_18C[0x1D0-0x18C];
+	/* 0x18C */ char unk_18C[0x1B8-0x18C];
+	/* 0x1B8 */ float velocity_cap;
+	/* 0x1BC */ char unk_1BC[0x1D0-0x1BC];
 	/* 0x1D0 */ short ostand_value;
 	/* 0x1D2 */ char unk_1D2[0x208-0x1D2];
-	/* 0x208 */ int* vehicle_actor_pointer;
+	/* 0x208 */ void* vehicle_actor_pointer;
 	/* 0x20C */ char was_gun_out;
 	/* 0x20D */ char unk_20D[0x23C - 0x20D];
 	/* 0x23C */ short unk_rocketbarrel_value1;
@@ -185,6 +207,8 @@ typedef struct PosState {
 	/* 0x039 */ char control_state_progress;
 	/* 0x03A */ char map;
 	/* 0x03B */ char bone_array_counter;
+	/* 0x03C */ short cameraRotation;
+	/* 0x03E */ char cameraState;
 } PosState;
 
 typedef struct TimerInfo {
@@ -246,7 +270,9 @@ typedef struct GiantKoshaData {
 } GiantKoshaData;
 
 typedef struct SwapObjectData {
-	/* 0x000 */ char unk_00[0x29C];
+	/* 0x000 */ char unk_00[0x210];
+	/* 0x210 */ floatPos cameraPositions[4];
+	/* 0x240 */ char unk_21C[0x29C-0x240];
 	/* 0x29C */ short action_type;
 } SwapObjectData;
 
@@ -298,6 +324,8 @@ typedef struct savedSettings {
 	/* 0x00E */ char input_quadrant;
 	/* 0x00F */ char transform_autostock;
 	/* 0x010 */ char krool_round_setting;
+	/* 0x011 */ char file_init_qol;
+	/* 0x012 */ char input_max;
 } savedSettings;
 
 typedef struct flagMenuData {
@@ -449,3 +477,10 @@ typedef struct undoFlagData {
 	/* 0x003 */ char flag_type;
 	/* 0x004 */ char flag_stored;
 } undoFlagData;
+
+typedef struct filestateInfo {
+	/* 0x000 */ char perm_flags[0x140];
+	/* 0x140 */ char moves_base[0x1E0];
+	/* 0x320 */ char inventory[0x10];
+	/* 0x330 */ char temp_flags[0x10];
+} filestateInfo;

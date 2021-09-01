@@ -68,6 +68,7 @@
 				<li>
 					<span class="caret">1.4</span>
 					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_141')">1.4.1</a></li>
 						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_140')">1.4.0</a></li>
 					</ul>
 				</li>
@@ -861,6 +862,152 @@
 							<li>The ability to tag individual warps with the menu has been removed</li>
 							<li>"From Intro" warp point in Castle Main has been removed</li>
 							<li>Removed music/sound changer</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_141" version="1.4.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.4.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Position Savestates</li>
+							<ul>
+								<li>There are now 4 position savestates (1 for each regular savestate). To change position savestates, use the "Change Savestate" menu</li>
+							</ul>
+							<li>Savestates</li>
+							<ul>
+								<li>Savestates now store more variables</li>
+								<ul>
+									<li>Player:</li>
+									<ul>
+										<li>Facing Angle</li>
+										<li>Skew Angle</li>
+										<li>Stored Damage</li>
+									</ul>
+									<li>Hideout Helm Timer:</li>
+									<ul>
+										<li>Timer On/Off</li>
+										<li>Starting Timer</li>
+										<li>Current Timer</li>
+									</ul>
+									<li>ISG Timer:</li>
+									<ul>
+										<li>Timer On/Off</li>
+										<li>Previous Fadeout Activated</li>
+										<li>Current Timer</li>
+									</ul>
+								</ul>
+								<li>Some savestate variables can be viewed in the "View Savestate Variables" menu</li>
+							</ul>
+							<li>Watches</li>
+							<ul>
+								<li>General</li>
+								<ul>
+									<li>Up to 4 watches and the Input display can be viewed at any one time</li>
+									<li>Watches are now left-aligned</li>
+								</ul>
+								<li>Input Display</li>
+								<ul>
+									<li>Input Display has been changed to a more visual format</li>
+									<li>The input display cannot be viewed in either Dogadon fight for technical reasons</li>
+								</ul>
+							</ul>
+							<li>File States</li>
+							<ul>
+								<li>File States have been revamped to include file states created before entering each of the levels in the "No Levels Early" run and Takeoff Skip</li>
+							</ul>
+							<li>Storing variables between power down</li>
+							<ul>
+								<li>Some variables will be stored inbetween power downs</li>
+								<ul>
+									<li>Kong Colors</li>
+									<ul>
+										<li>The user can now select which kong color they want for each of the primary 5 kongs. There are 3 values available per kong</li>
+									</ul>
+									<li>Whether the game performs a shortened startup sequence</li>
+									<li>Whether the game forces story skip</li>
+									<li>Pause Menu Volume</li>
+									<li>D-Pad Active Menu Navigation Mode</li>
+									<li>Whether to display save prompts</li>
+									<ul>
+										<li>If on, the game will display an indicator on the bottom-right portion of the screen to inform the player when the game is performing an autosave.</li>
+									</ul>
+									<li>Float Precision</li>
+									<ul>
+										<li>Details the precision (amount of decimal places shown) for non-integer watch values</li>
+									</ul>
+									<li>Input Display Screen Quadrant</li>
+									<ul>
+										<li>For the input display, you can select whether the input display is on the Top-Left, Top-Right, Bottom-Left or Bottom-Right</li>
+									</ul>
+									<li>D-Pad Button Assignment</li>
+									<li>Whether the Transform Cheat auto-restocks the crystal count</li>
+									<ul>
+										<li>If on, the player's crystal coconut count will not drain if they have used a transform cheat</li>
+									</ul>
+									<li>K. Rool Round Number setting</li>
+									<ul>
+										<li>Can be either "Random" (As it has been pre-1.4.1 by default) or "Forced Sequential" (Semi-Vanilla)</li>
+									</ul>
+									<li>Quality of Life features that are done on file initiation</li>
+									<ul>
+										<li>If on, the game sets the following flags upon file creation</li>
+										<ul>
+											<li>Training Grounds Waterfall Cutscene</li>
+											<li>Escape Cutscene</li>
+											<li>The 4 Kong FTTs</li>
+										</ul>
+									</ul>
+									<li>Input Display Maximum magnitude</li>
+									<ul>
+										<li>Values:</li>
+										<ul>
+											<li>Threshold: The stick magnitude caps at the maximum value the game reads for the kong movement (80)</li>
+											<li>Full Magnitude: The stick magnitude caps at the maximum value that the N64 allows (127)</li>
+										</ul>
+									</ul>
+								</ul>
+								<li>These variables can be reset with either the "Reset to default" button or deleting the ROM .eep file in the Everdrive menu</li>
+								<li>The above variables can be altered in Settings&gt;Hack Variables</li>
+							</ul>
+							<li>Cheats</li>
+							<ul>
+								<li>Acquire Cannon Skew cheat has been added. This can be acquired by pressing the "Acquire Regular Skew" option twice</li>
+								<li>Transform cheats have been added to transform to the 5 barrel moves</li>
+								<li>Toggle Kong Visibility cheat added</li>
+							</ul>
+							<li>RAM Viewer</li>
+							<ul>
+								<li>Made by Rain, displays the values inside RDRAM</li>
+							</ul>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Project has been converted from Assembler to C</li>
+							<li>Arcade & Jetpac warps have moved to "Miscellaneous"</li>
+							<li>Restock Inventory & Give Coins has been moved to the inventory menu</li>
+							<li>Movement State watch now displays the index instead of a representation of what that index means</li>
+							<li>Superspeed is no longer an on/off option, but where you can scale the superspeed applied from 2x to 7x. Superspeed is now activated by pressing L</li>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>File States for a complete 101% file and a Max% file have been temporarily removed.</li>
 						</ul>
 					</ul>
 				</div>

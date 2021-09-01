@@ -59,6 +59,7 @@ extern void toggleSpawnPrevention(void);
 extern void toggleTBVoid(void);
 extern void openSnagMenu(void);
 extern void killBoss(void);
+extern void toggleVisify(void);
 
 extern void openSettingsMainMenu(void);
 extern void openKongColorsMenu(void);
@@ -115,6 +116,7 @@ extern void handleLToTBV(void);
 extern void infiniteHealth(void);
 extern void isPaused(void);
 extern void checkMapType(void);
+extern void fileInit(void);
 
 extern void loadSettings(void);
 extern void saveSettings(void);

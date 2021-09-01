@@ -24,6 +24,15 @@ void handlePositionSavestates(void) {
 						pos_states[_focused_state]->xPos = Player->xPos;
 						pos_states[_focused_state]->yPos = Player->yPos;
 						pos_states[_focused_state]->zPos = Player->zPos;
+						if (SwapObject) {
+							pos_states[_focused_state]->xCamera = SwapObject->cameraPositions[0].xPos;
+							pos_states[_focused_state]->yCamera = SwapObject->cameraPositions[0].yPos;
+							pos_states[_focused_state]->zCamera = SwapObject->cameraPositions[0].zPos;
+						}
+						if (Camera) {
+							pos_states[_focused_state]->cameraRotation = Camera->viewportRotation;
+							pos_states[_focused_state]->cameraState = Camera->camera_state;
+						}
 						pos_states[_focused_state]->yFloor = Player->floor;
 						// Stored Position
 						if (Player->rendering_param_pointer) {
@@ -61,6 +70,20 @@ void handlePositionSavestates(void) {
 								Player->yPos = pos_states[_focused_state]->yPos;
 								Player->zPos = pos_states[_focused_state]->zPos;
 								Player->floor = pos_states[_focused_state]->yFloor;
+								if (SwapObject) {
+									for (int i = 0; i < 4; i++) {
+										SwapObject->cameraPositions[i].xPos = pos_states[_focused_state]->xCamera;
+										SwapObject->cameraPositions[i].yPos = pos_states[_focused_state]->yCamera;
+										SwapObject->cameraPositions[i].zPos = pos_states[_focused_state]->zCamera;
+									}
+								}
+								if (Camera) {
+									Camera->viewportX = pos_states[_focused_state]->xCamera;
+									Camera->viewportY = pos_states[_focused_state]->yCamera;
+									Camera->viewportZ = pos_states[_focused_state]->zCamera;
+									Camera->viewportRotation = pos_states[_focused_state]->cameraRotation;
+									Camera->camera_state = pos_states[_focused_state]->cameraState;
+								}
 								if ((CurrentMap != 0xCC) || (CurrentMap != 0xCD) || (CurrentMap != 0xCF)) {
 									if (IsAutowalking) {
 										if ((AutowalkPointer) && ((int)AutowalkPointer >= 0x80000000) && ((int)AutowalkPointer < 0x80800000)) {

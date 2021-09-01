@@ -25,6 +25,12 @@ static char hack_kroolround_random[] = "K. ROOL ROUND NUMBER: RANDOM";
 static char hack_kroolround_forcedsequential[] = "K. ROOL ROUND NUMBER: FORCED SEQUENTIAL";
 static char hack_kroolround_normal[] = "K. ROOL ROUND NUMBER: NORMAL";
 
+static char hack_fileinitqol_on[] = "FILE START STATE: PREPARED";
+static char hack_fileinitqol_off[] = "FILE START STATE: VANILLA";
+
+static char hack_inputmax_70[] = "INPUT STICK MAX: THRESHOLD";
+static char hack_inputmax_127[] = "INPUT STICK MAX: FULL MAGNITUDE";
+
 static char* hack_array[] = {
 	hack_quickstartup_on,
 	hack_forcedstoryskip_on,
@@ -34,6 +40,8 @@ static char* hack_array[] = {
 	hack_savenotifs_on,
 	hack_precision,
 	hack_kroolround_random,
+	hack_fileinitqol_on,
+	hack_inputmax_70,
 };
 
 void openHackVarsMenu(void) {
@@ -80,6 +88,16 @@ void openHackVarsMenu(void) {
 		} else {
 			hack_array[7] = hack_kroolround_random;
 		}
+	}
+	if (FileInitQOLOff) {
+		hack_array[8] = hack_fileinitqol_off;
+	} else {
+		hack_array[8] = hack_fileinitqol_on;
+	}
+	if (InputStickMax) {
+		hack_array[9] = hack_inputmax_127;
+	} else {
+		hack_array[9] = hack_inputmax_70;
 	}
 	changeMenu(69);
 };
@@ -141,6 +159,18 @@ void toggleKRoolRoundSetting(void) {
 	openHackVarsMenu();
 }
 
+void toggleFileStartState(void) {
+	FileInitQOLOff = 1 - FileInitQOLOff;
+	saveSettings();
+	openHackVarsMenu();
+}
+
+void toggleInputMax(void) {
+	InputStickMax = 1 - InputStickMax;
+	saveSettings();
+	openHackVarsMenu();
+}
+
 static const int hack_functions[] = {
 	(int)&toggleQuickStartup,
 	(int)&toggleForcedStorySkip,
@@ -150,12 +180,14 @@ static const int hack_functions[] = {
 	(int)&toggleSaveNotifications,
 	(int)&togglePrecision,
 	(int)&toggleKRoolRoundSetting,
+	(int)&toggleFileStartState,
+	(int)&toggleInputMax,
 };
 
 const Screen hack_struct = {
 	.TextArray = (int*)hack_array,
 	.FunctionArray = hack_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 10,
 	.ParentScreen = 57,
 	.ParentPosition = 3
 };

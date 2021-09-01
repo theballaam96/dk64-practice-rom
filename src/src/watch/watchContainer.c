@@ -11,6 +11,8 @@ static const char viewed_input[] = "INPUT (!)";
 static const char viewed_heldactor[] = "HELD ACTOR (!)";
 static const char viewed_isg[] = "INTRO STORY TIMER (!)";
 static const char viewed_position[] = "POSITION (!)";
+static const char viewed_storedposition1[] = "STORED POSITION 1 (!)";
+static const char viewed_storedposition2[] = "STORED POSITION 2 (!)";
 
 static const char change_lag[] = "LAG";
 static const char change_avglag[] = "AVERAGE LAG";
@@ -23,6 +25,8 @@ static const char change_input[] = "INPUT";
 static const char change_heldactor[] = "HELD ACTOR";
 static const char change_isg[] = "INTRO STORY TIMER";
 static const char change_position[] = "POSITION";
+static const char change_storedposition1[] = "STORED POSITION 1";
+static const char change_storedposition2[] = "STORED POSITION 2";
 
 void destroyWatch(int slot) {
 	if (WatchActor[slot]) {
@@ -86,7 +90,9 @@ static const char* watch_array[] = {
 	change_input,
 	change_heldactor,
 	change_isg,
-	change_position
+	change_position,
+	change_storedposition1,
+	change_storedposition2,
 };
 
 static const char* watch_viewed_array[] = {
@@ -100,7 +106,9 @@ static const char* watch_viewed_array[] = {
 	viewed_input,
 	viewed_heldactor,
 	viewed_isg,
-	viewed_position
+	viewed_position,
+	viewed_storedposition1,
+	viewed_storedposition2,
 };
 
 static const char* watch_change_array[] = {
@@ -114,7 +122,9 @@ static const char* watch_change_array[] = {
 	change_input,
 	change_heldactor,
 	change_isg,
-	change_position
+	change_position,
+	change_storedposition1,
+	change_storedposition2,
 };
 
 void setWatch(void) {
@@ -182,13 +192,15 @@ static const int watch_functions[] = {
 	(int)&toggleInputDisplay,
 	(int)&setWatch,
 	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
 	(int)&setWatch
 };
 
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 13,
 	.ParentScreen = 0,
 	.ParentPosition = 3
 };
@@ -252,6 +264,9 @@ void handleWatch(void) {
 	int _z = 0;
 	int _lagsum = 0;
 	char _movement_state = 0;
+	short xStored;
+	short yStored;
+	short zStored;
 	documentPastLag();
 	for (int j = 0; j < WatchCount; j++) {
 		if (WatchIndex[j]) {
@@ -274,6 +289,12 @@ void handleWatch(void) {
 					// Speed
 					if (Player) {
 						_speed = Player->hSpeed;
+						if (_speed == 0) {
+							if (Player->vehicle_actor_pointer) {
+								actorData* vehicle = Player->vehicle_actor_pointer;
+								_speed = vehicle->hSpeed;
+							}
+						}
 					}
 					dk_strFormat((char *)WatchTextSpace[j],"SPEED: %f",_speed);
 					break;
@@ -400,6 +421,36 @@ void handleWatch(void) {
 						_z = Player->zPos;
 					}
 					dk_strFormat((char *)WatchTextSpace[j], "POSITION: %d, %d, %d",_x,_y,_z);
+					break;
+				case 12:
+					xStored = 0;
+					yStored = 0;
+					zStored = 0;
+					if (Player) {
+						if (Player->rendering_param_pointer) {
+							if (Player->rendering_param_pointer->bone_array1) {
+								xStored = Player->rendering_param_pointer->bone_array1->xPos;
+								yStored = Player->rendering_param_pointer->bone_array1->yPos;
+								zStored = Player->rendering_param_pointer->bone_array1->zPos;
+							}
+						}
+					}
+					dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 1: %d, %d, %d",xStored,yStored,zStored);
+					break;
+				case 13:
+					xStored = 0;
+					yStored = 0;
+					zStored = 0;
+					if (Player) {
+						if (Player->rendering_param_pointer) {
+							if (Player->rendering_param_pointer->bone_array2) {
+								xStored = Player->rendering_param_pointer->bone_array2->xPos;
+								yStored = Player->rendering_param_pointer->bone_array2->yPos;
+								zStored = Player->rendering_param_pointer->bone_array2->zPos;
+							}
+						}
+					}
+					dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 2: %d, %d, %d",xStored,yStored,zStored);
 				break;
 			}
 			_KRoolTimerX = 220;

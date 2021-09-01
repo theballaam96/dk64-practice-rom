@@ -17,6 +17,8 @@ void levitate(void) {
 						}
 						Player->yPos = Player->yPos + increment;
 						Player->yVelocity = 0;
+						Player->touching_object = 0;
+						Player->collision_queue_pointer = 0;
 					}
 				}
 			}
