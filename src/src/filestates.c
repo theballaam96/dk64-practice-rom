@@ -1,29 +1,29 @@
 #include "../include/common.h"
 
-static const char filestates_nle[] = "NO LEVELS EARLY";
+static const char filestates_nle[] = "No Levels Early";
 static const char filestates_101[] = "101%";
-static const char filestates_general[] = "GENERAL";
-static const char filestates_101org[] = "ORGANIC ROUTE";
-static const char filestates_101jfm[] = "JAPES FOR MOVES ROUTE";
-static const char filestates_101ffm[] = "FACTORY FOR MOVES ROUTE";
+static const char filestates_general[] = "General";
+static const char filestates_101org[] = "Organic Route";
+static const char filestates_101jfm[] = "Japes for Moves Route";
+static const char filestates_101ffm[] = "Factory for Moves Route";
 
-static const char state_text_japes[] = "JAPES";
-static const char state_text_japes1[] = "JAPES 1";
-static const char state_text_japes2[] = "JAPES 2";
-static const char state_text_aztec[] = "AZTEC";
-static const char state_text_aztec1[] = "AZTEC 1";
-static const char state_text_aztec2[] = "AZTEC 2";
-static const char state_text_factory[] = "FACTORY";
-static const char state_text_galleon[] = "GALLEON";
-static const char state_text_fungi[] = "FUNGI";
-static const char state_text_caves[] = "CAVES";
-static const char state_text_castle[] = "CASTLE";
-static const char state_text_castle1[] = "CASTLE 1";
-static const char state_text_castle2[] = "CASTLE 2";
-static const char state_text_helm[] = "HELM";
+static const char state_text_japes[] = "Japes";
+static const char state_text_japes1[] = "Japes 1";
+static const char state_text_japes2[] = "Japes 2";
+static const char state_text_aztec[] = "Aztec";
+static const char state_text_aztec1[] = "Aztec 1";
+static const char state_text_aztec2[] = "Aztec 2";
+static const char state_text_factory[] = "Factory";
+static const char state_text_galleon[] = "Galleon";
+static const char state_text_fungi[] = "Fungi";
+static const char state_text_caves[] = "Caves";
+static const char state_text_castle[] = "Castle";
+static const char state_text_castle1[] = "Castle 1";
+static const char state_text_castle2[] = "Castle 2";
+static const char state_text_helm[] = "Helm";
 
-static const char state_text_takeoff[] = "TAKEOFF SKIP";
-static const char state_text_clean[] = "CLEAN FILE";
+static const char state_text_takeoff[] = "Takeoff Skip";
+static const char state_text_clean[] = "Clean File";
 
 static const char filestates_nle_stateindex[] = {0,1,2,3,4,5,6,7,8,9};
 static const char filestates_101org_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};

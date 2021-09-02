@@ -1,37 +1,37 @@
 #include "../../include/common.h"
 
-static const char flag_diddy_set[] = "DIDDY FTT: WATCHED";
-static const char flag_diddy_clear[] = "DIDDY FTT: NOT WATCHED";
+static const char flag_diddy_set[] = "Diddy FTT: Watched";
+static const char flag_diddy_clear[] = "Diddy FTT: Not Watched";
 
-static const char flag_lanky_set[] = "LANKY FTT: WATCHED";
-static const char flag_lanky_clear[] = "LANKY FTT: NOT WATCHED";
+static const char flag_lanky_set[] = "Lanky FTT: Watched";
+static const char flag_lanky_clear[] = "Lanky FTT: Not Watched";
 
-static const char flag_tiny_set[] = "TINY FTT: WATCHED";
-static const char flag_tiny_clear[] = "TINY FTT: NOT WATCHED";
+static const char flag_tiny_set[] = "Tiny FTT: Watched";
+static const char flag_tiny_clear[] = "Tiny FTT: Not Watched";
 
-static const char flag_chunky_set[] = "CHUNKY FTT: WATCHED";
-static const char flag_chunky_clear[] = "CHUNKY FTT: NOT WATCHED";
+static const char flag_chunky_set[] = "Chunky FTT: Watched";
+static const char flag_chunky_clear[] = "Chunky FTT: Not Watched";
 
-static const char flag_blocker_set[] = "B. LOCKER FTT: WATCHED";
-static const char flag_blocker_clear[] = "B. LOCKER FTT: NOT WATCHED";
+static const char flag_blocker_set[] = "B. Locker FTT: Watched";
+static const char flag_blocker_clear[] = "B. Locker FTT: Not Watched";
 
-static const char flag_bananaport_set[] = "BANANAPORT FTT: WATCHED";
-static const char flag_bananaport_clear[] = "BANANAPORT FTT: NOT WATCHED";
+static const char flag_bananaport_set[] = "Bananaport FTT: Watched";
+static const char flag_bananaport_clear[] = "Bananaport FTT: Not Watched";
 
-static const char flag_crownpad_set[] = "CROWN PAD FTT: WATCHED";
-static const char flag_crownpad_clear[] = "CROWN PAD FTT: NOT WATCHED";
+static const char flag_crownpad_set[] = "Crown Pad FTT: Watched";
+static const char flag_crownpad_clear[] = "Crown Pad FTT: Not Watched";
 
-static const char flag_strongkong_set[] = "STRONG KONG FTT: WATCHED";
-static const char flag_strongkong_clear[] = "STRONG KONG FTT: NOT WATCHED";
+static const char flag_strongkong_set[] = "Strong Kong FTT: Watched";
+static const char flag_strongkong_clear[] = "Strong Kong FTT: Not Watched";
 
-static const char flag_orangstandsprint_set[] = "OSTAND SPRINT FTT: WATCHED";
-static const char flag_orangstandsprint_clear[] = "OSTAND SPRINT FTT: NOT WATCHED";
+static const char flag_orangstandsprint_set[] = "OStand Sprint FTT: Watched";
+static const char flag_orangstandsprint_clear[] = "OStand Sprint FTT: Not Watched";
 
-static const char flag_minimonkey_set[] = "MINI MONKEY FTT: WATCHED";
-static const char flag_minimonkey_clear[] = "MINI MONKEY FTT: NOT WATCHED";
+static const char flag_minimonkey_set[] = "Mini Monkey FTT: Watched";
+static const char flag_minimonkey_clear[] = "Mini Monkey FTT: Not Watched";
 
-static const char flag_hunkychunky_set[] = "HUNKY CHUNKY FTT: WATCHED";
-static const char flag_hunkychunky_clear[] = "HUNKY CHUNKY FTT: NOT WATCHED";
+static const char flag_hunkychunky_set[] = "Hunky Chunky FTT: Watched";
+static const char flag_hunkychunky_clear[] = "Hunky Chunky FTT: Not Watched";
 
 static const short ftt_flags[] = {0x016F,0x0170,0x0171,0x0172,0x017E,0x0163,0x0166,0x016B,0x016A,0x0168,0x0169};
 static const char ftt_flag_types[] = {0,0,0,0,0,0,0,0,0,0,0};

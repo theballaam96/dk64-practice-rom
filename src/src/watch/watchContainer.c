@@ -1,32 +1,32 @@
 #include "../../include/common.h"
 
-static const char viewed_lag[] = "LAG (!)";
-static const char viewed_avglag[] = "AVERAGE LAG (!)";
-static const char viewed_speed[] = "SPEED (!)";
-static const char viewed_timer[] = "TIMER (!)";
-static const char viewed_gktimer[] = "GIANT KOSHA TIMER (!)";
-static const char viewed_movement[] = "MOVEMENT STATE (!)";
-static const char viewed_angle[] = "ANGLE (!)";
-static const char viewed_input[] = "INPUT (!)";
-static const char viewed_heldactor[] = "HELD ACTOR (!)";
-static const char viewed_isg[] = "INTRO STORY TIMER (!)";
-static const char viewed_position[] = "POSITION (!)";
-static const char viewed_storedposition1[] = "STORED POSITION 1 (!)";
-static const char viewed_storedposition2[] = "STORED POSITION 2 (!)";
+static const char viewed_lag[] = "Lag (!)";
+static const char viewed_avglag[] = "Average Lag (!)";
+static const char viewed_speed[] = "Speed (!)";
+static const char viewed_timer[] = "Timer (!)";
+static const char viewed_gktimer[] = "Giant Kosha Timer (!)";
+static const char viewed_movement[] = "Movement State (!)";
+static const char viewed_angle[] = "Angle (!)";
+static const char viewed_input[] = "Input (!)";
+static const char viewed_heldactor[] = "Held Actor (!)";
+static const char viewed_isg[] = "Intro Story Timer (!)";
+static const char viewed_position[] = "Position (!)";
+static const char viewed_storedposition1[] = "Stored Position 1 (!)";
+static const char viewed_storedposition2[] = "Stored Position 2 (!)";
 
-static const char change_lag[] = "LAG";
-static const char change_avglag[] = "AVERAGE LAG";
-static const char change_speed[] = "SPEED";
-static const char change_timer[] = "TIMER";
-static const char change_gktimer[] = "GIANT KOSHA TIMER";
-static const char change_movement[] = "MOVEMENT STATE";
-static const char change_angle[] = "ANGLE";
-static const char change_input[] = "INPUT";
-static const char change_heldactor[] = "HELD ACTOR";
-static const char change_isg[] = "INTRO STORY TIMER";
-static const char change_position[] = "POSITION";
-static const char change_storedposition1[] = "STORED POSITION 1";
-static const char change_storedposition2[] = "STORED POSITION 2";
+static const char change_lag[] = "Lag";
+static const char change_avglag[] = "Average Lag";
+static const char change_speed[] = "Speed";
+static const char change_timer[] = "Timer";
+static const char change_gktimer[] = "Giant Kosha Timer";
+static const char change_movement[] = "Movement State";
+static const char change_angle[] = "Angle";
+static const char change_input[] = "Input";
+static const char change_heldactor[] = "Held Actor";
+static const char change_isg[] = "Intro Story Timer";
+static const char change_position[] = "Position";
+static const char change_storedposition1[] = "Stored Position 1";
+static const char change_storedposition2[] = "Stored Position 2";
 
 void destroyWatch(int slot) {
 	if (WatchActor[slot]) {
@@ -37,14 +37,14 @@ void destroyWatch(int slot) {
 
 void spawnWatch(int slot) {
 	TextOverlay* textOverlay;
-	int y = 210 - (slot * 10);
+	int y = 210 - (slot * 13);
 	destroyWatch(slot);
-	spawnTextOverlay(10,25,y,"CALIBRATING",0,0,2,0);
+	spawnTextOverlay(10,25,y,"Calibrating",0,0,2,0);
 	textOverlay = (TextOverlay *)CurrentActorPointer;
 	if (textOverlay) {
 		WatchActor[slot] = textOverlay;
 		textOverlay->string = (char *)&WatchTextSpace[slot];
-		textOverlay->opacity = 0xFF;
+		textOverlay->style = 128;
 	}
 	
 };
@@ -54,6 +54,18 @@ void colorWatch(char _red, char _green, char _blue, int slot) {
 		WatchActor[slot]->red = _red;
 		WatchActor[slot]->green = _green;
 		WatchActor[slot]->blue = _blue;
+	}
+}
+
+void controlWatchView(void) {
+	for (int i = 0; i < WatchCount; i++) {
+		if (WatchActor[i]) {
+			if (ActiveMenu.isOpen) {
+				WatchActor[i]->opacity = 0;
+			} else {
+				WatchActor[i]->opacity = 0xFF;
+			}
+		}
 	}
 }
 
@@ -275,7 +287,7 @@ void handleWatch(void) {
 			switch(WatchIndex[j]) {
 				case 1:
 					// Lag
-					dk_strFormat((char *)WatchTextSpace[j],"LAG: %d",StoredLag);
+					dk_strFormat((char *)WatchTextSpace[j],"Lag: %d",StoredLag);
 					break;
 				case 2:
 					// Average Lag
@@ -283,7 +295,7 @@ void handleWatch(void) {
 						_lagsum += PreviousLagArray[k];
 					}
 					AverageLag = (float)(_lagsum) / 16;
-					dk_strFormat((char *)WatchTextSpace[j],"AVERAGE LAG: %f",AverageLag);
+					dk_strFormat((char *)WatchTextSpace[j],"Average Lag: %f",AverageLag);
 					break;
 				case 3:
 					// Speed
@@ -296,7 +308,7 @@ void handleWatch(void) {
 							}
 						}
 					}
-					dk_strFormat((char *)WatchTextSpace[j],"SPEED: %f",_speed);
+					dk_strFormat((char *)WatchTextSpace[j],"Speed: %f",_speed);
 					break;
 				case 4:
 					// Timer
@@ -305,9 +317,9 @@ void handleWatch(void) {
 					_timemins = (int)(float)(_time / 60);
 					_time = _time - (60 * _timemins);
 					if (_time >= 10) {
-						dk_strFormat((char *)WatchTextSpace[j],"TIME: %2d:%f",_timemins,_time);
+						dk_strFormat((char *)WatchTextSpace[j],"Time: %2d:%f",_timemins,_time);
 					} else {
-						dk_strFormat((char *)WatchTextSpace[j],"TIME: %2d:0%f",_timemins,_time);
+						dk_strFormat((char *)WatchTextSpace[j],"Time: %2d:0%f",_timemins,_time);
 					}
 					break;
 				case 5:
@@ -319,7 +331,7 @@ void handleWatch(void) {
 								GiantKoshaTimerValue = GiantKoshaTimerAddress->timer;
 							}
 						}
-						dk_strFormat((char *)WatchTextSpace[j],"KOSHA TIMER: %d",GiantKoshaTimerValue);
+						dk_strFormat((char *)WatchTextSpace[j],"Kosha Timer: %d",GiantKoshaTimerValue);
 						if (GiantKoshaTimerValue < 51) {
 							colorWatch(0x8B,0x00,0x00,j);
 						} else {
@@ -339,14 +351,14 @@ void handleWatch(void) {
 							}
 						}
 					} else {
-						dk_strFormat((char *)WatchTextSpace[j],"THIS AIN'T CAVES, BUD");
+						dk_strFormat((char *)WatchTextSpace[j],"This ain't Caves, Bud");
 					};
 					break;
 				case 6:
 					// Movement
 					if (Player) {
 						_movement_state = Player->control_state;
-						dk_strFormat((char *)WatchTextSpace[j],"MOVEMENT STATE:0x%X",_movement_state);
+						dk_strFormat((char *)WatchTextSpace[j],"Movement State:0x%X",_movement_state);
 					};
 					break;
 				case 7:
@@ -354,7 +366,7 @@ void handleWatch(void) {
 					if (Player) {
 						_angle = Player->facing_angle % 4096;
 						_angle = (_angle / 4096) * 360;
-						dk_strFormat((char *)WatchTextSpace[j],"ANGLE: %f",_angle);
+						dk_strFormat((char *)WatchTextSpace[j],"Angle: %f",_angle);
 						if (Player->facing_angle >= 4096) {
 							colorWatch(0xFF,0x45,0x00,j);
 						};
@@ -371,9 +383,9 @@ void handleWatch(void) {
 							if (isAddressActor(Player->held_actor)) {
 								colorWatch(0xFF,0x45,0x00,j);
 							}
-							dk_strFormat((char *)WatchTextSpace[j],"HELD ACTOR: %d",held_actor_index);
+							dk_strFormat((char *)WatchTextSpace[j],"Held Actor: %d",held_actor_index);
 						} else {
-							dk_strFormat((char *)WatchTextSpace[j],"NO ACTOR HELD");
+							dk_strFormat((char *)WatchTextSpace[j],"No Actor Held");
 						};
 					};
 					break;
@@ -409,9 +421,9 @@ void handleWatch(void) {
 					_isgmins = (int)(float)(_isgsecs / 60);
 					_isgsecs = _isgsecs - (60 * _isgmins);
 					if (_isgsecs >= 10) {
-						dk_strFormat((char *)WatchTextSpace[j], "ISG TIME: %d:%f",_isgmins,_isgsecs);
+						dk_strFormat((char *)WatchTextSpace[j], "ISG Time: %d:%f",_isgmins,_isgsecs);
 					} else {
-						dk_strFormat((char *)WatchTextSpace[j], "ISG TIME: %d:0%f",_isgmins,_isgsecs);
+						dk_strFormat((char *)WatchTextSpace[j], "ISG Time: %d:0%f",_isgmins,_isgsecs);
 					}
 					break;
 				case 11:
@@ -420,7 +432,7 @@ void handleWatch(void) {
 						_y = Player->yPos;
 						_z = Player->zPos;
 					}
-					dk_strFormat((char *)WatchTextSpace[j], "POSITION: %d, %d, %d",_x,_y,_z);
+					dk_strFormat((char *)WatchTextSpace[j], "Position: %d, %d, %d",_x,_y,_z);
 					break;
 				case 12:
 					xStored = 0;
@@ -435,7 +447,7 @@ void handleWatch(void) {
 							}
 						}
 					}
-					dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 1: %d, %d, %d",xStored,yStored,zStored);
+					dk_strFormat((char *)WatchTextSpace[j], "Stored Position 1: %d, %d, %d",xStored,yStored,zStored);
 					break;
 				case 13:
 					xStored = 0;
@@ -450,7 +462,7 @@ void handleWatch(void) {
 							}
 						}
 					}
-					dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 2: %d, %d, %d",xStored,yStored,zStored);
+					dk_strFormat((char *)WatchTextSpace[j], "Stored Position 2: %d, %d, %d",xStored,yStored,zStored);
 				break;
 			}
 			_KRoolTimerX = 220;

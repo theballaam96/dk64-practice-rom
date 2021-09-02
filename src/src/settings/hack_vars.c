@@ -1,35 +1,35 @@
 #include "../../include/common.h"
 
-static char hack_quickstartup_on[] = "QUICK STARTUP: ON";
-static char hack_quickstartup_off[] = "QUICK STARTUP: OFF";
+static char hack_quickstartup_on[] = "Quick Startup: On";
+static char hack_quickstartup_off[] = "Quick Startup: Off";
 
-static char hack_forcedstoryskip_on[] = "FORCED STORY SKIP: ON";
-static char hack_forcedstoryskip_off[] = "FORCED STORY SKIP: OFF";
+static char hack_forcedstoryskip_on[] = "Forced Story Skip: On";
+static char hack_forcedstoryskip_off[] = "Forced Story Skip: Off";
 
-static char hack_pausevolume_normal[] = "PAUSE VOLUME: NORMAL";
-static char hack_pausevolume_quiet[] = "PAUSE VOLUME: QUIET";
-static char hack_pausevolume_silent[] = "PAUSE VOLUME: SILENT";
+static char hack_pausevolume_normal[] = "Pause Volume: Normal";
+static char hack_pausevolume_quiet[] = "Pause Volume: Quiet";
+static char hack_pausevolume_silent[] = "Pause Volume: Silent";
 
-static char hack_dpadnavigate_on[] = "D-PAD TO NAVIGATE MENU: ON";
-static char hack_dpadnavigate_off[] = "D-PAD TO NAVIGATE MENU: OFF";
+static char hack_dpadnavigate_on[] = "D-Pad to Navigate Menu: On";
+static char hack_dpadnavigate_off[] = "D-Pad to Navigate Menu: Off";
 
-static char hack_transformautostock_on[] = "TRANSFORM AUTO-RESTOCK: ON";
-static char hack_transformautostock_off[] = "TRANSFORM AUTO-RESTOCK: OFF";
+static char hack_transformautostock_on[] = "Transform Cheat Auto-Restock: On";
+static char hack_transformautostock_off[] = "Transform Cheat Auto-Restock: Off";
 
-static char hack_savenotifs_on[] = "SAVE NOTIFICATIONS: ON";
-static char hack_savenotifs_off[] = "SAVE NOTIFICATIONS: OFF";
+static char hack_savenotifs_on[] = "Save Notifications: On";
+static char hack_savenotifs_off[] = "Save Notifications: Off";
 
-static char hack_precision[16] = "PRECISION: 0";
+static char hack_precision[16] = "Precision: 0";
 
-static char hack_kroolround_random[] = "K. ROOL ROUND NUMBER: RANDOM";
-static char hack_kroolround_forcedsequential[] = "K. ROOL ROUND NUMBER: FORCED SEQUENTIAL";
-static char hack_kroolround_normal[] = "K. ROOL ROUND NUMBER: NORMAL";
+static char hack_kroolround_random[] = "K. Rool Round Number: Random";
+static char hack_kroolround_forcedsequential[] = "K. Rool Round Number: Forced Sequential";
+static char hack_kroolround_normal[] = "K. Rool Round Number: Normal";
 
-static char hack_fileinitqol_on[] = "FILE START STATE: PREPARED";
-static char hack_fileinitqol_off[] = "FILE START STATE: VANILLA";
+static char hack_fileinitqol_on[] = "File Start State: Prepared";
+static char hack_fileinitqol_off[] = "File Start State: Vanilla";
 
-static char hack_inputmax_70[] = "INPUT STICK MAX: THRESHOLD";
-static char hack_inputmax_127[] = "INPUT STICK MAX: FULL MAGNITUDE";
+static char hack_inputmax_70[] = "Input Stick Max: Threshold";
+static char hack_inputmax_127[] = "Input Stick Max: Full Magnitude";
 
 static char* hack_array[] = {
 	hack_quickstartup_on,
@@ -79,7 +79,7 @@ void openHackVarsMenu(void) {
 	} else {
 		hack_array[5] = hack_savenotifs_off;
 	}
-	dk_strFormat((char *)hack_precision,"PRECISION: %d",Precision);
+	dk_strFormat((char *)hack_precision,"Precision: %d",Precision);
 	if (KRoolRoundSetting == 2) {
 		hack_array[7] = hack_kroolround_normal;
 	} else {

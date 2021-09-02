@@ -1,24 +1,24 @@
 #include "../../include/common.h"
 
-static char colors_dk_1[] = "DK: BLUE";
-static char colors_dk_2[] = "DK: GREEN";
-static char colors_dk_3[] = "DK: PURPLE";
+static char colors_dk_1[] = "DK: Blue";
+static char colors_dk_2[] = "DK: Green";
+static char colors_dk_3[] = "DK: Purple";
 
-static char colors_di_1[] = "DIDDY: DARK BLUE";
-static char colors_di_2[] = "DIDDY: YELLOW";
-static char colors_di_3[] = "DIDDY: LIGHT BLUE";
+static char colors_di_1[] = "Diddy: Dark Blue";
+static char colors_di_2[] = "Diddy: Yellow";
+static char colors_di_3[] = "Diddy: Light Blue";
 
-static char colors_la_1[] = "LANKY: GREEN";
-static char colors_la_2[] = "LANKY: PURPLE";
-static char colors_la_3[] = "LANKY: RED";
+static char colors_la_1[] = "Lanky: Green";
+static char colors_la_2[] = "Lanky: Purple";
+static char colors_la_3[] = "Lanky: Red";
 
-static char colors_ti_1[] = "TINY: GREEN";
-static char colors_ti_2[] = "TINY: PURPLE";
-static char colors_ti_3[] = "TINY: RED";
+static char colors_ti_1[] = "Tiny: Green";
+static char colors_ti_2[] = "Tiny: Purple";
+static char colors_ti_3[] = "Tiny: Red";
 
-static char colors_ch_1[] = "CHUNKY: RED";
-static char colors_ch_2[] = "CHUNKY: PURPLE AND BLUE";
-static char colors_ch_3[] = "CHUNKY: GREEN AND PURPLE";
+static char colors_ch_1[] = "Chunky: Red";
+static char colors_ch_2[] = "Chunky: Purple & Blue";
+static char colors_ch_3[] = "Chunky: Green & Purple";
 
 static char* kongcolors_array[] = {
 	colors_dk_1,

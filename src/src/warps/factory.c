@@ -1,20 +1,20 @@
 #include "../../include/common.h"
 
-static const char mapFactoryMain[] = "MAIN MAP";
-static const char mapFactoryJack[] = "MAD JACK";
-static const char mapFactoryBBlast[] = "BABOON BLAST COURSE";
-static const char mapFactoryCarRace[] = "CAR RACE";
-static const char mapFactoryCrusher[] = "CRUSHER ROOM";
-static const char mapFactoryPowerShed[] = "POWER SHED";
-static const char mapFactoryPortal[] = "FROM PORTAL";
-static const char mapFactoryArcadeRoom[] = "ARCADE ROOM";
-static const char mapFactoryBlockTower[] = "BLOCK TOWER";
-static const char mapFactoryCandyArea[] = "CANDY AREA";
-static const char mapFactoryFunkyRoom[] = "FUNKY ROOM";
-static const char mapFactoryProduction[] = "PRODUCTION ROOM";
-static const char mapFactoryRnD[] = "RESEARCH AND DEV";
-static const char mapFactorySnides[] = "SNIDES ROOM";
-static const char mapFactoryStorageRoom[] = "STORAGE ROOM";
+static const char mapFactoryMain[] = "Main Map";
+static const char mapFactoryJack[] = "Mad Jack";
+static const char mapFactoryBBlast[] = "Baboon Blast Course";
+static const char mapFactoryCarRace[] = "Car Race";
+static const char mapFactoryCrusher[] = "Crusher Room";
+static const char mapFactoryPowerShed[] = "Power Shed";
+static const char mapFactoryPortal[] = "From Portal";
+static const char mapFactoryArcadeRoom[] = "Arcade Room";
+static const char mapFactoryBlockTower[] = "Block Tower";
+static const char mapFactoryCandyArea[] = "Candy Area";
+static const char mapFactoryFunkyRoom[] = "Funky Room";
+static const char mapFactoryProduction[] = "Production Room";
+static const char mapFactoryRnD[] = "R&D";
+static const char mapFactorySnides[] = "Snide's Room";
+static const char mapFactoryStorageRoom[] = "Storage Room";
 
 void openFactoryMainMenu(void) {
 	changeMenu(8);

@@ -1,38 +1,38 @@
 #include "../../include/common.h"
 
-static const char mapCastleMain[] = "MAIN MAP";
-static const char mapCastleKutOut[] = "KING KUT OUT";
-static const char mapCastleBBlast[] = "BABOON BLAST COURSE";
-static const char mapCastleCarRace[] = "CAR RACE";
-static const char mapCastleCrypt[] = "CRYPT";
-static const char mapCastleDungeon[] = "DUNGEON";
-static const char mapCastleDungeonTunnel[] = "DUNGEON TUNNEL";
-static const char mapCastleOutsideBuildings[] = "OUTSIDE BUILDINGS";
-static const char mapCastleRooms[] = "ROOMS";
+static const char mapCastleMain[] = "Main Map";
+static const char mapCastleKutOut[] = "King Kut Out";
+static const char mapCastleBBlast[] = "Baboon Blast Course";
+static const char mapCastleCarRace[] = "Car Race";
+static const char mapCastleCrypt[] = "Crypt";
+static const char mapCastleDungeon[] = "Dungeon";
+static const char mapCastleDungeonTunnel[] = "Dungeon Tunnel";
+static const char mapCastleOutsideBuildings[] = "Outside Buildings";
+static const char mapCastleRooms[] = "Rooms";
 
-static const char mapCastlePortal[] = "FROM PORTAL";
-static const char mapCastleIntro[] = "INTRO";
-static const char mapCastleTopOfCastle[] = "TOP OF CASTLE";
-static const char mapCastleWarp2[] = "WARP 2";
-static const char mapCastleWarp4[] = "WARP 4";
+static const char mapCastlePortal[] = "From Portal";
+static const char mapCastleIntro[] = "Intro";
+static const char mapCastleTopOfCastle[] = "Top of Castle";
+static const char mapCastleWarp2[] = "Warp 2";
+static const char mapCastleWarp4[] = "Warp 4";
 
-static const char mapCastleCryptDDC[] = "CRYPT: DK, DIDDY, CHUNKY";
-static const char mapCastleCryptLT[] = "CRYPT: LANKY, TINY";
-static const char mapCastleCryptHub[] = "CRYPT: HUB";
-static const char mapCastleMinecart[] = "CRYPT: MINECART";
+static const char mapCastleCryptDDC[] = "Crypt: DK, Diddy, Chunky";
+static const char mapCastleCryptLT[] = "Crypt: Lanky, Tiny";
+static const char mapCastleCryptHub[] = "Crypt: Hub";
+static const char mapCastleMinecart[] = "Crypt: Minecart";
 
-static const char mapCastleTunnelNear[] = "DUNGEON TUNNEL: NEAR";
-static const char mapCastleTunnelFar[] = "DUNGEON TUNNEL: FAR";
+static const char mapCastleTunnelNear[] = "Dungeon Tunnel: Near";
+static const char mapCastleTunnelFar[] = "Dungeon Tunnel: Far";
 
-static const char mapCastleGreenhouse[] = "GREENHOUSE";
-static const char mapCastleShed[] = "SHED";
-static const char mapCastleTree[] = "TREE";
-static const char mapCastleTrashCan[] = "TRASH CAN";
+static const char mapCastleGreenhouse[] = "Greenhouse";
+static const char mapCastleShed[] = "Shed";
+static const char mapCastleTree[] = "Tree";
+static const char mapCastleTrashCan[] = "Trash Can";
 
-static const char mapCastleBallroom[] = "BALLROOM";
-static const char mapCastleLibrary[] = "LIBRARY";
-static const char mapCastleMuseum[] = "MUSEUM";
-static const char mapCastleWindTower[] = "WIND TOWER";
+static const char mapCastleBallroom[] = "Ballroom";
+static const char mapCastleLibrary[] = "Library";
+static const char mapCastleMuseum[] = "Museum";
+static const char mapCastleWindTower[] = "Wind Tower";
 
 void openCastleMainMenu(void) {
 	changeMenu(22);

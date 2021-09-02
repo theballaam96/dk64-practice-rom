@@ -1,19 +1,19 @@
 #include "../../include/common.h"
 
-static const char flag_dk_set[] = "DK: FREED";
-static const char flag_dk_clear[] = "DK: LOCKED";
+static const char flag_dk_set[] = "DK: Freed";
+static const char flag_dk_clear[] = "DK: Locked";
 
-static const char flag_diddy_set[] = "DIDDY: FREED";
-static const char flag_diddy_clear[] = "DIDDY: LOCKED";
+static const char flag_diddy_set[] = "Diddy: Freed";
+static const char flag_diddy_clear[] = "Diddy: Locked";
 
-static const char flag_lanky_set[] = "LANKY: FREED";
-static const char flag_lanky_clear[] = "LANKY: LOCKED";
+static const char flag_lanky_set[] = "Lanky: Freed";
+static const char flag_lanky_clear[] = "Lanky: Locked";
 
-static const char flag_tiny_set[] = "TINY: FREED";
-static const char flag_tiny_clear[] = "TINY: LOCKED";
+static const char flag_tiny_set[] = "Tiny: Freed";
+static const char flag_tiny_clear[] = "Tiny: Locked";
 
-static const char flag_chunky_set[] = "CHUNKY: FREED";
-static const char flag_chunky_clear[] = "CHUNKY: LOCKED";
+static const char flag_chunky_set[] = "Chunky: Freed";
+static const char flag_chunky_clear[] = "Chunky: Locked";
 
 static const short kong_flags[] = {0x0181,0x0006,0x0046,0x0042,0x0075};
 static const char kong_flag_types[] = {0,0,0,0,0};

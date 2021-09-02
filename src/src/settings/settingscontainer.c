@@ -1,12 +1,12 @@
 #include "../../include/common.h"
 
-static const char settings_dpadlr[] = "D-PAD LR FUNCTION";
-static const char settings_dpadd[] = "D-PAD DOWN FUNCTION";
-static const char settings_vanillavars[] = "VANILLA VARIABLES";
-static const char settings_hackvars[] = "HACK VARIABLES";
-static const char settings_kongmenu[] = "CHANGE KONG COLORS";
-static const char settings_changeinputquadrant[] = "CHANGE INPUT DISPLAY QUADRANT";
-static const char settings_resetdefaults[] = "RESET TO DEFAULT";
+static const char settings_dpadlr[] = "D-Pad L&R Function";
+static const char settings_dpadd[] = "D-Pad Down Function";
+static const char settings_vanillavars[] = "Vanilla Variables";
+static const char settings_hackvars[] = "Hack Variables";
+static const char settings_kongmenu[] = "Change Kong Colors";
+static const char settings_changeinputquadrant[] = "Change Input Display Quadrant";
+static const char settings_resetdefaults[] = "Reset to Default";
 
 static const char* settings_array[] = {
 	settings_dpadlr,

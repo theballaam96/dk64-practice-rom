@@ -1,12 +1,12 @@
 #include "../../include/common.h"
 
-static char dpadlr_current_position[] = "CURRENT: POSITION SAVING";
-static char dpadlr_current_frameadvance[] = "CURRENT: FRAME ADVANCE";
-static char dpadlr_current_nothing[] = "CURRENT: NOTHING";
+static char dpadlr_current_position[] = "Current: Position Saving";
+static char dpadlr_current_frameadvance[] = "Current: Frame Advance";
+static char dpadlr_current_nothing[] = "Current: Nothing";
 
-static char dpadlr_position[] = "SET TO POSITION SAVING";
-static char dpadlr_frameadvance[] = "SET TO FRAME ADVANCE";
-static char dpadlr_nothing[] = "SET TO NOTHING";
+static char dpadlr_position[] = "Set to: Position Saving";
+static char dpadlr_frameadvance[] = "Set to: Frame Advance";
+static char dpadlr_nothing[] = "Set to: Nothing";
 
 static char* current_dpadlr[] = {
 	dpadlr_current_position,

@@ -1,13 +1,13 @@
 #include "../../include/common.h"
 
-static const char flag_diddyhelpme_set[] = "DIDDY HELP ME CUTSCENE: WATCHED";
-static const char flag_diddyhelpme_clear[] = "DIDDY HELP ME CUTSCENE: NOT WATCHED";
+static const char flag_diddyhelpme_set[] = "Diddy Help Me Cutscene: Watched";
+static const char flag_diddyhelpme_clear[] = "Diddy Help Me Cutscene: Not Watched";
 
-static const char flag_llamacutscene_set[] = "LLAMA CUTSCENE: WATCHED";
-static const char flag_llamacutscene_clear[] = "LLAMA CUTSCENE: NOT WATCHED";
+static const char flag_llamacutscene_set[] = "Llama Cutscene: Watched";
+static const char flag_llamacutscene_clear[] = "Llama Cutscene: Not Watched";
 
-static const char flag_giantkoshacutscene_set[] = "GIANT KOSHA CUTSCENE: WATCHED";
-static const char flag_giantkoshacutscene_clear[] = "GIANT KOSHA CUTSCENE: NOT WATCHED";
+static const char flag_giantkoshacutscene_set[] = "Giant Kosha Cutscene: Watched";
+static const char flag_giantkoshacutscene_clear[] = "Giant Kosha Cutscene: Not Watched";
 
 static const short cutscene_flags[] = {0x002A,0x005C,0x012B};
 static const char cutscene_flag_types[] = {0,0,0};

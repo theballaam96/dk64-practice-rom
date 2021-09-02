@@ -1,13 +1,13 @@
 #include "../../include/common.h"
 
-static const char mapHelmEntrance[] = "HELM: ENTRANCE";
-static const char mapHelmBoMRoom[] = "HELM: BOM ROOM";
-static const char mapHelmNavigationRoom[] = "HELM: NAVIGATION ROOM";
-static const char mapRoolDK[] = "K. ROOL: DK PHASE";
-static const char mapRoolDiddy[] = "K. ROOL: DIDDY PHASE";
-static const char mapRoolLanky[] = "K. ROOL: LANKY PHASE";
-static const char mapRoolTiny[] = "K. ROOL: TINY PHASE";
-static const char mapRoolChunky[] = "K. ROOL: CHUNKY PHASE";
+static const char mapHelmEntrance[] = "Helm: Entrance";
+static const char mapHelmBoMRoom[] = "Helm: BOM Room";
+static const char mapHelmNavigationRoom[] = "Helm: Navigation Room";
+static const char mapRoolDK[] = "K. Rool: DK Phase";
+static const char mapRoolDiddy[] = "K. Rool: Diddy Phase";
+static const char mapRoolLanky[] = "K. Rool: Lanky Phase";
+static const char mapRoolTiny[] = "K. Rool: Tiny Phase";
+static const char mapRoolChunky[] = "K. Rool: Chunky Phase";
 
 static const unsigned char helmrool_destmap[] = {
 	0x11, // Helm Entrance

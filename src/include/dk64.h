@@ -42,7 +42,6 @@ extern void osWritebackDCacheAll();
 extern void copyFromROM(int rom_start, void* write_Location, void* file_size_location, int unk1, int unk2, int unk3, int unk4);
 
 //vanilla data
-
 extern float TransitionSpeed;
 extern char CutsceneWillPlay;
 extern char KRoolRound;
@@ -86,6 +85,7 @@ extern char ChimpyCam;
 extern char ScreenRatio;
 extern int* CurrentActorPointer;
 extern char LoadedActorCount;
+extern loadedActorArr LoadedActorArray[64];
 extern SpawnerMasterInfo SpawnerMasterData;
 extern RGB MenuSkyTopRGB;
 extern RGB MenuSkyRGB;
@@ -127,7 +127,7 @@ extern int* bbbandit_array[4];
 extern char StoredDamage;
 
 //hack data
-extern unsigned char TestVariable[4];
+extern int TestVariable;
 extern savedSettings StoredSettings;
 
 extern TextOverlay* ActiveTools_Error;
@@ -203,3 +203,5 @@ extern char TransformAutoRestockOff;
 extern char KRoolRoundSetting;
 extern char FileInitQOLOff;
 extern char InputStickMax;
+extern actorNames* ActorNamesTable;
+extern actorData* FocusedActorViewPointer;

@@ -172,8 +172,23 @@ kongHook:
 flagHook:
 	J 	writeLastUpdatedFlags
 	NOP
+TextResizeHook:
+	J 	resizeActiveMenuFont
+	NOP
+DefineAMFontHook:
+	J 	defineActiveMenuOtherParams
+	NOP
 
 loadExtraHooks:
+	// Color other font styles
+	ADDIU t3, r0, 1
+	LUI t4, 0x806A
+	SH 	t3, 0xD43A (t4)
+
+	ADDIU t3, r0, 0x1000
+	LUI t4, 0x806A
+	SH 	t3, 0xD738 (t4)
+
 	LUI t3, hi(pauseHook)
 	LW t3, lo(pauseHook) (t3)
 	LUI t4, 0x8060
@@ -183,7 +198,17 @@ loadExtraHooks:
 	LW t3, lo(flagHook) (t3)
 	LUI t4, 0x8073
 	SW t3, 0x129C (t4) // Store Hook
-	
+
+	LUI t3, hi(TextResizeHook)
+	LW t3, lo(TextResizeHook) (t3)
+	LUI t4, 0x806A
+	SW 	t3, 0xD88C (t4) // Store Hook
+
+	LUI t3, hi(DefineAMFontHook)
+	LW t3, lo(DefineAMFontHook) (t3)
+	LUI t4, 0x806A
+	SW 	t3, 0xD8B0 (t4) // Store Hook
+
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)
 	LUI t4, 0x806F

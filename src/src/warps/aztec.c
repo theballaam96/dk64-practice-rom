@@ -1,21 +1,21 @@
 #include "../../include/common.h"
 
-static const char mapAztecMain[] = "MAIN MAP";
-static const char mapAztecDog[] = "DOGADON 1";
-static const char mapAztecBBlast[] = "BABOON BLAST COURSE";
-static const char mapAztecBeetle[] = "BEETLE RACE";
-static const char mapAztec5DTs[] = "FIVE DOOR TEMPLES";
-static const char mapAztecLlama[] = "LLAMA TEMPLE";
-static const char mapAztecTiny[] = "TINY TEMPLE";
-static const char mapAztecPortal[] = "FROM PORTAL";
-static const char mapAztecFeedMe[] = "FEED ME TOTEM";
-static const char mapAztecOasis[] = "OASIS";
-static const char mapAztecSnakeRoad[] = "SNAKE ROAD";
-static const char mapAztec5DTDK[] = "FIVE DOOR TEMPLE: DK";
-static const char mapAztec5DTDiddy[] = "FIVE DOOR TEMPLE: DIDDY";
-static const char mapAztec5DTLanky[] = "FIVE DOOR TEMPLE: LANKY";
-static const char mapAztec5DTTiny[] = "FIVE DOOR TEMPLE: TINY";
-static const char mapAztec5DTChunky[] = "FIVE DOOR TEMPLE: CHUNKY";
+static const char mapAztecMain[] = "Main Map";
+static const char mapAztecDog[] = "Dogadon 1";
+static const char mapAztecBBlast[] = "Baboon Blast Course";
+static const char mapAztecBeetle[] = "Beetle Race";
+static const char mapAztec5DTs[] = "Five Door Temples";
+static const char mapAztecLlama[] = "Llama Temple";
+static const char mapAztecTiny[] = "Tiny Temple";
+static const char mapAztecPortal[] = "From Portal";
+static const char mapAztecFeedMe[] = "Feed Me Totem";
+static const char mapAztecOasis[] = "Oasis";
+static const char mapAztecSnakeRoad[] = "Snake Road";
+static const char mapAztec5DTDK[] = "Five Door Temple: DK";
+static const char mapAztec5DTDiddy[] = "Five Door Temple: Diddy";
+static const char mapAztec5DTLanky[] = "Five Door Temple: Lanky";
+static const char mapAztec5DTTiny[] = "Five Door Temple: Tiny";
+static const char mapAztec5DTChunky[] = "Five Door Temple: Chunky";
 
 void openAztecMainMenu(void) {
 	changeMenu(5);

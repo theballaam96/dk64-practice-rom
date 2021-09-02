@@ -1,19 +1,19 @@
 #include "../../include/common.h"
 
-static const char mapJapesMain[] = "MAIN MAP";
-static const char mapJapesDillo[] = "ARMY DILLO 1";
-static const char mapJapesBBlast[] = "BABOON BLAST COURSE";
-static const char mapJapesMinecart[] = "MINECART";
-static const char mapJapesMountain[] = "MOUNTAIN";
-static const char mapJapesPainting[] = "PAINTING ROOM";
-static const char mapJapesShellhive[] = "SHELLHIVE";
-static const char mapJapesUnderground[] = "UNDERGROUND";
-static const char mapJapesPortal[] = "FROM PORTAL";
-static const char mapJapesIntro[] = "FROM INTRO";
-static const char mapJapesRiverLow[] = "LOWER RIVER";
-static const char mapJapesRiverHigh[] = "UPPER RIVER";
-static const char mapJapesStorm[] = "STORM AREA";
-static const char mapJapesZinger[] = "ZINGER AREA";
+static const char mapJapesMain[] = "Main Map";
+static const char mapJapesDillo[] = "Army Dillo 1";
+static const char mapJapesBBlast[] = "Baboon Blast Course";
+static const char mapJapesMinecart[] = "Minecart";
+static const char mapJapesMountain[] = "Mountain";
+static const char mapJapesPainting[] = "Painting Room";
+static const char mapJapesShellhive[] = "Shellhive";
+static const char mapJapesUnderground[] = "Underground";
+static const char mapJapesPortal[] = "From Portal";
+static const char mapJapesIntro[] = "From Intro";
+static const char mapJapesRiverLow[] = "Lower River";
+static const char mapJapesRiverHigh[] = "Upper River";
+static const char mapJapesStorm[] = "Storm Area";
+static const char mapJapesZinger[] = "Zinger Area";
 
 void openJapesMainMenu(void) {
 	changeMenu(3);

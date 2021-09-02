@@ -1,16 +1,16 @@
 #include "../../include/common.h"
 
-static const char flag_kongs[] = "KONGS FREED";
-static const char flag_keysin[] = "KEYS TURNED IN";
-static const char flag_keyshave[] = "KEYS IN POSSESSION";
-static const char flag_levelIntros[] = "LEVEL INTROS";
-static const char flag_levenTnS[] = "LEVEL TROFF 'N' SCOFF";
-static const char flag_levelBoss[] = "LEVEL BOSS INTROS";
-static const char flag_cutscenes[] = "CUTSCENES";
-static const char flag_modifiers[] = "LEVEL MODIFIERS";
-static const char flag_misc[] = "MISCELLANEOUS";
-static const char flag_ftt[] = "FIRST TIME TEXTS";
-static const char flag_custom[] = "CUSTOM";
+static const char flag_kongs[] = "Kongs Freed";
+static const char flag_keysin[] = "Keys Turned In";
+static const char flag_keyshave[] = "Keys in Possession";
+static const char flag_levelIntros[] = "Level Intros";
+static const char flag_levenTnS[] = "Level Troff & Scoff";
+static const char flag_levelBoss[] = "Level Boss Intros";
+static const char flag_cutscenes[] = "Cutscenes";
+static const char flag_modifiers[] = "Level Modifiers";
+static const char flag_misc[] = "Miscellaneous";
+static const char flag_ftt[] = "First Time Texts";
+static const char flag_custom[] = "Custom";
 
 void openFlagsMainMenu(void) {
 	changeMenu(43);

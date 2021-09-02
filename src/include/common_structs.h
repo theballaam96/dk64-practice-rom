@@ -110,12 +110,14 @@ typedef struct playerData {
 } playerData; //size 0x630
 
 typedef struct TextOverlay {
-	/* 0x000 */ char unk_00[0x15F];
+	/* 0x000 */ char unk_00[0x84];
 	/* 0x004 */ //u16
 	/* 0x006 */ //u16
 	/* 0x008 */ //u8
 	/* 0x009 */ //u8
 	/* 0x054 */ //layer ID?
+	/* 0x084 */ float style;
+	/* 0x088 */ char unk_88[0x15F-0x88];
 	/* 0x15F */ char opacity;
 	/* 0x160 */ char unk_160[0x0A];
 	/* 0x16A */ unsigned char red;
@@ -153,7 +155,7 @@ typedef struct Savestate {
 	/* 0x365 */ char stored_damage;
 } Savestate;
 
-typedef const struct Screen {
+typedef struct Screen {
 	/* 0x000 */ int* TextArray;
 	/* 0x004 */ const int* FunctionArray;
 	/* 0x005 */ char ArrayItems;
@@ -484,3 +486,12 @@ typedef struct filestateInfo {
 	/* 0x320 */ char inventory[0x10];
 	/* 0x330 */ char temp_flags[0x10];
 } filestateInfo;
+
+typedef struct loadedActorArr {
+	/* 0x000 */ actorData* actor;
+	/* 0x004 */ int unk_04;
+} loadedActorArr;
+
+typedef struct actorNames {
+	/* 0x000 */ char actor_name[344][0x10];
+} actorNames;

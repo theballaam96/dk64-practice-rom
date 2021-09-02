@@ -1,22 +1,22 @@
 #include "../../../include/common.h"
 
-static const char candy_upgrade[18] = "UPGRADE LEVEL: 0";
-static const char candy_melons[10] = "MELONS: 0";
+static const char candy_upgrade[18] = "Upgrade Level: 0";
+static const char candy_melons[10] = "Melons: 0";
 
-static const char candy_dk0[] = "DK: NO INSTRUMENT";
-static const char candy_dk1[] = "DK: BONGO BLAST";
+static const char candy_dk0[] = "DK: No Instrument";
+static const char candy_dk1[] = "DK: Bongo Blast";
 
-static const char candy_di0[] = "DIDDY: NO INSTRUMENT";
-static const char candy_di1[] = "DIDDY: GUITAR GAZUMP";
+static const char candy_di0[] = "Diddy: No Instrument";
+static const char candy_di1[] = "Diddy: Guitar Gazump";
 
-static const char candy_la0[] = "LANKY: NO INSTRUMENT";
-static const char candy_la1[] = "LANKY: TROMBONE TREMOR";
+static const char candy_la0[] = "Lanky: No Instrument";
+static const char candy_la1[] = "Lanky: Trombone Tremor";
 
-static const char candy_ti0[] = "TINY: NO INSTRUMENT";
-static const char candy_ti1[] = "TINY: SAXOPHONE SLAM";
+static const char candy_ti0[] = "Tiny: No Instrument";
+static const char candy_ti1[] = "Tiny: Saxophone Slam";
 
-static const char candy_ch0[] = "CHUNKY: NO INSTRUMENT";
-static const char candy_ch1[] = "CHUNKY: TRIANGLE TRAMPLE";
+static const char candy_ch0[] = "Chunky: No Instrument";
+static const char candy_ch1[] = "Chunky: Triangle Trample";
 
 static const char* candy_array[] = {
 	candy_dk0,
@@ -77,8 +77,8 @@ void openCandyMenu(void) {
 			}
 		}
 	}
-	dk_strFormat((char *)candy_upgrade,"UPGRADE LEVEL: %d",_level);
-	dk_strFormat((char *)candy_melons,"MELONS: %d",CollectableBase.Melons);
+	dk_strFormat((char *)candy_upgrade,"Upgrade Level: %d",_level);
+	dk_strFormat((char *)candy_melons,"Melons: %d",CollectableBase.Melons);
 	for (int i = 0; i < 5; i++) {
 		candy_array[i] = (char*)candy_list_kong[i][(int)MovesBase[i].instrument_bitfield & 1];
 	}

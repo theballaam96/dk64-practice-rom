@@ -1,10 +1,10 @@
 #include "../../include/common.h"
 
-static const char transform_sk[] = "STRONG KONG";
-static const char transform_rb[] = "ROCKETBARREL";
-static const char transform_os[] = "ORANGSTAND SPRINT";
-static const char transform_mm[] = "MINI MONKEY";
-static const char transform_hc[] = "HUNKY CHUNKY";
+static const char transform_sk[] = "Strong Kong";
+static const char transform_rb[] = "Rocketbarrel";
+static const char transform_os[] = "Orangstand Sprint";
+static const char transform_mm[] = "Mini Monkey";
+static const char transform_hc[] = "Hunky Chunky";
 
 void openTransformMenu(void) {
 	changeMenu(62);

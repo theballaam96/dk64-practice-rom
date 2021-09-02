@@ -1,15 +1,15 @@
 #include "../../include/common.h"
 
-static const char mapJapes[] = "JUNGLE JAPES";
-static const char mapAztec[] = "ANGRY AZTEC";
-static const char mapFactory[] = "FRANTIC FACTORY";
-static const char mapGalleon[] = "GLOOMY GALLEON";
-static const char mapFungi[] = "FUNGI FOREST";
-static const char mapCaves[] = "CRYSTAL CAVES";
-static const char mapCastle[] = "CREEPY CASTLE";
-static const char mapHelmKRool[] = "HIDEOUT HELM AND K. ROOL";
-static const char mapIsles[] = "DK ISLES";
-static const char mapMisc[] = "MISCELLANEOUS";
+static const char mapJapes[] = "Jungle Japes";
+static const char mapAztec[] = "Angry Aztec";
+static const char mapFactory[] = "Frantic Factory";
+static const char mapGalleon[] = "Gloomy Galleon";
+static const char mapFungi[] = "Fungi Forest";
+static const char mapCaves[] = "Crystal Caves";
+static const char mapCastle[] = "Creepy Castle";
+static const char mapHelmKRool[] = "Hideout Helm & K. Rool";
+static const char mapIsles[] = "DK Isles";
+static const char mapMisc[] = "Miscellaneous";
 
 static const char* maps_container_array[] = {
 	mapJapes,

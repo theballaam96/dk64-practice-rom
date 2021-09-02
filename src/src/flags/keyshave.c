@@ -1,28 +1,28 @@
 #include "../../include/common.h"
 
-static const char flag_key1have_set[] = "KEY 1: OBTAINED";
-static const char flag_key1have_clear[] = "KEY 1: NOT OBTAINED";
+static const char flag_key1have_set[] = "Key 1: Obtained";
+static const char flag_key1have_clear[] = "Key 1: Not Obtained";
 
-static const char flag_key2have_set[] = "KEY 2: OBTAINED";
-static const char flag_key2have_clear[] = "KEY 2: NOT OBTAINED";
+static const char flag_key2have_set[] = "Key 2: Obtained";
+static const char flag_key2have_clear[] = "Key 2: Not Obtained";
 
-static const char flag_key3have_set[] = "KEY 3: OBTAINED";
-static const char flag_key3have_clear[] = "KEY 3: NOT OBTAINED";
+static const char flag_key3have_set[] = "Key 3: Obtained";
+static const char flag_key3have_clear[] = "Key 3: Not Obtained";
 
-static const char flag_key4have_set[] = "KEY 4: OBTAINED";
-static const char flag_key4have_clear[] = "KEY 4: NOT OBTAINED";
+static const char flag_key4have_set[] = "Key 4: Obtained";
+static const char flag_key4have_clear[] = "Key 4: Not Obtained";
 
-static const char flag_key5have_set[] = "KEY 5: OBTAINED";
-static const char flag_key5have_clear[] = "KEY 5: NOT OBTAINED";
+static const char flag_key5have_set[] = "Key 5: Obtained";
+static const char flag_key5have_clear[] = "Key 5: Not Obtained";
 
-static const char flag_key6have_set[] = "KEY 6: OBTAINED";
-static const char flag_key6have_clear[] = "KEY 6: NOT OBTAINED";
+static const char flag_key6have_set[] = "Key 6: Obtained";
+static const char flag_key6have_clear[] = "Key 6: Not Obtained";
 
-static const char flag_key7have_set[] = "KEY 7: OBTAINED";
-static const char flag_key7have_clear[] = "KEY 7: NOT OBTAINED";
+static const char flag_key7have_set[] = "Key 7: Obtained";
+static const char flag_key7have_clear[] = "Key 7: Not Obtained";
 
-static const char flag_key8have_set[] = "KEY 8: OBTAINED";
-static const char flag_key8have_clear[] = "KEY 8: NOT OBTAINED";
+static const char flag_key8have_set[] = "Key 8: Obtained";
+static const char flag_key8have_clear[] = "Key 8: Not Obtained";
 
 static const short keyshave_flags[] = {0x001A,0x004A,0x008A,0x00A8,0x00EC,0x0124,0x013D,0x017C};
 static const char keyshave_flag_types[] = {0,0,0,0,0,0,0,0};

@@ -1,14 +1,14 @@
 #include "../../include/common.h"
 
-static char quadrant_current_tl[] = "CURRENT: TOP LEFT";
-static char quadrant_current_tr[] = "CURRENT: TOP RIGHT";
-static char quadrant_current_bl[] = "CURRENT: BOTTOM LEFT";
-static char quadrant_current_br[] = "CURRENT: BOTTOM RIGHT";
+static char quadrant_current_tl[] = "Current: Top Left";
+static char quadrant_current_tr[] = "Current: Top Right";
+static char quadrant_current_bl[] = "Current: Bottom Left";
+static char quadrant_current_br[] = "Current: Bottom Right";
 
-static char quadrant_setto_tl[] = "SET TO: TOP LEFT";
-static char quadrant_setto_tr[] = "SET TO: TOP RIGHT";
-static char quadrant_setto_bl[] = "SET TO: BOTTOM LEFT";
-static char quadrant_setto_br[] = "SET TO: BOTTOM RIGHT";
+static char quadrant_setto_tl[] = "Set to: Top Left";
+static char quadrant_setto_tr[] = "Set to: Top Right";
+static char quadrant_setto_bl[] = "Set to: Bottom Left";
+static char quadrant_setto_br[] = "Set to: Bottom Right";
 
 static char* current_quadrants[] = {
 	quadrant_current_tl,

@@ -119,6 +119,11 @@ for x in file_dict["files"]:
 with open(newROMName, "r+b") as fh:
     fh.seek(0x3154)
     fh.write(bytearray([0, 0, 0, 0]))
+    with open("./../Source/Non-Code/actor_names.bin","rb") as fg:
+    	_actor_names = fg.read()
+    	fh.seek(0x2000000)
+    	fh.write(_actor_names)
+
 
 import filestatewriter
 

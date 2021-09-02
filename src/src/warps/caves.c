@@ -1,33 +1,33 @@
 #include "../../include/common.h"
 
-static const char mapCavesMain[] = "MAIN MAP";
-static const char mapCavesDillo[] = "ARMY DILLO 2";
-static const char mapCavesBBlast[] = "BABOON BLAST COURSE";
-static const char mapCavesBeetleRace[] = "BEETLE RACE";
-static const char mapCaves5DCs[] = "FIVE DOOR CABINS";
-static const char mapCaves5DIs[] = "FIVE DOOR IGLOOS";
-static const char mapCavesIceCastle[] = "ICE CASTLE";
-static const char mapCavesRotatingRoom[] = "ROTATING ROOM";
-static const char mapCavesSprintCabin[] = "SPRINT CABIN";
+static const char mapCavesMain[] = "Main Map";
+static const char mapCavesDillo[] = "Army Dillo 2";
+static const char mapCavesBBlast[] = "Baboon Blast Course";
+static const char mapCavesBeetleRace[] = "Beetle Race";
+static const char mapCaves5DCs[] = "Five Door Cabins";
+static const char mapCaves5DIs[] = "Five Door Igloos";
+static const char mapCavesIceCastle[] = "Ice Castle";
+static const char mapCavesRotatingRoom[] = "Rotating Room";
+static const char mapCavesSprintCabin[] = "Sprint Cabin";
 
-static const char mapCavesPortal[] = "FROM PORTAL";
-static const char mapCavesCabinsArea[] = "CABINS AREA";
-static const char mapCavesGiantBoulder[] = "GIANT BOULDER ROOM";
-static const char mapCavesIceCastleArea[] = "ICE CASTLE AREA";
-static const char mapCavesIglooArea[] = "IGLOOS AREA";
-static const char mapCavesWaterfall[] = "WATERFALL";
+static const char mapCavesPortal[] = "From Portal";
+static const char mapCavesCabinsArea[] = "Cabins Area";
+static const char mapCavesGiantBoulder[] = "Giant Boulder Room";
+static const char mapCavesIceCastleArea[] = "Ice Castle Area";
+static const char mapCavesIglooArea[] = "Igloos Area";
+static const char mapCavesWaterfall[] = "Waterfall";
 
-static const char mapCaves5DCDK[] = "FIVE DOOR CABIN: DK";
-static const char mapCaves5DCDiddyCandle[] = "FIVE DOOR CABIN: DIDDY CANDLES";
-static const char mapCaves5DCDiddyEnemy[] = "FIVE DOOR CABIN: DIDDY ENEMIES";
-static const char mapCaves5DCTiny[] = "FIVE DOOR CABIN: TINY";
-static const char mapCaves5DCChunky[] = "FIVE DOOR CABIN: CHUNKY";
+static const char mapCaves5DCDK[] = "Five Door Cabin: DK";
+static const char mapCaves5DCDiddyCandle[] = "Five Door Cabin: Diddy Candles";
+static const char mapCaves5DCDiddyEnemy[] = "Five Door Cabin: Diddy Enemies";
+static const char mapCaves5DCTiny[] = "Five Door Cabin: Tiny";
+static const char mapCaves5DCChunky[] = "Five Door Cabin: Chunky";
 
-static const char mapCaves5DIDK[] = "FIVE DOOR IGLOO: DK";
-static const char mapCaves5DIDiddy[] = "FIVE DOOR IGLOO: DIDDY";
-static const char mapCaves5DILanky[] = "FIVE DOOR IGLOO: LANKY";
-static const char mapCaves5DITiny[] = "FIVE DOOR IGLOO: TINY";
-static const char mapCaves5DIChunky[] = "FIVE DOOR IGLOO: CHUNKY";
+static const char mapCaves5DIDK[] = "Five Door Igloo: DK";
+static const char mapCaves5DIDiddy[] = "Five Door Igloo: Diddy";
+static const char mapCaves5DILanky[] = "Five Door Igloo: Lanky";
+static const char mapCaves5DITiny[] = "Five Door Igloo: Tiny";
+static const char mapCaves5DIChunky[] = "Five Door Igloo: Chunky";
 
 void openCavesMainMenu(void) {
 	changeMenu(18);

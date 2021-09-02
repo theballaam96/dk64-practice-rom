@@ -1,18 +1,18 @@
 #include "../../include/common.h"
 
-static const char cheats_altermoveset[] = "MOVESET AND INVENTORY";
-static const char cheats_changegamemode[] = "CHANGE GAMEMODE";
-static const char cheats_cancelcs[] = "CANCEL CUTSCENE";
-static const char cheats_instantskew[] = "ACQUIRE REGULAR SKEW";
-static const char cheats_instantskew_inverse[] = "ACQUIRE CANNON SKEW";
-static const char cheats_snagcheats[] = "SPAWN SNAG CHEATS";
-static const char cheats_toggles[] = "TOGGLES";
-static const char cheats_undoflag[] = "UNDO LAST FLAG WRITE";
-static const char cheats_gaincontrol[] = "GAIN CONTROL";
-static const char cheats_endminigame[] = "FORCE END MINIGAME";
-static const char cheats_tagallwarps[] = "TAG ALL WARPS";
-static const char cheats_corrupt[] = "CORRUPT";
-static const char cheats_transform[] = "TRANSFORM";
+static const char cheats_altermoveset[] = "Moveset & Inventory";
+static const char cheats_changegamemode[] = "Change Gamemode";
+static const char cheats_cancelcs[] = "Cancel Cutscene";
+static const char cheats_instantskew[] = "Acquire Regular Skew";
+static const char cheats_instantskew_inverse[] = "Acquire Cannon Skew";
+static const char cheats_snagcheats[] = "Spawn Snag Cheats";
+static const char cheats_toggles[] = "Toggles";
+static const char cheats_undoflag[] = "Undo Last Flag Write";
+static const char cheats_gaincontrol[] = "Gain Control";
+static const char cheats_endminigame[] = "Force End Minigame";
+static const char cheats_tagallwarps[] = "Tag All Warps";
+static const char cheats_corrupt[] = "Corrupt";
+static const char cheats_transform[] = "Transform";
 //static const char cheats_killboss[] = "KILL BOSS";
 	
 static const short warp_flags[] = {

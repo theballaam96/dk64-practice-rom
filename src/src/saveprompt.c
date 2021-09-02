@@ -25,10 +25,11 @@ void displaySavePrompt(void) {
 						int _inadventure = DetectAdventure();
 						if ((_ingameover) || (_inadventure)) {
 							SavePromptTimer = 60;
-							spawnTextOverlay(10,240,210,"SAVING...",0,0,2,0);
+							spawnTextOverlay(10,240,210,"Saving...",0,0,2,0);
 							textOverlay = (TextOverlay *)CurrentActorPointer;
 							if (textOverlay) {
 								SavePromptActor = textOverlay;
+								textOverlay->style = 128;
 								textOverlay->opacity = 0xFF;
 							}
 						}

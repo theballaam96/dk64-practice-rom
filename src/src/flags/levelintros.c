@@ -1,25 +1,25 @@
 #include "../../include/common.h"
 
-static const char flag_japesintro_set[] = "JAPES INTRO: WATCHED";
-static const char flag_japesintro_clear[] = "JAPES INTRO: NOT WATCHED";
+static const char flag_japesintro_set[] = "Jaoes Intro: Watched";
+static const char flag_japesintro_clear[] = "Jaoes Intro: Not Watched";
 
-static const char flag_aztecintro_set[] = "AZTEC INTRO: WATCHED";
-static const char flag_aztecintro_clear[] = "AZTEC INTRO: NOT WATCHED";
+static const char flag_aztecintro_set[] = "Aztec Intro: Watched";
+static const char flag_aztecintro_clear[] = "Aztec Intro: Not Watched";
 
-static const char flag_factoryintro_set[] = "FACTORY INTRO: WATCHED";
-static const char flag_factoryintro_clear[] = "FACTORY INTRO: NOT WATCHED";
+static const char flag_factoryintro_set[] = "Factory Intro: Watched";
+static const char flag_factoryintro_clear[] = "Factory Intro: Not Watched";
 
-static const char flag_galleonintro_set[] = "GALLEON INTRO: WATCHED";
-static const char flag_galleonintro_clear[] = "GALLEON INTRO: NOT WATCHED";
+static const char flag_galleonintro_set[] = "Galleon Intro: Watched";
+static const char flag_galleonintro_clear[] = "Galleon Intro: Not Watched";
 
-static const char flag_fungiintro_set[] = "FUNGI INTRO: WATCHED";
-static const char flag_fungiintro_clear[] = "FUNGI INTRO: NOT WATCHED";
+static const char flag_fungiintro_set[] = "Fungi Intro: Watched";
+static const char flag_fungiintro_clear[] = "Fungi Intro: Not Watched";
 
-static const char flag_cavesintro_set[] = "CAVES INTRO: WATCHED";
-static const char flag_cavesintro_clear[] = "CAVES INTRO: NOT WATCHED";
+static const char flag_cavesintro_set[] = "Caves Intro: Watched";
+static const char flag_cavesintro_clear[] = "Caves Intro: Not Watched";
 
-static const char flag_castleintro_set[] = "CASTLE INTRO: WATCHED";
-static const char flag_castleintro_clear[] = "CASTLE INTRO: NOT WATCHED";
+static const char flag_castleintro_set[] = "Castle Intro: Watched";
+static const char flag_castleintro_clear[] = "Castle Intro: Not Watched";
 
 static const short levelintros_flags[] = {0x001B,0x005F,0x008C,0x00C2,0x0101,0x011A,0x015D};
 static const char levelintros_flag_types[] = {0,0,0,0,0,0,0};

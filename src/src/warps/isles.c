@@ -1,27 +1,27 @@
 #include "../../include/common.h"
 
-static const char mapIslesMain[] = "OVERWORLD";
-static const char mapIslesBFI[] = "INSIDE BANANA FAIRY ISLAND";
-static const char mapIslesKLumsy[] = "K. LUMSY";
-static const char mapIslesLobbies[] = "LOBBIES";
-static const char mapIslesSnides[] = "SNIDE'S ROOM";
-static const char mapIslesTrainingGrounds[] = "TRAINING GROUNDS";
-static const char mapIslesTreehouse[] = "TREEHOUSE";
+static const char mapIslesMain[] = "Overworld";
+static const char mapIslesBFI[] = "Inside Banana Fairy Island";
+static const char mapIslesKLumsy[] = "K. Lumsy";
+static const char mapIslesLobbies[] = "Lobbies";
+static const char mapIslesSnides[] = "Snide's Room";
+static const char mapIslesTrainingGrounds[] = "Training Grounds";
+static const char mapIslesTreehouse[] = "Treehouse";
 
-static const char mapIslesEscape[] = "ESCAPE";
-static const char mapIslesBFIArea[] = "BANANA FAIRY ISLAND AREA";
-static const char mapIslesKrocIsle[] = "KROC ISLE";
-static const char mapIslesOutsideKRool[] = "OUTSIDE K. ROOL";
-static const char mapIslesTopOfIsles[] = "TOP OF DK ISLES";
+static const char mapIslesEscape[] = "Escape";
+static const char mapIslesBFIArea[] = "Banana Fairy Island Area";
+static const char mapIslesKrocIsle[] = "Kroc Isle";
+static const char mapIslesOutsideKRool[] = "Outside K. Rool";
+static const char mapIslesTopOfIsles[] = "Top of DK Isles";
 
-static const char mapIslesLobbyJapes[] = "JUNGLE JAPES LOBBY";
-static const char mapIslesLobbyAztec[] = "ANGRY AZTEC LOBBY";
-static const char mapIslesLobbyFactory[] = "FRANTIC FACTORY LOBBY";
-static const char mapIslesLobbyGalleon[] = "GLOOMY GALLEON LOBBY";
-static const char mapIslesLobbyFungi[] = "FUNGI FOREST LOBBY";
-static const char mapIslesLobbyCaves[] = "CRYSTAL CAVES LOBBY";
-static const char mapIslesLobbyCastle[] = "CREEPY CASTLE LOBBY";
-static const char mapIslesLobbyHelm[] = "HIDEOUT HELM LOBBY";
+static const char mapIslesLobbyJapes[] = "Jungle Japes Lobby";
+static const char mapIslesLobbyAztec[] = "Angry Aztec Lobby";
+static const char mapIslesLobbyFactory[] = "Frantic Factory Lobby";
+static const char mapIslesLobbyGalleon[] = "Gloomy Galleon Lobby";
+static const char mapIslesLobbyFungi[] = "Fungi Forest Lobby";
+static const char mapIslesLobbyCaves[] = "Crystal Caves Lobby";
+static const char mapIslesLobbyCastle[] = "Creepy Castle Lobby";
+static const char mapIslesLobbyHelm[] = "Hideout Helm Lobby";
 
 void openIslesMainMenu(void) {
 	changeMenu(28);

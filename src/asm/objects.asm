@@ -76,5 +76,9 @@
 .importobj "obj/tagAnywhere.o"
 .importobj "obj/file_init.o"
 .importobj "obj/init.o"
+
+.importobj "obj/actor.o"
 .importobj "obj/ramview.o"
+.importobj "obj/debug.o"
+
 .importobj "obj/main.o"

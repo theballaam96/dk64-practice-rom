@@ -45,4 +45,5 @@ void cFuncLoop(void) {
 	handleLToTBV();
 	infiniteHealth();
 	fileInit();
+	controlWatchView();
 }

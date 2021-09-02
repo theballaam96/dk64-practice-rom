@@ -1,34 +1,34 @@
 #include "../../include/common.h"
 
-static const char mapFungiMain[] = "MAIN MAP";
-static const char mapFungiDogadon[] = "DOGADON 2";
-static const char mapFungiAnthill[] = "ANTHILL";
-static const char mapFungiBBlast[] = "BABOON BLAST COURSE";
-static const char mapFungiBarn[] = "BARN";
-static const char mapFungiDarkAttic[] = "DARK ATTIC";
-static const char mapFungiGiantMush[] = "GIANT MUSHROOM";
-static const char mapFungiLankyAttic[] = "LANKY'S ATTIC";
-static const char mapFungiMills[] = "MILLS";
-static const char mapFungiMinecart[] = "MINECART";
-static const char mapFungiWinch[] = "WINCH ROOM";
+static const char mapFungiMain[] = "Main Map";
+static const char mapFungiDogadon[] = "Dogadon 2";
+static const char mapFungiAnthill[] = "Anthill";
+static const char mapFungiBBlast[] = "Baboon Blast Course";
+static const char mapFungiBarn[] = "Barn";
+static const char mapFungiDarkAttic[] = "Dark Attic";
+static const char mapFungiGiantMush[] = "Giant Mushroom";
+static const char mapFungiLankyAttic[] = "Lanky's Attic";
+static const char mapFungiMills[] = "Mills";
+static const char mapFungiMinecart[] = "Minecart";
+static const char mapFungiWinch[] = "Winch Room";
 
-static const char mapFungiPortal[] = "FROM PORTAL";
-static const char mapFungiAppleSide[] = "APPLE SIDE";
-static const char mapFungiMillSide[] = "MILL SIDE";
-static const char mapFungiMushroomSide[] = "MUSHROOM SIDE";
-static const char mapFungiOwlSide[] = "OWL TREE";
-static const char mapFungiTopOfMushroom[] = "TOP OF MUSHROOM";
+static const char mapFungiPortal[] = "From Portal";
+static const char mapFungiAppleSide[] = "Apple Side";
+static const char mapFungiMillSide[] = "Mill Side";
+static const char mapFungiMushroomSide[] = "Mushroom Side";
+static const char mapFungiOwlSide[] = "Owl Tree";
+static const char mapFungiTopOfMushroom[] = "Top of Mushroom";
 
-static const char mapFungiGMushBottom[] = "GIANT MUSHROOM: BOTTOM";
-static const char mapFungiGMushMiddle[] = "GIANT MUSHROOM: MIDDLE";
-static const char mapFungiGMushTop[] = "GIANT MUSHROOM: TOP";
-static const char mapFungiGMushDark[] = "MUSHROOM TOP: DARK ROOM";
-static const char mapFungiGMushLight[] = "MUSHROOM TOP: LIGHT ROOM";
-static const char mapFungiGMushFace[] = "MUSHROOM TOP: FACE PUZZLE";
+static const char mapFungiGMushBottom[] = "Giant Mushroom: Bottom";
+static const char mapFungiGMushMiddle[] = "Giant Mushroom: Middle";
+static const char mapFungiGMushTop[] = "Giant Mushroom: Top";
+static const char mapFungiGMushDark[] = "Mushroom Top: Dark Room";
+static const char mapFungiGMushLight[] = "Mushroom Top: Light Room";
+static const char mapFungiGMushFace[] = "Mushroom Top: Face Puzzle";
 
-static const char mapFungiMillFront[] = "MILL: FRONT";
-static const char mapFungiMillRear[] = "MILL: REAR";
-static const char mapFungiMillSpider[] = "MILL: SPIDER BOSS";
+static const char mapFungiMillFront[] = "Mill: Front";
+static const char mapFungiMillRear[] = "Mill: Rear";
+static const char mapFungiMillSpider[] = "Mill: Spider Boss";
 
 void openFungiMainMenu(void) {
 	changeMenu(14);

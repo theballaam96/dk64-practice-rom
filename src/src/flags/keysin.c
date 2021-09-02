@@ -1,31 +1,31 @@
 #include "../../include/common.h"
 
-static const char flag_key0_set[] = "JAPES: OPEN";
-static const char flag_key0_clear[] = "JAPES: NOT OPEN";
+static const char flag_key0_set[] = "Japes: Open";
+static const char flag_key0_clear[] = "Japes: Not Open";
 
-static const char flag_key1_set[] = "KEY 1: TURNED";
-static const char flag_key1_clear[] = "KEY 1: NOT TURNED";
+static const char flag_key1_set[] = "Key 1: Turned";
+static const char flag_key1_clear[] = "Key 1: Not Turned";
 
-static const char flag_key2_set[] = "KEY 2: TURNED";
-static const char flag_key2_clear[] = "KEY 2: NOT TURNED";
+static const char flag_key2_set[] = "Key 2: Turned";
+static const char flag_key2_clear[] = "Key 2: Not Turned";
 
-static const char flag_key3_set[] = "KEY 3: TURNED";
-static const char flag_key3_clear[] = "KEY 3: NOT TURNED";
+static const char flag_key3_set[] = "Key 3: Turned";
+static const char flag_key3_clear[] = "Key 3: Not Turned";
 
-static const char flag_key4_set[] = "KEY 4: TURNED";
-static const char flag_key4_clear[] = "KEY 4: NOT TURNED";
+static const char flag_key4_set[] = "Key 4: Turned";
+static const char flag_key4_clear[] = "Key 4: Not Turned";
 
-static const char flag_key5_set[] = "KEY 5: TURNED";
-static const char flag_key5_clear[] = "KEY 5: NOT TURNED";
+static const char flag_key5_set[] = "Key 5: Turned";
+static const char flag_key5_clear[] = "Key 5: Not Turned";
 
-static const char flag_key6_set[] = "KEY 6: TURNED";
-static const char flag_key6_clear[] = "KEY 6: NOT TURNED";
+static const char flag_key6_set[] = "Key 6: Turned";
+static const char flag_key6_clear[] = "Key 6: Not Turned";
 
-static const char flag_key7_set[] = "KEY 7: TURNED";
-static const char flag_key7_clear[] = "KEY 7: NOT TURNED";
+static const char flag_key7_set[] = "Key 7: Turned";
+static const char flag_key7_clear[] = "Key 7: Not Turned";
 
-static const char flag_key8_set[] = "KEY 8: TURNED";
-static const char flag_key8_clear[] = "KEY 8: NOT TURNED";
+static const char flag_key8_set[] = "Key 8: Turned";
+static const char flag_key8_clear[] = "Key 8: Not Turned";
 
 static const short keysin_flags[] = {0x01BB,0x01BC,0x01BD,0x01BE,0x01BF,0x01C0,0x01C1,0x01C2,0x01C3};
 static const char keysin_flag_types[] = {0,0,0,0,0,0,0,0,0};

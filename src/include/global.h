@@ -69,6 +69,9 @@ extern void openDPadDMenu(void);
 extern void openVanillaVarsMenu(void);
 extern void openHackVarsMenu(void);
 
+extern void openActorMenu(void);
+extern void openDebugMenu(void);
+
 extern void openWatchMenu(void);
 extern void endClose(void);
 extern void toggleMenu(void);
@@ -117,6 +120,7 @@ extern void infiniteHealth(void);
 extern void isPaused(void);
 extern void checkMapType(void);
 extern void fileInit(void);
+extern void controlWatchView(void);
 
 extern void loadSettings(void);
 extern void saveSettings(void);
@@ -194,6 +198,12 @@ extern const Screen hack_struct;
 extern const Screen other_mapwarp_struct;
 extern const Screen toggles_struct;
 extern const Screen snagcheats_struct;
+extern const Screen gamemode_gameplay_struct;
+extern const Screen gamemode_cutscenes_struct;
+extern const Screen gamemode_unused_struct;
+extern const Screen debug_struct;
+extern Screen actor_struct;
+extern const Screen detailsscreen_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

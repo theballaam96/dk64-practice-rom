@@ -1,7 +1,7 @@
 #include "../../include/common.h"
 
-static const char mapArcade[] = "ARCADE (MYSTERY MENU)";
-static const char mapJetpac[] = "JETPAC (MYSTERY MENU)";
+static const char mapArcade[] = "Arcade (Mystery Menu)";
+static const char mapJetpac[] = "Jetpac (Mystery Menu)";
 
 static const unsigned char other_destmap[] = {
 	0x2, // Arcade

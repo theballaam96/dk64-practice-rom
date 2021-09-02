@@ -1,15 +1,15 @@
 #include "../../include/common.h"
 
-static const char moveset_giveallmoves[] = "GIVE ALL MOVES";
-static const char moveset_revokeallmoves[] = "REVOKE ALL MOVES";
-static const char moveset_cranky[] = "CRANKY";
-static const char moveset_funky[] = "FUNKY";
-static const char moveset_candy[] = "CANDY";
-static const char moveset_trainingbarrels[] = "TRAINING BARRELS";
-static const char moveset_camerashockwave_on[] = "CAMERA AND SHOCKWAVE: ON";
-static const char moveset_camerashockwave_off[] = "CAMERA AND SHOCKWAVE: OFF";
-static const char moveset_givecoins[] = "GIVE COINS";
-static const char moveset_restockinventory[] = "RESTOCK INVENTORY";
+static const char moveset_giveallmoves[] = "Give All Moves";
+static const char moveset_revokeallmoves[] = "Revoke All Moves";
+static const char moveset_cranky[] = "Cranky";
+static const char moveset_funky[] = "Funky";
+static const char moveset_candy[] = "Candy";
+static const char moveset_trainingbarrels[] = "Training Barrels";
+static const char moveset_camerashockwave_on[] = "Camera & Shockwave: On";
+static const char moveset_camerashockwave_off[] = "Camera & Shockwave: Off";
+static const char moveset_givecoins[] = "Give Coins";
+static const char moveset_restockinventory[] = "Restock Inventory";
 
 static const char* moveset_array[] = {
 	moveset_giveallmoves,

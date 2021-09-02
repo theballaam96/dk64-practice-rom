@@ -1,36 +1,36 @@
 #include "../include/common.h"
 
-static const char state_selected1[] = "SELECTED STATE: 1";
-static const char state_selected2[] = "SELECTED STATE: 2";
-static const char state_selected3[] = "SELECTED STATE: 3";
-static const char state_selected4[] = "SELECTED STATE: 4";
-static const char state_change[] = "CHANGE SAVESTATE";
-static const char state_save[] = "SAVE STATE";
-static const char state_load_position[] = "LOAD STATE FROM POSITION";
-static const char state_load_exit[] = "LOAD STATE FROM EXIT";
-static const char state_view[] = "VIEW STATE VARIABLES";
+static const char state_selected1[] = "Selected State: 1";
+static const char state_selected2[] = "Selected State: 2";
+static const char state_selected3[] = "Selected State: 3";
+static const char state_selected4[] = "Selected State: 4";
+static const char state_change[] = "Change Savestate";
+static const char state_save[] = "Save State";
+static const char state_load_position[] = "Load State from Position";
+static const char state_load_exit[] = "Load State from Exit";
+static const char state_view[] = "View State Variables";
 
-static const char change_savestate1[] = "SET TO: SAVESTATE 1";
-static const char change_savestate2[] = "SET TO: SAVESTATE 2";
-static const char change_savestate3[] = "SET TO: SAVESTATE 3";
-static const char change_savestate4[] = "SET TO: SAVESTATE 4";
+static const char change_savestate1[] = "Set to: Savestate 1";
+static const char change_savestate2[] = "Set to: Savestate 2";
+static const char change_savestate3[] = "Set to: Savestate 3";
+static const char change_savestate4[] = "Set to: Savestate 4";
 
-static const char var_data_true[] = "HAS DATA: TRUE";
-static const char var_data_false[] = "HAS DATA: FALSE";
+static const char var_data_true[] = "Has Data: True";
+static const char var_data_false[] = "Has Data: False";
 static const char var_xPos[16] = "X: 0";
 static const char var_yPos[16] = "Y: 0";
 static const char var_zPos[16] = "Z: 0";
-static const char var_facing[20] = "FACING: 0";
-static const char var_skew[20] = "SKEW: 0";
-static const char var_map[10] = "MAP: 0x0";
-static const char var_exit[10] = "EXIT: 0";
-static const char var_character[13] = "CHARACTER: 0";
-static const char var_helmtimer_off[] = "HELM TIMER: OFF";
-static const char var_helmtimer_time[25] = "HELM TIMER: 00:00.00";
-static const char var_isgtimer_off[] = "ISG TIMER: OFF";
-static const char var_isgtimer_timer[25] = "ISG TIMER: 00:00.00";
-static const char var_created_off[] = "CREATED: UNKNOWN";
-static const char var_created_diff[22] = "CREATED: 00:00:00 AGO";
+static const char var_facing[20] = "Facing: 0";
+static const char var_skew[20] = "Skew: 0";
+static const char var_map[10] = "Map: 0x0";
+static const char var_exit[10] = "Exit: 0";
+static const char var_character[13] = "Character: 0";
+static const char var_helmtimer_off[] = "Helm Timer: Off";
+static const char var_helmtimer_time[25] = "Helm Timer: 00:00.00";
+static const char var_isgtimer_off[] = "ISG Timer: Off";
+static const char var_isgtimer_timer[25] = "ISG Timer: 00:00.00";
+static const char var_created_off[] = "Created: Unknown";
+static const char var_created_diff[22] = "Created: 00:00:00 Ago";
 
 static Savestate state1 = {};
 static Savestate state2 = {};
@@ -95,7 +95,7 @@ void openStateViewMenu(void) {
 		createdHours = _time_diff / 3600;
 		createdMins = (_time_diff - (60 * createdHours)) / 60;
 		createdSecs = _time_diff - (3600 * createdHours) - (60 * createdMins);
-		dk_strFormat((char *)var_created_diff,"CREATED: %02d:%02d:%02d AGO",createdHours,createdMins,createdSecs);
+		dk_strFormat((char *)var_created_diff,"Created: %02d:%02d:%02d Ago",createdHours,createdMins,createdSecs);
 	} else {
 		viewstate_array[0] = var_data_false;
 		viewstate_array[1] = var_created_off;
@@ -108,9 +108,9 @@ void openStateViewMenu(void) {
 		helmTimeMins = (int)(float)(helmTimerUsed / 60);
 		helmTimeSecs = helmTimerUsed - (60 * helmTimeMins);
 		if (helmTimeSecs < 10) {
-			dk_strFormat((char *)var_helmtimer_time,"HELM TIMER: %d:0%f",helmTimeMins,helmTimeSecs);
+			dk_strFormat((char *)var_helmtimer_time,"Helm Timer: %d:0%f",helmTimeMins,helmTimeSecs);
 		} else {
-			dk_strFormat((char *)var_helmtimer_time,"HELM TIMER: %d:%f",helmTimeMins,helmTimeSecs);
+			dk_strFormat((char *)var_helmtimer_time,"Helm Timer: %d:%f",helmTimeMins,helmTimeSecs);
 		}
 	} else {
 		viewstate_array[10] = var_helmtimer_off;
@@ -122,9 +122,9 @@ void openStateViewMenu(void) {
 		isgTimeMins = (int)(float)(isgTimerUsed / 60);
 		isgTimeSecs = isgTimerUsed - (60 * isgTimeMins);
 		if (isgTimeSecs < 10) {
-			dk_strFormat((char *)var_isgtimer_timer,"ISG TIMER: %d:0%f",isgTimeMins,isgTimeSecs);
+			dk_strFormat((char *)var_isgtimer_timer,"ISG Timer: %d:0%f",isgTimeMins,isgTimeSecs);
 		} else {
-			dk_strFormat((char *)var_isgtimer_timer,"ISG TIMER: %d:%f",isgTimeMins,isgTimeSecs);
+			dk_strFormat((char *)var_isgtimer_timer,"ISG Timer: %d:%f",isgTimeMins,isgTimeSecs);
 		}
 	} else {
 		viewstate_array[11] = var_isgtimer_off;
@@ -138,11 +138,11 @@ void openStateViewMenu(void) {
 	dk_strFormat((char *)var_xPos,"X: %f",states[_focused_state]->xPos);
 	dk_strFormat((char *)var_yPos,"Y: %f",states[_focused_state]->yPos);
 	dk_strFormat((char *)var_zPos,"Z: %f",states[_focused_state]->zPos);
-	dk_strFormat((char *)var_facing,"FACING: %f",facing);
-	dk_strFormat((char *)var_skew,"SKEW: %f",skew);
-	dk_strFormat((char *)var_map,"MAP: 0x%X",states[_focused_state]->Map);
-	dk_strFormat((char *)var_exit,"EXIT: %d",states[_focused_state]->Exit);
-	dk_strFormat((char *)var_character,"CHARACTER: %d",states[_focused_state]->Character);
+	dk_strFormat((char *)var_facing,"Facing: %f",facing);
+	dk_strFormat((char *)var_skew,"Skew: %f",skew);
+	dk_strFormat((char *)var_map,"Map: 0x%X",states[_focused_state]->Map);
+	dk_strFormat((char *)var_exit,"Exit: %d",states[_focused_state]->Exit);
+	dk_strFormat((char *)var_character,"Character: %d",states[_focused_state]->Character);
 	changeMenu(42);
 }
 

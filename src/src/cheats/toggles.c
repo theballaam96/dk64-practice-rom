@@ -1,38 +1,38 @@
 #include "../../include/common.h"
 
-static const char toggles_moonkick_off[] = "AUTO-MOONKICK: OFF";
-static const char toggles_moonkick_on[] = "AUTO-MOONKICK: ON";
+static const char toggles_moonkick_off[] = "Auto-Moonkick: Off";
+static const char toggles_moonkick_on[] = "Auto-Moonkick: On";
 
-static const char toggles_phase_off[] = "AUTO-PHASE STATE: OFF";
-static const char toggles_phase_on[] = "AUTO-PHASE STATE: ON";
+static const char toggles_phase_off[] = "Auto-Phase State: Off";
+static const char toggles_phase_on[] = "Auto-Phase State: On";
 
-static const char toggles_sandstorm_unk[] = "AZTEC SANDSTORM: UNKNOWN";
-static const char toggles_sandstorm_off[] = "AZTEC SANDSTORM: OFF";
-static const char toggles_sandstorm_on[] = "AZTEC SANDSTORM: ON";
+static const char toggles_sandstorm_unk[] = "Aztec Sandstorm: ?";
+static const char toggles_sandstorm_off[] = "Aztec Sandstorm: Off";
+static const char toggles_sandstorm_on[] = "Aztec Sandstorm: On";
 
-static const char toggles_enemyspawn_off[] = "ENEMY SPAWNING: OFF";
-static const char toggles_enemyspawn_on[] = "ENEMY SPAWNING: ON";
+static const char toggles_enemyspawn_off[] = "Enemy Spawning: Off";
+static const char toggles_enemyspawn_on[] = "Enemy Spawning: On";
 
-static const char toggles_infhealth_off[] = "INFINITE HEALTH: OFF";
-static const char toggles_infhealth_on[] = "INFINITE HEALTH: ON";
+static const char toggles_infhealth_off[] = "Infinite Health: Off";
+static const char toggles_infhealth_on[] = "Infinite Health: On";
 
-static const char toggles_ltocancelcs_off[] = "L TO CANCEL CUTSCENE: OFF";
-static const char toggles_ltocancelcs_on[] = "L TO CANCEL CUTSCENE: ON";
+static const char toggles_ltocancelcs_off[] = "L to Cancel Cutscene: Off";
+static const char toggles_ltocancelcs_on[] = "L to Cancel Cutscene: On";
 
-static const char toggles_ltoendminigame_off[] = "L TO END MINIGAME: OFF";
-static const char toggles_ltoendminigame_on[] = "L TO END MINIGAME: ON";
+static const char toggles_ltoendminigame_off[] = "L to End Minigame: Off";
+static const char toggles_ltoendminigame_on[] = "L to End Minigame: On";
 
-static const char toggles_levitate_off[] = "L TO LEVITATE: OFF";
-static const char toggles_levitate_on[] = "L TO LEVITATE: ON";
+static const char toggles_levitate_off[] = "L to Levitate: Off";
+static const char toggles_levitate_on[] = "L to Levitate: On";
 
-static const char toggles_ltotoggletb_off[] = "L TO TOGGLE TAG BARREL VOID: OFF";
-static const char toggles_ltotoggletb_on[] = "L TO TOGGLE TAG BARREL VOID: ON";
+static const char toggles_ltotoggletb_off[] = "L to Toggle Tag Barrel Void: Off";
+static const char toggles_ltotoggletb_on[] = "L to Toggle Tag Barrel Void: On";
 
-static const char toggles_superspeed_off[] = "L TO SUPERSPEED: OFF";
-static const char toggles_superspeed[20] = "L TO SUPERSPEED: 1x";
-static const char toggles_toggletb[] = "TOGGLE TAG BARREL VOID";
-static const char toggles_visify[] = "TOGGLE VISIBILITY";
-static const char toggles_turnoffall[] = "TURN OFF ALL CHEATS";
+static const char toggles_superspeed_off[] = "L to Superspeed: Off";
+static const char toggles_superspeed[20] = "L to Superspeed: 1x";
+static const char toggles_toggletb[] = "Toggle Tag Barrel Void";
+static const char toggles_visify[] = "Toggle Visibility";
+static const char toggles_turnoffall[] = "Turn off all cheats";
 
 static const char* toggles_array[] = {
 	toggles_moonkick_off,
@@ -95,7 +95,7 @@ void openTogglesMenu(void) {
 	} else {
 		toggles_array[7] = toggles_levitate_off;
 	}
-	dk_strFormat((char *)toggles_superspeed,"L TO SUPERSPEED: %dx",IsSuperspeedOn);
+	dk_strFormat((char *)toggles_superspeed,"L to Superspeed: %dx",IsSuperspeedOn);
 	if (IsSuperspeedOn == 1) {
 		toggles_array[8] = toggles_superspeed_off;
 	} else {

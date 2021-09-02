@@ -1,10 +1,10 @@
 #include "../../include/common.h"
 
-static const char flag_arcader1_set[] = "ARCADE ROUND 1: BEATEN";
-static const char flag_arcader1_clear[] = "ARCADE ROUND 1: NOT BEATEN";
+static const char flag_arcader1_set[] = "Arcade Round 1: Beaten";
+static const char flag_arcader1_clear[] = "Arcade Round 1: Not Beaten";
 
-static const char flag_rabbitr1_set[] = "RABBIT RACE ROUND 1: BEATEN";
-static const char flag_rabbitr1_clear[] = "RABBIT RACE ROUND 1: NOT BEATEN";
+static const char flag_rabbitr1_set[] = "Rabbit Race Round 1: Beaten";
+static const char flag_rabbitr1_clear[] = "Rabbit Race Round 1: Not Beaten";
 
 static const short misc_flags[] = {0x0082,0x00F8};
 static const char misc_flag_types[] = {0,0};

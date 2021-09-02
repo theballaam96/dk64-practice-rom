@@ -1,18 +1,17 @@
 #include "../include/common.h"
 
-static const char returnLine[] = "RETURN";
-static const char warp[] = "WARP TO MAP";
-static const char flags[] = "SPECIAL FLAGS";
-static const char saves[] = "SAVE STATES";
-static const char watches[] = "WATCHES";
-static const char ramview[] = "RAM VIEWER (WIP)";
-static const char timerSettings[] = "TIMER SETTINGS";
-static const char fileStates[] = "FILE STATES";
-static const char cheats[] = "CHEATS";
-static const char settings[] = "SETTINGS";
-static const char hackTitle[] = "DK64 PRACTICE ROM";
+static const char warp[] = "Warp to Map";
+static const char flags[] = "Special Flags";
+static const char saves[] = "Save States";
+static const char watches[] = "Watches";
+static const char ramview[] = "Debug";
+static const char timerSettings[] = "Timer Settings";
+static const char fileStates[] = "File States";
+static const char cheats[] = "Cheats";
+static const char settings[] = "Settings";
+static const char hackTitle[] = "DK64 Practice ROM";
 //static const char hackVersion[] = "VERSION 1.4.1";
-static const char hackVersion[] = "1.4.1 TEST: 30AUG2021";
+static const char hackVersion[] = "1.4.1 Test: 30AUG2021";
 
 static const char* main_array[] = {
 	warp,
@@ -110,6 +109,12 @@ const Screen* menu_screens[] = {
 	&other_mapwarp_struct,
 	&toggles_struct,
 	&snagcheats_struct,
+	&gamemode_gameplay_struct,
+	&gamemode_cutscenes_struct,
+	&gamemode_unused_struct,
+	&debug_struct,
+	&actor_struct,
+	&detailsscreen_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -117,35 +122,39 @@ void spawnMenu(int screenIndex) {
 	int x = 25;
 	int y = 25;
 	int style = 10;
-	Screen* focused_screen = menu_screens[screenIndex];
+	const Screen* focused_screen = menu_screens[screenIndex];
 	int* focused_text_array = (int*)focused_screen->TextArray;
 	int array_count = focused_screen->ArrayItems;
-	for (int i = 0; i < array_count; i++) {
+		for (int i = 0; i < array_count; i++) {
 		spawnTextOverlay(style,x,y,(char *)focused_text_array[i],0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		ActiveToolsMenu[i] = textOverlay;
 		textOverlay->opacity = 0xFF;
+		textOverlay->style = 128;
 		if (i == ActiveMenu.positionIndex) {
 			textOverlay->red = 0xFF;
 			textOverlay->green = 0xD7;
 			textOverlay->blue = 0;
 		}
-		y += 10;
+		y += 13;
 	}
-	spawnTextOverlay(style,x,y,(char *)returnLine,0,0,2,0);
+	spawnTextOverlay(style,x,y,"Return",0,0,2,0);
 	textOverlay = (TextOverlay *)CurrentActorPointer;
 	textOverlay->opacity = 0xFF;
+	textOverlay->style = 128;
 	ActiveToolsMenu[array_count] = textOverlay;
 	if (screenIndex == 0) {
 		spawnTextOverlay(style,180,25,(char *)hackTitle,0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		textOverlay->opacity = 0xFF;
+		textOverlay->style = 128;
 		HackTitle = textOverlay;
 		//int version_x = 217;
 		int version_x = 163;
-		spawnTextOverlay(style,version_x,35,(char *)hackVersion,0,0,2,0);
+		spawnTextOverlay(style,version_x,38,(char *)hackVersion,0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		textOverlay->opacity = 0xFF;
+		textOverlay->style = 128;
 		HackVersion = textOverlay;
 	}
 	ActiveMenu.isOpen = 1;
@@ -182,8 +191,21 @@ void toggleMenu(void) {
 					ActiveMenu.positionIndex = 0;
 					if (ActiveMenu.isOpen == 0) {
 						spawnMenu(0);
+						if (ActorNamesTable) {
+							dk_free(ActorNamesTable);
+							ActorNamesTable = 0;
+						}
+						actorNames* copy_space = dk_malloc(0x1580);
+						ActorNamesTable = copy_space;
+						int* file_size;
+						*(int*)(&file_size) = 0x1580;
+						copyFromROM(0x2000000,copy_space,&file_size,0,0,0,0);
 					} else {
 						clearMenu();
+						if (ActorNamesTable) {
+							dk_free(ActorNamesTable);
+							ActorNamesTable = 0;
+						}
 						ClosingMenu = 1;
 					}
 				}
@@ -202,7 +224,7 @@ void moveSlot(void) {
 			if (IsPauseMenuOpen == 0) {
 				if ((ControllerInput.Buttons & L_Button) == 0) {
 					int screenIndex = ActiveMenu.screenIndex;
-					Screen* focused_screen = menu_screens[screenIndex];
+					const Screen* focused_screen = menu_screens[screenIndex];
 					int cap = focused_screen->ArrayItems + 1;
 					int _position = ActiveMenu.positionIndex;
 					if (NewlyPressedControllerInput.Buttons & D_Up) {
@@ -249,9 +271,13 @@ void moveSlot(void) {
 };
 
 void closeMenuOnTransition(void) {
-	if (ActiveMenu.isOpen) {
-		if ((TransitionSpeed > 0) || (CutsceneActive == 6)) {
+	if ((TransitionSpeed > 0) || (CutsceneActive == 6)) {
+		if (ActiveMenu.isOpen) {
 			clearMenu();
+		}
+		if (ActorNamesTable) {
+			dk_free(ActorNamesTable);
+			ActorNamesTable = 0;
 		}
 	}
 }
@@ -271,12 +297,19 @@ void emergencyClose(void) {
 				NewMenu_ErrorStart = FrameReal;
 				spawnTextOverlay(10,100,200,"EMERGENCY: ERROR 01",0,0,2,0);
 				textOverlay = (TextOverlay *)CurrentActorPointer;
-				textOverlay->opacity = 0xFF;
-				textOverlay->red = 0xFF;
-				textOverlay->green = 0;
-				textOverlay->blue = 0;
+				if (textOverlay) {
+					textOverlay->opacity = 0xFF;
+					textOverlay->red = 0xFF;
+					textOverlay->green = 0;
+					textOverlay->blue = 0;
+					textOverlay->style = 128;
+				}
 				ActiveTools_Error = textOverlay;
 				clearMenu();
+				if (ActorNamesTable) {
+					dk_free(ActorNamesTable);
+					ActorNamesTable = 0;
+				}
 			}
 		}
 	}
@@ -287,8 +320,12 @@ void previousScreen(void) {
 	clearMenu();
 	if (screenIndex == 0) {
 		ClosingMenu = 1;
+		if (ActorNamesTable) {
+			dk_free(ActorNamesTable);
+			ActorNamesTable = 0;
+		}
 	} else {
-		Screen* focused_screen = menu_screens[screenIndex];
+		const Screen* focused_screen = menu_screens[screenIndex];
 		int newScreen = focused_screen->ParentScreen;
 		int newPosition = focused_screen->ParentPosition;
 		ActiveMenu.screenIndex = newScreen;
@@ -298,7 +335,7 @@ void previousScreen(void) {
 }
 
 void confirmOptionBackground(void) {
-	Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
+	const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
 	int* focused_function_array = (int *)focused_screen->FunctionArray;
 	int cap = focused_screen->ArrayItems;
 	if (ActiveMenu.positionIndex == cap) {
@@ -364,7 +401,7 @@ static const int main_functions[] = {
 	(int)&openFlagsMainMenu,
 	(int)&openStateMenu,
 	(int)&openWatchMenu,
-	0, //(int)&initRamViewerTab,
+	(int)&openDebugMenu,
 	(int)&openTimerSettingsMenu,
 	(int)&openFileStateMainMenu,
 	(int)&openCheatsMenu,

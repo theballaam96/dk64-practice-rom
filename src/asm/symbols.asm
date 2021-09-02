@@ -76,6 +76,7 @@
 .definelabel ScreenRatio, 0x807444C0
 .definelabel CurrentActorPointer, 0x807FBB44
 .definelabel LoadedActorCount, 0x807FBB35
+.definelabel LoadedActorArray, 0x807FB930
 .definelabel SpawnerMasterData, 0x807FDC88
 .definelabel MenuSkyTopRGB, 0x80754F4C
 .definelabel MenuSkyRGB, 0x80754F4F
@@ -153,6 +154,7 @@
 .definelabel KRoolRoundSetting, 0x807FFFD4 // u8
 .definelabel FileInitQOLOff, 0x807FFFD3 // u8
 .definelabel InputStickMax, 0x807FFFD2 // u8
+.definelabel ActorNamesTable, 0x807FFFCC // u32 ptr
 .definelabel FrameAdvanceStart, 0x807FFFC8 // u32
 .definelabel DisableStartupSkip, 0x807FFFC7 // u8
 .definelabel DisableForcedStorySkip, 0x807FFFC6 // u8
@@ -160,6 +162,7 @@
 .definelabel AutoPhaseStateOn, 0x807FFDF8 // u8
 .definelabel GiantKoshaTimerAddress, 0x807FFDF4 // u32
 .definelabel GiantKoshaTimerValue, 0x807FFDF2 // u16
+.definelabel FocusedActorViewPointer, 0x807FFDE8 // u32
 .definelabel MenuShortcutButtonsOff, 0x807FFDDB // u8
 .definelabel FrameAdvancing, 0x807FFDDA // u8
 .definelabel ArtificialPauseOn, 0x807FFDD9 // u8

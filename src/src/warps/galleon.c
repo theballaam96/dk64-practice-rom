@@ -1,29 +1,29 @@
 #include "../../include/common.h"
 
-static const char mapGalleonMain[] = "MAIN MAP";
-static const char mapGalleonPufftoss[] = "PUFFTOSS";
-static const char mapGalleonBBlast[] = "BABOON BLAST COURSE";
-static const char mapGalleonSeasick[] = "K. ROOL'S SHIP";
-static const char mapGalleonLighthouse[] = "LIGHTHOUSE";
-static const char mapGalleonMermaid[] = "MERMAID PALACE";
-static const char mapGalleonMechFish[] = "MECHANICAL FISH";
-static const char mapGalleonSeal[] = "SEAL RACE";
-static const char mapGalleonShipwrecks[] = "SHIPWRECKS";
-static const char mapGalleonSubmarine[] = "SUBMARINE";
-static const char mapGalleonTreasureChest[] = "TREASURE CHEST";
+static const char mapGalleonMain[] = "Main Map";
+static const char mapGalleonPufftoss[] = "Pufftoss";
+static const char mapGalleonBBlast[] = "Baboon Blast Course";
+static const char mapGalleonSeasick[] = "K. Rool's Ship";
+static const char mapGalleonLighthouse[] = "Lighthouse";
+static const char mapGalleonMermaid[] = "Mermaid Palace";
+static const char mapGalleonMechFish[] = "Mechanical Fish";
+static const char mapGalleonSeal[] = "Seal Race";
+static const char mapGalleonShipwrecks[] = "Shipwrecks";
+static const char mapGalleonSubmarine[] = "Submarine";
+static const char mapGalleonTreasureChest[] = "Treasure Chest";
 
-static const char mapGalleonPortal[] = "FROM PORTAL";
-static const char mapGalleonCranky[] = "CRANKY AREA";
-static const char mapGalleonLighthouseArea[] = "LIGHTHOUSE SIDE";
-static const char mapGalleonShipwreckSide[] = "SHIPWRECK SIDE";
+static const char mapGalleonPortal[] = "From Portal";
+static const char mapGalleonCranky[] = "Cranky Area";
+static const char mapGalleonLighthouseArea[] = "Lighthouse Side";
+static const char mapGalleonShipwreckSide[] = "Shipwreck Side";
 
-static const char mapGalleon5DSDK[] = "FIVE DOOR SHIP: DK";
-static const char mapGalleon5DSDiddy[] = "FIVE DOOR SHIP: DIDDY";
-static const char mapGalleon5DSLanky[] = "FIVE DOOR SHIP: LANKY";
-static const char mapGalleon5DSTiny[] = "FIVE DOOR SHIP: TINY";
-static const char mapGalleon5DSChunky[] = "FIVE DOOR SHIP: CHUNKY";
-static const char mapGalleon2DSLanky[] = "TWO DOOR SHIP: LANKY";
-static const char mapGalleon2DSTiny[] = "TWO DOOR SHIP: TINY";
+static const char mapGalleon5DSDK[] = "Five Door Ship: DK";
+static const char mapGalleon5DSDiddy[] = "Five Door Ship: Diddy";
+static const char mapGalleon5DSLanky[] = "Five Door Ship: Lanky";
+static const char mapGalleon5DSTiny[] = "Five Door Ship: Tiny";
+static const char mapGalleon5DSChunky[] = "Five Door Ship: Chunky";
+static const char mapGalleon2DSLanky[] = "Two Door Ship: Lanky";
+static const char mapGalleon2DSTiny[] = "Two Door Ship: Tiny";
 
 void openGalleonMainMenu(void) {
 	changeMenu(10);

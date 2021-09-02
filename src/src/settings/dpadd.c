@@ -1,10 +1,10 @@
 #include "../../include/common.h"
 
-static char dpadd_current_taganywhere[] = "CURRENT: TAG ANYWHERE";
-static char dpadd_current_nothing[] = "CURRENT: NOTHING";
+static char dpadd_current_taganywhere[] = "Current: Tag Anywhere";
+static char dpadd_current_nothing[] = "Current: Nothing";
 
-static char dpadd_taganywhere[] = "SET TO TAG ANYWHERE";
-static char dpadd_nothing[] = "SET TO NOTHING";
+static char dpadd_taganywhere[] = "Set to: Tag Anywhere";
+static char dpadd_nothing[] = "Set to: Nothing";
 
 static char* current_dpadd[] = {
 	dpadd_current_taganywhere,
