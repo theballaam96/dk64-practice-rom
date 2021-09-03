@@ -45,6 +45,9 @@ mv mapwarp_list.o obj/
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/aesthetic.c
 mv aesthetic.o obj/
 
+mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/watch/snag_watch.c
+mv snag_watch.o obj/
+
 mips64-elf-gcc -Wall -O1 -mtune=vr4300 -march=vr4300 -mabi=32 -fomit-frame-pointer -G0 -c src/watch/timer.c
 mv timer.o obj/
 

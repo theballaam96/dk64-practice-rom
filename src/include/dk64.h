@@ -40,6 +40,8 @@ extern void playCutscene(void* actor, int cutscene_index, int cutscene_type);
 extern void setHUDItemAsInfinite(int item_index, int player_index, char isInfinite);
 extern void osWritebackDCacheAll();
 extern void copyFromROM(int rom_start, void* write_Location, void* file_size_location, int unk1, int unk2, int unk3, int unk4);
+extern int getActorSpawnerID(void* actor);
+extern void textOverlayCode(void);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -125,6 +127,7 @@ extern int* sprite_table[0xAF];
 extern char sprite_translucency;
 extern int* bbbandit_array[4];
 extern char StoredDamage;
+extern void* ActorSpawnerPointer;
 
 //hack data
 extern int TestVariable;
@@ -204,4 +207,5 @@ extern char KRoolRoundSetting;
 extern char FileInitQOLOff;
 extern char InputStickMax;
 extern actorNames* ActorNamesTable;
+extern actorNames* SnagNamesTable;
 extern actorData* FocusedActorViewPointer;

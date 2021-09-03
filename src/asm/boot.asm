@@ -178,6 +178,12 @@ TextResizeHook:
 DefineAMFontHook:
 	J 	defineActiveMenuOtherParams
 	NOP
+ActorRunDuringFrameAdvanceHook:
+	J 	handleFrameAdvanceActorRun
+	NOP
+TextOverlayIsolationHook:
+	J 	isolateTextOverlays
+	NOP
 
 loadExtraHooks:
 	// Color other font styles
@@ -208,6 +214,17 @@ loadExtraHooks:
 	LW t3, lo(DefineAMFontHook) (t3)
 	LUI t4, 0x806A
 	SW 	t3, 0xD8B0 (t4) // Store Hook
+
+	LUI t3, hi(ActorRunDuringFrameAdvanceHook)
+	LW t3, lo(ActorRunDuringFrameAdvanceHook) (t3)
+	LUI t4, 0x8060
+	SW 	t3, 0xC3FC (t4) // Store Hook
+
+	LUI t3, hi(TextOverlayIsolationHook)
+	LW t3, lo(TextOverlayIsolationHook) (t3)
+	LUI t4, 0x8068
+	SW 	t3, 0x8928 (t4) // Store Hook
+	SW 	r0, 0x892C (t4) // Store NOP
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

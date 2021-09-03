@@ -14,6 +14,7 @@
 .importobj "obj/othermaps.o"
 .importobj "obj/mapwarp_list.o"
 
+.importobj "obj/snag_watch.o"
 .importobj "obj/timer.o"
 .importobj "obj/timer_settings.o"
 .importobj "obj/watchContainer.o"

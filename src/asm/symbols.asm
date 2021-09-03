@@ -31,6 +31,8 @@
 .definelabel setHUDItemAsInfinite, 0x806FB370
 .definelabel osWritebackDCacheAll, 0x800052E0
 .definelabel copyFromROM, 0x8060B140
+.definelabel getActorSpawnerIDFromTiedActor, 0x80688E68
+.definelabel textOverlayCode, 0x8069DA54
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -116,6 +118,7 @@
 .definelabel sprite_translucency, 0x807FC80F
 .definelabel bbbandit_array, 0x8002DB80
 .definelabel StoredDamage, 0x807FCC4D // s8
+.definelabel ActorSpawnerPointer, 0x807FC400 // u32 ptr
 
 //hack data
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
@@ -158,6 +161,7 @@
 .definelabel FrameAdvanceStart, 0x807FFFC8 // u32
 .definelabel DisableStartupSkip, 0x807FFFC7 // u8
 .definelabel DisableForcedStorySkip, 0x807FFFC6 // u8
+.definelabel SnagNamesTable, 0x807FFFC0 // u32 ptr
 .definelabel SandstormAddress, 0x807FFDFC // u32
 .definelabel AutoPhaseStateOn, 0x807FFDF8 // u8
 .definelabel GiantKoshaTimerAddress, 0x807FFDF4 // u32

@@ -11,7 +11,7 @@ static const char cheats[] = "Cheats";
 static const char settings[] = "Settings";
 static const char hackTitle[] = "DK64 Practice ROM";
 //static const char hackVersion[] = "VERSION 1.4.1";
-static const char hackVersion[] = "1.4.1 Test: 30AUG2021";
+static const char hackVersion[] = "1.4.1 Test: 3SEPT2021";
 
 static const char* main_array[] = {
 	warp,
@@ -115,6 +115,10 @@ const Screen* menu_screens[] = {
 	&debug_struct,
 	&actor_struct,
 	&detailsscreen_struct,
+	&watch_player_struct,
+	&watch_timers_struct,
+	&watch_sysenv_struct,
+	&watch_snag_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -125,7 +129,10 @@ void spawnMenu(int screenIndex) {
 	const Screen* focused_screen = menu_screens[screenIndex];
 	int* focused_text_array = (int*)focused_screen->TextArray;
 	int array_count = focused_screen->ArrayItems;
-		for (int i = 0; i < array_count; i++) {
+	if (ActiveMenu.positionIndex >= array_count) {
+		ActiveMenu.positionIndex = array_count - 1;
+	}
+	for (int i = 0; i < array_count; i++) {
 		spawnTextOverlay(style,x,y,(char *)focused_text_array[i],0,0,2,0);
 		textOverlay = (TextOverlay *)CurrentActorPointer;
 		ActiveToolsMenu[i] = textOverlay;
@@ -183,7 +190,7 @@ void clearMenu(void) {
 };
 
 void toggleMenu(void) {
-	if ((TBVoidByte & 2) == 0) {
+	if (((TBVoidByte & 2) == 0) || (ArtificialPauseOn)) {
 		if (IsPauseMenuOpen == 0) {
 			if (CurrentMap != 0x50) {
 				if ((ControllerInput.Buttons & R_Button) && (NewlyPressedControllerInput.Buttons & L_Button)) {
@@ -195,16 +202,28 @@ void toggleMenu(void) {
 							dk_free(ActorNamesTable);
 							ActorNamesTable = 0;
 						}
+						if (SnagNamesTable) {
+							dk_free(SnagNamesTable);
+							SnagNamesTable = 0;
+						}
 						actorNames* copy_space = dk_malloc(0x1580);
 						ActorNamesTable = copy_space;
 						int* file_size;
 						*(int*)(&file_size) = 0x1580;
 						copyFromROM(0x2000000,copy_space,&file_size,0,0,0,0);
+						copy_space = dk_malloc(0x350);
+						SnagNamesTable = copy_space;
+						*(int*)(&file_size) = 0x350;
+						copyFromROM(0x2001800,copy_space,&file_size,0,0,0,0);
 					} else {
 						clearMenu();
 						if (ActorNamesTable) {
 							dk_free(ActorNamesTable);
 							ActorNamesTable = 0;
+						}
+						if (SnagNamesTable) {
+							dk_free(SnagNamesTable);
+							SnagNamesTable = 0;
 						}
 						ClosingMenu = 1;
 					}
@@ -220,7 +239,7 @@ void moveSlot(void) {
 	unsigned char _green;
 	unsigned char _blue;
 	if (ActiveMenu.isOpen) {
-		if ((TBVoidByte & 2) == 0) {
+		if (((TBVoidByte & 2) == 0) || (ArtificialPauseOn)) {
 			if (IsPauseMenuOpen == 0) {
 				if ((ControllerInput.Buttons & L_Button) == 0) {
 					int screenIndex = ActiveMenu.screenIndex;
@@ -279,6 +298,10 @@ void closeMenuOnTransition(void) {
 			dk_free(ActorNamesTable);
 			ActorNamesTable = 0;
 		}
+		if (SnagNamesTable) {
+			dk_free(SnagNamesTable);
+			SnagNamesTable = 0;
+		}
 	}
 }
 
@@ -310,6 +333,10 @@ void emergencyClose(void) {
 					dk_free(ActorNamesTable);
 					ActorNamesTable = 0;
 				}
+				if (SnagNamesTable) {
+					dk_free(SnagNamesTable);
+					SnagNamesTable = 0;
+				}
 			}
 		}
 	}
@@ -323,6 +350,10 @@ void previousScreen(void) {
 		if (ActorNamesTable) {
 			dk_free(ActorNamesTable);
 			ActorNamesTable = 0;
+		}
+		if (SnagNamesTable) {
+			dk_free(SnagNamesTable);
+			SnagNamesTable = 0;
 		}
 	} else {
 		const Screen* focused_screen = menu_screens[screenIndex];
@@ -350,7 +381,7 @@ void confirmOptionBackground(void) {
 
 void confirmOption(void) {
 	if (ActiveMenu.isOpen) {
-		if ((TBVoidByte & 2) == 0) {
+		if (((TBVoidByte & 2) == 0) || (ArtificialPauseOn)) {
 			if (IsPauseMenuOpen == 0) {
 				if (NewlyPressedControllerInput.Buttons & L_Button) {
 					if ((ControllerInput.Buttons & R_Button) == 0) {

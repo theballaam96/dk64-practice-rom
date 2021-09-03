@@ -5,6 +5,7 @@ void cFuncLoop(void) {
 	changeCustomFlagVariable();
 	isPaused();
 	checkMapType();
+	updateLoadedActorNoTextOverlayList(0);
 	handleTimer();
 	toggleMenu();
 	moveSlot();
@@ -18,6 +19,7 @@ void cFuncLoop(void) {
 	startupSkip();
 	closeWatchesOnTransition();
 	openWatchesOnTransition();
+	shouldRefreshTOMenu();
 	handleWatch();
 	clampWatchFloats();
 	tagAnywhere();

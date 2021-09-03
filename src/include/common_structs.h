@@ -9,11 +9,15 @@ typedef struct actorData {
 	/* 0x058 */ int actorType;
 	/* 0x05C */ char unk_5C[0x7C-0x5C];
 	/* 0x07C */ float xPos;
-	/* 0x080 */ char unk_80[0xB8-0x80];
+	/* 0x080 */ float yPos;
+	/* 0x084 */ float zPos;
+	/* 0x088 */ char unk_80[0xB8-0x88];
 	/* 0x0B8 */ float hSpeed;
 	/* 0x0BC */ char unk_BC[0x154-0xBC];
 	/* 0x154 */ char control_state;
 	/* 0x155 */ char control_state_progress;
+	/* 0x156 */ char unk_156[0x180-0x156];
+	/* 0x180 */ void* tied_character_spawner;
 } actorData;
 
 typedef struct cameraData {
@@ -495,3 +499,15 @@ typedef struct loadedActorArr {
 typedef struct actorNames {
 	/* 0x000 */ char actor_name[344][0x10];
 } actorNames;
+
+typedef struct actorSpawnerData {
+	/* 0x000 */ char unk_00[4];
+	/* 0x004 */ floatPos positions;
+	/* 0x010 */ char unk_10[0x44-0x10];
+	/* 0x044 */ void* tied_actor;
+	/* 0x048 */ char unk_48[0x5A-0x58];
+	/* 0x05A */ short id;
+	/* 0x05C */ char unk_5C[0x64-0x5C];
+	/* 0x064 */ void* previous_spawner;
+	/* 0x068 */ void* next_spawner;
+} actorSpawnerData;

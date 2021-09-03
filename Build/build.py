@@ -123,6 +123,10 @@ with open(newROMName, "r+b") as fh:
     	_actor_names = fg.read()
     	fh.seek(0x2000000)
     	fh.write(_actor_names)
+    with open ("./../Source/Non-Code/snag_names.bin","rb") as fg:
+    	_snag_names = fg.read()
+    	fh.seek(0x2001800)
+    	fh.write(_snag_names)
 
 
 import filestatewriter

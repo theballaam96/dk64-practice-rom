@@ -22,5 +22,5 @@ const Screen debug_struct = {
 	.FunctionArray = debug_functions,
 	.ArrayItems = 2,
 	.ParentScreen = 0,
-	.ParentPosition = 1
+	.ParentPosition = 4
 };
