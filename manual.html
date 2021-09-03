@@ -117,22 +117,48 @@
 								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_save')">Save State</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_load_position')">Load State From Position</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_load_exit')">Load State From Exit</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('savestate_view')">View State Variables</a></li>
 							</ul>
 						</li>
 						<li>
 							<span class="caret">Watches</span>
 							<ul class="nested">
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_off')">Turn off Display</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_lag')">Lag</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_lag_cumulative')">Cumulative Lag</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_speed')">Speed</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_timer')">Timer</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_giant_kosha_timer')">Giant Kosha Timer</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_movement_state')">Movement State</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_angle')">Angle</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_input')">Input</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_held_actor')">Held Actor</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('watch_intro_story_timer')">Intro Story Timer</a></li>
+								<li>
+									<span class="caret">Player Variables</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_position')">Position</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_speed')">Speed</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_angle')">Angle</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_floor')">Floor</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_movement_state')">Movement State</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_held_actor')">Held Actor</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="caret">Timers</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_timer')">Timer</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_giant_kosha_timer')">Giant Kosha Timer</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_intro_story_timer')">Intro Story Timer</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="caret">System Environment</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_lag')">Lag</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_average')">Cumulative Lag</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_input')">Input</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_ssnag')">Spawn Snag Collectables</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('watch_clear')">Clear all Watches</a></li>
+							</ul>
+						</li>
+						<li>
+							<span class="caret">Debug</span>
+							<ul class="nested">
+								<li><a class="excluded_link hovergold" onclick="treeshow('debug_actors')">Actors</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('debug_memory')">Memory</a></li>
 							</ul>
 						</li>
 						<li>
@@ -162,10 +188,13 @@
 						<li>
 							<span class="caret">File States</span>
 							<ul class="nested">
-								<li><a class="excluded_link hovergold" onclick="treeshow('file_clean')">Clean Cart</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('file_takeoff')">Takeoff Skip</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('file_101')">101%</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('file_max')">Max%</a></li>
+								<li>
+									<span class="caret">General</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('file_clean')">Clean Cart</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('file_takeoff')">No Levels Early</a></li>
 							</ul>
 						</li>
 						<li>
@@ -181,13 +210,13 @@
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_candy')">Candy</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_tbarrels')">Training Barrels</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_moves_camera')">Camera and Shockwave</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_coins')">Give Coins</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_restock')">Restock Inventory</a></li>
 									</ul>
 								</li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_coins')">Give Coins</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_restock')">Restock Inventory</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_gamemode')">Change Gamemode</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_cancelcs')">Cancel Cutscene</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_skew')">Instant Skew</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_skew')">Acquire Regular Skew/Cannon Skew</a></li>
 								<li>
 									<span class="caret">Spawn Snag Cheats</span>
 									<ul class="nested">
@@ -198,17 +227,19 @@
 								<li>
 									<span class="caret">Toggles</span>
 									<ul class="nested">
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_levitate')">L to Levitate</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_sandstorm')">Aztec Sandstorm</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_phase')">Auto Phase State</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_moonkick')">Auto Moonkick</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_health')">Infinite Health</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_phase')">Auto Phase State</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_sandstorm')">Aztec Sandstorm</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_enemies')">Enemy Spawning</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_tbvoid')">Toggle Tag Barrel Void</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_superspeed')">Superspeed</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_health')">Infinite Health</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_cancelcs')">L to Cancel Cutscene</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_tbvoid')">L to Toggle TB Void</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_endminigame')">L to End Minigame</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_levitate')">L to Levitate</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_superspeed')">L to Superspeed</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_l_tbvoid')">L to Toggle TB Void</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_tbvoid')">Toggle Tag Barrel Void</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_visibiilty')">Toggle Visibility</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_turnoff')">Turn off all cheats</a></li>
 									</ul>
 								</li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_undoflag')">Undo Last Flag Write</a></li>
@@ -216,6 +247,7 @@
 								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_endminigame')">Force End Minigame</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_tagallwarps')">Tag All Warps</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_corrupt')">Corrupt</a></li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('cheats_transform')">Transform</a></li>
 							</ul>
 						</li>
 						<li>
@@ -234,8 +266,21 @@
 										<li><a class="excluded_link hovergold" onclick="treeshow('settings_dpad_taganywhere')">Tag Anywhere</a></li>
 									</ul>
 								</li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('settings_screenratio')">Screen Ratio</a></li>
-								<li><a class="excluded_link hovergold" onclick="treeshow('settings_chimpy')">Camera Mode</a></li>
+								<li>
+									<span class="caret">Vanilla Variables</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_screenratio')">Screen Ratio</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_chimpy')">Camera Mode</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="caret">Hack Variables</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_screenratio')">Screen Ratio</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('settings_chimpy')">Camera Mode</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold" onclick="treeshow('settings_kongcolors')">Change Kong Colors</a></li>
 								<li>
 									<span class="caret">Quality of Life Changes</span>
 									<ul class="nested">
@@ -337,16 +382,6 @@
 					</table>
 				</div>
 			</div>
-			<div class="treebox hide" tree-id="watch_off">
-				<div class="flexsplitter">
-					<div style="flex:50%">
-						<h2 class="treebox_head">Turn Off Display</h2>
-					</div>
-				</div>
-				<div class="treebox_body">
-					Turns off the currently viewed watch. The watch will no longer appear at the bottom of the screen and the value behind it will no longer be updated unless it is naturally updated by the game's code (eg. with lag)
-				</div>
-			</div>
 			<div class="treebox hide" tree-id="watch_lag">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -358,27 +393,6 @@
 					<div style="text-align: center">
 						lag_scripthawk = lag_practicerom - 2
 					</div>
-				</div>
-			</div>
-			<div class="treebox hide" tree-id="watch_lag_cumulative">
-				<div class="flexsplitter">
-					<div style="flex:50%">
-						<h2 class="treebox_head">Cumulative Lag Watch</h2>
-					</div>
-				</div>
-				<div class="treebox_body">
-					Displays the cumulative lag present since loading up the watch.
-					<h3>Controls</h3>
-					<table>
-						<tr>
-							<td>
-								<span class="n64buttons l">&nbsp;</span>
-							</td>
-							<td>
-								Reset the cumulative lag to 0
-							</td>
-						</tr>
-					</table>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_speed">
@@ -815,6 +829,16 @@
 					<ul class="bad_savestate_maps"></ul>
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="savestate_view">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">View Savestate Variables</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					{Text}
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="warp_map">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -938,26 +962,6 @@
 				</div>
 				<div class="treebox_body">
 					Sets the file state to setup the flags to practice <em>"Takeoff Skip"</em> for No Levels Early
-				</div>
-			</div>
-			<div class="treebox hide" tree-id="file_101">
-				<div class="flexsplitter">
-					<div style="flex:50%">
-						<h2 class="treebox_head">File Status: 101%</h2>
-					</div>
-				</div>
-				<div class="treebox_body">
-					Sets the file state to match the state of a completed 101% file
-				</div>
-			</div>
-			<div class="treebox hide" tree-id="file_max">
-				<div class="flexsplitter">
-					<div style="flex:50%">
-						<h2 class="treebox_head">File Status: Max%</h2>
-					</div>
-				</div>
-				<div class="treebox_body">
-					Sets the file state to match the state of a Max%/132%/-124% file
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_moves_giveall">

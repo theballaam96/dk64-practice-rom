@@ -37,7 +37,7 @@ static const char watchdisplay_snag[] = "Spawn Snag Collectables";
 static const char watchdisplay_clearall[] = "Clear all Watches";
 
 static const char watches_player_indexes[] = {11,3,7,14,6,9,12,13};
-static const char watches_timers_indexes[] = {4,5};
+static const char watches_timers_indexes[] = {4,5,10};
 static const char watches_sysenv_indexes[] = {1,2,8};
 
 static int watch_cache_slot0[] = {0,0,0,0};
@@ -180,6 +180,7 @@ static const char* watch_player_array[] = {
 static const char* watch_timers_array[] = {
 	change_timer,
 	change_gktimer,
+	change_isg,
 };
 
 static const char* watch_sysenv_array[] = {
@@ -353,12 +354,13 @@ const Screen watch_player_struct = {
 static const int watch_timers_functions[] = {
 	(int)&setWatch,
 	(int)&setWatch,
+	(int)&setWatch,
 };
 
 const Screen watch_timers_struct = {
 	.TextArray = (int*)watch_timers_array,
 	.FunctionArray = watch_timers_functions,
-	.ArrayItems = 2,
+	.ArrayItems = 3,
 	.ParentScreen = 12,
 	.ParentPosition = 1
 };
