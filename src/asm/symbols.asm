@@ -121,6 +121,7 @@
 .definelabel ActorSpawnerPointer, 0x807FC400 // u32 ptr
 
 //hack data
+.definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
 .definelabel ActiveToolsMenu, 0x807FFF20 // 0x60
 .definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct

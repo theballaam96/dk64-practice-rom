@@ -209,3 +209,4 @@ extern char InputStickMax;
 extern actorNames* ActorNamesTable;
 extern actorNames* SnagNamesTable;
 extern actorData* FocusedActorViewPointer;
+extern char ViewedSnagWatches[4];

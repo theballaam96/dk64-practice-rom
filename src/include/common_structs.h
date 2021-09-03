@@ -292,8 +292,10 @@ typedef struct snagData {
 	/* 0x048 */ char reset;
 	/* 0x049 */ char unk_49[0x54-0x49];
 	/* 0x054 */ char check;
-	/* 0x055 */ char unk_55[0x60 - 0x55];
+	/* 0x055 */ char unk_55[0x60-0x55];
 	/* 0x060 */ char state;
+	/* 0x061 */ char unk_61[0x9B-0x61];
+	/* 0x09B */ char resettrigger;
 } snagData;
 
 typedef struct ModelTwoData {
@@ -511,3 +513,21 @@ typedef struct actorSpawnerData {
 	/* 0x064 */ void* previous_spawner;
 	/* 0x068 */ void* next_spawner;
 } actorSpawnerData;
+
+typedef union snagTableInfo {
+    int data;
+    struct {
+        /* 0x000 */ short map;
+        /* 0x002 */ short om2_id;
+    };
+} snagTableInfo;
+
+typedef union encodedSnagState {
+	unsigned int data;
+	struct {
+		/* 0x000 */ char state;
+		/* 0x001 */ char check;
+		/* 0x002 */ char reset;
+		/* 0x003 */ char spawned;
+	};
+} encodedSnagState;

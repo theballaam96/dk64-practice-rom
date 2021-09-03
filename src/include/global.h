@@ -15,6 +15,11 @@ extern void handleMapWarping(int map, int levelIndex);
 extern int convertIDToIndex(short obj_index);
 extern void* findActorWithType(int search_actor_type);
 
+extern void destroyWatch(int slot);
+extern void spawnWatch(int slot);
+extern void colorWatch(char _red, char _green, char _blue, int slot);
+extern void openWatchSnagMenu(void);
+
 extern void warpToMap(void);
 extern void openJapesMenu(void);
 extern void openAztecMenu(void);
@@ -217,6 +222,8 @@ extern const flagMenuData* flag_menus[flagMenuScreenCount];
 extern const int maps_container_functions[10];
 extern const int flagmain_functions[11];
 extern char kongcolors[5];
+extern char* snagwatch_names_array[];
+extern const snagTableInfo snag_data[];
 
 extern const MapWarp map_japes_struct;
 extern const MapWarp map_japesmain_struct;

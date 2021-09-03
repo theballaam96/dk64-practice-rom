@@ -14,7 +14,7 @@ static const char* debug_array[] = {
 
 static const int debug_functions[] = {
 	(int)&openActorMenu,
-	(int)&initRamViewerTab,
+	0, //(int)&initRamViewerTab,
 };
 
 const Screen debug_struct = {

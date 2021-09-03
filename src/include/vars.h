@@ -51,6 +51,7 @@
 #define TagWarp 612
 #define TakeWarp 230
 #define Splat 22
+#define Burp 530
 
 // Other
 #define MysteryWriteOffset 0x29C

@@ -4,6 +4,9 @@ void initHack(void) {
 	if ((LoadedHooks == 0) && (CurrentMap == 0x28) && (TransitionSpeed > 0)) {
 		InputDisplayIndex = -1;
 		IsSuperspeedOn = 1;
+		for (int i = 0; i < WatchCount; i++) {
+			ViewedSnagWatches[i] = -1;
+		}
 		loadExtraHooks();
 		if (StoredSettings.hasSavedData == 0) {
 			*(int *)(0x807ED558) = -1;
