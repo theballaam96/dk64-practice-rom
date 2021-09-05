@@ -274,6 +274,7 @@ void savestateHandler(void) {
 					case 2:
 					case 3:
 						// Load State (2 = from position, 3 = from exit)
+						LastLoadStateAction = MenuSavestateAction;
 						if (states[_focused_state]->HasData) {
 							TimerData.Mode = 0;
 							TimerData.Timer = 0;

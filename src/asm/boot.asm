@@ -186,11 +186,6 @@ TextOverlayIsolationHook:
 	NOP
 
 loadExtraHooks:
-	// Color other font styles
-	ADDIU t3, r0, 1
-	LUI t4, 0x806A
-	SH 	t3, 0xD43A (t4)
-
 	ADDIU t3, r0, 0x1000
 	LUI t4, 0x806A
 	SH 	t3, 0xD738 (t4)

@@ -128,6 +128,7 @@ extern char sprite_translucency;
 extern int* bbbandit_array[4];
 extern char StoredDamage;
 extern void* ActorSpawnerPointer;
+extern char DebugInfoOn;
 
 //hack data
 extern int TestVariable;

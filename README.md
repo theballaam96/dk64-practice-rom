@@ -4,7 +4,8 @@ Practice ROM for Donkey Kong 64 that assists with practising the game. Written i
 ## Building Pre-requisites
 ```
 1. Python (version 3 or higher) or a text editor that can run a python terminal
-2. [Lua for windows 5.1.5](https://github.com/rjpcomputing/luaforwindows/releases)
+2. [ARMIPS](https://hack64.net/Thread-Importing-C-Code-Into-SM64-Using-n64chain-and-armips)
+3. mips64-elf-gcc
 ```
 
 ## Build Setup

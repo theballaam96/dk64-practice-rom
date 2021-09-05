@@ -63,12 +63,12 @@ void spawnWatch(int slot) {
 	TextOverlay* textOverlay;
 	int y = 210 - (slot * 13);
 	destroyWatch(slot);
-	spawnTextOverlay(10,25,y,"Calibrating",0,0,2,0);
+	spawnTextOverlay(10,25,y,"CALIBRATING",0,0,2,0);
 	textOverlay = (TextOverlay *)CurrentActorPointer;
 	if (textOverlay) {
 		WatchActor[slot] = textOverlay;
 		textOverlay->string = (char *)&WatchTextSpace[slot];
-		textOverlay->style = 128;
+		//textOverlay->style = 128;
 	}
 	
 };
@@ -435,7 +435,7 @@ void handleWatch(void) {
 						{
 							// Lag
 							if ((watch_cache_array[j][1] != StoredLag) || (watch_cache_array[j][0] != 1)) {
-								dk_strFormat((char *)WatchTextSpace[j],"Lag: %d",StoredLag);
+								dk_strFormat((char *)WatchTextSpace[j],"LAG: %d",StoredLag);
 							}
 							watch_cache_array[j][0] = 1;
 							watch_cache_array[j][1] = StoredLag;
@@ -450,7 +450,7 @@ void handleWatch(void) {
 							}
 							AverageLag = (float)(_lagsum) / 16;
 							if ((watch_cache_array[j][1] != _lagsum) || (watch_cache_array[j][0] != 2)) {
-								dk_strFormat((char *)WatchTextSpace[j],"Average Lag: %f",AverageLag);
+								dk_strFormat((char *)WatchTextSpace[j],"AVERAGE LAG: %f",AverageLag);
 							}
 							watch_cache_array[j][0] = 2;
 							watch_cache_array[j][1] = _lagsum;
@@ -470,7 +470,7 @@ void handleWatch(void) {
 								}
 							}
 							if ((watch_cache_array[j][1] != (int)_speed) || (watch_cache_array[j][0] != 3)) {
-								dk_strFormat((char *)WatchTextSpace[j],"Speed: %f",_speed);
+								dk_strFormat((char *)WatchTextSpace[j],"SPEED: %f",_speed);
 							}
 							watch_cache_array[j][0] = 3;
 							watch_cache_array[j][1] = (int)_speed;
@@ -487,9 +487,9 @@ void handleWatch(void) {
 							_time = _time - (60 * _timemins);
 							if ((watch_cache_array[j][1] != TimerData.TimerPostReduction) || (watch_cache_array[j][0] != 4)) {
 								if (_time >= 10) {
-									dk_strFormat((char *)WatchTextSpace[j],"Time: %2d:%f",_timemins,_time);
+									dk_strFormat((char *)WatchTextSpace[j],"TIME: %2d:%f",_timemins,_time);
 								} else {
-									dk_strFormat((char *)WatchTextSpace[j],"Time: %2d:0%f",_timemins,_time);
+									dk_strFormat((char *)WatchTextSpace[j],"TIME: %2d:0%f",_timemins,_time);
 								}
 							}
 							watch_cache_array[j][0] = 4;
@@ -508,7 +508,7 @@ void handleWatch(void) {
 									}
 								}
 								if ((watch_cache_array[j][1] != GiantKoshaTimerValue) || (watch_cache_array[j][0] != 5)) {
-									dk_strFormat((char *)WatchTextSpace[j],"Kosha Timer: %d",GiantKoshaTimerValue);
+									dk_strFormat((char *)WatchTextSpace[j],"KOSHA TIMER: %d",GiantKoshaTimerValue);
 								}
 								watch_cache_array[j][0] = 5;
 								watch_cache_array[j][1] = GiantKoshaTimerValue;
@@ -532,7 +532,7 @@ void handleWatch(void) {
 								}
 							} else {
 								if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != 5)) {
-									dk_strFormat((char *)WatchTextSpace[j],"This ain't Caves, Bud");
+									dk_strFormat((char *)WatchTextSpace[j],"THIS AIN'T CAVES BUD");
 								}
 								watch_cache_array[j][0] = 5;
 								watch_cache_array[j][1] = -1;
@@ -546,7 +546,7 @@ void handleWatch(void) {
 							if (Player) {
 								_movement_state = Player->control_state;
 								if ((watch_cache_array[j][1] != _movement_state) || (watch_cache_array[j][0] != 6)) {
-									dk_strFormat((char *)WatchTextSpace[j],"Movement State: 0x%X",_movement_state);
+									dk_strFormat((char *)WatchTextSpace[j],"MOVEMENT STATE: 0x%X",_movement_state);
 								}
 								watch_cache_array[j][0] = 6;
 								watch_cache_array[j][1] = _movement_state;
@@ -564,7 +564,7 @@ void handleWatch(void) {
 								_angle = Player->facing_angle % 4096;
 								_angle = (_angle / 4096) * 360;
 								if ((watch_cache_array[j][1] != Player->facing_angle) || (watch_cache_array[j][0] != 7)) {
-									dk_strFormat((char *)WatchTextSpace[j],"Angle: %f",_angle);
+									dk_strFormat((char *)WatchTextSpace[j],"ANGLE: %f",_angle);
 								}
 								watch_cache_array[j][0] = 7;
 								watch_cache_array[j][1] = Player->facing_angle;
@@ -588,13 +588,13 @@ void handleWatch(void) {
 										colorWatch(0xFF,0x45,0x00,j);
 									}
 									if ((watch_cache_array[j][1] != held_actor_index) || (watch_cache_array[j][0] != 9)) {
-										dk_strFormat((char *)WatchTextSpace[j],"Held Actor: %d",held_actor_index);
+										dk_strFormat((char *)WatchTextSpace[j],"HELD ACTOR: %d",held_actor_index);
 									}
 									watch_cache_array[j][0] = 9;
 									watch_cache_array[j][1] = held_actor_index;
 								} else {
 									if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != 9)) {
-										dk_strFormat((char *)WatchTextSpace[j],"No Actor Held");
+										dk_strFormat((char *)WatchTextSpace[j],"NO ACTOR HELD");
 									}
 									watch_cache_array[j][0] = 9;
 									watch_cache_array[j][1] = -1;
@@ -639,9 +639,9 @@ void handleWatch(void) {
 							_isgsecs = _isgsecs - (60 * _isgmins);
 							if ((watch_cache_array[j][1] != ISGTimer) || (watch_cache_array[j][0] != 10)) {
 								if (_isgsecs >= 10) {
-									dk_strFormat((char *)WatchTextSpace[j], "ISG Time: %d:%f",_isgmins,_isgsecs);
+									dk_strFormat((char *)WatchTextSpace[j], "ISG TIME: %d:%f",_isgmins,_isgsecs);
 								} else {
-									dk_strFormat((char *)WatchTextSpace[j], "ISG Time: %d:0%f",_isgmins,_isgsecs);
+									dk_strFormat((char *)WatchTextSpace[j], "ISG TIME: %d:0%f",_isgmins,_isgsecs);
 								}
 							}
 							watch_cache_array[j][0] = 10;
@@ -659,7 +659,7 @@ void handleWatch(void) {
 								_z = Player->zPos;
 							}
 							if (((watch_cache_array[j][1] != _x) || (watch_cache_array[j][2] != _y) || (watch_cache_array[j][3] != _z)) || (watch_cache_array[j][0] != 11)) {
-								dk_strFormat((char *)WatchTextSpace[j], "Position: %d, %d, %d",_x,_y,_z);
+								dk_strFormat((char *)WatchTextSpace[j], "POSITION: %d, %d, %d",_x,_y,_z);
 							}
 							watch_cache_array[j][0] = 11;
 							watch_cache_array[j][1] = _x;
@@ -682,7 +682,7 @@ void handleWatch(void) {
 								}
 							}
 							if (((watch_cache_array[j][1] != xStored) || (watch_cache_array[j][2] != yStored) || (watch_cache_array[j][3] != zStored)) || (watch_cache_array[j][0] != 12)) {
-								dk_strFormat((char *)WatchTextSpace[j], "Stored Position 1: %d, %d, %d",xStored,yStored,zStored);
+								dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 1: %d, %d, %d",xStored,yStored,zStored);
 							}
 							watch_cache_array[j][0] = 12;
 							watch_cache_array[j][1] = xStored;
@@ -705,7 +705,7 @@ void handleWatch(void) {
 								}
 							}
 							if (((watch_cache_array[j][1] != xStored) || (watch_cache_array[j][2] != yStored) || (watch_cache_array[j][3] != zStored)) || (watch_cache_array[j][0] != 13)) {
-								dk_strFormat((char *)WatchTextSpace[j], "Stored Position 2: %d, %d, %d",xStored,yStored,zStored);
+								dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 2: %d, %d, %d",xStored,yStored,zStored);
 							}
 							watch_cache_array[j][0] = 13;
 							watch_cache_array[j][1] = xStored;
@@ -720,7 +720,7 @@ void handleWatch(void) {
 								_floor = Player->floor;
 							}
 							if ((watch_cache_array[j][1] != (int)_floor) || (watch_cache_array[j][0] != 14)) {
-								dk_strFormat((char *)WatchTextSpace[j], "Floor: %f",_floor);
+								dk_strFormat((char *)WatchTextSpace[j], "FLOOR: %f",_floor);
 							}
 							watch_cache_array[j][0] = 14;
 							watch_cache_array[j][1] = (int)_floor;
@@ -760,22 +760,22 @@ void handleWatch(void) {
 								if (CurrentMap == _map) {
 									if (_m2_index > -1) {
 										if (snag_state.state) {
-											dk_strFormat((char *)WatchTextSpace[j], "%s: Uncollectable",snagwatch_names_array[j]);
+											dk_strFormat((char *)WatchTextSpace[j], "%s: UNCOLLECTABLE",snagwatch_names_array[j]);
 										} else {
-											dk_strFormat((char *)WatchTextSpace[j], "%s: Collectable",snagwatch_names_array[j]);
+											dk_strFormat((char *)WatchTextSpace[j], "%s: COLLECTABLE",snagwatch_names_array[j]);
 										}
 									} else {
-										dk_strFormat((char *)WatchTextSpace[j], "%s: Not Spawned",snagwatch_names_array[j]);
+										dk_strFormat((char *)WatchTextSpace[j], "%s: NOT SPAWNED",snagwatch_names_array[j]);
 									}
 								} else {
-									dk_strFormat((char *)WatchTextSpace[j], "%s: Wrong Map",snagwatch_names_array[j]);
+									dk_strFormat((char *)WatchTextSpace[j], "%s: WRONG MAP",snagwatch_names_array[j]);
 									colorWatch(0xFF,0xFF,0xFF,j);
 								}
 							}
 							colorWatch(0xFF,0xFF,0xFF,j);
 							if ((_m2_index > -1) && (CurrentMap == _map)) {
 								if (snag_state.check != 0) {
-									colorWatch(0x64,0x95,0xED,j);
+									colorWatch(0xFF,0x45,0x00,j);
 								}
 							}
 							watch_cache_array[j][0] = 15;
