@@ -70,6 +70,7 @@
 .importobj "obj/mapwarp_list.o"
 .importobj "obj/othermaps.o"
 .importobj "obj/input.o"
+.importobj "obj/phase_assistant.o"
 .importobj "obj/snag_watch.o"
 .importobj "obj/timer.o"
 .importobj "obj/timer_settings.o"

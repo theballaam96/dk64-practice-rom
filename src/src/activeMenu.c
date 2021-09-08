@@ -119,6 +119,7 @@ const Screen* menu_screens[] = {
 	&watch_timers_struct,
 	&watch_sysenv_struct,
 	&watch_snag_struct,
+	&watch_assist_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -189,6 +190,21 @@ void clearMenu(void) {
 	ActiveMenu.isOpen = 0;
 };
 
+void wipeText(void) {
+	if (ActorNamesTable) {
+		dk_free(ActorNamesTable);
+		ActorNamesTable = 0;
+	}
+	if (SnagNamesTable) {
+		dk_free(SnagNamesTable);
+		SnagNamesTable = 0;
+	}
+	if (SnagCapitalsTable) {
+		dk_free(SnagCapitalsTable);
+		SnagCapitalsTable = 0;
+	}
+}
+
 void toggleMenu(void) {
 	if (((TBVoidByte & 2) == 0) || (ArtificialPauseOn)) {
 		if (IsPauseMenuOpen == 0) {
@@ -198,33 +214,10 @@ void toggleMenu(void) {
 					ActiveMenu.positionIndex = 0;
 					if (ActiveMenu.isOpen == 0) {
 						spawnMenu(0);
-						if (ActorNamesTable) {
-							dk_free(ActorNamesTable);
-							ActorNamesTable = 0;
-						}
-						if (SnagNamesTable) {
-							dk_free(SnagNamesTable);
-							SnagNamesTable = 0;
-						}
-						actorNames* copy_space = dk_malloc(0x1580);
-						ActorNamesTable = copy_space;
-						int* file_size;
-						*(int*)(&file_size) = 0x1580;
-						copyFromROM(0x2000000,copy_space,&file_size,0,0,0,0);
-						copy_space = dk_malloc(0x350);
-						SnagNamesTable = copy_space;
-						*(int*)(&file_size) = 0x350;
-						copyFromROM(0x2001800,copy_space,&file_size,0,0,0,0);
+						wipeText();
 					} else {
 						clearMenu();
-						if (ActorNamesTable) {
-							dk_free(ActorNamesTable);
-							ActorNamesTable = 0;
-						}
-						if (SnagNamesTable) {
-							dk_free(SnagNamesTable);
-							SnagNamesTable = 0;
-						}
+						wipeText();
 						ClosingMenu = 1;
 					}
 				}
@@ -294,14 +287,7 @@ void closeMenuOnTransition(void) {
 		if (ActiveMenu.isOpen) {
 			clearMenu();
 		}
-		if (ActorNamesTable) {
-			dk_free(ActorNamesTable);
-			ActorNamesTable = 0;
-		}
-		if (SnagNamesTable) {
-			dk_free(SnagNamesTable);
-			SnagNamesTable = 0;
-		}
+		wipeText();
 	}
 }
 
@@ -329,14 +315,7 @@ void emergencyClose(void) {
 				}
 				ActiveTools_Error = textOverlay;
 				clearMenu();
-				if (ActorNamesTable) {
-					dk_free(ActorNamesTable);
-					ActorNamesTable = 0;
-				}
-				if (SnagNamesTable) {
-					dk_free(SnagNamesTable);
-					SnagNamesTable = 0;
-				}
+				wipeText();
 			}
 		}
 	}
@@ -347,14 +326,7 @@ void previousScreen(void) {
 	clearMenu();
 	if (screenIndex == 0) {
 		ClosingMenu = 1;
-		if (ActorNamesTable) {
-			dk_free(ActorNamesTable);
-			ActorNamesTable = 0;
-		}
-		if (SnagNamesTable) {
-			dk_free(SnagNamesTable);
-			SnagNamesTable = 0;
-		}
+		wipeText();
 	} else {
 		const Screen* focused_screen = menu_screens[screenIndex];
 		int newScreen = focused_screen->ParentScreen;

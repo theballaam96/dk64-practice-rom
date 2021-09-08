@@ -242,6 +242,7 @@ void savestateHandler(void) {
 							states[_focused_state]->xPos = Player->xPos;
 							states[_focused_state]->yPos = Player->yPos;
 							states[_focused_state]->zPos = Player->zPos;
+							states[_focused_state]->floor = Player->floor;
 							if (Player->camera_pointer) {
 								states[_focused_state]->camera_angle = Player->camera_pointer->facing_angle;
 							}
@@ -352,6 +353,7 @@ void savestateLoadMapLoadVars(void) {
 			if (LastLoadStateAction == 2) {
 				Player->facing_angle = states[_focused_state]->facing_angle;
 				Player->skew_angle = states[_focused_state]->skew_angle;
+				Player->floor = states[_focused_state]->floor;
 				if (Player->camera_pointer) {
 					Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
 				}

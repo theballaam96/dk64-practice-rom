@@ -14,6 +14,8 @@ static const char viewed_position[] = "Position (!)";
 static const char viewed_storedposition1[] = "Stored Position 1 (!)";
 static const char viewed_storedposition2[] = "Stored Position 2 (!)";
 static const char viewed_floor[] = "Floor (!)";
+static const char viewed_phaseassistant[] = "Phasewalk Assistant (!)";
+static const char viewed_avgspd[] = "Average Speed (!)";
 
 static const char change_lag[] = "Lag";
 static const char change_avglag[] = "Average Lag";
@@ -29,16 +31,33 @@ static const char change_position[] = "Position";
 static const char change_storedposition1[] = "Stored Position 1";
 static const char change_storedposition2[] = "Stored Position 2";
 static const char change_floor[] = "Floor";
+static const char change_phaseassistant[] = "Phasewalk Assistant";
+static const char change_avgspd[] = "Average Speed";
 
 static const char watchdisplay_player[] = "Player Variables";
 static const char watchdisplay_sys[] = "System Environment";
 static const char watchdisplay_timers[] = "Timers";
 static const char watchdisplay_snag[] = "Spawn Snag Collectables";
+static const char watchdisplay_assistants[] = "Trick Assistants";
 static const char watchdisplay_clearall[] = "Clear all Watches";
 
-static const char watches_player_indexes[] = {11,3,7,14,6,9,12,13};
+static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
+static const char phasereason_1[] = "LOW MAG DIFF (DOWN TOO SLOW)"; // Down flick too slow, not satisfying the 14-magnitude difference rule
+static const char phasereason_2[] = "NO FAST ACCELERATION"; // No fast acceleration
+static const char phasereason_3[] = "BAD INITIAL ANGLE"; // Initial angle outside of bounds
+static const char phasereason_4[] = "LOW MAG DIFF (OPPOSITE SIMILAR MAG)"; // Not satisfying the 14-magnitude difference rule because got to the other side with a magnitude similar in size
+static const char phasereason_5[] = "READING INPUTS"; // Phasewalk in progress
+static const char phasereason_6[] = "READY FOR SEQUENCE"; // In first person pre-phase sequence
+static const char phasereason_7[] = "EARLY Z PRESS"; // Pressed Z before the 2f window
+static const char phasereason_8[] = "LATE Z PRESS"; // Pressed Z after the 2f window
+static const char phasereason_9[] = "LOW MAG DIFF (UP TOO SLOW)"; // Up flick too slow, not satisfying the 14-magnitude difference rule
+static const char phasereason_10[] = "LOW MAG DIFF (RELEASE TOO SLOW)"; // Release too slow, not satisfying the 14-magnitude difference rule
+static const char phasereason_11[] = "NO DOWN FLICK"; // Pretty self-explanatory
+
+static const char watches_player_indexes[] = {11,3,17,7,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10};
 static const char watches_sysenv_indexes[] = {1,2,8};
+static const char watches_assist_indexes[] = {16};
 
 static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
@@ -51,6 +70,24 @@ static int* watch_cache_array[] = {
 	watch_cache_slot2,
 	watch_cache_slot3,
 };
+
+static const char* phasereason_list[] = {
+	phasereason_0,
+	phasereason_1,
+	phasereason_2,
+	phasereason_3,
+	phasereason_4,
+	phasereason_5,
+	phasereason_6,
+	phasereason_7,
+	phasereason_8,
+	phasereason_9,
+	phasereason_10,
+	phasereason_11,
+};
+
+static float past_speeds[64];
+static int speed_doc_index = 0;
 
 void destroyWatch(int slot) {
 	if (WatchActor[slot]) {
@@ -70,7 +107,6 @@ void spawnWatch(int slot) {
 		textOverlay->string = (char *)&WatchTextSpace[slot];
 		//textOverlay->style = 128;
 	}
-	
 };
 
 void colorWatch(char _red, char _green, char _blue, int slot) {
@@ -79,7 +115,7 @@ void colorWatch(char _red, char _green, char _blue, int slot) {
 		WatchActor[slot]->green = _green;
 		WatchActor[slot]->blue = _blue;
 	}
-}
+};
 
 void controlWatchView(void) {
 	for (int i = 0; i < WatchCount; i++) {
@@ -130,6 +166,9 @@ static const char* watch_listed_array[] = {
 	change_storedposition1,
 	change_storedposition2,
 	change_floor,
+	0,
+	change_phaseassistant,
+	change_avgspd,
 };
 
 static const char* watch_viewed_array[] = {
@@ -147,6 +186,9 @@ static const char* watch_viewed_array[] = {
 	viewed_storedposition1,
 	viewed_storedposition2,
 	viewed_floor,
+	0,
+	viewed_phaseassistant,
+	viewed_avgspd,
 };
 
 static const char* watch_change_array[] = {
@@ -164,11 +206,15 @@ static const char* watch_change_array[] = {
 	change_storedposition1,
 	change_storedposition2,
 	change_floor,
+	0,
+	change_phaseassistant,
+	change_avgspd,
 };
 
 static const char* watch_player_array[] = {
 	change_position,
 	change_speed,
+	change_avgspd,
 	change_angle,
 	change_floor,
 	change_movement,
@@ -187,6 +233,10 @@ static const char* watch_sysenv_array[] = {
 	change_lag,
 	change_avglag,
 	change_input,
+};
+
+static const char* watch_assist_array[] = {
+	change_phaseassistant,
 };
 
 void openWatchMenu(void) {
@@ -218,6 +268,9 @@ void updateWatchText(void) {
 	for (int i = 0; i < sizeof(watches_sysenv_indexes); i++) {
 		watch_sysenv_array[i] = watch_listed_array[(int)watches_sysenv_indexes[i] - 1];
 	}
+	for (int i = 0; i < sizeof(watches_assist_indexes); i++) {
+		watch_assist_array[i] = watch_listed_array[(int)watches_assist_indexes[i] - 1];
+	}
 }
 
 void openWatchPlayerMenu(void) {
@@ -233,6 +286,11 @@ void openWatchTimersMenu(void) {
 void openWatchSysMenu(void) {
 	updateWatchText();
 	changeMenu(81);
+}
+
+void openWatchAssistMenu(void) {
+	updateWatchText();
+	changeMenu(83);
 }
 
 void clearAllWatches(void) {
@@ -256,6 +314,9 @@ void setWatch(void) {
 			break;
 		case 81:
 			intended_watch_index = watches_sysenv_indexes[(int)ActiveMenu.positionIndex];
+			break;
+		case 83:
+			intended_watch_index = watches_assist_indexes[(int)ActiveMenu.positionIndex];
 		break;
 	}
 	char index_already_spawned = 0;
@@ -290,9 +351,18 @@ void setWatch(void) {
 			break;
 		case 81:
 			openWatchSysMenu();
+			break;
+		case 83:
+			openWatchAssistMenu();
 		break;
 	}
 };
+
+void togglePhaseAssistant(void) {
+	PhaseChecker.assistant_on = 1 - PhaseChecker.assistant_on;
+	PhaseChecker.reason_code = 6;
+	setWatch();
+}
 
 void getISGTimer(void) {
 	ISGTimer = 0;
@@ -313,6 +383,7 @@ static const char* watch_array[] = {
 	watchdisplay_timers,
 	watchdisplay_sys,
 	watchdisplay_snag,
+	watchdisplay_assistants,
 	watchdisplay_clearall,
 };
 
@@ -321,13 +392,14 @@ static const int watch_functions[] = {
 	(int)&openWatchTimersMenu,
 	(int)&openWatchSysMenu,
 	(int)&openWatchSnagMenu,
+	(int)&openWatchAssistMenu,
 	(int)&clearAllWatches,
 };
 
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 5,
+	.ArrayItems = 6,
 	.ParentScreen = 0,
 	.ParentPosition = 3
 };
@@ -341,12 +413,13 @@ static const int watch_player_functions[] = {
 	(int)&setWatch,
 	(int)&setWatch,
 	(int)&setWatch,
+	(int)&setWatch,
 };
 
 const Screen watch_player_struct = {
 	.TextArray = (int*)watch_player_array,
 	.FunctionArray = watch_player_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = 12,
 	.ParentPosition = 0
 };
@@ -377,6 +450,18 @@ const Screen watch_sysenv_struct = {
 	.ArrayItems = 3,
 	.ParentScreen = 12,
 	.ParentPosition = 2
+};
+
+static const int watch_assist_functions[] = {
+	(int)&togglePhaseAssistant,
+};
+
+const Screen watch_assist_struct = {
+	.TextArray = (int*)watch_assist_array,
+	.FunctionArray = watch_assist_functions,
+	.ArrayItems = 1,
+	.ParentScreen = 12,
+	.ParentPosition = 4
 };
 
 void clampWatchFloats(void) {
@@ -421,10 +506,23 @@ void documentPastLag(void) {
 	}
 }
 
+void documentPastSpeed(void) {
+	float spd = 0;
+	if (Player) {
+		spd = Player->hSpeed;
+	}
+	past_speeds[speed_doc_index] = spd;
+	speed_doc_index++;
+	if (speed_doc_index > 63) {
+		speed_doc_index = 0;
+	}
+}
+
 void handleWatch(void) {
 	float _KRoolTimerX = 125;
 	char watch_present = 0;
 	documentPastLag();
+	documentPastSpeed();
 	if (ActiveMenu.isOpen == 0) {
 		for (int j = 0; j < WatchCount; j++) {
 			if (WatchIndex[j]) {
@@ -782,6 +880,30 @@ void handleWatch(void) {
 							watch_cache_array[j][1] = snag_list_index;
 							watch_cache_array[j][2] = CurrentMap;
 							watch_cache_array[j][3] = snag_state.data;
+						}
+						break;
+					case 16:
+						{
+							if ((watch_cache_array[j][1] != PhaseChecker.reason_code) || (watch_cache_array[j][0] != 16)) {
+								dk_strFormat((char *)WatchTextSpace[j], "PWALK: %s",phasereason_list[(int)PhaseChecker.reason_code]);
+							}
+							watch_cache_array[j][0] = 16;
+							watch_cache_array[j][1] = PhaseChecker.reason_code;
+						}
+						break;
+					case 17:
+						{
+							int _spdsum = 0;
+							float _avgspd = 0;
+							for (int k = 0; k < 64; k++) {
+								_spdsum += past_speeds[k];
+							}
+							_avgspd = (float)(_spdsum) / 64;
+							if ((watch_cache_array[j][1] != _spdsum) || (watch_cache_array[j][0] != 17)) {
+								dk_strFormat((char *)WatchTextSpace[j],"AVERAGE SPEED: %f",_avgspd);
+							}
+							watch_cache_array[j][0] = 17;
+							watch_cache_array[j][1] = _spdsum;
 						}
 					break;
 				}

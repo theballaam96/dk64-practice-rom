@@ -154,9 +154,10 @@ typedef struct Savestate {
 	/* 0x358 */ int ISGTimerDifferenceMajor;
 	/* 0x35C */ int ISGTimerDifferenceMinor;
 	/* 0x360 */ short skew_angle;
-	/* 0x362 */ char unused_362[0x2];
+	/* 0x362 */ char stored_damage;
+	/* 0x363 */ char unused_363;
 	/* 0x364 */ int createdTime;
-	/* 0x365 */ char stored_damage;
+	/* 0x368 */ float floor;
 } Savestate;
 
 typedef struct Screen {
@@ -214,7 +215,6 @@ typedef struct PosState {
 	/* 0x03A */ char map;
 	/* 0x03B */ char bone_array_counter;
 	/* 0x03C */ short cameraRotation;
-	/* 0x03E */ char cameraState;
 } PosState;
 
 typedef struct TimerInfo {
@@ -242,7 +242,22 @@ typedef struct AutowalkData {
 } AutowalkData;
 
 typedef struct PhaseCheckerData {
-	/* 0x000 */ char previousMagnitude;
+	/* 0x000 */ unsigned char previousMagnitude;
+	/* 0x001 */ char assistant_on;
+	/* 0x002 */ char reason_code;
+		// 0 = Successful Phasewalk
+		// 1 = Low Magnitude Diff (Moving too slow - Flick down too late)
+		// 2 = No fast acceleration
+		// 3 = Bad initial angle
+		// 4 = Low Magnitude Diff (Moving too fast, got to other side without having a different magnitude diff)
+		// 5 = Reading
+		// 6 = Waiting for Phasewalk Initiation
+		// 7 = Early Z Press
+		// 8 = Late Z Press
+		// 9 = Low Magnitude Diff (Moving too slow - Flick up too slow)
+		// 10 = Low Magnitude Diff (Moving too slow - Release too slow)
+		// 11 = No Down Flick
+	/* 0x003 */ char prev_y_side;
 } PhaseCheckerData;
 
 typedef struct RGB {
@@ -531,3 +546,12 @@ typedef union encodedSnagState {
 		/* 0x003 */ char spawned;
 	};
 } encodedSnagState;
+
+typedef union phaseInputs {
+    int data;
+    struct {
+        /* 0x000 */ unsigned short buttons;
+        /* 0x002 */ char stickX;
+        /* 0x003 */ char stickY;
+    };
+} phaseInputs;

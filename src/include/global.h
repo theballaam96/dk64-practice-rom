@@ -128,6 +128,7 @@ extern void fileInit(void);
 extern void controlWatchView(void);
 extern void updateLoadedActorNoTextOverlayList(int callType);
 extern void shouldRefreshTOMenu(void);
+extern void analyzeInputs(void);
 
 extern void loadSettings(void);
 extern void saveSettings(void);
@@ -215,6 +216,7 @@ extern const Screen watch_player_struct;
 extern const Screen watch_timers_struct;
 extern const Screen watch_sysenv_struct;
 extern Screen watch_snag_struct;
+extern const Screen watch_assist_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

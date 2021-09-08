@@ -99,6 +99,13 @@ void updateLoadedActorNoTextOverlayList(int callType) { // callType: 0 = every f
 }
 
 void openActorMenu(void) {
+	if (ActorNamesTable == 0) {
+		actorNames* copy_space = dk_malloc(0x1580);
+		ActorNamesTable = copy_space;
+		int* file_size;
+		*(int*)(&file_size) = 0x1580;
+		copyFromROM(0x2000000,copy_space,&file_size,0,0,0,0);
+	}
 	updateLoadedActorNoTextOverlayList(1);
 	if (ActiveMenu.screenIndex != 77) {
 		startingActorIndex = 0;

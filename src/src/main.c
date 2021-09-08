@@ -48,4 +48,5 @@ void cFuncLoop(void) {
 	infiniteHealth();
 	fileInit();
 	controlWatchView();
+	analyzeInputs();
 }

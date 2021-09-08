@@ -8,6 +8,11 @@ START:
 		LW t3, lo(mainASMFunctionJump) (t3)
 		LUI t4, 0x8060
 		SW t3, 0xC164 (t4) //store per frame hook
+		LUI t3, 0
+		LUI t4, 1
+		LUI t5, 1
+		LUI t9, 0xD
+		LUI t8, 0xD
 		J 0x80000784
 		LUI t6, 0x000D
 		//end of boot code

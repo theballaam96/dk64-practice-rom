@@ -180,7 +180,7 @@
 .definelabel AutoMoonkickOn, 0x807FFDBE // u8
 .definelabel EnemySpawnOff, 0x807FFDBD // u8
 
-.definelabel PhaseChecker, 0x807FFDB7 // 0x1
+.definelabel PhaseChecker, 0x807FFDB7 // 0x6
 .definelabel CustomFlag, 0x807FFF80 // follows customflagdata struct
 
 .definelabel ISGStage, 0x807FFF85 // u8
@@ -200,7 +200,7 @@
 .definelabel TempTimestampStorageMinor, 0x807FFF9C // u32
 .definelabel HackTitle, 0x807FFFA0 // u32
 .definelabel HackVersion, 0x807FFFA4 // u32
-.definelabel AddedCorruptionActorCount, 0x807FFFA8 // u8
+.definelabel SnagCapitalsTable, 0x807FFFA8 // u32
 .definelabel SpriteAddress, 0x807FFFAC // u32
 .definelabel PreviousLagArray, 0x807FFFB0; // u8 array
 

@@ -31,7 +31,6 @@ void handlePositionSavestates(void) {
 						}
 						if (Camera) {
 							pos_states[_focused_state]->cameraRotation = Camera->viewportRotation;
-							pos_states[_focused_state]->cameraState = Camera->camera_state;
 						}
 						pos_states[_focused_state]->yFloor = Player->floor;
 						// Stored Position
@@ -82,7 +81,6 @@ void handlePositionSavestates(void) {
 									Camera->viewportY = pos_states[_focused_state]->yCamera;
 									Camera->viewportZ = pos_states[_focused_state]->zCamera;
 									Camera->viewportRotation = pos_states[_focused_state]->cameraRotation;
-									Camera->camera_state = pos_states[_focused_state]->cameraState;
 								}
 								if ((CurrentMap != 0xCC) || (CurrentMap != 0xCD) || (CurrentMap != 0xCF)) {
 									if (IsAutowalking) {

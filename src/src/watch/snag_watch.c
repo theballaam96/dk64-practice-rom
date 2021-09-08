@@ -111,6 +111,19 @@ Screen watch_snag_struct = {
 void openWatchSnagMenu(void) {
 	unsigned int _map;
 	int snag_counter = 0;
+	int* file_size;
+	if (SnagNamesTable == 0) {
+		actorNames* copy_space = dk_malloc(0x350);
+		SnagNamesTable = copy_space;
+		*(int*)(&file_size) = 0x350;
+		copyFromROM(0x2001800,copy_space,&file_size,0,0,0,0);
+	}
+	if (SnagCapitalsTable == 0) {
+		actorNames* copy_space = dk_malloc(0x350);
+		SnagCapitalsTable = copy_space;
+		*(int*)(&file_size) = 0x350;
+		copyFromROM(0x2001C00,copy_space,&file_size,0,0,0,0);
+	}
 	for (int i = 0; i < (sizeof(snag_data) / 4); i++) {
 		_map = snag_data[i].map;
 		if (CurrentMap == _map) {
@@ -201,7 +214,7 @@ void toggleSnagWatch(void) {
 				if (WatchIndex[i] == 0) {
 					WatchIndex[i] = 15;
 					ViewedSnagWatches[i] = list_index;
-					dk_strFormat((char *)snagwatch_names_array[i],"%s",SnagNamesTable->actor_name[list_index]);
+					dk_strFormat((char *)snagwatch_names_array[i],"%s",SnagCapitalsTable->actor_name[list_index]);
 					spawnWatch(i);
 					colorWatch(0xFF,0xFF,0xFF,i);
 					break;

@@ -37,36 +37,48 @@ static spriteDisplay* displaySlots[] = {
 static spriteControl* spriteSlots[12] = {};
 static otherSpriteControl* otherSpriteData[12] = {};
 
+int canDisplayInput(void) {
+	if (player_count > 1) {
+		return 0;
+	}
+	if ((CurrentMap == 0x53) || (CurrentMap == 0xC5) || (CurrentMap == 0x6B) || (CurrentMap == 0x6D) || (CurrentMap == 0xBE) || (CurrentMap || 0xC0)) {
+		return 0;
+	}
+	if ((DestMap == 0x6B) || (DestMap == 0x6D) || (DestMap == 0xBE) || (DestMap == 0xC0)) {
+		return 0;
+	}
+	return 1;
+}
+
 void openInputOnTransition(void) {
 	char _movement_style;
 	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
-		if (player_count == 1) {
+		int display_bool = canDisplayInput();
+		if (display_bool) {
 			if (spriteSlots[0] == 0) {
-				if ((CurrentMap != 0x53) && (CurrentMap != 0xC5)) { // Both Dogadon maps cause graphical glitches galore
-					if (InputDisplayQuadrant < 4) {
-						for (int i = 0; i < 10; i++) {
-							if (displaySlots[i]) {
-								displaySlots[i]->disappear = 0;
-							}
-							sprite_translucency = 0;
-							_movement_style = 4;
-							displaySprite(displaySlots[i],sprite_table[(int)sprite_table_indexes[i]],root_x[(int)InputDisplayQuadrant] + x_positions[i],root_y[(int)InputDisplayQuadrant] + y_positions[i],(int)target_size[i],0,_movement_style);
-							spriteSlots[i] = (spriteControl*)SpriteAddress;
-							otherSpriteData[i] = (otherSpriteControl*)getOtherSpritePointer();
+				if (InputDisplayQuadrant < 4) {
+					for (int i = 0; i < 10; i++) {
+						if (displaySlots[i]) {
+							displaySlots[i]->disappear = 0;
 						}
-						displaySlots[10]->disappear = 0;
-						sprite_translucency = 1;
-						displaySprite(displaySlots[10],sprite_table[0x67],root_x[(int)InputDisplayQuadrant] + 0x20,root_y[(int)InputDisplayQuadrant] + 0x34,0.5,0,4);
-						spriteSlots[10] = (spriteControl*)SpriteAddress;
-						otherSpriteData[10] = (otherSpriteControl*)getOtherSpritePointer();
-						displaySlots[11]->disappear = 0;
-						sprite_translucency = 1;
-						// 0x22
-						displaySprite(displaySlots[11],sprite_table[0x91],root_x[(int)InputDisplayQuadrant] + 0x20,root_y[(int)InputDisplayQuadrant] + 0x34,0.2,0,4);
-						spriteSlots[11] = (spriteControl*)SpriteAddress;
-						otherSpriteData[11] = (otherSpriteControl*)getOtherSpritePointer();
-						InputSpritesSpawned = 0;
+						sprite_translucency = 0;
+						_movement_style = 4;
+						displaySprite(displaySlots[i],sprite_table[(int)sprite_table_indexes[i]],root_x[(int)InputDisplayQuadrant] + x_positions[i],root_y[(int)InputDisplayQuadrant] + y_positions[i],(int)target_size[i],0,_movement_style);
+						spriteSlots[i] = (spriteControl*)SpriteAddress;
+						otherSpriteData[i] = (otherSpriteControl*)getOtherSpritePointer();
 					}
+					displaySlots[10]->disappear = 0;
+					sprite_translucency = 1;
+					displaySprite(displaySlots[10],sprite_table[0x67],root_x[(int)InputDisplayQuadrant] + 0x20,root_y[(int)InputDisplayQuadrant] + 0x34,0.5,0,4);
+					spriteSlots[10] = (spriteControl*)SpriteAddress;
+					otherSpriteData[10] = (otherSpriteControl*)getOtherSpritePointer();
+					displaySlots[11]->disappear = 0;
+					sprite_translucency = 1;
+					// 0x22
+					displaySprite(displaySlots[11],sprite_table[0x91],root_x[(int)InputDisplayQuadrant] + 0x20,root_y[(int)InputDisplayQuadrant] + 0x34,0.2,0,4);
+					spriteSlots[11] = (spriteControl*)SpriteAddress;
+					otherSpriteData[11] = (otherSpriteControl*)getOtherSpritePointer();
+					InputSpritesSpawned = 0;
 				}
 			}
 		}
@@ -75,7 +87,8 @@ void openInputOnTransition(void) {
 
 void closeInputOnTransition(void) {
 	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
-		if (player_count == 1) {
+		int display_bool = canDisplayInput();
+		if (display_bool) {
 			for (int i = 0; i < 12; i++) {
 				spriteSlots[i] = 0;
 				otherSpriteData[i] = 0;
@@ -90,82 +103,81 @@ void displayInput(void) {
 	float stick_x;
 	float stick_y;
 	float stick_mag;
-	if ((CurrentMap != 0x53) && (CurrentMap != 0xC5)) { // Both Dogadon maps cause graphical glitches galore
-		if (player_count == 1) {
-			if (InputStickMax) {
-				scale_factor = 0.3;
-			} else {
-				scale_factor = 0.476;
+	int display_bool = canDisplayInput();
+	if (display_bool) {
+		if (InputStickMax) {
+			scale_factor = 0.3;
+		} else {
+			scale_factor = 0.476;
+		}
+		if (InputSpritesSpawned) {
+			if (otherSpriteData[9]) {
+				otherSpriteData[9]->some_pointer = 0;
+				otherSpriteData[9]->xScale = 4 * target_size[9];
+				otherSpriteData[9]->yScale = (-target_size[9]) * 4;
+				otherSpriteData[9]->xPos = (4 * (float)(root_x[(int)InputDisplayQuadrant] + x_positions[9]));
+				otherSpriteData[9]->yPos = (4 * (float)(root_y[(int)InputDisplayQuadrant] + y_positions[9]));
 			}
-			if (InputSpritesSpawned) {
-				if (otherSpriteData[9]) {
-					otherSpriteData[9]->some_pointer = 0;
-					otherSpriteData[9]->xScale = 4 * target_size[9];
-					otherSpriteData[9]->yScale = (-target_size[9]) * 4;
-					otherSpriteData[9]->xPos = (4 * (float)(root_x[(int)InputDisplayQuadrant] + x_positions[9]));
-					otherSpriteData[9]->yPos = (4 * (float)(root_y[(int)InputDisplayQuadrant] + y_positions[9]));
-				}
-			}
-			for (int i = 0; i < 12; i++) {
-				if (spriteSlots[i]) {
-					if ((ActiveMenu.isOpen) || (InputDisplayOpen == 0)) {
-						spriteSlots[i]->scale = 0;
-						otherSpriteData[i]->xScale = 0;
-						otherSpriteData[i]->yScale = 0;
-						InputSpritesSpawned = 0;
-					} else {
-						if (InputDisplayOpen) {
-							if (i < 10) {
-								if (InputSpritesSpawned == 0) {
-									spriteSlots[i]->scale = target_size[i];
-								}
-								if (otherSpriteData[i]) {
-									if (ControllerInput.Buttons & button_bits[i]) {
-										otherSpriteData[i]->transparency1 = 255;
-										otherSpriteData[i]->transparency2 = 255;
-										otherSpriteData[i]->transparency3 = 255;
-									} else {
-										otherSpriteData[i]->transparency1 = 100;
-										otherSpriteData[i]->transparency2 = 100;
-										otherSpriteData[i]->transparency3 = 100;
-									}
-								}
-							} else {
-								if (InputSpritesSpawned == 0) {
-									spriteSlots[i]->scale = 0.5;
-								}
-								if (i == 10) {
-									otherSpriteData[i]->transparency1 = 150;
-									otherSpriteData[i]->transparency2 = 150;
-									otherSpriteData[i]->transparency3 = 150;
-								}
-								if (i == 11) {
-									// Joystick Position
-									spriteSlots[i]->scale = 0.2;
-									stick_x = ControllerInput.stickX;
-									stick_y = ControllerInput.stickY;
-									if (InputStickMax == 0) {
-										stick_mag = (float)(dk_sqrt((stick_x * stick_x) + (stick_y * stick_y)));
-										if (stick_mag > 80) {
-											stick_x = stick_x * (80 / stick_mag);
-											stick_y = stick_y * (80 / stick_mag);
-										}
-									}
-									spriteSlots[i]->xPos = (root_x[(int)InputDisplayQuadrant] * 4) + 127 + (scale_factor * stick_x);
-									spriteSlots[i]->yPos = (root_y[(int)InputDisplayQuadrant] * 4) + 210 - (scale_factor * stick_y);
+		}
+		for (int i = 0; i < 12; i++) {
+			if (spriteSlots[i]) {
+				if ((ActiveMenu.isOpen) || (InputDisplayOpen == 0)) {
+					spriteSlots[i]->scale = 0;
+					otherSpriteData[i]->xScale = 0;
+					otherSpriteData[i]->yScale = 0;
+					InputSpritesSpawned = 0;
+				} else {
+					if (InputDisplayOpen) {
+						if (i < 10) {
+							if (InputSpritesSpawned == 0) {
+								spriteSlots[i]->scale = target_size[i];
+							}
+							if (otherSpriteData[i]) {
+								if (ControllerInput.Buttons & button_bits[i]) {
+									otherSpriteData[i]->transparency1 = 255;
+									otherSpriteData[i]->transparency2 = 255;
+									otherSpriteData[i]->transparency3 = 255;
+								} else {
+									otherSpriteData[i]->transparency1 = 100;
+									otherSpriteData[i]->transparency2 = 100;
+									otherSpriteData[i]->transparency3 = 100;
 								}
 							}
-							if (i < 11) {
-								spriteSlots[i]->xPos = (4 * (float)(root_x[(int)InputDisplayQuadrant] + x_positions[i]));
-								spriteSlots[i]->yPos = (4 * (float)(root_y[(int)InputDisplayQuadrant] + y_positions[i]));
+						} else {
+							if (InputSpritesSpawned == 0) {
+								spriteSlots[i]->scale = 0.5;
 							}
+							if (i == 10) {
+								otherSpriteData[i]->transparency1 = 150;
+								otherSpriteData[i]->transparency2 = 150;
+								otherSpriteData[i]->transparency3 = 150;
+							}
+							if (i == 11) {
+								// Joystick Position
+								spriteSlots[i]->scale = 0.2;
+								stick_x = ControllerInput.stickX;
+								stick_y = ControllerInput.stickY;
+								if (InputStickMax == 0) {
+									stick_mag = (float)(dk_sqrt((stick_x * stick_x) + (stick_y * stick_y)));
+									if (stick_mag > 80) {
+										stick_x = stick_x * (80 / stick_mag);
+										stick_y = stick_y * (80 / stick_mag);
+									}
+								}
+								spriteSlots[i]->xPos = (root_x[(int)InputDisplayQuadrant] * 4) + 127 + (scale_factor * stick_x);
+								spriteSlots[i]->yPos = (root_y[(int)InputDisplayQuadrant] * 4) + 210 - (scale_factor * stick_y);
+							}
+						}
+						if (i < 11) {
+							spriteSlots[i]->xPos = (4 * (float)(root_x[(int)InputDisplayQuadrant] + x_positions[i]));
+							spriteSlots[i]->yPos = (4 * (float)(root_y[(int)InputDisplayQuadrant] + y_positions[i]));
 						}
 					}
 				}
 			}
-			if ((ActiveMenu.isOpen == 0) && (InputDisplayOpen)) {
-				InputSpritesSpawned = 1;
-			}
+		}
+		if ((ActiveMenu.isOpen == 0) && (InputDisplayOpen)) {
+			InputSpritesSpawned = 1;
 		}
 	}
 };

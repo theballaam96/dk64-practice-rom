@@ -83,7 +83,8 @@ with open(newROMName, "r+b") as fh:
 					compress = gzip.compress(byte_read, compresslevel=9)
 				else:
 					compress = byte_read
-					if (len(compress) > 0xB15E2): # Proper limit is 0xB15E0
+					print(hex(len(compress)))
+					if (len(compress) > 0xB15E0):
 						print("ERROR: STATIC CODE BIN IS TOO BIG (" + hex(len(compress)) + ")")
 				fh.seek(x["start"])
 				fh.write(compress)
@@ -126,6 +127,10 @@ with open(newROMName, "r+b") as fh:
     	_snag_names = fg.read()
     	fh.seek(0x2001800)
     	fh.write(_snag_names)
+    with open ("./../Source/Non-Code/snag_names_capitals.bin","rb") as fg:
+    	_snag_names2 = fg.read()
+    	fh.seek(0x2001C00)
+    	fh.write(_snag_names2)
 
 
 import filestatewriter
