@@ -302,6 +302,7 @@ void savestateHandler(void) {
 							};
 							HelmTimerShown = 0; // Prevent Game Over fadeout
 							ISGActive = 0; // Prevent ISG Fade
+							CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
 							LoadVarsOnMapLoad = 1;
 						} else {
 							playSFX(Wrong);

@@ -37,25 +37,11 @@ static spriteDisplay* displaySlots[] = {
 static spriteControl* spriteSlots[12] = {};
 static otherSpriteControl* otherSpriteData[12] = {};
 
-int canDisplayInput(void) {
-	if (player_count > 1) {
-		return 0;
-	}
-	if ((CurrentMap == 0x53) || (CurrentMap == 0xC5) || (CurrentMap == 0x6B) || (CurrentMap == 0x6D) || (CurrentMap == 0xBE) || (CurrentMap || 0xC0)) {
-		return 0;
-	}
-	if ((DestMap == 0x6B) || (DestMap == 0x6D) || (DestMap == 0xBE) || (DestMap == 0xC0)) {
-		return 0;
-	}
-	return 1;
-}
-
 void openInputOnTransition(void) {
 	char _movement_style;
 	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
-		int display_bool = canDisplayInput();
-		if (display_bool) {
-			if (spriteSlots[0] == 0) {
+		if (spriteSlots[0] == 0) {
+			if ((CurrentMap != 0x53) && (CurrentMap != 0xC5)) { // Both Dogadon maps cause graphical glitches galore
 				if (InputDisplayQuadrant < 4) {
 					for (int i = 0; i < 10; i++) {
 						if (displaySlots[i]) {
@@ -87,14 +73,11 @@ void openInputOnTransition(void) {
 
 void closeInputOnTransition(void) {
 	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
-		int display_bool = canDisplayInput();
-		if (display_bool) {
-			for (int i = 0; i < 12; i++) {
-				spriteSlots[i] = 0;
-				otherSpriteData[i] = 0;
-			}
-			InputSpritesSpawned = 0;
+		for (int i = 0; i < 12; i++) {
+			spriteSlots[i] = 0;
+			otherSpriteData[i] = 0;
 		}
+		InputSpritesSpawned = 0;
 	}
 };
 
@@ -103,8 +86,7 @@ void displayInput(void) {
 	float stick_x;
 	float stick_y;
 	float stick_mag;
-	int display_bool = canDisplayInput();
-	if (display_bool) {
+	if ((CurrentMap != 0x53) && (CurrentMap != 0xC5)) { // Both Dogadon maps cause graphical glitches galore
 		if (InputStickMax) {
 			scale_factor = 0.3;
 		} else {

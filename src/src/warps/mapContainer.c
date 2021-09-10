@@ -59,6 +59,7 @@ void warpToMap(void) {
 						setFlag(92,1,2);
 					}
 				}
+				CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
 				handleMapWarping(_map, 0);
 			}
 		}

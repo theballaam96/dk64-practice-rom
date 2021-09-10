@@ -120,6 +120,8 @@
 .definelabel StoredDamage, 0x807FCC4D // s8
 .definelabel ActorSpawnerPointer, 0x807FC400 // u32 ptr
 .definelabel DebugInfoOn, 0x807563B4 // u8
+.definelabel CutsceneFadeActive, 0x8075533B // u8
+.definelabel CutsceneFadeIndex, 0x8075533E // u16
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)

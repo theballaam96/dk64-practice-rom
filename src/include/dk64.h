@@ -129,6 +129,8 @@ extern int* bbbandit_array[4];
 extern char StoredDamage;
 extern void* ActorSpawnerPointer;
 extern char DebugInfoOn;
+extern char CutsceneFadeActive;
+extern short CutsceneFadeIndex;
 
 //hack data
 extern int TestVariable;
