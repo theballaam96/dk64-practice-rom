@@ -1,10 +1,15 @@
 #include "../../include/common.h"
 
 static const char debug_actors[] = "Actors";
-static const char debug_memory[] = "Memory (WIP)";
+static const char debug_memory[] = "Memory";
 
 void openDebugMenu(void) {
 	changeMenu(76);
+}
+
+void openRAMViewer(void) {
+	defineRAMViewerParameters((int*)0x80000000,(int*)0x80800000);
+	startRamViewerDisplay();
 }
 
 static const char* debug_array[] = {
@@ -14,7 +19,7 @@ static const char* debug_array[] = {
 
 static const int debug_functions[] = {
 	(int)&openActorMenu,
-	0, //(int)&initRamViewerTab,
+	(int)&openRAMViewer,
 };
 
 const Screen debug_struct = {

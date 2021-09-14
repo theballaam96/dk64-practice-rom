@@ -114,12 +114,14 @@ typedef struct playerData {
 } playerData; //size 0x630
 
 typedef struct TextOverlay {
-	/* 0x000 */ char unk_00[0x84];
+	/* 0x000 */ char unk_00[0x7C];
 	/* 0x004 */ //u16
 	/* 0x006 */ //u16
 	/* 0x008 */ //u8
 	/* 0x009 */ //u8
 	/* 0x054 */ //layer ID?
+	/* 0x07C */ float xPos;
+	/* 0x080 */ float yPos;
 	/* 0x084 */ float style;
 	/* 0x088 */ char unk_88[0x15F-0x88];
 	/* 0x15F */ char opacity;

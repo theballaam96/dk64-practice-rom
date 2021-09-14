@@ -5,7 +5,7 @@
 .headersize 0x7FFFF400
 .org 0x80000A30
 .include "asm/hookcode.asm" // Hook code
-.headersize 0x7E5EDDE0
+.headersize 0x7E5DAE00
 .org 0x805DAE00
 .include "asm/boot.asm" //include modified boot code
 .include "asm/objects.asm"

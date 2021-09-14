@@ -22,6 +22,7 @@ static const char detailsscreen_y[15] = "Y: 0";
 static const char detailsscreen_z[15] = "Z: 0";
 static const char detailsscreen_grab[] = "Grab Actor";
 static const char detailsscreen_warp[] = "Warp to Actor";
+static const char detailsscreen_memory[] = "View in Memory";
 
 static char startingActorIndex = 0;
 
@@ -77,6 +78,7 @@ static const char* detailsscreen_array[] = {
 	detailsscreen_z,
 	detailsscreen_grab,
 	detailsscreen_warp,
+	detailsscreen_memory,
 };
 
 void updateLoadedActorNoTextOverlayList(int callType) { // callType: 0 = every frame, checks screen Index. 1 = From openactormenu.
@@ -104,7 +106,7 @@ void openActorMenu(void) {
 		ActorNamesTable = copy_space;
 		int* file_size;
 		*(int*)(&file_size) = 0x1580;
-		copyFromROM(0x2000000,copy_space,&file_size,0,0,0,0);
+		copyFromROM(0x2020000,copy_space,&file_size,0,0,0,0);
 	}
 	updateLoadedActorNoTextOverlayList(1);
 	if (ActiveMenu.screenIndex != 77) {
@@ -183,6 +185,13 @@ void grabViewedActor(void) {
 	}
 }
 
+void openActorRAM(void) {
+	int actor_addr = (int)FocusedActorViewPointer;
+	int actor_size = (int)*(int*)(actor_addr - 0xC);
+	defineRAMViewerParameters((int*)actor_addr,(int*)(actor_addr + actor_size));
+	startRamViewerDisplay();
+}
+
 void warpToActor(void) {
 	if (FocusedActorViewPointer) {
 		if (isAddressActor(FocusedActorViewPointer)) {
@@ -256,12 +265,13 @@ static const int detailsscreen_functions[] = {
 	0,
 	(int)&grabViewedActor,
 	(int)&warpToActor,
+	(int)&openActorRAM,
 };
 
 const Screen detailsscreen_struct = {
 	.TextArray = (int*)detailsscreen_array,
 	.FunctionArray = detailsscreen_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 77,
 	.ParentPosition = 0
 };

@@ -61,6 +61,6 @@
 #define ErrorLength 180
 #define WarpScreens 29
 #define WatchCount 4
-#define FileStatesROMStart 0x2002000
+#define FileStatesROMStart 0x2022000
 #define FileStateSize 0x340
 #define flagMenuScreenCount 11

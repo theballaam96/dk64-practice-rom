@@ -1,5 +1,5 @@
 file_size = 0x140 + 0x1E0 + 0x10 + 0x10
-ROM_start = 0x2002000
+ROM_start = 0x2022000
 ROM_name = "dk64-practice-rom.z64";
 state_index = 0;
 state_files = [

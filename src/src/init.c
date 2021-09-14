@@ -5,6 +5,7 @@ void initHack(void) {
 		InputDisplayIndex = -1;
 		IsSuperspeedOn = 1;
 		DebugInfoOn = 1;
+		*(int*)(0x80731F78) = 0;
 		for (int i = 0; i < WatchCount; i++) {
 			ViewedSnagWatches[i] = -1;
 		}

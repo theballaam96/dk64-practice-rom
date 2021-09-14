@@ -121,15 +121,15 @@ with open(newROMName, "r+b") as fh:
     fh.write(bytearray([0, 0, 0, 0]))
     with open("./../Source/Non-Code/actor_names.bin","rb") as fg:
     	_actor_names = fg.read()
-    	fh.seek(0x2000000)
+    	fh.seek(0x2020000)
     	fh.write(_actor_names)
     with open ("./../Source/Non-Code/snag_names.bin","rb") as fg:
     	_snag_names = fg.read()
-    	fh.seek(0x2001800)
+    	fh.seek(0x2021800)
     	fh.write(_snag_names)
     with open ("./../Source/Non-Code/snag_names_capitals.bin","rb") as fg:
     	_snag_names2 = fg.read()
-    	fh.seek(0x2001C00)
+    	fh.seek(0x2021C00)
     	fh.write(_snag_names2)
 
 

@@ -103,6 +103,9 @@ START_HOOK:
 		ORI 	a3, a3, 0xCCCD
 		BEQ 	t0, at, resizeActiveMenuFont_NormalStyle10
 		NOP
+		ADDI 	t0, t0, -5
+		BEQZ 	t0, resizeActiveMenuFont_NormalStyle10
+		ADDIU 	t0, t0, 5
 		LUI 	a3, 0x3F66
 		ORI 	a3, a3, 0x6666
 
@@ -115,6 +118,9 @@ START_HOOK:
 		ADDIU 	a2, r0, 10
 		BEQ 	t0, a2, defineActiveMenuOtherParams_Finish
 		ADDIU 	a3, r0, 6
+		ADDIU 	a2, r0, 5
+		BEQ 	t0, a2, defineActiveMenuOtherParams_Finish
+		ADDIU 	a3, r0, 2
 		ADDIU 	a3, r0, 0
 
 		defineActiveMenuOtherParams_Finish:

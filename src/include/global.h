@@ -14,6 +14,10 @@ extern void toggleFlag(void);
 extern void handleMapWarping(int map, int levelIndex);
 extern int convertIDToIndex(short obj_index);
 extern void* findActorWithType(int search_actor_type);
+extern void closeMenu(void);
+extern void startRamViewerDisplay(void);
+extern void closeRamViewerDisplay(void);
+extern void defineRAMViewerParameters(int* start, int* end);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);

@@ -116,13 +116,13 @@ void openWatchSnagMenu(void) {
 		actorNames* copy_space = dk_malloc(0x350);
 		SnagNamesTable = copy_space;
 		*(int*)(&file_size) = 0x350;
-		copyFromROM(0x2001800,copy_space,&file_size,0,0,0,0);
+		copyFromROM(0x2021800,copy_space,&file_size,0,0,0,0);
 	}
 	if (SnagCapitalsTable == 0) {
 		actorNames* copy_space = dk_malloc(0x350);
 		SnagCapitalsTable = copy_space;
 		*(int*)(&file_size) = 0x350;
-		copyFromROM(0x2001C00,copy_space,&file_size,0,0,0,0);
+		copyFromROM(0x2021C00,copy_space,&file_size,0,0,0,0);
 	}
 	for (int i = 0; i < (sizeof(snag_data) / 4); i++) {
 		_map = snag_data[i].map;

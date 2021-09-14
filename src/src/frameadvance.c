@@ -5,7 +5,7 @@ void toggleFrameAdvanceState(void) {
 		PreviousFrameButtons = 0;
 	}
 	if (DisablePositionButtons == 1) {
-		if (ActiveMenu.isOpen == 0) {
+		if ((ActiveMenu.isOpen == 0) && (RAMDisplayOpen == 0)) {
 			if (ClosingMenu == 0) {
 				if (IsPauseMenuOpen == 0) {
 					if (NewlyPressedControllerInput.Buttons & D_Right) {
@@ -43,7 +43,7 @@ void initFrameAdvance(void) {
 	short _buttons;
 	if (DisablePositionButtons == 1) {
 		if (IsPauseMenuOpen == 0) {
-			if (ActiveMenu.isOpen == 0) {
+			if ((ActiveMenu.isOpen == 0) && (RAMDisplayOpen == 0)) {
 				if (ClosingMenu == 0) {
 					if (NewlyPressedControllerInput.Buttons & D_Left) {
 						if (FrameAdvancing == 0) {
@@ -76,7 +76,7 @@ void exitFrameAdvance(void) {
 	unsigned int _diff;
 	if (FrameAdvancing) {
 		if (IsPauseMenuOpen == 0) {
-			if (ActiveMenu.isOpen == 0) {
+			if ((ActiveMenu.isOpen == 0) && (RAMDisplayOpen == 0)) {
 				if (ClosingMenu == 0) {
 					_diff = FrameLag - FrameAdvanceStart;
 					if (_diff > 0) {

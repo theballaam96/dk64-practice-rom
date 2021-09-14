@@ -14,11 +14,11 @@
 char formatter08[] = "%02X:%08X %08X %08X %08X";
 char formatter04[] = "%02X:%04X %04X %04X %04X %04X %04X %04X %04X";
 char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X";
-char formatterheaderViewText[] = "ADDR: %08X";
+char formatterheaderViewText[] = "Addr: 0x%08X";
 
 char openRamViewText[] = "Open RAM View";
 char closeRamViewText[] = "Close RAM View";
-char headerViewText[30] = "Header";
+char headerViewText[30] = "HEADER";
 char line1[60] = "1";
 char line2[60] = "2";
 char line3[60] = "3";
@@ -27,18 +27,32 @@ char line5[60] = "5";
 char line6[60] = "6";
 char line7[60] = "7";
 char line8[60] = "8";
+char focusedBytes[10] = "00";
+char focusedAddrChar[2] = "0";
+short focusedBytes_offset = 0;
 char currentFormat = 0;
 int* printStartAddr = (int*)0x80000000;
 unsigned char headerStyle = 10;
 unsigned char tableStyle = 5;
+char editAddrPosition = 5;
+unsigned int ramViewer_start = validRamReadStart;
+unsigned int ramViewer_end = validRamReadEnd;
 
 char* ramViewTextPtrs[] = {headerViewText, line1, line2, line3, line4, line5, line6, line7, line8};
-TextOverlay* textOverlayInstances[9] = {0};
+char* focusedBytePtr = focusedBytes;
+char* focusedAddrPtr = focusedAddrChar;
+TextOverlay* textOverlayInstances[11] = {0};
 
 static char* ramview_array[] = {
     openRamViewText,
     closeRamViewText,
 };
+
+void defineRAMViewerParameters(int* start, int* end) {
+    ramViewer_start = (unsigned int)start;
+    ramViewer_end = (unsigned int)end - 0x70;
+    printStartAddr = start;
+}
 
 void dk_strFormatWrapper(char* destination, int byteFormat, int* address) {
     if (byteFormat == ByteFormat4) {
@@ -61,10 +75,11 @@ void initHeader(int* address) {
     TextOverlay* textOverlay;
 
     dk_strFormat(ramViewTextPtrs[0], formatterheaderViewText, address);
-    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(headerStyle, 60, 15, headerViewText, 0, 0, 2, 0);
+    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(headerStyle, 25, 25, headerViewText, 0, 0, 2, 0);
     textOverlay->string = ramViewTextPtrs[0];
     textOverlayInstances[0] = textOverlay;
     textOverlay->opacity = 0xFF;
+    textOverlay->style = 128;
 }
 
 void updateHeader(int* address) {
@@ -72,11 +87,22 @@ void updateHeader(int* address) {
     textOverlayInstances[0]->string = ramViewTextPtrs[0];
 }
 
+void formatByteFocus(int* address, int byteFormat) {
+    if (byteFormat == ByteFormat4) {
+        dk_strFormat((focusedBytePtr), "%08X", *((unsigned int*)address + focusedBytes_offset));
+    } else if (byteFormat == ByteFormat2) {
+        dk_strFormat((focusedBytePtr), "%04X", *((unsigned short*)address + focusedBytes_offset));
+    } else if (byteFormat == ByteFormat1) {
+        dk_strFormat((focusedBytePtr), "%02X", *((unsigned char*)address + focusedBytes_offset));
+    } else {//unknown byte format, default to %08X
+        dk_strFormat((focusedBytePtr), "%08X", *((unsigned int*)address + focusedBytes_offset));
+    };
+}
+
 void initTable (int* address) {
     TextOverlay* textOverlay;
     int x = 10;
     int y = 60;
-
     for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) {
         dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
         textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, x, y, (ramViewTextPtrs[i+1]), 0, 0, 2, 0);
@@ -85,14 +111,46 @@ void initTable (int* address) {
         textOverlay->opacity = 0xFF;
         y += 15;
     }
+    // Focused Byte
+    formatByteFocus(address, currentFormat);
+    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, 29, 60, (focusedBytePtr), 0, 0, 2, 0);
+    textOverlay->string = focusedBytePtr;
+    textOverlayInstances[9] = textOverlay;
+    textOverlay->opacity = 0xFF;
+    textOverlay->red = 0xFF;
+    textOverlay->green = 0xD7;
+    textOverlay->blue = 0;
+    // Focused Addr
+    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, 25, 25, (focusedAddrPtr), 0, 0, 2, 0);
+    textOverlay->string = focusedAddrPtr;
+    textOverlayInstances[10] = textOverlay;
+    textOverlay->opacity = 0xFF;
+    textOverlay->red = 0xFF;
+    textOverlay->green = 0xD7;
+    textOverlay->blue = 0;
+    textOverlay->style = 128;
 }
 
 void updateTable(int* address) {
+    int offset_size = (4 << currentFormat);
+    int byte_size = (2 << (2 - currentFormat));
+    int focus_x = focusedBytes_offset % offset_size;
+    int focus_y = (focusedBytes_offset - focus_x) / offset_size;
+    int text_size = byte_size + 1;
     for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) { //max of 8 lines
         if (ramViewTextPtrs[i+1] != 0) {
-            dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
-            textOverlayInstances[i+1]->string = ramViewTextPtrs[i+1];
-            //we do i+1 on lines because *lines[0] is header text
+            if (i < 8) {
+                dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
+                textOverlayInstances[i+1]->string = ramViewTextPtrs[i+1];
+                //we do i+1 on lines because *lines[0] is header text
+            }
+        }
+    }
+    formatByteFocus(address, currentFormat);
+    textOverlayInstances[9]->string = focusedBytes;
+    if ((ControllerInput.Buttons & R_Button) == 0) {
+        for (int i = 0; i < byte_size; i++) {
+            ramViewTextPtrs[focus_y + 1][i + 3 + (focus_x * text_size)] = 0x20;
         }
     }
 }
@@ -106,49 +164,218 @@ void destroyTextObjects(void) {
     }
 }
 
-void scrollRAMViewer(void) {
-    if (p1PressedButtons & D_Up && p1HeldButtons & L_Button) {
-        if ( (unsigned int)(printStartAddr - 4) < (unsigned int) validRamReadStart) {
-            //prevents reading from invalid memory
-        } else {
-            printStartAddr -= 0x4;
-        }
+void updateRAMValue(int* address) {
+    int change = 0;
+    if (ControllerInput.Buttons & L_Button) {
+        textOverlayInstances[9]->red = 0xFF;
+        textOverlayInstances[9]->green = 0x45;
+        textOverlayInstances[9]->blue = 0x00;
+    } else {
+        textOverlayInstances[9]->red = 0xFF;
+        textOverlayInstances[9]->green = 0xD7;
+        textOverlayInstances[9]->blue = 0x00;
+    }
+    if ((NewlyPressedControllerInput.Buttons & D_Up) && (ControllerInput.Buttons & L_Button)) {
+        change = 1;
     }
 
-    if (p1PressedButtons & D_Down && p1HeldButtons & L_Button) {
-        if ( (unsigned int) (printStartAddr + 4) >= (unsigned int) validRamReadEnd) { //we display 0x10 bytes * 8 therefore we stop advancing at 807FFF90
-            //prevents reading from invalid memory
+    if ((NewlyPressedControllerInput.Buttons & D_Down) && (ControllerInput.Buttons & L_Button)) {
+        change = -1;
+    }
+    if (change != 0) {
+        if (currentFormat == ByteFormat4) {
+            *((unsigned int*)address + focusedBytes_offset) += change;
+        } else if (currentFormat == ByteFormat2) {
+            *((unsigned short*)address + focusedBytes_offset) += change;
+        } else if (currentFormat == ByteFormat1) {
+            *((unsigned char*)address + focusedBytes_offset) += change;
+        } else {//unknown byte format, default to %08X
+            *((unsigned int*)address + focusedBytes_offset) += change;
+        };
+    }
+}
+
+int getGroovyCharKerning(int hex_digit) {
+    switch (hex_digit) {
+        case 0x0:
+        case 0xA:
+            return 32.8;
+        case 0x1:
+            return 19;
+        case 0x2:
+        case 0x5:
+        case 0x6:
+        case 0x7:
+            return 36;
+        case 0x3:
+        case 0x8:
+        case 0x9:
+            return 39;
+        case 0x4:
+            return 42;
+        case 0xB:
+            return 35;
+        case 0xC:
+        case 0xE:
+            return 29;
+        case 0xD:
+        case 0xF:
+            return 32;
+        break;
+    }
+    return 0;
+}
+
+void editAddress(void) {
+    int x_pos = 0;
+    int initial_digit = ((unsigned int)printStartAddr >> (4 * (6 - editAddrPosition))) & 0xF;
+    int new_digit = initial_digit;
+    int slot = 0xF0;
+    int opp_slot = -1;
+    if (ControllerInput.Buttons & R_Button) {
+        textOverlayInstances[9]->opacity = 0x0;
+        textOverlayInstances[10]->opacity = 0xFF;
+        if (NewlyPressedControllerInput.Buttons & D_Left) {
+            editAddrPosition -= 1;
         } else {
-            printStartAddr += 0x4;
+            if (NewlyPressedControllerInput.Buttons & D_Right) {
+                editAddrPosition += 1;
+            } else {
+                if (NewlyPressedControllerInput.Buttons & D_Up) {
+                    new_digit += 1;
+                    if (new_digit > 0xF) {
+                        new_digit = 0;
+                    }
+                } else {
+                    if (NewlyPressedControllerInput.Buttons & D_Down) {
+                        new_digit -= 1;
+                        if (new_digit < 0) {
+                            new_digit = 0xF;
+                        }
+                    }
+                }
+            }
+        }
+        if (initial_digit != new_digit) {
+            slot <<= (4 * (5 - editAddrPosition));
+            opp_slot -= slot;
+            printStartAddr = (int*)(((unsigned int)(printStartAddr) & opp_slot) | (new_digit << (4 * (6 - editAddrPosition))));
+        }
+        if ((int)printStartAddr < ramViewer_start) {
+            printStartAddr = (int*)ramViewer_start;
+        } else {
+            if ((int)printStartAddr > ramViewer_end) {
+                printStartAddr = (int*)ramViewer_end;
+            }
+        }
+    } else {
+        textOverlayInstances[9]->opacity = 0xFF;
+        textOverlayInstances[10]->opacity = 0x00;
+    }
+    if (editAddrPosition < 1) {
+        editAddrPosition = 1;
+    } else {
+        if (editAddrPosition > 5) {
+            editAddrPosition = 5;
         }
     }
+    x_pos = 377;
+    for (int i = 0; i < (editAddrPosition - 1); i++) {
+        x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - i))) & 0xF);
+    }
+    //x_pos = TestVariable;
+    textOverlayInstances[10]->xPos = x_pos;
+    dk_strFormat((focusedAddrPtr),"%1X",((unsigned int)printStartAddr >> (4 * (6 - editAddrPosition))) & 0xF);
 }
 
 void checkForFormatChange(void) {
     if (p1PressedButtons & D_Right && p1HeldButtons & L_Button) {
         if ( (currentFormat + 1) < 3) {
             currentFormat++;
+            focusedBytes_offset <<= 1;
         }
     }
     
     if (p1PressedButtons & D_Left && p1HeldButtons & L_Button) {
         if ( currentFormat != 0) {
             currentFormat--;
+            focusedBytes_offset >>= 1;
         }
     }
 }
 
-void closeRamViewerDisplay(void){
-    if (RAMDisplayOpen == 1) {
+void closeRamViewerDisplay(void) {
+    if (RAMDisplayOpen) {
         RAMDisplayOpen = 0;
         destroyTextObjects();
     }
 }
 
+void moveRAMViewFocus(void) {
+    int focus_x;
+    int focus_y;
+    int offset_size;
+    int x_offset_size = 0;
+    if (((RAMDisplayOpen) && (ClosingMenu == 0))) {
+        if ((ControllerInput.Buttons & R_Button) == 0) {
+            offset_size = (4 << currentFormat);
+            if ((ControllerInput.Buttons & L_Button) == 0) {
+                if (NewlyPressedControllerInput.Buttons & D_Left) {
+                    focusedBytes_offset -= 0x1;
+                } else {
+                    if (NewlyPressedControllerInput.Buttons & D_Right) {
+                        focusedBytes_offset += 0x1;
+                    } else {
+                        if (NewlyPressedControllerInput.Buttons & D_Up) {
+                            focusedBytes_offset -= offset_size;
+                        } else {
+                            if (NewlyPressedControllerInput.Buttons & D_Down) {
+                                focusedBytes_offset += offset_size;
+                            }
+                        }
+                    }
+                }
+            }
+            if (focusedBytes_offset < 0) {
+                printStartAddr -= 4;
+                focusedBytes_offset += offset_size;
+            }
+            if (focusedBytes_offset >= (0x20 << currentFormat)) {
+                printStartAddr += 4;
+                focusedBytes_offset -= offset_size;
+            }
+            if ((int)printStartAddr < ramViewer_start) {
+                printStartAddr = (int*)ramViewer_start;
+            } else {
+                if ((int)printStartAddr > ramViewer_end) {
+                    printStartAddr = (int*)ramViewer_end;
+                }
+            }
+            focus_x = focusedBytes_offset % offset_size;
+            focus_y = (focusedBytes_offset - focus_x) / offset_size;
+            switch(currentFormat) {
+                case 0:
+                    x_offset_size = 231;
+                    break;
+                case 1:
+                    x_offset_size = 128.3;
+                    break;
+                case 2:
+                    x_offset_size = 77;
+                break;
+            }
+            textOverlayInstances[9]->xPos = (29 * 4) + (focus_x * x_offset_size);
+            textOverlayInstances[9]->yPos = (60 * 4) + (focus_y * 60);
+        }
+    }   
+}
+
 void ramViewUpdate(void) {
-    if (RAMDisplayOpen == 1) {
+    if (RAMDisplayOpen) {
         checkForFormatChange();
-        scrollRAMViewer();
+        moveRAMViewFocus();
+        editAddress();
+        updateRAMValue(printStartAddr);
         updateHeader(printStartAddr);
         updateTable(printStartAddr);
         if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
@@ -161,6 +388,7 @@ void startRamViewerDisplay (void) {
     if (RAMDisplayOpen == 0) {
         initHeader(printStartAddr);
         initTable(printStartAddr);
+        closeMenu();
         RAMDisplayOpen = 1;
     }
 }

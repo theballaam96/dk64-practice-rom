@@ -99,6 +99,7 @@ extern char JoystickEnabledY;
 extern char MapState;
 extern Controller ControllerInput;
 extern Controller NewlyPressedControllerInput;
+extern Controller PreviouslyPressedButtons;
 extern playerData* Player;
 extern SwapObjectData* SwapObject;
 extern char Character;

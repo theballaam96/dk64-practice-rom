@@ -14,7 +14,7 @@ static PosState* pos_states[] = {
 
 void handlePositionSavestates(void) {
 	int _focused_state = FocusedSavestate;
-	if (ActiveMenu.isOpen == 0) {
+	if ((ActiveMenu.isOpen == 0) && (RAMDisplayOpen == 0)) {
 		if (ClosingMenu == 0) {
 			if (DisablePositionButtons == 0) {
 				if (NewlyPressedControllerInput.Buttons & D_Right) {
