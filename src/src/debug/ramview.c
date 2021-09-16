@@ -37,7 +37,7 @@ char currentFormat = 0;
 int* printStartAddr = (int*)0x80000000;
 unsigned char headerStyle = 10;
 unsigned char tableStyle = 5;
-char editAddrPosition = 5;
+char editAddrPosition = 6;
 unsigned int ramViewer_start = validRamReadStart;
 unsigned int ramViewer_end = validRamReadEnd;
 unsigned int focusValue = 0;
@@ -130,6 +130,18 @@ void formatByteFocus(int* address, int byteFormat) {
     }
 }
 
+void spawnAddrChanger(void) {
+    TextOverlay* textOverlay;
+    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, 25, 25, (focusedAddrPtr), 0, 0, 2, 0);
+    textOverlay->string = focusedAddrPtr;
+    textOverlayInstances[10] = textOverlay;
+    textOverlay->opacity = 0xFF;
+    textOverlay->red = 0xFF;
+    textOverlay->green = 0xD7;
+    textOverlay->blue = 0;
+    textOverlay->style = 128;
+}
+
 void initTable (int* address) {
     TextOverlay* textOverlay;
     int x = 10;
@@ -152,14 +164,7 @@ void initTable (int* address) {
     textOverlay->green = 0xD7;
     textOverlay->blue = 0;
     // Focused Addr
-    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, 25, 25, (focusedAddrPtr), 0, 0, 2, 0);
-    textOverlay->string = focusedAddrPtr;
-    textOverlayInstances[10] = textOverlay;
-    textOverlay->opacity = 0xFF;
-    textOverlay->red = 0xFF;
-    textOverlay->green = 0xD7;
-    textOverlay->blue = 0;
-    textOverlay->style = 128;
+    spawnAddrChanger();
 }
 
 void updateTable(int* address) {
@@ -260,7 +265,7 @@ void editAddress(void) {
     int x_pos = 0;
     int initial_digit = ((unsigned int)printStartAddr >> (4 * (6 - editAddrPosition))) & 0xF;
     int new_digit = initial_digit;
-    int slot = 0xF0;
+    int slot = 0xF;
     int opp_slot = -1;
     if ((ControllerInput.Buttons & R_Button) && (ControllerInput.Buttons & L_Button) == 0) {
         textOverlayInstances[9]->opacity = 0x0;
@@ -270,18 +275,29 @@ void editAddress(void) {
         } else if (NewlyPressedControllerInput.Buttons & D_Right) {
             editAddrPosition += 1;
         } else if (NewlyPressedControllerInput.Buttons & D_Up) {
-            new_digit += 1;
+            if (editAddrPosition == 6) {
+                new_digit += 8;
+            } else {
+                new_digit += 1;
+            }
             if (new_digit > 0xF) {
                 new_digit = 0;
             }
         } else if (NewlyPressedControllerInput.Buttons & D_Down) {
-            new_digit -= 1;
+            if (editAddrPosition == 6) {
+                new_digit += 8;
+            } else {
+                new_digit -= 1;
+            }
             if (new_digit < 0) {
                 new_digit = 0xF;
             }
+            if (new_digit > 0xF) {
+                new_digit = 0;
+            }
         }
         if (initial_digit != new_digit) {
-            slot <<= (4 * (5 - editAddrPosition));
+            slot <<= (4 * (6 - editAddrPosition));
             opp_slot -= slot;
             printStartAddr = (int*)(((unsigned int)(printStartAddr) & opp_slot) | (new_digit << (4 * (6 - editAddrPosition))));
         }
@@ -299,8 +315,8 @@ void editAddress(void) {
     if (editAddrPosition < 1) {
         editAddrPosition = 1;
     } else {
-        if (editAddrPosition > 5) {
-            editAddrPosition = 5;
+        if (editAddrPosition > 6) {
+            editAddrPosition = 6;
         }
     }
     x_pos = 377;
@@ -396,8 +412,19 @@ void moveRAMViewFocus(void) {
     }   
 }
 
+void detectLayering(void) {
+    if ((int)textOverlayInstances[10] < (int)textOverlayInstances[0]) {
+        if (textOverlayInstances[10] != NULL) {
+            deleteActor((int*)textOverlayInstances[10]);
+            textOverlayInstances[10] = NULL;
+            spawnAddrChanger();
+        }
+    }
+}
+
 void ramViewUpdate(void) {
     if (RAMDisplayOpen) {
+        detectLayering();
         if (ControllerInput.Buttons & L_Button) {
             if (ramViewEditMode == 1){
                 ramViewEditMode = 2;
