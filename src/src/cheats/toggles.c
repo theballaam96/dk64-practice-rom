@@ -13,6 +13,9 @@ static const char toggles_sandstorm_on[] = "Aztec Sandstorm: On";
 static const char toggles_enemyspawn_off[] = "Enemy Spawning: Off";
 static const char toggles_enemyspawn_on[] = "Enemy Spawning: On";
 
+static const char toggles_minigamems_off[] = "Minigame Timers: Normal";
+static const char toggles_minigamems_on[] = "Minigame Timers: Milliseconds";
+
 static const char toggles_infhealth_off[] = "Infinite Health: Off";
 static const char toggles_infhealth_on[] = "Infinite Health: On";
 
@@ -39,6 +42,7 @@ static const char* toggles_array[] = {
 	toggles_phase_off,
 	toggles_sandstorm_unk,
 	toggles_enemyspawn_off,
+	toggles_minigamems_off,
 	toggles_infhealth_off,
 	toggles_ltocancelcs_off,
 	toggles_ltoendminigame_off,
@@ -75,36 +79,41 @@ void openTogglesMenu(void) {
 	} else {
 		toggles_array[3] = toggles_enemyspawn_on;
 	}
-	if (InfiniteHealthCheatOn) {
-		toggles_array[4] = toggles_infhealth_on;
+	if (MinigameTimersInMS) {
+		toggles_array[4] = toggles_minigamems_on;
 	} else {
-		toggles_array[4] = toggles_infhealth_off;
+		toggles_array[4] = toggles_minigamems_off;
+	}
+	if (InfiniteHealthCheatOn) {
+		toggles_array[5] = toggles_infhealth_on;
+	} else {
+		toggles_array[5] = toggles_infhealth_off;
 	}
 	if (LToCancelCSOn) {
-		toggles_array[5] = toggles_ltocancelcs_on;
+		toggles_array[6] = toggles_ltocancelcs_on;
 	} else {
-		toggles_array[5] = toggles_ltocancelcs_off;
+		toggles_array[6] = toggles_ltocancelcs_off;
 	}
 	if (LToEndGameOn) {
-		toggles_array[6] = toggles_ltoendminigame_on;
+		toggles_array[7] = toggles_ltoendminigame_on;
 	} else {
-		toggles_array[6] = toggles_ltoendminigame_off;
+		toggles_array[7] = toggles_ltoendminigame_off;
 	}
 	if (LToLevitateOn) {
-		toggles_array[7] = toggles_levitate_on;
+		toggles_array[8] = toggles_levitate_on;
 	} else {
-		toggles_array[7] = toggles_levitate_off;
+		toggles_array[8] = toggles_levitate_off;
 	}
 	dk_strFormat((char *)toggles_superspeed,"L to Superspeed: %dx",IsSuperspeedOn);
 	if (IsSuperspeedOn == 1) {
-		toggles_array[8] = toggles_superspeed_off;
+		toggles_array[9] = toggles_superspeed_off;
 	} else {
-		toggles_array[8] = toggles_superspeed;
+		toggles_array[9] = toggles_superspeed;
 	}
 	if (LToToggleTBOn) {
-		toggles_array[9] = toggles_ltotoggletb_on;
+		toggles_array[10] = toggles_ltotoggletb_on;
 	} else {
-		toggles_array[9] = toggles_ltotoggletb_off;
+		toggles_array[10] = toggles_ltotoggletb_off;
 	}
 	changeMenu(71);
 }
@@ -158,6 +167,12 @@ void infiniteHealth(void) {
 	}
 };
 
+void toggleMinigameTimers(void) {
+	MinigameTimersInMS = 1 - MinigameTimersInMS;
+	changeTimer_button();
+	openTogglesMenu();
+}
+
 void resetAllCheats(void) {
 	AutoMoonkickOn = 0;
 	AutoPhaseStateOn = 0;
@@ -167,6 +182,7 @@ void resetAllCheats(void) {
 	LToLevitateOn = 0;
 	LToToggleTBOn = 0;
 	IsSuperspeedOn = 1;
+	MinigameTimersInMS = 0;
 	if (EnemySpawnOff) {
 		toggleSpawnPrevention();
 	}
@@ -183,6 +199,7 @@ static const int toggles_functions[] = {
 	(int)&toggleAutophase,
 	(int)&toggleSandstorm,
 	(int)&toggleSpawnPrevention,
+	(int)&toggleMinigameTimers,
 	(int)&toggleInfHealth,
 	(int)&toggleLToCancelCS,
 	(int)&toggleLToEndGame,
@@ -197,7 +214,7 @@ static const int toggles_functions[] = {
 const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
-	.ArrayItems = 13,
+	.ArrayItems = 14,
 	.ParentScreen = 55,
 	.ParentPosition = 5
 };

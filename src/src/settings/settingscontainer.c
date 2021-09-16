@@ -6,6 +6,7 @@ static const char settings_vanillavars[] = "Vanilla Variables";
 static const char settings_hackvars[] = "Hack Variables";
 static const char settings_kongmenu[] = "Change Kong Colors";
 static const char settings_changeinputquadrant[] = "Change Input Display Quadrant";
+static const char settings_runsticktest[] = "Run Stick Assessment Test";
 static const char settings_resetdefaults[] = "Reset to Default";
 
 static const char* settings_array[] = {
@@ -15,6 +16,7 @@ static const char* settings_array[] = {
 	settings_hackvars,
 	settings_kongmenu,
 	settings_changeinputquadrant,
+	settings_runsticktest,
 	settings_resetdefaults
 };
 
@@ -35,13 +37,14 @@ static const int settings_functions[] = {
 	(int)&openHackVarsMenu,
 	(int)&openKongColorsMenu,
 	(int)&openInputQuadrantMenu,
+	(int)&startTest,
 	(int)&resetSettingsHandler,
 };
 
 const Screen settings_struct = {
 	.TextArray = (int*)settings_array,
 	.FunctionArray = settings_functions,
-	.ArrayItems = 7,
+	.ArrayItems = 8,
 	.ParentScreen = 0,
 	.ParentPosition = 8
 };

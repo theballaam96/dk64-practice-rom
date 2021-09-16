@@ -37,6 +37,8 @@ unsigned char tableStyle = 5;
 char editAddrPosition = 5;
 unsigned int ramViewer_start = validRamReadStart;
 unsigned int ramViewer_end = validRamReadEnd;
+unsigned int focusValue = 0;
+int ramViewEditMode = 0;
 
 char* ramViewTextPtrs[] = {headerViewText, line1, line2, line3, line4, line5, line6, line7, line8};
 char* focusedBytePtr = focusedBytes;
@@ -88,15 +90,41 @@ void updateHeader(int* address) {
 }
 
 void formatByteFocus(int* address, int byteFormat) {
-    if (byteFormat == ByteFormat4) {
-        dk_strFormat((focusedBytePtr), "%08X", *((unsigned int*)address + focusedBytes_offset));
-    } else if (byteFormat == ByteFormat2) {
-        dk_strFormat((focusedBytePtr), "%04X", *((unsigned short*)address + focusedBytes_offset));
-    } else if (byteFormat == ByteFormat1) {
-        dk_strFormat((focusedBytePtr), "%02X", *((unsigned char*)address + focusedBytes_offset));
-    } else {//unknown byte format, default to %08X
-        dk_strFormat((focusedBytePtr), "%08X", *((unsigned int*)address + focusedBytes_offset));
+    unsigned int addr_value = 0;
+    char focus_format1[] = "%08X";
+    char focus_format2[] = "%04X";
+    char focus_format3[] = "%02X";
+    char* focus_formats[] = {
+        focus_format1,
+        focus_format2,
+        focus_format3,
     };
+    int format_index = 0;
+    if (byteFormat == ByteFormat4) {
+        addr_value = *((unsigned int*)address + focusedBytes_offset);
+        format_index = 0;
+        //dk_strFormat((focusedBytePtr), "%08X", addr_value);
+    } else if (byteFormat == ByteFormat2) {
+        addr_value = *((unsigned short*)address + focusedBytes_offset);
+        format_index = 1;
+        //dk_strFormat((focusedBytePtr), "%04X", addr_value);
+    } else if (byteFormat == ByteFormat1) {
+        addr_value = *((unsigned char*)address + focusedBytes_offset);
+        format_index = 2;
+        //dk_strFormat((focusedBytePtr), "%02X", addr_value);
+    } else {//unknown byte format, default to %08X
+        addr_value = *((unsigned int*)address + focusedBytes_offset);
+        format_index = 0;
+        //dk_strFormat((focusedBytePtr), "%08X", addr_value);
+    };
+    if (ramViewEditMode > 1) {
+        dk_strFormat((focusedBytePtr), focus_formats[format_index], focusValue);
+    } else {
+        dk_strFormat((focusedBytePtr), focus_formats[format_index], addr_value);
+    }
+    if (ramViewEditMode == 1) {
+        focusValue = addr_value;
+    }
 }
 
 void initTable (int* address) {
@@ -165,7 +193,6 @@ void destroyTextObjects(void) {
 }
 
 void updateRAMValue(int* address) {
-    int change = 0;
     if (ControllerInput.Buttons & L_Button) {
         textOverlayInstances[9]->red = 0xFF;
         textOverlayInstances[9]->green = 0x45;
@@ -176,21 +203,21 @@ void updateRAMValue(int* address) {
         textOverlayInstances[9]->blue = 0x00;
     }
     if ((NewlyPressedControllerInput.Buttons & D_Up) && (ControllerInput.Buttons & L_Button)) {
-        change = 1;
+        focusValue += 1;
     }
 
     if ((NewlyPressedControllerInput.Buttons & D_Down) && (ControllerInput.Buttons & L_Button)) {
-        change = -1;
+        focusValue -= 1;
     }
-    if (change != 0) {
+    if (ramViewEditMode == 3) {
         if (currentFormat == ByteFormat4) {
-            *((unsigned int*)address + focusedBytes_offset) += change;
+            *((unsigned int*)address + focusedBytes_offset) = focusValue;
         } else if (currentFormat == ByteFormat2) {
-            *((unsigned short*)address + focusedBytes_offset) += change;
+            *((unsigned short*)address + focusedBytes_offset) = focusValue & 0xFFFF;
         } else if (currentFormat == ByteFormat1) {
-            *((unsigned char*)address + focusedBytes_offset) += change;
+            *((unsigned char*)address + focusedBytes_offset) = focusValue & 0xFF;
         } else {//unknown byte format, default to %08X
-            *((unsigned int*)address + focusedBytes_offset) += change;
+            *((unsigned int*)address + focusedBytes_offset) = focusValue;
         };
     }
 }
@@ -232,7 +259,7 @@ void editAddress(void) {
     int new_digit = initial_digit;
     int slot = 0xF0;
     int opp_slot = -1;
-    if (ControllerInput.Buttons & R_Button) {
+    if ((ControllerInput.Buttons & R_Button) && (ControllerInput.Buttons & L_Button) == 0) {
         textOverlayInstances[9]->opacity = 0x0;
         textOverlayInstances[10]->opacity = 0xFF;
         if (NewlyPressedControllerInput.Buttons & D_Left) {
@@ -293,6 +320,7 @@ void checkForFormatChange(void) {
         if ( (currentFormat + 1) < 3) {
             currentFormat++;
             focusedBytes_offset <<= 1;
+            ramViewEditMode = 0;
         }
     }
     
@@ -300,6 +328,7 @@ void checkForFormatChange(void) {
         if ( currentFormat != 0) {
             currentFormat--;
             focusedBytes_offset >>= 1;
+            ramViewEditMode = 0;
         }
     }
 }
@@ -372,6 +401,21 @@ void moveRAMViewFocus(void) {
 
 void ramViewUpdate(void) {
     if (RAMDisplayOpen) {
+        if (ControllerInput.Buttons & L_Button) {
+            if (ramViewEditMode == 1){
+                ramViewEditMode = 2;
+            } else {
+                if (ramViewEditMode == 0) {
+                    ramViewEditMode = 1;
+                }
+            }
+        }
+        if (ramViewEditMode == 3) {
+            ramViewEditMode = 0;
+        }
+        if ((PreviouslyPressedButtons.Buttons & L_Button) && (ControllerInput.Buttons & L_Button) == 0) {
+            ramViewEditMode = 3;
+        }
         checkForFormatChange();
         moveRAMViewFocus();
         editAddress();

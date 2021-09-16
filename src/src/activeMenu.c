@@ -120,6 +120,10 @@ const Screen* menu_screens[] = {
 	&watch_sysenv_struct,
 	&watch_snag_struct,
 	&watch_assist_struct,
+	&heap_struct,
+	&flaglog_struct,
+	&instruction_struct,
+	&testinfo_struct,
 };
 
 void spawnMenu(int screenIndex) {

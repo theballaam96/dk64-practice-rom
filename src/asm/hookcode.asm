@@ -92,11 +92,32 @@ START_HOOK:
 		ADDIU 	t7, t7, lo(UndoFlag)
 		ADDIU 	a3, r0, 1
 		SB 		a3, 0x4 (t7)
-		SLL 	a3, a0, 0x10
+		SB 		a3, 0x5 (t7)
 		SH 		a0, 0x0 (t7)
 		SB 		a1, 0x2 (t7)
-		J 		0x807312A4
 		SB 		a2, 0x3 (t7)
+		LUI 	t7, hi(flagLog_currentfitems)
+		ADDIU	t7, t7, lo(flagLog_currentfitems)
+		LUI 	a3, hi(FlagLogCurrentFCounter)
+		LBU 	a3, lo(FlagLogCurrentFCounter) (a3)
+		SLL 	a3, a3, 2
+		ADD 	t7, t7, a3
+		LW 		t7, 0x0 (t7)
+		SH 		a0, 0x0 (t7)
+		SB 		a1, 0x2 (t7)
+		SB 		a2, 0x3 (t7)
+		LUI 	a3, hi(FlagLogCurrentFCounter)
+		LBU 	a3, lo(FlagLogCurrentFCounter) (a3)
+		ADDIU 	t7, r0, 9
+		BEQ 	a3, t7, writeLastUpdatedFlags_Finish
+		ADDIU 	a3, a3, 1
+		LUI 	t7, hi(FlagLogCurrentFCounter)
+		SB 		a3, lo(FlagLogCurrentFCounter) (t7)
+
+		writeLastUpdatedFlags_Finish:
+			SLL 	a3, a0, 0x10
+			J 		0x807312A4
+			NOP
 
 	resizeActiveMenuFont:
 		LUI 	a3, 0x3F4C
@@ -165,6 +186,16 @@ START_HOOK:
 		isolateTextOverlays_Finish:
 			J 	0x80678930
 			SB 		r0, 0x0 (s4)
+
+	controlTimer:
+		//JAL 	changeTimer_spawnTimer
+		//NOP
+		LUI 	t8, hi(ConvertTimerCountdown)
+		ADDIU 	t6, r0, 2
+		SB 		t6, lo(ConvertTimerCountdown) (t8)
+		LW 		ra, 0x14 (sp)
+		J 		0x806A2B00
+		ADDIU 	sp, sp, 0x18
 
 .align 0x10
 END_HOOK:

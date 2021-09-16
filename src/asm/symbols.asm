@@ -123,6 +123,9 @@
 .definelabel CutsceneFadeActive, 0x8075533B // u8
 .definelabel CutsceneFadeIndex, 0x8075533E // u16
 .definelabel PreviouslyPressedButtons, 0x807ECD60 // u32
+.definelabel heap_pointer, 0x807F0990 // ptr
+.definelabel stickX_magnitude, 0x807FD640 // u8
+.definelabel stickY_magnitude, 0x807FD641 // u8
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
@@ -150,6 +153,7 @@
 .definelabel AverageLag, 0x807FFFE8 // f32
 .definelabel SavePromptActor, 0x807FFFE4 // u32
 .definelabel ISGTimer, 0x807FFFE0 // u32
+.definelabel MinigameTimersInMS, 0x807FFFDF // u8
 .definelabel LagDocumentationIndex, 0x807FFFDE // u8
 .definelabel StoredLag, 0x807FFFDC // u16
 .definelabel StoredRound, 0x807FFFDB // u8
@@ -162,6 +166,7 @@
 .definelabel KRoolRoundSetting, 0x807FFFD4 // u8
 .definelabel FileInitQOLOff, 0x807FFFD3 // u8
 .definelabel InputStickMax, 0x807FFFD2 // u8
+.definelabel ConvertTimerCountdown, 0x807FFFD1 // u8
 .definelabel ActorNamesTable, 0x807FFFCC // u32 ptr
 .definelabel FrameAdvanceStart, 0x807FFFC8 // u32
 .definelabel DisableStartupSkip, 0x807FFFC7 // u8
@@ -172,6 +177,7 @@
 .definelabel GiantKoshaTimerAddress, 0x807FFDF4 // u32
 .definelabel GiantKoshaTimerValue, 0x807FFDF2 // u16
 .definelabel FocusedActorViewPointer, 0x807FFDE8 // u32
+.definelabel FlagLogCurrentFCounter, 0x807FFDDC // u8
 .definelabel MenuShortcutButtonsOff, 0x807FFDDB // u8
 .definelabel FrameAdvancing, 0x807FFDDA // u8
 .definelabel ArtificialPauseOn, 0x807FFDD9 // u8
@@ -183,13 +189,11 @@
 .definelabel AutoMoonkickOn, 0x807FFDBE // u8
 .definelabel EnemySpawnOff, 0x807FFDBD // u8
 
-.definelabel PhaseChecker, 0x807FFDB7 // 0x6
 .definelabel CustomFlag, 0x807FFF80 // follows customflagdata struct
 
 .definelabel ISGStage, 0x807FFF85 // u8
 .definelabel IsPauseMenuOpen, 0x807FFF86 // u8
 .definelabel PreviousFrameButtons, 0x807FFF88 // u16
-.definelabel UndoFlag, 0x807FFF8A // u16
 .definelabel LastLoadStateAction, 0x807FFF8F // u8
 .definelabel PauseMenuMusicSetting, 0x807FFF90 // u8
 .definelabel ClosingMenu, 0x807FFF91 // u8
@@ -210,3 +214,5 @@
 .definelabel graphicalOverlaySpace, 0x807FFA00 // 0x180
 .definelabel WatchActor, 0x807FFB80 // u32 x 4
 .definelabel WatchTextSpace, 0x807FFB90 // 0x30 x 4
+.definelabel PhaseChecker, 0x807FFC50 // follows phasecheckerdata struct
+.definelabel UndoFlag, 0x807FFC58 // u16

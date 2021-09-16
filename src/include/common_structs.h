@@ -37,6 +37,18 @@ typedef struct cameraData {
 	/* 0x26B */ char camera_state;
 } cameraData;
 
+typedef struct tagBarrel {
+	/* 0x000 */ char unk_00[0x1A0];
+	/* 0x1A0 */ short tag_oscillation_timer;
+} tagBarrel;
+
+typedef struct timerActor {
+	/* 0x000 */ char unk_00[0x15F];
+	/* 0x15F */ char type;
+	/* 0x160 */ char unk_160[0x184-0x160];
+	/* 0x184 */ int test;
+} timerActor;
+
 typedef struct bone_array {
 	/* 0x000 */ char unk_00[0x58];
 	/* 0x058 */ short xPos;
@@ -157,9 +169,11 @@ typedef struct Savestate {
 	/* 0x35C */ int ISGTimerDifferenceMinor;
 	/* 0x360 */ short skew_angle;
 	/* 0x362 */ char stored_damage;
-	/* 0x363 */ char unused_363;
+	/* 0x363 */ char nearest_tag_enabled;
 	/* 0x364 */ int createdTime;
 	/* 0x368 */ float floor;
+	/* 0x36C */ unsigned int rng;
+	/* 0x370 */ short nearest_tag_oscillation_timer;
 } Savestate;
 
 typedef struct Screen {
@@ -244,9 +258,9 @@ typedef struct AutowalkData {
 } AutowalkData;
 
 typedef struct PhaseCheckerData {
-	/* 0x000 */ unsigned char previousMagnitude;
-	/* 0x001 */ char assistant_on;
-	/* 0x002 */ char reason_code;
+	/* 0x000 */ float previousMagnitude;
+	/* 0x004 */ char assistant_on;
+	/* 0x005 */ char reason_code;
 		// 0 = Successful Phasewalk
 		// 1 = Low Magnitude Diff (Moving too slow - Flick down too late)
 		// 2 = No fast acceleration
@@ -259,7 +273,7 @@ typedef struct PhaseCheckerData {
 		// 9 = Low Magnitude Diff (Moving too slow - Flick up too slow)
 		// 10 = Low Magnitude Diff (Moving too slow - Release too slow)
 		// 11 = No Down Flick
-	/* 0x003 */ char prev_y_side;
+	/* 0x006 */ char prev_y_side;
 } PhaseCheckerData;
 
 typedef struct RGB {
@@ -503,6 +517,13 @@ typedef struct undoFlagData {
 	/* 0x004 */ char flag_stored;
 } undoFlagData;
 
+typedef struct flagLogData {
+	/* 0x000 */ short encoded_flag;
+	/* 0x002 */ char output;
+	/* 0x003 */ char flag_type;
+	/* 0x004 */ int set_frame;
+} flagLogData;
+
 typedef struct filestateInfo {
 	/* 0x000 */ char perm_flags[0x140];
 	/* 0x140 */ char moves_base[0x1E0];
@@ -557,3 +578,15 @@ typedef union phaseInputs {
         /* 0x003 */ char stickY;
     };
 } phaseInputs;
+
+typedef struct heap {
+	/* 0x000 */ void* unk;
+	/* 0x004 */ int size;
+	/* 0x008 */ void* next;
+	/* 0x00C */ void* prev;
+} heap;
+
+typedef struct stickTestData {
+	/* 0x000 */ char mag_max;
+	/* 0x001 */ char mag_threshold;
+} stickTestData;

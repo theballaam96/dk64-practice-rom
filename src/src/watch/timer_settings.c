@@ -7,11 +7,11 @@ static const char timerstart_input[] = "Start on: Input";
 static const char timerpause_off[] = "Pause Timer on Pause Menu: No";
 static const char timerpause_on[] = "Pause Timer on Pause Menu: Yes";
 
-static const char timerfinish_default[] = "End ON: L Press";
-static const char timerfinish_transition[] = "End ON: Transition";
-static const char timerfinish_cutscene[] = "End ON: Cutscene";
-static const char timerfinish_gb[] = "End ON: GB Collection";
-static const char timerfinish_endtransition[] = "End ON: End Transition";
+static const char timerfinish_default[] = "End on: L Press";
+static const char timerfinish_transition[] = "End on: Transition";
+static const char timerfinish_cutscene[] = "End on: Cutscene";
+static const char timerfinish_gb[] = "End on: GB Collection";
+static const char timerfinish_endtransition[] = "End on: End Transition";
 
 static const char* start_modes[] = {
 	timerstart_default,

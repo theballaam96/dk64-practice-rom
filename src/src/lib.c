@@ -101,3 +101,10 @@ void* findActorWithType(int search_actor_type) {
 	}
 	return 0;
 }
+
+int isRDRAM(void* address) {
+	if (((int)address >= 0x80000000) && ((int)address < 0x80800000)) {
+		return 1;
+	}
+	return 0;
+}

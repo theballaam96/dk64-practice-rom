@@ -18,6 +18,7 @@ extern void closeMenu(void);
 extern void startRamViewerDisplay(void);
 extern void closeRamViewerDisplay(void);
 extern void defineRAMViewerParameters(int* start, int* end);
+extern int isRDRAM(void* address);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);
@@ -69,6 +70,8 @@ extern void toggleTBVoid(void);
 extern void openSnagMenu(void);
 extern void killBoss(void);
 extern void toggleVisify(void);
+extern void changeTimer_button(void);
+extern void changeTimer_spawnTimer(void);
 
 extern void openSettingsMainMenu(void);
 extern void openKongColorsMenu(void);
@@ -80,6 +83,8 @@ extern void openHackVarsMenu(void);
 
 extern void openActorMenu(void);
 extern void openDebugMenu(void);
+extern void openHeapMenu(void);
+extern void openFlagLogMenu(void);
 
 extern void openWatchMenu(void);
 extern void endClose(void);
@@ -133,6 +138,10 @@ extern void controlWatchView(void);
 extern void updateLoadedActorNoTextOverlayList(int callType);
 extern void shouldRefreshTOMenu(void);
 extern void analyzeInputs(void);
+extern void writeFlagsToLog(void);
+
+extern void runTest(void);
+extern void startTest(void);
 
 extern void loadSettings(void);
 extern void saveSettings(void);
@@ -221,6 +230,10 @@ extern const Screen watch_timers_struct;
 extern const Screen watch_sysenv_struct;
 extern Screen watch_snag_struct;
 extern const Screen watch_assist_struct;
+extern const Screen heap_struct;
+extern Screen flaglog_struct;
+extern const Screen instruction_struct;
+extern const Screen testinfo_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
@@ -230,6 +243,7 @@ extern const int flagmain_functions[11];
 extern char kongcolors[5];
 extern char* snagwatch_names_array[];
 extern const snagTableInfo snag_data[];
+extern flagLogData* flagLog_currentfitems[];
 
 extern const MapWarp map_japes_struct;
 extern const MapWarp map_japesmain_struct;

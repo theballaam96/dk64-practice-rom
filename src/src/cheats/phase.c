@@ -8,7 +8,7 @@ void handleAutophase(void) {
 				_facing = Player->facing_angle + 4096;
 				Player->facing_angle = _facing;
 				Player->next_facing_angle = _facing;
-				Player->moving_angle = Player->moving_angle + 4096;
+				Player->moving_angle = (Player->moving_angle + 4096) & 0x1FFF;
 			}
 		}
 	}

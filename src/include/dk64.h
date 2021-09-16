@@ -132,6 +132,9 @@ extern void* ActorSpawnerPointer;
 extern char DebugInfoOn;
 extern char CutsceneFadeActive;
 extern short CutsceneFadeIndex;
+extern heap* heap_pointer;
+extern char stickX_magnitude;
+extern char stickY_magnitude;
 
 //hack data
 extern int TestVariable;
@@ -214,3 +217,6 @@ extern actorNames* SnagNamesTable;
 extern actorNames* SnagCapitalsTable;
 extern actorData* FocusedActorViewPointer;
 extern char ViewedSnagWatches[4];
+extern char FlagLogCurrentFCounter;
+extern char MinigameTimersInMS;
+extern char ConvertTimerCountdown;

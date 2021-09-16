@@ -226,6 +226,11 @@ const Screen viewstate_struct = {
 
 void savestateHandler(void) {
 	int _focused_state = FocusedSavestate;
+	int tag_found = 0;
+	int search_actor_index = 0;
+	float tag_y = 0;
+	float nearest_tag_distance = 999999;
+	float current_tag_distance = 0;
 	if (MenuSavestateAction > 0) {
 		if (InBadMap) {
 			playSFX(Wrong);
@@ -257,6 +262,7 @@ void savestateHandler(void) {
 						states[_focused_state]->ISGOn = ISGActive;
 						states[_focused_state]->createdTime = FrameReal;
 						states[_focused_state]->stored_damage = StoredDamage;
+						states[_focused_state]->rng = RNG;
 						if (HelmTimerShown) {
 							getTimestampDiffInTicks(HelmStartTimestampMajor,HelmStartTimestampMinor);
 							states[_focused_state]->HelmTimerDifferenceMajor = TempTimestampStorageMajor;
@@ -269,6 +275,24 @@ void savestateHandler(void) {
 							states[_focused_state]->ISGTimerDifferenceMinor = TempTimestampStorageMinor;
 							states[_focused_state]->ISGPrevFade = ISGPreviousFadeout;
 						}
+						for (int i = 0; i < LoadedActorCount; i++) {
+							search_actor_index = LoadedActorArray[i].actor->actorType;
+							if ((search_actor_index == 98) || (search_actor_index == 136) || (search_actor_index == 137)) { // Tag Barrel Actors
+								float a_x = LoadedActorArray[i].actor->xPos;
+								float a_z = LoadedActorArray[i].actor->zPos;
+								float p_x = Player->xPos;
+								float p_z = Player->zPos;
+								current_tag_distance = (float)((a_x - p_x) * (a_x - p_x)) + ((a_z - p_z) * (a_z - p_z));
+								if (current_tag_distance < nearest_tag_distance) {
+									tag_found = 1;
+									tagBarrel* tag_actor = (tagBarrel*)LoadedActorArray[i].actor;
+									tag_y = tag_actor->tag_oscillation_timer;
+									nearest_tag_distance = current_tag_distance;
+								}
+							}
+						}
+						states[_focused_state]->nearest_tag_enabled = tag_found;
+						states[_focused_state]->nearest_tag_oscillation_timer = tag_y;
 						dk_memcpy((int *)states[_focused_state]->InventoryBase,&CollectableBase,0xC);
 						dk_memcpy((int *)states[_focused_state]->TempFlagBlock,&TempFlagBlock,0x10);
 						break;
@@ -335,7 +359,11 @@ void shorthandSavestate(void) {
 
 void savestateLoadMapLoadVars(void) {
 	int _focused_state = FocusedSavestate;
-	if ((ObjectModel2Timer == 1) && (TransitionSpeed < 0) && (LoadVarsOnMapLoad == 1)) {
+	tagBarrel* tag_found_addr = 0;
+	int search_actor_index = 0;
+	float nearest_tag_distance = 999999;
+	float current_tag_distance = 0;
+	if ((ObjectModel2Timer == 2) && (TransitionSpeed < 0) && (LoadVarsOnMapLoad == 1)) {
 		HelmTimerShown = states[_focused_state]->HelmTimerOn;
 		if (HelmTimerShown) {
 			getTimestampDiffInTicks(states[_focused_state]->HelmTimerDifferenceMajor,states[_focused_state]->HelmTimerDifferenceMinor);
@@ -350,6 +378,7 @@ void savestateLoadMapLoadVars(void) {
 			ISGTimestampMinor = TempTimestampStorageMinor;
 			ISGPreviousFadeout = states[_focused_state]->ISGPrevFade;
 		}
+		RNG = states[_focused_state]->rng;
 		if (Player) {
 			if (LastLoadStateAction == 2) {
 				Player->facing_angle = states[_focused_state]->facing_angle;
@@ -357,6 +386,23 @@ void savestateLoadMapLoadVars(void) {
 				Player->floor = states[_focused_state]->floor;
 				if (Player->camera_pointer) {
 					Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
+				}
+				for (int i = 0; i < LoadedActorCount; i++) {
+					search_actor_index = LoadedActorArray[i].actor->actorType;
+					if ((search_actor_index == 98) || (search_actor_index == 136) || (search_actor_index == 137)) { // Tag Barrel Actors
+						float a_x = LoadedActorArray[i].actor->xPos;
+						float a_z = LoadedActorArray[i].actor->zPos;
+						float p_x = Player->xPos;
+						float p_z = Player->zPos;
+						current_tag_distance = (float)((a_x - p_x) * (a_x - p_x)) + ((a_z - p_z) * (a_z - p_z));
+						if (current_tag_distance < nearest_tag_distance) {
+							tag_found_addr = (tagBarrel*)LoadedActorArray[i].actor;
+							nearest_tag_distance = current_tag_distance;
+						}
+					}
+				}
+				if (tag_found_addr) {
+					tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 				}
 			}
 		}

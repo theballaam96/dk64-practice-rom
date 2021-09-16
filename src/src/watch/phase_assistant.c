@@ -45,27 +45,25 @@ static int phasewalk_state = 0;
 	// 4 = Z
 static char phase_accelerated = 0;
 
-int adjustStickMagnitude(int axis_value) {
-	if (axis_value < -70) {
-		return -70;
-	} else {
-		if (axis_value > 70) {
-			return 70;
-		} else {
-			if ((axis_value > -6) && (axis_value < 6)) {
-				return 0;
-			}
-		}
+int adjustStickAxis(int axis_value) {
+	if (axis_value == -1) {
+		return 0;
+	} else if (axis_value == 1) {
+		return 0;
 	}
 	return axis_value;
 }
 
 void logInputs(void) {
-	char _x = ControllerInput.stickX;
-	char _y = ControllerInput.stickY;
+	char _x = adjustStickAxis(ControllerInput.stickX);
+	char _y = adjustStickAxis(ControllerInput.stickY);
+	if ((_x > -5) && (_x < 5)) {
+		if ((_y > -5) && (_y < 5)) {
+			_x = 0;
+			_y = 0;
+		}
+	}
 	phaseass_input_list[phase_frame_counter]->buttons = ControllerInput.Buttons;
-	_x = adjustStickMagnitude(_x);
-	_y = adjustStickMagnitude(_y);
 	y_side = 0;
 	if (_y > 0) {
 		y_side = 1;
@@ -74,23 +72,30 @@ void logInputs(void) {
 			y_side = -1;
 		}
 	};
-	PhaseChecker.previousMagnitude = (unsigned char)(float)(dk_sqrt((_x * _x) + (_y * _y)));
+	PhaseChecker.previousMagnitude = (float)(dk_sqrt((_x * _x) + (_y * _y)));
+	if (PhaseChecker.previousMagnitude > 70) {
+		PhaseChecker.previousMagnitude = 70;
+	}
 	phaseass_input_list[phase_frame_counter]->stickX = _x;
 	phaseass_input_list[phase_frame_counter]->stickY = _y;
 }
 
 void analyzeInputs(void) {
-	unsigned int last_frame_magnitude = 0;
-	int mag_diff = 0;
+	float last_frame_magnitude = 0;
+	float mag_diff = 0;
 	int movement = 0;
-	char _x = 0;
-	char _y = 0;
+	char _x = adjustStickAxis(ControllerInput.stickX);
+	char _y = adjustStickAxis(ControllerInput.stickY);
 	int calculate_phase = 0;
+	if ((_x > -5) && (_x < 5)) {
+		if ((_y > -5) && (_y < 5)) {
+			_x = 0;
+			_y = 0;
+		}
+	}
 	if (PhaseChecker.assistant_on) {
 		if (Player) {
 			movement = Player->control_state;
-			_x = adjustStickMagnitude(ControllerInput.stickX);
-			_y = adjustStickMagnitude(ControllerInput.stickY);
 			if ((movement == 2) || (movement == 4)) {
 				if (Player->control_state_progress < 11) {
 					PhaseChecker.reason_code = 6;
@@ -99,7 +104,7 @@ void analyzeInputs(void) {
 			if (phase_initiated == 0) {
 				if (NewlyPressedControllerInput.Buttons & C_Up) {
 					phase_initiated = 1;
-					PhaseChecker.previousMagnitude = 127; // High value to cover off low mag diff reasoning
+					PhaseChecker.previousMagnitude = 255; // High value to cover off low mag diff reasoning
 					phase_frame_counter = 0;
 					phasewalk_state = 0;
 					PhaseChecker.prev_y_side = 0;

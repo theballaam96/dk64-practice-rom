@@ -49,4 +49,7 @@ void cFuncLoop(void) {
 	fileInit();
 	controlWatchView();
 	analyzeInputs();
+	writeFlagsToLog();
+	changeTimer_spawnTimer();
+	runTest();
 }
