@@ -135,6 +135,7 @@ extern short CutsceneFadeIndex;
 extern heap* heap_pointer;
 extern char stickX_magnitude;
 extern char stickY_magnitude;
+extern float phasewalk_stickmagnitude;
 
 //hack data
 extern int TestVariable;

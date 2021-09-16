@@ -843,7 +843,6 @@ void handleWatch(void) {
 									ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,_m2_index);
 									snagData* _behaviour = _object->behaviour_pointer;
 									if (_behaviour) {
-										TestVariable = (int)_behaviour;
 										snag_state.check = _behaviour->check;
 										snag_state.state = _behaviour->state;
 										snag_state.reset = _behaviour->resettrigger;

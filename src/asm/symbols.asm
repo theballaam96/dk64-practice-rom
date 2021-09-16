@@ -126,6 +126,7 @@
 .definelabel heap_pointer, 0x807F0990 // ptr
 .definelabel stickX_magnitude, 0x807FD640 // u8
 .definelabel stickY_magnitude, 0x807FD641 // u8
+.definelabel phasewalk_stickmagnitude, 0x807FD614 // f32
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)

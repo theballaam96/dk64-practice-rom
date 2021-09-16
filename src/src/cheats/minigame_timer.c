@@ -99,16 +99,4 @@ void changeTimer_spawnTimer(void) {
 			changeTimer_button();
 		}
 	}
-	// for (int i = 0; i < sizeof(minigame_list); i++) {
-	// 	if (CurrentMap == minigame_list[i]) {
-	// 		timerActor* _timer = (timerActor*)CurrentActorPointer;
-	// 		if (MinigameTimersInMS) {
-	// 			_timer->type = 0xB;
-	// 			_timer->test = (_timer->test - 1) & 0xFF;
-	// 		} else {
-	// 			_timer->type = 6;
-	// 		}
-	// 		TestVariable = (int)CurrentActorPointer;
-	// 	}
-	// }
 }

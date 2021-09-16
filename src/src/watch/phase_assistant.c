@@ -57,12 +57,6 @@ int adjustStickAxis(int axis_value) {
 void logInputs(void) {
 	char _x = adjustStickAxis(ControllerInput.stickX);
 	char _y = adjustStickAxis(ControllerInput.stickY);
-	if ((_x > -5) && (_x < 5)) {
-		if ((_y > -5) && (_y < 5)) {
-			_x = 0;
-			_y = 0;
-		}
-	}
 	phaseass_input_list[phase_frame_counter]->buttons = ControllerInput.Buttons;
 	y_side = 0;
 	if (_y > 0) {
@@ -72,10 +66,7 @@ void logInputs(void) {
 			y_side = -1;
 		}
 	};
-	PhaseChecker.previousMagnitude = (float)(dk_sqrt((_x * _x) + (_y * _y)));
-	if (PhaseChecker.previousMagnitude > 70) {
-		PhaseChecker.previousMagnitude = 70;
-	}
+	PhaseChecker.previousMagnitude = phasewalk_stickmagnitude;
 	phaseass_input_list[phase_frame_counter]->stickX = _x;
 	phaseass_input_list[phase_frame_counter]->stickY = _y;
 }

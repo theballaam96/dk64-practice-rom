@@ -124,6 +124,8 @@ START_HOOK:
 		ORI 	a3, a3, 0xCCCD
 		BEQ 	t0, at, resizeActiveMenuFont_NormalStyle10
 		NOP
+		LUI 	a3, 0x3F99
+		ORI 	a3, a3, 0x999A
 		ADDI 	t0, t0, -5
 		BEQZ 	t0, resizeActiveMenuFont_NormalStyle10
 		ADDIU 	t0, t0, 5
@@ -188,14 +190,33 @@ START_HOOK:
 			SB 		r0, 0x0 (s4)
 
 	controlTimer:
-		//JAL 	changeTimer_spawnTimer
-		//NOP
 		LUI 	t8, hi(ConvertTimerCountdown)
 		ADDIU 	t6, r0, 2
 		SB 		t6, lo(ConvertTimerCountdown) (t8)
 		LW 		ra, 0x14 (sp)
 		J 		0x806A2B00
 		ADDIU 	sp, sp, 0x18
+
+	preventPhasewalkingOverride:
+		JAL 	0x806DF494
+		SRA 	a2, t4, 0x10
+		LUI 	a2, hi(AutoPhaseStateOn)
+		LBU 	a2, lo(AutoPhaseStateOn) (a2)
+		BEQZ 	a2, preventPhasewalkingOverride_Finish
+		NOP
+		LUI 	a2, hi(Player)
+		LW 		a2, lo(Player) (a2)
+		BEQZ 	a2, preventPhasewalkingOverride_Finish
+		NOP
+		LHU 	a3, 0xE6 (a2)
+		SLTIU 	a1, a3, 2048
+		BEQZ 	a1, preventPhasewalkingOverride_Finish
+		ADDIU 	a3, a3, 4096
+		SH 		a3, 0xE6 (a2)
+
+		preventPhasewalkingOverride_Finish:
+			J 	0x806E0644
+			NOP
 
 .align 0x10
 END_HOOK:

@@ -192,6 +192,9 @@ TextOverlayIsolationHook:
 SpawnTimerHook:
 	J 	controlTimer
 	NOP
+PhaseCorrectionHook:
+	J 	preventPhasewalkingOverride
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -234,6 +237,11 @@ loadExtraHooks:
 	LUI t4, 0x806A
 	SW 	t3, 0x2AF8 (t4) // Store Hook
 	SW 	r0, 0x2AFC (t4) // Store NOP
+
+	LUI t3, hi(PhaseCorrectionHook)
+	LW t3, lo(PhaseCorrectionHook) (t3)
+	LUI t4, 0x806E
+	SW 	t3, 0x063C (t4) // Store Hook
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

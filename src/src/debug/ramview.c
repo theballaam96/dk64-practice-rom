@@ -5,15 +5,18 @@
 #define ByteFormat1 2
 
 #define validRamReadStart 0x80000000
-#define validRamReadEnd 0x807FFF90
+#define validRamReadEnd 0x807FFFC8
 
 #define menuStateChangeStartAddr 00000000
 #define menuStateSelectAddr 00000001 //for selecting a ram address to modify in the table
 #define menuStatePokeAddr 00000002 //for changing a ram value
 
-char formatter08[] = "%02X:%08X %08X %08X %08X";
-char formatter04[] = "%02X:%04X %04X %04X %04X %04X %04X %04X %04X";
-char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X";
+#define ramViewY 40
+#define ramViewYOffset 22
+
+char formatter08[] = "%02X:%08X %08X";
+char formatter04[] = "%02X:%04X %04X %04X %04X";
+char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X";
 char formatterheaderViewText[] = "Addr: 0x%08X";
 
 char openRamViewText[] = "Open RAM View";
@@ -52,17 +55,17 @@ static char* ramview_array[] = {
 
 void defineRAMViewerParameters(int* start, int* end) {
     ramViewer_start = (unsigned int)start;
-    ramViewer_end = (unsigned int)end - 0x70;
+    ramViewer_end = (unsigned int)end - 0x38;
     printStartAddr = start;
 }
 
 void dk_strFormatWrapper(char* destination, int byteFormat, int* address) {
     if (byteFormat == ByteFormat4) {
-        dk_strFormat(destination, formatter08, ((unsigned int)address & 0x000000FF), *(address), *(address + 1), *(address + 2), *(address + 3));
+        dk_strFormat(destination, formatter08, ((unsigned int)address & 0x000000FF), *(address), *(address + 1));
     } else if (byteFormat == ByteFormat2) {
-        dk_strFormat(destination, formatter04, ((unsigned int)address & 0x000000FF), *((unsigned short*)address), *((unsigned short*)address + 1), *((unsigned short*)address + 2), *((unsigned short*)address + 3), *((unsigned short*)address + 4), *((unsigned short*)address + 5), *((unsigned short*)address + 6), *((unsigned short*)address + 7));
+        dk_strFormat(destination, formatter04, ((unsigned int)address & 0x000000FF), *((unsigned short*)address), *((unsigned short*)address + 1), *((unsigned short*)address + 2), *((unsigned short*)address + 3));
     } else if (byteFormat == ByteFormat1) {
-        dk_strFormat(destination, formatter02, ((unsigned int)address & 0x000000FF), *((unsigned char*)address), *((unsigned char*)address + 1), *((unsigned char*)address + 2), *((unsigned char*)address + 3), *((unsigned char*)address + 4), *((unsigned char*)address + 5), *((unsigned char*)address + 6), *((unsigned char*)address + 7), *((unsigned char*)address + 8), *((unsigned char*)address + 9), *((unsigned char*)address + 10), *((unsigned char*)address + 11), *((unsigned char*)address + 12), *((unsigned char*)address + 13), *((unsigned char*)address + 14), *((unsigned char*)address + 15));
+        dk_strFormat(destination, formatter02, ((unsigned int)address & 0x000000FF), *((unsigned char*)address), *((unsigned char*)address + 1), *((unsigned char*)address + 2), *((unsigned char*)address + 3), *((unsigned char*)address + 4), *((unsigned char*)address + 5), *((unsigned char*)address + 6), *((unsigned char*)address + 7));
     } else {//unknown byte format, default to %08X
         dk_strFormat(destination, formatter08, ((unsigned int)address & 0x000000FF), *(address), *(address + 1), *(address + 2), *(address + 3));
     }
@@ -130,18 +133,18 @@ void formatByteFocus(int* address, int byteFormat) {
 void initTable (int* address) {
     TextOverlay* textOverlay;
     int x = 10;
-    int y = 60;
+    int y = ramViewY;
     for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) {
-        dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
+        dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 2)));
         textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, x, y, (ramViewTextPtrs[i+1]), 0, 0, 2, 0);
         textOverlay->string = ramViewTextPtrs[i+1];
         textOverlayInstances[i+1] = textOverlay;
         textOverlay->opacity = 0xFF;
-        y += 15;
+        y += ramViewYOffset;
     }
     // Focused Byte
     formatByteFocus(address, currentFormat);
-    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, 29, 60, (focusedBytePtr), 0, 0, 2, 0);
+    textOverlay = (TextOverlay*)spawnTextOverlayWrapper(tableStyle, 29, ramViewY, (focusedBytePtr), 0, 0, 2, 0);
     textOverlay->string = focusedBytePtr;
     textOverlayInstances[9] = textOverlay;
     textOverlay->opacity = 0xFF;
@@ -160,7 +163,7 @@ void initTable (int* address) {
 }
 
 void updateTable(int* address) {
-    int offset_size = (4 << currentFormat);
+    int offset_size = (2 << currentFormat);
     int byte_size = (2 << (2 - currentFormat));
     int focus_x = focusedBytes_offset % offset_size;
     int focus_y = (focusedBytes_offset - focus_x) / offset_size;
@@ -168,7 +171,7 @@ void updateTable(int* address) {
     for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) { //max of 8 lines
         if (ramViewTextPtrs[i+1] != 0) {
             if (i < 8) {
-                dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 4)));
+                dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (address + (i * 2)));
                 textOverlayInstances[i+1]->string = ramViewTextPtrs[i+1];
                 //we do i+1 on lines because *lines[0] is header text
             }
@@ -264,23 +267,17 @@ void editAddress(void) {
         textOverlayInstances[10]->opacity = 0xFF;
         if (NewlyPressedControllerInput.Buttons & D_Left) {
             editAddrPosition -= 1;
-        } else {
-            if (NewlyPressedControllerInput.Buttons & D_Right) {
-                editAddrPosition += 1;
-            } else {
-                if (NewlyPressedControllerInput.Buttons & D_Up) {
-                    new_digit += 1;
-                    if (new_digit > 0xF) {
-                        new_digit = 0;
-                    }
-                } else {
-                    if (NewlyPressedControllerInput.Buttons & D_Down) {
-                        new_digit -= 1;
-                        if (new_digit < 0) {
-                            new_digit = 0xF;
-                        }
-                    }
-                }
+        } else if (NewlyPressedControllerInput.Buttons & D_Right) {
+            editAddrPosition += 1;
+        } else if (NewlyPressedControllerInput.Buttons & D_Up) {
+            new_digit += 1;
+            if (new_digit > 0xF) {
+                new_digit = 0;
+            }
+        } else if (NewlyPressedControllerInput.Buttons & D_Down) {
+            new_digit -= 1;
+            if (new_digit < 0) {
+                new_digit = 0xF;
             }
         }
         if (initial_digit != new_digit) {
@@ -347,7 +344,7 @@ void moveRAMViewFocus(void) {
     int x_offset_size = 0;
     if (((RAMDisplayOpen) && (ClosingMenu == 0))) {
         if ((ControllerInput.Buttons & R_Button) == 0) {
-            offset_size = (4 << currentFormat);
+            offset_size = (2 << currentFormat);
             if ((ControllerInput.Buttons & L_Button) == 0) {
                 if (NewlyPressedControllerInput.Buttons & D_Left) {
                     focusedBytes_offset -= 0x1;
@@ -366,11 +363,11 @@ void moveRAMViewFocus(void) {
                 }
             }
             if (focusedBytes_offset < 0) {
-                printStartAddr -= 4;
+                printStartAddr -= 2;
                 focusedBytes_offset += offset_size;
             }
-            if (focusedBytes_offset >= (0x20 << currentFormat)) {
-                printStartAddr += 4;
+            if (focusedBytes_offset >= (0x10 << currentFormat)) {
+                printStartAddr += 2;
                 focusedBytes_offset -= offset_size;
             }
             if ((int)printStartAddr < ramViewer_start) {
@@ -384,17 +381,17 @@ void moveRAMViewFocus(void) {
             focus_y = (focusedBytes_offset - focus_x) / offset_size;
             switch(currentFormat) {
                 case 0:
-                    x_offset_size = 231;
+                    x_offset_size = 346.5;
                     break;
                 case 1:
-                    x_offset_size = 128.3;
+                    x_offset_size = 192.45;
                     break;
                 case 2:
-                    x_offset_size = 77;
+                    x_offset_size = 115.5;
                 break;
             }
-            textOverlayInstances[9]->xPos = (29 * 4) + (focus_x * x_offset_size);
-            textOverlayInstances[9]->yPos = (60 * 4) + (focus_y * 60);
+            textOverlayInstances[9]->xPos = (39 * 4) + (focus_x * x_offset_size);
+            textOverlayInstances[9]->yPos = (ramViewY * 4) + (focus_y * (4 * ramViewYOffset));
         }
     }   
 }
