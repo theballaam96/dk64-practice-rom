@@ -195,6 +195,18 @@ SpawnTimerHook:
 PhaseCorrectionHook:
 	J 	preventPhasewalkingOverride
 	NOP
+FairyStoreHook:
+	J 	fairyDataStorageCode
+	NOP
+ArcadeHook:
+	J 	arcadeLoopCode
+	NOP
+Pause97Hook:
+	J 	pauseMenu97Code
+	NOP
+Pause343Hook:
+	J 	pauseMenu343Code
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -242,6 +254,29 @@ loadExtraHooks:
 	LW t3, lo(PhaseCorrectionHook) (t3)
 	LUI t4, 0x806E
 	SW 	t3, 0x063C (t4) // Store Hook
+
+	LUI t3, hi(FairyStoreHook)
+	LW t3, lo(FairyStoreHook) (t3)
+	LUI t4, 0x806C
+	SW 	t3, 0x5D9C (t4) // Store Hook
+	SW 	r0, 0x5DA0 (t4) // Store NOP
+
+	LUI t3, hi(ArcadeHook)
+	LW t3, lo(ArcadeHook) (t3)
+	LUI t4, 0x8060
+	SW 	t3, 0xC144 (t4) // Store Hook
+
+	LUI t3, hi(Pause97Hook)
+	LW t3, lo(Pause97Hook) (t3)
+	LUI t4, 0x806B
+	SW 	t3, 0x8158 (t4) // Store Hook
+	SW 	r0, 0x815C (t4) // Store NOP
+
+	LUI t3, hi(Pause343Hook)
+	LW t3, lo(Pause343Hook) (t3)
+	LUI t4, 0x806B
+	SW 	t3, 0xCFFC (t4) // Store Hook
+	SW 	r0, 0xD000 (t4) // Store NOP
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

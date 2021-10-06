@@ -124,6 +124,7 @@ const Screen* menu_screens[] = {
 	&flaglog_struct,
 	&instruction_struct,
 	&testinfo_struct,
+	&forcespawn_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -380,7 +381,7 @@ void menuShortcutButtons(void) {
 		if ((_buttons & L_Button) == 0) {
 			if (ActiveMenu.isOpen) {
 				if (ClosingMenu == 0) {
-					if (ActiveMenu.screenIndex != 54) {
+					if ((ActiveMenu.screenIndex != 54) && (ActiveMenu.screenIndex != 88)) {
 						if (_buttons & D_Left) {
 							previousScreen();
 						} else {
@@ -402,10 +403,6 @@ void changeMenu(int newScreenIndex) {
 		ActiveMenu.screenIndex = newScreenIndex;
 	}
 	spawnMenu(newScreenIndex);
-}
-
-void endClose() {
-	ClosingMenu = 0;
 }
 
 static const int main_functions[] = {

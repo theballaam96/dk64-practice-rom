@@ -52,6 +52,10 @@
 #define TakeWarp 230
 #define Splat 22
 #define Burp 530
+#define ArcadeJump 65
+#define ArcadeSpring 67
+#define ArcadeFalling 68
+#define ArcadeGrunt 83
 
 // Other
 #define MysteryWriteOffset 0x29C

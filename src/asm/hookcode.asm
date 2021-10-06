@@ -155,6 +155,8 @@ START_HOOK:
 			OR 	a3, r0, r0
 
 	handleFrameAdvanceActorRun:
+		LUI 	t6, hi(IsPauseMenuOpen)
+		SB 		r0, lo(IsPauseMenuOpen) (t6)
 		JAL 	0x805FC668
 		NOP
 		LUI 	a0, hi(ArtificialPauseOn)
@@ -218,5 +220,130 @@ START_HOOK:
 			J 	0x806E0644
 			NOP
 
+	fairyDataStorageCode:
+		LUI 	t2, hi(fairy_data)
+		ADDIU 	t2, t2, lo(fairy_data)
+		LHU 	v0, 0x0 (t2)
+		LUI 	s0, hi(FairyViewerData)
+		ADDIU 	s0, s0, lo(FairyViewerData)
+		SH 		v0, 0x0 (s0)
+		LHU 	v0, 0x2 (t2)
+		SH 		v0, 0x2 (s0)
+		LHU 	v0, 0x4 (t2)
+		SH 		v0, 0x4 (s0)
+		LUI 	t2, 0x8080
+		LW 		t2, 0xBB40 (t2)
+		LUI 	s0, hi(FairyViewerFocus)
+		SW 		t2, lo(FairyViewerFocus) (s0)
+		LUI 	t2, 0x8080
+		J 		0x806C5DA4
+		LW 		t2, 0xC924 (t2)
+
+	arcadeTextHook:
+		J 		arcadeTextLoop
+		NOP
+	arcadeHasControlHook:
+		J 		arcadeHasControlLoop
+		NOP
+	arcadeHasControl2Hook:
+		J 		arcadeHasControl2Loop
+		NOP
+	arcadeHasControl3Hook:
+		J 		arcadeHasControl3Loop
+		NOP
+	arcadeLoopCode:
+		LUI 	t3, hi(arcadeTextHook)
+		LW 		t3, lo(arcadeTextHook) (t3)
+		LUI 	t4, 0x8003
+		SW 		t3, 0x1C30 (t4) // Store Hook
+		SW 		r0, 0x1C34 (t4) // Store NOP
+		LUI 	t3, hi(arcadeHasControlHook)
+		LW 		t3, lo(arcadeHasControlHook) (t3)
+		LUI 	t4, 0x8002
+		SW 		t3, 0x5410 (t4)
+		SW 		r0, 0x5414 (t4)
+		LUI 	t3, hi(arcadeHasControl2Hook)
+		LW 		t3, lo(arcadeHasControl2Hook) (t3)
+		LUI 	t4, 0x8002
+		SW 		t3, 0x52F4 (t4)
+		SW 		r0, 0x52F8 (t4)
+		LUI 	t3, hi(arcadeHasControl3Hook)
+		LW 		t3, lo(arcadeHasControl3Hook) (t3)
+		LUI 	t4, 0x8002
+		SW 		t3, 0x7914 (t4)
+		SW 		r0, 0x7918 (t4)
+		JAL 	0x80024000
+		NOP
+		JAL 	arcadeFuncLoop
+		NOP
+		J 		0x805FC14C
+		NOP
+
+	arcadeTextLoop:
+		JAL 	spawnArcadeMenu
+		ADDIU 	a0, sp, 0x90
+		LUI 	v0, 0x8005
+		J 		0x80031C38
+		LBU 	v0, 0xC724 (v0)
+
+	arcadeHasControlLoop:
+		LUI 	t6, hi(arcadeMenu)
+		ADDIU 	t6, t6, lo(arcadeMenu)
+		LBU 	t6, 0x0002 (t6)
+		BNEZ 	t6, arcadeHasControlLoop_Finish
+		NOP
+		LUI 	t6, 0x8005
+		J 		0x80025418
+		LBU 	t6, 0xC71D (t6)
+
+		arcadeHasControlLoop_Finish:
+			LUI 	t6, 0x8005
+			J 		0x80025484
+			LBU 	t6, 0xC71D (t6)
+
+	arcadeHasControl2Loop:
+		LUI 	t8, hi(arcadeMenu)
+		ADDIU 	t8, t8, lo(arcadeMenu)
+		LBU 	t8, 0x0002 (t8)
+		BNEZ 	t8, arcadeHasControl2Loop_Finish
+		NOP
+		LUI 	t8, 0x8005
+		J 		0x800252FC
+		LB 		t8, 0xC71E (t8)
+
+		arcadeHasControl2Loop_Finish:
+			LUI 	t8, 0x8005
+			J 		0x80025408
+			LB 		t8, 0xC71E (t8)
+
+	arcadeHasControl3Loop:
+		LUI 	at, hi(arcadeMenu)
+		ADDIU 	at, at, lo(arcadeMenu)
+		LBU 	at, 0x0002 (at)
+		BNEZ 	at, arcadeHasControl3Loop_Finish
+		NOP
+		LWC1 	f4, 0x4 (s1)
+		J 		0x8002791C
+		LWC1	f6, 0x8 (s1)
+
+		arcadeHasControl3Loop_Finish:
+			J 		0x8002796C
+			NOP
+
+	pauseMenu97Code:
+		LUI 	v0, hi(IsPauseMenuOpen)
+		ADDIU 	v1, r0, 1
+		SB 		v1, lo(IsPauseMenuOpen) (v0)
+		LUI 	v0, 0x8077
+		J 		0x806A8160
+		LW 		v0, 0xA0A8
+
+	pauseMenu343Code:
+		LUI 	t6, hi(IsPauseMenuOpen)
+		ADDIU 	t7, r0, 1
+		SB 		t7, lo(IsPauseMenuOpen) (t6)
+		ADDIU 	sp, sp, -0x30
+		J 		0x806AD004
+		SW 		s0, 0x1C (sp)
 .align 0x10
 END_HOOK:

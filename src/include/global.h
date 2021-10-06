@@ -24,6 +24,7 @@ extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);
 extern void colorWatch(char _red, char _green, char _blue, int slot);
 extern void openWatchSnagMenu(void);
+extern void toggleFairyViewer(void);
 
 extern void warpToMap(void);
 extern void openJapesMenu(void);
@@ -85,6 +86,7 @@ extern void openActorMenu(void);
 extern void openDebugMenu(void);
 extern void openHeapMenu(void);
 extern void openFlagLogMenu(void);
+extern void openForceSpawnActorMenu(void);
 
 extern void openWatchMenu(void);
 extern void endClose(void);
@@ -139,6 +141,13 @@ extern void updateLoadedActorNoTextOverlayList(int callType);
 extern void shouldRefreshTOMenu(void);
 extern void analyzeInputs(void);
 extern void writeFlagsToLog(void);
+extern void destroyViewerOnTransition(void);
+extern void controlFairyViewer(void);
+extern void toggleSelectedActor(void);
+
+extern void toggleArcadeMenu(void);
+extern void controlArcadeMenuActions(void);
+extern void finishLoadingArcadeState(void);
 
 extern void runTest(void);
 extern void startTest(void);
@@ -146,6 +155,9 @@ extern void startTest(void);
 extern void loadSettings(void);
 extern void saveSettings(void);
 extern void resetSettings(void);
+
+extern void spawnOverlay(void);
+extern void closeOverlay(void);
 
 extern const Screen maps_container_struct;
 extern const Screen japes_mapwarp_struct;
@@ -234,6 +246,7 @@ extern const Screen heap_struct;
 extern Screen flaglog_struct;
 extern const Screen instruction_struct;
 extern const Screen testinfo_struct;
+extern const Screen forcespawn_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
@@ -244,6 +257,10 @@ extern char kongcolors[5];
 extern char* snagwatch_names_array[];
 extern const snagTableInfo snag_data[];
 extern flagLogData* flagLog_currentfitems[];
+
+extern spriteDisplay* displaySlots[13];
+extern spriteControl* spriteSlots[13];
+extern otherSpriteControl* otherSpriteData[13];
 
 extern const MapWarp map_japes_struct;
 extern const MapWarp map_japesmain_struct;

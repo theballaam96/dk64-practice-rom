@@ -12,6 +12,7 @@ void colorMenuSky(void) {
 char kongcolors[5] = {1,2,2,2,1};
 
 void colorKong(void) {
+	int _char = Character;
 	prepKongColoring();
 	// DK = 1 (Blue)
 	// Diddy = 2 (Yellow Cap)
@@ -19,7 +20,7 @@ void colorKong(void) {
 	// Tiny = 2 (Purple)
 	// Chunky = 1 (Red)
 	if (Character < 5) {
-		PlayerOneColor = (int)kongcolors[(int)Character];
+		PlayerOneColor = (int)kongcolors[_char];
 	} else {
 		PlayerOneColor = 0;
 	}
@@ -41,34 +42,24 @@ void startupSkip(void) {
 	LogosDestMode = _mode;
 }
 
-void forceStorySkip(void) {
-	if (DisableForcedStorySkip == 0) {
-		StorySkip = 1;
-	}
-}
-
 void setKRoolRound(void) {
-	switch(KRoolRoundSetting) {
-		case 0:
-			// Random
-			if (((CutsceneActive == 6) && (CurrentMap == 0x50)) || (TransitionSpeed > 0)) {
-				StoredRound = (RNG & 0xF) + 1;
-				if (StoredRound > 11) {
-					StoredRound = 1;
-				} else {
-					if (StoredRound < 1) {
-						StoredRound = 11;
-					}
+	if (KRoolRoundSetting == 0) {
+		// Random
+		if (((CutsceneActive == 6) && (CurrentMap == 0x50)) || (TransitionSpeed > 0)) {
+			StoredRound = (RNG & 0xF) + 1;
+			if (StoredRound > 11) {
+				StoredRound = 1;
+			} else {
+				if (StoredRound < 1) {
+					StoredRound = 11;
 				}
 			}
-			KRoolRound = StoredRound;
-			break;
-		case 1:
-			// Forced Sequential
-			if ((CurrentMap > 0xCA) && (CurrentMap < 0xD0)) {
-				KRoolRound = CurrentMap - 0xCA;
-			}
-		break;
-		// Otherwise normal
+		}
+		KRoolRound = StoredRound;
+	} else {
+		// Forced Sequential
+		if ((CurrentMap > 0xCA) && (CurrentMap < 0xD0)) {
+			KRoolRound = CurrentMap - 0xCA;
+		}
 	}
 }

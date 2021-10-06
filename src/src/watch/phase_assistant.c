@@ -78,14 +78,14 @@ void analyzeInputs(void) {
 	char _x = adjustStickAxis(ControllerInput.stickX);
 	char _y = adjustStickAxis(ControllerInput.stickY);
 	int calculate_phase = 0;
-	if ((_x > -5) && (_x < 5)) {
-		if ((_y > -5) && (_y < 5)) {
-			_x = 0;
-			_y = 0;
-		}
-	}
 	if (PhaseChecker.assistant_on) {
 		if (Player) {
+			if ((_x > -5) && (_x < 5)) {
+				if ((_y > -5) && (_y < 5)) {
+					_x = 0;
+					_y = 0;
+				}
+			}
 			movement = Player->control_state;
 			if ((movement == 2) || (movement == 4)) {
 				if (Player->control_state_progress < 11) {

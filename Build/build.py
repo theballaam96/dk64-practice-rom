@@ -106,6 +106,16 @@ with open(newROMName, "r+b") as fh:
 		fh.write(dolby_image)
 	if os.path.exists("DolbyCompressed.bin.gz"):
 		os.remove("DolbyCompressed.bin.gz")
+	# Employee Head
+	#compressGZipFile("../Source/Non-Code/Employee Head/175D4A8_ZLib.bin", "EmployeeHead.bin.gz", False)
+	compressGZipFile("../Source/Non-Code/Employee Head/employee_head.bin", "EmployeeHead.bin.gz", False)
+	with open("EmployeeHead.bin.gz","rb") as fg:
+		head_image = fg.read()
+		fh.seek(0x175D4A8)
+		if (len(head_image) <= 4000):
+			fh.write(head_image)
+	if os.path.exists("EmployeeHead.bin.gz"):
+		os.remove("EmployeeHead.bin.gz")
 
 for x in file_dict["files"]:
 	if os.path.exists(x["output_file"]):

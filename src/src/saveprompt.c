@@ -8,10 +8,6 @@ void destroySavePrompt(void) {
 	}
 }
 
-void clearSavePromptFlag(void) {
-	SavePromptIsSaving = 0;
-}
-
 void displaySavePrompt(void) {
 	TextOverlay* textOverlay;
 	if (ShowSavePrompts) {

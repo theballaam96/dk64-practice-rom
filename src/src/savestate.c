@@ -148,16 +148,19 @@ void openStateViewMenu(void) {
 
 void stateaction_save(void) {
 	MenuSavestateAction = 1;
+	savestateHandler();
 }
 
 void stateaction_loadpos(void) {
 	MenuSavestateAction = 2;
 	LastLoadStateAction = 2;
+	savestateHandler();
 }
 
 void stateaction_loadexit(void) {
 	MenuSavestateAction = 3;
 	LastLoadStateAction = 3;
+	savestateHandler();
 }
 
 static const char* state_array[] = {
@@ -352,6 +355,7 @@ void shorthandSavestate(void) {
 				playSFX(Wrong);
 			} else {
 				MenuSavestateAction = _action;
+				savestateHandler();
 			}
 		}
 	}

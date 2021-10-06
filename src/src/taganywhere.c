@@ -13,14 +13,14 @@ void tagAnywhere(void) {
 	if (Character > 4) {
 		return;
 	}
-  if (RAMDisplayOpen) {
-    return;
-  }
+	if (RAMDisplayOpen) {
+    	return;
+  	}
 	if (ActiveMenu.isOpen && !(ControllerInput.Buttons & R_Button)) {
 		return;
 	}
 	if (!(NewlyPressedControllerInput.Buttons & D_Down)) {
-  	return;
+  		return;
 	}
 
 	if (DisableTagAnywhere) {

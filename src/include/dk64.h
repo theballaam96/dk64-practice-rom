@@ -42,6 +42,14 @@ extern void osWritebackDCacheAll();
 extern void copyFromROM(int rom_start, void* write_Location, void* file_size_location, int unk1, int unk2, int unk3, int unk4);
 extern int getActorSpawnerID(void* actor);
 extern void textOverlayCode(void);
+extern void spawnTransferredActor(void);
+extern void resolveMovementBox(void* spawner);
+extern void setArcadeTextXY(int x, int y);
+extern void spawnArcadeText(void* write_location, void* text_pointer);
+extern void setArcadeTextColor(int red, int green, int blue, int alpha);
+extern int arcadeGetObjIndexOfType(int obj_type);
+extern int arcadeGetNextVacantSlot(void);
+extern void setArcadeSong(int songIndex);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -136,6 +144,31 @@ extern heap* heap_pointer;
 extern char stickX_magnitude;
 extern char stickY_magnitude;
 extern float phasewalk_stickmagnitude;
+extern fairyInfo fairy_data;
+extern short transferredActorType;
+extern charSpawnerData characterSpawnerActors[0x71];
+extern unsigned char levelIndexMapping[216];
+extern char stickX_interpretted;
+extern char stickY_interpretted;
+
+extern char arcadeMap;
+extern char arcadeMode;
+extern char arcadeLevel;
+extern arcadeObject arcadeObjBase[0x50];
+extern char arcadeLives;
+extern char arcadeLivesVisual;
+extern int arcadeLevelTimer;
+extern int arcadeGlobalTimer;
+extern char arcadePause;
+extern int arcadeRNG;
+extern char arcadeJumpmanIndex;
+extern int arcadeCurrentScore;
+extern int arcadeHighScore;
+extern char arcadeBonusTimer;
+extern int arcadeSong;
+extern int arcadeHammerTimer;
+extern arcadeMoveFloorBase arcadeMovableFloor;
+extern unsigned char arcadeRivetBitfield;
 
 //hack data
 extern int TestVariable;
@@ -221,3 +254,7 @@ extern char ViewedSnagWatches[4];
 extern char FlagLogCurrentFCounter;
 extern char MinigameTimersInMS;
 extern char ConvertTimerCountdown;
+extern char FairyViewerOpen;
+extern fairyInfo FairyViewerData;
+extern actorData* FairyViewerFocus;
+extern ActiveMenuData arcadeMenu;

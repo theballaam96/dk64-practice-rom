@@ -6,6 +6,8 @@ void initHack(void) {
 		IsSuperspeedOn = 1;
 		DebugInfoOn = 1;
 		*(int*)(0x80731F78) = 0;
+		*(int*)(0x80728670) = 0x240447B8; // Increases the malloc for character spawners
+		colorMenuSky();
 		for (int i = 0; i < WatchCount; i++) {
 			ViewedSnagWatches[i] = -1;
 		}

@@ -33,12 +33,20 @@
 .definelabel copyFromROM, 0x8060B140
 .definelabel getActorSpawnerIDFromTiedActor, 0x80688E68
 .definelabel textOverlayCode, 0x8069DA54
+.definelabel spawnTransferredActor, 0x806C80E4
+.definelabel resolveMovementBox, 0x8072827C
+.definelabel setArcadeTextXY, 0x80024508
+.definelabel spawnArcadeText, 0x8002451C
+.definelabel setArcadeTextColor, 0x800244E4
+.definelabel arcadeGetObjIndexOfType, 0x80024860
+.definelabel arcadeGetNextVacantSlot, 0x800247B8
+.definelabel setArcadeSong, 0x800252A4
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
 .definelabel CutsceneWillPlay, 0x8075533B
 .definelabel KRoolRound, 0x80750AD4
-.definelabel MovesBase,  0x807FC950 // End: 0x807FCB28
+.definelabel MovesBase, 0x807FC950 // End: 0x807FCB28
 .definelabel PlayerOneColor, 0x807552F4
 .definelabel Mode, 0x80755318
 .definelabel TBVoidByte, 0x807FBB63
@@ -127,6 +135,31 @@
 .definelabel stickX_magnitude, 0x807FD640 // u8
 .definelabel stickY_magnitude, 0x807FD641 // u8
 .definelabel phasewalk_stickmagnitude, 0x807FD614 // f32
+.definelabel fairy_data, 0x807FD802
+.definelabel transferredActorType, 0x807FD570 // u16
+.definelabel characterSpawnerActors, 0x8075EB80 // array with struct
+.definelabel levelIndexMapping, 0x807445E0
+.definelabel stickX_interpretted, 0x807FD63E
+.definelabel stickY_interpretted, 0x807FD63F
+
+.definelabel arcadeMap, 0x8004C723 // u8
+.definelabel arcadeMode, 0x8004C724 // u8
+.definelabel arcadeLevel, 0x8004A76C // u8
+.definelabel arcadeObjBase, 0x8004BCD0 // 0x20 in size
+.definelabel arcadeLives, 0x8004C71B // u8
+.definelabel arcadeLivesVisual, 0x8004C71C // u8
+.definelabel arcadeLevelTimer, 0x8004C6DC // u32
+.definelabel arcadeGlobalTimer, 0x8004C6D8 // u32
+.definelabel arcadePause, 0x8004C71D // u8
+.definelabel arcadeRNG, 0x8004A738 // u32
+.definelabel arcadeJumpmanIndex, 0x8004C71F // u8
+.definelabel arcadeCurrentScore, 0x8004A748
+.definelabel arcadeHighScore, 0x8004A760
+.definelabel arcadeBonusTimer, 0x8004C71E
+.definelabel arcadeSong, 0x8004C714
+.definelabel arcadeHammerTimer, 0x8004C710
+.definelabel arcadeMovableFloor, 0x8004BC88
+.definelabel arcadeRivetBitfield, 0x8004C718
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
@@ -168,6 +201,7 @@
 .definelabel FileInitQOLOff, 0x807FFFD3 // u8
 .definelabel InputStickMax, 0x807FFFD2 // u8
 .definelabel ConvertTimerCountdown, 0x807FFFD1 // u8
+.definelabel FairyViewerOpen, 0x807FFFD0 // u8
 .definelabel ActorNamesTable, 0x807FFFCC // u32 ptr
 .definelabel FrameAdvanceStart, 0x807FFFC8 // u32
 .definelabel DisableStartupSkip, 0x807FFFC7 // u8
@@ -217,3 +251,6 @@
 .definelabel WatchTextSpace, 0x807FFB90 // 0x30 x 4
 .definelabel PhaseChecker, 0x807FFC50 // follows phasecheckerdata struct
 .definelabel UndoFlag, 0x807FFC58 // u16
+.definelabel FairyViewerData, 0x807FFC60 // fairyInfo Struct
+.definelabel FairyViewerFocus, 0x807FFC68 // ptr
+.definelabel arcadeMenu, 0x807FFC6C // Follows Struct

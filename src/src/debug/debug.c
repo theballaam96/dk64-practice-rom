@@ -4,6 +4,7 @@ static const char debug_actors[] = "Actors";
 static const char debug_memory[] = "Memory";
 static const char debug_heap[] = "Analyze Heap";
 static const char debug_flag[] = "Flag Log";
+static const char debug_spawnactor[] = "Spawn Actors";
 
 void openDebugMenu(void) {
 	changeMenu(76);
@@ -19,6 +20,7 @@ static const char* debug_array[] = {
 	debug_memory,
 	debug_heap,
 	debug_flag,
+	debug_spawnactor,
 };
 
 static const int debug_functions[] = {
@@ -26,12 +28,13 @@ static const int debug_functions[] = {
 	(int)&openRAMViewer,
 	(int)&openHeapMenu,
 	(int)&openFlagLogMenu,
+	(int)&openForceSpawnActorMenu,
 };
 
 const Screen debug_struct = {
 	.TextArray = (int*)debug_array,
 	.FunctionArray = debug_functions,
-	.ArrayItems = 4,
+	.ArrayItems = 5,
 	.ParentScreen = 0,
 	.ParentPosition = 4
 };

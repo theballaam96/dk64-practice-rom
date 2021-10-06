@@ -103,25 +103,30 @@ void formatByteFocus(int* address, int byteFormat) {
         focus_format3,
     };
     int format_index = 0;
+    unsigned int _cap = 0;
     if (byteFormat == ByteFormat4) {
         addr_value = *((unsigned int*)address + focusedBytes_offset);
         format_index = 0;
+        _cap = 0xFFFFFFFF;
         //dk_strFormat((focusedBytePtr), "%08X", addr_value);
     } else if (byteFormat == ByteFormat2) {
         addr_value = *((unsigned short*)address + focusedBytes_offset);
         format_index = 1;
+        _cap = 0xFFFF;
         //dk_strFormat((focusedBytePtr), "%04X", addr_value);
     } else if (byteFormat == ByteFormat1) {
         addr_value = *((unsigned char*)address + focusedBytes_offset);
         format_index = 2;
+        _cap = 0xFF;
         //dk_strFormat((focusedBytePtr), "%02X", addr_value);
     } else {//unknown byte format, default to %08X
         addr_value = *((unsigned int*)address + focusedBytes_offset);
         format_index = 0;
+        _cap = 0xFFFFFFFF;
         //dk_strFormat((focusedBytePtr), "%08X", addr_value);
     };
     if (ramViewEditMode > 1) {
-        dk_strFormat((focusedBytePtr), focus_formats[format_index], focusValue);
+        dk_strFormat((focusedBytePtr), focus_formats[format_index], focusValue & _cap);
     } else {
         dk_strFormat((focusedBytePtr), focus_formats[format_index], addr_value);
     }
@@ -323,7 +328,6 @@ void editAddress(void) {
     for (int i = 0; i < (editAddrPosition - 1); i++) {
         x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - i))) & 0xF);
     }
-    //x_pos = TestVariable;
     textOverlayInstances[10]->xPos = x_pos;
     dk_strFormat((focusedAddrPtr),"%1X",((unsigned int)printStartAddr >> (4 * (6 - editAddrPosition))) & 0xF);
 }

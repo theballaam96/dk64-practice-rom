@@ -16,6 +16,7 @@ static const char viewed_storedposition2[] = "Stored Position 2 (!)";
 static const char viewed_floor[] = "Floor (!)";
 static const char viewed_phaseassistant[] = "Phasewalk Assistant (!)";
 static const char viewed_avgspd[] = "Average Speed (!)";
+static const char viewed_fairy[] = "Fairy Viewer (!)";
 
 static const char change_lag[] = "Lag";
 static const char change_avglag[] = "Average Lag";
@@ -33,12 +34,13 @@ static const char change_storedposition2[] = "Stored Position 2";
 static const char change_floor[] = "Floor";
 static const char change_phaseassistant[] = "Phasewalk Assistant";
 static const char change_avgspd[] = "Average Speed";
+static const char change_fairy[] = "Fairy Viewer";
 
 static const char watchdisplay_player[] = "Player Variables";
 static const char watchdisplay_sys[] = "System Environment";
 static const char watchdisplay_timers[] = "Timers";
 static const char watchdisplay_snag[] = "Spawn Snag Collectables";
-static const char watchdisplay_assistants[] = "Trick Assistants";
+static const char watchdisplay_assistants[] = "Assistants";
 static const char watchdisplay_clearall[] = "Clear all Watches";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
@@ -57,7 +59,7 @@ static const char phasereason_11[] = "NO DOWN FLICK"; // Pretty self-explanatory
 static const char watches_player_indexes[] = {11,3,17,7,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10};
 static const char watches_sysenv_indexes[] = {1,2,8};
-static const char watches_assist_indexes[] = {16};
+static const char watches_assist_indexes[] = {16,-1};
 
 static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
@@ -130,9 +132,9 @@ void controlWatchView(void) {
 }
 
 void closeWatchesOnTransition(void) {
-	for (int i = 0; i < WatchCount; i++) {
-		if (WatchActor[i]) {
-			if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
+	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
+		for (int i = 0; i < WatchCount; i++) {
+			if (WatchActor[i]) {
 				destroyWatch(i);
 			}
 		}
@@ -140,10 +142,10 @@ void closeWatchesOnTransition(void) {
 }
 
 void openWatchesOnTransition(void) {
-	for (int i = 0; i < WatchCount; i++) {
-		if (WatchIndex[i]) {
-			if (WatchActor[i] == 0) {
-				if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
+	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
+		for (int i = 0; i < WatchCount; i++) {
+			if (WatchIndex[i]) {
+				if (WatchActor[i] == 0) {
 					spawnWatch(i);
 				}
 			}
@@ -169,6 +171,7 @@ static const char* watch_listed_array[] = {
 	0,
 	change_phaseassistant,
 	change_avgspd,
+	change_fairy,
 };
 
 static const char* watch_viewed_array[] = {
@@ -189,6 +192,7 @@ static const char* watch_viewed_array[] = {
 	0,
 	viewed_phaseassistant,
 	viewed_avgspd,
+	viewed_fairy,
 };
 
 static const char* watch_change_array[] = {
@@ -209,6 +213,7 @@ static const char* watch_change_array[] = {
 	0,
 	change_phaseassistant,
 	change_avgspd,
+	change_fairy,
 };
 
 static const char* watch_player_array[] = {
@@ -237,6 +242,7 @@ static const char* watch_sysenv_array[] = {
 
 static const char* watch_assist_array[] = {
 	change_phaseassistant,
+	change_fairy,
 };
 
 void openWatchMenu(void) {
@@ -245,6 +251,7 @@ void openWatchMenu(void) {
 
 void updateWatchText(void) {
 	int _index;
+	int watch_index = 0;
 	for (int i = 0; i < (sizeof(watch_listed_array) / 4); i++) {
 		watch_listed_array[i] = watch_change_array[i];
 	}
@@ -259,17 +266,35 @@ void updateWatchText(void) {
 	} else {
 		watch_listed_array[7] = watch_change_array[7];
 	}
+	if (FairyViewerOpen) {
+		watch_listed_array[17] = watch_viewed_array[17];
+	} else {
+		watch_listed_array[17] = watch_change_array[17];
+	}
+	watch_assist_array[1] = watch_listed_array[17];
 	for (int i = 0; i < sizeof(watches_player_indexes); i++) {
-		watch_player_array[i] = watch_listed_array[(int)watches_player_indexes[i] - 1];
+		watch_index = (int)watches_player_indexes[i] - 1;
+		if (watch_index > -1) {
+			watch_player_array[i] = watch_listed_array[watch_index];
+		}
 	}
 	for (int i = 0; i < sizeof(watches_timers_indexes); i++) {
-		watch_timers_array[i] = watch_listed_array[(int)watches_timers_indexes[i] - 1];
+		watch_index = (int)watches_timers_indexes[i] - 1;
+		if (watch_index > -1) {
+			watch_timers_array[i] = watch_listed_array[watch_index];
+		}
 	}
 	for (int i = 0; i < sizeof(watches_sysenv_indexes); i++) {
-		watch_sysenv_array[i] = watch_listed_array[(int)watches_sysenv_indexes[i] - 1];
+		watch_index = (int)watches_sysenv_indexes[i] - 1;
+		if (watch_index > -1) {
+			watch_sysenv_array[i] = watch_listed_array[watch_index];
+		}
 	}
 	for (int i = 0; i < sizeof(watches_assist_indexes); i++) {
-		watch_assist_array[i] = watch_listed_array[(int)watches_assist_indexes[i] - 1];
+		watch_index = (int)watches_assist_indexes[i] - 1;
+		if (watch_index > -1) {
+			watch_assist_array[i] = watch_listed_array[watch_index];
+		}
 	}
 }
 
@@ -295,6 +320,11 @@ void openWatchAssistMenu(void) {
 
 void clearAllWatches(void) {
 	InputDisplayOpen = 0;
+	if (FairyViewerOpen) {
+		toggleFairyViewer();
+	}
+	FairyViewerOpen = 0;
+	closeOverlay();
 	for (int i = 0; i < WatchCount; i++) {
 		destroyWatch(i);
 		WatchIndex[i] = 0;
@@ -375,7 +405,22 @@ void getISGTimer(void) {
 
 void toggleInputDisplay(void) {
 	InputDisplayOpen = 1 - InputDisplayOpen;
+	if (InputDisplayOpen) {
+		spawnOverlay();
+	} else if (FairyViewerOpen == 0) {
+		closeOverlay();
+	}
 	openWatchSysMenu();
+};
+
+void fairyViewerContainerToggle(void) {
+	toggleFairyViewer();
+	if (FairyViewerOpen) {
+		spawnOverlay();
+	} else if (InputDisplayOpen == 0) {
+		closeOverlay();
+	}
+	openWatchAssistMenu();
 }
 
 static const char* watch_array[] = {
@@ -454,6 +499,7 @@ const Screen watch_sysenv_struct = {
 
 static const int watch_assist_functions[] = {
 	(int)&togglePhaseAssistant,
+	(int)&fairyViewerContainerToggle,
 };
 
 const Screen watch_assist_struct = {

@@ -4,6 +4,12 @@ typedef struct floatPos {
 	/* 0x008 */ float zPos;
 } floatPos;
 
+typedef struct shortPos {
+	/* 0x000 */ short xPos;
+	/* 0x002 */ short yPos;
+	/* 0x004 */ short zPos;
+} shortPos;
+
 typedef struct actorData {
 	/* 0x000 */ char unk_00[0x58];
 	/* 0x058 */ int actorType;
@@ -309,7 +315,9 @@ typedef struct GiantKoshaData {
 typedef struct SwapObjectData {
 	/* 0x000 */ char unk_00[0x210];
 	/* 0x210 */ floatPos cameraPositions[4];
-	/* 0x240 */ char unk_21C[0x29C-0x240];
+	/* 0x240 */ char unk_21C[0x284-0x240];
+	/* 0x284 */ float near;
+	/* 0x288 */ char unk_288[0x29C-0x288];
 	/* 0x29C */ short action_type;
 } SwapObjectData;
 
@@ -446,15 +454,49 @@ typedef struct MinigameController {
 	/* 0X000 */ char hit_count;
 } MinigameController;
 
+typedef struct aggrBoxInfo {
+	/* 0x000 */ shortPos position[255];
+} aggrBoxInfo;
+
+typedef struct movementBoxInfo {
+	/* 0x000 */ char unk_00[0x8];
+	/* 0x008 */ short count;
+	/* 0x00A */ char unk_0A[0x2];
+	/* 0x00C */ aggrBoxInfo* unk_ptr;
+	/* 0x010 */ char unk_10[0x30-0x10];
+} movementBoxInfo;
+
 typedef struct SpawnerInfo {
 	/* 0x000 */ unsigned char enemy_value;
-	/* 0x001 */ char unk_01[0x14-0x1];
+	/* 0x001 */ char unk_01;
+	/* 0x002 */ short yRot;
+	/* 0x004 */ short xPos;
+	/* 0x006 */ short yPos;
+	/* 0x008 */ short zPos;
+	/* 0x00A */ char cs_model;
+	/* 0x00B */ char unk_0B;
+	/* 0x00C */ unsigned char max_idle_speed;
+	/* 0x00D */ unsigned char max_aggro_speed;
+	/* 0x00E */ char unk_0E;
+	/* 0x00F */ char scale;
+	/* 0x010 */ char aggro_index;
+	/* 0x011 */ char unk_11;
+	/* 0x012 */ char init_spawn_state;
+	/* 0x013 */ char spawn_trigger;
 	/* 0x014 */ char respawnTimerInit;
 	/* 0x015 */ char unk_15[0x18-0x15];
 	/* 0x018 */ void* tied_actor;
-	/* 0x01C */ char unk_1C[0x42-0x1C];
+	/* 0x01C */ movementBoxInfo* movement_box;
+	/* 0x020 */ void* unk_20;
+	/* 0x024 */ short respawn_timer;
+	/* 0x026 */ char unk_26[0x3C-0x26];
+	/* 0x03C */ float unk_3C;
+	/* 0x040 */ short chunk;
 	/* 0x042 */ char spawn_state;
-	/* 0x043 */ char unk_43[0x48 - 0x43];
+	/* 0x043 */ char counter;
+	/* 0x044 */ unsigned char alt_enemy_value;
+	/* 0x045 */ char unk_45;
+	/* 0x046 */ short unk_46;
 } SpawnerInfo;
 
 typedef struct pppanicController {
@@ -590,3 +632,75 @@ typedef struct stickTestData {
 	/* 0x000 */ char mag_max;
 	/* 0x001 */ char mag_threshold;
 } stickTestData;
+
+typedef struct fairyInfo {
+	/* 0x000 */ short max_dist_allowed;
+	/* 0x002 */ short xPos;
+	/* 0x004 */ short yPos;
+} fairyInfo;
+
+typedef struct charSpawnerData {
+	/* 0x000 */ short actor_type;
+	/* 0x002 */ short actor_behaviour;
+	/* 0x004 */ char unk_04[0x18-0x4];
+} charSpawnerData;
+
+typedef struct uniqueSpawnFunction {
+	/* 0x000 */ int actor_type;
+	/* 0x004 */ int func;
+} uniqueSpawnFunction;
+
+typedef struct actorWrapperParams {
+	/* 0x000 */ short actor_type;
+	/* 0x002 */ short actor_behaviour;	
+} actorWrapperParams;
+
+typedef struct forceSpawnActorData {
+	/* 0x000 */ short actor_type;
+} forceSpawnActorData;
+
+typedef struct arcadeObject {
+	/* 0x000 */ float x;
+	/* 0x004 */ float y;
+	/* 0x008 */ float x_velocity;
+	/* 0x00C */ float y_velocity;
+	/* 0x010 */ char unk_10[0x14-0x10];
+	/* 0x014 */ void* image_data_pointer;
+	/* 0x018 */ char type;
+	/* 0x019 */ char movement;
+	/* 0x01A */ char unk_1A[0x20-0x1A];
+} arcadeObject;
+
+typedef struct arcadeObjectBase {
+	/* 0x000 */ arcadeObject object[0x50];
+} arcadeObjectBase;
+
+typedef struct arcadeMoveFloor {
+	/* 0x000 */ float x;
+	/* 0x004 */ float y;
+	/* 0x008 */ float y_velocity;
+} arcadeMoveFloor;
+
+typedef struct arcadeMoveFloorBase {
+	/* 0x000 */ arcadeMoveFloor floor[6];
+} arcadeMoveFloorBase;
+
+typedef struct arcadeSavestate {
+	/* 0x000 */ arcadeObjectBase* base;
+	/* 0x004 */ int RNG;
+	/* 0x008 */ int global_timer;
+	/* 0x00C */ int level_timer;
+	/* 0x010 */ char map;
+	/* 0x011 */ char level;
+	/* 0x012 */ char mode;
+	/* 0x013 */ char stored;
+	/* 0x014 */ char lives;
+	/* 0x015 */ char jumpman_index;
+	/* 0x016 */ char bonus_timer;
+	/* 0x017 */ unsigned char rivet_bitfield;
+	/* 0x018 */ int current_score;
+	/* 0x01C */ int high_score;
+	/* 0x020 */ int song;
+	/* 0x024 */ int hammer_timer;
+	/* 0x028 */ arcadeMoveFloorBase* floors;
+} arcadeSavestate;
