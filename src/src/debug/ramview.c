@@ -44,6 +44,7 @@ unsigned int ramViewer_start = validRamReadStart;
 unsigned int ramViewer_end = validRamReadEnd;
 unsigned int focusValue = 0;
 int ramViewEditMode = 0;
+char access_type = 0; // 0 = Debug Menu, 1 = Actor Menu
 
 char* ramViewTextPtrs[] = {headerViewText, line1, line2, line3, line4, line5, line6, line7, line8};
 char* focusedBytePtr = focusedBytes;
@@ -56,10 +57,15 @@ static char* ramview_array[] = {
     closeRamViewText,
 };
 
-void defineRAMViewerParameters(int* start, int* end) {
+void defineRAMViewerParameters(int* start, int* end, int source) {
     ramViewer_start = (unsigned int)start;
     ramViewer_end = (unsigned int)end - 0x38;
-    printStartAddr = start;
+    access_type = source;
+    if ((source == 0) && (MemoryViewerLastAddress)) {
+        printStartAddr = MemoryViewerLastAddress;
+    } else {
+        printStartAddr = start;
+    }
 }
 
 void dk_strFormatWrapper(char* destination, int byteFormat, int* address) {
@@ -488,6 +494,9 @@ void ramViewUpdate(void) {
         updateHeader(printStartAddr);
         updateTable(printStartAddr);
         editAddress();
+        if (access_type == 0) {
+            MemoryViewerLastAddress = printStartAddr;
+        }
         if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
             closeRamViewerDisplay();
         }

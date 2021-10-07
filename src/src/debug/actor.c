@@ -188,7 +188,7 @@ void grabViewedActor(void) {
 void openActorRAM(void) {
 	int actor_addr = (int)FocusedActorViewPointer;
 	int actor_size = (int)*(int*)(actor_addr - 0xC);
-	defineRAMViewerParameters((int*)actor_addr,(int*)(actor_addr + actor_size));
+	defineRAMViewerParameters((int*)actor_addr,(int*)(actor_addr + actor_size),1);
 	startRamViewerDisplay();
 }
 

@@ -17,7 +17,7 @@ extern void* findActorWithType(int search_actor_type);
 extern void closeMenu(void);
 extern void startRamViewerDisplay(void);
 extern void closeRamViewerDisplay(void);
-extern void defineRAMViewerParameters(int* start, int* end);
+extern void defineRAMViewerParameters(int* start, int* end, int source);
 extern int isRDRAM(void* address);
 
 extern void destroyWatch(int slot);

@@ -254,3 +254,4 @@
 .definelabel FairyViewerData, 0x807FFC60 // fairyInfo Struct
 .definelabel FairyViewerFocus, 0x807FFC68 // ptr
 .definelabel arcadeMenu, 0x807FFC6C // Follows Struct
+.definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr

@@ -258,3 +258,4 @@ extern char FairyViewerOpen;
 extern fairyInfo FairyViewerData;
 extern actorData* FairyViewerFocus;
 extern ActiveMenuData arcadeMenu;
+extern int* MemoryViewerLastAddress;
