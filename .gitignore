@@ -4,3 +4,6 @@
 *.bak
 
 /*.bps
+src/symbols_map.txt
+src/rom/*.bps
+src/dk64-practice-rom.wch
