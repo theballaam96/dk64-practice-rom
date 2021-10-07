@@ -260,8 +260,8 @@ void spawnArcadeMenu(void* write_location) {
 	const Screen* focused_screen = arcade_screens[(int)arcadeMenu.screenIndex];
 	int* focused_text_array = (int*)focused_screen->TextArray;
 	int array_count = focused_screen->ArrayItems;
-	if (arcadeMenu.positionIndex >= array_count) {
-		arcadeMenu.positionIndex = array_count - 1;
+	if (arcadeMenu.positionIndex > array_count) {
+		arcadeMenu.positionIndex = array_count;
 	}
 	int _position = arcadeMenu.positionIndex;
 	if (arcadeMenu.isOpen) {
@@ -285,17 +285,22 @@ void spawnArcadeMenu(void* write_location) {
 	}
 }
 
+void closeArcadeMenu(void) {
+	const Screen* focused_screen = arcade_screens[(int)arcadeMenu.screenIndex];
+	if (arcadeMenu.screenIndex == 0) {
+		arcadeMenu.isOpen = 0;
+	} else {
+		arcadeMenu.screenIndex = focused_screen->ParentScreen;
+		arcadeMenu.positionIndex = focused_screen->ParentPosition;
+	}
+}
+
 void returnArcade(void) {
 	const Screen* focused_screen = arcade_screens[(int)arcadeMenu.screenIndex];
 	int* focused_function_array = (int *)focused_screen->FunctionArray;
 	int cap = focused_screen->ArrayItems;
 	if (arcadeMenu.positionIndex == cap) {
-		if (arcadeMenu.screenIndex == 0) {
-			arcadeMenu.isOpen = 0;
-		} else {
-			arcadeMenu.screenIndex = focused_screen->ParentScreen;
-			arcadeMenu.positionIndex = focused_screen->ParentPosition;
-		}
+		closeArcadeMenu();
 	} else {
 		int _code = focused_function_array[(int)arcadeMenu.positionIndex];
 		if (_code) {
@@ -312,12 +317,18 @@ void controlArcadeMenuActions(void) {
 	if  (arcadeMenu.isOpen) {
 		if ((_position > 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
 			arcadeMenu.positionIndex -= 1;
-		} else if ((_position <= cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
+		} else if ((_position == 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
+			arcadeMenu.positionIndex = cap;
+		} else if ((_position < cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
 			arcadeMenu.positionIndex += 1;
-		} else if ((ControllerInput.Buttons & L_Button) && (arcadeMenu.positionIndex == 2) && (arcadeMenu.screenIndex == 0) && ((ControllerInput.Buttons & R_Button) == 0)) {
+		} else if ((_position == cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
+			arcadeMenu.positionIndex = 0;
+		} else if (((ControllerInput.Buttons & L_Button) || ((ControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && (arcadeMenu.positionIndex == 2) && (arcadeMenu.screenIndex == 0) && ((ControllerInput.Buttons & R_Button) == 0)) {
 			returnArcade();
-		} else if ((NewlyPressedControllerInput.Buttons & L_Button) && ((ControllerInput.Buttons & R_Button) == 0)) {
+		} else if (((NewlyPressedControllerInput.Buttons & L_Button) || ((NewlyPressedControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && ((ControllerInput.Buttons & R_Button) == 0)) {
 			returnArcade();
+		} else if ((NewlyPressedControllerInput.Buttons & D_Left) && ((ControllerInput.Buttons & R_Button) == 0) && (MenuShortcutButtonsOff == 0)) {
+			closeArcadeMenu();
 		}
 	}
 }
