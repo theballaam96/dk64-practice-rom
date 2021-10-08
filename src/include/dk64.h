@@ -44,6 +44,7 @@ extern int getActorSpawnerID(void* actor);
 extern void textOverlayCode(void);
 extern void spawnTransferredActor(void);
 extern void resolveMovementBox(void* spawner);
+extern void wipeMemory(void* location, int size);
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* write_location, void* text_pointer);
 extern void setArcadeTextColor(int red, int green, int blue, int alpha);

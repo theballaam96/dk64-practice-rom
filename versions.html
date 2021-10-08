@@ -899,6 +899,7 @@
 										<li>Facing Angle</li>
 										<li>Skew Angle</li>
 										<li>Stored Damage</li>
+										<li>Floor</li>
 									</ul>
 									<li>Hideout Helm Timer:</li>
 									<ul>
@@ -911,6 +912,11 @@
 										<li>Timer On/Off</li>
 										<li>Previous Fadeout Activated</li>
 										<li>Current Timer</li>
+									</ul>
+									<li>Other:</li>
+									<ul>
+										<li>RNG Value</li>
+										<li>Nearest Tag Height</li>
 									</ul>
 								</ul>
 								<li>Some savestate variables can be viewed in the "View Savestate Variables" menu</li>
@@ -926,6 +932,13 @@
 								<ul>
 									<li>Input Display has been changed to a more visual format</li>
 									<li>The input display cannot be viewed in either Dogadon fight for technical reasons</li>
+								</ul>
+								<li>New Watches</li>
+								<ul>
+									<li>Stored Positions (1 watch for each co-ordinate set)</li>
+									<li>Spawn Snag state of all Spawn Snag collectables (eg. Arcade R1 GB)</li>
+									<li>An assistant that provides feedback on phasewalk attempts</li>
+									<li>Average speed over the past 64 frames</li>
 								</ul>
 							</ul>
 							<li>File States</li>
@@ -991,10 +1004,102 @@
 								<li>Acquire Cannon Skew cheat has been added. This can be acquired by pressing the "Acquire Regular Skew" option twice</li>
 								<li>Transform cheats have been added to transform to the 5 barrel moves</li>
 								<li>Toggle Kong Visibility cheat added</li>
+								<li>Option to change minigame timers to milliseconds added</li>
+								<ul>
+									<li>For anti-cheat reasons, "Force End Minigame" is disabled when the timers are changed to milliseconds</li>
+								</ul>
 							</ul>
-							<li>RAM Viewer</li>
+							<li>DK Arcade Menu</li>
 							<ul>
-								<li>Made by Rain, displays the values inside RDRAM</li>
+								<li>DK Arcade has a mini-menu of it's own</li>
+								<li>Controls are the same as the regular active menu</li>
+								<ul>
+									<li>If you have the D-Pad Left/Right buttons disabled for Active Menu navigation, this will also disable those in the Arcade Menu</li>
+								</ul>
+								<li>The menu pauses any active gameplay</li>
+								<li>The menu has several options to make practising DK Arcade easier</li>
+								<ul>
+									<li>Option to change the Arcade Map between 25m, 50m, 75m and 100m</li>
+									<li>Option to change the level (AKA Difficulty) between 1 and 9</li>
+									<li>Option to levitate jumpman</li>
+									<li>Option to restock the amount of lives</li>
+									<li>Options to load and save a state of Arcade. There is only 1 savestate. If a savestate cannot be made, then you will hear a sound of a 75m spring falling. The savestate stores the following variables:</li>
+									<ul>
+										<li>Arcade Map</li>
+										<li>Arcade Level (Difficulty)</li>
+										<li>RNG</li>
+										<li>All DK Arcade Objects loaded on the screen (eg. Jumpman, Pauline, DK, Misc Enemies etc.) and their associated attributes</li>
+										<li>All movable floors (AKA 75m elevators) and their associated attributes</li>
+										<li>Global, Level and Bonus Timers</li>
+										<li>High Score and Current Score</li>
+										<li>Lives</li>
+										<li>Hammer Timer</li>
+										<li>Song</li>
+										<li>Rivet Bitfield</li>
+									</ul>
+								</ul>
+							</ul>
+							<li>Debug</li>
+							<ul>
+								<li>Actor View Menu</li>
+								<ul>
+									<li>Displays a list of loaded non-Text Overlay actors with their respective memory address</li>
+									<li>For each actor, you can dive a little bit further with some options:</li>
+									<ul>
+										<li><strong>Grab Actor</strong>: Assigns the actor to your held slot, crouching and uncrouching will bring the actor into your arms</li>
+										<li><strong>Warp to Actor</strong>: Warps the player to the actor's position</li>
+										<li><strong>View Actor in Memory</strong>: Views the actor space (and only that actor space) in the Memory Viewer</li>
+									</ul>
+								</ul>
+								<li>Memory Viewer</li>
+								<ul>
+									<li><span style="color:red">Doesn't work on Wii U for some unknown reason</span></li>
+									<li>D-Pad to move the cursor around</li>
+									<li>L + D-Pad Left/Right to change the size of each data set between 4-byte, 2-byte, 1-byte and Hex Digit</li>
+									<li>L + D-Pad Up/Down to change the value of the selected piece of data</li>
+									<ul>
+										<li>The value won't be updated until the L Button is released</li>
+									</ul>
+									<li>R + D-Pad Up/Down to change the value of the selected hex digit in the address. The last digit can only be changed to either 0 or 8</li>
+									<li>R + D-Pad Left/Right to change the selected hex digit in the address</li>
+									<li>R + L to close the menu (and therefore open the <em>Active Menu</em>)</li>
+									<li>Normal D-Pad functionality (eg. Tag Anywhere) is disabled whilst the memory viewer is open</li>
+									<li>The memory viewer will remember the most recent address viewed if the memory viewer was opened from the debug screen</li>
+								</ul>
+								<li>Analyze Heap</li>
+								<ul>
+									<li>Produces some statistics about the current state of DK64's heap</li>
+									<ul>
+										<li>Amount of free memory</li>
+										<li>Amount of used memory</li>
+										<li>Amount of blocks allocated as used memory</li>
+									</ul>
+								</ul>
+								<li>Flag Log</li>
+								<ul>
+									<li>Shows the 10 most recently set flags, and how long ago they were set</li>
+									<li>Each item in the log has a specific structure:</li>
+									<ul>
+										<li>A>B CD</li>
+										<li>A: Flag Byte</li>
+										<li>B: Flag Bit</li>
+										<li>C: Flag Type (P = Permanent, G = Global, T = Temporary)</li>
+										<li>D: Flag Change (S = Set, C = Clear)</li>
+									</ul>
+								</ul>
+								<li>Spawn Actor</li>
+								<ul>
+									<li>Spawns the selected actor into the world</li>
+									<li>Some actors will crash the game, but this cannot be avoided unfortunately</li>
+									<ul>
+										<li>A list will be made to document what actors crash the game, and which don't</li>
+									</ul>
+								</ul>
+							</ul>
+							<li>Misc</li>
+							<ul>
+								<li>If the game crashes, the game will bring up a stack trace to display information. This doesn't render on Wii U (potentially a lack of direct draw for the VC Emulator)</li>
+								<li>Stick diagnostic test added to the settings menu to analyze stick wear and inform you whether it's impacting DK64</li>
 							</ul>
 						</ul>
 						<li>Changes</li>
@@ -1004,6 +1109,19 @@
 							<li>Restock Inventory & Give Coins has been moved to the inventory menu</li>
 							<li>Movement State watch now displays the index instead of a representation of what that index means</li>
 							<li>Superspeed is no longer an on/off option, but where you can scale the superspeed applied from 2x to 7x. Superspeed is now activated by pressing L</li>
+							<li>Active Menu font has been updated to something that's more easily visible. As a result of the font taking a larger vertical space per line, some menus have been re-organised to account for this.</li>
+							<li>Some menus are viewable during frame advance</li>
+							<ul>
+								<li>Active Menu</li>
+								<li>Watches</li>
+								<li>Save Notifications</li>
+								<li>Error Notifications</li>
+							</ul>
+							<li>Auto-Phase cheat no longer requires a phase trick to go through a wall</li>
+							<li>Some text has been slightly modified</li>
+							<ul>
+								<li>For example: Rain & Isotarge's names have been added to the contributor wrinkly door</li>
+							</ul>
 						</ul>
 						<li>Removals</li>
 						<ul>

@@ -50,6 +50,8 @@ void toggleArcadeMenu(void) {
 
 void warpToArcadeMap(void) {
 	arcadeMap = (arcadeMap & 0xFC) + arcadeMenu.positionIndex;
+	wipeMemory(&arcadeObjBase,0xA00);
+	waiting_for_reload = 0;
 	arcadeMode = 2;
 	arcadeLevelTimer = 0xA1; // Instant Load
 }

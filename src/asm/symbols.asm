@@ -35,6 +35,7 @@
 .definelabel textOverlayCode, 0x8069DA54
 .definelabel spawnTransferredActor, 0x806C80E4
 .definelabel resolveMovementBox, 0x8072827C
+.definelabel wipeMemory, 0x800051C0
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
 .definelabel setArcadeTextColor, 0x800244E4
