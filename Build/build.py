@@ -126,7 +126,7 @@ for x in file_dict["files"]:
 		os.remove(x["source_file"])
 	if os.path.exists("StaticCode_Copy.bin"):
 		os.remove("StaticCode_Copy.bin")
-#import asmloader
+		
 # crc patch
 with open(newROMName, "r+b") as fh:
     fh.seek(0x3154)

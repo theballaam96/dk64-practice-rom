@@ -1,2 +1,0 @@
-[ActiveTools_Error]: 0x807FFF1C // 0x4
-[ActiveToolsMenu]: 0x807FFF20 // 0x60
