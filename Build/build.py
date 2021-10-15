@@ -11,6 +11,7 @@ file_dict = {
 		{
 			"start": 0x1118420,
 			"compressed_size": 0x37A,
+			"file_type": "text",
 			"source_file": "Menu.bin",
 			"output_file": "Menu_Copy.bin",
 			"name": "Menu Text"
@@ -18,6 +19,7 @@ file_dict = {
 		{
 			"start": 0x1115766,
 			"compressed_size": 0x6D,
+			"file_type": "text",
 			"source_file": "Dolby.bin",
 			"output_file": "Dolby_Copy.bin",
 			"name": "Dolby Text"
@@ -25,6 +27,7 @@ file_dict = {
 		{
 			"start": 0x11172E8,
 			"compressed_size": 0x1FF,
+			"file_type": "text",
 			"source_file": "KLumsy.bin",
 			"output_file": "KLumsy_Copy.bin",
 			"name": "K. Lumsy Text"
@@ -32,6 +35,7 @@ file_dict = {
 		{
 			"start": 0x1118BA4,
 			"compressed_size": 0x60D,
+			"file_type": "text",
 			"source_file": "Wrinkly.bin",
 			"output_file": "Wrinkly_Copy.bin",
 			"name": "Wrinkly Hint Text"
@@ -39,10 +43,43 @@ file_dict = {
 		{
 			"start": 0x113F0,
 			"compressed_size": 0xF064C, # GEDECOMPRESS - B15DC, PYTHON - B17A8, FINALISE ROM - B15E0
+			"file_type": "code",
 			"source_file": "StaticCode.bin",
 			"output_file": "StaticCode_Copy.bin.gz",
 			"name": "Static ASM Code"
 		},
+		{
+			"start": 0x1156AC4,
+			"compressed_size": 0xA0C,
+			"file_type": "image",
+			#"source_file": "../assets/Non-Code/Nintendo Logo/Thumb.bin",
+			"source_file": "../assets/Non-Code/Nintendo Logo/Nintendo.png",
+			"output_file": "ThumbCompressed.bin.gz",
+			"name": "Thumb Image",
+			"convert": True,
+			"texture_format": "rgba5551",
+		},
+		{
+			"start": 0x116818C,
+			"compressed_size": 0x880,
+			"file_type": "image",
+			#"source_file": "../assets/Non-Code/Dolby/DolbyLogo.bin",
+			"source_file": "../assets/Non-Code/Dolby/DolbyThin.png",
+			"output_file": "DolbyCompressed.bin.gz",
+			"name": "Dolby Image",
+			"convert": True,
+			"texture_format": "i4",
+		},
+		{
+			"start": 0x175D4A8,
+			"compressed_size": 0xFA0,
+			"file_type": "image",
+			"source_file": "../assets/Non-Code/Employee Head/employee_head.bin",
+			"output_file": "EmployeeHead.bin.gz",
+			"name": "Employee Head Image",
+			"convert": False,
+			"texture_format": "i8"
+		}
 	]
 }
 
@@ -52,19 +89,20 @@ ROMName = "./../src/rom/dk64.z64"
 with open(ROMName, "r+b") as fh:
 	print("[1 / 2] - Unzipping files from ROM")
 	for x in file_dict["files"]:
-		fh.seek(x["start"])
-		byte_read = fh.read(x["compressed_size"])
-		binName = x["source_file"]
+		if x["file_type"] != "image":
+			fh.seek(x["start"])
+			byte_read = fh.read(x["compressed_size"])
+			binName = x["source_file"]
 
-		if os.path.exists(binName):
-		    os.remove(binName)
+			if os.path.exists(binName):
+			    os.remove(binName)
 
-		with open(binName, "wb") as fg:
-			dec = gzip.decompress(byte_read)
-			if x["source_file"] == "StaticCode.bin":
-				fg.write(dec[:0x149160])
-			else:
-				fg.write(dec)
+			with open(binName, "wb") as fg:
+				dec = gzip.decompress(byte_read)
+				if x["source_file"] == "StaticCode.bin":
+					fg.write(dec[:0x149160])
+				else:
+					fg.write(dec)
 
 import modules
 newROMName = "dk64-practice-rom.z64"
@@ -76,70 +114,93 @@ with open(newROMName, "r+b") as fh:
 	print("[2 / 2] - Writing modified compressed files to ROM")
 	for x in file_dict["files"]:
 		binName = x["output_file"]
-		if os.path.exists(binName):
-			with open(binName, "rb") as fg:
-				byte_read = fg.read()
-				if x["source_file"] != "StaticCode.bin":
-					compress = gzip.compress(byte_read, compresslevel=9)
-					if (len(compress) > x["compressed_size"]):
-						print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(compress)) + ")")
-				else:
-					compress = byte_read
-					print(hex(len(compress)))
-					if (len(compress) > 0xB15E2):
-						print("ERROR: STATIC CODE BIN IS TOO BIG (" + hex(len(compress)) + ")")
-				fh.seek(x["start"])
-				fh.write(compress)
+		if x["file_type"] != "image":
+			if os.path.exists(binName):
+				with open(binName, "rb") as fg:
+					byte_read = fg.read()
+					if x["source_file"] != "StaticCode.bin":
+						compress = gzip.compress(byte_read, compresslevel=9)
+						if (len(compress) > x["compressed_size"]):
+							print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(compress)) + ")")
+					else:
+						compress = byte_read
+						if (len(compress) > 0xB15E2):
+							print("ERROR: STATIC CODE BIN IS TOO BIG (" + hex(len(compress)) + ")")
+					fh.seek(x["start"])
+					fh.write(compress)
+			else:
+				print(x["output_file"] + " does not exist")
 		else:
-			print(x["output_file"] + " does not exist")
-	# Thumb
-	compressGZipFile("../Source/Non-Code/Nintendo Logo/Thumb.bin", "ThumbCompressed.bin.gz", False)
-	with open("ThumbCompressed.bin.gz","rb") as fg:
-		thumb_image = fg.read()
-		fh.seek(0x1156AC4)
-		fh.write(thumb_image)
-	if os.path.exists("ThumbCompressed.bin.gz"):
-		os.remove("ThumbCompressed.bin.gz")
-	# Dolby Logo
-	compressGZipFile("../Source/Non-Code/Dolby/DolbyLogo.bin", "DolbyCompressed.bin.gz", False)
-	with open("DolbyCompressed.bin.gz","rb") as fg:
-		dolby_image = fg.read()
-		fh.seek(0x116818C)
-		fh.write(dolby_image)
-	if os.path.exists("DolbyCompressed.bin.gz"):
-		os.remove("DolbyCompressed.bin.gz")
-	# Employee Head
-	#compressGZipFile("../Source/Non-Code/Employee Head/175D4A8_ZLib.bin", "EmployeeHead.bin.gz", False)
-	compressGZipFile("../Source/Non-Code/Employee Head/employee_head.bin", "EmployeeHead.bin.gz", False)
-	with open("EmployeeHead.bin.gz","rb") as fg:
-		head_image = fg.read()
-		fh.seek(0x175D4A8)
-		if (len(head_image) <= 4000):
-			fh.write(head_image)
-	if os.path.exists("EmployeeHead.bin.gz"):
-		os.remove("EmployeeHead.bin.gz")
+			
+			will_convert = False;
+			if "convert" in x:
+				if x["convert"]:
+					will_convert = True;
+			if will_convert:
+				converted = False;
+				if "texture_format" in x:
+					if x["texture_format"] == "rgba5551":
+						result = subprocess.check_output(["./n64tex.exe", x["texture_format"], x["source_file"]])
+						converted = True;
+					elif x["texture_format"] == "i4":
+						result = subprocess.check_output(["./n64tex.exe", x["texture_format"], x["source_file"]])
+						converted = True;
+					else:
+						print(" - ERROR: Unsupported texture format " + x["texture_format"])
+				if converted:
+					file_name = ".".join(x["source_file"].split(".")[0:-1]) + "." + x["texture_format"]
+					if os.path.exists(file_name):
+						compressGZipFile(file_name,x["output_file"],False);
+						with open(x["output_file"],"rb") as fg:
+							img = fg.read()
+							fh.seek(x["start"])
+							print(x["name"] + ": " + str(len(img)) + " bytes. Lim: " + str(x["compressed_size"]) + " bytes")
+							if len(img) > x["compressed_size"]:
+								print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(img)) + ")")
+							else:
+								fh.write(img)
+					if os.path.exists(file_name):
+						os.remove(file_name)
+					if os.path.exists(x["output_file"]):
+						os.remove(x["output_file"])
+			else:
+				if os.path.exists(x["source_file"]):
+					compressGZipFile(x["source_file"],x["output_file"],False)
+					with open(x["output_file"],"rb") as fg:
+						img = fg.read()
+						fh.seek(x["start"])
+						print(x["name"] + ": " + str(len(img)) + " bytes. Lim: " + str(x["compressed_size"]) + " bytes")
+						if len(img) > x["compressed_size"]:
+							print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(img)) + ")")
+						else:
+							fh.write(img)
+					if os.path.exists(x["output_file"]):
+						os.remove(x["output_file"])
+				else:
+					print(x["source_file"] + " does not exist")
 
 for x in file_dict["files"]:
-	if os.path.exists(x["output_file"]):
-		os.remove(x["output_file"])
-	if os.path.exists(x["source_file"]):
-		os.remove(x["source_file"])
-	if os.path.exists("StaticCode_Copy.bin"):
-		os.remove("StaticCode_Copy.bin")
+	if x["file_type"] != "image":
+		if os.path.exists(x["output_file"]):
+			os.remove(x["output_file"])
+		if os.path.exists(x["source_file"]):
+			os.remove(x["source_file"])
+if os.path.exists("StaticCode_Copy.bin"):
+	os.remove("StaticCode_Copy.bin")
 		
 # crc patch
 with open(newROMName, "r+b") as fh:
     fh.seek(0x3154)
     fh.write(bytearray([0, 0, 0, 0]))
-    with open("./../Source/Non-Code/actor_names.bin","rb") as fg:
+    with open("./../assets/Non-Code/actor_names.bin","rb") as fg:
     	_actor_names = fg.read()
     	fh.seek(0x2020000)
     	fh.write(_actor_names)
-    with open ("./../Source/Non-Code/snag_names.bin","rb") as fg:
+    with open ("./../assets/Non-Code/snag_names.bin","rb") as fg:
     	_snag_names = fg.read()
     	fh.seek(0x2021800)
     	fh.write(_snag_names)
-    with open ("./../Source/Non-Code/snag_names_capitals.bin","rb") as fg:
+    with open ("./../assets/Non-Code/snag_names_capitals.bin","rb") as fg:
     	_snag_names2 = fg.read()
     	fh.seek(0x2021C00)
     	fh.write(_snag_names2)

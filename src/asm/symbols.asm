@@ -36,6 +36,13 @@
 .definelabel spawnTransferredActor, 0x806C80E4
 .definelabel resolveMovementBox, 0x8072827C
 .definelabel wipeMemory, 0x800051C0
+.definelabel hideHUD, 0x806FB218
+.definelabel tagKong, 0x806C8E58
+.definelabel clearGun, 0x806F0C18
+.definelabel playAnimation, 0x80614E78
+.definelabel clearTagSlide, 0x806CFF9C
+.definelabel initiateTransitionFade, 0x807124B8
+
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
 .definelabel setArcadeTextColor, 0x800244E4
@@ -142,6 +149,7 @@
 .definelabel levelIndexMapping, 0x807445E0
 .definelabel stickX_interpretted, 0x807FD63E
 .definelabel stickY_interpretted, 0x807FD63F
+.definelabel preventSongPlaying, 0x80745650
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8
@@ -256,3 +264,4 @@
 .definelabel FairyViewerFocus, 0x807FFC68 // ptr
 .definelabel arcadeMenu, 0x807FFC6C // Follows Struct
 .definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr
+.definelabel assignedConsole, 0x807FFC74 // u32

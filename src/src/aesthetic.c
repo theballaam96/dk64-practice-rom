@@ -31,7 +31,11 @@ void startupSkip(void) {
 	char _map = 0x4C;
 	char _mode = 2; 
 	if (DisableStartupSkip == 0) {
-		_map = 0x50;
+		if (assignedConsole == 0) {
+			_map = 0x51;
+		} else {
+			_map = 0x50;
+		}
 		_mode = 5;
 		if (Gamemode == 1) {
 			_skip = 1;

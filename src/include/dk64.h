@@ -51,6 +51,12 @@ extern void setArcadeTextColor(int red, int green, int blue, int alpha);
 extern int arcadeGetObjIndexOfType(int obj_type);
 extern int arcadeGetNextVacantSlot(void);
 extern void setArcadeSong(int songIndex);
+extern void hideHUD(void);
+extern void tagKong(int kong_actor_index);
+extern void clearGun(void* player);
+extern void playAnimation(void* player, int anim_index);
+extern void clearTagSlide(void* player);
+extern void initiateTransitionFade(int map, int cutscene, int gamemode);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -151,6 +157,7 @@ extern charSpawnerData characterSpawnerActors[0x71];
 extern unsigned char levelIndexMapping[216];
 extern char stickX_interpretted;
 extern char stickY_interpretted;
+extern char preventSongPlaying;
 
 extern char arcadeMap;
 extern char arcadeMode;
@@ -260,3 +267,4 @@ extern fairyInfo FairyViewerData;
 extern actorData* FairyViewerFocus;
 extern ActiveMenuData arcadeMenu;
 extern int* MemoryViewerLastAddress;
+extern console assignedConsole;

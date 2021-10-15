@@ -17,6 +17,8 @@ static const char state_text_factory[] = "Factory";
 static const char state_text_galleon[] = "Galleon";
 static const char state_text_fungi[] = "Fungi";
 static const char state_text_caves[] = "Caves";
+static const char state_text_caves1[] = "Caves 1";
+static const char state_text_caves2[] = "Caves 2";
 static const char state_text_castle[] = "Castle";
 static const char state_text_castle1[] = "Castle 1";
 static const char state_text_castle2[] = "Castle 2";
@@ -26,7 +28,7 @@ static const char state_text_takeoff[] = "Takeoff Skip";
 static const char state_text_clean[] = "Clean File";
 
 static const char filestates_nle_stateindex[] = {0,1,2,3,4,5,6,7,8,9};
-static const char filestates_101org_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+static const char filestates_101org_stateindex[] = {11,12,13,14,15,16,17,18,19,20,21};
 static const char filestates_101jfm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 static const char filestates_101ffm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 static const char filestates_general_stateindex[] = {10};
@@ -131,7 +133,7 @@ static const int filestates_main_functions[] = {
 const Screen filestates_main_struct = {
 	.TextArray = (int*)filestates_main_array,
 	.FunctionArray = filestates_main_functions,
-	.ArrayItems = 2, // Would be 3, waiting on 101% states
+	.ArrayItems = 3, // Would be 3, waiting on 101% states
 	.ParentScreen = 0,
 	.ParentPosition = 6
 };
@@ -207,6 +209,7 @@ const Screen filestates_general_struct = {
 };
 
 static const char* filestates_101org_array[] = {
+	state_text_caves1,
 	state_text_japes1,
 	state_text_aztec1,
 	state_text_factory,
@@ -214,12 +217,13 @@ static const char* filestates_101org_array[] = {
 	state_text_helm,
 	state_text_castle,
 	state_text_aztec2,
-	state_text_caves,
+	state_text_caves2,
 	state_text_japes2,
 	state_text_fungi
 };
 
 static const int filestates_101org_functions[] = {
+	(int)&loadOtherStates,
 	(int)&loadOtherStates,
 	(int)&loadOtherStates,
 	(int)&loadOtherStates,
@@ -235,7 +239,7 @@ static const int filestates_101org_functions[] = {
 const Screen filestates_101org_struct = {
 	.TextArray = (int*)filestates_101org_array,
 	.FunctionArray = filestates_101org_functions,
-	.ArrayItems = 10,
+	.ArrayItems = 11,
 	.ParentScreen = 37,
 	.ParentPosition = 0
 };

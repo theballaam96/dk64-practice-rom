@@ -11,8 +11,12 @@ void openDebugMenu(void) {
 }
 
 void openRAMViewer(void) {
-	defineRAMViewerParameters((int*)0x80000000,(int*)0x80800000,0);
-	startRamViewerDisplay();
+	if (assignedConsole != WIIU) {
+		defineRAMViewerParameters((int*)0x80000000,(int*)0x80800000,0);
+		startRamViewerDisplay();
+	} else {
+		playSFX(Wrong);
+	}
 }
 
 static const char* debug_array[] = {

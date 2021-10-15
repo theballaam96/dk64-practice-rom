@@ -7,7 +7,7 @@ static phaseInputs phaseass_inputs03[] = {0};
 static phaseInputs phaseass_inputs04[] = {0};
 static phaseInputs phaseass_inputs05[] = {0};
 static phaseInputs phaseass_inputs06[] = {0};
-static phaseInputs phaseass_inputs07[]= {0};
+static phaseInputs phaseass_inputs07[] = {0};
 static phaseInputs phaseass_inputs08[] = {0};
 static phaseInputs phaseass_inputs09[] = {0};
 static phaseInputs phaseass_inputs10[] = {0};
@@ -55,9 +55,9 @@ int adjustStickAxis(int axis_value) {
 }
 
 void logInputs(void) {
-	char _x = adjustStickAxis(ControllerInput.stickX);
-	char _y = adjustStickAxis(ControllerInput.stickY);
-	phaseass_input_list[phase_frame_counter]->buttons = ControllerInput.Buttons;
+	char _x = adjustStickAxis(stickX_interpretted);
+	char _y = adjustStickAxis(stickY_interpretted);
+	phaseass_input_list[phase_frame_counter]->buttons = BackgroundHeldInput.Buttons;
 	y_side = 0;
 	if (_y > 0) {
 		y_side = 1;
@@ -75,8 +75,8 @@ void analyzeInputs(void) {
 	float last_frame_magnitude = 0;
 	float mag_diff = 0;
 	int movement = 0;
-	char _x = adjustStickAxis(ControllerInput.stickX);
-	char _y = adjustStickAxis(ControllerInput.stickY);
+	int _x = adjustStickAxis(stickX_interpretted);
+	int _y = adjustStickAxis(stickY_interpretted);
 	int calculate_phase = 0;
 	if (PhaseChecker.assistant_on) {
 		if (Player) {
@@ -90,9 +90,19 @@ void analyzeInputs(void) {
 			if ((movement == 2) || (movement == 4)) {
 				if (Player->control_state_progress < 11) {
 					PhaseChecker.reason_code = 6;
+					phase_initiated = 0;
+					PhaseChecker.previousMagnitude = 255; // High value to cover off low mag diff reasoning
+					phase_frame_counter = 0;
+					phasewalk_state = 0;
+					PhaseChecker.prev_y_side = 0;
+					phase_accelerated = 0;
+					for (int i = 0; i < 15; i++) {
+						phaseass_input_list[i]->data = 0;
+					}
 				}
 			}
 			if (phase_initiated == 0) {
+				TestVariable = (int)&phaseass_input_list;
 				if (NewlyPressedControllerInput.Buttons & C_Up) {
 					phase_initiated = 1;
 					PhaseChecker.previousMagnitude = 255; // High value to cover off low mag diff reasoning
@@ -110,9 +120,13 @@ void analyzeInputs(void) {
 			}
 			if ((movement == 2) || (movement == 4)) {
 				if (Player->control_state_progress == 0) {
-					if ((Player->facing_angle >= 2048) && (Player->facing_angle < 4096)) {
+					int _angle = Player->facing_angle;
+					int _trunc_angle = _angle % 4096;
+					if ((_angle >= 2048) && (_angle < 4096)) {
 						PhaseChecker.reason_code = 3;
 						phase_initiated = 0;
+					} else if (_trunc_angle < 1707) {
+						PhaseChecker.reason_code = 12;
 					}
 					calculate_phase = 1;
 				}
@@ -180,7 +194,7 @@ void analyzeInputs(void) {
 									PhaseChecker.reason_code = 3;
 									phase_initiated = 0;
 								} else {
-									if (ControllerInput.Buttons & Z_Button) {
+									if (BackgroundHeldInput.Buttons & Z_Button) {
 										if ((_x == 0) && (_y == 0)) {
 											phase_initiated = 0;
 											PhaseChecker.reason_code = 0;

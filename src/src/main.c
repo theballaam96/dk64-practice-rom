@@ -2,36 +2,45 @@
 
 void cFuncLoop(void) {
 	ClosingMenu = 0;
-	if (ActiveMenu.isOpen) {
-		changeCustomFlagVariable(); // Active Menu Open
-		updateLoadedActorNoTextOverlayList(0); // Active Menu Open
-		moveSlot(); // Active Menu Open
-		confirmOption(); // Active Menu Open
-		menuShortcutButtons(); // Active Menu Open
-		shouldRefreshTOMenu(); // Active Menu Open
-		runTest(); // Active Menu Open
-		toggleSelectedActor(); // Active Menu Open
+	if (CurrentMap == 0x51) {
+		CutsceneActive = 0;
+		spawnConsoleMenu();
+		controlConsoleMenu();
 	} else {
-		if (ClosingMenu == 0) {
-			levitate(); // Active Menu Closed
-			LToCancelCS(); // Active Menu Closed
-			handlePositionSavestates(); // Active Menu Closed, RAM Viewer Closed, PosButtons == 0
-			LToEndMinigame(); // Active Menu Closed
-			handleLToTBV(); // Active Menu Closed
+		if (ActiveMenu.isOpen) {
+			changeCustomFlagVariable(); // Active Menu Open
+			updateLoadedActorNoTextOverlayList(0); // Active Menu Open
+			moveSlot(); // Active Menu Open
+			confirmOption(); // Active Menu Open
+			menuShortcutButtons(); // Active Menu Open
+			shouldRefreshTOMenu(); // Active Menu Open
+			runTest(); // Active Menu Open
+			toggleSelectedActor(); // Active Menu Open
+			hideHUD();
+		} else {
+			if (ClosingMenu == 0) {
+				levitate(); // Active Menu Closed
+				LToCancelCS(); // Active Menu Closed
+				handlePositionSavestates(); // Active Menu Closed, RAM Viewer Closed, PosButtons == 0
+				LToEndMinigame(); // Active Menu Closed
+				handleLToTBV(); // Active Menu Closed
+			}
 		}
-	}
-	int _watch_present = 0;
-	int i = 0;
-	while (i < 4) {
-		if (WatchIndex[i++]) {
-			_watch_present = 1;
-			break;
+		int _watch_present = 0;
+		int i = 0;
+		while (i < 4) {
+			if (WatchIndex[i++]) {
+				_watch_present = 1;
+				break;
+			}
 		}
-	}
-	if (_watch_present) {
-		handleWatch(); // Active Menu Closed, Watch Present
-		clampWatchFloats(); // Active Menu Closed, Watch Present
-		controlWatchView(); // Watches Open
+		if (_watch_present) {
+			handleWatch(); // Active Menu Closed, Watch Present
+			clampWatchFloats(); // Active Menu Closed, Watch Present
+			controlWatchView(); // Watches Open
+			hideHUD();
+		}
+		toggleMenu(); // Constant
 	}
 	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
 		closeMenuOnTransition(); // Into Transition
@@ -48,7 +57,6 @@ void cFuncLoop(void) {
 	}
 	startupSkip();
 	handleTimer(); // Constant
-	toggleMenu(); // Constant
 	colorKong(); // Constant
 	emergencyClose(); // Constant
 	tagAnywhere(); // Constant

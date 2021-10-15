@@ -66,6 +66,10 @@ typedef struct rendering_params {
 	/* 0x000 */ char unk_00[0x14];
 	/* 0x014 */ bone_array* bone_array1;
 	/* 0x018 */ bone_array* bone_array2;
+	/* 0x01C */ char unk_1C[0x64-0x1C];
+	/* 0x064 */ short anim_idx;
+	/* 0x066 */ char unk_66[0x68-0x66];
+	/* 0x068 */ int anim_ptr;
 } rendering_params;
 
 typedef struct playerData {
@@ -373,6 +377,7 @@ typedef struct savedSettings {
 	/* 0x010 */ char krool_round_setting;
 	/* 0x011 */ char file_init_qol;
 	/* 0x012 */ char input_max;
+	/* 0x013 */ char console;
 } savedSettings;
 
 typedef struct flagMenuData {
@@ -704,3 +709,10 @@ typedef struct arcadeSavestate {
 	/* 0x024 */ int hammer_timer;
 	/* 0x028 */ arcadeMoveFloorBase* floors;
 } arcadeSavestate;
+
+typedef enum console {
+    NONE,
+    N64,
+    WIIU,
+    EMULATOR,
+} console;

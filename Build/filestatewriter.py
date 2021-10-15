@@ -23,10 +23,26 @@ state_files = [
 		"files": [
 			"cleanfile.bin",
 		],
+	},
+	{
+		"folder": "101",
+		"files": [
+			"caves1_organic.bin",
+			"japes1_organic.bin",
+			"aztec1_organic.bin",
+			"factory_organic.bin",
+			"galleon.bin",
+			"helm.bin",
+			"castle_organic.bin",
+			"aztec2_organic.bin",
+			"caves2_organic.bin",
+			"japes2_organic.bin",
+			"fungi.bin",
+		]
 	}
 ]
 
-file_dir_start = "./../Source/File States/"
+file_dir_start = "./../assets/File States/"
 for x in state_files:
 	file_dir = file_dir_start + x["folder"] + "/State Files/"
 	for y in x["files"]:

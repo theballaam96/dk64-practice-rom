@@ -55,6 +55,7 @@ static const char phasereason_8[] = "LATE Z PRESS"; // Pressed Z after the 2f wi
 static const char phasereason_9[] = "LOW MAG DIFF (UP TOO SLOW)"; // Up flick too slow, not satisfying the 14-magnitude difference rule
 static const char phasereason_10[] = "LOW MAG DIFF (RELEASE TOO SLOW)"; // Release too slow, not satisfying the 14-magnitude difference rule
 static const char phasereason_11[] = "NO DOWN FLICK"; // Pretty self-explanatory
+static const char phasereason_12[] = "POTENTIALLY SUBOPTIMAL ANGLE"; // Trunacted Angle < 150
 
 static const char watches_player_indexes[] = {11,3,17,7,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10};
@@ -65,6 +66,7 @@ static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
 static int watch_cache_slot2[] = {0,0,0,0};
 static int watch_cache_slot3[] = {0,0,0,0};
+static float watch_cache_slotf[] = {0,0,0,0};
 
 static int* watch_cache_array[] = {
 	watch_cache_slot0,
@@ -86,6 +88,7 @@ static const char* phasereason_list[] = {
 	phasereason_9,
 	phasereason_10,
 	phasereason_11,
+	phasereason_12,
 };
 
 static float past_speeds[64];
@@ -613,11 +616,11 @@ void handleWatch(void) {
 									}
 								}
 							}
-							if ((watch_cache_array[j][1] != (int)_speed) || (watch_cache_array[j][0] != 3)) {
+							if ((watch_cache_slotf[j] != _speed) || (watch_cache_array[j][0] != 3)) {
 								dk_strFormat((char *)WatchTextSpace[j],"SPEED: %f",_speed);
 							}
 							watch_cache_array[j][0] = 3;
-							watch_cache_array[j][1] = (int)_speed;
+							watch_cache_slotf[j] = _speed;
 						}
 						break;
 					case 4:
@@ -863,14 +866,15 @@ void handleWatch(void) {
 							if (Player) {
 								_floor = Player->floor;
 							}
-							if ((watch_cache_array[j][1] != (int)_floor) || (watch_cache_array[j][0] != 14)) {
+							if ((watch_cache_slotf[j] != _floor) || (watch_cache_array[j][0] != 14)) {
 								dk_strFormat((char *)WatchTextSpace[j], "FLOOR: %f",_floor);
 							}
 							watch_cache_array[j][0] = 14;
-							watch_cache_array[j][1] = (int)_floor;
+							watch_cache_slotf[j] = _floor;
 						}
 						break;
 					case 15:
+						// Snag Watches
 						{
 							int snag_list_index = ViewedSnagWatches[j];
 							int _map = snag_data[snag_list_index].map;
@@ -928,6 +932,7 @@ void handleWatch(void) {
 						}
 						break;
 					case 16:
+						// Phasewalk Assistant
 						{
 							if ((watch_cache_array[j][1] != PhaseChecker.reason_code) || (watch_cache_array[j][0] != 16)) {
 								dk_strFormat((char *)WatchTextSpace[j], "PWALK: %s",phasereason_list[(int)PhaseChecker.reason_code]);
@@ -937,6 +942,7 @@ void handleWatch(void) {
 						}
 						break;
 					case 17:
+						// Avg Speed
 						{
 							int _spdsum = 0;
 							float _avgspd = 0;

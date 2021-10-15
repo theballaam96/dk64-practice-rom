@@ -149,6 +149,9 @@ extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);
 extern void finishLoadingArcadeState(void);
 
+extern void spawnConsoleMenu(void);
+extern void controlConsoleMenu(void);
+
 extern void runTest(void);
 extern void startTest(void);
 

@@ -20,6 +20,7 @@ void resetSettings(void) {
 	StoredSettings.krool_round_setting = 0;
 	StoredSettings.file_init_qol = 0;
 	StoredSettings.input_max = 0;
+	StoredSettings.console = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -42,6 +43,7 @@ void loadSettings(void) {
 		KRoolRoundSetting = StoredSettings.krool_round_setting;
 		FileInitQOLOff = StoredSettings.file_init_qol;
 		InputStickMax = StoredSettings.input_max;
+		assignedConsole = StoredSettings.console;
 	} else {
 		resetSettings();
 	}
@@ -64,5 +66,6 @@ void saveSettings(void) {
 	StoredSettings.krool_round_setting = KRoolRoundSetting;
 	StoredSettings.file_init_qol = FileInitQOLOff;
 	StoredSettings.input_max = InputStickMax;
+	StoredSettings.console = assignedConsole;
 	SaveToGlobal();
 }
