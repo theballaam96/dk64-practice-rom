@@ -31,6 +31,7 @@ void tagAnywhere(void) {
 	if (Player) {
 		tagKong(_dest_character + 2);
 		clearTagSlide(Player);
+		Player->new_kong = _dest_character + 2;
 	  	_weapon_bitfield = MovesBase[_dest_character].weapon_bitfield;
 	  	if (((_weapon_bitfield & 1) == 0) || (Player->was_gun_out == 0)) {
 	    		Player->hand_state = 1;
@@ -45,5 +46,17 @@ void tagAnywhere(void) {
 	      			Player->hand_state = 3;
 	    		}
 	  	};
+	  	if (Player->rendering_param_pointer) {
+	  		if (Player->rendering_param_pointer->bone_array1) {
+	  			Player->rendering_param_pointer->bone_array1->xPos = Player->xPos;
+	  			Player->rendering_param_pointer->bone_array1->yPos = Player->yPos;
+	  			Player->rendering_param_pointer->bone_array1->zPos = Player->zPos;
+	  		}
+	  		if (Player->rendering_param_pointer->bone_array2) {
+	  			Player->rendering_param_pointer->bone_array2->xPos = Player->xPos;
+	  			Player->rendering_param_pointer->bone_array2->yPos = Player->yPos;
+	  			Player->rendering_param_pointer->bone_array2->zPos = Player->zPos;
+	  		}
+	  	}
 	}
 }
