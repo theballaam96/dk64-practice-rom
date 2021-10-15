@@ -11,7 +11,7 @@ static const char cheats[] = "Cheats";
 static const char settings[] = "Settings";
 static const char hackTitle[] = "DK64 Practice ROM";
 //static const char hackVersion[] = "Version 1.4.1";
-static const char hackVersion[] = "1.4.1 Test: 7OCT2021";
+static const char hackVersion[] = "1.4.1 Test: 15OCT2021";
 
 static const char* main_array[] = {
 	warp,
