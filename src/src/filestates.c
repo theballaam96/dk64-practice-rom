@@ -187,7 +187,7 @@ static const int filestates_101main_functions[] = {
 const Screen filestates_101main_struct = {
 	.TextArray = (int*)filestates_101main_array,
 	.FunctionArray = filestates_101main_functions,
-	.ArrayItems = 3,
+	.ArrayItems = 1,
 	.ParentScreen = 35,
 	.ParentPosition = 2
 };
