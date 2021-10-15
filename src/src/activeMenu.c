@@ -1,7 +1,7 @@
 #include "../include/common.h"
 
 static const char warp[] = "Warp to Map";
-static const char flags[] = "Special Flags";
+static const char flags[] = "Flags";
 static const char saves[] = "Save States";
 static const char watches[] = "Watches";
 static const char ramview[] = "Debug";

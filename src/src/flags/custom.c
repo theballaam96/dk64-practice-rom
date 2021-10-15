@@ -126,6 +126,9 @@ void toggleCustomFlag(void) {
 	char _current_state = checkFlag(_encodedflag,CustomFlag.type);
 	_current_state = 1 - _current_state;
 	setFlag(_encodedflag,_current_state,CustomFlag.type);
+	if (CustomFlag.type == 1) {
+		SaveToGlobal();
+	}
 	playSFX(BeepHigh);
 	openFlagsCustomMenu();
 }
