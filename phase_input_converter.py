@@ -1,6 +1,6 @@
 import math
 
-inputs = [0x00000000,0x20080000,0x2008EB61,0x0008F614,0x000800CE,0x000800A3];
+inputs = [0x00000000,0x20080000,0x0008D750,0x0008F314,0x000800C8];
 
 def convertStickToSigned(val):
 	if val > 127:

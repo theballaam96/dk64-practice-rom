@@ -118,10 +118,10 @@ void analyzeInputs(void) {
 				}
 				
 			}
+			int _angle = Player->facing_angle;
+			int _trunc_angle = _angle % 4096;
 			if ((movement == 2) || (movement == 4)) {
 				if (Player->control_state_progress == 0) {
-					int _angle = Player->facing_angle;
-					int _trunc_angle = _angle % 4096;
 					if ((_angle >= 2048) && (_angle < 4096)) {
 						PhaseChecker.reason_code = 3;
 						phase_initiated = 0;
@@ -185,7 +185,7 @@ void analyzeInputs(void) {
 							PhaseChecker.reason_code = 10;
 							phase_initiated = 0;
 						} else {
-							if ((Player->hSpeed < 40) && (phase_accelerated == 0)) {
+							if ((Player->hSpeed < 55) && (phase_accelerated == 0)) {
 								PhaseChecker.reason_code = 2;
 								phase_initiated = 0;
 							} else {

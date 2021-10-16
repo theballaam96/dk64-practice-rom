@@ -45,7 +45,7 @@ static const char watchdisplay_clearall[] = "Clear all Watches";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
 static const char phasereason_1[] = "LOW MAG DIFF (DOWN TOO SLOW)"; // Down flick too slow, not satisfying the 14-magnitude difference rule
-static const char phasereason_2[] = "NO FAST ACCELERATION"; // No fast acceleration
+static const char phasereason_2[] = "POTENTIALLY INSUFFICIENT SPEED"; // No fast acceleration/Not enough power in fast accel
 static const char phasereason_3[] = "BAD INITIAL ANGLE"; // Initial angle outside of bounds
 static const char phasereason_4[] = "LOW MAG DIFF (OPPOSITE SIMILAR MAG)"; // Not satisfying the 14-magnitude difference rule because got to the other side with a magnitude similar in size
 static const char phasereason_5[] = "READING INPUTS"; // Phasewalk in progress

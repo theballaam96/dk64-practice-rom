@@ -2,11 +2,11 @@
 	"bad_attempts":[
 		{
 			"reading":"successful",
-			"assessment": "correct",
+			"assessment": "correct, 41spd, very low",
 			"inputs":[
 				{
 					"x":0,
-					"y":-101,
+					"y":-79,
 					"mag":70,
 					"buttons":{
 						"Z":false,
@@ -15,9 +15,9 @@
 					}
 				},
 				{
-					"x":-2,
-					"y":-35,
-					"mag":35.05709628591621,
+					"x":-18,
+					"y":17,
+					"mag":24.758836806279895,
 					"buttons":{
 						"Z":false,
 						"CU":true,
@@ -25,21 +25,11 @@
 					}
 				},
 				{
-					"x":-10,
-					"y":51,
-					"mag":51.97114584074513,
+					"x":-33,
+					"y":79,
+					"mag":70,
 					"buttons":{
 						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
 						"CU":true,
 						"CD":false
 					}
@@ -67,45 +57,35 @@
 			]
 		},
 		{
-			"reading":"successful",
-			"assessment": "correct",
-			"inputs":[
+			"reading": "successful",
+			"assessment": "correct, 41spd, very low, turn might have shifted it out of phase range",
+			"inputs": [
 				{
-					"x":0,
-					"y":-108,
+					"x":-18,
+					"y":-22,
+					"mag":28.42534080710379,
+					"buttons":{
+						"Z":false,
+						"CU":true,
+						"CD":false
+					}
+				},
+				{
+					"x":-38,
+					"y":18,
+					"mag":42.04759208325728,
+					"buttons":{
+						"Z":false,
+						"CU":true,
+						"CD":false
+					}
+				},
+				{
+					"x":-35,
+					"y":62,
 					"mag":70,
 					"buttons":{
 						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-8,
-					"y":-1,
-					"mag":8.06225774829855,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-19,
-					"y":50,
-					"mag":53.48831648126533,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
 						"CU":true,
 						"CD":false
 					}
@@ -133,12 +113,13 @@
 			]
 		},
 		{
-			"reading":"low mag diff (up too slow)",
-			"inputs":[
+			"reading": "successful",
+			"assessment": "correct, 41spd, very low",
+			"inputs": [
 				{
 					"x":0,
-					"y":0,
-					"mag":0.0,
+					"y":-55,
+					"mag":55.0,
 					"buttons":{
 						"Z":false,
 						"CU":true,
@@ -146,214 +127,9 @@
 					}
 				},
 				{
-					"x":0,
-					"y":-100,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-96,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-1,
-					"mag":1.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				}
-			]
-		},
-		{
-			"reading":"low mag diff (up too slow)",
-			"inputs":[
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-109,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-111,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				}
-			]
-		},
-		{
-			"reading":"successful",
-			"inputs":[
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-109,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-111,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				}
-			]
-		},
-		{
-			"reading":"successful",
-			"inputs":[
-				{
-					"x":0,
-					"y":-92,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":-49,
-					"mag":49.0,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-9,
+					"x":-12,
 					"y":20,
-					"mag":21.93171219946131,
+					"mag":23.323807579381203,
 					"buttons":{
 						"Z":false,
 						"CU":true,
@@ -361,11 +137,11 @@
 					}
 				},
 				{
-					"x":-20,
-					"y":97,
+					"x":-40,
+					"y":80,
 					"mag":70,
 					"buttons":{
-						"Z":true,
+						"Z":false,
 						"CU":true,
 						"CD":false
 					}
