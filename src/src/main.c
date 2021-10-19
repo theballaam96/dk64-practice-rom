@@ -60,6 +60,7 @@ void cFuncLoop(void) {
 	colorKong(); // Constant
 	emergencyClose(); // Constant
 	tagAnywhere(); // Constant
+	//correctTagCode();
 	initHack(); // Map == 0x28
 	shorthandSavestate(); // Constant
 	ramViewUpdate(); // RAM Viewer Open

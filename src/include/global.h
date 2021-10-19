@@ -144,6 +144,7 @@ extern void writeFlagsToLog(void);
 extern void destroyViewerOnTransition(void);
 extern void controlFairyViewer(void);
 extern void toggleSelectedActor(void);
+//extern void correctTagCode(void);
 
 extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);

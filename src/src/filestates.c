@@ -29,7 +29,7 @@ static const char state_text_clean[] = "Clean File";
 
 static const char filestates_nle_stateindex[] = {0,1,2,3,4,5,6,7,8,9};
 static const char filestates_101org_stateindex[] = {11,12,13,14,15,16,17,18,19,20,21};
-static const char filestates_101jfm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+static const char filestates_101jfm_stateindex[] = {22,23,24,25,26,27,28,29,30,21};
 static const char filestates_101ffm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 static const char filestates_general_stateindex[] = {10};
 
@@ -187,7 +187,7 @@ static const int filestates_101main_functions[] = {
 const Screen filestates_101main_struct = {
 	.TextArray = (int*)filestates_101main_array,
 	.FunctionArray = filestates_101main_functions,
-	.ArrayItems = 1,
+	.ArrayItems = 2,
 	.ParentScreen = 35,
 	.ParentPosition = 2
 };

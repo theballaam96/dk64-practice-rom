@@ -42,11 +42,13 @@ file_dict = {
 		},
 		{
 			"start": 0x113F0,
-			"compressed_size": 0xF064C, # GEDECOMPRESS - B15DC, PYTHON - B17A8, FINALISE ROM - B15E0
+			"compressed_size": 0xB15E4, # GEDECOMPRESS - B15DC, PYTHON - B17A8, FINALISE ROM - B15E0 | 0xF064C
+			"forced_compressed_size": 0xB15E2,
 			"file_type": "code",
 			"source_file": "StaticCode.bin",
-			"output_file": "StaticCode_Copy.bin.gz",
-			"name": "Static ASM Code"
+			"output_file": "StaticCode_Copy.bin",
+			"name": "Static ASM Code",
+			"use_external_gzip": True,
 		},
 		{
 			"start": 0x1156AC4,
@@ -75,10 +77,11 @@ file_dict = {
 			"compressed_size": 0xFA0,
 			"file_type": "image",
 			"source_file": "../assets/Non-Code/Employee Head/employee_head.bin",
-			"output_file": "EmployeeHead.bin.gz",
+			"output_file": "EmployeeHead.bin",
 			"name": "Employee Head Image",
 			"convert": False,
-			"texture_format": "i8"
+			"texture_format": "i8",
+			"use_external_gzip": True,
 		}
 	]
 }
@@ -89,6 +92,9 @@ ROMName = "./../src/rom/dk64.z64"
 with open(ROMName, "r+b") as fh:
 	print("[1 / 2] - Unzipping files from ROM")
 	for x in file_dict["files"]:
+		if "use_external_gzip" in x and x["use_external_gzip"]:
+			if x["output_file"][-3:] != ".gz":
+				x["output_file"] += ".gz"
 		if x["file_type"] != "image":
 			fh.seek(x["start"])
 			byte_read = fh.read(x["compressed_size"])
@@ -99,10 +105,7 @@ with open(ROMName, "r+b") as fh:
 
 			with open(binName, "wb") as fg:
 				dec = gzip.decompress(byte_read)
-				if x["source_file"] == "StaticCode.bin":
-					fg.write(dec[:0x149160])
-				else:
-					fg.write(dec)
+				fg.write(dec)
 
 import modules
 newROMName = "dk64-practice-rom.z64"
@@ -115,23 +118,25 @@ with open(newROMName, "r+b") as fh:
 	for x in file_dict["files"]:
 		binName = x["output_file"]
 		if x["file_type"] != "image":
+			if "use_external_gzip" in x and x["use_external_gzip"]:
+				compressGZipFile(x["source_file"],x["output_file"],False)
 			if os.path.exists(binName):
 				with open(binName, "rb") as fg:
 					byte_read = fg.read()
-					if x["source_file"] != "StaticCode.bin":
-						compress = gzip.compress(byte_read, compresslevel=9)
-						if (len(compress) > x["compressed_size"]):
-							print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(compress)) + ")")
-					else:
+					if "use_external_gzip" in x and x["use_external_gzip"]:
 						compress = byte_read
-						if (len(compress) > 0xB15E2):
-							print("ERROR: STATIC CODE BIN IS TOO BIG (" + hex(len(compress)) + ")")
+					else:
+						compress = gzip.compress(byte_read, compresslevel=9)
+					sizeProp = "compressed_size"
+					if "forced_compressed_size" in x:
+						sizeProp = "forced_compressed_size"
+					if len(compress) > x[sizeProp]:
+						print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(compress)) + ")")
 					fh.seek(x["start"])
 					fh.write(compress)
 			else:
 				print(x["output_file"] + " does not exist")
 		else:
-			
 			will_convert = False;
 			if "convert" in x:
 				if x["convert"]:
@@ -148,6 +153,7 @@ with open(newROMName, "r+b") as fh:
 					else:
 						print(" - ERROR: Unsupported texture format " + x["texture_format"])
 				if converted:
+					print(x["name"])
 					file_name = ".".join(x["source_file"].split(".")[0:-1]) + "." + x["texture_format"]
 					if os.path.exists(file_name):
 						compressGZipFile(file_name,x["output_file"],False);

@@ -72,6 +72,22 @@ typedef struct rendering_params {
 	/* 0x068 */ int anim_ptr;
 } rendering_params;
 
+typedef struct bonepos {
+	/* 0x000 */ char unk_00[0x0C - 0x00];
+	/* 0x00C */ int boneX;
+	/* 0x010 */ int boneY;
+	/* 0x014 */ int boneZ;
+	/* 0x018 */ void* unk_ptr;
+	/* 0x01C */ void* next_bone;
+} bonepos;
+
+typedef struct bonedata {
+	/* 0x000 */ char unk_00[0x84 - 0x00];
+	/* 0x084 */ int timer;
+	/* 0x088 */ char unk_88[0x90 - 0x88];
+	/* 0x090 */ bonepos* bone_positions;
+} bonedata;
+
 typedef struct playerData {
 	/* 0x000 */ char unk_00[0x4];
 	/* 0x004 */ rendering_params* rendering_param_pointer;
@@ -106,7 +122,8 @@ typedef struct playerData {
 	/* 0x12C */ short chunk;
 	/* 0x12E */ char unk_12E[0x13C - 0x12E];
 	/* 0x13C */ int* collision_queue_pointer;
-	/* 0x140 */ char unk_140[0x147 - 0x140];
+	/* 0x140 */ bonedata* bone_data;
+	/* 0x144 */ char unk_140[0x147 - 0x144];
 	/* 0x147 */ char hand_state;
 	/* 0x148 */ char unk_148[0x154 - 0x148];
 	/* 0x154 */ char control_state;
@@ -125,7 +142,9 @@ typedef struct playerData {
 	/* 0x23E */ short unk_rocketbarrel_value2;
 	/* 0x240 */ char unk_240[0x284 - 0x240];
 	/* 0x284 */ cameraData* camera_pointer;
-	/* 0x288 */ char unk_288[0x323 - 0x288];
+	/* 0x288 */ char unk_288[0x2BC - 0x288];
+	/* 0x2BC */ floatPos grabPos;
+	/* 0x2C8 */ char unk_2C8[0x323 - 0x2C8];
 	/* 0x323 */ char unk_rocketbarrel_value3;
 	/* 0x324 */ char unk_324[0x328 - 0x324];
 	/* 0x328 */ actorData* krool_timer_pointer;

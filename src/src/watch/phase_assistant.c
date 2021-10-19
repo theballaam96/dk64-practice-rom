@@ -190,7 +190,7 @@ void analyzeInputs(void) {
 								phase_initiated = 0;
 							} else {
 								phase_accelerated = 1;
-								if ((Player->facing_angle >= 2048) && (Player->facing_angle < 4096)) {
+								if ((_angle >= 2048) && (_angle < 4096)) {
 									PhaseChecker.reason_code = 3;
 									phase_initiated = 0;
 								} else {

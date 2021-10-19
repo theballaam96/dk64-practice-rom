@@ -1,5 +1,8 @@
 #include "../include/common.h"
 
+// static unsigned int tag_frame = 0;
+// static int tagged = 0;
+
 void tagAnywhere(void) {
 	int _dest_character;
 	char _weapon_bitfield;
@@ -58,5 +61,29 @@ void tagAnywhere(void) {
 	  			Player->rendering_param_pointer->bone_array2->zPos = Player->zPos;
 	  		}
 	  	}
+	  	if (Player->bone_data) {
+	  		if (Player->bone_data->bone_positions) {
+	  			int _x = Player->xPos * 8;
+	  			int _y = Player->yPos * 8;
+	  			int _z = Player->zPos * 8;
+	  			Player->bone_data->bone_positions->boneX = _x;
+	  			Player->bone_data->bone_positions->boneY = _y;
+	  			Player->bone_data->bone_positions->boneZ = _z;
+	  			// tag_frame = FrameLag;
+	  			// tagged = 1;
+	  			// *(unsigned int*)(0x80671AA0) = 0;
+	  			// *(unsigned int*)(0x80671AB4) = 0x10000049;
+	  		}
+	  	}
 	}
 }
+
+// void correctTagCode(void) {
+// 	if (tagged) {
+// 		if (FrameLag > tag_frame) {
+// 			*(unsigned int*)(0x80671AA0) = 0x15C00005;
+// 		  	*(unsigned int*)(0x80671AB4) = 0x11F80049;
+// 		  	tagged = 0;
+// 		}
+// 	}
+// }

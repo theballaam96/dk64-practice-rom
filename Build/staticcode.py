@@ -2,14 +2,9 @@ import subprocess
 import os
 import shutil
 import gzip
-from compressFile import compressGZipFile
+#from compressFile import compressGZipFile
 
-StaticCodeFile = "StaticCode_Copy.bin"
-
-if os.path.exists(StaticCodeFile):
-  os.remove(StaticCodeFile)
-
-shutil.copyfile("StaticCode.bin", StaticCodeFile);
+StaticCodeFile = "StaticCode.bin"
 
 jump_data_start = 0x1FFF000
 with open("./../src/rom/dk64-practice-rom-temp.z64", "rb") as fg:
@@ -69,4 +64,4 @@ with open(StaticCodeFile, "r+b") as fh:
 	fh.seek(0x6A054)
 	fh.write(patch_speed_hook)
 
-compressGZipFile("StaticCode_Copy.bin","StaticCode_Copy.bin.gz",False)
+#compressGZipFile("StaticCode_Copy.bin","StaticCode_Copy.bin.gz",False)
