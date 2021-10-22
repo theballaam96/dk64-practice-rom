@@ -336,7 +336,7 @@ START_HOOK:
 		SB 		v1, lo(IsPauseMenuOpen) (v0)
 		LUI 	v0, 0x8077
 		J 		0x806A8160
-		LW 		v0, 0xA0A8
+		LW 		v0, 0xA0A8 (v0)
 
 	pauseMenu343Code:
 		LUI 	t6, hi(IsPauseMenuOpen)

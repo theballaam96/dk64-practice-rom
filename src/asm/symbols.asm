@@ -5,6 +5,7 @@
 .definelabel dk_free, 0x80611408
 .definelabel playSound, 0x80609140
 .definelabel initiateTransition, 0x805FF378
+.definelabel initiateTransition_0, 0x805FF9AC
 .definelabel getFlagBlockAddress, 0x8060E25C
 .definelabel isAddressActor, 0x8067AF44
 .definelabel getTimestamp, 0x800060B0
