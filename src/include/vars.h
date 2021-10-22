@@ -66,5 +66,5 @@
 #define WarpScreens 29
 #define WatchCount 4
 #define FileStatesROMStart 0x2022000
-#define FileStateSize 0x360
+#define FileStateSize 0x340
 #define flagMenuScreenCount 11

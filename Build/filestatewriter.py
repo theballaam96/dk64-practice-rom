@@ -1,6 +1,7 @@
 import os
 
 file_size = 0x140 + 0x1E0 + 0x10 + 0x10 + 0x10 + 0x10 # 0x1 at end, rounded up
+file_size = 0x140 + 0x1E0 + 0x10 + 0x10
 ROM_start = 0x2022000
 ROM_name = "dk64-practice-rom.z64";
 state_index = 0;
@@ -94,20 +95,20 @@ def grabFileState(input_file,output_file):
 			fh.seek(0x7FDD90)
 			fg.write(fh.read(0x10))
 			# Map
-			fh.seek(0x76A0A8)
-			fg.write(fh.read(0x4))
-			# X Y Z
-			fh.seek(0x7FBB4C)
-			player = bytereadToInt(fh.read(0x4)) - 0x80000000;
-			fh.seek(player + 0x7C)
-			fg.write(fh.read(0x4))
-			fh.seek(player + 0x80)
-			fg.write(fh.read(0x4))
-			fh.seek(player + 0x84)
-			fg.write(fh.read(0x4))
-			# Character
-			fh.seek(0x74E77C)
-			fg.write(fh.read(0x1))
+			# fh.seek(0x76A0A8)
+			# fg.write(fh.read(0x4))
+			# # X Y Z
+			# fh.seek(0x7FBB4C)
+			# player = bytereadToInt(fh.read(0x4)) - 0x80000000;
+			# fh.seek(player + 0x7C)
+			# fg.write(fh.read(0x4))
+			# fh.seek(player + 0x80)
+			# fg.write(fh.read(0x4))
+			# fh.seek(player + 0x84)
+			# fg.write(fh.read(0x4))
+			# # Character
+			# fh.seek(0x74E77C)
+			# fg.write(fh.read(0x1))
 
 file_dir_start = "./../assets/File States/"
 for x in state_files:
