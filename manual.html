@@ -75,6 +75,10 @@
 			padding: 7px;
 			padding-left: 12px;
 		}
+		.subscript {
+			font-size: 12px;
+			transform: translateY(-10px);
+		}
 	</style>
 </head>
 <body>
@@ -95,7 +99,7 @@
 					<ul class="nested">
 						<li><a class="excluded_link hovergold" onclick="treeshow('warp_map')">Warp to Map</a></li>
 						<li>
-							<span class="caret">Special Flags</span>
+							<span class="caret">Flags</span>
 							<ul class="nested">
 								<li><a class="excluded_link hovergold" onclick="treeshow('flags_kongs')">Kongs Freed</a></li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('flags_keysin')">Keys Turned In</a></li>
@@ -128,10 +132,12 @@
 									<ul class="nested">
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_position')">Position</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_speed')">Speed</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_avgspeed')">Average Speed</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_angle')">Angle</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_floor')">Floor</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_movement_state')">Movement State</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_held_actor')">Held Actor</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_storedpos')">Stored Position 1/2</a></li>
 									</ul>
 								</li>
 								<li>
@@ -146,11 +152,17 @@
 									<span class="caret">System Environment</span>
 									<ul class="nested">
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_lag')">Lag</a></li>
-										<li><a class="excluded_link hovergold" onclick="treeshow('watch_average')">Cumulative Lag</a></li>
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_average')">Average Lag</a></li>
 										<li><a class="excluded_link hovergold" onclick="treeshow('watch_input')">Input</a></li>
 									</ul>
 								</li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('watch_ssnag')">Spawn Snag Collectables</a></li>
+								<li>
+									<span class="caret">Assistants</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold" onclick="treeshow('watch_phase_assistant')">Phasewalk Assistant</a></li>
+									</ul>
+								</li>
 								<li><a class="excluded_link hovergold" onclick="treeshow('watch_clear')">Clear all Watches</a></li>
 							</ul>
 						</li>
@@ -384,8 +396,38 @@
 				<div class="treebox_body">
 					Displays the amount of lag currently present during gameplay. For those familiar with ScriptHawk, the conversion from Practice ROM lag watch to ScriptHawk lag watch is:<br><br>
 					<div style="text-align: center">
-						lag_scripthawk = lag_practicerom - 2
+						lag<span class="subscript">scripthawk</span> = lag<span class="subscript">practicerom</span> - 2
 					</div>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_average">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Lag Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the average lag over the past 16 frames
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_position">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Position Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the X, Y and Z co-ordinates of the player. Due to technical limitations, this rounds to the nearest integer for all 3 axis.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_floor">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Floor Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the Y value of the player's floor
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_speed">
@@ -396,6 +438,37 @@
 				</div>
 				<div class="treebox_body">
 					Displays the speed of the player, irrespective of lag.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_avgspeed">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Average Speed Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the average speed of the player over the past 64 frames, irrespective of lag.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_storedpos">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Stored Position Watches</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays the co-ordinates indicated by the first and second set of stored positions
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_phase_assistant">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Phase Assistant Watches</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					Displays some feedback on phasewalk attempts.
+					<div style="color:darkgoldenrod">The phasewalk assistant only</div>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_timer">
@@ -472,7 +545,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays the current movement state of the player					
+					Displays the current movement state of the player as a hex value.					
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_angle">
@@ -505,54 +578,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays the inputs that are being read from controller 1.
-					<h3>Input Watch Key</h3>
-					<table>
-						<tr>
-							<td>ABZSLR</td>
-							<td>The 
-								<span class="n64buttons a">&nbsp;</span>,
-								<span class="n64buttons b">&nbsp;</span>,
-								<span class="n64buttons z">&nbsp;</span>,
-								<span class="n64buttons start">&nbsp;</span> and
-								two shoulder buttons <span class="n64buttons l">&nbsp;</span><span class="n64buttons r">&nbsp;</span> respectively.
-							</td>
-						</tr>
-						<tr>
-							<td>D: UDLR</td>
-							<td>
-								The D-Pad directions (
-								<span class="n64buttons dup">&nbsp;</span>
-								<span class="n64buttons ddown">&nbsp;</span>
-								<span class="n64buttons dleft">&nbsp;</span>
-								<span class="n64buttons dright">&nbsp;</span>
-								) respectively
-							</td>
-						</tr>
-						<tr>
-							<td>C: UDLR</td>
-							<td>
-								The C Buttons (
-								<span class="n64buttons cup">&nbsp;</span>
-								<span class="n64buttons cdown">&nbsp;</span>
-								<span class="n64buttons cleft">&nbsp;</span>
-								<span class="n64buttons cright">&nbsp;</span>
-								) respectively
-							</td>
-						</tr>
-						<tr>
-							<td>X: -127</td>
-							<td>
-								The horizontal stick (<span class="n64buttons analog">&nbsp;</span> ) reading. The higher the magnitude, the further from the centre the stick is. Negative numbers represent the stick pointing left, positive numbers represent the stick pointing right.
-							</td>
-						</tr>
-						<tr>
-							<td>Y: -127</td>
-							<td>
-								The vertical stick (<span class="n64buttons analog">&nbsp;</span> ) reading. The higher the magnitude, the further from the centre the stick is. Negative numbers represent the stick pointing down, positive numbers represent the stick pointing up.
-							</td>
-						</tr>
-					</table>
+					Displays the inputs that are being read from controller 1 in a small graphic. The position of the watch and the stick threshold can be changed in the settings menu.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_held_actor">
@@ -720,12 +746,7 @@
 				<div class="treebox_body">
 					Toggles any flag you desire by modifying the target byte, bit and flag type using <span class="n64buttons dleft">&nbsp;</span> and <span class="n64buttons dright">&nbsp;</span>.
 					<br><br>
-					Documentation for what each byte, bit and flag type means is here:
-					<ul>
-						<li><a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64_flags.lua">Permanent Flags</a>></li>
-						<li><a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64_temp_flags.lua">Temporary Flags</a>></li>
-						<li><a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64.lua#L625">Global Flags</a>></li>
-					</ul>
+					You can search up which flag you need to set for your desired effect here: <a class="excluded_link hovergold" href="./tools/flag_search">Flag Search</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="savestate_change">
@@ -758,16 +779,25 @@
 							<li>Health</li>
 							<li>Melons</li>
 						</ul>
-						<li>Player 1's X, Y and Z co-ordinates</li>
-						<li>Current Map</li>
-						<li>The entrance Player 1 last entered the map from</li>
-						<li>The character Player 1 is playing as</li>
-						<li>Does the savestate have saved data</li>
+						<li>Player Variables</li>
 						<ul>
-							<li>If there is no saved data within the state, the state cannot be loaded</li>
+							<li>X, Y and Z co-ordinates</li>
+							<li>Stored Damage</li>
+							<li>Character</li>
+							<li>Skew Angle</li>
+							<li>Facing Angle</li>
+							<li>Floor Height</li>
 						</ul>
-						<li>The temporary flag block</li>
-						<li>The permanent flag block</li>
+						<li>Helm Timer Variables</li>
+						<ul>
+							<li>Helm Start Time (Default: 10 minutes)</li>
+							<li>Helm Time passed</li>
+						</ul>
+						<li>Intro Story Variables</li>
+						<ul>
+							<li>Story Timer</li>
+							<li>Previous Fadeout Index</li>
+						</ul>
 						<li>Kong Base</li>
 						<ul>
 							<li>For each Kong:</li>
@@ -787,6 +817,21 @@
 								</ul>
 							</ul>
 						</ul>
+						<li>Map Variables</li>
+						<ul>
+							<li>Current Map</li>
+							<li>Last entrance</li>
+							<li>Nearest Tag Barrel Height</li>
+						</ul>
+						<li>The permanent flag block</li>
+						<li>The temporary flag block</li>
+						<li>Does the savestate have saved data</li>
+						<ul>
+							<li>If there is no saved data within the state, the state cannot be loaded</li>
+						</ul>
+						<li>Savestate creation timestamp</li>
+						<li>RNG Value</li>
+						
 					</ul>
 					A savestate cannot be made if the player is within a certain sublist of maps:
 					<ul class="bad_savestate_maps"></ul>
@@ -829,7 +874,49 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					{Text}
+					Displays some information about the savestate to assist with identifying which savestate is which:
+					<ul>
+						<li>Has Data</li>
+						<ul>
+							<li>Whether the savestate has data or not</li>
+						</ul>
+						<li>Created</li>
+						<ul>
+							<li>Displays how long since a savestate's creation</li>
+						</ul>
+						<li>Map</li>
+						<ul>
+							<li>Map index of where the savestate was created</li>
+						</ul>
+						<li>Exit</li>
+						<ul>
+							<li>Exit index of where the savestate was created</li>
+						</ul>
+						<li>Character</li>
+						<ul>
+							<li>Character index of the kong who the player was playing as when the savestate was created</li>
+						</ul>
+						<li>X,Y,Z</li>
+						<ul>
+							<li>X,Y and Z co-ordinates of the player when the savestate was created</li>
+						</ul>
+						<li>Facing</li>
+						<ul>
+							<li>The facing angle of the kong represented in degrees when the savestate was created</li>
+						</ul>
+						<li>Skew</li>
+						<ul>
+							<li>The skew angle of the kong represented in degrees when the savestate was created</li>
+						</ul>
+						<li>Helm Timer</li>
+						<ul>
+							<li>Whether the Helm Timer was on, and if so, what time</li>
+						</ul>
+						<li>ISG Timer</li>
+						<ul>
+							<li>Whether the Intro Story was active, and if so, what time</li>
+						</ul>
+					</ul>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="warp_map">

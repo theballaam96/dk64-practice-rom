@@ -268,3 +268,4 @@ extern actorData* FairyViewerFocus;
 extern ActiveMenuData arcadeMenu;
 extern int* MemoryViewerLastAddress;
 extern console assignedConsole;
+extern int* cfrMalloc;

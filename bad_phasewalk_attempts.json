@@ -2,7 +2,6 @@
 	"bad_attempts":[
 		{
 			"reading":"successful",
-			"assessment": "correct, 41spd, very low",
 			"inputs":[
 				{
 					"x":0,
@@ -15,9 +14,9 @@
 					}
 				},
 				{
-					"x":-18,
-					"y":17,
-					"mag":24.758836806279895,
+					"x":-2,
+					"y":-15,
+					"mag":15.132745950421556,
 					"buttons":{
 						"Z":false,
 						"CU":true,
@@ -25,9 +24,9 @@
 					}
 				},
 				{
-					"x":-33,
-					"y":79,
-					"mag":70,
+					"x":-9,
+					"y":30,
+					"mag":31.32091952673165,
 					"buttons":{
 						"Z":false,
 						"CU":true,
@@ -35,9 +34,9 @@
 					}
 				},
 				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
+					"x":-19,
+					"y":61,
+					"mag":63.89053137985315,
 					"buttons":{
 						"Z":true,
 						"CU":true,
@@ -49,120 +48,8 @@
 					"y":0,
 					"mag":0.0,
 					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				}
-			]
-		},
-		{
-			"reading": "successful",
-			"assessment": "correct, 41spd, very low, turn might have shifted it out of phase range",
-			"inputs": [
-				{
-					"x":-18,
-					"y":-22,
-					"mag":28.42534080710379,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-38,
-					"y":18,
-					"mag":42.04759208325728,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-35,
-					"y":62,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
 						"Z":true,
 						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":false,
-						"CD":false
-					}
-				}
-			]
-		},
-		{
-			"reading": "successful",
-			"assessment": "correct, 41spd, very low",
-			"inputs": [
-				{
-					"x":0,
-					"y":-55,
-					"mag":55.0,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-12,
-					"y":20,
-					"mag":23.323807579381203,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":-40,
-					"y":80,
-					"mag":70,
-					"buttons":{
-						"Z":false,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":true,
-						"CU":true,
-						"CD":false
-					}
-				},
-				{
-					"x":0,
-					"y":0,
-					"mag":0.0,
-					"buttons":{
-						"Z":false,
-						"CU":false,
 						"CD":false
 					}
 				}

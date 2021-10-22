@@ -310,14 +310,8 @@ void savestateHandler(void) {
 							TimerData.Reduction = 0;
 							TimerData.TimerPostReduction = 0;
 							HasNeutralStickInput = 0;
-							dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
-							dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
-							dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
 							resetMap();
-							Character = states[_focused_state]->Character;
-							StoredDamage = states[_focused_state]->stored_damage;
 							initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
-							dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
 							if (MenuSavestateAction == 2) {
 								PositionWarpInfo.xPos = states[_focused_state]->xPos;
 								PositionWarpInfo.yPos = states[_focused_state]->yPos;
@@ -367,6 +361,17 @@ void savestateLoadMapLoadVars(void) {
 	int search_actor_index = 0;
 	float nearest_tag_distance = 999999;
 	float current_tag_distance = 0;
+	if (TransitionSpeed == 0 && (LoadVarsOnMapLoad == 1)) {
+		int* _perm_flag_block = getFlagBlockAddress(0);
+		if (_perm_flag_block) {
+			dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
+		}
+		dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
+		dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
+		Character = states[_focused_state]->Character;
+		StoredDamage = states[_focused_state]->stored_damage;
+		dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
+	}
 	if ((ObjectModel2Timer == 2) && (TransitionSpeed < 0) && (LoadVarsOnMapLoad == 1)) {
 		HelmTimerShown = states[_focused_state]->HelmTimerOn;
 		if (HelmTimerShown) {

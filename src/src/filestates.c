@@ -64,6 +64,7 @@ void openFileState101FFMMenu(void) {
 void portFileStateToMemory(int state_index) {
 	unsigned int _start = FileStatesROMStart + (state_index * FileStateSize);
 	filestateInfo* copy_space = dk_malloc(FileStateSize);
+	TestVariable = (int)copy_space;
 	int* file_size;
 	*(int*)(&file_size) = FileStateSize;
 	copyFromROM(_start,copy_space,&file_size,0,0,0,0);
@@ -74,6 +75,24 @@ void portFileStateToMemory(int state_index) {
 	dk_memcpy(&MovesBase,&copy_space->moves_base,0x1D6);
 	dk_memcpy(&CollectableBase,&copy_space->inventory,0xD);
 	dk_memcpy(&TempFlagBlock,&copy_space->temp_flags,0x10);
+	resetMap();
+	if (state_index != 10) {
+		int map = copy_space->map;
+		initiateTransition(map,0);
+		float x = copy_space->x;
+		float y = copy_space->y;
+		float z = copy_space->z;
+		PositionWarpInfo.xPos = x;
+		PositionWarpInfo.yPos = y;
+		PositionWarpInfo.zPos = z;
+		PositionFloatWarps[0] = x;
+		PositionFloatWarps[1] = y;
+		PositionFloatWarps[2] = z;
+		PositionWarpBitfield = PositionWarpBitfield | 1;
+		Character = copy_space->kong;
+	} else {
+		initiateTransition(0x22,0);
+	}
 	dk_free(copy_space);
 }
 

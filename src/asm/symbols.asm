@@ -265,3 +265,4 @@
 .definelabel arcadeMenu, 0x807FFC6C // Follows Struct
 .definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr
 .definelabel assignedConsole, 0x807FFC74 // u32
+.definelabel cfrMalloc, 0x807FFC78 // ptr
