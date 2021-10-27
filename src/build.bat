@@ -5,8 +5,6 @@ echo Started: %date% %time%
 
 python compile.py
 
-move *.o obj/
-
 armips asm/jump_list.asm
 cd ".\..\Build\"
 python build.py
