@@ -19,6 +19,8 @@ extern void startRamViewerDisplay(void);
 extern void closeRamViewerDisplay(void);
 extern void defineRAMViewerParameters(int* start, int* end, int source);
 extern int isRDRAM(void* address);
+extern int pm64ReadFromROM(int rom_start, int rom_end, void* write_location);
+extern void setWarpPosition(float x, float y, float z);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);

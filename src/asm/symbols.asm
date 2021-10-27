@@ -43,6 +43,16 @@
 .definelabel playAnimation, 0x80614E78
 .definelabel clearTagSlide, 0x806CFF9C
 .definelabel initiateTransitionFade, 0x807124B8
+.definelabel __osInvalICache, 0x80005260
+.definelabel __osInvalDCache, 0x80004520
+.definelabel __osWritebackDCache, 0x80005670
+.definelabel __osCreateMesgQueue, 0x80004950
+.definelabel __osRecvMesg, 0x800046C0
+.definelabel __osEPiStartDMA, 0x80006F10
+.definelabel __osPiRawReadIo, 0x800045D0
+.definelabel __osDisableInt, 0x80009020
+.definelabel __osRestoreInt, 0x80009040
+.definelabel copyFunc, 0x805FB750
 
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C

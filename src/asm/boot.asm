@@ -207,9 +207,6 @@ Pause97Hook:
 Pause343Hook:
 	J 	pauseMenu343Code
 	NOP
-CFRMallocHook:
-	J 	grabCopyFromROMMalloc
-	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -279,13 +276,7 @@ loadExtraHooks:
 	LW t3, lo(Pause343Hook) (t3)
 	LUI t4, 0x806B
 	SW 	t3, 0xCFFC (t4) // Store Hook
-	SW 	r0, 0xD000 (t4) // Store NOP
-
-	LUI t3, hi(CFRMallocHook)
-	LW 	t3, lo(CFRMallocHook) (t3)
-	LUI t4, 0x8061
-	SW 	t3, 0xB1C4 (t4) // Store Hook
-	SW 	r0, 0xB1C8 (t4) // Store NOP
+	SW 	r0, 0xD000 (t4) // Store NOP 
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)
@@ -301,6 +292,7 @@ getObjectArrayAddr:
 	MFLO	a1
 	JR 		ra
 	ADD 	v0, a0, a1
+
 
 .align 0x10
 END:

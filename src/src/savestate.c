@@ -313,13 +313,7 @@ void savestateHandler(void) {
 							resetMap();
 							initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
 							if (MenuSavestateAction == 2) {
-								PositionWarpInfo.xPos = states[_focused_state]->xPos;
-								PositionWarpInfo.yPos = states[_focused_state]->yPos;
-								PositionWarpInfo.zPos = states[_focused_state]->zPos;
-								PositionFloatWarps[0] = states[_focused_state]->xPos;
-								PositionFloatWarps[1] = states[_focused_state]->yPos;
-								PositionFloatWarps[2] = states[_focused_state]->zPos;
-								PositionWarpBitfield = PositionWarpBitfield | 1;
+								setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
 							};
 							HelmTimerShown = 0; // Prevent Game Over fadeout
 							ISGActive = 0; // Prevent ISG Fade

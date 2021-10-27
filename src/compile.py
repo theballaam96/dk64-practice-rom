@@ -10,9 +10,10 @@ with open(".avoid","r") as avoid_file:
 	for x in avoid_file.readlines():
 		avoids.append(x.replace("\n",""))
 
-print("AVOIDING THE FOLLOWING FILES")
-for x in avoids:
-	print("\t- " + x + "\n")
+if (len(avoids) > 0):
+	print("AVOIDING THE FOLLOWING FILES")
+	for x in avoids:
+		print("\t- " + x + "\n")
 
 if not os.path.exists("./obj"):
 	os.mkdir("obj")

@@ -40,7 +40,7 @@ extern void loadExtraHooks();
 extern void playCutscene(void* actor, int cutscene_index, int cutscene_type);
 extern void setHUDItemAsInfinite(int item_index, int player_index, char isInfinite);
 extern void osWritebackDCacheAll();
-extern void copyFromROM(int rom_start, void* write_Location, void* file_size_location, int unk1, int unk2, int unk3, int unk4);
+extern void copyFromROM(int rom_start, void* write_location, void* file_size_location, int unk1, int unk2, int unk3, int unk4);
 extern int getActorSpawnerID(void* actor);
 extern void textOverlayCode(void);
 extern void spawnTransferredActor(void);
@@ -58,6 +58,16 @@ extern void clearGun(void* player);
 extern void playAnimation(void* player, int anim_index);
 extern void clearTagSlide(void* player);
 extern void initiateTransitionFade(int map, int cutscene, int gamemode);
+extern void __osInvalICache(void* write_location, int size);
+extern void __osInvalDCache(void* write_location, int size);
+extern void __osWritebackDCache(void* write_location, int size);
+extern void __osCreateMesgQueue(void* queue, void* message, int unk);
+extern void __osRecvMesg(void* queue, void* message, int os_state);
+extern void __osEPiStartDMA(void* unk, void* iomessage, int os_state);
+extern void __osPiRawReadIo(int a0, void* a1);
+extern int __osDisableInt();
+extern void __osRestoreInt(int mask);
+extern void copyFunc(int rom_offset, int size, void* write_location);
 
 //vanilla data
 extern float TransitionSpeed;

@@ -5,5 +5,6 @@
 
 /*.bps
 src/symbols_map.txt
+src/asm/objects.asm
 src/rom/*.bps
 src/*.wch

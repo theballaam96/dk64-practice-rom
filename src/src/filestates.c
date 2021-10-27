@@ -67,32 +67,31 @@ void portFileStateToMemory(int state_index) {
 	TestVariable = (int)copy_space;
 	int* file_size;
 	*(int*)(&file_size) = FileStateSize;
-	copyFromROM(_start,copy_space,&file_size,0,0,0,1);
+	//copyFromROM(_start,copy_space,&file_size,0,0,0,1);
+	//pm64ReadFromROM(_start,_start + FileStateSize, copy_space);
+	copyFunc(_start - pointer_table_offset, FileStateSize, copy_space);
 	int* _perm_flags = getFlagBlockAddress(0);
 	if (_perm_flags) {
 		dk_memcpy(_perm_flags,copy_space,0x13C);
 	}
 	dk_memcpy(&MovesBase,&copy_space->moves_base,0x1D6);
-	dk_memcpy(&CollectableBase,&copy_space->inventory,0xD);
+	dk_memcpy(&CollectableBase,&copy_space->inventory,0xC);
 	dk_memcpy(&TempFlagBlock,&copy_space->temp_flags,0x10);
-	// resetMap();
-	// if (state_index != 10) {
-	// 	int map = copy_space->map;
-	// 	initiateTransition(map,0);
-	// 	float x = copy_space->x;
-	// 	float y = copy_space->y;
-	// 	float z = copy_space->z;
-	// 	PositionWarpInfo.xPos = x;
-	// 	PositionWarpInfo.yPos = y;
-	// 	PositionWarpInfo.zPos = z;
-	// 	PositionFloatWarps[0] = x;
-	// 	PositionFloatWarps[1] = y;
-	// 	PositionFloatWarps[2] = z;
-	// 	PositionWarpBitfield = PositionWarpBitfield | 1;
-	// 	Character = copy_space->kong;
-	// } else {
-	// 	initiateTransition(0x22,0);
-	// }
+	resetMap();
+	int _map = 0x22;
+	int _character = 0;
+	if (state_index != 10) {
+		_map = copy_space->map;
+		_character = copy_space->kong;
+		initiateTransition(_map,0);
+		setWarpPosition((float)copy_space->xPos,(float)copy_space->yPos,(float)copy_space->zPos);
+	} else {
+		initiateTransition(_map,0);
+	}
+	Character = _character;
+	__osWritebackDCache(copy_space, FileStateSize);
+	__osInvalICache(copy_space, FileStateSize);
+	__osInvalDCache(copy_space, FileStateSize);
 	dk_free(copy_space);
 }
 

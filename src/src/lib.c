@@ -46,3 +46,13 @@ int isRDRAM(void* address) {
 	}
 	return 0;
 }
+
+void setWarpPosition(float x, float y, float z) {
+	PositionWarpInfo.xPos = x;
+	PositionWarpInfo.yPos = y;
+	PositionWarpInfo.zPos = z;
+	PositionFloatWarps[0] = x;
+	PositionFloatWarps[1] = y;
+	PositionFloatWarps[2] = z;
+	PositionWarpBitfield = PositionWarpBitfield | 1;
+}

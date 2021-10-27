@@ -54,6 +54,11 @@ void cFuncLoop(void) {
 		openInputOnTransition(); // Out of Transition
 		getSandstormAddress(); // Out of Transition, CurrentMap == 0x26
 		handleSpawnPrevention(); // Out of Transition, EnemySpawnOff
+		if (CurrentMap == 0x28) {
+			for (int i = 0; i < 0x10; i++) {
+				TempFlagBlock[i] = 0;
+			}
+		}
 	}
 	startupSkip();
 	handleTimer(); // Constant

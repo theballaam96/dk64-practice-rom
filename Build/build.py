@@ -193,6 +193,8 @@ for x in file_dict["files"]:
 			os.remove(x["source_file"])
 if os.path.exists("StaticCode_Copy.bin"):
 	os.remove("StaticCode_Copy.bin")
+if os.path.exists("StaticCode.bin.gz"):
+	os.remove("StaticCode.bin.gz")
 		
 # crc patch
 with open(newROMName, "r+b") as fh:

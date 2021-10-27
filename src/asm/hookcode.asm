@@ -346,11 +346,5 @@ START_HOOK:
 		J 		0x806AD004
 		SW 		s0, 0x1C (sp)
 
-	grabCopyFromROMMalloc:
-		JAL 	0x80610FE8
-		LW 		a0, 0x0 (t6)
-		LUI 	a0, hi(cfrMalloc)
-		J 		0x8060B1CC
-		SW 		v0, lo(cfrMalloc) (a0)
 .align 0x10
 END_HOOK:

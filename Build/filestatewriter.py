@@ -1,7 +1,8 @@
 import os
+import struct
+import math
 
-file_size = 0x140 + 0x1E0 + 0x10 + 0x10 + 0x10 + 0x10 # 0x1 at end, rounded up
-file_size = 0x140 + 0x1E0 + 0x10 + 0x10
+file_size = 0x340 # 0x1 at end, rounded up
 ROM_start = 0x2022000
 ROM_name = "dk64-practice-rom.z64";
 state_index = 0;
@@ -63,6 +64,19 @@ def arrToInt(arr):
 def bytereadToInt(byteread):
 	return arrToInt(list(byteread))
 
+def floatbytereadToSignedShort(read):
+	if bytereadToInt(read) == 0:
+		flt = 0
+	else:
+		flt = struct.unpack('!f', bytes.fromhex(hex(bytereadToInt(read))[2:]))[0]
+	_flt = math.floor(flt)
+	if _flt < 0:
+		hx = (("0000" + hex(0x10000 + _flt))[2:])[-4:];
+	else:
+		hx = ("0000" + hex(_flt)[2:])[-4:]
+	arr = [int("0x" + hx[:2],16),int("0x" + hx[2:],16)]
+	return arr
+
 def grabFileState(input_file,output_file):
 	with open(input_file, "rb") as fh:
 		if os.path.exists(output_file):
@@ -89,26 +103,26 @@ def grabFileState(input_file,output_file):
 			fg.write(_perm_flag_block)
 			#print(hex(flag_block_address))
 			fh.seek(0x7FC950)
-			fg.write(fh.read(0x1E0))
+			fg.write(fh.read(0x1D6))
+			fh.seek(0x7FBB4C)
+			player = bytereadToInt(fh.read(4)) - 0x80000000;
+			fh.seek(player + 0x7C)
+			fg.write(bytearray(floatbytereadToSignedShort(fh.read(4))))
+			fh.seek(player + 0x80)
+			fg.write(bytearray(floatbytereadToSignedShort(fh.read(4))))
+			fh.seek(player + 0x84)
+			fg.write(bytearray(floatbytereadToSignedShort(fh.read(4))))
+			fg.write(bytearray([0,0,0,0]))
 			fh.seek(0x7FCC40)
-			fg.write(fh.read(0x10))
+			fg.write(fh.read(0xC))
+			fh.seek(0x76A0AB)
+			fg.write(fh.read(0x1))
+			fh.seek(0x74E77C)
+			fg.write(fh.read(0x1))
+			fg.write(bytearray([0,0]))
 			fh.seek(0x7FDD90)
 			fg.write(fh.read(0x10))
-			# Map
-			# fh.seek(0x76A0A8)
-			# fg.write(fh.read(0x4))
-			# # X Y Z
-			# fh.seek(0x7FBB4C)
-			# player = bytereadToInt(fh.read(0x4)) - 0x80000000;
-			# fh.seek(player + 0x7C)
-			# fg.write(fh.read(0x4))
-			# fh.seek(player + 0x80)
-			# fg.write(fh.read(0x4))
-			# fh.seek(player + 0x84)
-			# fg.write(fh.read(0x4))
-			# # Character
-			# fh.seek(0x74E77C)
-			# fg.write(fh.read(0x1))
+			
 
 file_dir_start = "./../assets/File States/"
 for x in state_files:
@@ -122,6 +136,8 @@ for x in state_files:
 		with open(state_dir + y, "rb") as fh:
 			with open(ROM_name, "r+b") as fg:
 				_byteread = fh.read()
+				if (len(_byteread) > file_size):
+					print("File State is too big: " + hex(len(_byteread)) + " > " + hex(file_size))
 				fg.seek(ROM_start + (file_size * state_index))
 				fg.write(_byteread)
 				state_index += 1

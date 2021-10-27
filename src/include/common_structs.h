@@ -592,14 +592,16 @@ typedef struct flagLogData {
 
 typedef struct filestateInfo {
 	/* 0x000 */ char perm_flags[0x140];
-	/* 0x140 */ char moves_base[0x1E0];
-	/* 0x320 */ char inventory[0x10];
+	/* 0x140 */ char moves_base[0x1D6];
+	/* 0x316 */ short xPos;
+	/* 0x318 */ short yPos;
+	/* 0x31A */ short zPos;
+	/* 0x31C */ char unk_31c[0x4];
+	/* 0x320 */ char inventory[0xC];
+	/* 0x32C */ unsigned char map;
+	/* 0x32D */ char kong;
+	/* 0x32E */ char unk_32e[0x2];
 	/* 0x330 */ char temp_flags[0x10];
-	/* 0x340 */ int map;
-	/* 0x344 */ float x;
-	/* 0x348 */ float y;
-	/* 0x34C */ float z;
-	/* 0x350 */ char kong;
 } filestateInfo;
 
 typedef struct loadedActorArr {
