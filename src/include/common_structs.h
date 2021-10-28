@@ -597,10 +597,10 @@ typedef struct filestateInfo {
 	/* 0x318 */ short yPos;
 	/* 0x31A */ short zPos;
 	/* 0x31C */ char unk_31c[0x4];
-	/* 0x320 */ char inventory[0xC];
-	/* 0x32C */ unsigned char map;
-	/* 0x32D */ char kong;
-	/* 0x32E */ char unk_32e[0x2];
+	/* 0x320 */ char inventory[0xD];
+	/* 0x32D */ unsigned char map;
+	/* 0x32E */ char kong;
+	/* 0x32F */ char unk_32f;
 	/* 0x330 */ char temp_flags[0x10];
 } filestateInfo;
 

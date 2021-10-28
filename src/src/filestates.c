@@ -84,7 +84,7 @@ void portFileStateToMemory(int state_index) {
 		dk_memcpy(_perm_flags,copy_space,0x13C);
 	}
 	dk_memcpy(&MovesBase,&copy_space->moves_base,0x1D6);
-	dk_memcpy(&CollectableBase,&copy_space->inventory,0xC);
+	dk_memcpy(&CollectableBase,&copy_space->inventory,0xD);
 	dk_memcpy(&TempFlagBlock,&copy_space->temp_flags,0x10);
 	resetMap();
 	int _map = 0x22;
@@ -100,6 +100,8 @@ void portFileStateToMemory(int state_index) {
 	}
 	load_filestate_vars = 1;
 	Character = _character;
+	HelmTimerShown = 0;
+	ISGActive = 0;
 	__osWritebackDCache(copy_space, FileStateSize);
 	__osInvalICache(copy_space, FileStateSize);
 	__osInvalDCache(copy_space, FileStateSize);

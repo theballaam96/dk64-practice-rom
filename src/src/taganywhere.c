@@ -49,41 +49,5 @@ void tagAnywhere(void) {
 	      			Player->hand_state = 3;
 	    		}
 	  	};
-	  	if (Player->rendering_param_pointer) {
-	  		if (Player->rendering_param_pointer->bone_array1) {
-	  			Player->rendering_param_pointer->bone_array1->xPos = Player->xPos;
-	  			Player->rendering_param_pointer->bone_array1->yPos = Player->yPos;
-	  			Player->rendering_param_pointer->bone_array1->zPos = Player->zPos;
-	  		}
-	  		if (Player->rendering_param_pointer->bone_array2) {
-	  			Player->rendering_param_pointer->bone_array2->xPos = Player->xPos;
-	  			Player->rendering_param_pointer->bone_array2->yPos = Player->yPos;
-	  			Player->rendering_param_pointer->bone_array2->zPos = Player->zPos;
-	  		}
-	  	}
-	  	if (Player->bone_data) {
-	  		if (Player->bone_data->bone_positions) {
-	  			int _x = Player->xPos * 8;
-	  			int _y = Player->yPos * 8;
-	  			int _z = Player->zPos * 8;
-	  			Player->bone_data->bone_positions->boneX = _x;
-	  			Player->bone_data->bone_positions->boneY = _y;
-	  			Player->bone_data->bone_positions->boneZ = _z;
-	  			// tag_frame = FrameLag;
-	  			// tagged = 1;
-	  			// *(unsigned int*)(0x80671AA0) = 0;
-	  			// *(unsigned int*)(0x80671AB4) = 0x10000049;
-	  		}
-	  	}
 	}
 }
-
-// void correctTagCode(void) {
-// 	if (tagged) {
-// 		if (FrameLag > tag_frame) {
-// 			*(unsigned int*)(0x80671AA0) = 0x15C00005;
-// 		  	*(unsigned int*)(0x80671AB4) = 0x11F80049;
-// 		  	tagged = 0;
-// 		}
-// 	}
-// }

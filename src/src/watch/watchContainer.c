@@ -56,6 +56,7 @@ static const char phasereason_9[] = "LOW MAG DIFF (UP TOO SLOW)"; // Up flick to
 static const char phasereason_10[] = "LOW MAG DIFF (RELEASE TOO SLOW)"; // Release too slow, not satisfying the 14-magnitude difference rule
 static const char phasereason_11[] = "NO DOWN FLICK"; // Pretty self-explanatory
 static const char phasereason_12[] = "POTENTIALLY SUBOPTIMAL ANGLE"; // Trunacted Angle < 150
+static const char phasereason_13[] = "PHASE LOST DUE TO UNKNOWN CAUSES"; // idk wtf happened
 
 static const char watches_player_indexes[] = {11,3,17,7,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10};
@@ -89,6 +90,7 @@ static const char* phasereason_list[] = {
 	phasereason_10,
 	phasereason_11,
 	phasereason_12,
+	phasereason_13,
 };
 
 static float past_speeds[64];

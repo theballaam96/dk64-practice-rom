@@ -197,7 +197,11 @@ void analyzeInputs(void) {
 									if (BackgroundHeldInput.Buttons & Z_Button) {
 										if ((_x == 0) && (_y == 0)) {
 											phase_initiated = 0;
-											PhaseChecker.reason_code = 0;
+											if (_angle > 4096) {
+												PhaseChecker.reason_code = 0;
+											} else {
+												PhaseChecker.reason_code = 13;
+											}
 										} else {
 											phasewalk_state = 4;
 										}
@@ -213,7 +217,11 @@ void analyzeInputs(void) {
 						break;
 					case 4:
 						if ((_x == 0) && (_y == 0)) {
-							PhaseChecker.reason_code = 0;
+							if (_angle > 4096) {
+								PhaseChecker.reason_code = 0;
+							} else {
+								PhaseChecker.reason_code = 13;
+							}
 						} else {
 							PhaseChecker.reason_code = 7;
 						}

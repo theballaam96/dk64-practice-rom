@@ -40,6 +40,7 @@ void cFuncLoop(void) {
 			clampWatchFloats(); // Active Menu Closed, Watch Present
 			controlWatchView(); // Watches Open
 			hideHUD();
+			handleTimer(); // Constant
 			hideRacePosition(0);
 		}
 		toggleMenu(); // Constant
@@ -63,7 +64,6 @@ void cFuncLoop(void) {
 		}
 	}
 	startupSkip();
-	handleTimer(); // Constant
 	colorKong(); // Constant
 	emergencyClose(); // Constant
 	tagAnywhere(); // Constant
