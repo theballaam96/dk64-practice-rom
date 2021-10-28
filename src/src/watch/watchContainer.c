@@ -571,6 +571,29 @@ void documentPastSpeed(void) {
 	}
 }
 
+void stringConcat(char* dest,char* str1,char* str2) {
+	int offset = 0;
+	for (int i = 0; i < 2; i++) {
+		int stop_str = 0;
+		int str_offset = 0;
+		while (!stop_str) {
+			if (i == 0) {
+				stop_str = str1[str_offset] == 0;
+			} else {
+				stop_str = str2[str_offset] == 0;
+			}
+			if (!stop_str) {
+				if (i == 0) {
+					dest[offset++] = str1[str_offset++];
+				} else {
+					dest[offset++] = str2[str_offset++];
+				}
+			}
+		}
+	}
+	dest[offset++] = 0;
+}
+
 void handleWatch(void) {
 	float _KRoolTimerX = 125;
 	char watch_present = 0;
@@ -683,7 +706,8 @@ void handleWatch(void) {
 								}
 							} else {
 								if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != 5)) {
-									dk_strFormat((char *)WatchTextSpace[j],"THIS AIN'T CAVES BUD");
+									stringConcat((char *)WatchTextSpace[j],"THIS AIN'T CAVES BUD","");
+									//dk_strFormat((char *)WatchTextSpace[j],"THIS AIN'T CAVES BUD");
 								}
 								watch_cache_array[j][0] = 5;
 								watch_cache_array[j][1] = -1;
@@ -745,7 +769,7 @@ void handleWatch(void) {
 									watch_cache_array[j][1] = held_actor_index;
 								} else {
 									if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != 9)) {
-										dk_strFormat((char *)WatchTextSpace[j],"NO ACTOR HELD");
+										stringConcat((char *)WatchTextSpace[j],"NO ACTOR HELD","");
 									}
 									watch_cache_array[j][0] = 9;
 									watch_cache_array[j][1] = -1;
@@ -911,15 +935,15 @@ void handleWatch(void) {
 								if (CurrentMap == _map) {
 									if (_m2_index > -1) {
 										if (snag_state.state) {
-											dk_strFormat((char *)WatchTextSpace[j], "%s: UNCOLLECTABLE",snagwatch_names_array[j]);
+											stringConcat((char *)WatchTextSpace[j],(char*)snagwatch_names_array[j],": UNCOLLECTABLE");
 										} else {
-											dk_strFormat((char *)WatchTextSpace[j], "%s: COLLECTABLE",snagwatch_names_array[j]);
+											stringConcat((char *)WatchTextSpace[j],(char*)snagwatch_names_array[j],": COLLECTABLE");
 										}
 									} else {
-										dk_strFormat((char *)WatchTextSpace[j], "%s: NOT SPAWNED",snagwatch_names_array[j]);
+										stringConcat((char *)WatchTextSpace[j],(char*)snagwatch_names_array[j],": NOT SPAWNED");
 									}
 								} else {
-									dk_strFormat((char *)WatchTextSpace[j], "%s: WRONG MAP",snagwatch_names_array[j]);
+									stringConcat((char *)WatchTextSpace[j],(char*)snagwatch_names_array[j],": WRONG MAP");
 									colorWatch(0xFF,0xFF,0xFF,j);
 								}
 							}
@@ -939,7 +963,7 @@ void handleWatch(void) {
 						// Phasewalk Assistant
 						{
 							if ((watch_cache_array[j][1] != PhaseChecker.reason_code) || (watch_cache_array[j][0] != 16)) {
-								dk_strFormat((char *)WatchTextSpace[j], "PWALK: %s",phasereason_list[(int)PhaseChecker.reason_code]);
+								stringConcat((char *)WatchTextSpace[j],"PWALK: ",(char*)phasereason_list[(int)PhaseChecker.reason_code]);
 							}
 							watch_cache_array[j][0] = 16;
 							watch_cache_array[j][1] = PhaseChecker.reason_code;

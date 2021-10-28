@@ -102,7 +102,7 @@ void analyzeInputs(void) {
 				}
 			}
 			if (phase_initiated == 0) {
-				TestVariable = (int)&phaseass_input_list;
+				phasePointer = (int*)phaseass_input_list[14];
 				if (NewlyPressedControllerInput.Buttons & C_Up) {
 					phase_initiated = 1;
 					PhaseChecker.previousMagnitude = 255; // High value to cover off low mag diff reasoning
@@ -185,7 +185,7 @@ void analyzeInputs(void) {
 							PhaseChecker.reason_code = 10;
 							phase_initiated = 0;
 						} else {
-							if ((Player->hSpeed < 70) && (phase_accelerated == 0)) {
+							if ((Player->hSpeed < 80) && (phase_accelerated == 0)) {
 								PhaseChecker.reason_code = 2;
 								phase_initiated = 0;
 							} else {

@@ -99,25 +99,15 @@ void hideRacePosition(int show) {
 		if (Player) {
 			race_vehicle* vehicle = (race_vehicle*)Player->vehicle_actor_pointer;
 			if (vehicle) {
-				TestVariable = (int)vehicle;
-				// if (CurrentMap == 0xE) {
-					// race_controller* controller = vehicle->controller;
-					// if (controller) {
-					// 	if (isRDRAM(controller)) {
-					// 		controller->control_byte = show * 2;
-					// 	}
-					// }
-				// } else {
-					vehicle_paad* paad = vehicle->paad;
-					if (paad) {
-						race_controller* controller = paad->controller;
-						if (controller) {
-							if (isRDRAM(controller)) {
-								controller->control_byte = show * control_value[in_race];
-							}
+				vehicle_paad* paad = vehicle->paad;
+				if (paad) {
+					race_controller* controller = paad->controller;
+					if (controller) {
+						if (isRDRAM(controller)) {
+							controller->control_byte = show * control_value[in_race];
 						}
 					}
-				//}
+				}
 			}
 		}
 	}

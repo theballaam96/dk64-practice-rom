@@ -73,7 +73,6 @@ void openFileStateGlitchlessMenu(void) {
 void portFileStateToMemory(int state_index) {
 	unsigned int _start = FileStatesROMStart + (state_index * FileStateSize);
 	filestateInfo* copy_space = dk_malloc(FileStateSize);
-	TestVariable = (int)copy_space;
 	int* file_size;
 	*(int*)(&file_size) = FileStateSize;
 	//copyFromROM(_start,copy_space,&file_size,0,0,0,1);
