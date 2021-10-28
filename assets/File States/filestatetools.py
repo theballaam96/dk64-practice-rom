@@ -46,5 +46,17 @@ def setFlag(file,byte,bit):
 		fh.write(bytearray([(val | andi)]))
 		print("Written " + hex(byte) + ">" + str(bit))
 
-#print(hex(checkFlag("./101/RAM Dump/fungi.bin",0x4D,2)))
-#setFlag("./101/RAM Dump/fungi.bin",0x4D,2);
+def clearFlag(file,byte,bit):
+	with open(file,"r+b") as fh:
+		fba = getFlagBlockAddress(file);
+		print(hex(fba))
+		fh.seek(fba + byte)
+		val = bytereadToInt(fh.read(1))
+		andi = 1 << bit;
+		fh.seek(fba + byte)
+		fh.write(bytearray([(val & (0xFF - andi))]))
+		print("Wiped " + hex(byte) + ">" + str(bit))
+
+
+print(hex(checkFlag("./Glitchless/RAM Dump/helm.bin",0x4D,1)))
+clearFlag("./Glitchless/RAM Dump/helm.bin",0x4D,1);

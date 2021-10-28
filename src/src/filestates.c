@@ -6,6 +6,7 @@ static const char filestates_general[] = "General";
 static const char filestates_101org[] = "Organic Route";
 static const char filestates_101jfm[] = "Japes for Moves Route";
 static const char filestates_101ffm[] = "Factory for Moves Route";
+static const char filestates_glitchless[] = "Glitchless Any%";
 
 static const char state_text_japes[] = "Japes";
 static const char state_text_japes1[] = "Japes 1";
@@ -31,7 +32,11 @@ static const char filestates_nle_stateindex[] = {0,1,2,3,4,5,6,7,8,9};
 static const char filestates_101org_stateindex[] = {11,12,13,14,15,16,17,18,19,20,21};
 static const char filestates_101jfm_stateindex[] = {22,23,24,25,26,27,28,29,30,21};
 static const char filestates_101ffm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+static const char filestates_glitchless_stateindex[] = {31,32,33,34,35,36,37,38,39};
 static const char filestates_general_stateindex[] = {10};
+
+static char load_filestate_vars = 0;
+static short filestate_floor = 0;
 
 void openFileStateMainMenu(void) {
 	changeMenu(35);
@@ -61,6 +66,10 @@ void openFileState101FFMMenu(void) {
 	changeMenu(41);
 }
 
+void openFileStateGlitchlessMenu(void) {
+	changeMenu(89);
+}
+
 void portFileStateToMemory(int state_index) {
 	unsigned int _start = FileStatesROMStart + (state_index * FileStateSize);
 	filestateInfo* copy_space = dk_malloc(FileStateSize);
@@ -85,14 +94,25 @@ void portFileStateToMemory(int state_index) {
 		_character = copy_space->kong;
 		initiateTransition(_map,0);
 		setWarpPosition((float)copy_space->xPos,(float)copy_space->yPos,(float)copy_space->zPos);
+		filestate_floor = copy_space->yPos;
 	} else {
 		initiateTransition(_map,0);
 	}
+	load_filestate_vars = 1;
 	Character = _character;
 	__osWritebackDCache(copy_space, FileStateSize);
 	__osInvalICache(copy_space, FileStateSize);
 	__osInvalDCache(copy_space, FileStateSize);
 	dk_free(copy_space);
+}
+
+void fileStateMapLoadVars(void) {
+	if ((ObjectModel2Timer == 2) && (TransitionSpeed < 0) && (load_filestate_vars)) {
+		if (Player) {
+			Player->floor = filestate_floor;
+			load_filestate_vars = 0;
+		}
+	}
 }
 
 void loadFileState(void) {
@@ -118,6 +138,9 @@ void loadFileState(void) {
 		case 41:
 			// 101% FFM Route
 			_stateindex = filestates_101ffm_stateindex[_position];
+			break;
+		case 89:
+			_stateindex = filestates_glitchless_stateindex[_position];
 		break;
 	}
 	if (_stateindex > -1) {
@@ -140,18 +163,20 @@ static const char* filestates_main_array[] = {
 	filestates_general,
 	filestates_nle,
 	filestates_101,
+	filestates_glitchless,
 };
 
 static const int filestates_main_functions[] = {
 	(int)&openFileStateGeneralMenu,
 	(int)&openFileStateNLEMenu,
 	(int)&openFileState101MainMenu,
+	(int)&openFileStateGlitchlessMenu,
 };
 
 const Screen filestates_main_struct = {
 	.TextArray = (int*)filestates_main_array,
 	.FunctionArray = filestates_main_functions,
-	.ArrayItems = 3, // Would be 3, waiting on 101% states
+	.ArrayItems = 4,
 	.ParentScreen = 0,
 	.ParentPosition = 6
 };
@@ -328,4 +353,36 @@ const Screen filestates_101ffm_struct = {
 	.ArrayItems = 10,
 	.ParentScreen = 37,
 	.ParentPosition = 2
+};
+
+static const char* filestates_glitchless_array[] = {
+	state_text_japes1,
+	state_text_aztec,
+	state_text_factory,
+	state_text_japes2,
+	state_text_galleon,
+	state_text_fungi,
+	state_text_caves,
+	state_text_castle,
+	state_text_helm
+};
+
+static const int filestates_glitchless_functions[] = {
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates
+};
+
+const Screen filestates_glitchless_struct = {
+	.TextArray = (int*)filestates_glitchless_array,
+	.FunctionArray = filestates_glitchless_functions,
+	.ArrayItems = 9,
+	.ParentScreen = 37,
+	.ParentPosition = 3
 };

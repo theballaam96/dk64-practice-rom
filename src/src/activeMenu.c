@@ -125,6 +125,7 @@ const Screen* menu_screens[] = {
 	&instruction_struct,
 	&testinfo_struct,
 	&forcespawn_struct,
+	&filestates_glitchless_struct,
 };
 
 void spawnMenu(int screenIndex) {
@@ -213,6 +214,7 @@ void wipeText(void) {
 void closeMenu(void) {
 	clearMenu();
 	wipeText();
+	hideRacePosition(1);
 	ClosingMenu = 1;
 }
 

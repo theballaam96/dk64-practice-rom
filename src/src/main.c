@@ -17,6 +17,7 @@ void cFuncLoop(void) {
 			runTest(); // Active Menu Open
 			toggleSelectedActor(); // Active Menu Open
 			hideHUD();
+			hideRacePosition(0);
 		} else {
 			if (ClosingMenu == 0) {
 				levitate(); // Active Menu Closed
@@ -39,6 +40,7 @@ void cFuncLoop(void) {
 			clampWatchFloats(); // Active Menu Closed, Watch Present
 			controlWatchView(); // Watches Open
 			hideHUD();
+			hideRacePosition(0);
 		}
 		toggleMenu(); // Constant
 	}
@@ -69,8 +71,9 @@ void cFuncLoop(void) {
 	initHack(); // Map == 0x28
 	shorthandSavestate(); // Constant
 	ramViewUpdate(); // RAM Viewer Open
-	if (LoadVarsOnMapLoad) {
+	if (TransitionSpeed < 0) {
 		savestateLoadMapLoadVars(); // LoadVarsOnMapLoad
+		fileStateMapLoadVars();
 	}
 	if (ShowSavePrompts) {
 		displaySavePrompt(); // ShowSavePrompts

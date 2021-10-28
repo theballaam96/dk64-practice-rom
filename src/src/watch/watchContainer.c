@@ -328,6 +328,7 @@ void clearAllWatches(void) {
 	}
 	FairyViewerOpen = 0;
 	closeOverlay();
+	hideRacePosition(1);
 	for (int i = 0; i < WatchCount; i++) {
 		destroyWatch(i);
 		WatchIndex[i] = 0;
@@ -363,6 +364,7 @@ void setWatch(void) {
 	if (index_already_spawned) {
 		destroyWatch(i);
 		WatchIndex[i] = 0;
+		hideRacePosition(1);
 	} else {
 		i = 0;
 		while (i < WatchCount) {

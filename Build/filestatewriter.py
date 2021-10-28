@@ -52,6 +52,20 @@ state_files = [
 			"aztec2_jfm.bin",
 			"caves_jfm.bin",
 		]
+	},
+	{
+		"folder": "Glitchless",
+		"files": [
+			"japes1.bin",
+			"aztec.bin",
+			"factory.bin",
+			"japes2.bin",
+			"galleon.bin",
+			"fungi.bin",
+			"caves.bin",
+			"castle.bin",
+			"helm.bin",
+		]
 	}
 ]
 
@@ -130,6 +144,8 @@ for x in state_files:
 	dump_dir = file_dir_start + x["folder"] + "/RAM Dump/"
 	for y in x["files"]:
 		#print(file_dir + y)
+		if not os.path.exists(state_dir):
+			os.mkdir(state_dir)
 		if os.path.exists(state_dir + y):
 			os.remove(state_dir + y);
 		grabFileState(dump_dir + y, state_dir + y);

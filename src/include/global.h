@@ -21,6 +21,7 @@ extern void defineRAMViewerParameters(int* start, int* end, int source);
 extern int isRDRAM(void* address);
 extern int pm64ReadFromROM(int rom_start, int rom_end, void* write_location);
 extern void setWarpPosition(float x, float y, float z);
+extern void hideRacePosition(int show);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);
@@ -115,6 +116,7 @@ extern void shorthandSavestate(void);
 extern void initRamViewerTab(void);
 extern void ramViewUpdate(void);
 extern void savestateLoadMapLoadVars(void);
+extern void fileStateMapLoadVars(void);
 extern void changeCustomFlagVariable(void);
 extern void LToCancelCS(void);
 extern void displaySavePrompt(void);
@@ -253,6 +255,7 @@ extern Screen flaglog_struct;
 extern const Screen instruction_struct;
 extern const Screen testinfo_struct;
 extern const Screen forcespawn_struct;
+extern const Screen filestates_glitchless_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];
