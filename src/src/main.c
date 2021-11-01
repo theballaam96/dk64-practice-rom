@@ -74,6 +74,7 @@ void cFuncLoop(void) {
 	if (TransitionSpeed < 0) {
 		savestateLoadMapLoadVars(); // LoadVarsOnMapLoad
 		fileStateMapLoadVars();
+		loadMapVars_0();
 	}
 	if (ShowSavePrompts) {
 		displaySavePrompt(); // ShowSavePrompts

@@ -250,6 +250,9 @@ static const char* watch_assist_array[] = {
 	change_fairy,
 };
 
+static char float_str[22] = {};
+static float test_floats[2] = {};
+
 void openWatchMenu(void) {
 	changeMenu(12);
 };
@@ -594,6 +597,70 @@ void stringConcat(char* dest,char* str1,char* str2) {
 	dest[offset++] = 0;
 }
 
+void reverse(char* str, int len) {
+	int i = 0, j = len - 1, temp;
+	while (i < j) {
+		temp = str[i];
+		str[i] = str[j];
+		str[j] = temp;
+		i++;
+		j--;
+	}
+}
+
+int intToStr(int x, char str[], int digits) {
+	int i = 0;
+	while (x) {
+		str[i++] = (x % 10) + 0x30;
+		x /= 10;
+	}
+	// If num digits is more, add 0s at beginning
+	while (i < digits) {
+		str[i++] = 0x30;
+	}
+	reverse(str,i);
+	str[i] = 0;
+	return i;
+}
+
+void floatToString(float flt, char* res, int precision) {
+	// Extract integer part
+	int ipart = (int)(flt + 0);
+
+	// Extract floating part
+	float fpart = (flt + 0) - (float)ipart;
+	// test_floats[0] = flt;
+	// test_floats[1] = fpart;
+	// TestVariable = (int)&test_floats;
+
+	// convert int to string
+	int i = intToStr(ipart, res, 1);
+	int pow = 1;
+
+	if (precision != 0) {
+		for (int k = 0; k < precision; k++) {
+			pow *= 10;
+		}
+		res[i] = 0x2E;
+		fpart *= pow;
+		intToStr((int)fpart, res + i + 1, precision);
+	}
+}
+
+typedef enum format_mode {
+	FLOAT_TYPE,
+	INT_TYPE,
+} format_mode;
+
+void headerFormatter(char* header, float _fval, int _ival, format_mode mode, int watch_index) {
+	if (mode == 0) {
+		floatToString(_fval,float_str,Precision);
+	} else {
+		intToStr(_ival,float_str,0);
+	}
+	stringConcat((char*)WatchTextSpace[watch_index],header,float_str);
+}
+
 void handleWatch(void) {
 	float _KRoolTimerX = 125;
 	char watch_present = 0;
@@ -609,7 +676,8 @@ void handleWatch(void) {
 						{
 							// Lag
 							if ((watch_cache_array[j][1] != StoredLag) || (watch_cache_array[j][0] != 1)) {
-								dk_strFormat((char *)WatchTextSpace[j],"LAG: %d",StoredLag);
+								headerFormatter("LAG: ",0,StoredLag,INT_TYPE,j);
+								//dk_strFormat((char *)WatchTextSpace[j],"LAG: %d",StoredLag);
 							}
 							watch_cache_array[j][0] = 1;
 							watch_cache_array[j][1] = StoredLag;
@@ -624,7 +692,10 @@ void handleWatch(void) {
 							}
 							AverageLag = (float)(_lagsum) / 16;
 							if ((watch_cache_array[j][1] != _lagsum) || (watch_cache_array[j][0] != 2)) {
-								dk_strFormat((char *)WatchTextSpace[j],"AVERAGE LAG: %f",AverageLag);
+								headerFormatter("AVERAGE LAG: ",AverageLag,0,FLOAT_TYPE,j);
+								// floatToString(AverageLag,float_str,Precision);
+								// stringConcat((char *)WatchTextSpace[j],"AVERAGE LAG: ",float_str);
+								//dk_strFormat((char *)WatchTextSpace[j],"AVERAGE LAG: %f",AverageLag);
 							}
 							watch_cache_array[j][0] = 2;
 							watch_cache_array[j][1] = _lagsum;
@@ -644,7 +715,7 @@ void handleWatch(void) {
 								}
 							}
 							if ((watch_cache_slotf[j] != _speed) || (watch_cache_array[j][0] != 3)) {
-								dk_strFormat((char *)WatchTextSpace[j],"SPEED: %f",_speed);
+								headerFormatter("SPEED: ",_speed,0,FLOAT_TYPE,j);
 							}
 							watch_cache_array[j][0] = 3;
 							watch_cache_slotf[j] = _speed;
@@ -682,7 +753,7 @@ void handleWatch(void) {
 									}
 								}
 								if ((watch_cache_array[j][1] != GiantKoshaTimerValue) || (watch_cache_array[j][0] != 5)) {
-									dk_strFormat((char *)WatchTextSpace[j],"KOSHA TIMER: %d",GiantKoshaTimerValue);
+									headerFormatter("KOSHA TIMER: ",0,GiantKoshaTimerValue,INT_TYPE,j);
 								}
 								watch_cache_array[j][0] = 5;
 								watch_cache_array[j][1] = GiantKoshaTimerValue;
@@ -739,7 +810,7 @@ void handleWatch(void) {
 								_angle = Player->facing_angle % 4096;
 								_angle = (_angle / 4096) * 360;
 								if ((watch_cache_array[j][1] != Player->facing_angle) || (watch_cache_array[j][0] != 7)) {
-									dk_strFormat((char *)WatchTextSpace[j],"ANGLE: %f",_angle);
+									headerFormatter("ANGLE: ",_angle,0,FLOAT_TYPE,j);
 								}
 								watch_cache_array[j][0] = 7;
 								watch_cache_array[j][1] = Player->facing_angle;
@@ -763,7 +834,7 @@ void handleWatch(void) {
 										colorWatch(0xFF,0x45,0x00,j);
 									}
 									if ((watch_cache_array[j][1] != held_actor_index) || (watch_cache_array[j][0] != 9)) {
-										dk_strFormat((char *)WatchTextSpace[j],"HELD ACTOR: %d",held_actor_index);
+										headerFormatter("HELD ACTOR: ",0,held_actor_index,INT_TYPE,j);
 									}
 									watch_cache_array[j][0] = 9;
 									watch_cache_array[j][1] = held_actor_index;
@@ -834,6 +905,12 @@ void handleWatch(void) {
 								_z = Player->zPos;
 							}
 							if (((watch_cache_array[j][1] != _x) || (watch_cache_array[j][2] != _y) || (watch_cache_array[j][3] != _z)) || (watch_cache_array[j][0] != 11)) {
+								// intToStr(_x,float_str,0);
+								// stringConcat((char*)WatchTextSpace[j],"POSITION",float_str);
+								// intToStr(_y,float_str,0);
+								// stringConcat((char*)WatchTextSpace[j],(char*)WatchTextSpace[j],float_str);
+								// intToStr(_z,float_str,0);
+								// stringConcat((char*)WatchTextSpace[j],(char*)WatchTextSpace[j],float_str);
 								dk_strFormat((char *)WatchTextSpace[j], "POSITION: %d, %d, %d",_x,_y,_z);
 							}
 							watch_cache_array[j][0] = 11;
@@ -895,7 +972,7 @@ void handleWatch(void) {
 								_floor = Player->floor;
 							}
 							if ((watch_cache_slotf[j] != _floor) || (watch_cache_array[j][0] != 14)) {
-								dk_strFormat((char *)WatchTextSpace[j], "FLOOR: %f",_floor);
+								headerFormatter("FLOOR: ",_floor,0,FLOAT_TYPE,j);
 							}
 							watch_cache_array[j][0] = 14;
 							watch_cache_slotf[j] = _floor;
@@ -979,7 +1056,7 @@ void handleWatch(void) {
 							}
 							_avgspd = (float)(_spdsum) / 64;
 							if ((watch_cache_array[j][1] != _spdsum) || (watch_cache_array[j][0] != 17)) {
-								dk_strFormat((char *)WatchTextSpace[j],"AVERAGE SPEED: %f",_avgspd);
+								headerFormatter("AVERAGE SPEED: ",_avgspd,0,FLOAT_TYPE,j);
 							}
 							watch_cache_array[j][0] = 17;
 							watch_cache_array[j][1] = _spdsum;

@@ -148,6 +148,7 @@ extern void writeFlagsToLog(void);
 extern void destroyViewerOnTransition(void);
 extern void controlFairyViewer(void);
 extern void toggleSelectedActor(void);
+extern void loadMapVars_0(void);
 //extern void correctTagCode(void);
 
 extern void toggleArcadeMenu(void);
