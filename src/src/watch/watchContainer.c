@@ -251,7 +251,7 @@ static const char* watch_assist_array[] = {
 };
 
 static char float_str[22] = {};
-static float test_floats[2] = {};
+//static float test_floats[2] = {};
 
 void openWatchMenu(void) {
 	changeMenu(12);
