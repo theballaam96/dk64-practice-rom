@@ -25,6 +25,8 @@ static const char mapGalleon5DSChunky[] = "Five Door Ship: Chunky";
 static const char mapGalleon2DSLanky[] = "Two Door Ship: Lanky";
 static const char mapGalleon2DSTiny[] = "Two Door Ship: Tiny";
 
+static const char mapGalleonCrown[] = "More Kritter Karnage";
+
 void openGalleonMainMenu(void) {
 	changeMenu(10);
 }
@@ -36,6 +38,7 @@ void openGalleonShipsMenu(void) {
 static const unsigned char galleon_destmap[] = {
 	0x0, // Null for main map
 	0x6F, // Pufftoss
+	0x9C, // Crown
 	0x36, // BBlast
 	0x1F, // Seasick Ship
 	0x31, // Lighthouse
@@ -50,6 +53,7 @@ static const unsigned char galleon_destmap[] = {
 static const unsigned char galleon_destexit[] = {
 	0x0, // Null for main map
 	0x0, // Pufftoss
+	0x0, // Crown
 	0x0, // BBlast
 	0x0, // Seasick Ship
 	0x0, // Lighthouse
@@ -70,6 +74,7 @@ const MapWarp map_galleon_struct = {
 static const char* galleon_mapwarp_array[] = {
 	mapGalleonMain,
 	mapGalleonPufftoss,
+	mapGalleonCrown,
 	mapGalleonBBlast,
 	mapGalleonSeasick,
 	mapGalleonLighthouse,
@@ -90,6 +95,7 @@ static const int galleon_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&openGalleonShipsMenu,
 	(int)&warpToMap,
 	(int)&warpToMap
@@ -98,7 +104,7 @@ static const int galleon_mapwarp_functions[] = {
 const Screen galleon_mapwarp_struct = {
 	.TextArray = (int*)galleon_mapwarp_array,
 	.FunctionArray = galleon_mapwarp_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 12,
 	.ParentScreen = 1,
 	.ParentPosition = 3
 };

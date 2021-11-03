@@ -16,6 +16,7 @@ static const char mapAztec5DTDiddy[] = "Five Door Temple: Diddy";
 static const char mapAztec5DTLanky[] = "Five Door Temple: Lanky";
 static const char mapAztec5DTTiny[] = "Five Door Temple: Tiny";
 static const char mapAztec5DTChunky[] = "Five Door Temple: Chunky";
+static const char mapAztecCrown[] = "Kritter Karnage";
 
 void openAztecMainMenu(void) {
 	changeMenu(5);
@@ -28,6 +29,7 @@ void openAztec5DTMenu(void) {
 static const unsigned char aztec_destmap[] = {
 	0x0, // Null for main map
 	0xC5, // Dogadon 1
+	0x49, // Crown
 	0x29, // BBlast
 	0xE, // Beetle Slide
 	0x0, // Null for 5DTs
@@ -38,6 +40,7 @@ static const unsigned char aztec_destmap[] = {
 static const unsigned char aztec_destexit[] = {
 	0x0, // Null for main map
 	0x0, // Dogadon 1
+	0x0, // Crown
 	0x0, // BBlast
 	0x0, // Beetle Slide
 	0x0, // Null for 5DTs
@@ -54,6 +57,7 @@ const MapWarp map_aztec_struct = {
 static const char* aztec_mapwarp_array[] = {
 	mapAztecMain,
 	mapAztecDog,
+	mapAztecCrown,
 	mapAztecBBlast,
 	mapAztecBeetle,
 	mapAztec5DTs,
@@ -66,6 +70,7 @@ static const int aztec_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&openAztec5DTMenu,
 	(int)&warpToMap,
 	(int)&warpToMap
@@ -74,7 +79,7 @@ static const int aztec_mapwarp_functions[] = {
 const Screen aztec_mapwarp_struct = {
 	.TextArray = (int*)aztec_mapwarp_array,
 	.FunctionArray = aztec_mapwarp_functions,
-	.ArrayItems = 7,
+	.ArrayItems = 8,
 	.ParentScreen = 1,
 	.ParentPosition = 1
 };

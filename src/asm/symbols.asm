@@ -53,6 +53,8 @@
 .definelabel __osDisableInt, 0x80009020
 .definelabel __osRestoreInt, 0x80009040
 .definelabel copyFunc, 0x805FB750
+.definelabel getMapData, 0x8066B0F8
+.definelabel loadSetup, 0x806886E0
 
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
@@ -161,6 +163,10 @@
 .definelabel stickX_interpretted, 0x807FD63E
 .definelabel stickY_interpretted, 0x807FD63F
 .definelabel preventSongPlaying, 0x80745650
+.definelabel parentDataCount, 0x807F5A68
+.definelabel parentData, 0x8076A160
+.definelabel SetupFilePointer, 0x807F6010
+.definelabel focusedParentDataSetup, 0x807F5A70
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8

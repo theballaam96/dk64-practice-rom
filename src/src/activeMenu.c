@@ -126,6 +126,16 @@ const Screen* menu_screens[] = {
 	&testinfo_struct,
 	&forcespawn_struct,
 	&filestates_glitchless_struct,
+	&bonusmain_mapwarp_struct,
+	&bonusjapes_mapwarp_struct,
+	&bonusaztec_mapwarp_struct,
+	&bonusfactory_mapwarp_struct,
+	&bonusgalleon_mapwarp_struct,
+	&bonusfungi_mapwarp_struct,
+	&bonuscaves_mapwarp_struct,
+	&bonuscastle_mapwarp_struct,
+	&bonushelm_mapwarp_struct,
+	&bonusisles_mapwarp_struct,
 };
 
 void spawnMenu(int screenIndex) {

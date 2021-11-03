@@ -742,3 +742,57 @@ typedef enum console {
     WIIU,
     EMULATOR,
 } console;
+
+typedef enum data_indexes {
+	Music_MIDI,
+	Map_Geometry,
+	Map_Walls,
+	Map_Floors,
+	ModelTwo_Geometry,
+	Actor_Geometry,
+	Unk06,
+	Textures_Uncompressed,
+	Cutscenes,
+	Map_Setups,
+	Map_Object_Scripts,
+	Animations,
+	Text,
+	Unk0D,
+	Textures,
+	Map_Paths,
+	Map_Character_Spawners,
+	Unk11,
+	Map_Loading_Zones,
+	Unk13,
+	Unk14,
+	Map_Autowalks,
+	Unk16,
+	Map_Exits,
+	Map_Race_Checkpoints,
+	Textures_2,
+	Uncompressed_File_Sizes,
+	Unk1B,
+	Unk1C,
+	Unk1D,
+	Unk1E,
+	Unk1F,
+	Unk20,
+} data_indexes;
+
+typedef enum load_modes {
+	SAVESTATE,
+	MAPWARP,
+} load_modes;
+
+typedef struct parentMaps {
+	/* 0x000 */ char in_submap;
+	/* 0x001 */ char unk_01;
+	/* 0x002 */ unsigned short transition_properties_bitfield;
+	/* 0x004 */ floatPos positions;
+	/* 0x010 */ short facing_angle;
+	/* 0x012 */ short map;
+	/* 0x014 */ unsigned char exit;
+	/* 0x015 */ char unk_15[0x18-0x15];
+	/* 0x018 */ void* setup_pointer;
+	/* 0x01C */ char unk_1C[0xC0-0x1C];
+} parentMaps;

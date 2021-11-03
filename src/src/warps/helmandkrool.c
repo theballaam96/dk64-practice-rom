@@ -8,11 +8,13 @@ static const char mapRoolDiddy[] = "K. Rool: Diddy Phase";
 static const char mapRoolLanky[] = "K. Rool: Lanky Phase";
 static const char mapRoolTiny[] = "K. Rool: Tiny Phase";
 static const char mapRoolChunky[] = "K. Rool: Chunky Phase";
+static const char mapHelmCrown[] = "Shockwave Showdown";
 
 static const unsigned char helmrool_destmap[] = {
 	0x11, // Helm Entrance
 	0x11, // Helm BoM Room
 	0x11, // Helm Navigation Room
+	0xA2, // Helm Crown
 	0xCB, // DK Phase
 	0xCC, // Diddy Phase
 	0xCD, // Lanky Phase
@@ -24,6 +26,7 @@ static const unsigned char helmrool_destexit[] = {
 	0x0, // Helm Entrance
 	0x3, // Helm BoM Room
 	0x4, // Helm Navigation Room
+	0x0, // Helm Crown
 	0x0, // DK Phase
 	0x0, // Diddy Phase
 	0x0, // Lanky Phase
@@ -41,6 +44,7 @@ static const char* helmrool_mapwarp_array[] = {
 	mapHelmEntrance,
 	mapHelmBoMRoom,
 	mapHelmNavigationRoom,
+	mapHelmCrown,
 	mapRoolDK,
 	mapRoolDiddy,
 	mapRoolLanky,
@@ -56,13 +60,14 @@ static const int helmrool_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&warpToMap
 };
 
 const Screen helmrool_mapwarp_struct = {
 	.TextArray = (int*)helmrool_mapwarp_array,
 	.FunctionArray = helmrool_mapwarp_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = 1,
 	.ParentPosition = 7
 };

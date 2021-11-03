@@ -29,6 +29,8 @@ static const char mapCaves5DILanky[] = "Five Door Igloo: Lanky";
 static const char mapCaves5DITiny[] = "Five Door Igloo: Tiny";
 static const char mapCaves5DIChunky[] = "Five Door Igloo: Chunky";
 
+static const char mapCavesCrown[] = "Plinth Panic";
+
 void openCavesMainMenu(void) {
 	changeMenu(18);
 }
@@ -44,6 +46,7 @@ void openCaves5DIMenu(void) {
 static const unsigned char caves_destmap[] = {
 	0x0, // Null for main map
 	0xC4, // Dillo 2
+	0xA0, // Crown
 	0xBA, // BBlast
 	0x52, // Beetle Race
 	0x0, // Null for 5DCs
@@ -56,6 +59,7 @@ static const unsigned char caves_destmap[] = {
 static const unsigned char caves_destexit[] = {
 	0x0, // Null for main map
 	0x0, // Dillo 2
+	0x0, // Crown
 	0x0, // BBlast
 	0x0, // Beetle Race
 	0x0, // Null for 5DCs
@@ -74,6 +78,7 @@ const MapWarp map_caves_struct = {
 static const char* caves_mapwarp_array[] = {
 	mapCavesMain,
 	mapCavesDillo,
+	mapCavesCrown,
 	mapCavesBBlast,
 	mapCavesBeetleRace,
 	mapCaves5DCs,
@@ -88,6 +93,7 @@ static const int caves_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&openCaves5DCMenu,
 	(int)&openCaves5DIMenu,
 	(int)&warpToMap,
@@ -98,7 +104,7 @@ static const int caves_mapwarp_functions[] = {
 const Screen caves_mapwarp_struct = {
 	.TextArray = (int*)caves_mapwarp_array,
 	.FunctionArray = caves_mapwarp_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 1,
 	.ParentPosition = 5
 };

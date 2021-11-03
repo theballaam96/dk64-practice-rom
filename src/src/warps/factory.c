@@ -15,6 +15,7 @@ static const char mapFactoryProduction[] = "Production Room";
 static const char mapFactoryRnD[] = "R&D";
 static const char mapFactorySnides[] = "Snide's Room";
 static const char mapFactoryStorageRoom[] = "Storage Room";
+static const char mapFactoryCrown[] = "Arena Ambush";
 
 void openFactoryMainMenu(void) {
 	changeMenu(8);
@@ -23,6 +24,7 @@ void openFactoryMainMenu(void) {
 static const unsigned char factory_destmap[] = {
 	0x00, // Null for main map
 	0x9A, // Mad Jack
+	0x9B, // Crown
 	0x6E, // BBlast
 	0x1B, // Car Race
 	0x24, // Crusher Room
@@ -32,6 +34,7 @@ static const unsigned char factory_destmap[] = {
 static const unsigned char factory_destexit[] = {
 	0x0, // Null for main map
 	0x0, // Mad Jack
+	0x0, // Crown
 	0x0, // BBlast
 	0x0, // Car Race
 	0x0, // Crusher Room
@@ -47,6 +50,7 @@ const MapWarp map_factory_struct = {
 static const char* factory_mapwarp_array[] = {
 	mapFactoryMain,
 	mapFactoryJack,
+	mapFactoryCrown,
 	mapFactoryBBlast,
 	mapFactoryCarRace,
 	mapFactoryCrusher,
@@ -59,13 +63,14 @@ static const int factory_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&warpToMap
 };
 
 const Screen factory_mapwarp_struct = {
 	.TextArray = (int*)factory_mapwarp_array,
 	.FunctionArray = factory_mapwarp_functions,
-	.ArrayItems = 6,
+	.ArrayItems = 7,
 	.ParentScreen = 1,
 	.ParentPosition = 2
 };

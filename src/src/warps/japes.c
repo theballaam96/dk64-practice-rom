@@ -14,6 +14,7 @@ static const char mapJapesRiverLow[] = "Lower River";
 static const char mapJapesRiverHigh[] = "Upper River";
 static const char mapJapesStorm[] = "Storm Area";
 static const char mapJapesZinger[] = "Zinger Area";
+static const char mapJapesCrown[] = "Beaver Brawl";
 
 void openJapesMainMenu(void) {
 	changeMenu(3);
@@ -22,6 +23,7 @@ void openJapesMainMenu(void) {
 static const unsigned char japes_destmap[] = {
 	0x0, // Null for main map
 	0x8, // Dillo 1
+	0x35, // Crown
 	0x25, // BBlast
 	0x6, // Minecart
 	0x4, // Mountain
@@ -33,6 +35,7 @@ static const unsigned char japes_destmap[] = {
 static const unsigned char japes_destexit[] = {
 	0x0, // Null for main map
 	0x0, // Dillo 1
+	0x0, // Crown
 	0x0, // BBlast
 	0x0, // Minecart
 	0x0, // Mountain
@@ -50,6 +53,7 @@ const MapWarp map_japes_struct = {
 static const char* japes_mapwarp_array[] = {
 	mapJapesMain,
 	mapJapesDillo,
+	mapJapesCrown,
 	mapJapesBBlast,
 	mapJapesMinecart,
 	mapJapesMountain,
@@ -66,13 +70,14 @@ static const int japes_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&warpToMap
 };
 
 const Screen japes_mapwarp_struct = {
 	.TextArray = (int*)japes_mapwarp_array,
 	.FunctionArray = japes_mapwarp_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = 1,
 	.ParentPosition = 0
 };

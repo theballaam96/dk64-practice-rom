@@ -10,6 +10,7 @@ static const char mapCastle[] = "Creepy Castle";
 static const char mapHelmKRool[] = "Hideout Helm & K. Rool";
 static const char mapIsles[] = "DK Isles";
 static const char mapMisc[] = "Miscellaneous";
+static const char mapBonus[] = "Bonus Barrels";
 
 static const char* maps_container_array[] = {
 	mapJapes,
@@ -21,13 +22,14 @@ static const char* maps_container_array[] = {
 	mapCastle,
 	mapHelmKRool,
 	mapIsles,
-	mapMisc
+	mapMisc,
+	mapBonus
 };
 
 const Screen maps_container_struct = {
 	.TextArray = (int*)maps_container_array,
 	.FunctionArray = maps_container_functions,
-	.ArrayItems = 10,
+	.ArrayItems = 11,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };
@@ -52,7 +54,6 @@ void warpToMap(void) {
 				setPermFlag(0x17E);
 				int _map = warping_struct[i]->maps[(int)ActiveMenu.positionIndex];
 				int _exit = warping_struct[i]->exits[(int)ActiveMenu.positionIndex];
-				initiateTransition(_map,_exit);
 				if ((_map > 0xCA) && (_map < 0xD0)) {
 					Character = _map - 0xCB;
 					if (_map != 0xCD) {
@@ -60,7 +61,7 @@ void warpToMap(void) {
 					}
 				}
 				CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
-				handleMapWarping(_map, 0);
+				handleMapWarping(_map, _exit, 0, MAPWARP);
 			}
 		}
 	}

@@ -23,6 +23,9 @@ static const char mapIslesLobbyCaves[] = "Crystal Caves Lobby";
 static const char mapIslesLobbyCastle[] = "Creepy Castle Lobby";
 static const char mapIslesLobbyHelm[] = "Hideout Helm Lobby";
 
+static const char mapIslesCrown1[] = "Bish Bash Brawl";
+static const char mapIslesCrown2[] = "Forest Fracas";
+
 void openIslesMainMenu(void) {
 	changeMenu(28);
 }
@@ -33,6 +36,8 @@ void openIslesLobbyMenu(void) {
 
 static const unsigned char isles_destmap[] = {
 	0x0, // Null for overworld
+	0x9E, // Crown 1
+	0x9D, // Crown 2
 	0xBD, // Inside BFI
 	0x61, // K Lumsy
 	0x0, // Null for Lobbies
@@ -43,6 +48,8 @@ static const unsigned char isles_destmap[] = {
 
 static const unsigned char isles_destexit[] = {
 	0x0, // Null for overworld
+	0x0, // Crown 1
+	0x0, // Crown 2
 	0x0, // Inside BFI
 	0x0, // K Lumsy
 	0x0, // Null for Lobbies
@@ -59,6 +66,8 @@ const MapWarp map_isles_struct = {
 
 static const char* isles_mapwarp_array[] = {
 	mapIslesMain,
+	mapIslesCrown1,
+	mapIslesCrown2,
 	mapIslesBFI,
 	mapIslesKLumsy,
 	mapIslesLobbies,
@@ -71,6 +80,8 @@ static const int isles_mapwarp_functions[] = {
 	(int)&openIslesMainMenu,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&openIslesLobbyMenu,
 	(int)&warpToMap,
 	(int)&warpToMap,
@@ -80,7 +91,7 @@ static const int isles_mapwarp_functions[] = {
 const Screen isles_mapwarp_struct = {
 	.TextArray = (int*)isles_mapwarp_array,
 	.FunctionArray = isles_mapwarp_functions,
-	.ArrayItems = 7,
+	.ArrayItems = 9,
 	.ParentScreen = 1,
 	.ParentPosition = 8
 };

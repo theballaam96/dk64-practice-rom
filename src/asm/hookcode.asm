@@ -346,5 +346,47 @@ START_HOOK:
 		J 		0x806AD004
 		SW 		s0, 0x1C (sp)
 
+	loadSetupCode:
+		JAL 	0x80600080
+		LW 		a0, 0xA0A8 (a0)
+		LI 		at, -1
+		BEQ 	v0, at, loadSetupCode_Finish
+		ADDIU 	t6, r0, 0xC0
+		LUI 	at, hi(parentData)
+		ADDIU 	at, at, lo(parentData)
+		MULTU 	t6, v0
+		MFLO 	t6
+		ADDU 	at, at, t6
+		LBU 	t6, 0x0 (at)
+		ANDI 	t6, t6, 2
+		BEQZ 	t6, loadSetupCode_Finish
+		NOP
+		LI 		v0, -1
+
+		loadSetupCode_Finish:
+			J 		0x80688720
+			LI 		at, -1
+
+	resolveBonusBarrelCode:
+		JAL 	0x80600080
+		SWC1 	f12, 0x4c (sp)
+		LI 		at, -1
+		BEQ 	v0, at, resolveBonusBarrelCode_Finish
+		ADDIU 	a3, r0, 0xc0
+		LUI 	at, hi(parentData)
+		ADDIU 	at, at, lo(parentData)
+		MULTU 	v0, a3
+		MFLO 	a3
+		ADDU 	at, at, a3
+		LBU 	a3, 0x0 (at)
+		ANDI 	a3, a3, 2
+		BEQZ 	a3, resolveBonusBarrelCode_Finish
+		NOP
+		LI  	v0, -1
+
+		resolveBonusBarrelCode_Finish:
+			J 	0x80688D70
+			LI  at, -1
+
 .align 0x10
 END_HOOK:

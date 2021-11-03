@@ -30,6 +30,8 @@ static const char mapFungiMillFront[] = "Mill: Front";
 static const char mapFungiMillRear[] = "Mill: Rear";
 static const char mapFungiMillSpider[] = "Mill: Spider Boss";
 
+static const char mapFungiCrown[] = "Kamikaze Kremlings";
+
 void openFungiMainMenu(void) {
 	changeMenu(14);
 }
@@ -45,6 +47,7 @@ void openFungiMillsMenu(void) {
 static const unsigned char fungi_destmap[] = {
 	0x0, // Null for main map
 	0x53, // Dogadon 2
+	0x9F, // Crown
 	0x34, // Anthill
 	0xBC, // BBlast
 	0x3B, // Barn
@@ -59,6 +62,7 @@ static const unsigned char fungi_destmap[] = {
 static const unsigned char fungi_destexit[] = {
 	0x0, // Null for main map
 	0x0, // Dogadon 2
+	0x0, // Crown
 	0x0, // Anthill
 	0x0, // BBlast
 	0x0, // Barn
@@ -79,6 +83,7 @@ const MapWarp map_fungi_struct = {
 static const char* fungi_mapwarp_array[] = {
 	mapFungiMain,
 	mapFungiDogadon,
+	mapFungiCrown,
 	mapFungiAnthill,
 	mapFungiBBlast,
 	mapFungiBarn,
@@ -97,6 +102,7 @@ static const int fungi_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&openFungiGMushMenu,
 	(int)&warpToMap,
 	(int)&openFungiMillsMenu,
@@ -107,7 +113,7 @@ static const int fungi_mapwarp_functions[] = {
 const Screen fungi_mapwarp_struct = {
 	.TextArray = (int*)fungi_mapwarp_array,
 	.FunctionArray = fungi_mapwarp_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 12,
 	.ParentScreen = 1,
 	.ParentPosition = 4
 };

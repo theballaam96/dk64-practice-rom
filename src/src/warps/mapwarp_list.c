@@ -30,6 +30,15 @@ const MapWarp* warping_struct[] = {
 	&map_isleslobbies_struct,
 	&map_helmrool_struct,
 	&map_other_struct,
+	&map_bonusjapes_struct,
+	&map_bonusaztec_struct,
+	&map_bonusfactory_struct,
+	&map_bonusgalleon_struct,
+	&map_bonusfungi_struct,
+	&map_bonuscaves_struct,
+	&map_bonuscastle_struct,
+	&map_bonushelm_struct,
+	&map_bonusisles_struct,
 };
 
 const int maps_container_functions[] = {
@@ -43,4 +52,5 @@ const int maps_container_functions[] = {
 	(int)&openHelmRoolMenu,
 	(int)&openIslesMenu,
 	(int)&openOtherMapsMenu,
+	(int)&openBonusMainMenu,
 };

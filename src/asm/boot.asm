@@ -207,6 +207,12 @@ Pause97Hook:
 Pause343Hook:
 	J 	pauseMenu343Code
 	NOP
+LoadSetupHook:
+	J 	loadSetupCode
+	NOP
+ResolveBarrelHook:
+	J 	resolveBonusBarrelCode
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -277,6 +283,18 @@ loadExtraHooks:
 	LUI t4, 0x806B
 	SW 	t3, 0xCFFC (t4) // Store Hook
 	SW 	r0, 0xD000 (t4) // Store NOP 
+
+	LUI t3, hi(LoadSetupHook)
+	LW t3, lo(LoadSetupHook) (t3)
+	LUI t4, 0x8069
+	SW 	t3, 0x8714 (t4) // Store Hook
+	SW 	r0, 0x8718 (t4) // Store NOP 
+
+	LUI t3, hi(ResolveBarrelHook)
+	LW t3, lo(ResolveBarrelHook) (t3)
+	LUI t4, 0x8069
+	SW t3, 0x8D64 (t4) // Store Hook
+	SW r0, 0x8D68 (t4) // Store NOP
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

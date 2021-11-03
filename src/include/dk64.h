@@ -68,6 +68,8 @@ extern void __osPiRawReadIo(int a0, void* a1);
 extern int __osDisableInt();
 extern void __osRestoreInt(int mask);
 extern void copyFunc(int rom_offset, int size, void* write_location);
+extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, char compressbyte1);
+extern void loadSetup(void* setup_file, int unk0, int unk1);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -169,6 +171,10 @@ extern unsigned char levelIndexMapping[216];
 extern char stickX_interpretted;
 extern char stickY_interpretted;
 extern char preventSongPlaying;
+extern int parentDataCount;
+extern parentMaps parentData[17];
+extern void* SetupFilePointer;
+extern int* focusedParentDataSetup[17];
 
 extern char arcadeMap;
 extern char arcadeMode;

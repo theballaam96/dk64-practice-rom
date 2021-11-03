@@ -34,6 +34,8 @@ static const char mapCastleLibrary[] = "Library";
 static const char mapCastleMuseum[] = "Museum";
 static const char mapCastleWindTower[] = "Wind Tower";
 
+static const char mapCastleCrown[] = "Pinnacle Palaver";
+
 void openCastleMainMenu(void) {
 	changeMenu(22);
 }
@@ -57,6 +59,7 @@ void openCastleRoomsMenu(void) {
 static const unsigned char castle_destmap[] = {
 	0x00, // Null for main map
 	0xC7, // King Kut Out
+	0xA1, // Crown
 	0xBB, // BBlast
 	0xB9, // Car Race
 	0x00, // Null for Crypts
@@ -69,6 +72,7 @@ static const unsigned char castle_destmap[] = {
 static const unsigned char castle_destexit[] = {
 	0x00, // Null for main map
 	0x00, // King Kut Out
+	0x00, // Crown
 	0x00, // BBlast
 	0x00, // Car Race
 	0x00, // Null for Crypts
@@ -87,6 +91,7 @@ const MapWarp map_castle_struct = {
 static const char* castle_mapwarp_array[] = {
 	mapCastleMain,
 	mapCastleKutOut,
+	mapCastleCrown,
 	mapCastleBBlast,
 	mapCastleCarRace,
 	mapCastleCrypt,
@@ -101,6 +106,7 @@ static const int castle_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToMap,
 	(int)&openCastleCryptMenu,
 	(int)&warpToMap,
 	(int)&openCastleDungeonTunnelMenu,
@@ -111,7 +117,7 @@ static const int castle_mapwarp_functions[] = {
 const Screen castle_mapwarp_struct = {
 	.TextArray = (int*)castle_mapwarp_array,
 	.FunctionArray = castle_mapwarp_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 1,
 	.ParentPosition = 6
 };
