@@ -80,6 +80,17 @@ void openBonusIslesMenu(void) {
 	changeMenu(99);
 }
 
+void initMapWarpLast(void) {
+	setDataStates(0,0);
+	warpToMap();
+}
+
+void initMapWarpFirst(void) {
+	setDataStates(1,0);
+	warpToMap();
+	setDataStates(0,0);
+}
+
 static const char* bonusmain_mapwarp_array[] = {
 	mapBonusJapes,
 	mapBonusAztec,
@@ -144,10 +155,10 @@ static const char* bonusjapes_mapwarp_array[] = {
 };
 
 static const int bonusjapes_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonusjapes_mapwarp_struct = {
@@ -193,11 +204,11 @@ static const char* bonusaztec_mapwarp_array[] = {
 };
 
 static const int bonusaztec_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonusaztec_mapwarp_struct = {
@@ -243,11 +254,11 @@ static const char* bonusfactory_mapwarp_array[] = {
 };
 
 static const int bonusfactory_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonusfactory_mapwarp_struct = {
@@ -299,13 +310,13 @@ static const char* bonusgalleon_mapwarp_array[] = {
 };
 
 static const int bonusgalleon_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonusgalleon_mapwarp_struct = {
@@ -354,12 +365,12 @@ static const char* bonusfungi_mapwarp_array[] = {
 };
 
 static const int bonusfungi_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpFirst,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonusfungi_mapwarp_struct = {
@@ -402,10 +413,10 @@ static const char* bonuscaves_mapwarp_array[] = {
 };
 
 static const int bonuscaves_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonuscaves_mapwarp_struct = {
@@ -457,13 +468,13 @@ static const char* bonuscastle_mapwarp_array[] = {
 };
 
 static const int bonuscastle_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpFirst,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpFirst,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonuscastle_mapwarp_struct = {
@@ -524,16 +535,16 @@ static const char* bonushelm_mapwarp_array[] = {
 };
 
 static const int bonushelm_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonushelm_mapwarp_struct = {
@@ -579,11 +590,11 @@ static const char* bonusisles_mapwarp_array[] = {
 };
 
 static const int bonusisles_mapwarp_functions[] = {
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
-	(int)&warpToMap,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
 };
 
 const Screen bonusisles_mapwarp_struct = {

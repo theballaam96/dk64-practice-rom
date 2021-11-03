@@ -16,7 +16,8 @@ void cFuncLoop(void) {
 			shouldRefreshTOMenu(); // Active Menu Open
 			runTest(); // Active Menu Open
 			toggleSelectedActor(); // Active Menu Open
-			hideHUD();
+			//hideHUD();
+			customHideHUD();
 			hideRacePosition(0);
 		} else {
 			if (ClosingMenu == 0) {
@@ -39,7 +40,8 @@ void cFuncLoop(void) {
 			handleWatch(); // Active Menu Closed, Watch Present
 			clampWatchFloats(); // Active Menu Closed, Watch Present
 			controlWatchView(); // Watches Open
-			hideHUD();
+			//hideHUD();
+			customHideHUD();
 			handleTimer(); // Constant
 			hideRacePosition(0);
 		}

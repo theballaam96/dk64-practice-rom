@@ -203,6 +203,13 @@ typedef struct Savestate {
 	/* 0x368 */ float floor;
 	/* 0x36C */ unsigned int rng;
 	/* 0x370 */ short nearest_tag_oscillation_timer;
+	/* 0x372 */ unsigned char par_map;
+	/* 0x373 */ unsigned char par_exit;
+	/* 0x374 */ float par_x;
+	/* 0x378 */ float par_y;
+	/* 0x37C */ float par_z;
+	/* 0x380 */ short par_tpb;
+	/* 0x382 */ char par_bool;
 } Savestate;
 
 typedef struct Screen {
@@ -794,5 +801,21 @@ typedef struct parentMaps {
 	/* 0x014 */ unsigned char exit;
 	/* 0x015 */ char unk_15[0x18-0x15];
 	/* 0x018 */ void* setup_pointer;
-	/* 0x01C */ char unk_1C[0xC0-0x1C];
+	/* 0x01C */ int behaviour_load;
+	/* 0x020 */ char unk_1C[0xC0-0x20];
 } parentMaps;
+
+typedef struct hud_element {
+	/* 0x000 */ void* item_count_pointer;
+	/* 0x004 */ short visual_item_count;
+	/* 0x006 */ short hud_state_timer;
+	/* 0x008 */ int x;
+	/* 0x00C */ int y;
+	/* 0x010 */ float unk_10[4];
+	/* 0x020 */ int hud_state;
+	/* 0x024 */ char unk_24[0xC];
+} hud_element;
+
+typedef struct hudData {
+	/* 0x000 */ hud_element item[0xE];
+} hudData;

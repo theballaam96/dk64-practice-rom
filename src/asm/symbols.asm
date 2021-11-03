@@ -55,6 +55,7 @@
 .definelabel copyFunc, 0x805FB750
 .definelabel getMapData, 0x8066B0F8
 .definelabel loadSetup, 0x806886E0
+.definelabel getParentDataIndex, 0x80688D64
 
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
@@ -167,6 +168,7 @@
 .definelabel parentData, 0x8076A160
 .definelabel SetupFilePointer, 0x807F6010
 .definelabel focusedParentDataSetup, 0x807F5A70
+.definelabel HUD, 0x80754280
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8

@@ -2,15 +2,31 @@
 
 static const char mapArcade[] = "Arcade (Mystery Menu)";
 static const char mapJetpac[] = "Jetpac (Mystery Menu)";
+static const char mapArcadeStory[] = "Arcade (Story Mode)";
+static const char mapJetpacStory[] = "Jetpac (Story Mode)";
+
+void warpToStoryArcade(void) {
+	setDataStates(0,1);
+	warpToMap();
+}
+
+void warpToStoryJetpac(void) {
+	setDataStates(0,2);
+	warpToMap();
+}
 
 static const unsigned char other_destmap[] = {
 	0x2, // Arcade
 	0x9, // Jetpac
+	0x2, // Story Arcade
+	0x9, // Story Jetpac
 };
 
 static const unsigned char other_destexit[] = {
 	0x0, // Arcade
 	0x0, // Jetpac
+	0x0, // Story Arcade
+	0x0, // Story Jetpac
 };
 
 const MapWarp map_other_struct = {
@@ -21,18 +37,22 @@ const MapWarp map_other_struct = {
 
 static const char* other_mapwarp_array[] = {
 	mapArcade,
-	mapJetpac
+	mapJetpac,
+	mapArcadeStory,
+	mapJetpacStory,
 };
 
 static const int other_mapwarp_functions[] = {
 	(int)&warpToMap,
 	(int)&warpToMap,
+	(int)&warpToStoryArcade,
+	(int)&warpToStoryJetpac,
 };
 
 const Screen other_mapwarp_struct = {
 	.TextArray = (int*)other_mapwarp_array,
 	.FunctionArray = other_mapwarp_functions,
-	.ArrayItems = 2,
+	.ArrayItems = 4,
 	.ParentScreen = 1,
 	.ParentPosition = 9
 };

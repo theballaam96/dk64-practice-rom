@@ -22,6 +22,8 @@ extern int isRDRAM(void* address);
 extern int pm64ReadFromROM(int rom_start, int rom_end, void* write_location);
 extern void setWarpPosition(float x, float y, float z);
 extern void hideRacePosition(int show);
+extern void setDataStates(int state, int eightbit);
+extern void customHideHUD(void);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);

@@ -235,7 +235,7 @@ void savestateHandler(void) {
 	float nearest_tag_distance = 999999;
 	float current_tag_distance = 0;
 	if (MenuSavestateAction > 0) {
-		if (InBadMap) {
+		if (CurrentMap == 0x51) { // Prevent savestate load in console menu
 			playSFX(Wrong);
 		} else {
 			int* _perm_flag_block = getFlagBlockAddress(0);
@@ -266,6 +266,37 @@ void savestateHandler(void) {
 						states[_focused_state]->createdTime = FrameReal;
 						states[_focused_state]->stored_damage = StoredDamage;
 						states[_focused_state]->rng = RNG;
+
+						// Parent Map Shenanigans
+						int levelIndex = levelIndexMapping[CurrentMap];
+						int boss_index = -1;
+						unsigned char boss_maps[7] = {0x8,0xC5,0x9A,0x6F,0x53,0xC4,0xC7};
+						for (int i = 0; i < 7; i++) {
+							if (boss_maps[i] == CurrentMap) {
+								boss_index = i;
+							}
+						}
+						int getParent = -1;
+						if (((levelIndex == 0x9) || (levelIndex == 0xD) || (boss_index > -1))) {
+							for (int i = 0; i < 0x11; i++) {
+								if ((parentData[0x10 - i].transition_properties_bitfield & 2) && (parentData[0x10 - i].in_submap)) {
+									getParent = 0x10 - i;
+								}
+							}
+						}
+						if (getParent > -1) {
+							states[_focused_state]->par_bool = 1;
+							states[_focused_state]->par_map = parentData[getParent].map;
+							states[_focused_state]->par_exit = parentData[getParent].exit;
+							states[_focused_state]->par_x = parentData[getParent].positions.xPos;
+							states[_focused_state]->par_y = parentData[getParent].positions.yPos;
+							states[_focused_state]->par_z = parentData[getParent].positions.zPos;
+							states[_focused_state]->par_tpb = parentData[getParent].transition_properties_bitfield;
+						} else {
+							states[_focused_state]->par_bool = 0;
+						}
+
+						
 						if (HelmTimerShown) {
 							getTimestampDiffInTicks(HelmStartTimestampMajor,HelmStartTimestampMinor);
 							states[_focused_state]->HelmTimerDifferenceMajor = TempTimestampStorageMajor;
@@ -311,7 +342,18 @@ void savestateHandler(void) {
 							TimerData.TimerPostReduction = 0;
 							HasNeutralStickInput = 0;
 							resetMap();
-							initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
+							if (states[_focused_state]->par_bool) {
+								handleMapWarping(states[_focused_state]->Map,states[_focused_state]->Exit,0,SAVESTATE);
+								parentData[0].map = states[_focused_state]->par_map;
+								parentData[0].exit = states[_focused_state]->par_exit;
+								parentData[0].positions.xPos = states[_focused_state]->par_x;
+								parentData[0].positions.yPos = states[_focused_state]->par_y;
+								parentData[0].positions.zPos = states[_focused_state]->par_z;
+								parentData[0].transition_properties_bitfield = states[_focused_state]->par_tpb;
+								parentData[0].in_submap |= 3;
+							} else {
+								initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
+							}
 							if (MenuSavestateAction == 2) {
 								setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
 							};

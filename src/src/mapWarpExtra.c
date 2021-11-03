@@ -16,6 +16,9 @@ typedef struct map_frompos_data {
 	/* 0x006 */ short z;
 } map_frompos_data;
 
+static char first_state = 0;
+static char eightbit_state = 0;
+
 static const map_fromexit_data bosses[7] = {
 	{
 		.dest_map = 0x8,
@@ -540,6 +543,11 @@ static const map_frompos_data barrels[57] = {
 	}
 };
 
+void setDataStates(int state, int eightbit) {
+	first_state = state;
+	eightbit_state = eightbit;
+}
+
 void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 	// Fixes some minor bugs with the following map categories
 		// Crowns
@@ -564,53 +572,80 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 	}
 	for (int i = 0; i < 57; i++) {
 		if (barrels[i].dest_map == map) {
-			barrel_index = i;
+			if (first_state == 0) {
+				barrel_index = i;
+			} else if (barrel_index == -1) {
+				barrel_index = i;
+			}
 		}
 	}
 	if (load_mode == MAPWARP) {
-		if ((boss_index > -1)) {
+		if (eightbit_state == 1) { // Arcade
+			setFlag(0x63,1,2);
+			initiateTransition_0(map,exit,0xA,0x2);
+			parentData[0].in_submap |= 2;
+			parentData[0].transition_properties_bitfield = 3;
+			parentData[0].positions.xPos = 1862.0f;
+			parentData[0].positions.yPos = 1107.0f;
+			parentData[0].positions.zPos = 1305.0f;
+			parentData[0].map = 0x1A;
+			parentData[0].exit = 0;
+		} else if (eightbit_state == 2) { // Jetpac
+			setFlag(0x61,1,2);
 			initiateTransition_0(map,exit,0xA,0x2);
 			parentData[0].in_submap |= 2;
 			parentData[0].transition_properties_bitfield = 2;
-			parentData[0].map = bosses[boss_index].level_map;
-			parentData[0].exit = bosses[boss_index].level_exit;
-		} else if (crown_index > -1) {
-			initiateTransition_0(map,exit,0xA,0x2);
-			parentData[0].in_submap |= 2;
-			parentData[0].transition_properties_bitfield = 3;
-			parentData[0].positions.xPos = crowns[crown_index].x;
-			parentData[0].positions.yPos = crowns[crown_index].y;
-			parentData[0].positions.zPos = crowns[crown_index].z;
-			parentData[0].map = crowns[crown_index].level_map;
-			parentData[0].exit = 0;
-		} else if (barrel_index > -1) {
-			initiateTransition_0(map,exit,0xA,0x2);
-			parentData[0].in_submap |= 2;
-			parentData[0].transition_properties_bitfield = 3;
-			parentData[0].positions.xPos = barrels[barrel_index].x;
-			parentData[0].positions.yPos = barrels[barrel_index].y;
-			parentData[0].positions.zPos = barrels[barrel_index].z;
-			parentData[0].map = barrels[barrel_index].level_map;
-			parentData[0].exit = 0;
-			warp_loadmapvars |= 2;
+			parentData[0].map = 0x57;
+			parentData[0].exit = 0x12;
 		} else {
-			initiateTransition(map,exit);
-			warp_loadmapvars |= 1;
+			if ((boss_index > -1)) {
+				initiateTransition_0(map,exit,0xA,0x2);
+				parentData[0].in_submap |= 2;
+				parentData[0].transition_properties_bitfield = 2;
+				parentData[0].map = bosses[boss_index].level_map;
+				parentData[0].exit = bosses[boss_index].level_exit;
+			} else if (crown_index > -1) {
+				initiateTransition_0(map,exit,0xA,0x2);
+				parentData[0].in_submap |= 2;
+				parentData[0].transition_properties_bitfield = 3;
+				parentData[0].positions.xPos = crowns[crown_index].x;
+				parentData[0].positions.yPos = crowns[crown_index].y;
+				parentData[0].positions.zPos = crowns[crown_index].z;
+				parentData[0].map = crowns[crown_index].level_map;
+				parentData[0].exit = 0;
+			} else if (barrel_index > -1) {
+				initiateTransition_0(map,exit,0,3);
+				parentData[0].in_submap |= 2;
+				parentData[0].transition_properties_bitfield = 3;
+				parentData[0].positions.xPos = barrels[barrel_index].x;
+				parentData[0].positions.yPos = barrels[barrel_index].y - 40;
+				parentData[0].positions.zPos = barrels[barrel_index].z;
+				parentData[0].map = barrels[barrel_index].level_map;
+				parentData[0].exit = 0;
+			} else {
+				initiateTransition(map,exit);
+				warp_loadmapvars |= 1;
+			}
+		}
+		eightbit_state = 0;
+	} else if (load_mode == SAVESTATE) {
+		if (barrel_index > -1) {
+			initiateTransition_0(map,exit,0,3);
+		} else {
+			initiateTransition_0(map,exit,0xA,0x2);
 		}
 	}
 }
 
 void loadMapVars_0(void) {
-	if ((warp_loadmapvars & 2) && (TransitionSpeed < 0) && (ObjectModel2Timer == 0)) {
-		warp_loadmapvars &= 0xFD;
-	}
+
 	if ((ObjectModel2Timer == 20) && (TransitionSpeed < 0) && (warp_loadmapvars & 1)) {
-		if (IsAutowalking) {
-			if ((AutowalkPointer) && isRDRAM(AutowalkPointer)) {
-				AutowalkPointer->xPos = (short)Player->xPos;
-				AutowalkPointer->zPos = (short)Player->zPos;
-			}
-		}
+		// if (IsAutowalking) {
+		// 	if ((AutowalkPointer) && isRDRAM(AutowalkPointer)) {
+		// 		AutowalkPointer->xPos = (short)Player->xPos;
+		// 		AutowalkPointer->zPos = (short)Player->zPos;
+		// 	}
+		// }
 		warp_loadmapvars &= 0xFE;
 	}
 }

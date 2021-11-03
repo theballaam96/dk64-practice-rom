@@ -70,6 +70,7 @@ extern void __osRestoreInt(int mask);
 extern void copyFunc(int rom_offset, int size, void* write_location);
 extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, char compressbyte1);
 extern void loadSetup(void* setup_file, int unk0, int unk1);
+extern int getParentDataIndex(int map);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -175,6 +176,7 @@ extern int parentDataCount;
 extern parentMaps parentData[17];
 extern void* SetupFilePointer;
 extern int* focusedParentDataSetup[17];
+extern hudData* HUD;
 
 extern char arcadeMap;
 extern char arcadeMode;

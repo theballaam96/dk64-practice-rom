@@ -112,3 +112,9 @@ void hideRacePosition(int show) {
 		}
 	}
 }
+
+void customHideHUD(void) {
+	for (int i = 0; i < 0xE; i++) {
+		HUD->item[i].hud_state = 0;
+	}
+}
