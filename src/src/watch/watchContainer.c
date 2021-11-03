@@ -610,6 +610,11 @@ void reverse(char* str, int len) {
 
 int intToStr(int x, char str[], int digits) {
 	int i = 0;
+	if (x < 0) {
+		str[i] = 0x2D;
+		x = -x;
+		i = 1;
+	}
 	while (x) {
 		str[i++] = (x % 10) + 0x30;
 		x /= 10;
@@ -624,6 +629,10 @@ int intToStr(int x, char str[], int digits) {
 }
 
 void floatToString(float flt, char* res, int precision) {
+	int is_negative = flt < 0;
+	if (is_negative) {
+		flt = -flt;
+	}
 	// Extract integer part
 	int ipart = (int)(flt + 0);
 
@@ -634,7 +643,11 @@ void floatToString(float flt, char* res, int precision) {
 	// TestVariable = (int)&test_floats;
 
 	// convert int to string
-	int i = intToStr(ipart, res, 1);
+	int i = intToStr(ipart, res + is_negative, 1);
+	i += is_negative;
+	if (is_negative) {
+		res[0] = 0x2D;
+	}
 	int pow = 1;
 
 	if (precision != 0) {
@@ -656,7 +669,7 @@ void headerFormatter(char* header, float _fval, int _ival, format_mode mode, int
 	if (mode == 0) {
 		floatToString(_fval,float_str,Precision);
 	} else {
-		intToStr(_ival,float_str,0);
+		intToStr(_ival,float_str,1);
 	}
 	stringConcat((char*)WatchTextSpace[watch_index],header,float_str);
 }
