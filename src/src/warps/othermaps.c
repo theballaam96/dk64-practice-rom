@@ -15,6 +15,16 @@ void warpToStoryJetpac(void) {
 	warpToMap();
 }
 
+void warpToMenuArcade(void) {
+	setDataStates(0,3);
+	warpToMap();
+}
+
+void warpToMenuJetpac(void) {
+	setDataStates(0,4);
+	warpToMap();
+}
+
 static const unsigned char other_destmap[] = {
 	0x2, // Arcade
 	0x9, // Jetpac

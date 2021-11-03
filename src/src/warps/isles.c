@@ -197,7 +197,7 @@ const Screen isleslobbies_mapwarp_struct = {
 	.FunctionArray = isleslobbies_mapwarp_functions,
 	.ArrayItems = 8,
 	.ParentScreen = 27,
-	.ParentPosition = 3
+	.ParentPosition = 5
 };
 
 void openIslesMenu(void) {

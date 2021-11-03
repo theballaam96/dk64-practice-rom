@@ -202,7 +202,7 @@ const Screen caves5dc_mapwarp_struct = {
 	.FunctionArray = caves5dc_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 17,
-	.ParentPosition = 4
+	.ParentPosition = 5
 };
 
 
@@ -249,7 +249,7 @@ const Screen caves5di_mapwarp_struct = {
 	.FunctionArray = caves5di_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 17,
-	.ParentPosition = 5
+	.ParentPosition = 6
 };
 
 void openCavesMenu(void) {

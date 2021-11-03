@@ -362,9 +362,9 @@ static const map_frompos_data barrels[57] = {
 	{
 		.dest_map = 79,
 		.level_map = 48,
-		.x = 1281,
-		.y = 597,
-		.z = 3841,
+		.x = 1269, // 1281
+		.y = 620, // 597
+		.z = 3902, // 3841
 	},
 	{
 		.dest_map = 118,
@@ -597,6 +597,12 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 			parentData[0].transition_properties_bitfield = 2;
 			parentData[0].map = 0x57;
 			parentData[0].exit = 0x12;
+		} else if (eightbit_state == 3) {
+			setFlag(0x63,0,2);
+			initiateTransition(map,exit);
+		} else if (eightbit_state == 4) {
+			setFlag(0x61,0,2);
+			initiateTransition(map,exit);
 		} else {
 			if ((boss_index > -1)) {
 				initiateTransition_0(map,exit,0xA,0x2);

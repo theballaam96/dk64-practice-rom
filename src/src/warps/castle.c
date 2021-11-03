@@ -207,7 +207,7 @@ const Screen castlecrypt_mapwarp_struct = {
 	.FunctionArray = castlecrypt_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
-	.ParentPosition = 4
+	.ParentPosition = 5
 };
 
 
@@ -242,7 +242,7 @@ const Screen castletunnel_mapwarp_struct = {
 	.FunctionArray = castletunnel_mapwarp_functions,
 	.ArrayItems = 2,
 	.ParentScreen = 21,
-	.ParentPosition = 6
+	.ParentPosition = 7
 };
 
 static const unsigned char castle_outside_destmap[] = {
@@ -284,7 +284,7 @@ const Screen castleoutside_mapwarp_struct = {
 	.FunctionArray = castleoutside_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
-	.ParentPosition = 7
+	.ParentPosition = 8
 };
 
 static const unsigned char castle_rooms_destmap[] = {
@@ -326,7 +326,7 @@ const Screen castlerooms_mapwarp_struct = {
 	.FunctionArray = castlerooms_mapwarp_functions,
 	.ArrayItems = 4,
 	.ParentScreen = 21,
-	.ParentPosition = 8
+	.ParentPosition = 9
 };
 
 void openCastleMenu(void) {

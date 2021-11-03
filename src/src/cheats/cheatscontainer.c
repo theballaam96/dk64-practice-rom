@@ -11,7 +11,6 @@ static const char cheats_undoflag[] = "Undo Last Flag Write";
 static const char cheats_gaincontrol[] = "Gain Control";
 static const char cheats_endminigame[] = "Force End Minigame";
 static const char cheats_tagallwarps[] = "Tag All Warps";
-static const char cheats_corrupt[] = "Corrupt";
 static const char cheats_transform[] = "Transform";
 //static const char cheats_killboss[] = "KILL BOSS";
 	
@@ -41,7 +40,6 @@ static const char* cheats_array[] = {
 	cheats_gaincontrol,
 	cheats_endminigame,
 	cheats_tagallwarps,
-	cheats_corrupt,
 	cheats_transform,
 };
 
@@ -81,14 +79,13 @@ static const int cheats_functions[] = {
 	(int)&gainControl,
 	(int)&endMinigame,
 	(int)&tagAllWarps,
-	(int)&corruptGame,
 	(int)&openTransformMenu,
 };
 
 const Screen cheats_struct = {
 	.TextArray = (int*)cheats_array,
 	.FunctionArray = cheats_functions,
-	.ArrayItems = 12,
+	.ArrayItems = 11,
 	.ParentScreen = 0,
 	.ParentPosition = 7
 };

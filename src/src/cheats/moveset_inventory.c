@@ -10,6 +10,7 @@ static const char moveset_camerashockwave_on[] = "Camera & Shockwave: On";
 static const char moveset_camerashockwave_off[] = "Camera & Shockwave: Off";
 static const char moveset_givecoins[] = "Give Coins";
 static const char moveset_restockinventory[] = "Restock Inventory";
+static const char moveset_restockhoming[] = "Give Homing Ammo";
 
 static const char* moveset_array[] = {
 	moveset_giveallmoves,
@@ -21,6 +22,7 @@ static const char* moveset_array[] = {
 	moveset_camerashockwave_off,
 	moveset_givecoins,
 	moveset_restockinventory,
+	moveset_restockhoming,
 };
 
 void openMovesetInventoryMenu(void) {
@@ -52,6 +54,11 @@ void restockInventory(void) {
 	}
 	playSFX(AmmoPickup);
 };
+
+void restockHoming(void) {
+	CollectableBase.HomingAmmo = 100;
+	playSFX(494); // Homing
+}
 
 void toggleCamera(void) {
 	char _camera = checkFlag(0x179,0);
@@ -108,12 +115,13 @@ static const int moveset_functions[] = {
 	(int)&toggleCamera,
 	(int)&giveCoins,
 	(int)&restockInventory,
+	(int)&restockHoming,
 };
 
 const Screen moveset_struct = {
 	.TextArray = (int*)moveset_array,
 	.FunctionArray = moveset_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 55,
 	.ParentPosition = 0
 };

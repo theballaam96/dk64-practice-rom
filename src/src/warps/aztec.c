@@ -169,7 +169,7 @@ const Screen aztecfivedt_mapwarp_struct = {
 	.FunctionArray = aztecfivedt_mapwarp_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 4,
-	.ParentPosition = 4
+	.ParentPosition = 5
 };
 
 void openAztecMenu(void) {

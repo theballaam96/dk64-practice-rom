@@ -202,7 +202,7 @@ const Screen galleonships_mapwarp_struct = {
 	.FunctionArray = galleonships_mapwarp_functions,
 	.ArrayItems = 7,
 	.ParentScreen = 9,
-	.ParentPosition = 8
+	.ParentPosition = 9
 };
 
 void openGalleonMenu(void) {

@@ -215,7 +215,7 @@ const Screen fungigmush_mapwarp_struct = {
 	.FunctionArray = fungigmush_mapwarp_functions,
 	.ArrayItems = 6,
 	.ParentScreen = 13,
-	.ParentPosition = 6
+	.ParentPosition = 7
 };
 
 
@@ -254,7 +254,7 @@ const Screen fungimills_mapwarp_struct = {
 	.FunctionArray = fungimills_mapwarp_functions,
 	.ArrayItems = 3,
 	.ParentScreen = 13,
-	.ParentPosition = 8
+	.ParentPosition = 9
 };
 
 void openFungiMenu(void) {
