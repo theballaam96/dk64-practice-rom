@@ -285,3 +285,9 @@
 .definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr
 .definelabel assignedConsole, 0x807FFC74 // u32
 .definelabel phasePointer, 0x807FFC78 // ptr
+
+// Code
+.definelabel debugColumnLoop, 0x80731F78
+.definelabel characterSpawnerMalloc, 0x80728670
+.definelabel nfrTitleScreenSong, 0x80745D20
+.definelabel globalFlags, 0x807ED558

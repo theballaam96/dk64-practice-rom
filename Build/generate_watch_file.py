@@ -2,7 +2,19 @@ import os
 
 def read_symbols():
 	addr_set = [];
-	with open("./../src/asm/symbols.asm","r") as fh:
+	sym_path = "./../src/asm/symbols.asm";
+	with open("./../src/.version","r") as fh:
+		v = int(fh.readlines()[0][0])
+		sub="unk"
+		if v == 0:
+			sub = "us"
+		elif v == 1:
+			sub = "pal"
+		elif v == 2:
+			sub = "jp"
+		sym_path = "./../src/asm/" + sub + "/symbols.asm"
+
+	with open(sym_path,"r") as fh:
 		lines = fh.readlines()
 		for x in lines:
 			if ".definelabel" in x:

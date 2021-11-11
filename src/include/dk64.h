@@ -288,3 +288,9 @@ extern ActiveMenuData arcadeMenu;
 extern int* MemoryViewerLastAddress;
 extern console assignedConsole;
 extern int* phasePointer;
+
+// Code
+extern int debugColumnLoop;
+extern int characterSpawnerMalloc;
+extern char nfrTitleScreenSong;
+extern int globalFlags[2];

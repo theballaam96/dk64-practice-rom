@@ -6,27 +6,32 @@ import gzip
 import sys
 from compressFile import compressGZipFile
 
+rom_version = 3;
+with open("./../src/.version","r") as fh:
+	rom_version = int(fh.readlines()[0][0])
+if rom_version > 2:
+	exit();
 file_dict = {
 	"files": [
 		{
-			"start": 0x1118420,
-			"compressed_size": 0x37A,
+			"start": [0x1118420,0x1122254,0x1116F7C][rom_version],
+			"compressed_size": [0x37A,0xC74,0x3A0][rom_version],
 			"file_type": "text",
 			"source_file": "Menu.bin",
 			"output_file": "Menu_Copy.bin",
 			"name": "Menu Text"
 		},
 		{
-			"start": 0x1115766,
-			"compressed_size": 0x6D,
+			"start": [0x1115766,0x111839A,0x1113E9A][rom_version],
+			"compressed_size": [0x6D,0xEC,0x72][rom_version],
 			"file_type": "text",
 			"source_file": "Dolby.bin",
 			"output_file": "Dolby_Copy.bin",
 			"name": "Dolby Text"
 		},
 		{
-			"start": 0x11172E8,
-			"compressed_size": 0x1FF,
+			"start": [0x11172E8,0x111E61A,0x1115DC8][rom_version],
+			"compressed_size": [0x1FF,0x75E,0x1D8][rom_version],
 			"file_type": "text",
 			"source_file": "KLumsy.bin",
 			"output_file": "KLumsy_Copy.bin",

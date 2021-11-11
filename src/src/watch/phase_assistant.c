@@ -185,7 +185,7 @@ void analyzeInputs(void) {
 							PhaseChecker.reason_code = 10;
 							phase_initiated = 0;
 						} else {
-							if ((Player->hSpeed < 90) && (phase_accelerated == 0)) {
+							if ((Player->hSpeed < 100) && (phase_accelerated == 0)) {
 								PhaseChecker.reason_code = 2;
 								phase_initiated = 0;
 							} else {
