@@ -357,6 +357,15 @@ void savestateHandler(void) {
 							if (MenuSavestateAction == 2) {
 								setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
 							};
+							int* _perm_flag_block = getFlagBlockAddress(0);
+							if (_perm_flag_block) {
+								dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
+							}
+							dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
+							dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
+							StoredDamage = states[_focused_state]->stored_damage;
+							dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
+							Character = states[_focused_state]->Character;
 							HelmTimerShown = 0; // Prevent Game Over fadeout
 							ISGActive = 0; // Prevent ISG Fade
 							CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
@@ -397,14 +406,13 @@ void savestateLoadMapLoadVars(void) {
 	int search_actor_index = 0;
 	float nearest_tag_distance = 999999;
 	float current_tag_distance = 0;
-	if (TransitionSpeed == 0 && (LoadVarsOnMapLoad == 1)) {
+	if ((TransitionSpeed < 0) && (ObjectModel2Timer < 2) && (LoadVarsOnMapLoad == 1)) {
 		int* _perm_flag_block = getFlagBlockAddress(0);
 		if (_perm_flag_block) {
 			dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
 		}
 		dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
 		dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
-		Character = states[_focused_state]->Character;
 		StoredDamage = states[_focused_state]->stored_damage;
 		dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
 	}
