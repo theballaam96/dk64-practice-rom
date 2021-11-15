@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tools | Donkey Kong 64 Practice ROM</title>
+	<link rel="stylesheet" href="./Site/style/nav.css">
+	<link rel="stylesheet" href="./Site/style/main.css">
+	<link rel="stylesheet" href="./Site/style/home.css">
+	<link rel="stylesheet" href="./Site/style/maps.css">
+	<link rel="stylesheet" href="./Site/style/mj.css">
+	<link rel="stylesheet" href="./Site/style/tree.css">
+	<link rel="stylesheet" href="./Site/style/n64buttons.css">
+	<link rel="stylesheet" href="./Site/style/manual.css">
+	<link rel="apple-touch-icon" sizes="57x57" href="./apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="./apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="./apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="./apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="./apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="./apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="./apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="./apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="./apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="./android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+	<link rel="manifest" href="./manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="./ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="description" content="" />
+	<style type="text/css">
+		.homebox {
+			transition: 0.5s ease-in-out;
+			cursor: default;
+		}
+		.homebox.clickable:hover {
+			border-color:red;
+		}
+		.hide {
+			display: none;
+		}
+		download-buttons {
+			display: block;
+			padding: 10px;
+		}
+		download-buttons .isdownload::before {
+			content: "\203A";
+			cursor: pointer;
+			user-select: none;
+			color: darkgoldenrod;
+			display: inline-block;
+		}
+		.changelog {
+			list-style-type: none;
+			margin:0;
+			padding:0;
+			padding-left: 10px;
+		}
+		.link_button {
+			width:fit-content;
+			width:-moz-fit-content;
+			padding:5px;
+			padding-bottom: 2px;
+			display:none;
+		}
+		input {
+			padding: 15px;
+			width: 90%;
+		}
+		.flag_title {
+			color: white;
+		}
+		.flag_info {
+			color: white;
+			padding-bottom: 20px;
+		}
+		.flag_list {
+			padding-top: 20px;
+		}
+		.flag_box {
+			color: white;
+			border: 2px solid white;
+			border-radius: 5px;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+		.f_title {
+			color: white;
+			font-weight: bold;
+			text-align: left;
+			padding-left: 10px;
+		}
+		.f_content {
+			color: white;
+			text-align: left;
+		}
+		.cen_block {
+			text-align: center;
+		}
+		.tool_block {
+			flex:1;
+			border:5px solid darkgoldenrod;
+			background: no-repeat;
+			background-position: center center;
+			position: relative;
+			transition: 0.5s ease-in-out;
+		}
+		.tool_block .block_name {
+			color: white;
+			font-weight: bold;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			text-transform: uppercase;
+			padding: 10px 20px;
+			background-color: rgba(25,25,25,0.8);
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		.tool_block:hover {
+			border-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<nav id="navigation"></nav>
+	<div class="flexsplitter max">
+		<div class="rightbox" style="flex:80%">
+			<div class="v_spacer"></div>
+			<div class="cen_block">
+				<h1 class="flag_title">Tools</h1>
+				<div class="flexsplitter check_contents" style="width:15%;margin-left: auto;margin-right: auto">
+					<div class="shown_block tool_block" style="background-image:url('./Site/assets/flag.png');background-size: 150%;" onclick="goTo('/tools/flag_search')">
+						<div class="block_name">
+							Flag Search
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="./Site/script/nav.js"></script>
+	<script>
+		var blocks = document.getElementsByClassName("shown_block")
+		var w_ = 0;
+		for (b = 0; b < blocks.length; b++) {
+			var focused_block = blocks[b];
+			var bounding_rect = focused_block.getBoundingClientRect();
+			if (bounding_rect.width > 0) {
+				if (w_ == 0) {
+					w_ = bounding_rect.width;
+				}
+			}
+			focused_block.style.height = w_.toString() + "px";
+		}
+		function goTo(url) {
+			window.location.href = url;
+		}
+	</script>
+</body>
+</html>

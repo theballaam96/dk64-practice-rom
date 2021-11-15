@@ -333,6 +333,8 @@ void clearAllWatches(void) {
 	}
 	FairyViewerOpen = 0;
 	closeOverlay();
+	PhaseChecker.assistant_on = 0;
+	PhaseChecker.reason_code = 6;
 	hideRacePosition(1);
 	for (int i = 0; i < WatchCount; i++) {
 		destroyWatch(i);

@@ -52,6 +52,15 @@ var navHtml = "\
 									</span>\
 								</a>\
 							</li>\
+							<li>\
+								<a href='/tools' class='nav_link'>\
+									<span>\
+										<strong>\
+											Tools\
+										</strong>\
+									</span>\
+								</a>\
+							</li>\
 						</ul>\
 					</div>\
 				</div>\
@@ -60,7 +69,7 @@ var navHtml = "\
 	</div>";
 
 document.getElementById("navigation").innerHTML = navHtml;
-document.getElementById("tools_hover").addEventListener("click", toggleDropdown)
+//document.getElementById("tools_hover").addEventListener("click", toggleDropdown)
 
 function homewarp() {
 	window.location = "/home.html"
