@@ -9,17 +9,8 @@ if os.path.exists(KLumsyText):
 
 shutil.copyfile("KLumsy.bin", KLumsyText);
 
-os.chdir("../Source/Non-Code/K Lumsy")
-
-with open("first_textbox.bin", "rb") as fh:
-  patch_klumsyfirst = fh.read(339)
-
-with open("final_textbox.bin", "rb") as fh:
-  patch_klumsyfinal = fh.read(281)
-
-os.chdir("../../../Build")
 with open(KLumsyText, "r+b") as fh:
   fh.seek(0x67)
-  fh.write(patch_klumsyfirst)
+  fh.write("THE GANONDOOR GLITCH IN OCARINA OF TIME WAS CREATED DUE TO SHEER LAZINESS. CAUSE WHAT THEY DID WAS THEY USED THE EXACT SAME DOOR FOR GOHMA THAT THEY USED FOR GANON'S CASTLE. SO WHEN YOU EDIT THE H- WHEN YOU USE THE GLITCH, WHAT IT DOES IS IT MAKES THE GAME THINK THAT YOU'RE ENTERING THE FIGHT. IT WAS EITHER ZFG OR NARCISSA THAT FOUND IT\0".encode("ascii"))
   fh.seek(0x245)
-  fh.write(patch_klumsyfinal)
+  fh.write("HEY 2DOS, WHY DON'T YOU PLAY DK64 ANYMORE? I THINK IT'S PRETTY FKIN RUDE HOW YOU'RE ACTING RIGHT NOW. MOST PEOPLE ONLY FOLLOW FOR YOUR DK64 AND YOU'RE LOSING FOLLOWERS TONIGHT ACTING LIKE A CHILD.\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0".encode("ascii"))

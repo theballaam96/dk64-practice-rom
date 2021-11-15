@@ -9,17 +9,10 @@ if os.path.exists(DolbyText):
 
 shutil.copyfile("Dolby.bin", DolbyText);
 
-os.chdir("../Source/Non-Code/Dolby")
-
-with open("top_line.bin", "rb") as fh:
-  patch_dolbytop = fh.read(33);
-
-with open("bottom_line.bin", "rb") as fh:
-  patch_dolbybottom = fh.read(33);
-
-os.chdir("../../../Build")
 with open(DolbyText, "r+b") as fh:
+  fh.seek(0x30);
+  fh.write("PRESENTED BY".encode("ascii"))
   fh.seek(0x3C);
-  fh.write(patch_dolbytop)
+  fh.write("RED IS STINKY\0".encode("ascii"))
   fh.seek(0x5D);
-  fh.write(patch_dolbybottom)
+  fh.write("\0\0\0\0\0\0\0\0\0\0\0\0".encode("ascii"))

@@ -68,6 +68,7 @@
 				<li>
 					<span class="caret">1.4</span>
 					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_141')">1.4.1</a></li>
 						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_140')">1.4.0</a></li>
 					</ul>
 				</li>
@@ -861,6 +862,284 @@
 							<li>The ability to tag individual warps with the menu has been removed</li>
 							<li>"From Intro" warp point in Castle Main has been removed</li>
 							<li>Removed music/sound changer</li>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
+			<div class="treebox hide" tree-id="version_141" version="1.4.1">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.4.1</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Position Savestates</li>
+							<ul>
+								<li>There are now 4 position savestates (1 for each regular savestate). To change position savestates, use the "Change Savestate" menu</li>
+							</ul>
+							<li>Savestates</li>
+							<ul>
+								<li>Savestates now store more variables</li>
+								<ul>
+									<li>Player:</li>
+									<ul>
+										<li>Facing Angle</li>
+										<li>Skew Angle</li>
+										<li>Stored Damage</li>
+										<li>Floor</li>
+									</ul>
+									<li>Hideout Helm Timer:</li>
+									<ul>
+										<li>Timer On/Off</li>
+										<li>Starting Timer</li>
+										<li>Current Timer</li>
+									</ul>
+									<li>ISG Timer:</li>
+									<ul>
+										<li>Timer On/Off</li>
+										<li>Previous Fadeout Activated</li>
+										<li>Current Timer</li>
+									</ul>
+									<li>Other:</li>
+									<ul>
+										<li>RNG Value</li>
+										<li>Nearest Tag Height</li>
+									</ul>
+								</ul>
+								<li>Some savestate variables can be viewed in the "View Savestate Variables" menu</li>
+							</ul>
+							<li>Watches</li>
+							<ul>
+								<li>General</li>
+								<ul>
+									<li>Up to 4 watches and the Input display can be viewed at any one time</li>
+									<li>Watches are now left-aligned</li>
+								</ul>
+								<li>Input Display</li>
+								<ul>
+									<li>Input Display has been changed to a more visual format</li>
+									<li>The input display cannot be viewed in either Dogadon fight for technical reasons</li>
+								</ul>
+								<li>New Watches</li>
+								<ul>
+									<li>Stored Positions (1 watch for each co-ordinate set)</li>
+									<li>Spawn Snag state of all Spawn Snag collectables (eg. Arcade R1 GB)</li>
+									<li>An assistant that provides feedback on phasewalk attempts</li>
+									<li>Average speed over the past 64 frames</li>
+								</ul>
+							</ul>
+							<li>File States</li>
+							<ul>
+								<li>File States have been revamped to include file states created before key points in each of the following runs:</li>
+								<ul>
+									<li>No Levels Early 'Helm Escape' Route</li>
+									<li>101% 'Organic' Route</li>
+									<li>101% 'Japes for Moves' Route</li>
+									<li>Any% Glitchless</li>
+								</ul>
+								<li>Selecting a file state will warp you to the warp creation point</li>
+							</ul>
+							<li>Storing variables between power down</li>
+							<ul>
+								<li>Some variables will be stored inbetween power downs</li>
+								<ul>
+									<li>Kong Colors</li>
+									<ul>
+										<li>The user can now select which kong color they want for each of the primary 5 kongs. There are 3 values available per kong</li>
+									</ul>
+									<li>Whether the game performs a shortened startup sequence</li>
+									<li>Whether the game forces story skip</li>
+									<li>Pause Menu Volume</li>
+									<li>D-Pad Active Menu Navigation Mode</li>
+									<li>Whether to display save prompts</li>
+									<ul>
+										<li>If on, the game will display an indicator on the bottom-right portion of the screen to inform the player when the game is performing an autosave.</li>
+									</ul>
+									<li>Float Precision</li>
+									<ul>
+										<li>Details the precision (amount of decimal places shown) for non-integer watch values</li>
+									</ul>
+									<li>Input Display Screen Quadrant</li>
+									<ul>
+										<li>For the input display, you can select whether the input display is on the Top-Left, Top-Right, Bottom-Left or Bottom-Right</li>
+									</ul>
+									<li>D-Pad Button Assignment</li>
+									<li>Whether the Transform Cheat auto-restocks the crystal count</li>
+									<ul>
+										<li>If on, the player's crystal coconut count will not drain if they have used a transform cheat</li>
+									</ul>
+									<li>K. Rool Round Number setting</li>
+									<ul>
+										<li>Can be either "Random" (As it has been pre-1.4.1 by default) or "Forced Sequential" (Semi-Vanilla)</li>
+									</ul>
+									<li>Quality of Life features that are done on file initiation</li>
+									<ul>
+										<li>If on, the game sets the following flags upon file creation</li>
+										<ul>
+											<li>Training Grounds Waterfall Cutscene</li>
+											<li>Escape Cutscene</li>
+											<li>The 4 Kong FTTs</li>
+										</ul>
+									</ul>
+									<li>Input Display Maximum magnitude</li>
+									<ul>
+										<li>Values:</li>
+										<ul>
+											<li>Threshold: The stick magnitude caps at the maximum value the game reads for the kong movement (80)</li>
+											<li>Full Magnitude: The stick magnitude caps at the maximum value that the N64 allows (127)</li>
+										</ul>
+									</ul>
+								</ul>
+								<li>These variables can be reset with either the "Reset to default" button or deleting the ROM .eep file in the Everdrive menu</li>
+								<li>The above variables can be altered in Settings&gt;Hack Variables</li>
+							</ul>
+							<li>Cheats</li>
+							<ul>
+								<li>Acquire Cannon Skew cheat has been added. This can be acquired by pressing the "Acquire Regular Skew" option twice</li>
+								<li>Transform cheats have been added to transform to the 5 barrel moves</li>
+								<li>Toggle Kong Visibility cheat added</li>
+								<li>Option to change minigame timers to milliseconds added</li>
+								<li>Added button to give homing ammo</li>
+								<ul>
+									<li>For anti-cheat reasons, "Force End Minigame" is disabled when the timers are changed to milliseconds</li>
+								</ul>
+							</ul>
+							<li>DK Arcade Menu</li>
+							<ul>
+								<li>DK Arcade has a mini-menu of it's own</li>
+								<li>Controls are the same as the regular active menu</li>
+								<ul>
+									<li>If you have the D-Pad Left/Right buttons disabled for Active Menu navigation, this will also disable those in the Arcade Menu</li>
+								</ul>
+								<li>The menu pauses any active gameplay</li>
+								<li>The menu has several options to make practising DK Arcade easier</li>
+								<ul>
+									<li>Option to change the Arcade Map between 25m, 50m, 75m and 100m</li>
+									<li>Option to change the level (AKA Difficulty) between 1 and 9</li>
+									<li>Option to levitate jumpman</li>
+									<li>Option to restock the amount of lives</li>
+									<li>Options to load and save a state of Arcade. There is only 1 savestate. If a savestate cannot be made, then you will hear a sound of a 75m spring falling. The savestate stores the following variables:</li>
+									<ul>
+										<li>Arcade Map</li>
+										<li>Arcade Level (Difficulty)</li>
+										<li>RNG</li>
+										<li>All DK Arcade Objects loaded on the screen (eg. Jumpman, Pauline, DK, Misc Enemies etc.) and their associated attributes</li>
+										<li>All movable floors (AKA 75m elevators) and their associated attributes</li>
+										<li>Global, Level and Bonus Timers</li>
+										<li>High Score and Current Score</li>
+										<li>Lives</li>
+										<li>Hammer Timer</li>
+										<li>Song</li>
+										<li>Rivet Bitfield</li>
+									</ul>
+								</ul>
+							</ul>
+							<li>Debug</li>
+							<ul>
+								<li>Actor View Menu</li>
+								<ul>
+									<li>Displays a list of loaded non-Text Overlay actors with their respective memory address</li>
+									<li>For each actor, you can dive a little bit further with some options:</li>
+									<ul>
+										<li><strong>Grab Actor</strong>: Assigns the actor to your held slot, crouching and uncrouching will bring the actor into your arms</li>
+										<li><strong>Warp to Actor</strong>: Warps the player to the actor's position</li>
+										<li><strong>View Actor in Memory</strong>: Views the actor space (and only that actor space) in the Memory Viewer</li>
+									</ul>
+								</ul>
+								<li>Memory Viewer</li>
+								<ul>
+									<li><span style="color:red">This option is blocked on Wii U</span></li>
+									<li>D-Pad to move the cursor around</li>
+									<li>L + D-Pad Left/Right to change the size of each data set between 4-byte, 2-byte, 1-byte and Hex Digit</li>
+									<li>L + D-Pad Up/Down to change the value of the selected piece of data</li>
+									<ul>
+										<li>The value won't be updated until the L Button is released</li>
+									</ul>
+									<li>R + D-Pad Up/Down to change the value of the selected hex digit in the address. The last digit can only be changed to either 0 or 8</li>
+									<li>R + D-Pad Left/Right to change the selected hex digit in the address</li>
+									<li>R + L to close the menu (and therefore open the <em>Active Menu</em>)</li>
+									<li>Normal D-Pad functionality (eg. Tag Anywhere) is disabled whilst the memory viewer is open</li>
+									<li>The memory viewer will remember the most recent address viewed if the memory viewer was opened from the debug screen</li>
+								</ul>
+								<li>Analyze Heap</li>
+								<ul>
+									<li>Produces some statistics about the current state of DK64's heap</li>
+									<ul>
+										<li>Amount of free memory</li>
+										<li>Amount of used memory</li>
+										<li>Amount of blocks allocated as used memory</li>
+									</ul>
+								</ul>
+								<li>Flag Log</li>
+								<ul>
+									<li>Shows the 10 most recently set flags, and how long ago they were set</li>
+									<li>Each item in the log has a specific structure:</li>
+									<ul>
+										<li>A>B CD</li>
+										<li>A: Flag Byte</li>
+										<li>B: Flag Bit</li>
+										<li>C: Flag Type (P = Permanent, G = Global, T = Temporary)</li>
+										<li>D: Flag Change (S = Set, C = Clear)</li>
+									</ul>
+								</ul>
+								<li>Spawn Actor</li>
+								<ul>
+									<li>Spawns the selected actor into the world</li>
+									<li>Some actors will crash the game, but this cannot be avoided unfortunately</li>
+									<ul>
+										<li>A list will be made to document what actors crash the game, and which don't</li>
+									</ul>
+								</ul>
+							</ul>
+							<li>Misc</li>
+							<ul>
+								<li>If the game crashes, the game will bring up a stack trace to display information. This doesn't render on Wii U (potentially a lack of direct draw for the VC Emulator)</li>
+								<li>Stick diagnostic test added to the settings menu to analyze stick wear and inform you whether it's impacting DK64</li>
+								<li>On first boot, the game will present an option to select your console. This tunes the Practice ROM to your console</li>
+								<li>Watches & Active Menu hide race overlays</li>
+								<li>Warping is now enabled in all warps</li>
+							</ul>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Project has been converted from Assembler to C</li>
+							<li>Arcade & Jetpac warps have moved to "Miscellaneous"</li>
+							<li>Restock Inventory & Give Coins has been moved to the inventory menu</li>
+							<li>Movement State watch now displays the index instead of a representation of what that index means</li>
+							<li>Superspeed is no longer an on/off option, but where you can scale the superspeed applied from 2x to 7x. Superspeed is now activated by pressing L</li>
+							<li>Active Menu font has been updated to something that's more easily visible. As a result of the font taking a larger vertical space per line, some menus have been re-organised to account for this.</li>
+							<li>Some menus are viewable during frame advance</li>
+							<ul>
+								<li>Active Menu</li>
+								<li>Watches</li>
+								<li>Save Notifications</li>
+								<li>Error Notifications</li>
+							</ul>
+							<li>Auto-Phase cheat no longer requires a phase trick to go through a wall</li>
+							<li>GB HUD in lobbies hides if the Active Menu is open</li>
+							<li>Tag Anywhere is more responsive</li>
+							<li>Some text has been slightly modified</li>
+							<li>"Corrupt" cheat has been moved to the Debug Menu</li>
+							<ul>
+								<li>For example: Rain & Isotarge's names have been added to the contributor wrinkly door</li>
+							</ul>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>File States for a complete 101% file and a Max% file have been temporarily removed.</li>
 						</ul>
 					</ul>
 				</div>

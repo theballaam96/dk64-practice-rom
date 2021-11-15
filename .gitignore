@@ -1,4 +1,13 @@
 *.z64
+*.n64
+*.v64
 *.pyc
+*.o
+*.bak
+src/include/rom_version.h
 
 /*.bps
+src/symbols_map.txt
+src/asm/objects.asm
+src/rom/*.bps
+src/*.wch

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flag Search | Donkey Kong 64 Practice ROM</title>
+	<link rel="stylesheet" href="../Site/style/nav.css">
+	<link rel="stylesheet" href="../Site/style/main.css">
+	<link rel="stylesheet" href="../Site/style/home.css">
+	<link rel="stylesheet" href="../Site/style/maps.css">
+	<link rel="stylesheet" href="../Site/style/mj.css">
+	<link rel="stylesheet" href="../Site/style/tree.css">
+	<link rel="stylesheet" href="../Site/style/n64buttons.css">
+	<link rel="stylesheet" href="../Site/style/manual.css">
+	<link rel="apple-touch-icon" sizes="57x57" href="../apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="../apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="../apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="../apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="../apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="../apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="../android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+	<link rel="manifest" href="../manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="../ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="description" content="" />
+	<style type="text/css">
+		.homebox {
+			transition: 0.5s ease-in-out;
+			cursor: default;
+		}
+		.homebox.clickable:hover {
+			border-color:red;
+		}
+		.hide {
+			display: none;
+		}
+		download-buttons {
+			display: block;
+			padding: 10px;
+		}
+		download-buttons .isdownload::before {
+			content: "\203A";
+			cursor: pointer;
+			user-select: none;
+			color: darkgoldenrod;
+			display: inline-block;
+		}
+		.changelog {
+			list-style-type: none;
+			margin:0;
+			padding:0;
+			padding-left: 10px;
+		}
+		.link_button {
+			width:fit-content;
+			width:-moz-fit-content;
+			padding:5px;
+			padding-bottom: 2px;
+			display:none;
+		}
+		input {
+			padding: 15px;
+			width: 90%;
+		}
+		.flag_title {
+			color: white;
+		}
+		.flag_info {
+			color: white;
+			padding-bottom: 20px;
+		}
+		.flag_list {
+			padding-top: 20px;
+		}
+		.flag_box {
+			color: white;
+			border: 2px solid white;
+			border-radius: 5px;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+		.f_title {
+			color: white;
+			font-weight: bold;
+			text-align: left;
+			padding-left: 10px;
+		}
+		.f_content {
+			color: white;
+			text-align: left;
+		}
+		.cen_block {
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<nav id="navigation"></nav>
+	<div class="flexsplitter max">
+		<div class="rightbox" style="flex:80%">
+			<div class="v_spacer"></div>
+			<div class="cen_block">
+				<h1 class="flag_title">Flag Search</h1>
+				<div class="flag_info">
+					A search tool built to assist with using the custom flag editor inside the Practice ROM.
+					<br>
+					Flags sourced from the ScriptHawk repository, thanks to all contributors on that repository.
+					<br><br>
+					Hit enter to search.
+				</div>
+				<input placeholder="Search for flag name..." id="flag_search" onkeyup="search(event)">
+				<div class="flag_list" id="flag_list">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../Site/script/nav.js"></script>
+	<script>
+		var xhttp = new XMLHttpRequest();
+		var perm_flags = [];
+		var temp_flags = [];
+		var global_flags = [];
+		var flag_data = {};
+		var update_count = 0;
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				responseJSON = xhttp.responseText.split("\n").filter(item=>item.indexOf("\t{byte=") == 0);
+				perm_flags = responseJSON.map(item=>{
+					x = {};
+					x.byte = Number(item.split("byte=")[1].split(",")[0]);
+					x.bit = Number(item.split("bit=")[1].split(",")[0]);
+					if (item.indexOf("name=\"") > -1) {
+						x.name = item.split("name=\"")[1].split("\"")[0];
+					}
+					if (item.indexOf("type=\"") > -1) {
+						x.type = item.split("type=\"")[1].split("\"")[0];
+					}
+					return x;
+				})
+				flag_data.permanent_flags = perm_flags;
+				update_count += 1;
+				afterAllRead();
+				//console.log(perm_flags)
+			}
+		}
+		xhttp.open("GET", "https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/games/dk64_flags.lua", true);
+		xhttp.send(null)
+
+		var xhttp2 = new XMLHttpRequest();
+		xhttp2.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				responseJSON = xhttp2.responseText.split("pal = {")[0].split("\n").filter(item=>item.indexOf("\t\t{byte=") == 0);
+				temp_flags = responseJSON.map(item=>{
+					x = {};
+					x.byte = Number(item.split("byte=")[1].split(",")[0]);
+					x.bit = Number(item.split("bit=")[1].split(",")[0]);
+					if (item.indexOf("flagName=\"") > -1) {
+						x.name = item.split("flagName=\"")[1].split("\"")[0];
+					}
+					if (item.indexOf("type=\"") > -1) {
+						x.type = item.split("type=\"")[1].split("\"")[0];
+					}
+					return x;
+				})
+				flag_data.temporary_flags = temp_flags;
+				update_count += 1;
+				afterAllRead();
+				//console.log(temp_flags)
+			}
+		}
+		xhttp2.open("GET", "https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/games/dk64_temp_flags.lua", true);
+		xhttp2.send(null)
+
+		var xhttp3 = new XMLHttpRequest();
+		xhttp3.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				responseJSON = xhttp3.responseText.split("global_flag_array = {")[1].split("};")[0].split("\n").filter(item=>item.indexOf("\t{byte=") == 0);
+				global_flags = responseJSON.map(item=>{ 
+					x = {};
+					x.byte = Number(item.split("byte=")[1].split(",")[0]);
+					x.bit = Number(item.split("bit=")[1].split(",")[0]);
+					if (item.indexOf("name=\"") > -1) {
+						x.name = item.split("name=\"")[1].split("\"")[0];
+					}
+					if (item.indexOf("type=\"") > -1) {
+						x.type = item.split("type=\"")[1].split("\"")[0];
+					}
+					return x;
+				})
+				flag_data.global_flags = global_flags;
+				update_count += 1;
+				afterAllRead();
+				//console.log(global_flags)
+			}
+		}
+		xhttp3.open("GET", "https://raw.githubusercontent.com/Isotarge/ScriptHawk/master/games/dk64.lua", true);
+		xhttp3.send(null)
+
+		function afterAllRead() {
+			if (update_count == 3) {
+				console.log(flag_data)
+			}
+		}
+
+		function matchTest(base,term) {
+			found = true;
+			term.forEach(item => {
+				if (base.indexOf(item) < 0) {
+					found = false;
+				}
+			})
+			return found;
+		}
+
+		function search(e) {
+			var keynum = 0;
+		  	if(window.event) { // IE                  
+		    	keynum = e.keyCode;
+		  	} else if(e.which){ // Netscape/Firefox/Opera                 
+		    	keynum = e.which;
+		  	}
+		  	if (keynum == 13) {
+				var search_term = document.getElementById("flag_search").value.toLowerCase();
+				var db = [];
+				if (search_term.length > 2) {
+					var terms = search_term.split(" ")
+					Object.keys(flag_data).forEach(flag_type=> {
+						flag_data[flag_type].forEach(item=>{
+							if (item.name) {
+								var base = item.name.toLowerCase();
+								var matches = matchTest(base,terms);
+								if (matches) {
+									db.push({
+										"type": flag_type,
+										"byte": item.byte,
+										"bit": item.bit,
+									})
+								}
+							}
+						})
+					})
+					console.log(db)
+				}
+				var hook = document.getElementById("flag_list");
+				hook.innerHTML = "";
+				db.forEach(item => {
+					var new_div = document.createElement("div")
+					var obj = flag_data[item.type].find(item2 => {
+						if (item2.byte == item.byte) {
+							if (item2.bit == item.bit) {
+								return true;
+							}
+						}
+						return false;
+					})
+					var title_div = document.createElement("div");
+					title_div.classList.add("f_title")
+					var content_div = document.createElement("div");
+					content_div.classList.add("f_content")
+					var content_ul = document.createElement("ul");
+					var hex_txt = "0000" + obj.byte.toString(16).toUpperCase();
+					var info = [
+						{
+							"head": "Byte",
+							"val": "0x" + hex_txt.substring(hex_txt.length - 4, hex_txt.length),
+						}, {
+							"head": "Bit",
+							"val": obj.bit,
+						}, {
+							"head": "Type",
+							"val": item.type.split("_")[0].substring(0,1).toUpperCase() + item.type.split("_")[0].substring(1),
+						}
+					]
+					info.forEach(item2 => {
+						var _li = document.createElement("li")
+						var _li_text = document.createTextNode(item2.head + ": " + item2.val);
+						_li.appendChild(_li_text);
+						content_ul.appendChild(_li);
+					})
+					content_div.appendChild(content_ul);
+					var new_div_text = document.createTextNode(obj.name)
+					title_div.appendChild(new_div_text)
+					new_div.classList.add("flag_box");
+					new_div.appendChild(title_div);
+					new_div.appendChild(content_div);
+					hook.appendChild(new_div);
+				})
+		  	}
+		}
+
+		function treeshow(treeid) {
+			if (treeid == "latest") {
+				var versions = document.getElementsByClassName("isversion")
+				var versionFunc = versions[0].getAttribute("onclick");
+				var versionFuncArray = versionFunc.split("'");
+				treeid = versionFuncArray[1];
+			}
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+
+			for (t = 0; t < treeboxes.length; t++) {
+				var found_treeid = treeboxes[t].getAttribute("tree-id")
+				if (found_treeid == treeid) {
+					treeboxes[t].classList.remove("hide")
+					window.history.replaceState(null, null, "?guide=" + found_treeid)
+				} else {
+					treeboxes[t].classList.add("hide")
+				}
+			}
+		}
+
+		function goTo(url) {
+			window.location.href = url;
+		}
+
+		function copyToClipboard(text) {
+		    var dummy = document.createElement("textarea");
+		    document.body.appendChild(dummy);
+		    dummy.value = text;
+		    dummy.select();
+		    document.execCommand("copy");
+		    document.body.removeChild(dummy);
+		}
+
+		function getLink(param) {
+			window.history.replaceState(null, null, param)
+			copyToClipboard(window.location.origin + window.location.pathname + param)
+		}
+
+		function goThroughParams() {
+			var queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString)
+			const detected_guide = urlParams.get("guide");
+			console.log("Detected Guide: " + detected_guide)
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+			var version = "";
+
+			for (t = 0; t < treeboxes.length; t++) {
+				treeid = treeboxes[t].getAttribute("tree-id")
+				if (treeid == detected_guide) {
+					treeboxes[t].classList.remove("hide")
+				} else {
+					treeboxes[t].classList.add("hide")
+				}
+			}
+		}
+		goThroughParams();
+
+		function toggleImage(el,hover) {
+			var img_node = el.getElementsByTagName("img")[0]
+			var new_img = "./Site/assets/link.png";
+			if (hover) {
+				new_img = "./Site/assets/link_black.png"
+			}
+			img_node.setAttribute("src",new_img)
+		}
+
+		function editButtonClickEvent() {
+			var treeboxes = document.getElementsByClassName("treebox")
+			var t;
+			var version = "";
+
+			for (t = 0; t < treeboxes.length; t++) {
+				found_guide = treeboxes[t].getAttribute("tree-id")
+				var link_button = treeboxes[t].getElementsByTagName("link-button")[0]
+				link_button.childNodes[1].setAttribute("onclick","getLink('" + "?guide=" + found_guide + "')");
+			}
+		}
+		editButtonClickEvent()
+	</script>
+</body>
+</html>
