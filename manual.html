@@ -2682,7 +2682,8 @@
 				}
 			}
 			for (t = 0; t < tree_items.length; t++) {
-				if (tree_items[t].getAttribute("onclick").indexOf(found_guide) > -1) {
+				var click_event = tree_items[t].getAttribute("onclick");
+				if (click_event.split("'")[1] == found_guide) {
 					parent_count = 20;
 					var focused_el = tree_items[t];
 					while (parent_count > 0) {
