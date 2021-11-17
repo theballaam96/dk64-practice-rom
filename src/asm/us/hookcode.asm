@@ -129,7 +129,7 @@ START_HOOK:
 		ADDI 	t0, t0, -5
 		BEQZ 	t0, resizeActiveMenuFont_NormalStyle10
 		ADDIU 	t0, t0, 5
-		LUI 	a3, 0x3F66
+		LUI 	a3, 0x3F66 // Groovy Font Size
 		ORI 	a3, a3, 0x6666
 
 		resizeActiveMenuFont_NormalStyle10:

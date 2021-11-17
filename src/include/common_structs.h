@@ -819,3 +819,12 @@ typedef struct hud_element {
 typedef struct hudData {
 	/* 0x000 */ hud_element item[0xE];
 } hudData;
+
+typedef struct text_struct {
+	/* 0x000 */ unsigned char width;
+	/* 0x001 */ unsigned char file_count;
+	/* 0x002 */ unsigned char height;
+	/* 0x003 */ char kerning_space;
+	/* 0x004 */ char kerning_char;
+	/* 0x005 */ char unk_05;
+} text_struct;

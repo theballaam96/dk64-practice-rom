@@ -8,6 +8,10 @@ void initHack(void) {
 		debugColumnLoop = 0; // Debug 1 Column
 		characterSpawnerMalloc = 0x240447B8; // Increases the malloc for character spawners
 		nfrTitleScreenSong = 113; // NFR Title Screen Song
+		// int* file_size;
+		// *(int*)(&file_size) = 0x180;
+		// copyFromROM(0x2021600,(int*)0x807546D0,&file_size,0,0,0,0);
+		//textData[0].kerning_char = -2;
 		colorMenuSky();
 		for (int i = 0; i < WatchCount; i++) {
 			ViewedSnagWatches[i] = -1;

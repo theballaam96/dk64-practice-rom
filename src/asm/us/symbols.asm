@@ -169,6 +169,7 @@
 .definelabel SetupFilePointer, 0x807F6010
 .definelabel focusedParentDataSetup, 0x807F5A70
 .definelabel HUD, 0x80754280
+.definelabel textData, 0x80754A34
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8

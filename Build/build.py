@@ -5,6 +5,8 @@ import binascii
 import gzip
 import sys
 from compressFile import compressGZipFile
+import packages
+from ia_format import to_ia4, to_ia8, to_i8, to_i4
 
 rom_version = 3;
 with open("./../src/.version","r") as fh:
@@ -81,13 +83,42 @@ file_dict = {
 			"start": 0x175D4A8,
 			"compressed_size": 0xFA0,
 			"file_type": "image",
-			"source_file": "../assets/Non-Code/Employee Head/employee_head.bin",
-			"output_file": "EmployeeHead.bin",
+			"source_file": "../assets/Non-Code/Employee Head/employee_head.png",
+			"output_file": "employee_head.bin.gz",
 			"name": "Employee Head Image",
-			"convert": False,
+			"convert": True,
 			"texture_format": "i8",
-			"use_external_gzip": True,
-		}
+		},
+		# {
+		# 	"start": 0x11201B4,
+		# 	"compressed_size": 0x47A,
+		# 	"file_type": "image",
+		# 	"source_file": "../assets/Non-Code/Font/symbols_new_gz.png",
+		# 	"output_file": "sym_large.bin.gz",
+		# 	"name": "Groovy Font Symbols Image",
+		# 	"convert": True,
+		# 	"texture_format": "ia4",
+		# },
+		# {
+		# 	"start": 0x112062E,
+		# 	"compressed_size": 0x4B6,
+		# 	"file_type": "image",
+		# 	"source_file": "../assets/Non-Code/Font/capitals_new_gz.png",
+		# 	"output_file": "upper_large.bin.gz",
+		# 	"name": "Groovy Font Uppercase Image",
+		# 	"convert": True,
+		# 	"texture_format": "ia4",
+		# },
+		# {
+		# 	"start": 0x1120AE4,
+		# 	"compressed_size": 0x444,
+		# 	"file_type": "image",
+		# 	"source_file": "../assets/Non-Code/Font/lower_new_gz.png",
+		# 	"output_file": "lower_large.bin.gz",
+		# 	"name": "Groovy Font Lowercase Image",
+		# 	"convert": True,
+		# 	"texture_format": "ia4",
+		# },
 	]
 }
 
@@ -155,11 +186,24 @@ with open(newROMName, "r+b") as fh:
 					elif x["texture_format"] == "i4":
 						result = subprocess.check_output(["./n64tex.exe", x["texture_format"], x["source_file"]])
 						converted = True;
+					elif x["texture_format"] == "ia4":
+						to_ia4(x["source_file"])
+						converted = True;
+					elif x["texture_format"] == "ia8":
+						to_ia8(x["source_file"])
+						converted = True;
+					elif x["texture_format"] == "i8":
+						to_i8(x["source_file"])
+						converted = True;
+					elif x["texture_format"] == "i4":
+						to_i4(x["source_file"])
+						converted = True;
 					else:
 						print(" - ERROR: Unsupported texture format " + x["texture_format"])
 				if converted:
-					print(x["name"])
+					#print(x["name"])
 					file_name = ".".join(x["source_file"].split(".")[0:-1]) + "." + x["texture_format"]
+					#print(file_name)
 					if os.path.exists(file_name):
 						compressGZipFile(file_name,x["output_file"],False);
 						with open(x["output_file"],"rb") as fg:
@@ -200,7 +244,9 @@ if os.path.exists("StaticCode_Copy.bin"):
 	os.remove("StaticCode_Copy.bin")
 if os.path.exists("StaticCode.bin.gz"):
 	os.remove("StaticCode.bin.gz")
-		
+
+#import font_builder
+
 # crc patch
 with open(newROMName, "r+b") as fh:
     fh.seek(0x3154)
@@ -217,9 +263,15 @@ with open(newROMName, "r+b") as fh:
     	_snag_names2 = fg.read()
     	fh.seek(0x2021C00)
     	fh.write(_snag_names2)
-
+    # with open("./../assets/Non-Code/Font/font_boundaries.bin","rb") as fg:
+    # 	_font_boundaries = fg.read()
+    # 	fh.seek(0x2021600)
+    # 	fh.write(_font_boundaries)
 
 import filestatewriter
+
+#if os.path.exists("./../assets/Non-Code/Font/font_boundaries.bin"):
+#	os.remove("./../assets/Non-Code/Font/font_boundaries.bin")
 
 if os.path.exists("dk64-practice-rom.z64"):
 	shutil.copyfile("dk64-practice-rom.z64", "./../src/rom/dk64-practice-rom-python.z64");

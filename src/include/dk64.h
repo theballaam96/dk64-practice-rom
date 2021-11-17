@@ -177,6 +177,7 @@ extern parentMaps parentData[17];
 extern void* SetupFilePointer;
 extern int* focusedParentDataSetup[17];
 extern hudData* HUD;
+extern text_struct textData[6];
 
 extern char arcadeMap;
 extern char arcadeMode;

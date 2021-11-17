@@ -4,6 +4,7 @@
 *.pyc
 *.o
 *.bak
+*.pckg
 src/include/rom_version.h
 
 /*.bps

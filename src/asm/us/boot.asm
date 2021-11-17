@@ -296,6 +296,12 @@ loadExtraHooks:
 	SW t3, 0x8D64 (t4) // Store Hook
 	SW r0, 0x8D68 (t4) // Store NOP
 
+	// Negative Kerning
+	LUI t3, 0x8070
+	ADDIU t4, r0, 0x81
+	SB t4, 0xCB10 (t3)
+	SB t4, 0xCACC (t3)
+
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)
 	LUI t4, 0x806F
