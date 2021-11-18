@@ -57,6 +57,8 @@
 .definelabel loadSetup, 0x806886E0
 .definelabel getParentDataIndex, 0x80688D64
 
+.definelabel prepDisplayList, 0x807132DC
+
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
 .definelabel setArcadeTextColor, 0x800244E4
@@ -170,6 +172,8 @@
 .definelabel focusedParentDataSetup, 0x807F5A70
 .definelabel HUD, 0x80754280
 .definelabel textData, 0x80754A34
+
+.definelabel displayListVar, 0x80744490
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8

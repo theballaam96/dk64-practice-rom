@@ -99,10 +99,24 @@ void cFuncLoop(void) {
 	writeFlagsToLog(); // Constant
 	changeTimer_spawnTimer(); // ConvertTimerCountdown > 0
 	//controlFairyViewer(); // FairyViewerOpen
-}
+};
 
 void arcadeFuncLoop(void) {
 	controlArcadeMenuActions();
 	toggleArcadeMenu();
 	finishLoadingArcadeState();
-}
+};
+
+int* displayListModifiers(int* dl) {
+	// int dl0 = displayListVar[0];
+	// int dl1 = displayListVar[2];
+	// *(unsigned int*)(dl + 0x00) = 0xE200001C;
+	// *(unsigned int*)(dl + 0x04) = 0x00504240;
+	// *(unsigned int*)(dl + 0x08) = 0xFA000000;
+	// *(unsigned int*)(dl + 0x0C) = 0xFFFFFFFF;
+	// *(unsigned int*)(dl + 0x10) = 0xFCFF97FF;
+	// *(unsigned int*)(dl + 0x14) = 0xFF2CFE7F;
+	// *(unsigned int*)(dl + 0x18) = 0xE3001201;
+	// *(unsigned int*)(dl + 0x1C) = 0x00000000;
+	return dl;
+};

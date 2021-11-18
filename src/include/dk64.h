@@ -72,6 +72,8 @@ extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, c
 extern void loadSetup(void* setup_file, int unk0, int unk1);
 extern int getParentDataIndex(int map);
 
+extern int* prepDisplayList(int* dl);
+
 //vanilla data
 extern float TransitionSpeed;
 extern char CutsceneWillPlay;
@@ -178,6 +180,8 @@ extern void* SetupFilePointer;
 extern int* focusedParentDataSetup[17];
 extern hudData* HUD;
 extern text_struct textData[6];
+
+extern short displayListVar[3];
 
 extern char arcadeMap;
 extern char arcadeMode;

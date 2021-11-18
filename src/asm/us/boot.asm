@@ -213,6 +213,9 @@ LoadSetupHook:
 ResolveBarrelHook:
 	J 	resolveBonusBarrelCode
 	NOP
+DisplayListHook:
+	J 	displayListCode
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -296,6 +299,12 @@ loadExtraHooks:
 	SW t3, 0x8D64 (t4) // Store Hook
 	SW r0, 0x8D68 (t4) // Store NOP
 
+	LUI t3, hi(DisplayListHook)
+	LW t3, lo(DisplayListHook) (t3)
+	LUI t4, 0x8071
+	SW t3, 0x417C (t4) // Store Hook
+	SW r0, 0x4180 (t4) // Store NOP
+
 	// Negative Kerning
 	LUI t3, 0x8070
 	ADDIU t4, r0, 0x81
@@ -316,7 +325,6 @@ getObjectArrayAddr:
 	MFLO	a1
 	JR 		ra
 	ADD 	v0, a0, a1
-
 
 .align 0x10
 END:

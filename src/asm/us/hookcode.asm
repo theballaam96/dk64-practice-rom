@@ -388,5 +388,17 @@ START_HOOK:
 			J 	0x80688D70
 			LI  at, -1
 
+	displayListCode:
+		JAL 	displayListModifiers
+		OR 		a0, s0, r0
+		OR 		s0, v0, r0
+		LUI 	a0, 0x8075
+		ADDIU 	a0, a0, 0x531C
+		LHU 	v1, 0x0 (a0)
+		LUI 	v0, 0x8075
+		J 		0x80714184
+		LBU 	v0, 0x5314 (v0)
+
+
 .align 0x10
 END_HOOK:

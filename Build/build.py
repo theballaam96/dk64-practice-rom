@@ -5,8 +5,8 @@ import binascii
 import gzip
 import sys
 from compressFile import compressGZipFile
-import packages
-from ia_format import to_ia4, to_ia8, to_i8, to_i4
+#import packages
+#from ia_format import to_ia4, to_ia8, to_i8, to_i4
 
 rom_version = 3;
 with open("./../src/.version","r") as fh:
@@ -180,23 +180,8 @@ with open(newROMName, "r+b") as fh:
 			if will_convert:
 				converted = False;
 				if "texture_format" in x:
-					if x["texture_format"] == "rgba5551":
+					if x["texture_format"] in ["rgba5551","i4","i8","ia4","ia8"]:
 						result = subprocess.check_output(["./n64tex.exe", x["texture_format"], x["source_file"]])
-						converted = True;
-					elif x["texture_format"] == "i4":
-						result = subprocess.check_output(["./n64tex.exe", x["texture_format"], x["source_file"]])
-						converted = True;
-					elif x["texture_format"] == "ia4":
-						to_ia4(x["source_file"])
-						converted = True;
-					elif x["texture_format"] == "ia8":
-						to_ia8(x["source_file"])
-						converted = True;
-					elif x["texture_format"] == "i8":
-						to_i8(x["source_file"])
-						converted = True;
-					elif x["texture_format"] == "i4":
-						to_i4(x["source_file"])
 						converted = True;
 					else:
 						print(" - ERROR: Unsupported texture format " + x["texture_format"])
