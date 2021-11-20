@@ -1,9 +1,9 @@
 import os
 
 def read_symbols():
-	addr_set = [];
-	sym_path = "./../src/asm/symbols.asm";
-	with open("./../src/.version","r") as fh:
+	addr_set = []
+	sym_path = "asm/symbols.asm"
+	with open(".version","r") as fh:
 		v = int(fh.readlines()[0][0])
 		sub="unk"
 		if v == 0:
@@ -12,7 +12,7 @@ def read_symbols():
 			sub = "pal"
 		elif v == 2:
 			sub = "jp"
-		sym_path = "./../src/asm/" + sub + "/symbols.asm"
+		sym_path = "asm/" + sub + "/symbols.asm"
 
 	with open(sym_path,"r") as fh:
 		lines = fh.readlines()
@@ -24,9 +24,9 @@ def read_symbols():
 	return addr_set
 
 def read_h_file(symbols_data):
-	addr_set = [];
-	type_set = [];
-	with open("./../src/include/dk64.h","r") as fh:
+	addr_set = []
+	type_set = []
+	with open("include/dk64.h","r") as fh:
 		c = fh.readlines()
 		for x in symbols_data:
 			for y in c:
@@ -46,10 +46,7 @@ def read_h_file(symbols_data):
 							addr_set.append([list(x)[0],list(x)[1],s])
 	return addr_set
 
-def create_wch_file(_data,watch_file_name):
-	os.chdir("./../src/")
-	if (os.path.exists(watch_file_name)):
-		os.remove(watch_file_name)
+def create_wch_file(_data, watch_file_name):
 	wch_info = [
 		["*","d","h"], # Pointer
 		["float","d","f"],
@@ -59,22 +56,22 @@ def create_wch_file(_data,watch_file_name):
 		["short","w","h"],
 		["unsigned char","b","h"],
 		["char","b","h"],
-	];
+	]
 	with open(watch_file_name,"w") as fh:
-		lines = ["SystemID N64"];
+		lines = ["SystemID N64"]
 		for x in _data:
-			found = False;
+			found = False
 			for y in wch_info:
 				if y[0] in x[2]:
-					_size = y[1];
-					_type = y[2];
-					found = True;
-					break;
+					_size = y[1]
+					_type = y[2]
+					found = True
+					break
 			if found:
 				lines.append(str(x[0][2:]) + "	" + str(_size) + "	" + str(_type) + "	1	RDRAM	"+ str(x[1]))
 		for x in lines:
 			fh.write(x+"\n")
 
-a = read_symbols();
-b = read_h_file(a);
-create_wch_file(b,"dk64-practice-rom.wch");
+a = read_symbols()
+b = read_h_file(a)
+create_wch_file(b,"rom/dk64-practice-rom.wch")

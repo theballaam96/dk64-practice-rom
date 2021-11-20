@@ -7,8 +7,10 @@
 *.pckg
 src/include/rom_version.h
 
-/*.bps
-src/symbols_map.txt
-src/asm/objects.asm
-src/rom/*.bps
-src/*.wch
+*.sym
+asm/objects.asm
+*.bps
+*.wch
+*.log
+.rom
+.version

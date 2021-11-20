@@ -4,8 +4,8 @@ import math
 
 file_size = 0x340 # 0x1 at end, rounded up
 ROM_start = 0x2022000
-ROM_name = "dk64-practice-rom.z64";
-state_index = 0;
+ROM_name = "rom/dk64-practice-rom.z64"
+state_index = 0
 state_files = [
 	{
 		"folder": "No Levels Early",
@@ -70,7 +70,7 @@ state_files = [
 ]
 
 def arrToInt(arr):
-	total = 0;
+	total = 0
 	for x in arr:
 		total = (total * 256) + x
 	return total
@@ -85,7 +85,7 @@ def floatbytereadToSignedShort(read):
 		flt = struct.unpack('!f', bytes.fromhex(hex(bytereadToInt(read))[2:]))[0]
 	_flt = math.floor(flt)
 	if _flt < 0:
-		hx = (("0000" + hex(0x10000 + _flt))[2:])[-4:];
+		hx = (("0000" + hex(0x10000 + _flt))[2:])[-4:]
 	else:
 		hx = ("0000" + hex(_flt)[2:])[-4:]
 	arr = [int("0x" + hx[:2],16),int("0x" + hx[2:],16)]
@@ -98,18 +98,18 @@ def grabFileState(input_file,output_file):
 		with open(output_file, "wb") as fg:
 			# Grab File Index
 			fh.seek(0x7467C8)
-			file_index = bytereadToInt(fh.read(1));
+			file_index = bytereadToInt(fh.read(1))
 			# Grab Eeprom Slot
-			found_slot = False;
+			found_slot = False
 			for x in range(4):
-				fh.seek(0x7EDEA8 + x);
+				fh.seek(0x7EDEA8 + x)
 				EEPROMMap = bytereadToInt(fh.read(1))
 				if not found_slot:
 					if EEPROMMap == file_index:
-						eeprom_slot = x;
-						found_slot = True;
+						eeprom_slot = x
+						found_slot = True
 			if not found_slot:
-				eeprom_slot = 0;
+				eeprom_slot = 0
 			# Get Flag Block Address
 			flag_block_address = 0x7ECEA8 + eeprom_slot * 0x1AC
 			fh.seek(flag_block_address)
@@ -119,7 +119,7 @@ def grabFileState(input_file,output_file):
 			fh.seek(0x7FC950)
 			fg.write(fh.read(0x1D6))
 			fh.seek(0x7FBB4C)
-			player = bytereadToInt(fh.read(4)) - 0x80000000;
+			player = bytereadToInt(fh.read(4)) - 0x80000000
 			fh.seek(player + 0x7C)
 			fg.write(bytearray(floatbytereadToSignedShort(fh.read(4))))
 			fh.seek(player + 0x80)
@@ -138,7 +138,7 @@ def grabFileState(input_file,output_file):
 			fg.write(fh.read(0x10))
 			
 
-file_dir_start = "./../assets/File States/"
+file_dir_start = "assets/File States/"
 for x in state_files:
 	state_dir = file_dir_start + x["folder"] + "/State Files/"
 	dump_dir = file_dir_start + x["folder"] + "/RAM Dump/"
@@ -147,8 +147,8 @@ for x in state_files:
 		if not os.path.exists(state_dir):
 			os.mkdir(state_dir)
 		if os.path.exists(state_dir + y):
-			os.remove(state_dir + y);
-		grabFileState(dump_dir + y, state_dir + y);
+			os.remove(state_dir + y)
+		grabFileState(dump_dir + y, state_dir + y)
 		with open(state_dir + y, "rb") as fh:
 			with open(ROM_name, "r+b") as fg:
 				_byteread = fh.read()
@@ -158,5 +158,5 @@ for x in state_files:
 				fg.write(_byteread)
 				state_index += 1
 		if os.path.exists(state_dir + y):
-			os.remove(state_dir + y);
+			os.remove(state_dir + y)
 print("Generated File States")

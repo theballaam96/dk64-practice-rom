@@ -1,22 +1,22 @@
 import math
 
-inputs = [0x20080000,0x0008E236,0x0008EC00,0x000800B0];
+inputs = [0x20080000,0x0008E236,0x0008EC00,0x000800B0]
 
 def convertStickToSigned(val):
 	if val > 127:
-		return val - 255;
-	return val;
+		return val - 255
+	return val
 
 def convertInputs(input_seq):
-	inversed_seq = [];
+	inversed_seq = []
 	for x in range(len(input_seq)):
-		index = (len(input_seq) - 1) - x;
-		stick_x = convertStickToSigned((input_seq[index] >> 8) & 0xFF);
-		stick_y = convertStickToSigned(input_seq[index] & 0xFF);
-		mag = math.pow(((stick_x * stick_x) + (stick_y * stick_y)),0.5);
+		index = (len(input_seq) - 1) - x
+		stick_x = convertStickToSigned((input_seq[index] >> 8) & 0xFF)
+		stick_y = convertStickToSigned(input_seq[index] & 0xFF)
+		mag = math.pow(((stick_x * stick_x) + (stick_y * stick_y)),0.5)
 		if (mag > 70):
-			mag = 70;
-		buttons_half = (input_seq[index] >> 16) & 0xFFFF;
+			mag = 70
+		buttons_half = (input_seq[index] >> 16) & 0xFFFF
 		inversed_seq.append({
 			"x": stick_x,
 			"y": stick_y,
