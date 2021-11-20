@@ -1,266 +1,353 @@
 import subprocess
 import os
 import shutil
-import binascii
 import gzip
-import sys
-from compressFile import compressGZipFile
-#import packages
-#from ia_format import to_ia4, to_ia8, to_i8, to_i4
+import zlib
 
-rom_version = 3;
-with open("./../src/.version","r") as fh:
+rom_version = 3
+with open(".version","r") as fh:
 	rom_version = int(fh.readlines()[0][0])
 if rom_version > 2:
-	exit();
-file_dict = {
-	"files": [
-		{
-			"start": [0x1118420,0x1122254,0x1116F7C][rom_version],
-			"compressed_size": [0x37A,0xC74,0x3A0][rom_version],
-			"file_type": "text",
-			"source_file": "Menu.bin",
-			"output_file": "Menu_Copy.bin",
-			"name": "Menu Text"
-		},
-		{
-			"start": [0x1115766,0x111839A,0x1113E9A][rom_version],
-			"compressed_size": [0x6D,0xEC,0x72][rom_version],
-			"file_type": "text",
-			"source_file": "Dolby.bin",
-			"output_file": "Dolby_Copy.bin",
-			"name": "Dolby Text"
-		},
-		{
-			"start": [0x11172E8,0x111E61A,0x1115DC8][rom_version],
-			"compressed_size": [0x1FF,0x75E,0x1D8][rom_version],
-			"file_type": "text",
-			"source_file": "KLumsy.bin",
-			"output_file": "KLumsy_Copy.bin",
-			"name": "K. Lumsy Text"
-		},
-		{
-			"start": 0x1118BA4,
-			"compressed_size": 0x60D,
-			"file_type": "text",
-			"source_file": "Wrinkly.bin",
-			"output_file": "Wrinkly_Copy.bin",
-			"name": "Wrinkly Hint Text"
-		},
-		{
-			"start": 0x113F0,
-			"compressed_size": 0xB15E4, # GEDECOMPRESS - B15DC, PYTHON - B17A8, FINALISE ROM - B15E0 | 0xF064C
-			"forced_compressed_size": 0xB15E2,
-			"file_type": "code",
-			"source_file": "StaticCode.bin",
-			"output_file": "StaticCode_Copy.bin",
-			"name": "Static ASM Code",
-			"use_external_gzip": True,
-		},
-		{
-			"start": 0x1156AC4,
-			"compressed_size": 0xA0C,
-			"file_type": "image",
-			#"source_file": "../assets/Non-Code/Nintendo Logo/Thumb.bin",
-			"source_file": "../assets/Non-Code/Nintendo Logo/Nintendo.png",
-			"output_file": "ThumbCompressed.bin.gz",
-			"name": "Thumb Image",
-			"convert": True,
-			"texture_format": "rgba5551",
-		},
-		{
-			"start": 0x116818C,
-			"compressed_size": 0x880,
-			"file_type": "image",
-			#"source_file": "../assets/Non-Code/Dolby/DolbyLogo.bin",
-			"source_file": "../assets/Non-Code/Dolby/DolbyThin.png",
-			"output_file": "DolbyCompressed.bin.gz",
-			"name": "Dolby Image",
-			"convert": True,
-			"texture_format": "i4",
-		},
-		{
-			"start": 0x175D4A8,
-			"compressed_size": 0xFA0,
-			"file_type": "image",
-			"source_file": "../assets/Non-Code/Employee Head/employee_head.png",
-			"output_file": "employee_head.bin.gz",
-			"name": "Employee Head Image",
-			"convert": True,
-			"texture_format": "i8",
-		},
-		# {
-		# 	"start": 0x11201B4,
-		# 	"compressed_size": 0x47A,
-		# 	"file_type": "image",
-		# 	"source_file": "../assets/Non-Code/Font/symbols_new_gz.png",
-		# 	"output_file": "sym_large.bin.gz",
-		# 	"name": "Groovy Font Symbols Image",
-		# 	"convert": True,
-		# 	"texture_format": "ia4",
-		# },
-		# {
-		# 	"start": 0x112062E,
-		# 	"compressed_size": 0x4B6,
-		# 	"file_type": "image",
-		# 	"source_file": "../assets/Non-Code/Font/capitals_new_gz.png",
-		# 	"output_file": "upper_large.bin.gz",
-		# 	"name": "Groovy Font Uppercase Image",
-		# 	"convert": True,
-		# 	"texture_format": "ia4",
-		# },
-		# {
-		# 	"start": 0x1120AE4,
-		# 	"compressed_size": 0x444,
-		# 	"file_type": "image",
-		# 	"source_file": "../assets/Non-Code/Font/lower_new_gz.png",
-		# 	"output_file": "lower_large.bin.gz",
-		# 	"name": "Groovy Font Lowercase Image",
-		# 	"convert": True,
-		# 	"texture_format": "ia4",
-		# },
-	]
-}
+	exit()
 
-print("Practice ROM Extractor")
-print("[0 / 2] - Analyzing ROM")
-ROMName = "./../src/rom/dk64.z64"
-with open(ROMName, "r+b") as fh:
-	print("[1 / 2] - Unzipping files from ROM")
-	for x in file_dict["files"]:
-		if "use_external_gzip" in x and x["use_external_gzip"]:
-			if x["output_file"][-3:] != ".gz":
-				x["output_file"] += ".gz"
-		if x["file_type"] != "image":
-			fh.seek(x["start"])
-			byte_read = fh.read(x["compressed_size"])
-			binName = x["source_file"]
+# Infrastructure for recomputing DK64 global pointer tables
+from map_names import maps
+from recompute_pointer_table import pointer_tables, dumpPointerTableDetails, replaceROMFile, writeModifiedPointerTablesToROM, parsePointerTables, getFileInfo, make_safe_filename
+from recompute_overlays import isROMAddressOverlay, readOverlayOriginalData, replaceOverlayData, writeModifiedOverlaysToROM
 
-			if os.path.exists(binName):
-			    os.remove(binName)
+# Patcher functions for the extracted files
+from patch_text import patchDolbyText, patchWrinklyText, patchKlumsyText, patchMainMenu
+from staticcode import patchStaticCode
 
-			with open(binName, "wb") as fg:
-				dec = gzip.decompress(byte_read)
-				fg.write(dec)
+ROMName = "rom/dk64.z64"
+newROMName = "rom/dk64-practice-rom.z64"
 
-import modules
-newROMName = "dk64-practice-rom.z64"
 if os.path.exists(newROMName):
     os.remove(newROMName)
-shutil.copyfile(ROMName, newROMName);
+shutil.copyfile(ROMName, newROMName)
+
+file_dict = [
+	{
+		"name": "Menu Text",
+		"pointer_table_index": 12,
+		"file_index": 37,
+		"source_file": "Menu.bin",
+		"patcher": patchMainMenu
+	},
+	{
+		"name": "Dolby Text",
+		"pointer_table_index": 12,
+		"file_index": 13,
+		"source_file": "DolbyText.bin",
+		"patcher": patchDolbyText,
+	},
+	{
+		"name": "K. Lumsy Text",
+		"pointer_table_index": 12,
+		"file_index": 27,
+		"source_file": "KLumsy.bin",
+		"patcher": patchKlumsyText,
+	},
+	{
+		"name": "Wrinkly Hint Text",
+		"pointer_table_index": 12,
+		"file_index": 41,
+		"source_file": "Wrinkly.bin",
+		"patcher": patchWrinklyText,
+	},
+	{
+		"name": "Static ASM Code",
+		"start": 0x113F0,
+		"compressed_size": 0xB15E4,
+		"source_file": "StaticCode.bin",
+		"use_external_gzip": True,
+		"patcher": patchStaticCode,
+	},
+	{
+		"name": "Thumb Image",
+		"pointer_table_index": 14,
+		"file_index": 94,
+		"source_file": "assets/Non-Code/Nintendo Logo/Nintendo.png",
+		"texture_format": "rgba5551",
+	},
+	{
+		"name": "Dolby Logo",
+		"pointer_table_index": 14,
+		"file_index": 176,
+		"source_file": "assets/Non-Code/Dolby/DolbyThin.png",
+		"texture_format": "i4",
+	},
+	{
+		"name": "Employee Head Image",
+		"pointer_table_index": 25,
+		"file_index": 5003,
+		"source_file": "assets/Non-Code/Employee Head/employee_head.png",
+		"texture_format": "i8",
+	},
+	# {
+	# 	"name": "Groovy Font Symbols Image",
+	# 	"pointer_table_index": 14,
+	# 	"file_index": 0,
+	# 	"source_file": "assets/Non-Code/Font/symbols_new_gz.png",
+	# 	"texture_format": "ia4",
+	# },
+	# {
+	# 	"name": "Groovy Font Uppercase Image",
+	# 	"pointer_table_index": 14,
+	# 	"file_index": 1,
+	# 	"source_file": "assets/Non-Code/Font/capitals_new_gz.png",
+	# 	"texture_format": "ia4",
+	# },
+	# {
+	# 	"name": "Groovy Font Lowercase Image",
+	# 	"pointer_table_index": 14,
+	# 	"file_index": 2,
+	# 	"source_file": "assets/Non-Code/Font/lower_new_gz.png",
+	# 	"texture_format": "ia4",
+	# },
+	{
+		"name": "Actor Names",
+		"start": 0x2020000,
+		"source_file": "assets/Non-Code/actor_names.bin",
+		"do_not_extract": True,
+		"do_not_delete_source": True,
+		"do_not_compress": True,
+	},
+	{
+		"name": "Snag Names",
+		"start": 0x2021800,
+		"source_file": "assets/Non-Code/snag_names.bin",
+		"do_not_extract": True,
+		"do_not_delete_source": True,
+		"do_not_compress": True,
+	},
+	{
+		"name": "Snag Names (Capitals)",
+		"start": 0x2021C00,
+		"source_file": "assets/Non-Code/snag_names_capitals.bin",
+		"do_not_extract": True,
+		"do_not_delete_source": True,
+		"do_not_compress": True,
+	},
+]
+
+map_replacements = [
+	# {
+	# 	"name": "Test Map",
+	# 	"map_index": 0,
+	# 	"map_folder": "maps/path_test/"
+	# },
+]
+
+print("DK64 Extractor")
+
+with open(ROMName, "rb") as fh:
+	print("[1 / 7] - Parsing pointer tables")
+	parsePointerTables(fh)
+	readOverlayOriginalData(fh)
+
+	for x in map_replacements:
+		print(" - Processing map replacement " + x["name"])
+		if os.path.exists(x["map_folder"]):
+			found_geometry = False
+			found_floors = False
+			found_walls = False
+			should_compress_walls = True
+			should_compress_floors = True
+			for y in pointer_tables:
+				if not "encoded_filename" in y:
+					continue
+
+				# Convert decoded_filename to encoded_filename using the encoder function
+				# Eg. exits.json to exits.bin
+				if "encoder" in y and callable(y["encoder"]):
+					if "decoded_filename" in y and os.path.exists(x["map_folder"] + y["decoded_filename"]):
+						y["encoder"](x["map_folder"] + y["decoded_filename"], x["map_folder"] + y["encoded_filename"])
+				
+				if os.path.exists(x["map_folder"] + y["encoded_filename"]):
+					if y["index"] == 1:
+						with open(x["map_folder"] + y["encoded_filename"], "rb") as fg:
+							byte_read = fg.read(10)
+							should_compress_walls = (byte_read[9] & 0x1) != 0
+							should_compress_floors = (byte_read[9] & 0x2) != 0
+						found_geometry = True
+					elif y["index"] == 2:
+						found_walls = True
+					elif y["index"] == 3:
+						found_floors = True
+
+			# Check that all walls|floors|geometry files exist on disk, or that none of them do
+			walls_floors_geometry_valid = (found_geometry == found_walls) and (found_geometry == found_floors)
+
+			if not walls_floors_geometry_valid:
+				print("  - WARNING: In map replacement: " + x["name"])
+				print("    - Need all 3 files present to replace walls, floors, and geometry.")
+				print("    - Only found 1 or 2 of them out of 3. Make sure all 3 exist on disk.")
+				print("    - Will skip replacing walls, floors, and geometry to prevent crashes.")
+
+			for y in pointer_tables:
+				if not "encoded_filename" in y:
+					continue
+
+				if os.path.exists(x["map_folder"] + y["encoded_filename"]):
+					# Special case to prevent crashes with custom level geometry, walls, and floors
+					# Some of the files are compressed in ROM, some are not
+					if y["index"] in [1, 2, 3] and not walls_floors_geometry_valid:
+						continue
+
+					do_not_compress = "do_not_compress" in y and y["do_not_compress"]
+					if y["index"] == 2:
+						do_not_compress = not should_compress_walls
+					elif y["index"] == 3:
+						do_not_compress = not should_compress_floors
+
+					print("  - Found " + x["map_folder"] + y["encoded_filename"])
+					file_dict.append({
+						"name": x["name"] + y["name"],
+						"pointer_table_index": y["index"],
+						"file_index": x["map_index"],
+						"source_file": x["map_folder"] + y["encoded_filename"],
+						"do_not_extract": True,
+						"do_not_compress": do_not_compress,
+						"use_external_gzip": "use_external_gzip" in y and y["use_external_gzip"],
+					})
+
+	print("[2 / 7] - Extracting files from ROM")
+	for x in file_dict:
+		# N64Tex conversions do not need to be extracted to disk from ROM
+		if "texture_format" in x:
+			x["do_not_extract"] = True
+			x["output_file"] = x["source_file"].replace(".png", "." + x["texture_format"])
+
+		if not "output_file" in x:
+			x["output_file"] = x["source_file"]
+
+		# gzip.exe appends .gz to the filename, we'll do the same
+		if "use_external_gzip" in x and x["use_external_gzip"]:
+			x["output_file"] = x["output_file"] + ".gz"
+
+		# If we're not extracting the file to disk, we're using a custom .bin that shoudn't be deleted
+		if "do_not_extract" in x and x["do_not_extract"]:
+			x["do_not_delete_source"] = True
+
+		# Extract the compressed file from ROM
+		if not ("do_not_extract" in x and x["do_not_extract"]):
+			byte_read = bytes()
+			if "pointer_table_index" in x and "file_index" in x:
+				file_info = getFileInfo(x["pointer_table_index"], x["file_index"])
+				if file_info:
+					x["start"] = file_info["new_absolute_address"]
+					x["compressed_size"] = len(file_info["data"])
+
+			fh.seek(x["start"])
+			byte_read = fh.read(x["compressed_size"])
+
+			if not ("do_not_delete_source" in x and x["do_not_delete_source"]):
+				if os.path.exists(x["source_file"]):
+					os.remove(x["source_file"])
+
+				with open(x["source_file"], "wb") as fg:
+					dec = zlib.decompress(byte_read, 15 + 32)
+					fg.write(dec)
+
+print("[3 / 7] - Patching Extracted Files")
+for x in file_dict:
+	if "patcher" in x and callable(x["patcher"]):
+		print(" - Running patcher for " + x["source_file"])
+		x["patcher"](x["source_file"])
 
 with open(newROMName, "r+b") as fh:
-	print("[2 / 2] - Writing modified compressed files to ROM")
-	for x in file_dict["files"]:
-		binName = x["output_file"]
-		if x["file_type"] != "image":
-			if "use_external_gzip" in x and x["use_external_gzip"]:
-				compressGZipFile(x["source_file"],x["output_file"],False)
-			if os.path.exists(binName):
-				with open(binName, "rb") as fg:
-					byte_read = fg.read()
-					if "use_external_gzip" in x and x["use_external_gzip"]:
-						compress = byte_read
-					else:
-						compress = gzip.compress(byte_read, compresslevel=9)
-					sizeProp = "compressed_size"
-					if "forced_compressed_size" in x:
-						sizeProp = "forced_compressed_size"
-					if len(compress) > x[sizeProp]:
-						print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(compress)) + ")")
+	print("[4 / 7] - Writing patched files to ROM")
+	for x in file_dict:
+		if "texture_format" in x:
+			if x["texture_format"] in ["rgba5551", "i4", "ia4", "i8", "ia8"]:
+				result = subprocess.check_output(["./build/n64tex.exe", x["texture_format"], x["source_file"]])
+			else:
+				print(" - ERROR: Unsupported texture format " + x["texture_format"])
+
+		if "use_external_gzip" in x and x["use_external_gzip"]:
+			if os.path.exists(x["source_file"]):
+				result = subprocess.check_output(["./build/gzip.exe", "-f", "-n", "-k", "-q", "-9", x["output_file"].replace(".gz", "")])
+				if os.path.exists(x["output_file"]):
+					with open(x["output_file"], "r+b") as outputFile:
+						# Chop off gzip footer
+						outputFile.truncate(len(outputFile.read()) - 8)
+
+		if os.path.exists(x["output_file"]):
+			byte_read = bytes()
+			uncompressed_size = 0
+			with open(x["output_file"], "rb") as fg:
+				byte_read = fg.read()
+				uncompressed_size = len(byte_read)
+
+			if "do_not_compress" in x and x["do_not_compress"]:
+				compress = bytearray(byte_read)
+			elif "use_external_gzip" in x and x["use_external_gzip"]:
+				compress = bytearray(byte_read)
+			elif "use_zlib" in x and x["use_zlib"]:
+				compressor = zlib.compressobj(zlib.Z_BEST_COMPRESSION, zlib.DEFLATED, 25)
+				compress = compressor.compress(byte_read)
+				compress += compressor.flush()
+				compress = bytearray(compress)
+				# Zero out timestamp in gzip header to make builds deterministic
+				compress[4] = 0
+				compress[5] = 0
+				compress[6] = 0
+				compress[7] = 0
+			else:
+				compress = bytearray(gzip.compress(byte_read, compresslevel=9))
+				# Zero out timestamp in gzip header to make builds deterministic
+				compress[4] = 0
+				compress[5] = 0
+				compress[6] = 0
+				compress[7] = 0
+
+			print(" - Writing " + x["output_file"] + " (" + hex(len(compress)) + ") to ROM")
+			if "pointer_table_index" in x and "file_index" in x:
+				# More complicated write, update the pointer tables to point to the new data
+				replaceROMFile(x["pointer_table_index"], x["file_index"], compress, uncompressed_size)
+			elif "start" in x:
+				if isROMAddressOverlay(x["start"]):
+					replaceOverlayData(x["start"], compress)
+				else:
+					# Simply write the bytes at the absolute address in ROM specified by x["start"]
 					fh.seek(x["start"])
 					fh.write(compress)
 			else:
-				print(x["output_file"] + " does not exist")
+				print("  - WARNING: Can't find address information in file_dict entry to write " + x["output_file"] + " (" + hex(len(compress)) + ") to ROM")
 		else:
-			will_convert = False;
-			if "convert" in x:
-				if x["convert"]:
-					will_convert = True;
-			if will_convert:
-				converted = False;
-				if "texture_format" in x:
-					if x["texture_format"] in ["rgba5551","i4","i8","ia4","ia8"]:
-						result = subprocess.check_output(["./n64tex.exe", x["texture_format"], x["source_file"]])
-						converted = True;
-					else:
-						print(" - ERROR: Unsupported texture format " + x["texture_format"])
-				if converted:
-					#print(x["name"])
-					file_name = ".".join(x["source_file"].split(".")[0:-1]) + "." + x["texture_format"]
-					#print(file_name)
-					if os.path.exists(file_name):
-						compressGZipFile(file_name,x["output_file"],False);
-						with open(x["output_file"],"rb") as fg:
-							img = fg.read()
-							fh.seek(x["start"])
-							print(x["name"] + ": " + str(len(img)) + " bytes. Lim: " + str(x["compressed_size"]) + " bytes")
-							if len(img) > x["compressed_size"]:
-								print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(img)) + ")")
-							else:
-								fh.write(img)
-					if os.path.exists(file_name):
-						os.remove(file_name)
-					if os.path.exists(x["output_file"]):
-						os.remove(x["output_file"])
-			else:
-				if os.path.exists(x["source_file"]):
-					compressGZipFile(x["source_file"],x["output_file"],False)
-					with open(x["output_file"],"rb") as fg:
-						img = fg.read()
-						fh.seek(x["start"])
-						print(x["name"] + ": " + str(len(img)) + " bytes. Lim: " + str(x["compressed_size"]) + " bytes")
-						if len(img) > x["compressed_size"]:
-							print("ERROR: " + x["name"].upper() + " IS TOO BIG (" + hex(len(img)) + ")")
-						else:
-							fh.write(img)
-					if os.path.exists(x["output_file"]):
-						os.remove(x["output_file"])
-				else:
-					print(x["source_file"] + " does not exist")
+			print(x["output_file"] + " does not exist")
 
-for x in file_dict["files"]:
-	if x["file_type"] != "image":
-		if os.path.exists(x["output_file"]):
-			os.remove(x["output_file"])
-		if os.path.exists(x["source_file"]):
-			os.remove(x["source_file"])
-if os.path.exists("StaticCode_Copy.bin"):
-	os.remove("StaticCode_Copy.bin")
-if os.path.exists("StaticCode.bin.gz"):
-	os.remove("StaticCode.bin.gz")
+		# Cleanup temporary files
+		if not ("do_not_delete" in x and x["do_not_delete"]):
+			if not ("do_not_delete_output" in x and x["do_not_delete_output"]):
+				if os.path.exists(x["output_file"]) and x["output_file"] != x["source_file"]:
+					os.remove(x["output_file"])
+			if not ("do_not_delete_source" in x and x["do_not_delete_source"]):
+				if os.path.exists(x["source_file"]):
+					os.remove(x["source_file"])
+
+	print("[5 / 7] - Writing recomputed pointer tables to ROM")
+	writeModifiedPointerTablesToROM(fh)
+	writeModifiedOverlaysToROM(fh)
+
+	print("[6 / 7] - Dumping details of all pointer tables to rom/build.log")
+	dumpPointerTableDetails("rom/build.log", fh)
 
 #import font_builder
 
-# crc patch
-with open(newROMName, "r+b") as fh:
-    fh.seek(0x3154)
-    fh.write(bytearray([0, 0, 0, 0]))
-    with open("./../assets/Non-Code/actor_names.bin","rb") as fg:
-    	_actor_names = fg.read()
-    	fh.seek(0x2020000)
-    	fh.write(_actor_names)
-    with open ("./../assets/Non-Code/snag_names.bin","rb") as fg:
-    	_snag_names = fg.read()
-    	fh.seek(0x2021800)
-    	fh.write(_snag_names)
-    with open ("./../assets/Non-Code/snag_names_capitals.bin","rb") as fg:
-    	_snag_names2 = fg.read()
-    	fh.seek(0x2021C00)
-    	fh.write(_snag_names2)
-    # with open("./../assets/Non-Code/Font/font_boundaries.bin","rb") as fg:
+# with open(newROMName, "r+b") as fh:
+    # with open("assets/Non-Code/Font/font_boundaries.bin","rb") as fg:
     # 	_font_boundaries = fg.read()
     # 	fh.seek(0x2021600)
     # 	fh.write(_font_boundaries)
 
 import filestatewriter
 
-#if os.path.exists("./../assets/Non-Code/Font/font_boundaries.bin"):
-#	os.remove("./../assets/Non-Code/Font/font_boundaries.bin")
+#if os.path.exists("assets/Non-Code/Font/font_boundaries.bin"):
+#	os.remove("assets/Non-Code/Font/font_boundaries.bin")
 
-if os.path.exists("dk64-practice-rom.z64"):
-	shutil.copyfile("dk64-practice-rom.z64", "./../src/rom/dk64-practice-rom-python.z64");
-	os.remove("dk64-practice-rom.z64")
-# crcresult = subprocess.check_output(["n64crc", newROMName])
-# print("[5 / 5] - CRC Updated")
+print("[7 / 7] - Generating BizHawk RAM watch")
+import generate_watch_file
+
 exit()

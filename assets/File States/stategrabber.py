@@ -1,7 +1,7 @@
 import os
 
 def arrToInt(arr):
-	total = 0;
+	total = 0
 	for x in arr:
 		total = (total * 256) + x
 	return total
@@ -16,18 +16,18 @@ def grabFileState(input_file,output_file):
 		with open(output_file, "wb") as fg:
 			# Grab File Index
 			fh.seek(0x7467C8)
-			file_index = bytereadToInt(fh.read(1));
+			file_index = bytereadToInt(fh.read(1))
 			# Grab Eeprom Slot
-			found_slot = False;
+			found_slot = False
 			for x in range(4):
-				fh.seek(0x7EDEA8 + x);
+				fh.seek(0x7EDEA8 + x)
 				EEPROMMap = bytereadToInt(fh.read(1))
 				if not found_slot:
 					if EEPROMMap == file_index:
-						eeprom_slot = x;
-						found_slot = True;
+						eeprom_slot = x
+						found_slot = True
 			if not found_slot:
-				eeprom_slot = 0;
+				eeprom_slot = 0
 			# Get Flag Block Address
 			flag_block_address = 0x7ECEA8 + eeprom_slot * 0x1AC
 			fh.seek(flag_block_address)
@@ -52,7 +52,7 @@ grabFileState("./No Levels Early/RAM Dump/caves.bin","./No Levels Early/State Fi
 grabFileState("./No Levels Early/RAM Dump/castle.bin","./No Levels Early/State Files/castle.bin")
 grabFileState("./No Levels Early/RAM Dump/helm.bin","./No Levels Early/State Files/helm.bin")
 grabFileState("./No Levels Early/RAM Dump/takeoffskip.bin","./No Levels Early/State Files/takeoffskip.bin")
-grabFileState("./General/RAM Dump/cleanfile.bin","./General/State Files/cleanfile.bin");
+grabFileState("./General/RAM Dump/cleanfile.bin","./General/State Files/cleanfile.bin")
 grabFileState("./101/RAM Dump/caves1_organic.bin","./101/State Files/caves1_organic.bin")
 grabFileState("./101/RAM Dump/japes1_organic.bin","./101/State Files/japes1_organic.bin")
 grabFileState("./101/RAM Dump/aztec1_organic.bin","./101/State Files/aztec1_organic.bin")
