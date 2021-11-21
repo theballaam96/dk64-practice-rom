@@ -18,6 +18,7 @@
 	#define HERTZ 60 // US/JP = 60 Hz
 #endif
 
+#define F3DEX_GBI_2
 #include "ultra64.h"
 #include "common_structs.h"
 #include "dk64.h"

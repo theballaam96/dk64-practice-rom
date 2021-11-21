@@ -9,14 +9,12 @@ void cFuncLoop(void) {
 	} else {
 		if (ActiveMenu.isOpen) {
 			changeCustomFlagVariable(); // Active Menu Open
-			updateLoadedActorNoTextOverlayList(0); // Active Menu Open
 			moveSlot(); // Active Menu Open
 			confirmOption(); // Active Menu Open
 			menuShortcutButtons(); // Active Menu Open
 			shouldRefreshTOMenu(); // Active Menu Open
 			runTest(); // Active Menu Open
 			toggleSelectedActor(); // Active Menu Open
-			//hideHUD();
 			customHideHUD();
 			hideRacePosition(0);
 		} else {
@@ -28,19 +26,18 @@ void cFuncLoop(void) {
 				handleLToTBV(); // Active Menu Closed
 			}
 		}
-		int _watch_present = 0;
+		watchActive = 0;
 		int i = 0;
 		while (i < 4) {
 			if (WatchIndex[i++]) {
-				_watch_present = 1;
+				watchActive = 1;
 				break;
 			}
 		}
-		if (_watch_present) {
+		if (watchActive) {
 			handleWatch(); // Active Menu Closed, Watch Present
 			clampWatchFloats(); // Active Menu Closed, Watch Present
 			controlWatchView(); // Watches Open
-			//hideHUD();
 			customHideHUD();
 			handleTimer(); // Constant
 			hideRacePosition(0);
@@ -51,11 +48,9 @@ void cFuncLoop(void) {
 		closeMenuOnTransition(); // Into Transition
 		closeInputOnTransition(); // Into Transition
 		destroyViewerOnTransition(); // Into Transition
-		closeWatchesOnTransition(); // Into Transition
 	}
 	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
 		checkMapType(); // Out of Transition
-		openWatchesOnTransition(); // Out of Transition
 		openInputOnTransition(); // Out of Transition
 		getSandstormAddress(); // Out of Transition, CurrentMap == 0x26
 		handleSpawnPrevention(); // Out of Transition, EnemySpawnOff
@@ -65,9 +60,11 @@ void cFuncLoop(void) {
 			}
 		}
 	}
+	if (stateLoadTimer > 0) {
+		stateLoadTimer -= 1;
+	}
 	startupSkip();
 	colorKong(); // Constant
-	emergencyClose(); // Constant
 	tagAnywhere(); // Constant
 	//correctTagCode();
 	initHack(); // Map == 0x28
@@ -107,7 +104,20 @@ void arcadeFuncLoop(void) {
 	finishLoadingArcadeState();
 };
 
+static char stateLoadstr[15] = "";
+
 int* displayListModifiers(int* dl) {
+	if ((CurrentMap == 0x50) && (!watchActive)) {
+		dl = drawTextContainer(dl, 1, 25, 525, "DK64 PRACTICE ROM", 0xFF, 0xFF, 0xFF, 0xFF, 0);
+		dl = drawTextContainer(dl, 1, 25, 550, "VERSION 1.4.2", 0xFF, 0xFF, 0xFF, 0xFF, 0);
+	}
+	if (stateLoadTimer > 0) {
+		dk_strFormat((char *)stateLoadstr, "State %d Loaded", FocusedSavestate + 1);
+		dl = drawTextContainer(dl, 128, 200, 290, (char *)stateLoadstr, 0xFF, 0xFF, 0xFF, 0xFF, 1);
+	}
+	dl = displayMenu(dl);
+	dl = displayWatches(dl);
+	dl = displayMemory(dl);
 	// int dl0 = displayListVar[0];
 	// int dl1 = displayListVar[2];
 	// *(unsigned int*)(dl + 0x00) = 0xE200001C;

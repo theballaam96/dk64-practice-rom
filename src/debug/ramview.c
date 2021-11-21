@@ -15,6 +15,9 @@
 #define ramViewY 40
 #define ramViewYOffset 22
 
+#define FOCUSMENU_DEFAULT 0
+#define FOCUSMENU_DETAILS 1
+
 char formatter08[] = "%02X:%08X %08X";
 char formatter04[] = "%02X:%04X %04X %04X %04X";
 char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X";
@@ -45,6 +48,19 @@ unsigned int ramViewer_end = validRamReadEnd;
 unsigned int focusValue = 0;
 int ramViewEditMode = 0;
 char access_type = 0; // 0 = Debug Menu, 1 = Actor Menu
+char focus_menu = 0; // 0 = Normal, 1 = Additional Options
+char details_index = 0;
+char details_cap = 0;
+
+static const char addToWatches[] = "Add as Watch";
+static const char freezeValue[] = "Freeze Value";
+static const char frozenMenu[] = "Frozen Values";
+static const char watchTypeInt0[] = "Int";
+static const char watchTypeInt1[] = "Float";
+static const char watchTypeShort0[] = "Short";
+static const char watchTypeByte0[] = "Byte";
+static const char watchTypeByte1[] = "Bool";
+int* focused_address = 0;
 
 char* ramViewTextPtrs[] = {headerViewText, line1, line2, line3, line4, line5, line6, line7, line8};
 char* focusedBytePtr = focusedBytes;
@@ -117,25 +133,30 @@ void formatByteFocus(int* address, int byteFormat) {
     unsigned int _cap = 0;
     if (byteFormat == ByteFormat4) {
         addr_value = *((unsigned int*)address + focusedBytes_offset);
+        focused_address = (int*)(address + focusedBytes_offset);
         format_index = 0;
         _cap = 0xFFFFFFFF;
         //dk_strFormat((focusedBytePtr), "%08X", addr_value);
     } else if (byteFormat == ByteFormat2) {
         addr_value = *((unsigned short*)address + focusedBytes_offset);
+        focused_address = (int*)(((short*)address + focusedBytes_offset));
         format_index = 1;
         _cap = 0xFFFF;
         //dk_strFormat((focusedBytePtr), "%04X", addr_value);
     } else if (byteFormat == ByteFormat1) {
         addr_value = *((unsigned char*)address + focusedBytes_offset);
+        focused_address = (int*)(((char*)address + focusedBytes_offset));
         format_index = 2;
         _cap = 0xFF;
         //dk_strFormat((focusedBytePtr), "%02X", addr_value);
     } else if (byteFormat == ByteFormatH) {
         addr_value = (*((unsigned char*)address + (focusedBytes_offset / 2)) >> (4 * (1 - (focusedBytes_offset % 2)))) & 0xF;
+        focused_address = (int*)(((char*)address + (focusedBytes_offset / 2)));
         format_index = 3;
         _cap = 0xF;
     } else {//unknown byte format, default to %08X
         addr_value = *((unsigned int*)address + focusedBytes_offset);
+        focused_address = (int*)(address + focusedBytes_offset);
         format_index = 0;
         _cap = 0xFFFFFFFF;
         //dk_strFormat((focusedBytePtr), "%08X", addr_value);
@@ -227,14 +248,20 @@ void destroyTextObjects(void) {
 }
 
 void updateRAMValue(int* address) {
-    if (ControllerInput.Buttons & L_Button) {
-        textOverlayInstances[9]->red = 0xFF;
-        textOverlayInstances[9]->green = 0x45;
-        textOverlayInstances[9]->blue = 0x00;
+    if (focus_menu == FOCUSMENU_DEFAULT) {
+        if (ControllerInput.Buttons & L_Button) {
+            textOverlayInstances[9]->red = 0xFF;
+            textOverlayInstances[9]->green = 0x45;
+            textOverlayInstances[9]->blue = 0x00;
+        } else {
+            textOverlayInstances[9]->red = 0xFF;
+            textOverlayInstances[9]->green = 0xD7;
+            textOverlayInstances[9]->blue = 0x00;
+        } 
     } else {
         textOverlayInstances[9]->red = 0xFF;
-        textOverlayInstances[9]->green = 0xD7;
-        textOverlayInstances[9]->blue = 0x00;
+        textOverlayInstances[9]->green = 0x03;
+        textOverlayInstances[9]->blue = 0x03;
     }
     if ((NewlyPressedControllerInput.Buttons & D_Up) && (ControllerInput.Buttons & L_Button)) {
         focusValue += 1;
@@ -299,47 +326,53 @@ void editAddress(void) {
     int new_digit = initial_digit;
     int slot = 0xF;
     int opp_slot = -1;
-    if ((ControllerInput.Buttons & R_Button) && (ControllerInput.Buttons & L_Button) == 0) {
-        textOverlayInstances[9]->opacity = 0x0;
-        textOverlayInstances[10]->opacity = 0xFF;
-        textOverlayInstances[11]->opacity = 0xFF;
-        if (NewlyPressedControllerInput.Buttons & D_Left) {
-            editAddrPosition -= 1;
-        } else if (NewlyPressedControllerInput.Buttons & D_Right) {
-            editAddrPosition += 1;
-        } else if (NewlyPressedControllerInput.Buttons & D_Up) {
-            if (editAddrPosition == 6) {
-                new_digit += 8;
+    if (focus_menu == FOCUSMENU_DEFAULT) {
+        if ((ControllerInput.Buttons & R_Button) && (ControllerInput.Buttons & L_Button) == 0) {
+            textOverlayInstances[9]->opacity = 0x0;
+            textOverlayInstances[10]->opacity = 0xFF;
+            textOverlayInstances[11]->opacity = 0xFF;
+            if (NewlyPressedControllerInput.Buttons & D_Left) {
+                editAddrPosition -= 1;
+            } else if (NewlyPressedControllerInput.Buttons & D_Right) {
+                editAddrPosition += 1;
+            } else if (NewlyPressedControllerInput.Buttons & D_Up) {
+                if (editAddrPosition == 6) {
+                    new_digit += 8;
+                } else {
+                    new_digit += 1;
+                }
+                if (new_digit > 0xF) {
+                    new_digit = 0;
+                }
+            } else if (NewlyPressedControllerInput.Buttons & D_Down) {
+                if (editAddrPosition == 6) {
+                    new_digit += 8;
+                } else {
+                    new_digit -= 1;
+                }
+                if (new_digit < 0) {
+                    new_digit = 0xF;
+                }
+                if (new_digit > 0xF) {
+                    new_digit = 0;
+                }
+            }
+            if (initial_digit != new_digit) {
+                slot <<= (4 * (6 - editAddrPosition));
+                opp_slot -= slot;
+                printStartAddr = (int*)(((unsigned int)(printStartAddr) & opp_slot) | (new_digit << (4 * (6 - editAddrPosition))));
+            }
+            if ((int)printStartAddr < ramViewer_start) {
+                printStartAddr = (int*)ramViewer_start;
             } else {
-                new_digit += 1;
+                if ((int)printStartAddr > ramViewer_end) {
+                    printStartAddr = (int*)ramViewer_end;
+                }
             }
-            if (new_digit > 0xF) {
-                new_digit = 0;
-            }
-        } else if (NewlyPressedControllerInput.Buttons & D_Down) {
-            if (editAddrPosition == 6) {
-                new_digit += 8;
-            } else {
-                new_digit -= 1;
-            }
-            if (new_digit < 0) {
-                new_digit = 0xF;
-            }
-            if (new_digit > 0xF) {
-                new_digit = 0;
-            }
-        }
-        if (initial_digit != new_digit) {
-            slot <<= (4 * (6 - editAddrPosition));
-            opp_slot -= slot;
-            printStartAddr = (int*)(((unsigned int)(printStartAddr) & opp_slot) | (new_digit << (4 * (6 - editAddrPosition))));
-        }
-        if ((int)printStartAddr < ramViewer_start) {
-            printStartAddr = (int*)ramViewer_start;
         } else {
-            if ((int)printStartAddr > ramViewer_end) {
-                printStartAddr = (int*)ramViewer_end;
-            }
+            textOverlayInstances[9]->opacity = 0xFF;
+            textOverlayInstances[10]->opacity = 0x00;
+            textOverlayInstances[11]->opacity = 0x00;
         }
     } else {
         textOverlayInstances[9]->opacity = 0xFF;
@@ -358,23 +391,25 @@ void editAddress(void) {
         x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - i))) & 0xF);
     }
     textOverlayInstances[10]->xPos = x_pos;
-    if (ControllerInput.Buttons & R_Button) {
-        x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - (editAddrPosition - 1)))) & 0xF);
-        textOverlayInstances[11]->xPos = x_pos;
-        int focus_char = 0x20;
-        int _pos = editAddrPosition + 10;
-        int addr_pos = 0;
-        if (editAddrPosition == 6) {
-            addrEndBytes[0] = 0x20;
-            addrEndBytes[1] = 0;
-        } else {
-            while ((focus_char != 0) && (addr_pos < 7)) {
-                focus_char = ramViewTextPtrs[0][_pos++];
-                addrEndBytes[addr_pos++] = focus_char;
+    if (focus_menu == FOCUSMENU_DEFAULT) {
+        if (ControllerInput.Buttons & R_Button) {
+            x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - (editAddrPosition - 1)))) & 0xF);
+            textOverlayInstances[11]->xPos = x_pos;
+            int focus_char = 0x20;
+            int _pos = editAddrPosition + 10;
+            int addr_pos = 0;
+            if (editAddrPosition == 6) {
+                addrEndBytes[0] = 0x20;
+                addrEndBytes[1] = 0;
+            } else {
+                while ((focus_char != 0) && (addr_pos < 7)) {
+                    focus_char = ramViewTextPtrs[0][_pos++];
+                    addrEndBytes[addr_pos++] = focus_char;
+                }
+                addrEndBytes[addr_pos] = 0; 
             }
-            addrEndBytes[addr_pos] = 0; 
+            ramViewTextPtrs[0][editAddrPosition + 9] = 0;
         }
-        ramViewTextPtrs[0][editAddrPosition + 9] = 0;
     }
     dk_strFormat((focusedAddrPtr),"%1X",((unsigned int)printStartAddr >> (4 * (6 - editAddrPosition))) & 0xF);
 }
@@ -471,13 +506,30 @@ void moveRAMViewFocus(void) {
     }   
 }
 
+void alterDetailsFocus(void) {
+    if (details_cap > 1) {
+        if (NewlyPressedControllerInput.Buttons & D_Down) {
+            details_index += 1;
+            if (details_index == details_cap) {
+                details_index = 0;
+            }
+        } else if (NewlyPressedControllerInput.Buttons & D_Up) {
+            if (details_index > 0) {
+                details_index -= 1;
+            } else {
+                details_index = details_cap - 1;
+            }
+        }
+    }
+}
+
 void ramViewUpdate(void) {
     if (RAMDisplayOpen) {
-        if (ControllerInput.Buttons & L_Button) {
-            if (ramViewEditMode == 1){
-                ramViewEditMode = 2;
-            } else {
-                if (ramViewEditMode == 0) {
+        if (focus_menu == FOCUSMENU_DEFAULT) {
+            if (ControllerInput.Buttons & L_Button) {
+                if (ramViewEditMode == 1){
+                    ramViewEditMode = 2;
+                } else if (ramViewEditMode == 0) {
                     ramViewEditMode = 1;
                 }
             }
@@ -488,12 +540,26 @@ void ramViewUpdate(void) {
         if ((PreviouslyPressedButtons.Buttons & L_Button) && (ControllerInput.Buttons & L_Button) == 0) {
             ramViewEditMode = 3;
         }
-        checkForFormatChange();
-        moveRAMViewFocus();
+        if (NewlyPressedControllerInput.Buttons & Z_Button) {
+            focus_menu += 1;
+            if (focus_menu == 2) {
+                focus_menu = 0;
+            }
+            if (focus_menu == FOCUSMENU_DETAILS) {
+                details_index = 0;
+            }
+        }
+        if (focus_menu == FOCUSMENU_DEFAULT) {
+            checkForFormatChange();
+            moveRAMViewFocus();
+        }
         updateRAMValue(printStartAddr);
         updateHeader(printStartAddr);
         updateTable(printStartAddr);
         editAddress();
+        if (focus_menu == FOCUSMENU_DETAILS) {
+            alterDetailsFocus();
+        }
         if (access_type == 0) {
             MemoryViewerLastAddress = printStartAddr;
         }
@@ -501,6 +567,45 @@ void ramViewUpdate(void) {
             closeRamViewerDisplay();
         }
     }
+}
+
+int* displayMemory(int* dl) {
+    int focus_index = 0;
+    if (RAMDisplayOpen) {
+        if (focus_menu == FOCUSMENU_DETAILS) {
+            int colors[6] = {0xFF,0xFF,0xFF,0xFF,0xD7,0x00};
+            int background = 1;
+            int y = 265;
+            if (currentFormat == ByteFormat4) {
+                int val = *(int*)(focused_address);
+                if ((val >= 0x80000000) && (val < 0x80800000)) {
+                    dl = drawTextContainer(dl, 128, 200, y, "Follow Pointer",
+                        colors[(3 * (focus_index == details_index)) + 0],
+                        colors[(3 * (focus_index == details_index)) + 1],
+                        colors[(3 * (focus_index == details_index)) + 2],
+                        0xFF, background);
+                    focus_index += 1;
+                    y += 13;
+                }
+            }
+            dl = drawTextContainer(dl, 128, 200, y, "Add to Watch",
+                colors[(3 * (focus_index == details_index)) + 0],
+                colors[(3 * (focus_index == details_index)) + 1],
+                colors[(3 * (focus_index == details_index)) + 2],
+                0xFF, background);
+            focus_index += 1;
+            y += 13;
+            dl = drawTextContainer(dl, 128, 200, y, "Freeze Value",
+                colors[(3 * (focus_index == details_index)) + 0],
+                colors[(3 * (focus_index == details_index)) + 1],
+                colors[(3 * (focus_index == details_index)) + 2],
+                0xFF, background);
+            focus_index += 1;
+            y += 13;
+        }
+        details_cap = focus_index;
+    }
+    return dl;
 }
 
 void startRamViewerDisplay (void) {

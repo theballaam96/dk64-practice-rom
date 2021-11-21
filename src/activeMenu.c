@@ -9,9 +9,6 @@ static const char timerSettings[] = "Timer Settings";
 static const char fileStates[] = "File States";
 static const char cheats[] = "Cheats";
 static const char settings[] = "Settings";
-static const char hackTitle[] = "DK64 Practice ROM";
-static const char hackVersion[] = "Version 1.4.1";
-// static const char hackVersion[] = "1.4.1 Test: 9NOV2021";
 
 static const char* main_array[] = {
 	warp,
@@ -139,70 +136,54 @@ const Screen* menu_screens[] = {
 };
 
 void spawnMenu(int screenIndex) {
-	TextOverlay* textOverlay;
-	int x = 25;
-	int y = 25;
-	int style = 10;
+	ActiveMenu.screenIndex = screenIndex;
 	const Screen* focused_screen = menu_screens[screenIndex];
-	int* focused_text_array = (int*)focused_screen->TextArray;
 	int array_count = focused_screen->ArrayItems;
 	if (ActiveMenu.positionIndex >= array_count) {
 		ActiveMenu.positionIndex = array_count - 1;
 	}
-	for (int i = 0; i < array_count; i++) {
-		spawnTextOverlay(style,x,y,(char *)focused_text_array[i],0,0,2,0);
-		textOverlay = (TextOverlay *)CurrentActorPointer;
-		ActiveToolsMenu[i] = textOverlay;
-		textOverlay->opacity = 0xFF;
-		textOverlay->style = 128;
-		if (i == ActiveMenu.positionIndex) {
-			textOverlay->red = 0xFF;
-			textOverlay->green = 0xD7;
-			textOverlay->blue = 0;
-		}
-		y += 13;
-	}
-	spawnTextOverlay(style,x,y,"Return",0,0,2,0);
-	textOverlay = (TextOverlay *)CurrentActorPointer;
-	textOverlay->opacity = 0xFF;
-	textOverlay->style = 128;
-	ActiveToolsMenu[array_count] = textOverlay;
-	if (screenIndex == 0) {
-		spawnTextOverlay(style,180,25,(char *)hackTitle,0,0,2,0);
-		textOverlay = (TextOverlay *)CurrentActorPointer;
-		textOverlay->opacity = 0xFF;
-		textOverlay->style = 128;
-		HackTitle = textOverlay;
-		int version_x = 217;
-		// int version_x = 153;
-		spawnTextOverlay(style,version_x,38,(char *)hackVersion,0,0,2,0);
-		textOverlay = (TextOverlay *)CurrentActorPointer;
-		textOverlay->opacity = 0xFF;
-		textOverlay->style = 128;
-		HackVersion = textOverlay;
-	}
 	ActiveMenu.isOpen = 1;
 };
 
-void clearMenu(void) {
-	int* textOverlay;
-	for (int i = 0; i < MaxMenuItems; i++) {
-		textOverlay = (int *)ActiveToolsMenu[i];
-		if (textOverlay) {
-			deleteActor(textOverlay);
+int* displayMenu(int* dl) {
+	if (ActiveMenu.isOpen) {
+		int x = 25;
+		int y = 100;
+		int red = 0xFF;
+		int green = 0xFF;
+		int blue = 0xFF;
+		int style = 128;
+		const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
+		int* focused_text_array = (int*)focused_screen->TextArray;
+		int array_count = focused_screen->ArrayItems;
+		int background = 1;
+		for (int i = 0; i < array_count; i++) {
+			red = 0xFF;
+			green = 0xFF;
+			blue = 0xFF;
+			if (i == ActiveMenu.positionIndex) {
+				red = 0xFF;
+				green = 0xD7;
+				blue = 0;
+			}
+			dl = drawTextContainer(dl, style, x, y, (char *)focused_text_array[i], red, green, blue, 0xFF, background);
+			y += 13;
 		}
-		ActiveToolsMenu[i] = 0;
+		if (ActiveMenu.positionIndex == array_count) {
+			red = 0xFF;
+			green = 0x45;
+			blue = 0;
+		} else {
+			red = 0xFF;
+			green = 0xFF;
+			blue = 0xFF;
+		}
+		dl = drawTextContainer(dl, style, x, y, "Return", red, green, blue, 0xFF, background);
 	}
-	textOverlay = (int *)HackTitle;
-	if (textOverlay) {
-		deleteActor(textOverlay);
-	}
-	HackTitle = 0;
-	textOverlay = (int *)HackVersion;
-	if (textOverlay) {
-		deleteActor(textOverlay);
-	}
-	HackVersion = 0;
+	return dl;
+}
+
+void clearMenu(void) {
 	ActiveMenu.isOpen = 0;
 };
 
@@ -249,10 +230,6 @@ void toggleMenu(void) {
 };
 
 void moveSlot(void) {
-	TextOverlay* textOverlay;
-	unsigned char _red;
-	unsigned char _green;
-	unsigned char _blue;
 	if (ActiveMenu.isOpen) {
 		if (((TBVoidByte & 2) == 0) || (ArtificialPauseOn)) {
 			if (IsPauseMenuOpen == 0) {
@@ -276,28 +253,6 @@ void moveSlot(void) {
 						}
 					}
 					ActiveMenu.positionIndex = _position;
-					for (int i = 0; i < cap; i++) {
-						textOverlay = (TextOverlay *)(int *)ActiveToolsMenu[i];
-						_red = 0xFF;
-						_green = 0xFF;
-						_blue = 0xFF;
-						if (textOverlay) {
-							if (_position == i) {
-								if (_position == (cap - 1)) {
-									_red = 0xFF;
-									_green = 0x45;
-									_blue = 0;
-								} else {
-									_red = 0xFF;
-									_green = 0xD7;
-									_blue = 0;
-								}
-							}
-						};
-						textOverlay->red = _red;
-						textOverlay->green = _green;
-						textOverlay->blue = _blue;
-					}
 				}
 			}
 		}
@@ -310,36 +265,6 @@ void closeMenuOnTransition(void) {
 			clearMenu();
 		}
 		wipeText();
-	}
-}
-
-void emergencyClose(void) {
-	TextOverlay* textOverlay;
-	if (NewMenu_ErrorStart) {
-		int _time = FrameReal - NewMenu_ErrorStart;
-		if (_time >= ErrorLength) {
-			textOverlay = ActiveTools_Error;
-			deleteActor((void *)textOverlay);
-			NewMenu_ErrorStart = 0;
-		}
-	} else {
-		if (LoadedActorCount >= 60) {
-			if (ActiveMenu.isOpen) {
-				NewMenu_ErrorStart = FrameReal;
-				spawnTextOverlay(10,100,200,"EMERGENCY: ERROR 01",0,0,2,0);
-				textOverlay = (TextOverlay *)CurrentActorPointer;
-				if (textOverlay) {
-					textOverlay->opacity = 0xFF;
-					textOverlay->red = 0xFF;
-					textOverlay->green = 0;
-					textOverlay->blue = 0;
-					textOverlay->style = 128;
-				}
-				ActiveTools_Error = textOverlay;
-				clearMenu();
-				wipeText();
-			}
-		}
 	}
 }
 

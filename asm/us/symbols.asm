@@ -57,7 +57,9 @@
 .definelabel loadSetup, 0x806886E0
 .definelabel getParentDataIndex, 0x80688D64
 
-.definelabel prepDisplayList, 0x807132DC
+.definelabel initDisplayList, 0x807132DC
+.definelabel getTextStyleHeight, 0x806FD894
+.definelabel displayText, 0x806FC530
 
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
@@ -172,8 +174,10 @@
 .definelabel focusedParentDataSetup, 0x807F5A70
 .definelabel HUD, 0x80754280
 .definelabel textData, 0x80754A34
+.definelabel LZFadeoutProgress, 0x807FD888
 
-.definelabel displayListVar, 0x80744490
+.definelabel screenCenterX, 0x80744490
+.definelabel screenCenterY, 0x80744494
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8
@@ -197,7 +201,9 @@
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
-.definelabel ActiveToolsMenu, 0x807FFF20 // 0x60
+.definelabel style6Mtx, 0x807FFF20 // 0x20
+.definelabel watchActive, 0x807FFF40 // u8
+.definelabel stateLoadTimer, 0x807FFF41 // u8
 .definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct
 
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes

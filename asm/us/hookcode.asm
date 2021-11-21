@@ -154,43 +154,6 @@ START_HOOK:
 			J 	0x8069D8BC
 			OR 	a3, r0, r0
 
-	handleFrameAdvanceActorRun:
-		LUI 	t6, hi(IsPauseMenuOpen)
-		SB 		r0, lo(IsPauseMenuOpen) (t6)
-		JAL 	0x805FC668
-		NOP
-		LUI 	a0, hi(ArtificialPauseOn)
-		LBU 	a0, lo(ArtificialPauseOn) (a0)
-		BEQZ  	a0, handleFrameAdvanceActorRun_Finish
-		NOP
-		JAL 	0x80678824
-		NOP
-		J 		0x805FC40C
-		NOP
-		
-		handleFrameAdvanceActorRun_Finish:
-			J 	0x805FC404
-			NOP
-
-	isolateTextOverlays:
-		LW 		t9, 0x0 (t8)
-		LUI 	t0, hi(ArtificialPauseOn)
-		LBU 	t0, lo(ArtificialPauseOn) (t0)
-		BEQZ  	t0, isolateTextOverlays_Finish
-		NOP
-		LW 		t0, 0x58 (t9)
-		ADDIU 	t1, r0, 0xE8
-		BEQ 	t0, t1, isolateTextOverlays_Finish
-		NOP
-		LUI 	t8, 0x8080
-		LHU 	t8, 0xBB3C (t8)
-		J 		0x806789A4
-		ADDIU 	t8, t8, 1
-
-		isolateTextOverlays_Finish:
-			J 	0x80678930
-			SB 		r0, 0x0 (s4)
-
 	controlTimer:
 		LUI 	t8, hi(ConvertTimerCountdown)
 		ADDIU 	t6, r0, 2
@@ -398,7 +361,6 @@ START_HOOK:
 		LUI 	v0, 0x8075
 		J 		0x80714184
 		LBU 	v0, 0x5314 (v0)
-
 
 .align 0x10
 END_HOOK:

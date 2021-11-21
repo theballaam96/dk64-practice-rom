@@ -183,12 +183,6 @@ TextResizeHook:
 DefineAMFontHook:
 	J 	defineActiveMenuOtherParams
 	NOP
-ActorRunDuringFrameAdvanceHook:
-	J 	handleFrameAdvanceActorRun
-	NOP
-TextOverlayIsolationHook:
-	J 	isolateTextOverlays
-	NOP
 SpawnTimerHook:
 	J 	controlTimer
 	NOP
@@ -241,17 +235,6 @@ loadExtraHooks:
 	LW t3, lo(DefineAMFontHook) (t3)
 	LUI t4, 0x806A
 	SW 	t3, 0xD8B0 (t4) // Store Hook
-
-	LUI t3, hi(ActorRunDuringFrameAdvanceHook)
-	LW t3, lo(ActorRunDuringFrameAdvanceHook) (t3)
-	LUI t4, 0x8060
-	SW 	t3, 0xC3FC (t4) // Store Hook
-
-	LUI t3, hi(TextOverlayIsolationHook)
-	LW t3, lo(TextOverlayIsolationHook) (t3)
-	LUI t4, 0x8068
-	SW 	t3, 0x8928 (t4) // Store Hook
-	SW 	r0, 0x892C (t4) // Store NOP
 
 	LUI t3, hi(SpawnTimerHook)
 	LW t3, lo(SpawnTimerHook) (t3)
@@ -310,6 +293,10 @@ loadExtraHooks:
 	ADDIU t4, r0, 0x81
 	SB t4, 0xCB10 (t3)
 	SB t4, 0xCACC (t3)
+
+	LUI t3, 0x8070
+	ADDIU t4, r0, 0x50
+	SB t4, 0xCA68 (t3)
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

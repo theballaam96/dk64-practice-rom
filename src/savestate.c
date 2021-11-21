@@ -266,6 +266,15 @@ void savestateHandler(void) {
 						states[_focused_state]->createdTime = FrameReal;
 						states[_focused_state]->stored_damage = StoredDamage;
 						states[_focused_state]->rng = RNG;
+						if (SwapObject) {
+							states[_focused_state]->cameraPos.xPos = SwapObject->cameraPositions[0].xPos;
+							states[_focused_state]->cameraPos.yPos = SwapObject->cameraPositions[0].yPos;
+							states[_focused_state]->cameraPos.zPos = SwapObject->cameraPositions[0].zPos;
+						}
+						if (Camera) {
+							states[_focused_state]->camera_rotation = Camera->viewportRotation;
+						}
+						
 
 						// Parent Map Shenanigans
 						int levelIndex = levelIndexMapping[CurrentMap];
@@ -369,6 +378,7 @@ void savestateHandler(void) {
 							HelmTimerShown = 0; // Prevent Game Over fadeout
 							ISGActive = 0; // Prevent ISG Fade
 							CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
+							LZFadeoutProgress = 28.0f;
 							LoadVarsOnMapLoad = 1;
 						} else {
 							playSFX(Wrong);
@@ -415,8 +425,6 @@ void savestateLoadMapLoadVars(void) {
 		dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
 		StoredDamage = states[_focused_state]->stored_damage;
 		dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
-	}
-	if ((ObjectModel2Timer == 2) && (TransitionSpeed < 0) && (LoadVarsOnMapLoad == 1)) {
 		HelmTimerShown = states[_focused_state]->HelmTimerOn;
 		if (HelmTimerShown) {
 			getTimestampDiffInTicks(states[_focused_state]->HelmTimerDifferenceMajor,states[_focused_state]->HelmTimerDifferenceMinor);
@@ -434,9 +442,23 @@ void savestateLoadMapLoadVars(void) {
 		RNG = states[_focused_state]->rng;
 		if (Player) {
 			if (LastLoadStateAction == 2) {
+				LZFadeoutProgress = 1.0f;
 				Player->facing_angle = states[_focused_state]->facing_angle;
 				Player->skew_angle = states[_focused_state]->skew_angle;
 				Player->floor = states[_focused_state]->floor;
+				if (SwapObject) {
+					for (int i = 0; i < 4; i++) {
+						SwapObject->cameraPositions[i].xPos = states[_focused_state]->cameraPos.xPos;
+						SwapObject->cameraPositions[i].yPos = states[_focused_state]->cameraPos.yPos;
+						SwapObject->cameraPositions[i].zPos = states[_focused_state]->cameraPos.zPos;
+					}
+				}
+				if (Camera) {
+					Camera->viewportX = states[_focused_state]->cameraPos.xPos;
+					Camera->viewportY = states[_focused_state]->cameraPos.yPos;
+					Camera->viewportZ = states[_focused_state]->cameraPos.zPos;
+					Camera->viewportRotation = states[_focused_state]->camera_rotation;
+				}
 				if (Player->camera_pointer) {
 					Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
 				}
@@ -459,6 +481,7 @@ void savestateLoadMapLoadVars(void) {
 				}
 			}
 		}
+		stateLoadTimer = 60;
 		LoadVarsOnMapLoad = 0;
 	}
 }

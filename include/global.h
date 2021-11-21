@@ -24,6 +24,11 @@ extern void setWarpPosition(float x, float y, float z);
 extern void hideRacePosition(int show);
 extern void setDataStates(int state, int eightbit);
 extern void customHideHUD(void);
+extern int* drawTextContainer(int* dl, int style, float x, float y, char* str, int red, int green, int blue, int opacity, int background);
+extern int* displayMenu(int* dl);
+extern int* displayWatches(int* dl);
+extern int* drawTri(int* dl);
+extern int* displayMemory(int* dl);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);

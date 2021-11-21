@@ -25,9 +25,6 @@ static const char detailsscreen_warp[] = "Warp to Actor";
 static const char detailsscreen_memory[] = "View in Memory";
 
 static char startingActorIndex = 0;
-
-static actorData* loadedActorsNoTextOverlays[64];
-static int loadedActorNoTOCount = 0;
 static int previousNoTOCount = 0;
 
 static const char* actorscreen_viewed[10] = {
@@ -81,25 +78,6 @@ static const char* detailsscreen_array[] = {
 	detailsscreen_memory,
 };
 
-void updateLoadedActorNoTextOverlayList(int callType) { // callType: 0 = every frame, checks screen Index. 1 = From openactormenu.
-	if (ActiveMenu.isOpen) {
-		if ((callType) || (ActiveMenu.screenIndex == 77) || (ActiveMenu.screenIndex == 78)) {
-			previousNoTOCount = loadedActorNoTOCount;
-			for (int i = 0; i < 64; i++) {
-				loadedActorsNoTextOverlays[i] = 0;
-			}
-			int no_to_running_count = 0;
-			for (int i = 0; i < LoadedActorCount; i++) {
-				if (LoadedActorArray[i].actor->actorType != 0xE8) { // Not Text Overlay
-					loadedActorsNoTextOverlays[no_to_running_count] = LoadedActorArray[i].actor;
-					no_to_running_count += 1;
-				}
-			}
-			loadedActorNoTOCount = no_to_running_count;
-		}
-	}
-}
-
 void openActorMenu(void) {
 	if (ActorNamesTable == 0) {
 		actorNames* copy_space = dk_malloc(0x1580);
@@ -108,12 +86,11 @@ void openActorMenu(void) {
 		*(int*)(&file_size) = 0x1580;
 		copyFromROM(0x2020000,copy_space,&file_size,0,0,0,0);
 	}
-	updateLoadedActorNoTextOverlayList(1);
 	if (ActiveMenu.screenIndex != 77) {
 		startingActorIndex = 0;
 	}
 	int actorAddr = 0;
-	int loaded_shown = loadedActorNoTOCount - startingActorIndex;
+	int loaded_shown = LoadedActorCount - startingActorIndex;
 	int shown_items = loaded_shown;
 	if (loaded_shown > 10) {
 		loaded_shown = 10;
@@ -123,8 +100,8 @@ void openActorMenu(void) {
 		shown_items += 1;
 	}
 	for (int i = 0; i < loaded_shown; i++) {
-		actorAddr = (int)loadedActorsNoTextOverlays[i + startingActorIndex];
-		int actorType = loadedActorsNoTextOverlays[i + startingActorIndex]->actorType;
+		actorAddr = (int)LoadedActorArray[i + startingActorIndex].actor;
+		int actorType = LoadedActorArray[i + startingActorIndex].actor->actorType;
 		if (ActorNamesTable) {
 			dk_strFormat((char *)actorscreen_viewed[i],"%2d: 0x%4X: %s",i + startingActorIndex,actorAddr, ActorNamesTable->actor_name[actorType]);
 		} else {
@@ -134,7 +111,7 @@ void openActorMenu(void) {
 	}
 	actor_struct.ArrayItems = shown_items;
 	shown_items = loaded_shown;
-	if ((loadedActorNoTOCount - startingActorIndex) > 10) {
+	if ((LoadedActorCount - startingActorIndex) > 10) {
 		actor_array[shown_items] = actorscreen_viewmore;
 		shown_items += 1;
 	}
@@ -148,9 +125,9 @@ void openActorMenu(void) {
 void shouldRefreshTOMenu(void) {
 	if (ActiveMenu.isOpen) {
 		if (ActiveMenu.screenIndex == 77) {
-			if (loadedActorNoTOCount != previousNoTOCount) {
-				if (loadedActorNoTOCount < (startingActorIndex + 1)) {
-					startingActorIndex = loadedActorNoTOCount - (loadedActorNoTOCount % 10);
+			if (LoadedActorCount != previousNoTOCount) {
+				if (LoadedActorCount < (startingActorIndex + 1)) {
+					startingActorIndex = LoadedActorCount - (LoadedActorCount % 10);
 				}
 				openActorMenu();
 			}
@@ -160,16 +137,16 @@ void shouldRefreshTOMenu(void) {
 
 void viewActorInfo(int index) {
 	int actorAddr = 0;
-	actorAddr = (int)loadedActorsNoTextOverlays[index];
-	FocusedActorViewPointer = loadedActorsNoTextOverlays[index];
-	int actorType = loadedActorsNoTextOverlays[index]->actorType;
+	actorAddr = (int)LoadedActorArray[index].actor;
+	FocusedActorViewPointer = LoadedActorArray[index].actor;
+	int actorType = LoadedActorArray[index].actor->actorType;
 	dk_strFormat((char *)detailsscreen_addr,"Address: 0x%4X",actorAddr);
 	dk_strFormat((char *)detailsscreen_typename,"Name: %s",ActorNamesTable->actor_name[actorType]);
 	dk_strFormat((char *)detailsscreen_typehex,"Type: 0x%X",actorType);
 	dk_strFormat((char *)detailsscreen_sizehex,"Size: 0x%X",*(int*)(actorAddr - 0xC));
-	dk_strFormat((char *)detailsscreen_x,"X: %f",loadedActorsNoTextOverlays[index]->xPos);
-	dk_strFormat((char *)detailsscreen_y,"Y: %f",loadedActorsNoTextOverlays[index]->yPos);
-	dk_strFormat((char *)detailsscreen_z,"Z: %f",loadedActorsNoTextOverlays[index]->zPos);
+	dk_strFormat((char *)detailsscreen_x,"X: %f",LoadedActorArray[index].actor->xPos);
+	dk_strFormat((char *)detailsscreen_y,"Y: %f",LoadedActorArray[index].actor->yPos);
+	dk_strFormat((char *)detailsscreen_z,"Z: %f",LoadedActorArray[index].actor->zPos);
 	changeMenu(78);
 }
 
@@ -225,7 +202,7 @@ void decrementActorIndexShown(void) {
 }
 
 void handleActorOption(void) {
-	int actor_screen_count = loadedActorNoTOCount - startingActorIndex;
+	int actor_screen_count = LoadedActorCount - startingActorIndex;
 	if (actor_screen_count > 10) {
 		actor_screen_count = 10;
 	}
@@ -233,7 +210,7 @@ void handleActorOption(void) {
 		viewActorInfo(startingActorIndex + ActiveMenu.positionIndex);
 	} else {
 		if (ActiveMenu.positionIndex == actor_screen_count) {
-			if ((loadedActorNoTOCount - startingActorIndex) > 10) {
+			if ((LoadedActorCount - startingActorIndex) > 10) {
 				incrementActorIndexShown();
 			} else {
 				decrementActorIndexShown();

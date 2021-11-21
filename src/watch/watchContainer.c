@@ -95,33 +95,22 @@ static const char* phasereason_list[] = {
 
 static float past_speeds[64];
 static int speed_doc_index = 0;
+static unsigned char watch_red[WatchCount];
+static unsigned char watch_green[WatchCount];
+static unsigned char watch_blue[WatchCount];
 
 void destroyWatch(int slot) {
-	if (WatchActor[slot]) {
-		deleteActor((void *)WatchActor[slot]);
-		WatchActor[slot] = 0;
-	}
+	WatchActor[slot] = 0;
 };
 
 void spawnWatch(int slot) {
-	TextOverlay* textOverlay;
-	int y = 210 - (slot * 13);
 	destroyWatch(slot);
-	spawnTextOverlay(10,25,y,"CALIBRATING",0,0,2,0);
-	textOverlay = (TextOverlay *)CurrentActorPointer;
-	if (textOverlay) {
-		WatchActor[slot] = textOverlay;
-		textOverlay->string = (char *)&WatchTextSpace[slot];
-		//textOverlay->style = 128;
-	}
 };
 
 void colorWatch(char _red, char _green, char _blue, int slot) {
-	if (WatchActor[slot]) {
-		WatchActor[slot]->red = _red;
-		WatchActor[slot]->green = _green;
-		WatchActor[slot]->blue = _blue;
-	}
+	watch_red[slot] = _red;
+	watch_green[slot] = _green;
+	watch_blue[slot] = _blue;
 };
 
 void controlWatchView(void) {
@@ -136,27 +125,20 @@ void controlWatchView(void) {
 	}
 }
 
-void closeWatchesOnTransition(void) {
-	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
-		for (int i = 0; i < WatchCount; i++) {
-			if (WatchActor[i]) {
-				destroyWatch(i);
-			}
-		}
-	}
-}
-
-void openWatchesOnTransition(void) {
-	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
+int* displayWatches(int* dl) {
+	if (!ActiveMenu.isOpen) {
+		int y = 0;
+		int k = 0;
 		for (int i = 0; i < WatchCount; i++) {
 			if (WatchIndex[i]) {
-				if (WatchActor[i] == 0) {
-					spawnWatch(i);
-				}
+				y = 340 - (k++ * 13);
+				// Note: This is huge for some reason? Is there a way we can shrink this?
+				dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 1);
 			}
 		}
 	}
-};
+	return dl;
+}
 
 static const char* watch_listed_array[] = {
 	change_lag,

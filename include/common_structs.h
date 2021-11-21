@@ -210,6 +210,9 @@ typedef struct Savestate {
 	/* 0x37C */ float par_z;
 	/* 0x380 */ short par_tpb;
 	/* 0x382 */ char par_bool;
+	/* 0x383 */ char unk_383;
+	/* 0x384 */ floatPos cameraPos;
+	/* 0x390 */ short camera_rotation;
 } Savestate;
 
 typedef struct Screen {
@@ -826,5 +829,5 @@ typedef struct text_struct {
 	/* 0x002 */ unsigned char height;
 	/* 0x003 */ char kerning_space;
 	/* 0x004 */ char kerning_char;
-	/* 0x005 */ char unk_05;
+	/* 0x005 */ char kerning_anim;
 } text_struct;

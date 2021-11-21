@@ -12,6 +12,12 @@ void initHack(void) {
 		// *(int*)(&file_size) = 0x180;
 		// copyFromROM(0x2021600,(int*)0x807546D0,&file_size,0,0,0,0);
 		//textData[0].kerning_char = -2;
+		textData[0].kerning_anim = 5;
+		// Style 6 Mtx
+		int base_mtx = 3;
+		style6Mtx[0x0] = base_mtx;
+		style6Mtx[0x5] = base_mtx;
+		style6Mtx[0xF] = base_mtx + 1;
 		colorMenuSky();
 		for (int i = 0; i < WatchCount; i++) {
 			ViewedSnagWatches[i] = -1;

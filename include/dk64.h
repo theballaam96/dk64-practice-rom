@@ -72,7 +72,9 @@ extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, c
 extern void loadSetup(void* setup_file, int unk0, int unk1);
 extern int getParentDataIndex(int map);
 
-extern int* prepDisplayList(int* dl);
+extern int* initDisplayList(int* dl);
+extern int getTextStyleHeight(int style);
+extern int* displayText(int* dl, int style, int x, int y, void* text_pointer, char unk0);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -180,8 +182,10 @@ extern void* SetupFilePointer;
 extern int* focusedParentDataSetup[17];
 extern hudData* HUD;
 extern text_struct textData[6];
+extern float LZFadeoutProgress;
 
-extern short displayListVar[3];
+extern short screenCenterX;
+extern short screenCenterY;
 
 extern char arcadeMap;
 extern char arcadeMode;
@@ -207,7 +211,6 @@ extern int TestVariable;
 extern savedSettings StoredSettings;
 
 extern TextOverlay* ActiveTools_Error;
-extern TextOverlay* ActiveToolsMenu[];
 extern char InBadMap;
 extern char MenuSavestateAction;
 extern char WatchIndex[4];
@@ -293,6 +296,9 @@ extern ActiveMenuData arcadeMenu;
 extern int* MemoryViewerLastAddress;
 extern console assignedConsole;
 extern int* phasePointer;
+extern short style6Mtx[0x10];
+extern char watchActive;
+extern char stateLoadTimer;
 
 // Code
 extern int debugColumnLoop;
