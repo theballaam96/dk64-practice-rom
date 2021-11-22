@@ -61,7 +61,7 @@ int* drawImage(int* dl, int text_index, codecs codec_index, int img_width, int i
 	*(unsigned int*)(dl++) = 0xFF2CFE7F;
 	*(unsigned int*)(dl++) = 0xE3001201;
 	*(unsigned int*)(dl++) = 0x00000000;
-	dl = displayImage(dl++, 48, 0, RGBA16, 32, 32, *(int*)(0x807FFF50), *(int*)(0x807FFF54), *(float*)(0x807FFF58), *(float*)(0x807FFF5C), *(int*)(0x807FFF60), *(float*)(0x807FFF64));
+	dl = displayImage(dl++, 48, 0, RGBA16, 32, 32, img_width, img_height, x, y, xScale, yScale);
 	return dl;
 };
 
