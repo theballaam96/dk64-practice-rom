@@ -31,6 +31,10 @@ void initHack(void) {
 		if (StoredSettings.console > 0) {
 			DestMap = 0x50;
 		}
+		*(int*)(0x807FFF50) = 631;
+		*(int*)(0x807FFF54) = 487;
+		*(float*)(0x807FFF58) = 5.19f;
+		*(float*)(0x807FFF5C) = 5.19f;
 		loadSettings();
 		LoadedHooks = 1;
 	}

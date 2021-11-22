@@ -95,7 +95,7 @@ void cFuncLoop(void) {
 	analyzeInputs(); // PhaseChecker.assistant_on
 	writeFlagsToLog(); // Constant
 	changeTimer_spawnTimer(); // ConvertTimerCountdown > 0
-	//controlFairyViewer(); // FairyViewerOpen
+	controlFairyViewer(); // FairyViewerOpen
 };
 
 void arcadeFuncLoop(void) {
@@ -118,6 +118,7 @@ int* displayListModifiers(int* dl) {
 	dl = displayMenu(dl);
 	dl = displayWatches(dl);
 	dl = displayMemory(dl);
+	dl = displayFairy(dl);
 	// int dl0 = displayListVar[0];
 	// int dl1 = displayListVar[2];
 	// *(unsigned int*)(dl + 0x00) = 0xE200001C;

@@ -84,6 +84,22 @@ file_dict = [
 		"source_file": "assets/Non-Code/Employee Head/employee_head.png",
 		"texture_format": "i8",
 	},
+	{
+		"name": "Fairy Viewer Square",
+		"pointer_table_index": 14,
+		"file_index": 48,
+		"source_file": "assets/Non-Code/Fairy Viewer/fairy_square.png",
+		"texture_format": "rgba5551",
+		"do_not_extract": True,
+	},
+	{
+		"name": "Fairy Viewer Dot",
+		"pointer_table_index": 14,
+		"file_index": 49,
+		"source_file": "assets/Non-Code/Fairy Viewer/fairy_dot.png",
+		"texture_format": "rgba5551",
+		"do_not_extract": True,
+	},
 	# {
 	# 	"name": "Groovy Font Symbols Image",
 	# 	"pointer_table_index": 14,

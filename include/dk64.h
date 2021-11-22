@@ -75,6 +75,7 @@ extern int getParentDataIndex(int map);
 extern int* initDisplayList(int* dl);
 extern int getTextStyleHeight(int style);
 extern int* displayText(int* dl, int style, int x, int y, void* text_pointer, char unk0);
+extern int* displayImage(int* dl, int texture_index, int unk3, codecs codec_index, int width, int height, int x, int y, float xScale, float yScale, int unk11, float unk12);
 
 //vanilla data
 extern float TransitionSpeed;

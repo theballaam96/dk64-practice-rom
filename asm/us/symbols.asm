@@ -60,6 +60,7 @@
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894
 .definelabel displayText, 0x806FC530
+.definelabel displayImage, 0x8068C5A8
 
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C

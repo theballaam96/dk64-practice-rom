@@ -29,6 +29,8 @@ extern int* displayMenu(int* dl);
 extern int* displayWatches(int* dl);
 extern int* drawTri(int* dl);
 extern int* displayMemory(int* dl);
+extern int* drawImage(int* dl, int text_index, codecs codec_index, int img_width, int img_height, int x, int y, float xScale, float yScale, int opacity);
+extern int* displayFairy(int* dl);
 
 extern void destroyWatch(int slot);
 extern void spawnWatch(int slot);

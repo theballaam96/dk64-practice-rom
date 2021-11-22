@@ -5,7 +5,7 @@
 *.o
 *.bak
 *.pckg
-src/include/rom_version.h
+include/rom_version.h
 
 *.sym
 asm/objects.asm

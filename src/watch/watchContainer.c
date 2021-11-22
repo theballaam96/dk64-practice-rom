@@ -499,7 +499,7 @@ static const int watch_assist_functions[] = {
 const Screen watch_assist_struct = {
 	.TextArray = (int*)watch_assist_array,
 	.FunctionArray = watch_assist_functions,
-	.ArrayItems = 1,
+	.ArrayItems = 2,
 	.ParentScreen = 12,
 	.ParentPosition = 4
 };

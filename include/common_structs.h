@@ -831,3 +831,10 @@ typedef struct text_struct {
 	/* 0x004 */ char kerning_char;
 	/* 0x005 */ char kerning_anim;
 } text_struct;
+
+typedef enum codecs {
+    IA4,
+    IA8,
+    RGBA16,
+    RGBA32,
+} codecs;

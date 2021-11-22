@@ -282,6 +282,12 @@ loadExtraHooks:
 	SW t3, 0x8D64 (t4) // Store Hook
 	SW r0, 0x8D68 (t4) // Store NOP
 
+	LUI t3, hi(FairyStoreHook)
+	LW t3, lo(FairyStoreHook) (t3)
+	LUI t4, 0x806C
+	SW 	t3, 0x5D9C (t4) // Store Hook
+	SW 	r0, 0x5DA0 (t4) // Store NOP
+
 	LUI t3, hi(DisplayListHook)
 	LW t3, lo(DisplayListHook) (t3)
 	LUI t4, 0x8071
