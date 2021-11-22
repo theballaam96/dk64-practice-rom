@@ -247,12 +247,6 @@ loadExtraHooks:
 	LUI t4, 0x806E
 	SW 	t3, 0x063C (t4) // Store Hook
 
-	//LUI t3, hi(FairyStoreHook)
-	//LW t3, lo(FairyStoreHook) (t3)
-	//LUI t4, 0x806C
-	//SW 	t3, 0x5D9C (t4) // Store Hook
-	//SW 	r0, 0x5DA0 (t4) // Store NOP
-
 	LUI t3, hi(ArcadeHook)
 	LW t3, lo(ArcadeHook) (t3)
 	LUI t4, 0x8060

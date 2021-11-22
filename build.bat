@@ -23,6 +23,7 @@ build\armips.exe %jl_file%
 python build\build.py
 build\armips.exe %ml_file% -sym rom\dk64-practice-rom-dev.sym
 rmdir /s /q .\obj > NUL
+python build\correct_file_size.py
 build\n64crc.exe rom\dk64-practice-rom-dev.z64
 python build\dump_pointer_tables_vanilla.py
 python build\dump_pointer_tables_modified.py
