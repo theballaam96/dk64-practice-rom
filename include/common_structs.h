@@ -149,7 +149,9 @@ typedef struct playerData {
 	/* 0x324 */ char unk_324[0x328 - 0x324];
 	/* 0x328 */ actorData* krool_timer_pointer;
 	/* 0x32C */ actorData* held_actor;
-	/* 0x330 */ char unk_330[0x36F - 0x330];
+	/* 0x330 */ char unk_330[0x36C - 0x330];
+	/* 0x36C */ char fairy_state;
+	/* 0x36D */ char unk_36D[0x36F - 0x36D];
 	/* 0x36F */ char new_kong;
 	/* 0x370 */ int strong_kong_ostand_bitfield;
 } playerData; //size 0x630
