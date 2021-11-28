@@ -27,7 +27,7 @@ void destroyFairyViewer(void) {
 int* displayFairy(int* dl) {
 	if (FairyViewerOpen && !ActiveMenu.isOpen) {
 		int y = 215;
-		dl = drawImage(dl, 48, RGBA16, 32, 32, *(int*)(0x807FFF50), *(int*)(0x807FFF54), *(float*)(0x807FFF58), *(float*)(0x807FFF5C), 0x80);
+		dl = drawImage(dl, 48, RGBA16, 32, 32, 623, 467, 5.19f, 4.83f, 0x80);
 		if (show_dot) {
 			dl = drawImage(dl, 49, RGBA16, 16, 16, (3.9498f * fairy_x) + 8.5118f, (3.9178f * fairy_y) + 10.822f, 1.0f, 1.0f, 0xFF);
 			int diff = max_dist - fairy_dist;
