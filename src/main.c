@@ -119,6 +119,8 @@ int* displayListModifiers(int* dl) {
 	dl = displayWatches(dl);
 	dl = displayMemory(dl);
 	dl = displayFairy(dl);
+	//dl = drawTri(dl, 100, 100, 300, 500, 500, 300);
+	dl = displayFloors(dl);
 	// int dl0 = displayListVar[0];
 	// int dl1 = displayListVar[2];
 	// *(unsigned int*)(dl + 0x00) = 0xE200001C;
@@ -131,3 +133,8 @@ int* displayListModifiers(int* dl) {
 	// *(unsigned int*)(dl + 0x1C) = 0x00000000;
 	return dl;
 };
+
+int* mapDLModifiers(int* dl) {
+	
+	return dl;
+}

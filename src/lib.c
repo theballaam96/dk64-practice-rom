@@ -118,3 +118,42 @@ void customHideHUD(void) {
 		HUD->item[i].hud_state = 0;
 	}
 }
+
+float arctan(float val) {
+	int arctan_taylortotal = 0;
+	if (val <= 1) {
+		for (int i = 0; i < 15; i++) {
+			int sign = 1;
+			if (i % 2) {
+				sign = -1;
+			}
+			int z_power = (2 * i) + 1;
+			int total = val;
+			for (int j = 0; j < z_power; j++) {
+				total *= val;
+			}
+			arctan_taylortotal += (sign * (total/z_power));
+		}
+	}
+	return arctan_taylortotal;
+}
+
+float arctan2(float x, float y) {
+	if (x > 0) {
+		return arctan(y/x);
+	} else if (x < 0) {
+		if (y >= 0) {
+			return arctan(y/x) + 3.14159f;
+		} else {
+			return arctan(y/x) - 3.14159f;
+		}
+	} else { // x == 0
+		if (y > 0) {
+			return 3.14159f / 2;
+		} else if (y < 0) {
+			return -3.14159f / 2;
+		} else {
+			return 0; // Undefined
+		}
+	}
+}

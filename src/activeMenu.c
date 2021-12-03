@@ -133,6 +133,8 @@ const Screen* menu_screens[] = {
 	&bonuscastle_mapwarp_struct,
 	&bonushelm_mapwarp_struct,
 	&bonusisles_mapwarp_struct,
+	&collisionmenu_struct,
+	&floormenu_struct,
 };
 
 void spawnMenu(int screenIndex) {

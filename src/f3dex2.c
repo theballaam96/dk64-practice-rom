@@ -7,35 +7,29 @@ int* drawString(int* dl, int style, float x, float y, char* str) {
 	return dl_copy;
 }
 
-int* colorText(unsigned char* dl, int red, int green, int blue, int opacity) {
-	*(unsigned char*)(dl + 0x4) = red;
-	*(unsigned char*)(dl + 0x5) = green;
-	*(unsigned char*)(dl + 0x6) = blue;
-	*(unsigned char*)(dl + 0x7) = opacity;
-	return (int*)dl;
-}
-
 int* drawText(int* dl, int style, float x, float y, char* str, int red, int green, int blue, int opacity) {
 	dl = initDisplayList(dl);
 	if (style == 1) {
-		*(unsigned int*)(dl + 0) = 0xFCFFFFFF;
-		*(unsigned int*)(dl + 1) = 0xFFFCF279;
-		*(unsigned int*)(dl + 2) = 0xDA380003;
-		*(unsigned int*)(dl + 3) = 0x807FDAC0;
-		dl += 4;
+		*(unsigned int*)(dl++) = 0xFCFFFFFF;
+		*(unsigned int*)(dl++) = 0xFFFCF279;
+		*(unsigned int*)(dl++) = 0xDA380003;
+		*(unsigned int*)(dl++) = 0x807FDAC0;
 	} else {
-		*(unsigned int*)(dl + 0) = 0xDE000000; // G_DL 0
-		*(unsigned int*)(dl + 1) = 0x01000118; // G_VTX 0 11
-		*(unsigned int*)(dl + 2) = 0xFC119623; // G_SETCOMBINE
-		*(unsigned int*)(dl + 3) = 0xFF2FFFFF; // G_SETCIMG format: 1, 1, -1
-		dl += 4;
+		*(unsigned int*)(dl++) = 0xDE000000; // G_DL 0
+		*(unsigned int*)(dl++) = 0x01000118; // G_VTX 0 11
+		*(unsigned int*)(dl++) = 0xFC119623; // G_SETCOMBINE
+		*(unsigned int*)(dl++) = 0xFF2FFFFF; // G_SETCIMG format: 1, 1, -1
 		if (style == 6) {
-			*(unsigned int*)(dl + 0) = 0xDA380003;
-			*(unsigned int*)(dl + 1) = (int)&style6Mtx[0];
+			gSPMatrix(dl, (int)&style6Mtx[0], 3);
 			dl += 2;
+		} else if (style == 2) {
+			gSPMatrix(dl, (int)&style2Mtx[0], 3);
+			dl += 2;
+		// } else if (style == 128) {
+			// gSPMatrix(dl, (int)&style128Mtx[0], 3);
+			// dl += 2;
 		}
-		*(unsigned int*)(dl + 0) = 0xFA000000; // G_SETPRIMCOLOR
-		dl = colorText((unsigned char*)dl,red,green,blue,opacity);
+		gDPSetPrimColor(dl, 0, 0, red, green, blue, opacity);
 		dl += 2;
 	}
 	dl = drawString(dl,style,x,y,str);
@@ -44,10 +38,9 @@ int* drawText(int* dl, int style, float x, float y, char* str, int red, int gree
 
 int* drawTextContainer(int* dl, int style, float x, float y, char* str, int red, int green, int blue, int opacity, int background) {
 	if (background) {
-		int offset = 1;
-		dl = drawText(dl,style,x-offset,y+offset,str,0,0,0,0xFF);
+		dl = drawText(dl,style,x-background,y+background,str,0,0,0,opacity);
 	}
-	dl = drawText(dl,style,x,y,str,red,green,blue,0xFF);
+	dl = drawText(dl,style,x,y,str,red,green,blue,opacity);
 	return dl;
 }
 
@@ -55,8 +48,8 @@ int* drawImage(int* dl, int text_index, codecs codec_index, int img_width, int i
 	dl = initDisplayList(dl);
 	*(unsigned int*)(dl++) = 0xE200001C;
 	*(unsigned int*)(dl++) = 0x00504240;
-	*(unsigned int*)(dl++) = 0xFA000000;
-	*(unsigned int*)(dl++) = 0xFFFFFF00 | opacity; // Last 2 bits == Opacity
+	gDPSetPrimColor(dl, 0, 0, 0xFF, 0xFF, 0xFF, opacity);
+	dl += 2;
 	*(unsigned int*)(dl++) = 0xFCFF97FF;
 	*(unsigned int*)(dl++) = 0xFF2CFE7F;
 	*(unsigned int*)(dl++) = 0xE3001201;
@@ -65,14 +58,36 @@ int* drawImage(int* dl, int text_index, codecs codec_index, int img_width, int i
 	return dl;
 };
 
-int* drawTri(int* dl) {
+int* drawTri(int* dl, short x1, short y1, short x2, short y2, short x3, short y3, int red, int green, int blue, int alpha) {
 	dl = initDisplayList(dl);
-	//*(unsigned int*)(dl++) = 0xDE000000; // G_DL 0
-	// gSPModifyVertex(dl++,0,G_MWO_POINT_XYSCREEN,0x00800080);
-	// gSPModifyVertex(dl++,1,G_MWO_POINT_XYSCREEN,0x00A000A0);
-	// gSPModifyVertex(dl++,2,G_MWO_POINT_XYSCREEN,0x00A00080);
-	// gSPVertex(dl++,0,3,0);
-	// gSP1Triangle(dl++,0,1,2,0);
+	// Set Combine
+	*(unsigned int*)(dl++) = 0xFC7EA004;
+	*(unsigned int*)(dl++) = 0x100C00F4;
+	// Mtx
+	*(unsigned int*)(dl++) = 0xDA380003;
+	*(unsigned int*)(dl++) = 0x02000180;
+	*(unsigned int*)(dl++) = 0xDA380007;
+	*(unsigned int*)(dl++) = 0x02000080;
+	// Vertex 0
+	*(unsigned int*)(dl++) = 0x02180000;
+	*(unsigned int*)(dl++) = (x1 << 16) | y1;
+	*(unsigned int*)(dl++) = 0x02100000;
+	*(unsigned int*)(dl++) = 0xFFFFFFFF;
+	// Vertex 1
+	*(unsigned int*)(dl++) = 0x02180002;
+	*(unsigned int*)(dl++) = (x2 << 16) | y2;
+	*(unsigned int*)(dl++) = 0x02100002;
+	*(unsigned int*)(dl++) = 0xFFFFFFFF;
+	// Vertex 2
+	*(unsigned int*)(dl++) = 0x02180004;
+	*(unsigned int*)(dl++) = (x3 << 16) | y3;
+	*(unsigned int*)(dl++) = 0x02100004;
+	*(unsigned int*)(dl++) = 0xFFFFFFFF;
+	gDPSetPrimColor(dl, 0, 0, red, green, blue, alpha);
+	dl += 2;
+	// Draw Tri
+	*(unsigned int*)(dl++) = 0x05000204;
+	*(unsigned int*)(dl++) = 0x00000000;
 	return dl;
 }
 

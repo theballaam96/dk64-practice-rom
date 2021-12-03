@@ -14,6 +14,8 @@ extern void deleteActor(void* actor);
 extern int spawnActor(int actorID, int actorBehaviour);
 extern void spawnTextOverlay(int style, int x, int y, char* string, int timer1, int timer2, unsigned char effect, unsigned char speed);
 extern float dk_sqrt(float __x);
+extern float dk_cos(float __x);
+extern float dk_sin(float __x);
 extern void dk_strFormat(char* destination, char* source, ...);
 extern void dk_multiply(double val1, double val2, int unk1, int unk2);
 extern double convertTimestamp(double unk0, double unk1, unsigned int unk2, unsigned int unk3);
@@ -76,6 +78,7 @@ extern int* initDisplayList(int* dl);
 extern int getTextStyleHeight(int style);
 extern int* displayText(int* dl, int style, int x, int y, void* text_pointer, char unk0);
 extern int* displayImage(int* dl, int texture_index, int unk3, codecs codec_index, int width, int height, int x, int y, float xScale, float yScale, int unk11, float unk12);
+extern void getScreenPosition(float x, float y, float z, float* x_store, float* y_store, int unk8, float scale, char player_index);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -184,6 +187,9 @@ extern int* focusedParentDataSetup[17];
 extern hudData* HUD;
 extern text_struct textData[6];
 extern float LZFadeoutProgress;
+extern int* mapFloorPointer;
+extern int mapFloorBlockCount;
+extern int displayListCount;
 
 extern short screenCenterX;
 extern short screenCenterY;
@@ -297,7 +303,9 @@ extern ActiveMenuData arcadeMenu;
 extern int* MemoryViewerLastAddress;
 extern console assignedConsole;
 extern int* phasePointer;
+extern short style128Mtx[0x10];
 extern short style6Mtx[0x10];
+extern short style2Mtx[0x10];
 extern char watchActive;
 extern char stateLoadTimer;
 

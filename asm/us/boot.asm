@@ -210,6 +210,9 @@ ResolveBarrelHook:
 DisplayListHook:
 	J 	displayListCode
 	NOP
+mapDLHook:
+	J 	mapDLCode
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -288,6 +291,12 @@ loadExtraHooks:
 	SW t3, 0x417C (t4) // Store Hook
 	SW r0, 0x4180 (t4) // Store NOP
 
+	//LUI t3, hi(mapDLHook)
+	//LW t3, lo(mapDLHook) (t3)
+	//LUI t4, 0x8060
+	//SW t3, 0xC544 (t4) // Store Hook
+	//SW r0, 0xC548 (t4) // Store NOP
+
 	// Negative Kerning
 	LUI t3, 0x8070
 	ADDIU t4, r0, 0x81
@@ -312,6 +321,6 @@ getObjectArrayAddr:
 	MFLO	a1
 	JR 		ra
 	ADD 	v0, a0, a1
-
+	
 .align 0x10
 END:

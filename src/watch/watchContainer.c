@@ -126,7 +126,7 @@ void controlWatchView(void) {
 }
 
 int* displayWatches(int* dl) {
-	if (!ActiveMenu.isOpen) {
+	if (!ActiveMenu.isOpen && !RAMDisplayOpen) {
 		int y = 0;
 		int k = 0;
 		for (int i = 0; i < WatchCount; i++) {

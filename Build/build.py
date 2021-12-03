@@ -104,23 +104,30 @@ file_dict = [
 	# 	"name": "Groovy Font Symbols Image",
 	# 	"pointer_table_index": 14,
 	# 	"file_index": 0,
-	# 	"source_file": "assets/Non-Code/Font/symbols_new_gz.png",
+	# 	"source_file": "assets/Non-Code/Font/symbols.png",
 	# 	"texture_format": "ia4",
 	# },
 	# {
 	# 	"name": "Groovy Font Uppercase Image",
 	# 	"pointer_table_index": 14,
 	# 	"file_index": 1,
-	# 	"source_file": "assets/Non-Code/Font/capitals_new_gz.png",
+	# 	"source_file": "assets/Non-Code/Font/capitals.png",
 	# 	"texture_format": "ia4",
 	# },
 	# {
 	# 	"name": "Groovy Font Lowercase Image",
 	# 	"pointer_table_index": 14,
 	# 	"file_index": 2,
-	# 	"source_file": "assets/Non-Code/Font/lower_new_gz.png",
+	# 	"source_file": "assets/Non-Code/Font/lower.png",
 	# 	"texture_format": "ia4",
 	# },
+	{
+		"name": "Tri Background Image",
+		"pointer_table_index": 25,
+		"file_index": 6013,
+		"source_file": "assets/Non-Code/Tri/blank.png",
+		"texture_format": "rgba5551",
+	},
 	{
 		"name": "Actor Names",
 		"start": 0x2020000,
@@ -350,18 +357,16 @@ with open(newROMName, "r+b") as fh:
 	print("[6 / 7] - Dumping details of all pointer tables to rom/build.log")
 	dumpPointerTableDetails("rom/build.log", fh)
 
-#import font_builder
-
+# import font_builder
 # with open(newROMName, "r+b") as fh:
-    # with open("assets/Non-Code/Font/font_boundaries.bin","rb") as fg:
-    # 	_font_boundaries = fg.read()
-    # 	fh.seek(0x2021600)
-    # 	fh.write(_font_boundaries)
+#     with open("assets/Non-Code/Font/font_boundaries.bin","rb") as fg:
+#     	_font_boundaries = fg.read()
+#     	fh.seek(0x2021600)
+#     	fh.write(_font_boundaries)
+# if os.path.exists("assets/Non-Code/Font/font_boundaries.bin"):
+# 	os.remove("assets/Non-Code/Font/font_boundaries.bin")
 
 import filestatewriter
-
-#if os.path.exists("assets/Non-Code/Font/font_boundaries.bin"):
-#	os.remove("assets/Non-Code/Font/font_boundaries.bin")
 
 print("[7 / 7] - Generating BizHawk RAM watch")
 import generate_watch_file

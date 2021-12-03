@@ -39,7 +39,9 @@ typedef struct cameraData {
 	/* 0x204 */ float viewportZ;
 	/* 0x208 */ char unk_208[0x22A-0x208];
 	/* 0x22A */ short viewportRotation;
-	/* 0x22C */ char unk_22C[0x26B-0x22C];
+	/* 0x22C */ char unk_22C[0x230-0x22C];
+	/* 0x230 */ float viewportXRotation;
+	/* 0x234 */ char unk_234[0x26B-0x234];
 	/* 0x26B */ char camera_state;
 } cameraData;
 
@@ -840,3 +842,36 @@ typedef enum codecs {
     RGBA16,
     RGBA32,
 } codecs;
+
+typedef enum freeze_sizes {
+	SIZE_BYTE,
+	SIZE_SHORT,
+	SIZE_INT,
+	SIZE_HEXDIG,
+	SIZE_UNKNOWN,
+} freeze_sizes;
+
+typedef struct freeze_struct {
+	/* 0x000 */ int* addr;
+	/* 0x004 */ unsigned int value;
+	/* 0x008 */ freeze_sizes size;
+	/* 0x00C */ int used;
+} freeze_struct;
+
+typedef struct floor_tri {
+	/* 0x000 */ short x[3];
+	/* 0x006 */ short y[3];
+	/* 0x00C */ short z[3];
+	/* 0x012 */ unsigned short state_bitfield;
+	/* 0x014 */ short sfx;
+	/* 0x016 */ unsigned char brightness;
+	/* 0x017 */ char unk_17;
+} floor_tri;
+
+typedef struct floor_tri_data {
+	/* 0x000 */ int* rdram_start;
+	/* 0x004 */ int* rdram_end;
+	/* 0x008 */ int unk_08;
+	/* 0x00C */ int rom_start;
+	/* 0x010 */ int size;
+} floor_tri_data;

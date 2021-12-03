@@ -362,5 +362,13 @@ START_HOOK:
 		J 		0x80714184
 		LBU 	v0, 0x5314 (v0)
 
+	mapDLCode:
+		LUI 	a0, 0x8080
+		JAL 	mapDLModifiers
+		LW 		a0, 0xA150 (a0)
+		LUI 	a0, 0x8077
+		J 		0x805FC54C
+		LW 		a0, 0xA048 (a0)
+
 .align 0x10
 END_HOOK:

@@ -14,6 +14,8 @@
 .definelabel spawnActor, 0x80677FA8
 .definelabel spawnTextOverlay, 0x8069D0F8
 .definelabel dk_sqrt, 0x8000AC60
+.definelabel dk_cos, 0x8000A930
+.definelabel dk_sin, 0x8000AAA0
 .definelabel dk_strFormat, 0x800031E0
 .definelabel dk_multiply, 0x80005918
 .definelabel convertTimestamp, 0x80005818
@@ -56,6 +58,7 @@
 .definelabel getMapData, 0x8066B0F8
 .definelabel loadSetup, 0x806886E0
 .definelabel getParentDataIndex, 0x80688D64
+.definelabel getScreenPosition, 0x80626F8C
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894
@@ -176,6 +179,9 @@
 .definelabel HUD, 0x80754280
 .definelabel textData, 0x80754A34
 .definelabel LZFadeoutProgress, 0x807FD888
+.definelabel mapFloorPointer, 0x807F9514
+.definelabel mapFloorBlockCount, 0x807F9518
+.definelabel displayListCount, 0x8076A088
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494
@@ -202,9 +208,11 @@
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
-.definelabel style6Mtx, 0x807FFF20 // 0x20
-.definelabel watchActive, 0x807FFF40 // u8
-.definelabel stateLoadTimer, 0x807FFF41 // u8
+.definelabel style128Mtx, 0x807FF900 // 0x20
+.definelabel style6Mtx, 0x807FF920 // 0x20
+.definelabel style2Mtx, 0x807FF940 // 0x20
+.definelabel watchActive, 0x807FFF60 // u8
+.definelabel stateLoadTimer, 0x807FFF61 // u8
 .definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct
 
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes
