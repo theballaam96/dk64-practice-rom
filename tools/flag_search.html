@@ -274,6 +274,9 @@
 							"head": "Bit",
 							"val": obj.bit,
 						}, {
+							"head": "Encoded Index",
+							"val": ((item.byte) * 8) + (item.bit)
+						}, {
 							"head": "Type",
 							"val": item.type.split("_")[0].substring(0,1).toUpperCase() + item.type.split("_")[0].substring(1),
 						}
