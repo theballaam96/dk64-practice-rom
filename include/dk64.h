@@ -48,12 +48,17 @@ extern void textOverlayCode(void);
 extern void spawnTransferredActor(void);
 extern void resolveMovementBox(void* spawner);
 extern void wipeMemory(void* location, int size);
+
 extern void setArcadeTextXY(int x, int y);
-extern void spawnArcadeText(void* write_location, void* text_pointer);
+extern void spawnArcadeText(void* dl, void* text_pointer);
 extern void setArcadeTextColor(int red, int green, int blue, int alpha);
 extern int arcadeGetObjIndexOfType(int obj_type);
 extern int arcadeGetNextVacantSlot(void);
 extern void setArcadeSong(int songIndex);
+
+extern void spawnJetpacText(void* dl, char* str, short x, short y, int background);
+extern void setJetpacTextColor(int red, int green, int blue, int alpha);
+
 extern void hideHUD(void);
 extern void tagKong(int kong_actor_index);
 extern void clearGun(void* player);
@@ -79,6 +84,7 @@ extern int getTextStyleHeight(int style);
 extern int* displayText(int* dl, int style, int x, int y, void* text_pointer, char unk0);
 extern int* displayImage(int* dl, int texture_index, int unk3, codecs codec_index, int width, int height, int x, int y, float xScale, float yScale, int unk11, float unk12);
 extern void getScreenPosition(float x, float y, float z, float* x_store, float* y_store, int unk8, float scale, char player_index);
+extern int* textDraw(int* dl, int style, int x, int y, char* str);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -221,7 +227,7 @@ extern TextOverlay* ActiveTools_Error;
 extern char InBadMap;
 extern char MenuSavestateAction;
 extern char WatchIndex[4];
-extern char SniperOn;
+extern unsigned char NoVacantWatchTimer;
 extern char SlamLevel;
 extern float AverageLag;
 extern int ISGTimer;
@@ -248,7 +254,6 @@ extern int NewMenu_ErrorStart;
 extern char FocusedSavestate;
 extern char AutoMoonkickOn;
 extern char EnemySpawnOff;
-extern TextOverlay* WatchActor[4];
 extern PhaseCheckerData PhaseChecker;
 extern char WatchTextSpace[4][0x30];
 extern customFlagData CustomFlag;
@@ -308,6 +313,7 @@ extern short style6Mtx[0x10];
 extern short style2Mtx[0x10];
 extern char watchActive;
 extern char stateLoadTimer;
+extern actorData* PausePointer;
 
 // Code
 extern int debugColumnLoop;

@@ -5,6 +5,7 @@
 *.o
 *.bak
 *.pckg
+include/build_date.h
 include/rom_version.h
 
 *.sym

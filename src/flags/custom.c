@@ -1,17 +1,17 @@
 #include "../../include/common.h"
 
-static const char flag_byte[16] = "Byte: 0x0";
-static const char flag_bit[16] = "Bit: 0";
+static const char flag_byte[16] = "BYTE: 0X0";
+static const char flag_bit[16] = "BIT: 0";
 
-static const char flag_type0[] = "Type: Permanent";
-static const char flag_type1[] = "Type: Global";
-static const char flag_type2[] = "Type: Temporary";
+static const char flag_type0[] = "TYPE: PERMANENT";
+static const char flag_type1[] = "TYPE: GLOBAL";
+static const char flag_type2[] = "TYPE: TEMPORARY";
 
-static const char flag_state_clear[] = "Current State: Clear";
-static const char flag_state_set[] = "Current State: Set";
+static const char flag_state_clear[] = "CURRENT STATE: CLEAR";
+static const char flag_state_set[] = "CURRENT STATE: SET";
 
-static const char flag_change_clear[] = "Clear";
-static const char flag_change_set[] = "Set";
+static const char flag_change_clear[] = "CLEAR";
+static const char flag_change_set[] = "SET";
 
 static const char* flagcustom_array[] = {
 	flag_byte,
@@ -28,8 +28,8 @@ static const char* flag_types[] = {
 };
 
 void openFlagsCustomMenu(void) {
-	dk_strFormat((char *)flag_byte, "Byte: 0x%04X",CustomFlag.byte);
-	dk_strFormat((char *)flag_bit, "Bit: %1d",CustomFlag.bit);
+	dk_strFormat((char *)flag_byte, "BYTE: 0X%04X",CustomFlag.byte);
+	dk_strFormat((char *)flag_bit, "BIT %1d",CustomFlag.bit);
 	flagcustom_array[2] = flag_types[(int)CustomFlag.type];
 	short _encodedflag = (CustomFlag.byte << 3) + CustomFlag.bit;
 	char _flagset = checkFlag(_encodedflag,CustomFlag.type);
@@ -124,7 +124,7 @@ void changeCustomFlagVariable(void) {
 void toggleCustomFlag(void) {
 	short _encodedflag = (CustomFlag.byte << 3) + CustomFlag.bit;
 	char _current_state = checkFlag(_encodedflag,CustomFlag.type);
-	_current_state = 1 - _current_state;
+	_current_state = 1 ^ _current_state;
 	setFlag(_encodedflag,_current_state,CustomFlag.type);
 	if (CustomFlag.type == 1) {
 		SaveToGlobal();

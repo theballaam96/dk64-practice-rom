@@ -1,10 +1,7 @@
 #include "../../include/common.h"
 
-static char dpadd_current_taganywhere[] = "Current: Tag Anywhere";
-static char dpadd_current_nothing[] = "Current: Nothing";
-
-static char dpadd_taganywhere[] = "Set to: Tag Anywhere";
-static char dpadd_nothing[] = "Set to: Nothing";
+static char dpadd_current_taganywhere[] = "CURRENT: TAG ANYWHERE";
+static char dpadd_current_nothing[] = "CURRENT: NOTHING";
 
 static char* current_dpadd[] = {
 	dpadd_current_taganywhere,
@@ -13,8 +10,8 @@ static char* current_dpadd[] = {
 
 static char* dpadd_array[] = {
 	dpadd_current_taganywhere,
-	dpadd_taganywhere,
-	dpadd_nothing,
+	"SET TO: TAG ANYWHERE",
+	"SET TO: NOTHING",
 };
 
 void openDPadDMenu(void) {

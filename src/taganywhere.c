@@ -1,8 +1,5 @@
 #include "../include/common.h"
 
-// static unsigned int tag_frame = 0;
-// static int tagged = 0;
-
 void tagAnywhere(void) {
 	int _dest_character;
 	char _weapon_bitfield;

@@ -20,12 +20,6 @@ void cancelCutscene(void) {
 	}
 }
 
-void toggleCancelCutsceneWithL(void) {
-	char _mode = LToCancelCSOn;
-	LToCancelCSOn = 1 - _mode;
-	// Call menu pullup
-}
-
 void LToCancelCS(void) {
 	if (LToCancelCSOn) {
 		if (ActiveMenu.isOpen == 0) {

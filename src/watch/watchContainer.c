@@ -1,47 +1,40 @@
 #include "../../include/common.h"
 
-static const char viewed_lag[] = "Lag (!)";
-static const char viewed_avglag[] = "Average Lag (!)";
-static const char viewed_speed[] = "Speed (!)";
-static const char viewed_timer[] = "Timer (!)";
-static const char viewed_gktimer[] = "Giant Kosha Timer (!)";
-static const char viewed_movement[] = "Movement State (!)";
-static const char viewed_angle[] = "Angle (!)";
-static const char viewed_input[] = "Input (!)";
-static const char viewed_heldactor[] = "Held Actor (!)";
-static const char viewed_isg[] = "Intro Story Timer (!)";
-static const char viewed_position[] = "Position (!)";
-static const char viewed_storedposition1[] = "Stored Position 1 (!)";
-static const char viewed_storedposition2[] = "Stored Position 2 (!)";
-static const char viewed_floor[] = "Floor (!)";
-static const char viewed_phaseassistant[] = "Phasewalk Assistant (!)";
-static const char viewed_avgspd[] = "Average Speed (!)";
-static const char viewed_fairy[] = "Fairy Viewer (!)";
+static const char viewed_lag[] = "} LAG";
+static const char viewed_avglag[] = "} AVERAGE LAG";
+static const char viewed_speed[] = "} SPEED";
+static const char viewed_timer[] = "} TIMER";
+static const char viewed_gktimer[] = "} GIANT KOSHA TIMER";
+static const char viewed_movement[] = "} MOVEMENT STATE";
+static const char viewed_angle[] = "} ANGLE";
+static const char viewed_input[] = "} INPUT";
+static const char viewed_heldactor[] = "} HELD ACTOR";
+static const char viewed_isg[] = "} INTRO STORY TIMER";
+static const char viewed_position[] = "} POSITION";
+static const char viewed_storedposition1[] = "} STORED POSITION 1";
+static const char viewed_storedposition2[] = "} STORED POSITION 2";
+static const char viewed_floor[] = "} FLOOR";
+static const char viewed_phaseassistant[] = "} PHASEWALK ASSISTANT";
+static const char viewed_avgspd[] = "} AVERAGE SPEED";
+static const char viewed_fairy[] = "} FAIRY VIEWER";
 
-static const char change_lag[] = "Lag";
-static const char change_avglag[] = "Average Lag";
-static const char change_speed[] = "Speed";
-static const char change_timer[] = "Timer";
-static const char change_gktimer[] = "Giant Kosha Timer";
-static const char change_movement[] = "Movement State";
-static const char change_angle[] = "Angle";
-static const char change_input[] = "Input";
-static const char change_heldactor[] = "Held Actor";
-static const char change_isg[] = "Intro Story Timer";
-static const char change_position[] = "Position";
-static const char change_storedposition1[] = "Stored Position 1";
-static const char change_storedposition2[] = "Stored Position 2";
-static const char change_floor[] = "Floor";
-static const char change_phaseassistant[] = "Phasewalk Assistant";
-static const char change_avgspd[] = "Average Speed";
-static const char change_fairy[] = "Fairy Viewer";
-
-static const char watchdisplay_player[] = "Player Variables";
-static const char watchdisplay_sys[] = "System Environment";
-static const char watchdisplay_timers[] = "Timers";
-static const char watchdisplay_snag[] = "Spawn Snag Collectables";
-static const char watchdisplay_assistants[] = "Assistants";
-static const char watchdisplay_clearall[] = "Clear all Watches";
+static const char change_lag[] = "{ LAG";
+static const char change_avglag[] = "{ AVERAGE LAG";
+static const char change_speed[] = "{ SPEED";
+static const char change_timer[] = "{ TIMER";
+static const char change_gktimer[] = "{ GIANT KOSHA TIMER";
+static const char change_movement[] = "{ MOVEMENT STATE";
+static const char change_angle[] = "{ ANGLE";
+static const char change_input[] = "{ INPUT";
+static const char change_heldactor[] = "{ HELD ACTOR";
+static const char change_isg[] = "{ INTRO STORY TIMER";
+static const char change_position[] = "{ POSITION";
+static const char change_storedposition1[] = "{ STORED POSITION 1";
+static const char change_storedposition2[] = "{ STORED POSITION 2";
+static const char change_floor[] = "{ FLOOR";
+static const char change_phaseassistant[] = "{ PHASEWALK ASSISTANT";
+static const char change_avgspd[] = "{ AVERAGE SPEED";
+static const char change_fairy[] = "{ FAIRY VIEWER";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
 static const char phasereason_1[] = "LOW MAG DIFF (DOWN TOO SLOW)"; // Down flick too slow, not satisfying the 14-magnitude difference rule
@@ -99,45 +92,37 @@ static unsigned char watch_red[WatchCount];
 static unsigned char watch_green[WatchCount];
 static unsigned char watch_blue[WatchCount];
 
-void destroyWatch(int slot) {
-	WatchActor[slot] = 0;
-};
-
-void spawnWatch(int slot) {
-	destroyWatch(slot);
-};
-
 void colorWatch(char _red, char _green, char _blue, int slot) {
 	watch_red[slot] = _red;
 	watch_green[slot] = _green;
 	watch_blue[slot] = _blue;
 };
 
-void controlWatchView(void) {
-	for (int i = 0; i < WatchCount; i++) {
-		if (WatchActor[i]) {
-			if (ActiveMenu.isOpen) {
-				WatchActor[i]->opacity = 0;
-			} else {
-				WatchActor[i]->opacity = 0xFF;
-			}
-		}
-	}
-}
-
 int* displayWatches(int* dl) {
-	if (!ActiveMenu.isOpen && !RAMDisplayOpen) {
+	if ((!ActiveMenu.isOpen) && (!RAMDisplayOpen)) {
 		int y = 0;
 		int k = 0;
 		for (int i = 0; i < WatchCount; i++) {
 			if (WatchIndex[i]) {
 				y = 340 - (k++ * 13);
 				// Note: This is huge for some reason? Is there a way we can shrink this?
-				dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 1);
+				dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 0);
 			}
 		}
 	}
 	return dl;
+}
+
+void checkWatchCapacity(void) {
+	int slot_vacant = 0;
+	for (int i = 0; i < WatchCount; i++) {
+		if (WatchIndex[i] == 0) {
+			slot_vacant = 1;
+		}
+	}
+	if (!slot_vacant) {
+		NoVacantWatchTimer = 60;
+	}
 }
 
 static const char* watch_listed_array[] = {
@@ -319,7 +304,6 @@ void clearAllWatches(void) {
 	PhaseChecker.reason_code = 6;
 	hideRacePosition(1);
 	for (int i = 0; i < WatchCount; i++) {
-		destroyWatch(i);
 		WatchIndex[i] = 0;
 		ViewedSnagWatches[i] = -1;
 	}
@@ -351,15 +335,14 @@ void setWatch(void) {
 		i++;
 	};
 	if (index_already_spawned) {
-		destroyWatch(i);
 		WatchIndex[i] = 0;
 		hideRacePosition(1);
 	} else {
+		checkWatchCapacity();
 		i = 0;
 		while (i < WatchCount) {
 			if (WatchIndex[i] == 0) {
 				WatchIndex[i] = intended_watch_index;
-				spawnWatch(i);
 				colorWatch(0xFF,0xFF,0xFF,i);
 				break;
 			};
@@ -398,7 +381,7 @@ void getISGTimer(void) {
 };
 
 void toggleInputDisplay(void) {
-	InputDisplayOpen = 1 - InputDisplayOpen;
+	InputDisplayOpen = 1 ^ InputDisplayOpen;
 	if (InputDisplayOpen) {
 		spawnOverlay();
 	} else if (FairyViewerOpen == 0) {
@@ -418,12 +401,12 @@ void fairyViewerContainerToggle(void) {
 }
 
 static const char* watch_array[] = {
-	watchdisplay_player,
-	watchdisplay_timers,
-	watchdisplay_sys,
-	watchdisplay_snag,
-	watchdisplay_assistants,
-	watchdisplay_clearall,
+	"PLAYER VARIABLES",
+	"TIMERS",
+	"SYSTEM ENVIRONMENT",
+	"SPAWN SNAG COLLECTABLES",
+	"ASSISTANTS",
+	"CLEAR ALL WATCHES",
 };
 
 static const int watch_functions[] = {

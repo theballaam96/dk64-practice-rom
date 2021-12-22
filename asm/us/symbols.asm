@@ -64,6 +64,7 @@
 .definelabel getTextStyleHeight, 0x806FD894
 .definelabel displayText, 0x806FC530
 .definelabel displayImage, 0x8068C5A8
+.definelabel textDraw, 0x806FD490
 
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
@@ -71,6 +72,9 @@
 .definelabel arcadeGetObjIndexOfType, 0x80024860
 .definelabel arcadeGetNextVacantSlot, 0x800247B8
 .definelabel setArcadeSong, 0x800252A4
+
+.definelabel spawnJetpacText, 0x8002AEFC
+.definelabel setJetpacTextColor, 0x8002AE94
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -230,7 +234,7 @@
 .definelabel SavePromptIsSaving, 0x807FFFF0 // u8
 .definelabel LoadedHooks, 0x807FFFEF // u8
 .definelabel Precision, 0x807FFFEE // u8
-.definelabel SniperOn, 0x807FFFED // u8
+.definelabel NoVacantWatchTimer, 0x807FFFED // u8
 .definelabel SlamLevel, 0x807FFFEC // u8
 .definelabel AverageLag, 0x807FFFE8 // f32
 .definelabel SavePromptActor, 0x807FFFE4 // u32
@@ -295,7 +299,7 @@
 .definelabel PreviousLagArray, 0x807FFFB0; // u8 array
 
 .definelabel graphicalOverlaySpace, 0x807FFA00 // 0x180
-.definelabel WatchActor, 0x807FFB80 // u32 x 4
+.definelabel PausePointer, 0x807FFB80 // ptr
 .definelabel WatchTextSpace, 0x807FFB90 // 0x30 x 4
 .definelabel PhaseChecker, 0x807FFC50 // follows phasecheckerdata struct
 .definelabel UndoFlag, 0x807FFC58 // u16

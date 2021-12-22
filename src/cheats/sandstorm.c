@@ -18,7 +18,7 @@ void getSandstormAddress(void) {
 void toggleSandstorm(void) {
 	if (CurrentMap == 0x26) {
 		if ((TBVoidByte & 2) == 0) {
-			*(char *)SandstormAddress = 1 - *(char *)SandstormAddress;
+			*(char *)SandstormAddress = 1 ^ *(char *)SandstormAddress;
 			openTogglesMenu();
 		}
 	}

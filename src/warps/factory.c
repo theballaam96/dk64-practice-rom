@@ -1,22 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapFactoryMain[] = "Main Map";
-static const char mapFactoryJack[] = "Mad Jack";
-static const char mapFactoryBBlast[] = "Baboon Blast Course";
-static const char mapFactoryCarRace[] = "Car Race";
-static const char mapFactoryCrusher[] = "Crusher Room";
-static const char mapFactoryPowerShed[] = "Power Shed";
-static const char mapFactoryPortal[] = "From Portal";
-static const char mapFactoryArcadeRoom[] = "Arcade Room";
-static const char mapFactoryBlockTower[] = "Block Tower";
-static const char mapFactoryCandyArea[] = "Candy Area";
-static const char mapFactoryFunkyRoom[] = "Funky Room";
-static const char mapFactoryProduction[] = "Production Room";
-static const char mapFactoryRnD[] = "R&D";
-static const char mapFactorySnides[] = "Snide's Room";
-static const char mapFactoryStorageRoom[] = "Storage Room";
-static const char mapFactoryCrown[] = "Arena Ambush";
-
 void openFactoryMainMenu(void) {
 	changeMenu(8);
 }
@@ -48,13 +31,13 @@ const MapWarp map_factory_struct = {
 };
 
 static const char* factory_mapwarp_array[] = {
-	mapFactoryMain,
-	mapFactoryJack,
-	mapFactoryCrown,
-	mapFactoryBBlast,
-	mapFactoryCarRace,
-	mapFactoryCrusher,
-	mapFactoryPowerShed
+	"MAIN MAP",
+	"MAD JACK",
+	"ARENA AMBUSH",
+	"BABOON BLAST COURSE",
+	"CAR RACE",
+	"CRUSHER ROOM",
+	"POWER SHED"
 };
 
 static const int factory_mapwarp_functions[] = {
@@ -106,15 +89,15 @@ const MapWarp map_factorymain_struct = {
 };
 
 static const char* factorymain_mapwarp_array[] = {
-	mapFactoryPortal,
-	mapFactoryArcadeRoom,
-	mapFactoryBlockTower,
-	mapFactoryCandyArea,
-	mapFactoryFunkyRoom,
-	mapFactoryProduction,
-	mapFactoryRnD,
-	mapFactorySnides,
-	mapFactoryStorageRoom
+	"FROM PORTAL",
+	"ARCADE ROOM",
+	"BLOCK TOWER",
+	"CANDY AREA",
+	"FUNKY ROOM",
+	"PRODUCTION ROOM",
+	"RESEARCH AND DEVELOPMENT",
+	"SNIDES ROOM",
+	"STORAGE ROOM"
 };
 
 static const int factorymain_mapwarp_functions[] = {

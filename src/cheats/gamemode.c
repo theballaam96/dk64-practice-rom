@@ -1,25 +1,5 @@
 #include "../../include/common.h"
 
-static const char gamemodes_00[] = "Nintendo Logo";
-static const char gamemodes_01[] = "Opening Cutscene";
-static const char gamemodes_02[] = "DK Rap";
-static const char gamemodes_03[] = "DK TV";
-static const char gamemodes_04[] = "Gamemode 4";
-static const char gamemodes_05[] = "Main Menu";
-static const char gamemodes_06[] = "Adventure & Kong Battle";
-static const char gamemodes_07[] = "Loading Game Over";
-static const char gamemodes_08[] = "Gamemode 8";
-static const char gamemodes_09[] = "Game Over";
-static const char gamemodes_10[] = "End Sequence (Adventure)";
-static const char gamemodes_11[] = "DK Theatre";
-static const char gamemodes_12[] = "DK Bonus & Bosses";
-static const char gamemodes_13[] = "Snide's Bonus Minigames";
-static const char gamemodes_14[] = "End Sequence (DK Theatre)";
-
-static const char gamemodes_gameplay[] = "Gameplay Gamemodes";
-static const char gamemodes_cutscenes[] = "Cutscene Gamemodes";
-static const char gamemodes_unused[] = "Unused Gamemodes";
-
 static const char gamemodes_gameplay_list[] = {5,6,12,13};
 static const char gamemodes_cutscenes_list[] = {0,1,2,3,7,9,10,11,14};
 static const char gamemodes_unused_list[] = {4,8};
@@ -59,9 +39,9 @@ void changeGamemode(void) {
 }
 
 static const char* gamemode_array[] = {
-	gamemodes_gameplay,
-	gamemodes_cutscenes,
-	gamemodes_unused,
+	"GAMEPLAY GAMEMODES",
+	"CUTSCENE GAMEMODES",
+	"UNUSED GAMEMODES",
 };
 
 static const int gamemode_functions[] = {
@@ -79,10 +59,10 @@ const Screen gamemode_struct = {
 };
 
 static const char* gamemode_gameplay_array[] = {
-	gamemodes_05,
-	gamemodes_06,
-	gamemodes_12,
-	gamemodes_13,
+	"MAIN MENU",
+	"ADVENTURE AND KONG BATTLE",
+	"DK BONUS AND BOSSES",
+	"SNIDE BONUS MINIGAMES",
 };
 
 static const int gamemode_gameplay_functions[] = {
@@ -101,15 +81,15 @@ const Screen gamemode_gameplay_struct = {
 };
 
 static const char* gamemode_cutscenes_array[] = {
-	gamemodes_00,
-	gamemodes_01,
-	gamemodes_02,
-	gamemodes_03,
-	gamemodes_07,
-	gamemodes_09,
-	gamemodes_10,
-	gamemodes_11,
-	gamemodes_14,
+	"NINTENDO LOGO",
+	"OPENING CUTSCENE",
+	"DK RAP",
+	"DK TV",
+	"LOADING GAME OVER",
+	"GAME OVER",
+	"END SEQUENCE <ADVENTURE>",
+	"DK THEATRE",
+	"END SEQUENCE <DK THEATRE>",
 };
 
 static const int gamemode_cutscenes_functions[] = {
@@ -133,8 +113,8 @@ const Screen gamemode_cutscenes_struct = {
 };
 
 static const char* gamemode_unused_array[] = {
-	gamemodes_04,
-	gamemodes_08,
+	"GAMEMODE 4",
+	"GAMEMODE 8",
 };
 
 static const int gamemode_unused_functions[] = {

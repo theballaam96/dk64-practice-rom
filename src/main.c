@@ -2,6 +2,11 @@
 
 void cFuncLoop(void) {
 	ClosingMenu = 0;
+	if ((PausePointer) && isAddressActor(PausePointer)) {
+		IsPauseMenuOpen = 1;
+	} else {
+		IsPauseMenuOpen = 0;
+	}
 	if (CurrentMap == 0x51) {
 		CutsceneActive = 0;
 		spawnConsoleMenu();
@@ -37,7 +42,6 @@ void cFuncLoop(void) {
 		if (watchActive) {
 			handleWatch(); // Active Menu Closed, Watch Present
 			clampWatchFloats(); // Active Menu Closed, Watch Present
-			controlWatchView(); // Watches Open
 			customHideHUD();
 			handleTimer(); // Constant
 			hideRacePosition(0);
@@ -61,7 +65,10 @@ void cFuncLoop(void) {
 		}
 	}
 	if (stateLoadTimer > 0) {
-		stateLoadTimer -= 1;
+		stateLoadTimer--;
+	}
+	if (NoVacantWatchTimer > 0) {
+		NoVacantWatchTimer--;
 	}
 	startupSkip();
 	colorKong(); // Constant
@@ -105,32 +112,40 @@ void arcadeFuncLoop(void) {
 };
 
 static char stateLoadstr[15] = "";
+#define ACTOR_MAINMENUCONTROLLER 0x146
 
 int* displayListModifiers(int* dl) {
 	if ((CurrentMap == 0x50) && (!watchActive)) {
-		dl = drawTextContainer(dl, 1, 25, 525, "DK64 PRACTICE ROM", 0xFF, 0xFF, 0xFF, 0xFF, 0);
-		dl = drawTextContainer(dl, 1, 25, 550, "VERSION 1.4.2", 0xFF, 0xFF, 0xFF, 0xFF, 0);
+		int i = 0;
+		while (i < LoadedActorCount) {
+			if (LoadedActorArray[i].actor) {
+				if (LoadedActorArray[i].actor->actorType == ACTOR_MAINMENUCONTROLLER) {
+					int screen = *(char*)((int)(LoadedActorArray[i].actor) + 0x18A);
+					//int next_screen = *(char*)((int)(LoadedActorArray[i].actor) + 0x18B);
+					if (screen < 2) {
+						dl = displayInfo(dl);
+					}
+					break;
+				}
+			}
+			i++;
+		}
 	}
 	if (stateLoadTimer > 0) {
-		dk_strFormat((char *)stateLoadstr, "State %d Loaded", FocusedSavestate + 1);
-		dl = drawTextContainer(dl, 128, 200, 290, (char *)stateLoadstr, 0xFF, 0xFF, 0xFF, 0xFF, 1);
+		dk_strFormat((char *)stateLoadstr, "STATE %d LOADED", FocusedSavestate + 1);
+		dl = drawPixelTextContainer(dl, 185, 207, (char *)stateLoadstr, 0xFF, 0xFF, 0xFF, 0xFF, 1);
 	}
-	dl = displayMenu(dl);
-	dl = displayWatches(dl);
-	dl = displayMemory(dl);
-	dl = displayFairy(dl);
-	//dl = drawTri(dl, 100, 100, 300, 500, 500, 300);
-	dl = displayFloors(dl);
-	// int dl0 = displayListVar[0];
-	// int dl1 = displayListVar[2];
-	// *(unsigned int*)(dl + 0x00) = 0xE200001C;
-	// *(unsigned int*)(dl + 0x04) = 0x00504240;
-	// *(unsigned int*)(dl + 0x08) = 0xFA000000;
-	// *(unsigned int*)(dl + 0x0C) = 0xFFFFFFFF;
-	// *(unsigned int*)(dl + 0x10) = 0xFCFF97FF;
-	// *(unsigned int*)(dl + 0x14) = 0xFF2CFE7F;
-	// *(unsigned int*)(dl + 0x18) = 0xE3001201;
-	// *(unsigned int*)(dl + 0x1C) = 0x00000000;
+	if (NoVacantWatchTimer > 0) {
+		dl = drawPixelTextContainer(dl, 130, 207, "NO VACANT WATCH SLOTS", 0xFF, 0xFF, 0xFF, 0xFF, 1);
+	}
+	if (!IsPauseMenuOpen) {
+		dl = displayMenu(dl);
+		dl = displayWatches(dl);
+		dl = displayMemory(dl);
+		dl = displayFairy(dl);
+		//dl = drawTri(dl, 100, 100, 300, 500, 500, 300);
+		dl = displayFloors(dl);
+	}
 	return dl;
 };
 

@@ -1,25 +1,25 @@
 #include "../../include/common.h"
 
-static const char flag_japesboss_set[] = "Army Dillo 1 Intro: Watched";
-static const char flag_japesboss_clear[] = "Army Dillo 1 Intro: Not Watched";
+static const char flag_japesboss_set[] = "ARMY DILLO 1 INTRO: WATCHED";
+static const char flag_japesboss_clear[] = "ARMY DILLO 1 INTRO: NOT WATCHED";
 
-static const char flag_aztecboss_set[] = "Dogadon 1 Intro: Watched";
-static const char flag_aztecboss_clear[] = "Dogadon 1 Intro: Not Watched";
+static const char flag_aztecboss_set[] = "DOGADON 1 INTRO: WATCHED";
+static const char flag_aztecboss_clear[] = "DOGADON 1 INTRO: NOT WATCHED";
 
-static const char flag_factoryboss_set[] = "Mad Jack Intro: Watched";
-static const char flag_factoryboss_clear[] = "Mad Jack Intro: Not Watched";
+static const char flag_factoryboss_set[] = "MAD JACK INTRO: WATCHED";
+static const char flag_factoryboss_clear[] = "MAD JACK INTRO: NOT WATCHED";
 
-static const char flag_galleonboss_set[] = "Pufftoss Intro: Watched";
-static const char flag_galleonboss_clear[] = "Pufftoss Intro: Not Watched";
+static const char flag_galleonboss_set[] = "PUFFTOSS INTRO: WATCHED";
+static const char flag_galleonboss_clear[] = "PUFFTOSS INTRO: NOT WATCHED";
 
-static const char flag_fungiboss_set[] = "Dogadon 2 Intro: Watched";
-static const char flag_fungiboss_clear[] = "Dogadon 2 Intro: Not Watched";
+static const char flag_fungiboss_set[] = "DOGADON 2 INTRO: WATCHED";
+static const char flag_fungiboss_clear[] = "DOGADON 2 INTRO: NOT WATCHED";
 
-static const char flag_cavesboss_set[] = "Army Dillo 2 Intro: Watched";
-static const char flag_cavesboss_clear[] = "Army Dillo 2 Intro: Not Watched";
+static const char flag_cavesboss_set[] = "ARMY DILLO 2 INTRO: WATCHED";
+static const char flag_cavesboss_clear[] = "ARMY DILLO 2 INTRO: NOT WATCHED";
 
-static const char flag_castleboss_set[] = "King Kut Out Intro: Watched";
-static const char flag_castleboss_clear[] = "King Kut Out Intro: Not Watched";
+static const char flag_castleboss_set[] = "KING KUT OUT INTRO: WATCHED";
+static const char flag_castleboss_clear[] = "KING KUT OUT INTRO: NOT WATCHED";
 
 static const short levelboss_flags[] = {0x0068,0x0067,0x006A,0x006B,0x0069,0x006D,0x006C};
 static const char levelboss_flag_types[] = {2,2,2,2,2,2,2};

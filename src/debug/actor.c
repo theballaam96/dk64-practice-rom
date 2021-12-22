@@ -10,19 +10,19 @@ static const char actorscreen_view6[40] = "";
 static const char actorscreen_view7[40] = "";
 static const char actorscreen_view8[40] = "";
 static const char actorscreen_view9[40] = "";
-static const char actorscreen_viewprev[] = "< Prev";
-static const char actorscreen_viewmore[] = "Next >";
+static const char actorscreen_viewprev[] = "< PREV";
+static const char actorscreen_viewmore[] = "NEXT >";
 
-static const char detailsscreen_addr[20] = "Address: 0x0";
-static const char detailsscreen_typename[25] = "Name: 0";
-static const char detailsscreen_typehex[15] = "Type: 0x0";
-static const char detailsscreen_sizehex[15] = "Size: 0x0";
-static const char detailsscreen_x[15] = "X: 0";
-static const char detailsscreen_y[15] = "Y: 0";
-static const char detailsscreen_z[15] = "Z: 0";
-static const char detailsscreen_grab[] = "Grab Actor";
-static const char detailsscreen_warp[] = "Warp to Actor";
-static const char detailsscreen_memory[] = "View in Memory";
+static const char detailsscreen_addr[20] = "ADDRESS:0X0";
+static const char detailsscreen_typename[25] = "NAME:0";
+static const char detailsscreen_typehex[15] = "TYPE:0X0";
+static const char detailsscreen_sizehex[15] = "SIZE:0X0";
+static const char detailsscreen_x[15] = "X:0";
+static const char detailsscreen_y[15] = "Y:0";
+static const char detailsscreen_z[15] = "Z:0";
+static const char detailsscreen_grab[] = "GRAB ACTOR";
+static const char detailsscreen_warp[] = "WARP TO ACTOR";
+static const char detailsscreen_memory[] = "VIEW IN MEMORY";
 
 static char startingActorIndex = 0;
 static int previousNoTOCount = 0;
@@ -103,9 +103,9 @@ void openActorMenu(void) {
 		actorAddr = (int)LoadedActorArray[i + startingActorIndex].actor;
 		int actorType = LoadedActorArray[i + startingActorIndex].actor->actorType;
 		if (ActorNamesTable) {
-			dk_strFormat((char *)actorscreen_viewed[i],"%2d: 0x%4X: %s",i + startingActorIndex,actorAddr, ActorNamesTable->actor_name[actorType]);
+			dk_strFormat((char *)actorscreen_viewed[i],"%2d:0X%4X:%s",i + startingActorIndex,actorAddr, ActorNamesTable->actor_name[actorType]);
 		} else {
-			dk_strFormat((char *)actorscreen_viewed[i],"%2d: 0x%4X: %d",i + startingActorIndex,actorAddr, actorType);
+			dk_strFormat((char *)actorscreen_viewed[i],"%2d:0X%4X:%d",i + startingActorIndex,actorAddr, actorType);
 		}
 		actor_array[i] = actorscreen_viewed[i];
 	}
@@ -140,13 +140,13 @@ void viewActorInfo(int index) {
 	actorAddr = (int)LoadedActorArray[index].actor;
 	FocusedActorViewPointer = LoadedActorArray[index].actor;
 	int actorType = LoadedActorArray[index].actor->actorType;
-	dk_strFormat((char *)detailsscreen_addr,"Address: 0x%4X",actorAddr);
-	dk_strFormat((char *)detailsscreen_typename,"Name: %s",ActorNamesTable->actor_name[actorType]);
-	dk_strFormat((char *)detailsscreen_typehex,"Type: 0x%X",actorType);
-	dk_strFormat((char *)detailsscreen_sizehex,"Size: 0x%X",*(int*)(actorAddr - 0xC));
-	dk_strFormat((char *)detailsscreen_x,"X: %f",LoadedActorArray[index].actor->xPos);
-	dk_strFormat((char *)detailsscreen_y,"Y: %f",LoadedActorArray[index].actor->yPos);
-	dk_strFormat((char *)detailsscreen_z,"Z: %f",LoadedActorArray[index].actor->zPos);
+	dk_strFormat((char *)detailsscreen_addr,"ADDRESS:0X%4X",actorAddr);
+	dk_strFormat((char *)detailsscreen_typename,"NAME:%s",ActorNamesTable->actor_name[actorType]);
+	dk_strFormat((char *)detailsscreen_typehex,"TYPE:0X%X",actorType);
+	dk_strFormat((char *)detailsscreen_sizehex,"SIZE:0X%X",*(int*)(actorAddr - 0xC));
+	dk_strFormat((char *)detailsscreen_x,"X:%f",LoadedActorArray[index].actor->xPos);
+	dk_strFormat((char *)detailsscreen_y,"Y:%f",LoadedActorArray[index].actor->yPos);
+	dk_strFormat((char *)detailsscreen_z,"Z:%f",LoadedActorArray[index].actor->zPos);
 	changeMenu(78);
 }
 

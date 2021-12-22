@@ -45,22 +45,22 @@ static tri_storage triarray_instadeath[FLOORTRICAP_INSTADEATH] = {};
 #define FLOORTYPE_DAMAGE 4
 #define FLOORTYPE_DAMAGEWATER 5
 
-static char floortext_normal_off[] = "Normal";
-static char floortext_void_off[] = "Voids";
-static char floortext_water_off[] = "Water";
-static char floortext_damage_off[] = "Damage";
-static char floortext_instadeath_off[] = "Instadeath";
+static char floortext_normal_off[] = "{ NORMAL";
+static char floortext_void_off[] = "{ VOIDS";
+static char floortext_water_off[] = "{ WATER";
+static char floortext_damage_off[] = "{ DAMAGE";
+static char floortext_instadeath_off[] = "{ INSTADEATH";
 
-static char floortext_normal_on[] = "Normal (!)";
-static char floortext_void_on[] = "Voids (!)";
-static char floortext_water_on[] = "Water (!)";
-static char floortext_damage_on[] = "Damage (!)";
-static char floortext_instadeath_on[] = "Instadeath (!)";
+static char floortext_normal_on[] = "} NORMAL";
+static char floortext_void_on[] = "} VOIDS";
+static char floortext_water_on[] = "} WATER";
+static char floortext_damage_on[] = "} DAMAGE";
+static char floortext_instadeath_on[] = "} INSTADEATH";
 
-static char floortext_clear[] = "Clear all floors";
+static char floortext_clear[] = "CLEAR ALL FLOORS";
 
-static const char collisiontext_floor[] = "Floors";
-static const char collisiontext_wall[] = "Walls";
+static const char collisiontext_floor[] = "FLOORS";
+static const char collisiontext_wall[] = "WALLS";
 
 #define FLOOR_TYPE_COUNT 5
 static const short floor_order[] = {

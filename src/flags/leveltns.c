@@ -1,25 +1,25 @@
 #include "../../include/common.h"
 
-static const char flag_japestns_set[] = "Japes Troff & Scoff: Cleared";
-static const char flag_japestns_clear[] = "Japes Troff & Scoff: Spawned";
+static const char flag_japestns_set[] = "JAPES TROFF AND SCOFF: CLEARED";
+static const char flag_japestns_clear[] = "JAPES TROFF AND SCOFF: SPAWNED";
 
-static const char flag_aztectns_set[] = "Aztec Troff & Scoff: Cleared";
-static const char flag_aztectns_clear[] = "Aztec Troff & Scoff: Spawned";
+static const char flag_aztectns_set[] = "AZTEC TROFF AND SCOFF: CLEARED";
+static const char flag_aztectns_clear[] = "AZTEC TROFF AND SCOFF: SPAWNED";
 
-static const char flag_factorytns_set[] = "Factory Troff & Scoff: Cleared";
-static const char flag_factorytns_clear[] = "Factory Troff & Scoff: Spawned";
+static const char flag_factorytns_set[] = "FACTORY TROFF AND SCOFF: CLEARED";
+static const char flag_factorytns_clear[] = "FACTORY TROFF AND SCOFF: SPAWNED";
 
-static const char flag_galleontns_set[] = "Galleon Troff & Scoff: Cleared";
-static const char flag_galleontns_clear[] = "Galleon Troff & Scoff: Spawned";
+static const char flag_galleontns_set[] = "GALLEON TROFF AND SCOFF: CLEARED";
+static const char flag_galleontns_clear[] = "GALLEON TROFF AND SCOFF: SPAWNED";
 
-static const char flag_fungitns_set[] = "Fungi Troff & Scoff: Cleared";
-static const char flag_fungitns_clear[] = "Fungi Troff & Scoff: Spawned";
+static const char flag_fungitns_set[] = "FUNGI TROFF AND SCOFF: CLEARED";
+static const char flag_fungitns_clear[] = "FUNGI TROFF AND SCOFF: SPAWNED";
 
-static const char flag_cavestns_set[] = "Caves Troff & Scoff: Cleared";
-static const char flag_cavestns_clear[] = "Caves Troff & Scoff: Spawned";
+static const char flag_cavestns_set[] = "CAVES TROFF AND SCOFF: CLEARED";
+static const char flag_cavestns_clear[] = "CAVES TROFF AND SCOFF: SPAWNED";
 
-static const char flag_castletns_set[] = "Castle Troff & Scoff: Cleared";
-static const char flag_castletns_clear[] = "Castle Troff & Scoff: Spawned";
+static const char flag_castletns_set[] = "CASTLE TROFF AND SCOFF: CLEARED";
+static const char flag_castletns_clear[] = "CASTLE TROFF AND SCOFF: SPAWNED";
 
 static const short leveltns_flags[] = {0x002E,0x006C,0x0098,0x00CB,0x0102,0x012E,0x0160};
 static const char leveltns_flag_types[] = {0,0,0,0,0,0,0};

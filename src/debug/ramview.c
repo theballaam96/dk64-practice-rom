@@ -15,7 +15,7 @@
 #define menuStateSelectAddr 00000001 //for selecting a ram address to modify in the table
 #define menuStatePokeAddr 00000002 //for changing a ram value
 
-#define ramViewY 70
+#define ramViewY 38
 #define ramViewYOffset 13
 
 #define FOCUSMENU_DEFAULT 0
@@ -24,10 +24,10 @@
 char formatter08[] = "%02X:%08X %08X";
 char formatter04[] = "%02X:%04X %04X %04X %04X";
 char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X";
-char formatterheaderViewText[] = "Addr: 0x%08X";
+char formatterheaderViewText[] = "ADDR:0X%08X";
 
-char openRamViewText[] = "Open RAM View";
-char closeRamViewText[] = "Close RAM View";
+char openRamViewText[] = "OPEN RAM VIEW";
+char closeRamViewText[] = "CLOSE RAM VIEW";
 char headerViewText[30] = "HEADER";
 char line1[60] = "1";
 char line2[60] = "2";
@@ -58,14 +58,14 @@ char editing_address = 0;
 float focusbyte_x = 0;
 float focusbyte_y = 0;
 
-static const char addToWatches[] = "Add as Watch";
-static const char freezeValue[] = "Freeze Value";
-static const char frozenMenu[] = "Frozen Values";
-static const char watchTypeInt0[] = "Int";
-static const char watchTypeInt1[] = "Float";
-static const char watchTypeShort0[] = "Short";
-static const char watchTypeByte0[] = "Byte";
-static const char watchTypeByte1[] = "Bool";
+// static const char addToWatches[] = "ADD TO WATCH";
+// static const char freezeValue[] = "FREEZE VALUE";
+// static const char frozenMenu[] = "FROZEN VALUES";
+// static const char watchTypeInt0[] = "Int";
+// static const char watchTypeInt1[] = "Float";
+// static const char watchTypeShort0[] = "Short";
+// static const char watchTypeByte0[] = "Byte";
+// static const char watchTypeByte1[] = "Bool";
 static int extraFuncs[extraFuncCount] = {};
 int* focused_address = 0;
 
@@ -80,6 +80,14 @@ static freeze_struct freeze_data[maxFreeze] = {};
 static char* ramview_array[] = {
     openRamViewText,
     closeRamViewText,
+};
+
+char ramview_size_full[15] = "";
+static char* ramview_sizes[] = {
+    "INT",
+    "SHORT",
+    "BYTE",
+    "HEX DIGIT",
 };
 
 void defineRAMViewerParameters(int* start, int* end, int source) {
@@ -204,37 +212,6 @@ void updateRAMValue(int* address) {
     }
 }
 
-int getGroovyCharKerning(int hex_digit) {
-    switch (hex_digit) {
-        case 0x0:
-        case 0xA:
-            return 32.8;
-        case 0x1:
-            return 19;
-        case 0x2:
-        case 0x5:
-        case 0x6:
-        case 0x7:
-            return 36;
-        case 0x3:
-        case 0x8:
-        case 0x9:
-            return 39;
-        case 0x4:
-            return 42;
-        case 0xB:
-            return 35;
-        case 0xC:
-        case 0xE:
-            return 29;
-        case 0xD:
-        case 0xF:
-            return 32;
-        break;
-    }
-    return 0;
-}
-
 void editAddress(void) {
     int initial_digit = ((unsigned int)printStartAddr >> (4 * (6 - editAddrPosition))) & 0xF;
     int new_digit = initial_digit;
@@ -297,7 +274,7 @@ void editAddress(void) {
     if (focus_menu == FOCUSMENU_DEFAULT) {
         if (ControllerInput.Buttons & R_Button) {
             int focus_char = 0x20;
-            int _pos = editAddrPosition + 10;
+            int _pos = editAddrPosition + 9;
             int addr_pos = 0;
             if (editAddrPosition == 6) {
                 addrEndBytes[0] = 0x20;
@@ -393,11 +370,12 @@ void moveRAMViewFocus(void) {
                     x_offset_size = 77;
                 break;
             }
+            float a = 4.77f;
             if (currentFormat < 3) {
-                focusbyte_x = 34 + (focus_x * (x_offset_size / 4.8f));
+                focusbyte_x = 49 + (focus_x * (x_offset_size / a));
             } else {
                 int sets = focus_x / 2;
-                focusbyte_x = 34 + (sets * (115 / 4.8f)) + (8.125f * (focus_x % 2));
+                focusbyte_x = 49 + (sets * (115 / a)) + (8.125f * (focus_x % 2));
             }
             focusbyte_y = ramViewY + (focus_y * ramViewYOffset);
         }
@@ -470,7 +448,8 @@ void ramViewUpdate(void) {
 
 int* drawExtraText(int* dl, char* str, int y, int focus_index, int details_index, int background, int func) {
     int colors[6] = {0xFF,0xFF,0xFF,0xFF,0xD7,0x00};
-    dl = drawTextContainer(dl, 128, 200, y, str,
+    dl = drawPixelTextContainer(dl, 185, y, str,
+    //dl = drawTextContainer(dl, 128, 200, y, str,
         colors[(3 * (focus_index == details_index)) + 0],
         colors[(3 * (focus_index == details_index)) + 1],
         colors[(3 * (focus_index == details_index)) + 2],
@@ -528,20 +507,21 @@ void freezeValueFunc(void) {
 
 int* displayMemory(int* dl) {
     int focus_index = 0;
-    int x = 10;
+    int x = 25;
     int y = ramViewY;
     int background = 1;
     int focus_rgb[3] = {0,0,0};
-    int addr_y = 100;
+    int size_rgb[3] = {0xFF,0xFF,0xFF};
+    int addr_y = 25;
     int offset_size = (2 << currentFormat);
     int byte_size = (2 << (2 - currentFormat));
     int focus_x = focusedBytes_offset % offset_size;
     int focus_y = (focusedBytes_offset - focus_x) / offset_size;
     int text_size = byte_size + 1;
     if (RAMDisplayOpen) {
-        TestVariable = focus_menu;
         dk_strFormat(ramViewTextPtrs[0], formatterheaderViewText, printStartAddr);
-        dl = drawTextContainer(dl, 128, 25, addr_y, ramViewTextPtrs[0],0xFF,0xFF,0xFF,0xFF, background);
+        dl = drawPixelTextContainer(dl, 25, addr_y, ramViewTextPtrs[0], 0xFF, 0xFF, 0xFF, 0xFF, background);
+        //dl = drawTextContainer(dl, 128, 25, addr_y, ramViewTextPtrs[0],0xFF,0xFF,0xFF,0xFF, background);
         for (int i = 0; i < (sizeof(ramViewTextPtrs) / sizeof(char*)) -1; i++) {
             dk_strFormatWrapper((ramViewTextPtrs[i+1]), currentFormat, (printStartAddr + (i * 2)));
             if ((ControllerInput.Buttons & R_Button) == 0) {
@@ -554,15 +534,31 @@ int* displayMemory(int* dl) {
                     ramViewTextPtrs[focus_y + 1][3 + (sets * 3) + (focus_x % 2)] = 0x20;
                 }
             }
-            dl = drawTextContainer(dl, tableStyle, x, y, ramViewTextPtrs[i+1],0xFF,0xFF,0xFF,0xFF, background);
+            dl = drawPixelTextContainer(dl, x, y, ramViewTextPtrs[i+1], 0xFF, 0xFF, 0xFF, 0xFF, background);
+            //dl = drawTextContainer(dl, tableStyle, x, y, ,0xFF,0xFF,0xFF,0xFF, background);
             y += ramViewYOffset;
         }
+        int size_x = 175;
+        dk_strFormat(ramview_size_full, "SIZE:%s", ramview_sizes[(int)currentFormat]);
         if (!editing_address) {
             if (focus_menu == FOCUSMENU_DEFAULT) {
                 if (ControllerInput.Buttons & L_Button) {
                     focus_rgb[0] = 0xFF;
                     focus_rgb[1] = 0x45;
                     focus_rgb[2] = 0x00;
+                    size_rgb[0] = 0xFF;
+                    size_rgb[1] = 0x45;
+                    size_rgb[2] = 0x00;
+                    if (currentFormat == ByteFormat4) {
+                        dk_strFormat(ramview_size_full, "SIZE:%s>", ramview_sizes[(int)currentFormat]);
+                    } else {
+                        size_x -= 8;
+                        if (currentFormat == ByteFormatH) {
+                            dk_strFormat(ramview_size_full, "<SIZE:%s", ramview_sizes[(int)currentFormat]);
+                        } else {
+                            dk_strFormat(ramview_size_full, "<SIZE:%s>", ramview_sizes[(int)currentFormat]);
+                        }
+                    }
                 } else {
                     focus_rgb[0] = 0xFF;
                     focus_rgb[1] = 0xD7;
@@ -574,41 +570,55 @@ int* displayMemory(int* dl) {
                 focus_rgb[2] = 0x03;
             }
         }
+        dl = drawPixelTextContainer(dl, size_x, addr_y, ramview_size_full, 
+            size_rgb[0],
+            size_rgb[1],
+            size_rgb[2], 0xFF, background);
         // Focused Byte
         formatByteFocus(printStartAddr, currentFormat);
         if (!editing_address) {
-            dl = drawTextContainer(dl, tableStyle, focusbyte_x, focusbyte_y, focusedBytePtr,
+            dl = drawPixelTextContainer(dl, focusbyte_x, focusbyte_y, focusedBytePtr,
                 focus_rgb[0],
                 focus_rgb[1],
                 focus_rgb[2],
                 0xFF, background);
+            // dl = drawTextContainer(dl, tableStyle, focusbyte_x, focusbyte_y, focusedBytePtr,
+            //     focus_rgb[0],
+            //     focus_rgb[1],
+            //     focus_rgb[2],
+            //     0xFF, background);
         }
         // Focused Addr
-        int x_pos = 377;
+        int x_pos = 356;
+        int char_spacing = 29;
         for (int i = 0; i < (editAddrPosition - 1); i++) {
-            x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - i))) & 0xF);
+            x_pos += char_spacing;
         }
         if (editing_address) {
-            dl = drawTextContainer(dl, 128, (x_pos / 3.65f), addr_y, focusedAddrPtr,0xFF,0xD7,0x00,0xFF, background);
+
+            dl = drawPixelTextContainer(dl, (x_pos / 3.65f), addr_y, focusedAddrPtr,0xFF,0xD7,0x00,0xFF, background);
+            //dl = drawTextContainer(dl, 128, (x_pos / 3.65f), addr_y, focusedAddrPtr,0xFF,0xD7,0x00,0xFF, background);
             // Addr End
-            x_pos += getGroovyCharKerning(((unsigned int)printStartAddr >> (4 * (5 - (editAddrPosition - 1)))) & 0xF);
-            dl = drawTextContainer(dl, 128, (x_pos / 3.65f), addr_y, addrEndBytes,0xFF,0xFF,0xFF,0xFF, background);
+            x_pos += char_spacing;
+            dl = drawPixelTextContainer(dl, (x_pos / 3.65f), addr_y, addrEndBytes,0xFF,0xFF,0xFF,0xFF, background);
+            //dl = drawTextContainer(dl, 128, (x_pos / 3.65f), addr_y, addrEndBytes,0xFF,0xFF,0xFF,0xFF, background);
         }
         if (focus_menu == FOCUSMENU_DETAILS) {
             int background = 1;
-            int y = 265;
+            // int y = 265;
+            int y = 181;
             if (currentFormat == ByteFormat4) {
                 int val = *(int*)(focused_address);
                 if ((val >= 0x80000000) && (val < 0x80800000)) {
-                    dl = drawExtraText(dl, "Follow Pointer", y, focus_index, details_index, background, (int)&followPointerFunc);
+                    dl = drawExtraText(dl, "FOLLOW POINTER", y, focus_index, details_index, background, (int)&followPointerFunc);
                     focus_index += 1;
                     y += 13;
                 }
             }
-            dl = drawExtraText(dl, "Add to Watch", y, focus_index, details_index, background, (int)&addToWatchFunc);
+            dl = drawExtraText(dl, "ADD TO WATCH", y, focus_index, details_index, background, (int)&addToWatchFunc);
             focus_index += 1;
             y += 13;
-            dl = drawExtraText(dl, "Freeze Value", y, focus_index, details_index, background, (int)&freezeValueFunc);
+            dl = drawExtraText(dl, "FREEZE VALUE", y, focus_index, details_index, background, (int)&freezeValueFunc);
             focus_index += 1;
             y += 13;
         }

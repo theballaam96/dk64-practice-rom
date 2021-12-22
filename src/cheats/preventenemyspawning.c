@@ -66,11 +66,11 @@ void handleSpawnPrevention(void) {
 }
 
 void toggleSpawnPrevention(void) {
-	EnemySpawnOff = 1 - EnemySpawnOff;
+	EnemySpawnOff = 1 ^ EnemySpawnOff;
 	SpawnerArray* spawner_array;
 	SpawnerInfo* focused_spawner;
-	char _allowed;
-	char _change;
+	int _allowed = 0;
+	int _change = 0;
 	if (EnemySpawnOff) {
 		_change = 8;
 	} else {

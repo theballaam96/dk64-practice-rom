@@ -2,20 +2,14 @@
 
 static char spawned_menu = 0;
 static char menu_slot = 0;
-static const char console_title1[] = "THIS IS THE FIRST TIME YOU'VE BOOTED UP THE ROM";
-static const char console_title2[] = "PLEASE SELECT YOUR CONSOLE";
-static const char console_n64[] = "NINTENDO 64";
-static const char console_wiiu[] = "WII U VIRTUAL CONSOLE";
-static const char console_emu[] = "EMULATOR";
-static const char console_foot[] = "YOU CAN CHANGE THIS IN THE SETTINGS MENU LATER";
 
 static const char* console_text_list[] = {
-	console_title1,
-	console_title2,
-	console_n64,
-	console_wiiu,
-	console_emu,
-	console_foot,
+	"THIS IS THE FIRST TIME YOU'VE BOOTED UP THE ROM",
+	"PLEASE SELECT YOUR CONSOLE",
+	"NINTENDO 64",
+	"WII U VIRTUAL CONSOLE",
+	"EMULATOR",
+	"YOU CAN CHANGE THIS IN THE SETTINGS MENU LATER",
 };
 static const float console_y[] = {55,68,101,114,127,160};
 

@@ -1,33 +1,5 @@
 #include "../include/common.h"
 
-static const char filestates_nle[] = "No Levels Early";
-static const char filestates_101[] = "101%";
-static const char filestates_general[] = "General";
-static const char filestates_101org[] = "Organic Route";
-static const char filestates_101jfm[] = "Japes for Moves Route";
-static const char filestates_101ffm[] = "Factory for Moves Route";
-static const char filestates_glitchless[] = "Glitchless Any%";
-
-static const char state_text_japes[] = "Japes";
-static const char state_text_japes1[] = "Japes 1";
-static const char state_text_japes2[] = "Japes 2";
-static const char state_text_aztec[] = "Aztec";
-static const char state_text_aztec1[] = "Aztec 1";
-static const char state_text_aztec2[] = "Aztec 2";
-static const char state_text_factory[] = "Factory";
-static const char state_text_galleon[] = "Galleon";
-static const char state_text_fungi[] = "Fungi";
-static const char state_text_caves[] = "Caves";
-static const char state_text_caves1[] = "Caves 1";
-static const char state_text_caves2[] = "Caves 2";
-static const char state_text_castle[] = "Castle";
-static const char state_text_castle1[] = "Castle 1";
-static const char state_text_castle2[] = "Castle 2";
-static const char state_text_helm[] = "Helm";
-
-static const char state_text_takeoff[] = "Takeoff Skip";
-static const char state_text_clean[] = "Clean File";
-
 static const char filestates_nle_stateindex[] = {0,1,2,3,4,5,6,7,8,9};
 static const char filestates_101org_stateindex[] = {11,12,13,14,15,16,17,18,19,20,21};
 static const char filestates_101jfm_stateindex[] = {22,23,24,25,26,27,28,29,30,21};
@@ -161,10 +133,10 @@ void takeoffSkip(void) {
 }
 
 static const char* filestates_main_array[] = {
-	filestates_general,
-	filestates_nle,
-	filestates_101,
-	filestates_glitchless,
+	"GENERAL",
+	"NO LEVELS EARLY",
+	"101$",
+	"ANY$ GLITCHLESS",
 };
 
 static const int filestates_main_functions[] = {
@@ -183,16 +155,16 @@ const Screen filestates_main_struct = {
 };
 
 static const char* filestates_nle_array[] = {
-	state_text_japes1,
-	state_text_aztec,
-	state_text_factory,
-	state_text_japes2,
-	state_text_galleon,
-	state_text_fungi,
-	state_text_caves,
-	state_text_castle,
-	state_text_helm,
-	state_text_takeoff
+	"JAPES 1",
+	"AZTEC",
+	"FACTORY",
+	"JAPES 2",
+	"GALLEON",
+	"FUNGI",
+	"CAVES",
+	"CASTLE",
+	"HELM",
+	"TAKEOFF SKIP"
 };
 
 static const int filestates_nle_functions[] = {
@@ -217,9 +189,9 @@ const Screen filestates_nle_struct = {
 };
 
 static const char* filestates_101main_array[] = {
-	filestates_101org,
-	filestates_101jfm,
-	filestates_101ffm,
+	"ORGANIC ROUTE",
+	"JAPES FOR MOVES ROUTE",
+	"FACTORY FOR MOVES ROUTE",
 };
 
 static const int filestates_101main_functions[] = {
@@ -237,7 +209,7 @@ const Screen filestates_101main_struct = {
 };
 
 static const char* filestates_general_array[] = {
-	state_text_clean
+	"CLEAN FILE"
 };
 
 static const int filestates_general_functions[] = {
@@ -253,17 +225,17 @@ const Screen filestates_general_struct = {
 };
 
 static const char* filestates_101org_array[] = {
-	state_text_caves1,
-	state_text_japes1,
-	state_text_aztec1,
-	state_text_factory,
-	state_text_galleon,
-	state_text_helm,
-	state_text_castle,
-	state_text_aztec2,
-	state_text_caves2,
-	state_text_japes2,
-	state_text_fungi
+	"CAVES 1",
+	"JAPES 1",
+	"AZTEC 1",
+	"FACTORY",
+	"GALLEON",
+	"HELM",
+	"CASTLE",
+	"AZTEC 2",
+	"CAVES 2",
+	"JAPES 2",
+	"FUNGI"
 };
 
 static const int filestates_101org_functions[] = {
@@ -289,16 +261,16 @@ const Screen filestates_101org_struct = {
 };
 
 static const char* filestates_101jfm_array[] = {
-	state_text_aztec1,
-	state_text_castle1,
-	state_text_japes,
-	state_text_factory,
-	state_text_galleon,
-	state_text_helm,
-	state_text_castle2,
-	state_text_aztec2,
-	state_text_caves,
-	state_text_fungi
+	"AZTEC 1",
+	"CASTLE 1",
+	"JAPES",
+	"FACTORY",
+	"GALLEON",
+	"HELM",
+	"CASTLE 2",
+	"AZTEC 2",
+	"CAVES",
+	"FUNGI"
 };
 
 static const int filestates_101jfm_functions[] = {
@@ -323,16 +295,16 @@ const Screen filestates_101jfm_struct = {
 };
 
 static const char* filestates_101ffm_array[] = {
-	state_text_aztec1,
-	state_text_castle1,
-	state_text_factory,
-	state_text_galleon,
-	state_text_helm,
-	state_text_japes,
-	state_text_castle2,
-	state_text_aztec2,
-	state_text_caves,
-	state_text_fungi
+	"AZTEC 1",
+	"CASTLE 1",
+	"FACTORY",
+	"GALLEON",
+	"HELM",
+	"JAPES",
+	"CASTLE 2",
+	"AZTEC 2",
+	"CAVES",
+	"FUNGI"
 };
 
 static const int filestates_101ffm_functions[] = {
@@ -357,15 +329,15 @@ const Screen filestates_101ffm_struct = {
 };
 
 static const char* filestates_glitchless_array[] = {
-	state_text_japes1,
-	state_text_aztec,
-	state_text_factory,
-	state_text_japes2,
-	state_text_galleon,
-	state_text_fungi,
-	state_text_caves,
-	state_text_castle,
-	state_text_helm
+	"JAPES 1",
+	"AZTEC",
+	"FACTORY",
+	"JAPES 2",
+	"GALLEON",
+	"FUNGI",
+	"CAVES",
+	"CASTLE",
+	"HELM"
 };
 
 static const int filestates_glitchless_functions[] = {
@@ -384,6 +356,6 @@ const Screen filestates_glitchless_struct = {
 	.TextArray = (int*)filestates_glitchless_array,
 	.FunctionArray = filestates_glitchless_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 37,
+	.ParentScreen = 35,
 	.ParentPosition = 3
 };

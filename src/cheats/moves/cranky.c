@@ -1,37 +1,37 @@
 #include "../../../include/common.h"
 
-static const char cranky_slam0[] = "Slam: None";
-static const char cranky_slam1[] = "Slam: Regular";
-static const char cranky_slam2[] = "Slam: Super";
-static const char cranky_slam3[] = "Slam: Super Duper";
+static const char cranky_slam0[] = "SLAM:NONE";
+static const char cranky_slam1[] = "SLAM:REGULAR";
+static const char cranky_slam2[] = "SLAM:SUPER";
+static const char cranky_slam3[] = "SLAM:SUPER DUPER";
 
-static const char cranky_dk0[] = "DK: None";
-static const char cranky_dk1[] = "DK: BBlast";
-static const char cranky_dk2[] = "DK: BBlast & Strong Kong";
-static const char cranky_dk3[] = "DK: All";
+static const char cranky_dk0[] = "DK:NONE";
+static const char cranky_dk1[] = "DK:BBLAST";
+static const char cranky_dk2[] = "DK:BBLAST AND STRONG KONG";
+static const char cranky_dk3[] = "DK:ALL";
 
-static const char cranky_di0[] = "Diddy: None";
-static const char cranky_di1[] = "Diddy: CCharge";
-static const char cranky_di2[] = "Diddy: CCharge & Rocketbarrel";
-static const char cranky_di3[] = "Diddy: All";
+static const char cranky_di0[] = "DIDDY:NONE";
+static const char cranky_di1[] = "DIDDY:CCHARGE";
+static const char cranky_di2[] = "DIDDY:CCHARGE AND ROCKETBARREL";
+static const char cranky_di3[] = "DIDDY:ALL";
 
-static const char cranky_la0[] = "Lanky: None";
-static const char cranky_la1[] = "Lanky: OStand";
-static const char cranky_la2[] = "Lanky: OStand & BBalloon";
-static const char cranky_la3[] = "Lanky: ALL";
+static const char cranky_la0[] = "LANKY:NONE";
+static const char cranky_la1[] = "LANKY:OSTAND";
+static const char cranky_la2[] = "LANKY:OSTAND AND BBALLOON";
+static const char cranky_la3[] = "LANKY:ALL";
 
-static const char cranky_ti0[] = "Tiny: None";
-static const char cranky_ti1[] = "Tiny: MMonkey";
-static const char cranky_ti2[] = "Tiny: MMonkey & PTT";
-static const char cranky_ti3[] = "Tiny: ALL";
+static const char cranky_ti0[] = "TINY:NONE";
+static const char cranky_ti1[] = "TINY:MMONKEY";
+static const char cranky_ti2[] = "TINY:MMONKEY AND PTT";
+static const char cranky_ti3[] = "TINY:ALL";
 
-static const char cranky_ch0[] = "Chunky: None";
-static const char cranky_ch1[] = "Chunky: Hunky Chunky";
-static const char cranky_ch2[] = "Chunky: Hunky Chunky & PPunch";
-static const char cranky_ch3[] = "Chunky: All";
+static const char cranky_ch0[] = "CHUNKY:NONE";
+static const char cranky_ch1[] = "CHUNKY:HUNKY CHUNKY";
+static const char cranky_ch2[] = "CHUNKY:HUNKY CHUNKY AND PPUNCH";
+static const char cranky_ch3[] = "CHUNKY:ALL";
 
-static const char cranky_ssflag_on[] = "Simian Slam Purchased: True";
-static const char cranky_ssflag_off[] = "Simian Slam Purchased: False";
+static const char cranky_ssflag_on[] = "SIMIAN SLAM PURCHASED:TRUE";
+static const char cranky_ssflag_off[] = "SIMIAN SLAM PURCHASED:FALSE";
 
 static const char* cranky_array[] = {
 	cranky_slam0,
@@ -109,7 +109,7 @@ void openCrankyMenu(void) {
 
 void toggleSlamFlag(void) {
 	char _flag = checkFlag(0x180,0);
-	setFlag(0x180,1 - _flag,0);
+	setFlag(0x180,1 ^ _flag,0);
 	openCrankyMenu();
 }
 

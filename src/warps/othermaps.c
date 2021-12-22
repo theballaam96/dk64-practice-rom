@@ -1,10 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapArcade[] = "Arcade (Mystery Menu)";
-static const char mapJetpac[] = "Jetpac (Mystery Menu)";
-static const char mapArcadeStory[] = "Arcade (Story Mode)";
-static const char mapJetpacStory[] = "Jetpac (Story Mode)";
-
 void warpToStoryArcade(void) {
 	setDataStates(0,1);
 	warpToMap();
@@ -46,10 +41,10 @@ const MapWarp map_other_struct = {
 };
 
 static const char* other_mapwarp_array[] = {
-	mapArcade,
-	mapJetpac,
-	mapArcadeStory,
-	mapJetpacStory,
+	"ARCADE <MYSTERY MENU>",
+	"JETPAC <MYSTERY MENU>",
+	"ARCADE <STORY MODE>",
+	"JETPAC <STORY MODE>",
 };
 
 static const int other_mapwarp_functions[] = {

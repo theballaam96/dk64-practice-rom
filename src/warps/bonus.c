@@ -1,43 +1,22 @@
 #include "../../include/common.h"
 
-static const char mapBonusBBBandit[] = "Batty Barrel Bandit";
-static const char mapBonusBBother[] = "Beaver Bother";
-static const char mapBonusBBotherTower[] = "Beaver Bother (Tower)";
-static const char mapBonusBBotherTree[] = "Beaver Bother (Tree)";
-static const char mapBonusBBBash[] = "Big Bug Bash";
-static const char mapBonusBBBarrage[] = "Busy Barrel Barrage";
-static const char mapBonusMMMaul[] = "Mad Maze Maul";
-static const char mapBonusKrazyKK[] = "Krazy Kong Klamour";
-static const char mapBonusKKosh[] = "Kremling Kosh";
-static const char mapBonusMMayhem[] = "Minecart Mayhem";
-static const char mapBonusPPPanic[] = "Peril Path Panic";
-static const char mapBonusSSeek[] = "Searchlight Seek";
-static const char mapBonusSSSortie[] = "Speedy Swing Sortie";
-static const char mapBonusSSSalvage[] = "Splish Splash Salvage";
-static const char mapBonusSSnatch[] = "Stash Snatch";
-static const char mapBonusSSnoop[] = "Stealthy Snoop";
-static const char mapBonusTTTrouble[] = "Teetering Turtle Trouble";
-
-static const char mapBonusDKTarget[] = "DK Target Game";
-static const char mapBonusDKRambi[] = "DK Rambi Game";
-static const char mapBonusDiddyKremling[] = "Diddy Kremling Game";
-static const char mapBonusDiddyRocketbarrel[] = "Diddy Rocketbarrel Game";
-static const char mapBonusLankyMaze[] = "Lanky Maze Game";
-static const char mapBonusLankyShooting[] = "Lanky Shooting Game";
-static const char mapBonusTinyPTT[] = "Tiny PTT Game";
-static const char mapBonusTinyMushroom[] = "Tiny Mushroom Game";
-static const char mapBonusChunkyHiddenKremling[] = "Chunky Hidden Kremling Game";
-static const char mapBonusChunkyShooting[] = "Chunky Shooting Game";
-
-static const char mapBonusJapes[] = "Japes Barrels";
-static const char mapBonusAztec[] = "Aztec Barrels";
-static const char mapBonusFactory[] = "Factory Barrels";
-static const char mapBonusGalleon[] = "Galleon Barrels";
-static const char mapBonusFungi[] = "Fungi Barrels";
-static const char mapBonusCaves[] = "Caves Barrels";
-static const char mapBonusCastle[] = "Castle Barrels";
-static const char mapBonusHelm[] = "Helm Barrels";
-static const char mapBonusIsles[] = "Isles Barrels";
+static const char mapBonusBBBandit[] = "BATTY BARREL BANDIT";
+static const char mapBonusBBother[] = "BEAVER BOTHER";
+static const char mapBonusBBotherTower[] = "BEAVER BOTHER <TOWER>";
+static const char mapBonusBBotherTree[] = "BEAVER BOTHER <TREE>";
+static const char mapBonusBBBash[] = "BIG BUG BASH";
+static const char mapBonusBBBarrage[] = "BUSY BARREL BARRAGE";
+static const char mapBonusMMMaul[] = "MAD MAZE MAUL";
+static const char mapBonusKrazyKK[] = "KRAZY KONG KLAMOUR";
+static const char mapBonusKKosh[] = "KREMLING KOSH";
+static const char mapBonusMMayhem[] = "MINECART MAYHEM";
+static const char mapBonusPPPanic[] = "PERIL PATH PANIC";
+static const char mapBonusSSeek[] = "SEARCHLIGHT SEEK";
+static const char mapBonusSSSortie[] = "SPEEDY SWING SORTIE";
+static const char mapBonusSSSalvage[] = "SPLISH SPLASH SALVAGE";
+static const char mapBonusSSnatch[] = "STASH SNATCH";
+static const char mapBonusSSnoop[] = "STEALTHY SNOOP";
+static const char mapBonusTTTrouble[] = "TEETERING TURTLE TROUBLE";
 
 
 void openBonusMainMenu(void) {
@@ -92,15 +71,15 @@ void initMapWarpFirst(void) {
 }
 
 static const char* bonusmain_mapwarp_array[] = {
-	mapBonusJapes,
-	mapBonusAztec,
-	mapBonusFactory,
-	mapBonusGalleon,
-	mapBonusFungi,
-	mapBonusCaves,
-	mapBonusCastle,
-	mapBonusHelm,
-	mapBonusIsles,
+	"JAPES BARRELS",
+	"AZTEC BARRELS",
+	"FACTORY BARRELS",
+	"GALLEON BARRELS",
+	"FUNGI BARRELS",
+	"CAVES BARRELS",
+	"CASTLE BARRELS",
+	"HELM BARRELS",
+	"ISLES BARRELS",
 };
 
 static const int bonusmain_mapwarp_functions[] = {
@@ -522,16 +501,16 @@ const MapWarp map_bonushelm_struct = {
 };
 
 static const char* bonushelm_mapwarp_array[] = {
-	mapBonusDKRambi,
-	mapBonusDKTarget,
-	mapBonusDiddyKremling,
-	mapBonusDiddyRocketbarrel,
-	mapBonusLankyMaze,
-	mapBonusLankyShooting,
-	mapBonusTinyMushroom,
-	mapBonusTinyPTT,
-	mapBonusChunkyHiddenKremling,
-	mapBonusChunkyShooting,
+	"DK RAMBI GAME",
+	"DK TARGET GAME",
+	"DIDDY KREMLING GAME",
+	"DIDDY ROCKETBARREL GAME",
+	"LANKY MAZE GAME",
+	"LANKY SHOOTING GAME",
+	"TINY MUSHROOM GAME",
+	"TINY PTT GAME",
+	"CHUNKY HIDDEN KREMLING GAME",
+	"CHUNKY SHOOTING GAME",
 };
 
 static const int bonushelm_mapwarp_functions[] = {

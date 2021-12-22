@@ -1,17 +1,5 @@
 #include "../../include/common.h"
 
-static const char flag_kongs[] = "Kongs Freed";
-static const char flag_keysin[] = "Keys Turned In";
-static const char flag_keyshave[] = "Keys in Possession";
-static const char flag_levelIntros[] = "Level Intros";
-static const char flag_levenTnS[] = "Level Troff & Scoff";
-static const char flag_levelBoss[] = "Level Boss Intros";
-static const char flag_cutscenes[] = "Cutscenes";
-static const char flag_modifiers[] = "Level Modifiers";
-static const char flag_misc[] = "Miscellaneous";
-static const char flag_ftt[] = "First Time Texts";
-static const char flag_custom[] = "Custom";
-
 void openFlagsMainMenu(void) {
 	changeMenu(43);
 }
@@ -46,7 +34,7 @@ void toggleFlag(void) {
 			_flag_index = flag_menus[i]->flagArray[(int)ActiveMenu.positionIndex];
 			_flag_type = flag_menus[i]->flagTypeArray[(int)ActiveMenu.positionIndex];
 			_flag_state = checkFlag(_flag_index,_flag_type);
-			_flag_state = 1 - _flag_state;
+			_flag_state = 1 ^ _flag_state;
 			setFlag(_flag_index,_flag_state,_flag_type);
 		}
 	}
@@ -54,17 +42,17 @@ void toggleFlag(void) {
 }
 
 static const char* flagmain_array[] = {
-	flag_kongs,
-	flag_keysin,
-	flag_keyshave,
-	flag_levelIntros,
-	flag_levenTnS,
-	flag_levelBoss,
-	flag_cutscenes,
-	flag_modifiers,
-	flag_ftt,
-	flag_misc,
-	flag_custom,
+	"KONGS FREED",
+	"KEYS TURNED IN",
+	"KEYS IN POSSESSION",
+	"LEVEL INTROS",
+	"LEVEL TROFF AND SCOFF",
+	"LEVEL BOSS INTROS",
+	"CUTSCENES",
+	"LEVEL MODIFIERS",
+	"FIRST TIME TEXTS",
+	"MISCELLANEOUS",
+	"CUSTOM",
 };
 
 const Screen flagmain_struct = {

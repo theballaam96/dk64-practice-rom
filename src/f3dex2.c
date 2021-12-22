@@ -20,11 +20,15 @@ int* drawText(int* dl, int style, float x, float y, char* str, int red, int gree
 		*(unsigned int*)(dl++) = 0xFC119623; // G_SETCOMBINE
 		*(unsigned int*)(dl++) = 0xFF2FFFFF; // G_SETCIMG format: 1, 1, -1
 		if (style == 6) {
-			gSPMatrix(dl, (int)&style6Mtx[0], 3);
-			dl += 2;
+			*(unsigned int*)(dl++) = 0xDA380003;
+			*(unsigned int*)(dl++) = (int)&style6Mtx[0];
+			// gSPMatrix(dl, (int)&style6Mtx[0], 3);
+			// dl += 2;
 		} else if (style == 2) {
-			gSPMatrix(dl, (int)&style2Mtx[0], 3);
-			dl += 2;
+			*(unsigned int*)(dl++) = 0xDA380003;
+			*(unsigned int*)(dl++) = (int)&style2Mtx[0];
+			// gSPMatrix(dl, (int)&style2Mtx[0], 3);
+			// dl += 2;
 		// } else if (style == 128) {
 			// gSPMatrix(dl, (int)&style128Mtx[0], 3);
 			// dl += 2;
@@ -88,6 +92,51 @@ int* drawTri(int* dl, short x1, short y1, short x2, short y2, short x3, short y3
 	// Draw Tri
 	*(unsigned int*)(dl++) = 0x05000204;
 	*(unsigned int*)(dl++) = 0x00000000;
+	return dl;
+}
+
+int* drawPixelText(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha) {
+	*(unsigned int*)(dl++) = 0xE7000000;
+    *(unsigned int*)(dl++) = 0x00000000;
+    *(unsigned int*)(dl++) = 0xE3000A01;
+    *(unsigned int*)(dl++) = 0x00000000;
+    *(unsigned int*)(dl++) = 0xD9000000;
+    *(unsigned int*)(dl++) = 0x00000000;
+    *(unsigned int*)(dl++) = 0xD9FFFFFF;
+    *(unsigned int*)(dl++) = 0x00200004;
+    gDPSetPrimColor(dl, 0, 0, red, green, blue, alpha);
+    dl += 2;
+    *(unsigned int*)(dl++) = 0xFC119623;
+    *(unsigned int*)(dl++) = 0xFF2FFFFF;
+    *(unsigned int*)(dl++) = 0xE200001C;
+    *(unsigned int*)(dl++) = 0x00504240;
+    dl = textDraw(dl,2,x,y,str);
+	return dl;
+};
+
+int* drawPixelTextContainer(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha, int offset) {
+	if (offset) {
+		dl = drawPixelText(dl,x-offset,y+offset,str,0,0,0,alpha);
+	}
+	dl = drawPixelText(dl,x,y,str,red,green,blue,alpha);
+	return dl;
+}
+
+int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, int blue, int alpha) {
+	*(unsigned int*)(dl++) = 0xE7000000;
+	*(unsigned int*)(dl++) = 0x00000000;
+	*(unsigned int*)(dl++) = 0xE3000A01;
+	*(unsigned int*)(dl++) = 0x00300000;
+	*(unsigned int*)(dl++) = 0xE200001C;
+	*(unsigned int*)(dl++) = 0x00000000;
+	*(unsigned int*)(dl++) = 0xD9FFFFFE;
+	*(unsigned int*)(dl++) = 0x00000000;
+	*(unsigned int*)(dl++) = 0xF7000000;
+	*(unsigned int*)(dl++) = ((red & 0x1F) << 11) | ((green & 0x1F) << 6) | ((blue & 0x1F) << 1) | (alpha & 0x1);
+	*(unsigned int*)(dl++) = 0xED000000 | (((0xA * 4) & 0xFFF) << 12) | ((4 * 0xA) & 0xFFF);
+	*(unsigned int*)(dl++) = (((4 * 0x135) & 0xFFF) << 12) | ((4 * 0xE5) & 0xFFF);
+	*(unsigned int*)(dl++) = 0xF6000000 | ((x2 & 0x3FF) << 12) | (y2 & 0x3FF);
+	*(unsigned int*)(dl++) = ((x1 & 0x3FF) << 12) | (y1 & 0x3FF);
 	return dl;
 }
 

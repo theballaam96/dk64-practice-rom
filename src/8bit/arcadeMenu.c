@@ -1,25 +1,5 @@
 #include "../../include/common.h"
 
-static char arcade_map[10] = "MAP SELECT";
-static char arcade_map0[] = "25M";
-static char arcade_map1[] = "50M";
-static char arcade_map2[] = "75M";
-static char arcade_map3[] = "100M";
-static char arcade_diff[20] = "LEVEL SELECT";
-static char arcade_levitate[] = "LEVITATE JUMPMAN";
-static char arcade_restocklives[] = "RESTOCK LIVES";
-static char arcade_savestate[] = "SAVE STATE";
-static char arcade_loadstate[] = "LOAD STATE";
-static char arcade_lvl0[] = "LEVEL 1";
-static char arcade_lvl1[] = "LEVEL 2";
-static char arcade_lvl2[] = "LEVEL 3";
-static char arcade_lvl3[] = "LEVEL 4";
-static char arcade_lvl4[] = "LEVEL 5";
-static char arcade_lvl5[] = "LEVEL 6";
-static char arcade_lvl6[] = "LEVEL 7";
-static char arcade_lvl7[] = "LEVEL 8";
-static char arcade_lvl8[] = "LEVEL 9";
-
 static arcadeObjectBase arcadeObjectsState = {};
 static arcadeMoveFloorBase arcadeFloorState = {};
 static arcadeObject jumpmanObj = {};
@@ -172,12 +152,12 @@ void finishLoadingArcadeState(void) {
 }
 
 static char* arcade_array[] = {
-	arcade_map,
-	arcade_diff,
-	arcade_levitate,
-	arcade_restocklives,
-	arcade_savestate,
-	arcade_loadstate
+	"MAP SELECT",
+	"LEVEL SELECT",
+	"LEVITATE JUMPMAN",
+	"RESTOCK LIVES",
+	"SAVE STATE",
+	"LOAD STATE"
 };
 
 static const int arcade_functions[] = {
@@ -198,10 +178,10 @@ static const Screen arcade_struct = {
 };
 
 static char* arcademap_array[] = {
-	arcade_map0,
-	arcade_map1,
-	arcade_map2,
-	arcade_map3
+	"25M",
+	"50M",
+	"75M",
+	"100M"
 };
 
 static const int arcademap_functions[] = {
@@ -220,15 +200,15 @@ static const Screen arcademap_struct = {
 };
 
 static char* arcadelvl_array[] = {
-	arcade_lvl0,
-	arcade_lvl1,
-	arcade_lvl2,
-	arcade_lvl3,
-	arcade_lvl4,
-	arcade_lvl5,
-	arcade_lvl6,
-	arcade_lvl7,
-	arcade_lvl8
+	"LEVEL 1",
+	"LEVEL 2",
+	"LEVEL 3",
+	"LEVEL 4",
+	"LEVEL 5",
+	"LEVEL 6",
+	"LEVEL 7",
+	"LEVEL 8",
+	"LEVEL 9"
 };
 
 static const int arcadelvl_functions[] = {

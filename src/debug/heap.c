@@ -1,9 +1,9 @@
 #include "../../include/common.h"
 
-static char memory_free[40] = "Free: 0x0 bytes";
-static char memory_used[40] = "Used: 0x0 bytes";
-static char memory_allocated[40] = "Allocated: 0";
-static char memory_total[40] = "Total: 0x0 bytes";
+static char memory_free[40] = "";
+static char memory_used[40] = "";
+static char memory_allocated[40] = "";
+static char memory_total[40] = "";
 
 unsigned int heap_free = 0;
 unsigned int heap_used = 0;
@@ -46,10 +46,10 @@ void getMemoryStats(void) {
 
 void openHeapMenu(void) {
 	getMemoryStats();
-	dk_strFormat(memory_free, "Free: 0x%X bytes (%f%%)",heap_free,heap_free_percent);
-	dk_strFormat(memory_used, "Used: 0x%X bytes (%f%%)",heap_used,heap_used_percent);
-	dk_strFormat(memory_allocated, "Allocated: %d",heap_allocated);
-	dk_strFormat(memory_total, "Total: 0x%X bytes",heap_total);
+	dk_strFormat(memory_free, "FREE:0X%X BYTES <%f$>",heap_free,heap_free_percent);
+	dk_strFormat(memory_used, "USED:0X%X BYTES <%f$>",heap_used,heap_used_percent);
+	dk_strFormat(memory_allocated, "ALLOCATED:%d",heap_allocated);
+	dk_strFormat(memory_total, "TOTAL:0X%X BYTES",heap_total);
 	changeMenu(84);
 }
 

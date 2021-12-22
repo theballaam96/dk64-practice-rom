@@ -1,28 +1,19 @@
 #include "../../include/common.h"
 
-static const char moveset_giveallmoves[] = "Give All Moves";
-static const char moveset_revokeallmoves[] = "Revoke All Moves";
-static const char moveset_cranky[] = "Cranky";
-static const char moveset_funky[] = "Funky";
-static const char moveset_candy[] = "Candy";
-static const char moveset_trainingbarrels[] = "Training Barrels";
-static const char moveset_camerashockwave_on[] = "Camera & Shockwave: On";
-static const char moveset_camerashockwave_off[] = "Camera & Shockwave: Off";
-static const char moveset_givecoins[] = "Give Coins";
-static const char moveset_restockinventory[] = "Restock Inventory";
-static const char moveset_restockhoming[] = "Give Homing Ammo";
+static const char moveset_camerashockwave_on[] = "} CAMERA AND SHOCKWAVE";
+static const char moveset_camerashockwave_off[] = "{ CAMERA AND SHOCKWAVE";
 
 static const char* moveset_array[] = {
-	moveset_giveallmoves,
-	moveset_revokeallmoves,
-	moveset_cranky,
-	moveset_funky,
-	moveset_candy,
-	moveset_trainingbarrels,
+	"GIVE ALL MOVES",
+	"REVOKE ALL MOVES",
+	"CRANKY",
+	"FUNKY",
+	"CANDY",
+	"TRAINING BARRELS",
 	moveset_camerashockwave_off,
-	moveset_givecoins,
-	moveset_restockinventory,
-	moveset_restockhoming,
+	"GIVE COINS",
+	"RESTOCK INVENTORY",
+	"GIVE HOMING AMMO",
 };
 
 void openMovesetInventoryMenu(void) {
@@ -61,8 +52,8 @@ void restockHoming(void) {
 }
 
 void toggleCamera(void) {
-	char _camera = checkFlag(0x179,0);
-	setFlag(0x179,1 - _camera,0);
+	int _camera = checkFlag(0x179,0);
+	setFlag(0x179,1 ^ _camera,0);
 	openMovesetInventoryMenu();
 }
 

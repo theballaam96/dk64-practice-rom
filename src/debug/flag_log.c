@@ -159,7 +159,7 @@ void openFlagLogMenu(void) {
 			_sec = _diff - (3600 * _hour) - (60 * _min);
 			dk_strFormat(
 				flagLog_items[i],
-				"%d: 0x%03X>%d %s%s %02d:%02d:%02d ago",
+				"%d: 0X%03X>%d %s%s %02d:%02d:%02d AGO",
 				(i+1),
 				_byte,
 				_bit,
@@ -171,7 +171,7 @@ void openFlagLogMenu(void) {
 			);
 		};
 	} else {
-		dk_strFormat(flagLog_items[0],"No flags in log");
+		dk_strFormat(flagLog_items[0],"NO FLAGS IN LOG");
 		count = 1;
 	}
 	flaglog_struct.ArrayItems = count;

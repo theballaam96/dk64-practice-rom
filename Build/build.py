@@ -18,6 +18,10 @@ from recompute_overlays import isROMAddressOverlay, readOverlayOriginalData, rep
 # Patcher functions for the extracted files
 from patch_text import patchDolbyText, patchWrinklyText, patchKlumsyText, patchMainMenu
 from staticcode import patchStaticCode
+from actor_bin_builder import *
+from snag_bins_builder import *
+from font_image_builder import build_font
+import check_unused
 
 ROMName = "rom/dk64.z64"
 newROMName = "rom/dk64-practice-rom.z64"
@@ -122,18 +126,18 @@ file_dict = [
 	# 	"texture_format": "ia4",
 	# },
 	{
-		"name": "Tri Background Image",
-		"pointer_table_index": 25,
-		"file_index": 6013,
-		"source_file": "assets/Non-Code/Tri/blank.png",
-		"texture_format": "rgba5551",
+		"name": "Arcade Font",
+		"pointer_table_index": 14,
+		"file_index": 19,
+		"source_file": "assets/Non-Code/Font/arcade_font_modified.png",
+		"texture_format": "i4",
+		"font_key": "arcade_font",
 	},
 	{
 		"name": "Actor Names",
 		"start": 0x2020000,
 		"source_file": "assets/Non-Code/actor_names.bin",
 		"do_not_extract": True,
-		"do_not_delete_source": True,
 		"do_not_compress": True,
 	},
 	{
@@ -141,7 +145,6 @@ file_dict = [
 		"start": 0x2021800,
 		"source_file": "assets/Non-Code/snag_names.bin",
 		"do_not_extract": True,
-		"do_not_delete_source": True,
 		"do_not_compress": True,
 	},
 	{
@@ -149,7 +152,6 @@ file_dict = [
 		"start": 0x2021C00,
 		"source_file": "assets/Non-Code/snag_names_capitals.bin",
 		"do_not_extract": True,
-		"do_not_delete_source": True,
 		"do_not_compress": True,
 	},
 ]
@@ -240,7 +242,10 @@ with open(ROMName, "rb") as fh:
 		# N64Tex conversions do not need to be extracted to disk from ROM
 		if "texture_format" in x:
 			x["do_not_extract"] = True
-			x["output_file"] = x["source_file"].replace(".png", "." + x["texture_format"])
+			if "font_key" in x:
+				x["output_file"] = x["source_file"].replace(".png", ".bin")
+			else:
+				x["output_file"] = x["source_file"].replace(".png", "." + x["texture_format"])
 
 		if not "output_file" in x:
 			x["output_file"] = x["source_file"]
@@ -252,6 +257,22 @@ with open(ROMName, "rb") as fh:
 		# If we're not extracting the file to disk, we're using a custom .bin that shoudn't be deleted
 		if "do_not_extract" in x and x["do_not_extract"]:
 			x["do_not_delete_source"] = True
+
+		if "font_key" in x:
+			byte_read = bytes()
+			if "pointer_table_index" in x and "file_index" in x:
+				file_info = getFileInfo(x["pointer_table_index"], x["file_index"])
+				if file_info:
+					x["start"] = file_info["new_absolute_address"]
+					x["compressed_size"] = len(file_info["data"])
+
+			fh.seek(x["start"])
+			byte_read = fh.read(x["compressed_size"])
+			dec = zlib.decompress(byte_read, 15 + 32)
+			bin_file = x["source_file"].split(".")[0]+".bin";
+			with open(bin_file,"wb") as fg:
+				fg.write(dec)
+			build_font(bin_file,x["texture_format"],x["font_key"])
 
 		# Extract the compressed file from ROM
 		if not ("do_not_extract" in x and x["do_not_extract"]):
@@ -282,7 +303,7 @@ for x in file_dict:
 with open(newROMName, "r+b") as fh:
 	print("[4 / 7] - Writing patched files to ROM")
 	for x in file_dict:
-		if "texture_format" in x:
+		if "texture_format" in x and not "font_key" in x:
 			if x["texture_format"] in ["rgba5551", "i4", "ia4", "i8", "ia8"]:
 				result = subprocess.check_output(["./build/n64tex.exe", x["texture_format"], x["source_file"]])
 			else:
@@ -367,6 +388,14 @@ with open(newROMName, "r+b") as fh:
 # 	os.remove("assets/Non-Code/Font/font_boundaries.bin")
 
 import filestatewriter
+
+bins = ["actor_names","snag_names","snag_names_capitals"]
+for x in bins:
+	pth = "assets/Non-Code/" + x + ".bin"
+	if os.path.exists(pth):
+		os.remove(pth)
+	else:
+		print(x + "doesn't exist")
 
 print("[7 / 7] - Generating BizHawk RAM watch")
 import generate_watch_file

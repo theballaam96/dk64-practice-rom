@@ -1,10 +1,10 @@
 #include "../../include/common.h"
 
-static char vanilla_screenratio_43[] = "Screen Ratio: Normal";
-static char vanilla_screenratio_169[] = "Screen Ratio: Widescreen";
+static char vanilla_screenratio_43[] = "SCREEN RATIO:NORMAL";
+static char vanilla_screenratio_169[] = "SCREEN RATIO:WIDESCREEN";
 
-static char vanilla_chimpycam_free[] = "Chimpy Cam: Free";
-static char vanilla_chimpycam_follow[] = "Chimpy Cam: Follow";
+static char vanilla_chimpycam_free[] = "CHIMPY CAM:FREE";
+static char vanilla_chimpycam_follow[] = "CHIMPY CAM:FOLLOW";
 
 static char* vanilla_array[] = {
 	vanilla_screenratio_43,
@@ -26,12 +26,12 @@ void openVanillaVarsMenu(void) {
 };
 
 void toggleScreenRatio(void) {
-	ScreenRatio = 1 - ScreenRatio;
+	ScreenRatio = 1 ^ ScreenRatio;
 	openVanillaVarsMenu();
 }
 
 void toggleChimpyCam(void) {
-	ChimpyCam = 1 - ChimpyCam;
+	ChimpyCam = 1 ^ ChimpyCam;
 	openVanillaVarsMenu();
 }
 

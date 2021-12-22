@@ -1,12 +1,8 @@
 #include "../../include/common.h"
 
-static char dpadlr_current_position[] = "Current: Position Saving";
-static char dpadlr_current_frameadvance[] = "Current: Frame Advance";
-static char dpadlr_current_nothing[] = "Current: Nothing";
-
-static char dpadlr_position[] = "Set to: Position Saving";
-static char dpadlr_frameadvance[] = "Set to: Frame Advance";
-static char dpadlr_nothing[] = "Set to: Nothing";
+static char dpadlr_current_position[] = "CURRENT: POSITION SAVING";
+static char dpadlr_current_frameadvance[] = "CURRENT: FRAME ADVANCE";
+static char dpadlr_current_nothing[] = "CURRENT: NOTHING";
 
 static char* current_dpadlr[] = {
 	dpadlr_current_position,
@@ -16,9 +12,9 @@ static char* current_dpadlr[] = {
 
 static char* dpadlr_array[] = {
 	dpadlr_current_position,
-	dpadlr_position,
-	dpadlr_frameadvance,
-	dpadlr_nothing,
+	"SET TO: POSITION SAVING",
+	"SET TO: FRAME ADVANCE",
+	"SET TO: NOTHING",
 };
 
 void openDPadLRMenu(void) {

@@ -1,15 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapHelmEntrance[] = "Helm: Entrance";
-static const char mapHelmBoMRoom[] = "Helm: BOM Room";
-static const char mapHelmNavigationRoom[] = "Helm: Navigation Room";
-static const char mapRoolDK[] = "K. Rool: DK Phase";
-static const char mapRoolDiddy[] = "K. Rool: Diddy Phase";
-static const char mapRoolLanky[] = "K. Rool: Lanky Phase";
-static const char mapRoolTiny[] = "K. Rool: Tiny Phase";
-static const char mapRoolChunky[] = "K. Rool: Chunky Phase";
-static const char mapHelmCrown[] = "Shockwave Showdown";
-
 static const unsigned char helmrool_destmap[] = {
 	0x11, // Helm Entrance
 	0x11, // Helm BoM Room
@@ -41,15 +31,15 @@ const MapWarp map_helmrool_struct = {
 };
 
 static const char* helmrool_mapwarp_array[] = {
-	mapHelmEntrance,
-	mapHelmBoMRoom,
-	mapHelmNavigationRoom,
-	mapHelmCrown,
-	mapRoolDK,
-	mapRoolDiddy,
-	mapRoolLanky,
-	mapRoolTiny,
-	mapRoolChunky
+	"HELM:ENTRANCE",
+	"HELM:BOM ROOM",
+	"HELM:NAVIGATION",
+	"SHOCKWAVE SHOWDOWN",
+	"K.ROOL:DK PHASE",
+	"K.ROOL:DIDDY PHASE",
+	"K.ROOL:LANKY PHASE",
+	"K.ROOL:TINY PHASE",
+	"K.ROOL:CHUNKY PHASE"
 };
 
 static const int helmrool_mapwarp_functions[] = {

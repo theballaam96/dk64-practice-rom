@@ -1,19 +1,19 @@
 #include "../../include/common.h"
 
-static const char flag_dive_set[] = "Dive Barrel: Complete";
-static const char flag_dive_clear[] = "Dive Barrel: Incomplete";
+static const char flag_dive_set[] = "DIVE BARREL: COMPLETE";
+static const char flag_dive_clear[] = "DIVE BARREL: INCOMPLETE";
 
-static const char flag_orange_set[] = "Orange Barrel: Complete";
-static const char flag_orange_clear[] = "Orange Barrel: Incomplete";
+static const char flag_orange_set[] = "ORANGE BARREL: COMPLETE";
+static const char flag_orange_clear[] = "ORANGE BARREL: INCOMPLETE";
 
-static const char flag_barrel_set[] = "Barrel Barrel: Complete";
-static const char flag_barrel_clear[] = "Barrel Barrel: Incomplete";
+static const char flag_barrel_set[] = "BARREL BARREL: COMPLETE";
+static const char flag_barrel_clear[] = "BARREL BARREL: INCOMPLETE";
 
-static const char flag_vine_set[] = "Vine Barrel: Complete";
-static const char flag_vine_clear[] = "Vine Barrel: Incomplete";
+static const char flag_vine_set[] = "VINE BARREL: COMPLETE";
+static const char flag_vine_clear[] = "VINE BARREL: INCOMPLETE";
 
-static const char flag_tbarrelsspawned_set[] = "Training Barrels: Spawned";
-static const char flag_tbarrelsspawned_clear[] = "Training Barrels: Not Spawned";
+static const char flag_tbarrelsspawned_set[] = "TRAINING BARRELS: SPAWNED";
+static const char flag_tbarrelsspawned_clear[] = "TRAINING BARRELS: NOT SPAWNED";
 
 static const short tbarrel_flags[] = {0x0182,0x0184,0x0185,0x0183,0x017F};
 static const char tbarrel_flag_types[] = {0,0,0,0,0};

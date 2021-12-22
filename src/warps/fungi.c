@@ -1,37 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapFungiMain[] = "Main Map";
-static const char mapFungiDogadon[] = "Dogadon 2";
-static const char mapFungiAnthill[] = "Anthill";
-static const char mapFungiBBlast[] = "Baboon Blast Course";
-static const char mapFungiBarn[] = "Barn";
-static const char mapFungiDarkAttic[] = "Dark Attic";
-static const char mapFungiGiantMush[] = "Giant Mushroom";
-static const char mapFungiLankyAttic[] = "Lanky's Attic";
-static const char mapFungiMills[] = "Mills";
-static const char mapFungiMinecart[] = "Minecart";
-static const char mapFungiWinch[] = "Winch Room";
-
-static const char mapFungiPortal[] = "From Portal";
-static const char mapFungiAppleSide[] = "Apple Side";
-static const char mapFungiMillSide[] = "Mill Side";
-static const char mapFungiMushroomSide[] = "Mushroom Side";
-static const char mapFungiOwlSide[] = "Owl Tree";
-static const char mapFungiTopOfMushroom[] = "Top of Mushroom";
-
-static const char mapFungiGMushBottom[] = "Giant Mushroom: Bottom";
-static const char mapFungiGMushMiddle[] = "Giant Mushroom: Middle";
-static const char mapFungiGMushTop[] = "Giant Mushroom: Top";
-static const char mapFungiGMushDark[] = "Mushroom Top: Dark Room";
-static const char mapFungiGMushLight[] = "Mushroom Top: Light Room";
-static const char mapFungiGMushFace[] = "Mushroom Top: Face Puzzle";
-
-static const char mapFungiMillFront[] = "Mill: Front";
-static const char mapFungiMillRear[] = "Mill: Rear";
-static const char mapFungiMillSpider[] = "Mill: Spider Boss";
-
-static const char mapFungiCrown[] = "Kamikaze Kremlings";
-
 void openFungiMainMenu(void) {
 	changeMenu(14);
 }
@@ -81,18 +49,18 @@ const MapWarp map_fungi_struct = {
 };
 
 static const char* fungi_mapwarp_array[] = {
-	mapFungiMain,
-	mapFungiDogadon,
-	mapFungiCrown,
-	mapFungiAnthill,
-	mapFungiBBlast,
-	mapFungiBarn,
-	mapFungiDarkAttic,
-	mapFungiGiantMush,
-	mapFungiLankyAttic,
-	mapFungiMills,
-	mapFungiMinecart,
-	mapFungiWinch
+	"MAIN MAP",
+	"DOGADON 2",
+	"KAMIKAZE KREMLINGS",
+	"ANTHILL",
+	"BABOON BLAST COURSE",
+	"BARN",
+	"DARK ATTIC",
+	"GIANT MUSHROOM",
+	"LANKYS ATTIC",
+	"MILLS",
+	"MINECART",
+	"WINCH ROOM"
 };
 
 static const int fungi_mapwarp_functions[] = {
@@ -143,12 +111,12 @@ const MapWarp map_fungimain_struct = {
 };
 
 static const char* fungimain_mapwarp_array[] = {
-	mapFungiPortal,
-	mapFungiAppleSide,
-	mapFungiMillSide,
-	mapFungiMushroomSide,
-	mapFungiOwlSide,
-	mapFungiTopOfMushroom
+	"FROM PORTAL",
+	"APPLE SIDE",
+	"MILL SIDE",
+	"MUSHROOM SIDE",
+	"OWL TREE",
+	"TOP OF MUSHROOM"
 };
 
 static const int fungimain_mapwarp_functions[] = {
@@ -193,12 +161,12 @@ const MapWarp map_fungigmush_struct = {
 };
 
 static const char* fungigmush_mapwarp_array[] = {
-	mapFungiGMushBottom,
-	mapFungiGMushMiddle,
-	mapFungiGMushTop,
-	mapFungiGMushDark,
-	mapFungiGMushLight,
-	mapFungiGMushFace
+	"GIANT MUSHROOM:BOTTOM",
+	"GIANT MUSHROOM:MIDDLE",
+	"GIANT MUSHROOM:TOP",
+	"MUSHROOM TOP:DARK ROOM",
+	"MUSHROOM TOP:LIGHT ROOM",
+	"MUSHROOM TOP:FACE PUZZLE"
 };
 
 static const int fungigmush_mapwarp_functions[] = {
@@ -238,9 +206,9 @@ const MapWarp map_fungimills_struct = {
 };
 
 static const char* fungimills_mapwarp_array[] = {
-	mapFungiMillFront,
-	mapFungiMillRear,
-	mapFungiMillSpider
+	"MILL:FRONT",
+	"MILL:REAR",
+	"MILL:SPIDER BOSS"
 };
 
 static const int fungimills_mapwarp_functions[] = {

@@ -106,7 +106,7 @@ pointer_tables = [
 	},
 	{
 		"index": 17,
-		"name": "Unknown 17",
+		"name": "DKTV Inputs",
 	},
 	{
 		"index": 18,
@@ -287,6 +287,7 @@ def parsePointerTables(fh : BinaryIO):
 
 	# Read pointer table entries
 	for x in pointer_tables:
+		#print(str(x["index"]) + ": " + x["name"] + " - " + str(x["num_entries"]))
 		if x["num_entries"] > 0:
 			for i in range(x["num_entries"]):
 				# Compute address and size information about the pointer

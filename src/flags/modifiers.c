@@ -1,22 +1,22 @@
 #include "../../include/common.h"
 
-static const char flag_prodroom_set[] = "Production Room: On";
-static const char flag_prodroom_clear[] = "Production Room: Off";
+static const char flag_prodroom_set[] = "PRODUCTION ROOM: ON";
+static const char flag_prodroom_clear[] = "PRODUCTION ROOM: OFF";
 
-static const char flag_galleonwater_set[] = "Galleon Water Level: Raised";
-static const char flag_galleonwater_clear[] = "Galleon Water Level: Lowered";
+static const char flag_galleonwater_set[] = "GALLEON WATER LEVEL: RAISED";
+static const char flag_galleonwater_clear[] = "GALLEON WATER LEVEL: LOWERED";
 
-static const char flag_galleonship_set[] = "Galleon Ship: Spawned";
-static const char flag_galleonship_clear[] = "Galleon Ship: Not Spawned";
+static const char flag_galleonship_set[] = "GALLEON SHIP: SPAWNED";
+static const char flag_galleonship_clear[] = "GALLEON SHIP: NOT SPAWNED";
 
-static const char flag_funginighttime_set[] = "Fungi Time of Day: Night";
-static const char flag_funginighttime_clear[] = "Fungi Time of Day: Day";
+static const char flag_funginighttime_set[] = "FUNGI TIME OF DAY: NIGHT";
+static const char flag_funginighttime_clear[] = "FUNGI TIME OF DAY: DAY";
 
-static const char flag_koshadead_set[] = "Giant Kosha: Dead";
-static const char flag_koshadead_clear[] = "Giant Kosha: Alive";
+static const char flag_koshadead_set[] = "GIANT KOSHA: DEAD";
+static const char flag_koshadead_clear[] = "GIANT KOSHA: ALIVE";
 
-static const char flag_bom_set[] = "Blast-o-Matic: Off";
-static const char flag_bom_clear[] = "Blast-o-Matic: On";
+static const char flag_bom_set[] = "BLAST O MATIC: OFF";
+static const char flag_bom_clear[] = "BLAST O MATIC: ON";
 
 static const short modifier_flags[] = {0x006F,0x00A0,0x009C,0x00CE,0x012C,0x0302};
 static const char modifier_flag_types[] = {0,0,0,0,0,0};

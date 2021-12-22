@@ -1,23 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapAztecMain[] = "Main Map";
-static const char mapAztecDog[] = "Dogadon 1";
-static const char mapAztecBBlast[] = "Baboon Blast Course";
-static const char mapAztecBeetle[] = "Beetle Race";
-static const char mapAztec5DTs[] = "Five Door Temples";
-static const char mapAztecLlama[] = "Llama Temple";
-static const char mapAztecTiny[] = "Tiny Temple";
-static const char mapAztecPortal[] = "From Portal";
-static const char mapAztecFeedMe[] = "Feed Me Totem";
-static const char mapAztecOasis[] = "Oasis";
-static const char mapAztecSnakeRoad[] = "Snake Road";
-static const char mapAztec5DTDK[] = "Five Door Temple: DK";
-static const char mapAztec5DTDiddy[] = "Five Door Temple: Diddy";
-static const char mapAztec5DTLanky[] = "Five Door Temple: Lanky";
-static const char mapAztec5DTTiny[] = "Five Door Temple: Tiny";
-static const char mapAztec5DTChunky[] = "Five Door Temple: Chunky";
-static const char mapAztecCrown[] = "Kritter Karnage";
-
 void openAztecMainMenu(void) {
 	changeMenu(5);
 }
@@ -55,14 +37,14 @@ const MapWarp map_aztec_struct = {
 };
 
 static const char* aztec_mapwarp_array[] = {
-	mapAztecMain,
-	mapAztecDog,
-	mapAztecCrown,
-	mapAztecBBlast,
-	mapAztecBeetle,
-	mapAztec5DTs,
-	mapAztecLlama,
-	mapAztecTiny
+	"MAIN MAP",
+	"DOGADON 1",
+	"KRITTER KARNAGE",
+	"BABOON BLAST COURSE",
+	"BEETLE RACE",
+	"FIVE DOOR TEMPLES",
+	"LLAMA TEMPLE",
+	"TINY TEMPLE"
 };
 
 static const int aztec_mapwarp_functions[] = {
@@ -105,10 +87,10 @@ const MapWarp map_aztecmain_struct = {
 };
 
 static const char* aztecmain_mapwarp_array[] = {
-	mapAztecPortal,
-	mapAztecFeedMe,
-	mapAztecOasis,
-	mapAztecSnakeRoad
+	"FROM PORTAL",
+	"FEED ME TOTEM",
+	"OASIS",
+	"SNAKE ROAD"
 };
 
 static const int aztecmain_mapwarp_functions[] = {
@@ -149,11 +131,11 @@ const MapWarp map_aztecfivedt_struct = {
 };
 
 static const char* aztecfivedt_mapwarp_array[] = {
-	mapAztec5DTDK,
-	mapAztec5DTDiddy,
-	mapAztec5DTLanky,
-	mapAztec5DTTiny,
-	mapAztec5DTChunky
+	"FIVE DOOR TEMPLE:DK",
+	"FIVE DOOR TEMPLE:DIDDY",
+	"FIVE DOOR TEMPLE:LANKY",
+	"FIVE DOOR TEMPLE:TINY",
+	"FIVE DOOR TEMPLE:CHUNKY"
 };
 
 static const int aztecfivedt_mapwarp_functions[] = {

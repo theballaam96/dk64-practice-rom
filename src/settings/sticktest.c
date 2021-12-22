@@ -1,14 +1,14 @@
 #include "../../include/common.h"
 
-static char instruction_up[] = "Hold up";
-static char instruction_right[] = "Hold right";
-static char instruction_down[] = "Hold down";
-static char instruction_left[] = "Hold left";
+static char instruction_up[] = "HOLD UP";
+static char instruction_right[] = "HOLD RIGHT";
+static char instruction_down[] = "HOLD DOWN";
+static char instruction_left[] = "HOLD LEFT";
 
-static char information_up[30] = "UR: Overall: 100%. DK64: 100%";
-static char information_right[30] = "UR: Overall: 100%. DK64: 100%";
-static char information_down[30] = "UR: Overall: 100%. DK64: 100%";
-static char information_left[30] = "UR: Overall: 100%. DK64: 100%";
+static char information_up[30] = "UR:OVERALL:100$.DK64:100$";
+static char information_right[30] = "UR:OVERALL:100$.DK64:100$";
+static char information_down[30] = "UR:OVERALL:100$.DK64:100$";
+static char information_left[30] = "UR:OVERALL:100$.DK64:100$";
 
 static const char header_up[] = "U";
 static const char header_right[] = "R";
@@ -88,7 +88,7 @@ void showTestResults(void) {
 		ratio_threshold = clampRatio(100 * ((float)(stick_data[i]->mag_threshold) / 80));
 		dk_strFormat(
 			testinfo_array[i],
-			"%s: Overall: %d%%. DK64: %d%%",
+			"%s:OVERALL:%d$.DK64:%d$",
 			info_headers[i],
 			ratio_max,
 			ratio_threshold

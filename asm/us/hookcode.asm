@@ -294,17 +294,19 @@ START_HOOK:
 			NOP
 
 	pauseMenu97Code:
-		LUI 	v0, hi(IsPauseMenuOpen)
-		ADDIU 	v1, r0, 1
-		SB 		v1, lo(IsPauseMenuOpen) (v0)
+		LUI 	v0, hi(PausePointer)
+		LUI 	v1, 0x8080
+		LW 		v1, 0xBB40 (v1)
+		SW 		v1, lo(PausePointer) (v0)
 		LUI 	v0, 0x8077
 		J 		0x806A8160
 		LW 		v0, 0xA0A8 (v0)
 
 	pauseMenu343Code:
-		LUI 	t6, hi(IsPauseMenuOpen)
-		ADDIU 	t7, r0, 1
-		SB 		t7, lo(IsPauseMenuOpen) (t6)
+		LUI 	t6, hi(PausePointer)
+		LUI 	t7, 0x8080
+		LW 		t7, 0xBB40 (t7)
+		SB 		t7, lo(PausePointer) (t6)
 		ADDIU 	sp, sp, -0x30
 		J 		0x806AD004
 		SW 		s0, 0x1C (sp)

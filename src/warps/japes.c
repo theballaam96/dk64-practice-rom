@@ -1,21 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapJapesMain[] = "Main Map";
-static const char mapJapesDillo[] = "Army Dillo 1";
-static const char mapJapesBBlast[] = "Baboon Blast Course";
-static const char mapJapesMinecart[] = "Minecart";
-static const char mapJapesMountain[] = "Mountain";
-static const char mapJapesPainting[] = "Painting Room";
-static const char mapJapesShellhive[] = "Shellhive";
-static const char mapJapesUnderground[] = "Underground";
-static const char mapJapesPortal[] = "From Portal";
-static const char mapJapesIntro[] = "From Intro";
-static const char mapJapesRiverLow[] = "Lower River";
-static const char mapJapesRiverHigh[] = "Upper River";
-static const char mapJapesStorm[] = "Storm Area";
-static const char mapJapesZinger[] = "Zinger Area";
-static const char mapJapesCrown[] = "Beaver Brawl";
-
 void openJapesMainMenu(void) {
 	changeMenu(3);
 }
@@ -51,15 +35,15 @@ const MapWarp map_japes_struct = {
 };
 
 static const char* japes_mapwarp_array[] = {
-	mapJapesMain,
-	mapJapesDillo,
-	mapJapesCrown,
-	mapJapesBBlast,
-	mapJapesMinecart,
-	mapJapesMountain,
-	mapJapesPainting,
-	mapJapesShellhive,
-	mapJapesUnderground
+	"MAIN MAP",
+	"ARMY DILLO 1",
+	"BEAVER BRAWL",
+	"BABOON BLAST COURSE",
+	"MINECART",
+	"MOUNTAIN",
+	"PAINTING ROOM",
+	"SHELLHIVE",
+	"UNDERGROUND"
 };
 
 static const int japes_mapwarp_functions[] = {
@@ -107,12 +91,12 @@ const MapWarp map_japesmain_struct = {
 };
 
 static const char* japesmain_mapwarp_array[] = {
-	mapJapesPortal,
-	mapJapesIntro,
-	mapJapesRiverLow,
-	mapJapesRiverHigh,
-	mapJapesStorm,
-	mapJapesZinger
+	"FROM PORTAL",
+	"FROM INTRO",
+	"LOWER RIVER",
+	"UPPER RIVER",
+	"STORM AREA",
+	"ZINGER AREA"
 };
 
 static const int japesmain_mapwarp_functions[] = {

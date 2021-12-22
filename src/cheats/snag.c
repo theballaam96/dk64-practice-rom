@@ -1,11 +1,8 @@
 #include "../../include/common.h"
 
-static const char snagcheats_visify[] = "Visify Snag Collectables";
-static const char snagcheats_reset[] = "Reset Snag Collectables";
-
 static const char* snagcheats_array[] = {
-	snagcheats_visify,
-	snagcheats_reset,
+	"VISIFY SNAG COLLECTABLES",
+	"RESET SNAG COLLECTABLES",
 };
 
 void openSnagMenu(void) {

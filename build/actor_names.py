@@ -236,7 +236,7 @@ actor_names = [
     "Scoff",
     "Robo-Kremling",
     "Dogadon",
-    "Unknown 237",
+    "Krossbones Head",
     "Kremling",
     "Bongos",
     "Spotlight Fish",

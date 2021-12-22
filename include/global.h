@@ -33,12 +33,15 @@ extern int* drawTri(int* dl, short x1, short y1, short x2, short y2, short x3, s
 extern int* displayMemory(int* dl);
 extern int* drawImage(int* dl, int text_index, codecs codec_index, int img_width, int img_height, int x, int y, float xScale, float yScale, int opacity);
 extern int* displayFairy(int* dl);
+extern int* displayInfo(int* dl);
+extern int* drawPixelText(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha);
+extern int* drawPixelTextContainer(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha, int offset);
+extern int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, int blue, int alpha);
 
-extern void destroyWatch(int slot);
-extern void spawnWatch(int slot);
 extern void colorWatch(char _red, char _green, char _blue, int slot);
 extern void openWatchSnagMenu(void);
 extern void toggleFairyViewer(void);
+extern void checkWatchCapacity(void);
 
 extern void warpToMap(void);
 extern void openJapesMenu(void);
@@ -153,7 +156,6 @@ extern void infiniteHealth(void);
 extern void isPaused(void);
 extern void checkMapType(void);
 extern void fileInit(void);
-extern void controlWatchView(void);
 extern void updateLoadedActorNoTextOverlayList(int callType);
 extern void shouldRefreshTOMenu(void);
 extern void analyzeInputs(void);

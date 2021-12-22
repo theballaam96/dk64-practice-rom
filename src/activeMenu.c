@@ -1,25 +1,15 @@
 #include "../include/common.h"
 
-static const char warp[] = "Warp to Map";
-static const char flags[] = "Flags";
-static const char saves[] = "Save States";
-static const char watches[] = "Watches";
-static const char ramview[] = "Debug";
-static const char timerSettings[] = "Timer Settings";
-static const char fileStates[] = "File States";
-static const char cheats[] = "Cheats";
-static const char settings[] = "Settings";
-
 static const char* main_array[] = {
-	warp,
-	flags,
-	saves,
-	watches,
-	ramview,
-	timerSettings,
-	fileStates,
-	cheats,
-	settings
+	"WARP TO MAP",
+	"FLAGS",
+	"SAVE STATES",
+	"WATCHES",
+	"DEBUG",
+	"TIMER SETTINGS",
+	"FILE STATES",
+	"CHEATS",
+	"SETTINGS"
 };
 
 static const int main_functions[9];
@@ -150,11 +140,10 @@ void spawnMenu(int screenIndex) {
 int* displayMenu(int* dl) {
 	if (ActiveMenu.isOpen) {
 		int x = 25;
-		int y = 100;
+		int y = 25;
 		int red = 0xFF;
 		int green = 0xFF;
 		int blue = 0xFF;
-		int style = 128;
 		const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
 		int* focused_text_array = (int*)focused_screen->TextArray;
 		int array_count = focused_screen->ArrayItems;
@@ -168,7 +157,7 @@ int* displayMenu(int* dl) {
 				green = 0xD7;
 				blue = 0;
 			}
-			dl = drawTextContainer(dl, style, x, y, (char *)focused_text_array[i], red, green, blue, 0xFF, background);
+			dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[i], red, green, blue, 0xFF,background);
 			y += 13;
 		}
 		if (ActiveMenu.positionIndex == array_count) {
@@ -180,7 +169,11 @@ int* displayMenu(int* dl) {
 			green = 0xFF;
 			blue = 0xFF;
 		}
-		dl = drawTextContainer(dl, style, x, y, "Return", red, green, blue, 0xFF, background);
+		int check_char = ((char*)focused_text_array[array_count - 1])[0];
+		if ((check_char == 0x7B) || (check_char == 0x7D)) {
+			y += 6;
+		}
+		dl = drawPixelTextContainer(dl, x, y, "RETURN", red, green, blue, 0xFF,background);
 	}
 	return dl;
 }

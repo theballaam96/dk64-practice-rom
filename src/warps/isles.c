@@ -1,31 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapIslesMain[] = "Overworld";
-static const char mapIslesBFI[] = "Inside Banana Fairy Island";
-static const char mapIslesKLumsy[] = "K. Lumsy";
-static const char mapIslesLobbies[] = "Lobbies";
-static const char mapIslesSnides[] = "Snide's Room";
-static const char mapIslesTrainingGrounds[] = "Training Grounds";
-static const char mapIslesTreehouse[] = "Treehouse";
-
-static const char mapIslesEscape[] = "Escape";
-static const char mapIslesBFIArea[] = "Banana Fairy Island Area";
-static const char mapIslesKrocIsle[] = "Kroc Isle";
-static const char mapIslesOutsideKRool[] = "Outside K. Rool";
-static const char mapIslesTopOfIsles[] = "Top of DK Isles";
-
-static const char mapIslesLobbyJapes[] = "Jungle Japes Lobby";
-static const char mapIslesLobbyAztec[] = "Angry Aztec Lobby";
-static const char mapIslesLobbyFactory[] = "Frantic Factory Lobby";
-static const char mapIslesLobbyGalleon[] = "Gloomy Galleon Lobby";
-static const char mapIslesLobbyFungi[] = "Fungi Forest Lobby";
-static const char mapIslesLobbyCaves[] = "Crystal Caves Lobby";
-static const char mapIslesLobbyCastle[] = "Creepy Castle Lobby";
-static const char mapIslesLobbyHelm[] = "Hideout Helm Lobby";
-
-static const char mapIslesCrown1[] = "Bish Bash Brawl";
-static const char mapIslesCrown2[] = "Forest Fracas";
-
 void openIslesMainMenu(void) {
 	changeMenu(28);
 }
@@ -65,15 +39,15 @@ const MapWarp map_isles_struct = {
 };
 
 static const char* isles_mapwarp_array[] = {
-	mapIslesMain,
-	mapIslesCrown1,
-	mapIslesCrown2,
-	mapIslesBFI,
-	mapIslesKLumsy,
-	mapIslesLobbies,
-	mapIslesSnides,
-	mapIslesTrainingGrounds,
-	mapIslesTreehouse
+	"OVERWORLD",
+	"BISH BASH BRAWL",
+	"FOREST FRACAS",
+	"INSIDE BANANA FAIRY ISLAND",
+	"K.LUMSY",
+	"LOBBIES",
+	"SNIDES ROOM",
+	"TRAINING GROUNDS",
+	"TREEHOUSE"
 };
 
 static const int isles_mapwarp_functions[] = {
@@ -119,11 +93,11 @@ const MapWarp map_islesmain_struct = {
 };
 
 static const char* islesmain_mapwarp_array[] = {
-	mapIslesEscape,
-	mapIslesBFIArea,
-	mapIslesKrocIsle,
-	mapIslesOutsideKRool,
-	mapIslesTopOfIsles
+	"ESCAPE",
+	"BANANA FAIRY ISLAND AREA",
+	"KROC ISLE",
+	"OUTSIDE K ROOL",
+	"TOP OF DK ISLES"
 };
 
 static const int islesmain_mapwarp_functions[] = {
@@ -171,14 +145,14 @@ const MapWarp map_isleslobbies_struct = {
 };
 
 static const char* isleslobbies_mapwarp_array[] = {
-	mapIslesLobbyJapes,
-	mapIslesLobbyAztec,
-	mapIslesLobbyFactory,
-	mapIslesLobbyGalleon,
-	mapIslesLobbyFungi,
-	mapIslesLobbyCaves,
-	mapIslesLobbyCastle,
-	mapIslesLobbyHelm
+	"JUNGLE JAPES LOBBY",
+	"ANGRY AZTEC LOBBY",
+	"FRANTIC FACTORY LOBBY",
+	"GLOOMY GALLEON LOBBY",
+	"FUNGI FOREST LOBBY",
+	"CRYSTAL CAVES LOBBY",
+	"CREEPY CASTLE LOBBY",
+	"HIDEOUT HELM LOBBY"
 };
 
 static const int isleslobbies_mapwarp_functions[] = {

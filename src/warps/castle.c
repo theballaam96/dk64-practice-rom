@@ -1,41 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapCastleMain[] = "Main Map";
-static const char mapCastleKutOut[] = "King Kut Out";
-static const char mapCastleBBlast[] = "Baboon Blast Course";
-static const char mapCastleCarRace[] = "Car Race";
-static const char mapCastleCrypt[] = "Crypt";
-static const char mapCastleDungeon[] = "Dungeon";
-static const char mapCastleDungeonTunnel[] = "Dungeon Tunnel";
-static const char mapCastleOutsideBuildings[] = "Outside Buildings";
-static const char mapCastleRooms[] = "Rooms";
-
-static const char mapCastlePortal[] = "From Portal";
-static const char mapCastleIntro[] = "Intro";
-static const char mapCastleTopOfCastle[] = "Top of Castle";
-static const char mapCastleWarp2[] = "Warp 2";
-static const char mapCastleWarp4[] = "Warp 4";
-
-static const char mapCastleCryptDDC[] = "Crypt: DK, Diddy, Chunky";
-static const char mapCastleCryptLT[] = "Crypt: Lanky, Tiny";
-static const char mapCastleCryptHub[] = "Crypt: Hub";
-static const char mapCastleMinecart[] = "Crypt: Minecart";
-
-static const char mapCastleTunnelNear[] = "Dungeon Tunnel: Near";
-static const char mapCastleTunnelFar[] = "Dungeon Tunnel: Far";
-
-static const char mapCastleGreenhouse[] = "Greenhouse";
-static const char mapCastleShed[] = "Shed";
-static const char mapCastleTree[] = "Tree";
-static const char mapCastleTrashCan[] = "Trash Can";
-
-static const char mapCastleBallroom[] = "Ballroom";
-static const char mapCastleLibrary[] = "Library";
-static const char mapCastleMuseum[] = "Museum";
-static const char mapCastleWindTower[] = "Wind Tower";
-
-static const char mapCastleCrown[] = "Pinnacle Palaver";
-
 void openCastleMainMenu(void) {
 	changeMenu(22);
 }
@@ -89,16 +53,16 @@ const MapWarp map_castle_struct = {
 };
 
 static const char* castle_mapwarp_array[] = {
-	mapCastleMain,
-	mapCastleKutOut,
-	mapCastleCrown,
-	mapCastleBBlast,
-	mapCastleCarRace,
-	mapCastleCrypt,
-	mapCastleDungeon,
-	mapCastleDungeonTunnel,
-	mapCastleOutsideBuildings,
-	mapCastleRooms
+	"MAIN MAP",
+	"KING KUT OUT",
+	"PINNACLE PALAVER",
+	"BABOON BLAST COURSE",
+	"CAR RACE",
+	"CRYPT",
+	"DUNGEON",
+	"DUNGEON TUNNEL",
+	"OUTSIDE BUILDINGS",
+	"ROOMS"
 };
 
 static const int castle_mapwarp_functions[] = {
@@ -145,11 +109,11 @@ const MapWarp map_castlemain_struct = {
 };
 
 static const char* castlemain_mapwarp_array[] = {
-	mapCastlePortal,
-	mapCastleIntro,
-	mapCastleTopOfCastle,
-	mapCastleWarp2,
-	mapCastleWarp4
+	"FROM PORTAL",
+	"INTRO",
+	"TOP OF CASTLE",
+	"WARP 2",
+	"WARP 4"
 };
 
 static const int castlemain_mapwarp_functions[] = {
@@ -189,10 +153,10 @@ const MapWarp map_castlecrypt_struct = {
 };
 
 static const char* castlecrypt_mapwarp_array[] = {
-	mapCastleCryptDDC,
-	mapCastleCryptLT,
-	mapCastleCryptHub,
-	mapCastleMinecart
+	"CRYPT:DK DIDDY CHUNKY",
+	"CRYPT:LANKY TINY",
+	"CRYPT:HUB",
+	"CRYPT:MINECART"
 };
 
 static const int castlecrypt_mapwarp_functions[] = {
@@ -228,8 +192,8 @@ const MapWarp map_castletunnel_struct = {
 };
 
 static const char* castletunnel_mapwarp_array[] = {
-	mapCastleTunnelNear,
-	mapCastleTunnelFar,
+	"DUNGEON TUNNEL:NEAR",
+	"DUNGEON TUNNEL:FAR",
 };
 
 static const int castletunnel_mapwarp_functions[] = {
@@ -266,10 +230,10 @@ const MapWarp map_castleoutside_struct = {
 };
 
 static const char* castleoutside_mapwarp_array[] = {
-	mapCastleGreenhouse,
-	mapCastleShed,
-	mapCastleTree,
-	mapCastleTrashCan
+	"GREENHOUSE",
+	"SHED",
+	"TREE",
+	"TRASH CAN"
 };
 
 static const int castleoutside_mapwarp_functions[] = {
@@ -308,10 +272,10 @@ const MapWarp map_castlerooms_struct = {
 };
 
 static const char* castlerooms_mapwarp_array[] = {
-	mapCastleBallroom,
-	mapCastleLibrary,
-	mapCastleMuseum,
-	mapCastleWindTower
+	"BALLROOM",
+	"LIBRARY",
+	"MUSEUM",
+	"WIND TOWER"
 };
 
 static const int castlerooms_mapwarp_functions[] = {

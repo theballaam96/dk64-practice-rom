@@ -1,36 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapCavesMain[] = "Main Map";
-static const char mapCavesDillo[] = "Army Dillo 2";
-static const char mapCavesBBlast[] = "Baboon Blast Course";
-static const char mapCavesBeetleRace[] = "Beetle Race";
-static const char mapCaves5DCs[] = "Five Door Cabins";
-static const char mapCaves5DIs[] = "Five Door Igloos";
-static const char mapCavesIceCastle[] = "Ice Castle";
-static const char mapCavesRotatingRoom[] = "Rotating Room";
-static const char mapCavesSprintCabin[] = "Sprint Cabin";
-
-static const char mapCavesPortal[] = "From Portal";
-static const char mapCavesCabinsArea[] = "Cabins Area";
-static const char mapCavesGiantBoulder[] = "Giant Boulder Room";
-static const char mapCavesIceCastleArea[] = "Ice Castle Area";
-static const char mapCavesIglooArea[] = "Igloos Area";
-static const char mapCavesWaterfall[] = "Waterfall";
-
-static const char mapCaves5DCDK[] = "Five Door Cabin: DK";
-static const char mapCaves5DCDiddyCandle[] = "Five Door Cabin: Diddy Candles";
-static const char mapCaves5DCDiddyEnemy[] = "Five Door Cabin: Diddy Enemies";
-static const char mapCaves5DCTiny[] = "Five Door Cabin: Tiny";
-static const char mapCaves5DCChunky[] = "Five Door Cabin: Chunky";
-
-static const char mapCaves5DIDK[] = "Five Door Igloo: DK";
-static const char mapCaves5DIDiddy[] = "Five Door Igloo: Diddy";
-static const char mapCaves5DILanky[] = "Five Door Igloo: Lanky";
-static const char mapCaves5DITiny[] = "Five Door Igloo: Tiny";
-static const char mapCaves5DIChunky[] = "Five Door Igloo: Chunky";
-
-static const char mapCavesCrown[] = "Plinth Panic";
-
 void openCavesMainMenu(void) {
 	changeMenu(18);
 }
@@ -76,16 +45,16 @@ const MapWarp map_caves_struct = {
 };
 
 static const char* caves_mapwarp_array[] = {
-	mapCavesMain,
-	mapCavesDillo,
-	mapCavesCrown,
-	mapCavesBBlast,
-	mapCavesBeetleRace,
-	mapCaves5DCs,
-	mapCaves5DIs,
-	mapCavesIceCastle,
-	mapCavesRotatingRoom,
-	mapCavesSprintCabin
+	"MAIN MAP",
+	"ARMY DILLO 2",
+	"PLINTH PANIC",
+	"BABOON BLAST COURSE",
+	"BEETLE RACE",
+	"FIVE DOOR CABINS",
+	"FIVE DOOR IGLOOS",
+	"ICE CASTLE",
+	"ROTATING ROOM",
+	"SPRINT CABIN"
 };
 
 static const int caves_mapwarp_functions[] = {
@@ -134,12 +103,12 @@ const MapWarp map_cavesmain_struct = {
 };
 
 static const char* cavesmain_mapwarp_array[] = {
-	mapCavesPortal,
-	mapCavesCabinsArea,
-	mapCavesGiantBoulder,
-	mapCavesIceCastleArea,
-	mapCavesIglooArea,
-	mapCavesWaterfall
+	"FROM PORTAL",
+	"CABINS AREA",
+	"GIANT BOULDER ROOM",
+	"ICE CASTLE AREA",
+	"IGLOOS AREA",
+	"WATERFALL"
 };
 
 static const int cavesmain_mapwarp_functions[] = {
@@ -182,11 +151,11 @@ const MapWarp map_caves5dc_struct = {
 };
 
 static const char* caves5dc_mapwarp_array[] = {
-	mapCaves5DCDK,
-	mapCaves5DCDiddyCandle,
-	mapCaves5DCDiddyEnemy,
-	mapCaves5DCTiny,
-	mapCaves5DCChunky
+	"FIVE DOOR CABIN:DK",
+	"FIVE DOOR CABIN:DIDDY CANDLES",
+	"FIVE DOOR CABIN:DIDDY ENEMIES",
+	"FIVE DOOR CABIN:TINY",
+	"FIVE DOOR CABIN:CHUNKY"
 };
 
 static const int caves5dc_mapwarp_functions[] = {
@@ -229,11 +198,11 @@ const MapWarp map_caves5di_struct = {
 };
 
 static const char* caves5di_mapwarp_array[] = {
-	mapCaves5DIDK,
-	mapCaves5DIDiddy,
-	mapCaves5DILanky,
-	mapCaves5DITiny,
-	mapCaves5DIChunky
+	"FIVE DOOR IGLOO:DK",
+	"FIVE DOOR IGLOO:DIDDY",
+	"FIVE DOOR IGLOO:LANKY",
+	"FIVE DOOR IGLOO:TINY",
+	"FIVE DOOR IGLOO:CHUNKY"
 };
 
 static const int caves5di_mapwarp_functions[] = {

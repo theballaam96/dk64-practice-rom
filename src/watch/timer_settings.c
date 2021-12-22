@@ -1,17 +1,17 @@
 #include "../../include/common.h"
 
-static const char timerstart_default[] = "Start on: L Press";
-static const char timerstart_mapload[] = "Start on: Map Load";
-static const char timerstart_input[] = "Start on: Input";
+static const char timerstart_default[] = "START ON:L PRESS";
+static const char timerstart_mapload[] = "START ON:MAP LOAD";
+static const char timerstart_input[] = "START ON:INPUT";
 
-static const char timerpause_off[] = "Pause Timer on Pause Menu: No";
-static const char timerpause_on[] = "Pause Timer on Pause Menu: Yes";
+static const char timerpause_off[] = "PAUSE TIMER ON PAUSE MENU:NO";
+static const char timerpause_on[] = "PAUSE TIMER ON PAUSE MENU:YES";
 
-static const char timerfinish_default[] = "End on: L Press";
-static const char timerfinish_transition[] = "End on: Transition";
-static const char timerfinish_cutscene[] = "End on: Cutscene";
-static const char timerfinish_gb[] = "End on: GB Collection";
-static const char timerfinish_endtransition[] = "End on: End Transition";
+static const char timerfinish_default[] = "END ON:L PRESS";
+static const char timerfinish_transition[] = "END ON:TRANSITION";
+static const char timerfinish_cutscene[] = "END ON:CUTSCENE";
+static const char timerfinish_gb[] = "END ON:GB COLLECTION";
+static const char timerfinish_endtransition[] = "END ON:END TRANSITION";
 
 static const char* start_modes[] = {
 	timerstart_default,
@@ -56,7 +56,7 @@ void toggleStartCondition(void) {
 }
 
 void togglePauseCondition(void) {
-	TimerData.PauseMode = 1 - TimerData.PauseMode;
+	TimerData.PauseMode = 1 ^ TimerData.PauseMode;
 	openTimerSettingsMenu();
 }
 

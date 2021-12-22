@@ -1,11 +1,5 @@
 #include "../../include/common.h"
 
-static const char transform_sk[] = "Strong Kong";
-static const char transform_rb[] = "Rocketbarrel";
-static const char transform_os[] = "Orangstand Sprint";
-static const char transform_mm[] = "Mini Monkey";
-static const char transform_hc[] = "Hunky Chunky";
-
 void openTransformMenu(void) {
 	changeMenu(62);
 }
@@ -81,11 +75,11 @@ void transformHunkyChunky(void) {
 };
 
 static const char* transform_array[] = {
-	transform_sk,
-	transform_rb,
-	transform_os,
-	transform_mm,
-	transform_hc,
+	"STRONG KONG",
+	"ROCKETBARREL",
+	"ORANGSTAND SPRINT",
+	"MINI MONKEY",
+	"HUNKY CHUNKY",
 };
 
 static const int transform_functions[] = {

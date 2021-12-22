@@ -1,4 +1,5 @@
 import os
+from datetime import date, datetime, timedelta
 
 with open(".rom","r") as fh:
 	rom_file = "./rom/" + fh.readlines()[0].replace("\n","")
@@ -20,5 +21,9 @@ with open(".rom","r") as fh:
 		print("ERROR: ROM File doesn't exist")
 	with open(".version","w") as vfile:
 		vfile.write(str(version))
+	with open("./include/build_date.h","w") as bdfile:
+		now = datetime.now();
+		today = date.today();
+		bdfile.write("#define BUILD_DATE \"BUILD DATE: " + today.strftime("%d-%m-%Y") + " " + now.astimezone(tz=None).strftime("%H:%M" + "\""))
 	with open("./include/rom_version.h","w") as vhfile:
 		vhfile.write("#define ROM_VERSION " + str(version))

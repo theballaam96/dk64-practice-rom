@@ -56,24 +56,24 @@ const snagTableInfo snag_data[] = {
 	{0x0011005E}, // Chunky Helm Medal
 };
 
-static char snagmenu_collect0[30] = "";
-static char snagmenu_collect1[30] = "";
-static char snagmenu_collect2[30] = "";
-static char snagmenu_collect3[30] = "";
-static char snagmenu_collect4[30] = "";
-static char snagmenu_collect5[30] = "";
-static char snagmenu_collect6[30] = "";
-static char snagmenu_collect7[30] = "";
-static char snagmenu_collect8[30] = "";
-static char snagmenu_collect9[30] = "";
-static char snagmenu_collect10[30] = "";
-static char snagmenu_collect11[30] = "";
-static char snagmenu_collect12[30] = "";
+static char snagmenu_collect0[20] = "";
+static char snagmenu_collect1[20] = "";
+static char snagmenu_collect2[20] = "";
+static char snagmenu_collect3[20] = "";
+static char snagmenu_collect4[20] = "";
+static char snagmenu_collect5[20] = "";
+static char snagmenu_collect6[20] = "";
+static char snagmenu_collect7[20] = "";
+static char snagmenu_collect8[20] = "";
+static char snagmenu_collect9[20] = "";
+static char snagmenu_collect10[20] = "";
+static char snagmenu_collect11[20] = "";
+static char snagmenu_collect12[20] = "";
 
-static char snagwatch_name0[20] = "";
-static char snagwatch_name1[20] = "";
-static char snagwatch_name2[20] = "";
-static char snagwatch_name3[20] = "";
+static char snagwatch_name0[16] = "";
+static char snagwatch_name1[16] = "";
+static char snagwatch_name2[16] = "";
+static char snagwatch_name3[16] = "";
 
 static char* watch_snag_array[] = {
 	snagmenu_collect0,
@@ -134,21 +134,21 @@ void openWatchSnagMenu(void) {
 				}
 			}
 			if (snag_viewed) {
-				dk_strFormat((char *)watch_snag_array[snag_counter++],"%s (!)",SnagNamesTable->actor_name[i]);
+				dk_strFormat((char *)watch_snag_array[snag_counter++],"} %s",SnagCapitalsTable->actor_name[i]);
 			} else {
-				dk_strFormat((char *)watch_snag_array[snag_counter++],"%s",SnagNamesTable->actor_name[i]);
+				dk_strFormat((char *)watch_snag_array[snag_counter++],"{ %s",SnagCapitalsTable->actor_name[i]);
 			}
 		}
 	}
 	for (int i = 0; i < WatchCount; i++) {
 		if (ViewedSnagWatches[i] > -1) {
 			if (snag_data[(int)ViewedSnagWatches[i]].map != CurrentMap) {
-				dk_strFormat((char *)watch_snag_array[snag_counter++],"%s (!)",SnagNamesTable->actor_name[(int)ViewedSnagWatches[i]]);
+				dk_strFormat((char *)watch_snag_array[snag_counter++],"} %s",SnagCapitalsTable->actor_name[(int)ViewedSnagWatches[i]]);
 			}
 		}
 	}
 	if (snag_counter == 0) {
-		dk_strFormat((char *)watch_snag_array[0],"No Snag Collectables");
+		dk_strFormat((char *)watch_snag_array[0],"NO SNAG COLLECTABLES");
 		snag_counter = 1;
 	}
 	watch_snag_struct.ArrayItems = snag_counter;
@@ -205,17 +205,16 @@ void toggleSnagWatch(void) {
 			i++;
 		}
 		if (index_already_spawned) {
-			destroyWatch(i);
 			WatchIndex[i] = 0;
 			ViewedSnagWatches[i] = -1;
 		} else {
 			i = 0;
+			checkWatchCapacity();
 			while (i < WatchCount) {
 				if (WatchIndex[i] == 0) {
 					WatchIndex[i] = 15;
 					ViewedSnagWatches[i] = list_index;
 					dk_strFormat((char *)snagwatch_names_array[i],"%s",SnagCapitalsTable->actor_name[list_index]);
-					spawnWatch(i);
 					colorWatch(0xFF,0xFF,0xFF,i);
 					break;
 				};

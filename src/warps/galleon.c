@@ -1,32 +1,5 @@
 #include "../../include/common.h"
 
-static const char mapGalleonMain[] = "Main Map";
-static const char mapGalleonPufftoss[] = "Pufftoss";
-static const char mapGalleonBBlast[] = "Baboon Blast Course";
-static const char mapGalleonSeasick[] = "K. Rool's Ship";
-static const char mapGalleonLighthouse[] = "Lighthouse";
-static const char mapGalleonMermaid[] = "Mermaid Palace";
-static const char mapGalleonMechFish[] = "Mechanical Fish";
-static const char mapGalleonSeal[] = "Seal Race";
-static const char mapGalleonShipwrecks[] = "Shipwrecks";
-static const char mapGalleonSubmarine[] = "Submarine";
-static const char mapGalleonTreasureChest[] = "Treasure Chest";
-
-static const char mapGalleonPortal[] = "From Portal";
-static const char mapGalleonCranky[] = "Cranky Area";
-static const char mapGalleonLighthouseArea[] = "Lighthouse Side";
-static const char mapGalleonShipwreckSide[] = "Shipwreck Side";
-
-static const char mapGalleon5DSDK[] = "Five Door Ship: DK";
-static const char mapGalleon5DSDiddy[] = "Five Door Ship: Diddy";
-static const char mapGalleon5DSLanky[] = "Five Door Ship: Lanky";
-static const char mapGalleon5DSTiny[] = "Five Door Ship: Tiny";
-static const char mapGalleon5DSChunky[] = "Five Door Ship: Chunky";
-static const char mapGalleon2DSLanky[] = "Two Door Ship: Lanky";
-static const char mapGalleon2DSTiny[] = "Two Door Ship: Tiny";
-
-static const char mapGalleonCrown[] = "More Kritter Karnage";
-
 void openGalleonMainMenu(void) {
 	changeMenu(10);
 }
@@ -72,18 +45,18 @@ const MapWarp map_galleon_struct = {
 };
 
 static const char* galleon_mapwarp_array[] = {
-	mapGalleonMain,
-	mapGalleonPufftoss,
-	mapGalleonCrown,
-	mapGalleonBBlast,
-	mapGalleonSeasick,
-	mapGalleonLighthouse,
-	mapGalleonMermaid,
-	mapGalleonMechFish,
-	mapGalleonSeal,
-	mapGalleonShipwrecks,
-	mapGalleonSubmarine,
-	mapGalleonTreasureChest
+	"MAIN MAP",
+	"PUFFTOSS",
+	"MORE KRITTER KARNAGE",
+	"BABOON BLAST COURSE",
+	"K.ROOL^S SHIP",
+	"LIGHTHOUSE",
+	"MERMAID PALACE",
+	"MECHANICAL FISH",
+	"SEAL RACE",
+	"SHIPWRECKS",
+	"SUBMARINE",
+	"TREASURE CHEST"
 };
 
 static const int galleon_mapwarp_functions[] = {
@@ -130,10 +103,10 @@ const MapWarp map_galleonmain_struct = {
 };
 
 static const char* galleonmain_mapwarp_array[] = {
-	mapGalleonPortal,
-	mapGalleonCranky,
-	mapGalleonLighthouseArea,
-	mapGalleonShipwreckSide
+	"FROM PORTAL",
+	"CRANKY AREA",
+	"LIGHTHOUSE SIDE",
+	"SHIPWRECK SIDE"
 };
 
 static const int galleonmain_mapwarp_functions[] = {
@@ -178,13 +151,13 @@ const MapWarp map_galleonships_struct = {
 };
 
 static const char* galleonships_mapwarp_array[] = {
-	mapGalleon5DSDK,
-	mapGalleon5DSDiddy,
-	mapGalleon5DSLanky,
-	mapGalleon5DSTiny,
-	mapGalleon5DSChunky,
-	mapGalleon2DSLanky,
-	mapGalleon2DSTiny
+	"FIVE DOOR SHIP:DK",
+	"FIVE DOOR SHIP:DIDDY",
+	"FIVE DOOR SHIP:LANKY",
+	"FIVE DOOR SHIP:TINY",
+	"FIVE DOOR SHIP:CHUNKY",
+	"TWO DOOR SHIP:LANKY",
+	"TWO DOOR SHIP:TINY"
 };
 
 static const int galleonships_mapwarp_functions[] = {

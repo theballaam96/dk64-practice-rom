@@ -1,29 +1,17 @@
 #include "../../include/common.h"
 
-static const char mapJapes[] = "Jungle Japes";
-static const char mapAztec[] = "Angry Aztec";
-static const char mapFactory[] = "Frantic Factory";
-static const char mapGalleon[] = "Gloomy Galleon";
-static const char mapFungi[] = "Fungi Forest";
-static const char mapCaves[] = "Crystal Caves";
-static const char mapCastle[] = "Creepy Castle";
-static const char mapHelmKRool[] = "Hideout Helm & K. Rool";
-static const char mapIsles[] = "DK Isles";
-static const char mapMisc[] = "Miscellaneous";
-static const char mapBonus[] = "Bonus Barrels";
-
 static const char* maps_container_array[] = {
-	mapJapes,
-	mapAztec,
-	mapFactory,
-	mapGalleon,
-	mapFungi,
-	mapCaves,
-	mapCastle,
-	mapHelmKRool,
-	mapIsles,
-	mapMisc,
-	mapBonus
+	"JUNGLE JAPES",
+	"ANGRY AZTEC",
+	"FRANTIC FACTORY",
+	"GLOOMY GALLEON",
+	"FUNGI FOREST",
+	"CRYSTAL CAVES",
+	"CREEPY CASTLE",
+	"HIDEOUT HELM AND K. ROOL",
+	"DK ISLES",
+	"MISCELLANEOUS",
+	"BONUS BARRELS"
 };
 
 const Screen maps_container_struct = {

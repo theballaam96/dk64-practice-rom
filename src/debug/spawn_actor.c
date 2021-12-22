@@ -4,7 +4,7 @@
 
 static forceSpawnActorData spawnActorData = {};
 static char viewed_actor_name[30] = "";
-static char actor_spawn[] = "Spawn";
+static char actor_spawn[] = "SPAWN";
 
 static const uniqueSpawnFunction uniqueFuncs[] = {
 	{
@@ -312,9 +312,9 @@ void openForceSpawnActorMenu(void) {
 		copyFromROM(0x2020000,copy_space,&file_size,0,0,0,0);
 	}
 	if (ActorNamesTable) {
-		dk_strFormat(viewed_actor_name,"Actor: %s",ActorNamesTable->actor_name[(int)spawnActorData.actor_type]);
+		dk_strFormat(viewed_actor_name,"ACTOR:%s",ActorNamesTable->actor_name[(int)spawnActorData.actor_type]);
 	} else {
-		dk_strFormat(viewed_actor_name,"Actor: 0x%X",spawnActorData.actor_type);
+		dk_strFormat(viewed_actor_name,"ACTOR:0X%X",spawnActorData.actor_type);
 	}
 	changeMenu(88);
 }

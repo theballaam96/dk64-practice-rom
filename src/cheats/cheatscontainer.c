@@ -1,17 +1,7 @@
 #include "../../include/common.h"
 
-static const char cheats_altermoveset[] = "Moveset & Inventory";
-static const char cheats_changegamemode[] = "Change Gamemode";
-static const char cheats_cancelcs[] = "Cancel Cutscene";
-static const char cheats_instantskew[] = "Acquire Regular Skew";
-static const char cheats_instantskew_inverse[] = "Acquire Cannon Skew";
-static const char cheats_snagcheats[] = "Spawn Snag Cheats";
-static const char cheats_toggles[] = "Toggles";
-static const char cheats_undoflag[] = "Undo Last Flag Write";
-static const char cheats_gaincontrol[] = "Gain Control";
-static const char cheats_endminigame[] = "Force End Minigame";
-static const char cheats_tagallwarps[] = "Tag All Warps";
-static const char cheats_transform[] = "Transform";
+static const char cheats_instantskew[] = "ACQUIRE REGULAR SKEW";
+static const char cheats_instantskew_inverse[] = "ACQUIRE CANNON SKEW";
 //static const char cheats_killboss[] = "KILL BOSS";
 	
 static const short warp_flags[] = {
@@ -30,17 +20,17 @@ static const short warp_flags[] = {
 };
 
 static const char* cheats_array[] = {
-	cheats_altermoveset,
-	cheats_changegamemode,
-	cheats_cancelcs,
+	"MOVESET AND INVENTORY",
+	"CHANGE GAMEMODE",
+	"CANCEL CUTSCENE",
 	cheats_instantskew,
-	cheats_snagcheats,
-	cheats_toggles,
-	cheats_undoflag,
-	cheats_gaincontrol,
-	cheats_endminigame,
-	cheats_tagallwarps,
-	cheats_transform,
+	"SPAWN SNAG CHEATS",
+	"TOGGLES",
+	"UNDO LAST FLAG WRITE",
+	"GAIN CONTROL",
+	"FORCE END MINIGAME",
+	"TAG ALL WARPS",
+	"TRANSFORM",
 };
 
 void openCheatsMenu(void) {
@@ -56,7 +46,7 @@ void openCheatsMenu(void) {
 
 void undoLastFlagWrite(void) {
 	if (UndoFlag.flag_stored) {
-		setFlag(UndoFlag.encoded_flag,1 - UndoFlag.output, UndoFlag.flag_type);
+		setFlag(UndoFlag.encoded_flag,1 ^ UndoFlag.output, UndoFlag.flag_type);
 		playSFX(Splat);
 	}
 }
