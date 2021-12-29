@@ -59,6 +59,7 @@
 .definelabel loadSetup, 0x806886E0
 .definelabel getParentDataIndex, 0x80688D64
 .definelabel getScreenPosition, 0x80626F8C
+.definelabel getNewSaveTime, 0x805FC98C
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894
@@ -186,6 +187,7 @@
 .definelabel mapFloorPointer, 0x807F9514
 .definelabel mapFloorBlockCount, 0x807F9518
 .definelabel displayListCount, 0x8076A088
+.definelabel IGT, 0x80750AB0
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494

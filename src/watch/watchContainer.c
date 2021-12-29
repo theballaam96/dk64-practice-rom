@@ -16,6 +16,7 @@ static const char viewed_storedposition2[] = "} STORED POSITION 2";
 static const char viewed_floor[] = "} FLOOR";
 static const char viewed_phaseassistant[] = "} PHASEWALK ASSISTANT";
 static const char viewed_avgspd[] = "} AVERAGE SPEED";
+static const char viewed_igt[] = "} IN-GAME TIME";
 static const char viewed_fairy[] = "} FAIRY VIEWER";
 
 static const char change_lag[] = "{ LAG";
@@ -34,6 +35,7 @@ static const char change_storedposition2[] = "{ STORED POSITION 2";
 static const char change_floor[] = "{ FLOOR";
 static const char change_phaseassistant[] = "{ PHASEWALK ASSISTANT";
 static const char change_avgspd[] = "{ AVERAGE SPEED";
+static const char change_igt[] = "{ IN-GAME TIME";
 static const char change_fairy[] = "{ FAIRY VIEWER";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
@@ -52,7 +54,7 @@ static const char phasereason_12[] = "POTENTIALLY SUBOPTIMAL ANGLE"; // Trunacte
 static const char phasereason_13[] = "PHASE LOST DUE TO UNKNOWN CAUSES"; // idk wtf happened
 
 static const char watches_player_indexes[] = {11,3,17,7,14,6,9,12,13};
-static const char watches_timers_indexes[] = {4,5,10};
+static const char watches_timers_indexes[] = {4,5,10,18};
 static const char watches_sysenv_indexes[] = {1,2,8};
 static const char watches_assist_indexes[] = {16,-1};
 
@@ -143,6 +145,7 @@ static const char* watch_listed_array[] = {
 	0,
 	change_phaseassistant,
 	change_avgspd,
+	change_igt,
 	change_fairy,
 };
 
@@ -164,6 +167,7 @@ static const char* watch_viewed_array[] = {
 	0,
 	viewed_phaseassistant,
 	viewed_avgspd,
+	viewed_igt,
 	viewed_fairy,
 };
 
@@ -185,6 +189,7 @@ static const char* watch_change_array[] = {
 	0,
 	change_phaseassistant,
 	change_avgspd,
+	change_igt,
 	change_fairy,
 };
 
@@ -204,6 +209,7 @@ static const char* watch_timers_array[] = {
 	change_timer,
 	change_gktimer,
 	change_isg,
+	change_igt,
 };
 
 static const char* watch_sysenv_array[] = {
@@ -224,6 +230,8 @@ void openWatchMenu(void) {
 	changeMenu(12);
 };
 
+#define INPUT_VIEWER_INDEX 7
+#define FAIRY_VIEWER_INDEX 18
 void updateWatchText(void) {
 	int _index;
 	int watch_index = 0;
@@ -237,16 +245,16 @@ void updateWatchText(void) {
 		}
 	}
 	if (InputDisplayOpen) {
-		watch_listed_array[7] = watch_viewed_array[7];
+		watch_listed_array[INPUT_VIEWER_INDEX] = watch_viewed_array[INPUT_VIEWER_INDEX];
 	} else {
-		watch_listed_array[7] = watch_change_array[7];
+		watch_listed_array[INPUT_VIEWER_INDEX] = watch_change_array[INPUT_VIEWER_INDEX];
 	}
 	if (FairyViewerOpen) {
-		watch_listed_array[17] = watch_viewed_array[17];
+		watch_listed_array[FAIRY_VIEWER_INDEX] = watch_viewed_array[FAIRY_VIEWER_INDEX];
 	} else {
-		watch_listed_array[17] = watch_change_array[17];
+		watch_listed_array[FAIRY_VIEWER_INDEX] = watch_change_array[FAIRY_VIEWER_INDEX];
 	}
-	watch_assist_array[1] = watch_listed_array[17];
+	watch_assist_array[1] = watch_listed_array[FAIRY_VIEWER_INDEX];
 	for (int i = 0; i < sizeof(watches_player_indexes); i++) {
 		watch_index = (int)watches_player_indexes[i] - 1;
 		if (watch_index > -1) {
@@ -450,12 +458,13 @@ static const int watch_timers_functions[] = {
 	(int)&setWatch,
 	(int)&setWatch,
 	(int)&setWatch,
+	(int)&setWatch,
 };
 
 const Screen watch_timers_struct = {
 	.TextArray = (int*)watch_timers_array,
 	.FunctionArray = watch_timers_functions,
-	.ArrayItems = 3,
+	.ArrayItems = 4,
 	.ParentScreen = 12,
 	.ParentPosition = 1
 };
@@ -640,6 +649,9 @@ void headerFormatter(char* header, float _fval, int _ival, format_mode mode, int
 	}
 	stringConcat((char*)WatchTextSpace[watch_index],header,float_str);
 }
+
+#define IGT_STATE_LOCKED 0
+#define IGT_STATE_CANSAVE 1
 
 void handleWatch(void) {
 	float _KRoolTimerX = 125;
@@ -1040,6 +1052,33 @@ void handleWatch(void) {
 							}
 							watch_cache_array[j][0] = 17;
 							watch_cache_array[j][1] = _spdsum;
+						}
+						break;
+					case 18:
+						// IGT
+						{
+							int state = IGT_STATE_LOCKED;
+							int igt_secs = 0;
+							if (player_count == 1) {
+								int _ingameover = DetectGameOver();
+								int _inadventure = DetectAdventure();
+								if ((_ingameover) || (_inadventure)) {
+									state = IGT_STATE_CANSAVE;
+								}
+							}
+							if (state == IGT_STATE_CANSAVE) {
+								igt_secs = getNewSaveTime();
+							} else {
+								igt_secs = IGT;
+							}
+							if ((watch_cache_array[j][1] != igt_secs) || (watch_cache_array[j][0] != 18)) {
+								int igt_split_secs = igt_secs % 60;
+								int igt_split_mins = ((igt_secs % 3600) - igt_split_secs) / 60;
+								int igt_split_hours = (igt_secs - (60 * igt_split_mins) - igt_split_secs) / 3600;
+								dk_strFormat((char *)WatchTextSpace[j], "IGT: %d:%02d:%02d",igt_split_hours,igt_split_mins,igt_split_secs);
+							}
+							watch_cache_array[j][0] = 18;
+							watch_cache_array[j][1] = igt_secs;
 						}
 					break;
 				}

@@ -36,7 +36,7 @@ static const int debug_functions[] = {
 const Screen debug_struct = {
 	.TextArray = (int*)debug_array,
 	.FunctionArray = debug_functions,
-	.ArrayItems = 7,
+	.ArrayItems = 6, // 7
 	.ParentScreen = 0,
 	.ParentPosition = 4
 };

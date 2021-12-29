@@ -48,6 +48,7 @@ extern void textOverlayCode(void);
 extern void spawnTransferredActor(void);
 extern void resolveMovementBox(void* spawner);
 extern void wipeMemory(void* location, int size);
+extern int getNewSaveTime();
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
@@ -196,6 +197,7 @@ extern float LZFadeoutProgress;
 extern int* mapFloorPointer;
 extern int mapFloorBlockCount;
 extern int displayListCount;
+extern int IGT;
 
 extern short screenCenterX;
 extern short screenCenterY;
