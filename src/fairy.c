@@ -26,19 +26,21 @@ void destroyFairyViewer(void) {
 
 int* displayFairy(int* dl) {
 	if (FairyViewerOpen && !ActiveMenu.isOpen) {
-		int y = 215;
+		int y = 140;
 		dl = drawImage(dl, 48, RGBA16, 32, 32, 623, 467, 5.19f, 4.83f, 0x80);
 		if (show_dot) {
 			dl = drawImage(dl, 49, RGBA16, 16, 16, (3.9498f * fairy_x) + 8.5118f, (3.9178f * fairy_y) + 10.822f, 1.0f, 1.0f, 0xFF);
 			int diff = max_dist - fairy_dist;
 			int red_col = 0xFF;
-			dk_strFormat(fairy_text, "%d",diff);
+			dk_strFormat(fairy_text, "DIST:%d",diff);
 			if (diff > 0) {
 				red_col = 0;
 			}
-			dl = drawTextContainer(dl, 128, 135, y, (char*)fairy_text, red_col, 0xFF - red_col, 0x00, 0xFF, 1);
+			//dl = drawTextContainer(dl, 128, 135, y, (char*)fairy_text, red_col, 0xFF - red_col, 0x00, 0xFF, 1);
+			dl = drawPixelTextContainer(dl, 135, y, (char *)fairy_text, red_col, 0xFF - red_col, 0x00, 0xFF, 1);
 		} else {
-			dl = drawTextContainer(dl, 128, 100, y, "No Fairies in View", 0xFF, 0xFF, 0xFF, 0xFF, 1);
+			//dl = drawTextContainer(dl, 128, 100, y, "No Fairies in View", 0xFF, 0xFF, 0xFF, 0xFF, 1);
+			dl = drawPixelTextContainer(dl, 85, y, "NO FAIRIES IN VIEW", 0xFF, 0xFF, 0xFF, 0xFF, 1);
 		}
 	}
 	return dl;
@@ -69,7 +71,16 @@ void controlFairyViewer(void) {
 					xDist = SwapObject->cameraPositions[0].xPos - FairyViewerFocus->xPos;
 					zDist = SwapObject->cameraPositions[0].zPos - FairyViewerFocus->zPos;
 					if (Player->control_state != 100) {
-						fairy_dist = dk_sqrt((xDist * xDist) + (zDist * zDist)) - SwapObject->near;
+						actorData* vehicle = Player->vehicle_actor_pointer;
+						int pass = 1;
+						if (vehicle) {
+							if (vehicle->actorType == 202) {
+								pass = 0;
+							}
+						}
+						if (pass) {
+							fairy_dist = dk_sqrt((xDist * xDist) + (zDist * zDist)) - SwapObject->near;
+						}
 					}
 					fairy_x = FairyViewerData.xPos;
 					fairy_y = FairyViewerData.yPos;
