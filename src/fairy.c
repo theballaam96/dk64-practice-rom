@@ -44,12 +44,6 @@ int* displayFairy(int* dl) {
 	return dl;
 }
 
-void destroyViewerOnTransition(void) {
-	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
-		destroyFairyViewer();
-	}
-};
-
 void toggleFairyViewer(void) {
 	if (FairyViewerOpen) {
 		destroyFairyViewer();

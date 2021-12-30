@@ -24,6 +24,7 @@ const int flagmain_functions[] = {
 	(int)&openFlagsCutsceneMenu,
 	(int)&openFlagsModifierMenu,
 	(int)&openFlagsFTTMenu,
+	(int)&openBPortsMenu,
 	(int)&openFlagsMiscMenu,
 	(int)&openFlagsCustomMenu,
 };

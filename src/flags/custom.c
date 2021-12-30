@@ -146,5 +146,5 @@ const Screen flagcustom_struct = {
 	.FunctionArray = flagcustom_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 43,
-	.ParentPosition = 10
+	.ParentPosition = 11
 };

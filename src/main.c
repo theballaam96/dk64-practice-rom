@@ -51,7 +51,6 @@ void cFuncLoop(void) {
 	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
 		closeMenuOnTransition(); // Into Transition
 		closeInputOnTransition(); // Into Transition
-		destroyViewerOnTransition(); // Into Transition
 	}
 	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
 		checkMapType(); // Out of Transition
@@ -115,7 +114,7 @@ static char stateLoadstr[15] = "";
 #define ACTOR_MAINMENUCONTROLLER 0x146
 
 int* displayListModifiers(int* dl) {
-	if ((CurrentMap == 0x50) && (!watchActive)) {
+	if (CurrentMap == 0x50) {
 		int i = 0;
 		while (i < LoadedActorCount) {
 			if (LoadedActorArray[i].actor) {
@@ -138,11 +137,13 @@ int* displayListModifiers(int* dl) {
 	if (NoVacantWatchTimer > 0) {
 		dl = drawPixelTextContainer(dl, 130, 207, "NO VACANT WATCH SLOTS", 0xFF, 0xFF, 0xFF, 0xFF, 1);
 	}
-	if (!IsPauseMenuOpen) {
+	if ((!IsPauseMenuOpen) && (CurrentMap != 0x51)) {
 		dl = displayMenu(dl);
 		dl = displayWatches(dl);
 		dl = displayMemory(dl);
-		dl = displayFairy(dl);
+		if (CurrentMap != 0x50) {
+			dl = displayFairy(dl);
+		}
 		//dl = drawTri(dl, 100, 100, 300, 500, 500, 300);
 		dl = displayFloors(dl);
 	}

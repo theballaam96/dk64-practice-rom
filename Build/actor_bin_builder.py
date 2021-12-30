@@ -128,6 +128,7 @@ with open("assets/Non-Code/actor_names.bin","wb") as fh:
 		x = x.replace("+","PLUS")
 		x = x.replace(": ",":")
 		x = x.replace(". ",".")
+		x = x.replace("&","#")
 		x = x.upper()
 		for y in range(len(x)):
 			arr[y] = ord(x[y])

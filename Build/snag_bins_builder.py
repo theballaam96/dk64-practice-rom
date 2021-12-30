@@ -40,6 +40,7 @@ with open("assets/Non-Code/snag_names.bin","wb") as fh:
 			x = x.replace("(","<")
 			x = x.replace(")",">")
 			x = x.replace("-"," ")
+			x = x.replace("&","#")
 			x_upper = x.upper()
 			for y in range(len(x)):
 				arr[y] = ord(x[y])

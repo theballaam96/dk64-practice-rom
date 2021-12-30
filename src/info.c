@@ -31,8 +31,10 @@ int* displayInfo(int* dl) {
 			}
 		}
 	} else {
-		dl = drawTextContainer(dl, 1, 25, 525, "DK64 PRACTICE ROM", 0xFF, 0xFF, 0xFF, 0xFF, 0);
-		dl = drawTextContainer(dl, 1, 25, 550, "VERSION 1.4.2", 0xFF, 0xFF, 0xFF, 0xFF, 0);
+		if (!watchActive) {
+			dl = drawTextContainer(dl, 1, 25, 525, "DK64 PRACTICE ROM", 0xFF, 0xFF, 0xFF, 0xFF, 0);
+			dl = drawTextContainer(dl, 1, 25, 550, "VERSION 1.4.2", 0xFF, 0xFF, 0xFF, 0xFF, 0);		
+		}
 		dl = drawTextContainer(dl, 6, 25, 80, "INFO", 0xFF, 0, 0, 0xFF, 0);
 		dl = drawTextContainer(dl, 1, 85, 149, "g", 0xFF, 0xFF, 0xFF, 0xFF, 0); // Start Button
 	}

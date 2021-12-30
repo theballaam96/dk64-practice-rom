@@ -51,6 +51,7 @@ static const char* flagmain_array[] = {
 	"CUTSCENES",
 	"LEVEL MODIFIERS",
 	"FIRST TIME TEXTS",
+	"BANANAPORTS",
 	"MISCELLANEOUS",
 	"CUSTOM",
 };
@@ -58,7 +59,7 @@ static const char* flagmain_array[] = {
 const Screen flagmain_struct = {
 	.TextArray = (int*)flagmain_array,
 	.FunctionArray = flagmain_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 12,
 	.ParentScreen = 0,
 	.ParentPosition = 1
 };

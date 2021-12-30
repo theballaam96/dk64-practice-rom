@@ -28,7 +28,7 @@ const Screen flagmenu_misc_struct = {
 	.FunctionArray = flagmenu_misc_functions,
 	.ArrayItems = 2,
 	.ParentScreen = 43,
-	.ParentPosition = 9
+	.ParentPosition = 10
 };
 
 static const char* flag_arcader1_array[] = {

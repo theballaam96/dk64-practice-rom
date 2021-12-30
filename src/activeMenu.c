@@ -125,6 +125,7 @@ const Screen* menu_screens[] = {
 	&bonusisles_mapwarp_struct,
 	&collisionmenu_struct,
 	&floormenu_struct,
+	&bports_struct,
 };
 
 void spawnMenu(int screenIndex) {
