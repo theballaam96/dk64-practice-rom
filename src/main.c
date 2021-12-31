@@ -139,7 +139,10 @@ int* displayListModifiers(int* dl) {
 	}
 	if ((!IsPauseMenuOpen) && (CurrentMap != 0x51)) {
 		dl = displayMenu(dl);
-		dl = displayWatches(dl);
+		if ((!ActiveMenu.isOpen) && (!RAMDisplayOpen)) {
+			dl = displayWatches(dl);
+			dl = displaySimpleInput(dl);
+		}
 		dl = displayMemory(dl);
 		if (CurrentMap != 0x50) {
 			dl = displayFairy(dl);

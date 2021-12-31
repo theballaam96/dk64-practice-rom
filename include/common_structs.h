@@ -411,6 +411,7 @@ typedef struct savedSettings {
 	/* 0x011 */ char file_init_qol;
 	/* 0x012 */ char input_max;
 	/* 0x013 */ char console;
+	/* 0x014 */ char input_type;
 } savedSettings;
 
 typedef struct flagMenuData {

@@ -31,6 +31,9 @@ static char hack_fileinitqol_off[] = "FILE START STATE:VANILLA";
 static char hack_inputmax_70[] = "INPUT STICK MAX:THRESHOLD";
 static char hack_inputmax_127[] = "INPUT STICK MAX:FULL MAGNITUDE";
 
+static char hack_inputtype_detailed[] = "INPUT TYPE:DETAILED";
+static char hack_inputtype_lowlag[] = "INPUT TYPE:LOW LAG";
+
 static char hack_console_none[] = "CONSOLE:NONE";
 static char hack_console_n64[] = "CONSOLE:NINTENDO 64";
 static char hack_console_wiiu[] = "CONSOLE:WII U";
@@ -47,6 +50,7 @@ static char* hack_array[] = {
 	hack_kroolround_random,
 	hack_fileinitqol_on,
 	hack_inputmax_70,
+	hack_inputtype_detailed,
 	hack_console_none,
 };
 
@@ -112,7 +116,12 @@ void openHackVarsMenu(void) {
 	} else {
 		hack_array[9] = hack_inputmax_70;
 	}
-	hack_array[10] = hack_console_list[(int)assignedConsole];
+	if (InputDisplayType) {
+		hack_array[10] = hack_inputtype_lowlag;
+	} else {
+		hack_array[10] = hack_inputtype_detailed;
+	}
+	hack_array[11] = hack_console_list[(int)assignedConsole];
 	changeMenu(69);
 };
 
@@ -195,6 +204,14 @@ void toggleConsole(void) {
 	openHackVarsMenu();
 }
 
+void toggleInputType(void) {
+	InputDisplayType = 1 ^ InputDisplayType;
+	saveSettings();
+	closeOverlay();
+	spawnOverlay();
+	openHackVarsMenu();
+}
+
 static const int hack_functions[] = {
 	(int)&toggleQuickStartup,
 	(int)&toggleForcedStorySkip,
@@ -206,13 +223,14 @@ static const int hack_functions[] = {
 	(int)&toggleKRoolRoundSetting,
 	(int)&toggleFileStartState,
 	(int)&toggleInputMax,
+	(int)&toggleInputType,
 	(int)&toggleConsole,
 };
 
 const Screen hack_struct = {
 	.TextArray = (int*)hack_array,
 	.FunctionArray = hack_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 12,
 	.ParentScreen = 57,
 	.ParentPosition = 3
 };

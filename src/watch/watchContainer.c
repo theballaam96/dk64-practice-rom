@@ -101,15 +101,13 @@ void colorWatch(char _red, char _green, char _blue, int slot) {
 };
 
 int* displayWatches(int* dl) {
-	if ((!ActiveMenu.isOpen) && (!RAMDisplayOpen)) {
-		int y = 0;
-		int k = 0;
-		for (int i = 0; i < WatchCount; i++) {
-			if (WatchIndex[i]) {
-				y = 340 - (k++ * 13);
-				// Note: This is huge for some reason? Is there a way we can shrink this?
-				dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 0);
-			}
+	int y = 0;
+	int k = 0;
+	for (int i = 0; i < WatchCount; i++) {
+		if (WatchIndex[i]) {
+			y = 340 - (k++ * 13);
+			// Note: This is huge for some reason? Is there a way we can shrink this?
+			dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 0);
 		}
 	}
 	return dl;

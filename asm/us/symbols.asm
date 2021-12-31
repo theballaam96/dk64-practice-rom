@@ -237,7 +237,7 @@
 .definelabel LoadedHooks, 0x807FFFEF // u8
 .definelabel Precision, 0x807FFFEE // u8
 .definelabel NoVacantWatchTimer, 0x807FFFED // u8
-.definelabel SlamLevel, 0x807FFFEC // u8
+.definelabel InputDisplayType, 0x807FFFEC // u8
 .definelabel AverageLag, 0x807FFFE8 // f32
 .definelabel SavePromptActor, 0x807FFFE4 // u32
 .definelabel ISGTimer, 0x807FFFE0 // u32

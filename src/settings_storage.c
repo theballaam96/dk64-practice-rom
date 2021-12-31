@@ -21,6 +21,7 @@ void resetSettings(void) {
 	StoredSettings.file_init_qol = 0;
 	StoredSettings.input_max = 0;
 	StoredSettings.console = 0;
+	StoredSettings.input_type = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -44,6 +45,7 @@ void loadSettings(void) {
 		FileInitQOLOff = StoredSettings.file_init_qol;
 		InputStickMax = StoredSettings.input_max;
 		assignedConsole = StoredSettings.console;
+		InputDisplayType = StoredSettings.input_type;
 	} else {
 		resetSettings();
 	}
@@ -67,5 +69,6 @@ void saveSettings(void) {
 	StoredSettings.file_init_qol = FileInitQOLOff;
 	StoredSettings.input_max = InputStickMax;
 	StoredSettings.console = assignedConsole;
+	StoredSettings.input_type = InputDisplayType;
 	SaveToGlobal();
 }

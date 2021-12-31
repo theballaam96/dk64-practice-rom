@@ -37,6 +37,7 @@ extern int* displayInfo(int* dl);
 extern int* drawPixelText(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha);
 extern int* drawPixelTextContainer(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha, int offset);
 extern int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, int blue, int alpha);
+extern int* displaySimpleInput(int* dl);
 
 extern void colorWatch(char _red, char _green, char _blue, int slot);
 extern void openWatchSnagMenu(void);

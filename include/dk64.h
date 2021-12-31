@@ -230,7 +230,7 @@ extern char InBadMap;
 extern char MenuSavestateAction;
 extern char WatchIndex[4];
 extern unsigned char NoVacantWatchTimer;
-extern char SlamLevel;
+extern char InputDisplayType;
 extern float AverageLag;
 extern int ISGTimer;
 extern char LagDocumentationIndex;
