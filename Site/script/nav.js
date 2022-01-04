@@ -44,6 +44,15 @@ var navHtml = "\
 								</a>\
 							</li>\
 							<li>\
+								<a href='/install' class='nav_link'>\
+									<span>\
+										<strong>\
+											Install\
+										</strong>\
+									</span>\
+								</a>\
+							</li>\
+							<li>\
 								<a href='/manual' class='nav_link'>\
 									<span>\
 										<strong>\
