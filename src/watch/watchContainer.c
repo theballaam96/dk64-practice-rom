@@ -17,6 +17,7 @@ static const char viewed_floor[] = "} FLOOR";
 static const char viewed_phaseassistant[] = "} PHASEWALK ASSISTANT";
 static const char viewed_avgspd[] = "} AVERAGE SPEED";
 static const char viewed_igt[] = "} IN-GAME TIME";
+static const char viewed_anglepoint[] = "} ANGLE TO POINT";
 static const char viewed_fairy[] = "} FAIRY VIEWER";
 
 static const char change_lag[] = "{ LAG";
@@ -36,6 +37,7 @@ static const char change_floor[] = "{ FLOOR";
 static const char change_phaseassistant[] = "{ PHASEWALK ASSISTANT";
 static const char change_avgspd[] = "{ AVERAGE SPEED";
 static const char change_igt[] = "{ IN-GAME TIME";
+static const char change_anglepoint[] = "{ ANGLE TO POINT";
 static const char change_fairy[] = "{ FAIRY VIEWER";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
@@ -53,7 +55,7 @@ static const char phasereason_11[] = "NO DOWN FLICK"; // Pretty self-explanatory
 static const char phasereason_12[] = "POTENTIALLY SUBOPTIMAL ANGLE"; // Trunacted Angle < 150
 static const char phasereason_13[] = "PHASE LOST DUE TO UNKNOWN CAUSES"; // idk wtf happened
 
-static const char watches_player_indexes[] = {11,3,17,7,14,6,9,12,13};
+static const char watches_player_indexes[] = {11,3,17,7,19,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10,18};
 static const char watches_sysenv_indexes[] = {1,2,8};
 static const char watches_assist_indexes[] = {16,-1};
@@ -63,6 +65,10 @@ static int watch_cache_slot1[] = {0,0,0,0};
 static int watch_cache_slot2[] = {0,0,0,0};
 static int watch_cache_slot3[] = {0,0,0,0};
 static float watch_cache_slotf[] = {0,0,0,0};
+
+static float player_ref_x = 0.0f;
+static float player_ref_z = 0.0f;
+static char player_ref_bool = 0;
 
 static int* watch_cache_array[] = {
 	watch_cache_slot0,
@@ -144,6 +150,7 @@ static const char* watch_listed_array[] = {
 	change_phaseassistant,
 	change_avgspd,
 	change_igt,
+	change_anglepoint,
 	change_fairy,
 };
 
@@ -166,6 +173,7 @@ static const char* watch_viewed_array[] = {
 	viewed_phaseassistant,
 	viewed_avgspd,
 	viewed_igt,
+	viewed_anglepoint,
 	viewed_fairy,
 };
 
@@ -188,6 +196,7 @@ static const char* watch_change_array[] = {
 	change_phaseassistant,
 	change_avgspd,
 	change_igt,
+	change_anglepoint,
 	change_fairy,
 };
 
@@ -196,6 +205,7 @@ static const char* watch_player_array[] = {
 	change_speed,
 	change_avgspd,
 	change_angle,
+	change_anglepoint,
 	change_floor,
 	change_movement,
 	change_heldactor,
@@ -229,7 +239,7 @@ void openWatchMenu(void) {
 };
 
 #define INPUT_VIEWER_INDEX 7
-#define FAIRY_VIEWER_INDEX 18
+#define FAIRY_VIEWER_INDEX 19
 void updateWatchText(void) {
 	int _index;
 	int watch_index = 0;
@@ -406,12 +416,22 @@ void fairyViewerContainerToggle(void) {
 	openWatchAssistMenu();
 }
 
+void setReferencePosition(void) {
+	if (Player) {
+		player_ref_x = Player->xPos;
+		player_ref_z = Player->zPos;
+		player_ref_bool = 1;
+		playSFX(61);
+	}
+}
+
 static const char* watch_array[] = {
 	"PLAYER VARIABLES",
 	"TIMERS",
 	"SYSTEM ENVIRONMENT",
 	"SPAWN SNAG COLLECTABLES",
 	"ASSISTANTS",
+	"SET REFERENCE POINT",
 	"CLEAR ALL WATCHES",
 };
 
@@ -421,13 +441,14 @@ static const int watch_functions[] = {
 	(int)&openWatchSysMenu,
 	(int)&openWatchSnagMenu,
 	(int)&openWatchAssistMenu,
+	(int)&setReferencePosition,
 	(int)&clearAllWatches,
 };
 
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 6,
+	.ArrayItems = 7,
 	.ParentScreen = 0,
 	.ParentPosition = 3
 };
@@ -447,7 +468,7 @@ static const int watch_player_functions[] = {
 const Screen watch_player_struct = {
 	.TextArray = (int*)watch_player_array,
 	.FunctionArray = watch_player_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 12,
 	.ParentPosition = 0
 };
@@ -1077,6 +1098,38 @@ void handleWatch(void) {
 							}
 							watch_cache_array[j][0] = 18;
 							watch_cache_array[j][1] = igt_secs;
+						}
+						break;
+					case 19:
+						// Point Angle
+						{
+							if (player_ref_bool) {
+								float angle = 0;
+								if (Player) {
+									float px = Player->xPos;
+									float pz = Player->zPos;
+									float dx = player_ref_x - px;
+									float dz = player_ref_z - pz;
+									if ((dx != 0) && (dz != 0)) {
+										angle = (arctan2(dz,dx) * (180 / 3.14159f)) + 360;
+									}
+								}
+								if (angle >= 360) {
+									angle -= 360;
+								}
+								// angle = angle * (4096 / 360);
+								// int angle_units = angle;
+								// angle_units = angle_units % 4096;
+								// float angle_units_f = angle_units;
+								// float angle_rounded = angle_units_f * (360 / 4096);
+								if ((watch_cache_slotf[j] != angle) || (watch_cache_array[j][0] != 19)) {
+									headerFormatter("ANGLE TO POINT: ",angle,0,FLOAT_TYPE,j);
+								}
+								watch_cache_slotf[j] = angle;
+							} else {
+								stringConcat((char *)WatchTextSpace[j],"ANGLE TO POINT: UNDEFINED","");
+							}
+							watch_cache_array[j][0] = 19;
 						}
 					break;
 				}

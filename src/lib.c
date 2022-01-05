@@ -120,20 +120,33 @@ void customHideHUD(void) {
 }
 
 float arctan(float val) {
-	int arctan_taylortotal = 0;
-	if (val <= 1) {
-		for (int i = 0; i < 15; i++) {
-			int sign = 1;
-			if (i % 2) {
-				sign = -1;
-			}
-			int z_power = (2 * i) + 1;
-			int total = val;
-			for (int j = 0; j < z_power; j++) {
-				total *= val;
-			}
-			arctan_taylortotal += (sign * (total/z_power));
+	float arctan_taylortotal = 0;
+	int arctan_type = 0;
+	if (val >= 1) {
+		arctan_type = 1;
+	} else if (val <= -1) {
+		arctan_type = 2;
+	}
+	for (int i = 0; i < 15; i++) {
+		int sign = 1;
+		if (i % 2) {
+			sign = -1;
 		}
+		int z_power = (2 * i) + 1;
+		float total = 1;
+		for (int j = 0; j < z_power; j++) {
+			total *= val;
+		}
+		if (arctan_type == 0) {
+			arctan_taylortotal += (sign * (total / z_power));
+		} else {
+			arctan_taylortotal += (sign * (1 / (z_power * total)));
+		}
+	}
+	if (arctan_type == 1) {
+		arctan_taylortotal = (3.14159f / 2) - arctan_taylortotal;
+	} else if (arctan_type == 2) {
+		arctan_taylortotal = (-3.14159f / 2) - arctan_taylortotal;
 	}
 	return arctan_taylortotal;
 }
