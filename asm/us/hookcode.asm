@@ -169,6 +169,11 @@ START_HOOK:
 		LBU 	a2, lo(AutoPhaseStateOn) (a2)
 		BEQZ 	a2, preventPhasewalkingOverride_Finish
 		NOP
+		LUI 	a2, hi(ControllerInput)
+		LHU 	a2, lo(ControllerInput) (a2)
+		ANDI 	a2, a2, 0x0800 // D_Up
+		BEQZ 	a2, preventPhasewalkingOverride_Finish
+		NOP
 		LUI 	a2, hi(Player)
 		LW 		a2, lo(Player) (a2)
 		BEQZ 	a2, preventPhasewalkingOverride_Finish

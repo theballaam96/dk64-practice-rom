@@ -3,8 +3,8 @@
 static const char toggles_moonkick_off[] = "{ AUTO-MOONKICK";
 static const char toggles_moonkick_on[] = "} AUTO-MOONKICK";
 
-static const char toggles_phase_off[] = "{ AUTO-PHASE STATE";
-static const char toggles_phase_on[] = "} AUTO-PHASE STATE";
+static const char toggles_phase_off[] = "{ D-UP TO AUTO-PHASE";
+static const char toggles_phase_on[] = "} D-UP TO AUTO-PHASE";
 
 static const char toggles_sandstorm_unk[] = "? AZTEC SANDSTORM";
 static const char toggles_sandstorm_off[] = "{ AZTEC SANDSTORM";

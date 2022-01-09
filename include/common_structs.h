@@ -271,7 +271,7 @@ typedef struct PosState {
 	/* 0x034 */ float zPos;
 	/* 0x038 */ char control_state;
 	/* 0x039 */ char control_state_progress;
-	/* 0x03A */ char map;
+	/* 0x03A */ unsigned char map;
 	/* 0x03B */ char bone_array_counter;
 	/* 0x03C */ short cameraRotation;
 } PosState;
