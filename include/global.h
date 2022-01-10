@@ -7,6 +7,7 @@ extern void initWarpMenu(void);
 extern void playSFX(short sfxIndex);
 extern float arctan(float val);
 extern float arctan2(float x, float y);
+extern void clearDKPortal(void);
 extern void setPermFlag(short flagIndex);
 extern void openStateMenu(void);
 extern void openTimerSettingsMenu(void);

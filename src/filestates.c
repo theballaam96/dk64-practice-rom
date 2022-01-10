@@ -80,9 +80,10 @@ void portFileStateToMemory(int state_index) {
 }
 
 void fileStateMapLoadVars(void) {
-	if ((ObjectModel2Timer == 2) && (TransitionSpeed < 0) && (load_filestate_vars)) {
+	if ((ObjectModel2Timer < 2) && (TransitionSpeed < 0) && (load_filestate_vars)) {
 		if (Player) {
 			Player->floor = filestate_floor;
+			clearDKPortal();
 			load_filestate_vars = 0;
 		}
 	}

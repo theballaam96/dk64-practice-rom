@@ -170,3 +170,24 @@ float arctan2(float x, float y) {
 		}
 	}
 }
+
+static const unsigned char dk_portal_maps[] = {0x07,0x26,0x1A,0x1E,0x30,0x48,0x57,0xA9,0xAD,0xAF,0xAE,0xB2,0xC2,0xC1};
+void clearDKPortal(void) {
+	int is_portal_map = 0;
+	for (int i = 0; i < sizeof(dk_portal_maps); i++) {
+		if (dk_portal_maps[i] == CurrentMap) {
+			is_portal_map = 1;
+		}
+	}
+	if (is_portal_map) {
+		int _count = ObjectModel2Count;
+		int* m2location = ObjectModel2Pointer;
+		for (int i = 0; i < _count; i++) {
+			ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,i);
+			if (_object->object_type == 0x2AD) {
+				snagData* behav = _object->behaviour_pointer;
+				behav->reset = 2;
+			}
+		}
+	}
+}

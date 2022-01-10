@@ -469,6 +469,7 @@ void savestateLoadMapLoadVars(void) {
 				if (tag_found_addr) {
 					tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 				}
+				clearDKPortal();
 			}
 		}
 		stateLoadTimer = 60;
