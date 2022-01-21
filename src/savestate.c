@@ -264,6 +264,9 @@ void savestateHandler(void) {
 						if (Camera) {
 							states[_focused_state]->camera_rotation = Camera->viewportRotation;
 						}
+						for (int i = 0; i < 7; i++) {
+							states[_focused_state]->cbs_turned_in[i] = CBTurnedInArray[i];
+						}
 						
 
 						// Parent Map Shenanigans
@@ -353,6 +356,9 @@ void savestateHandler(void) {
 							} else {
 								initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
 							}
+							for (int i = 0; i < 7; i++) {
+								CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];
+							}
 							if (MenuSavestateAction == 2) {
 								setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
 							};
@@ -390,7 +396,7 @@ void shorthandSavestate(void) {
 			if (_action == 0) {
 				_action = 2;
 			};
-			if ((InBadMap) || (states[(int)FocusedSavestate]->HasData == 0)) {
+			if (states[(int)FocusedSavestate]->HasData == 0) {
 				playSFX(Wrong);
 			} else {
 				MenuSavestateAction = _action;
@@ -410,6 +416,9 @@ void savestateLoadMapLoadVars(void) {
 		int* _perm_flag_block = getFlagBlockAddress(0);
 		if (_perm_flag_block) {
 			dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
+		}
+		for (int i = 0; i < 7; i++) {
+			CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];
 		}
 		dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
 		dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);

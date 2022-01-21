@@ -188,6 +188,7 @@
 .definelabel mapFloorBlockCount, 0x807F9518
 .definelabel displayListCount, 0x8076A088
 .definelabel IGT, 0x80750AB0
+.definelabel CBTurnedInArray, 0x807FC930
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494

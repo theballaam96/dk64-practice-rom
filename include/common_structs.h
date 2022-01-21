@@ -217,6 +217,7 @@ typedef struct Savestate {
 	/* 0x383 */ char unk_383;
 	/* 0x384 */ floatPos cameraPos;
 	/* 0x390 */ short camera_rotation;
+	/* 0x392 */ short cbs_turned_in[7];
 } Savestate;
 
 typedef struct Screen {

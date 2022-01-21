@@ -198,6 +198,7 @@ extern int* mapFloorPointer;
 extern int mapFloorBlockCount;
 extern int displayListCount;
 extern int IGT;
+extern short CBTurnedInArray[8];
 
 extern short screenCenterX;
 extern short screenCenterY;
