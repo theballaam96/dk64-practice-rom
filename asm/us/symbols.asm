@@ -60,6 +60,10 @@
 .definelabel getParentDataIndex, 0x80688D64
 .definelabel getScreenPosition, 0x80626F8C
 .definelabel getNewSaveTime, 0x805FC98C
+.definelabel loadExits, 0x806C95D0
+.definelabel updateModel2Allowances, 0x80631FAC
+.definelabel handleSetup, 0x806886E0
+.definelabel ObjectModel2Something, 0x80663DA0
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894
@@ -189,6 +193,7 @@
 .definelabel displayListCount, 0x8076A088
 .definelabel IGT, 0x80750AB0
 .definelabel CBTurnedInArray, 0x807FC930
+.definelabel exitPointer, 0x807FC900
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494
@@ -312,6 +317,7 @@
 .definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr
 .definelabel assignedConsole, 0x807FFC74 // u32
 .definelabel phasePointer, 0x807FFC78 // ptr
+.definelabel isFastStating, 0x807FFC7C // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

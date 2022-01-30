@@ -49,6 +49,10 @@ extern void spawnTransferredActor(void);
 extern void resolveMovementBox(void* spawner);
 extern void wipeMemory(void* location, int size);
 extern int getNewSaveTime();
+extern void loadExits(int map);
+extern int updateModel2Allowances(int map, int update_pointer);
+extern void handleSetup(void* setup, int unk1, int unk2);
+extern void ObjectModel2Something(void);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
@@ -199,6 +203,7 @@ extern int mapFloorBlockCount;
 extern int displayListCount;
 extern int IGT;
 extern short CBTurnedInArray[8];
+extern int* exitPointer;
 
 extern short screenCenterX;
 extern short screenCenterY;
@@ -317,6 +322,7 @@ extern short style2Mtx[0x10];
 extern char watchActive;
 extern char stateLoadTimer;
 extern actorData* PausePointer;
+extern char isFastStating;
 
 // Code
 extern int debugColumnLoop;

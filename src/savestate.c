@@ -217,6 +217,22 @@ const Screen viewstate_struct = {
 	.ParentPosition = 5
 };
 
+int fast_state(int new_map) {
+	if (new_map == CurrentMap) {
+		dk_free(exitPointer);
+		exitPointer = 0;
+		loadExits(new_map);
+		dk_free(ObjectModel2Pointer);
+		ObjectModel2Pointer = 0;
+		int allowance = updateModel2Allowances(new_map, 1);
+		int* setup = getMapData(9,new_map,1,1);
+		handleSetup(setup,0,0);
+		ObjectModel2Something();
+		return 1;
+	}
+	return 0;
+}
+
 void savestateHandler(void) {
 	int _focused_state = FocusedSavestate;
 	int tag_found = 0;
@@ -354,7 +370,9 @@ void savestateHandler(void) {
 								parentData[0].transition_properties_bitfield = states[_focused_state]->par_tpb;
 								parentData[0].in_submap |= 3;
 							} else {
-								initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
+								if (!fast_state(states[_focused_state]->Map)) {
+									initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
+								}
 							}
 							for (int i = 0; i < 7; i++) {
 								CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];

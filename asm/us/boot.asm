@@ -2,6 +2,12 @@ START:
 	displacedBootCode:
 		LUI v0, 0x8001
 		ADDIU v0, v0, 0xDCC4
+		// Bypass Setup Checks
+		LUI t3, 0x8075
+		ADDIU t4, r0, 1
+		SB t4, 0x00B0 (t3)
+		LUI t3, 0x8074
+		SB t4, 0x7D78 (t3)
 		//write per frame hook
 		//
 		LUI t3, hi(mainASMFunctionJump)
@@ -213,6 +219,9 @@ DisplayListHook:
 mapDLHook:
 	J 	mapDLCode
 	NOP
+secondSetupLoadHook:
+	J 	fastStateLoad
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -290,6 +299,12 @@ loadExtraHooks:
 	LUI t4, 0x8071
 	SW t3, 0x417C (t4) // Store Hook
 	SW r0, 0x4180 (t4) // Store NOP
+
+	LUI t3, hi(secondSetupLoadHook)
+	LW t3, lo(secondSetupLoadHook) (t3)
+	LUI t4, 0x8069
+	SW t3, 0x8AA8 (t4) // Store Hook
+	SW r0, 0x8AAC (t4) // Store NOP
 
 	//LUI t3, hi(mapDLHook)
 	//LW t3, lo(mapDLHook) (t3)
