@@ -64,6 +64,14 @@
 .definelabel updateModel2Allowances, 0x80631FAC
 .definelabel handleSetup, 0x806886E0
 .definelabel ObjectModel2Something, 0x80663DA0
+.definelabel loadEnemies, 0x80724C78
+.definelabel extraEnemyParser, 0x8066B434
+.definelabel wipeActors, 0x80677D80
+.definelabel spawnPersistentActors, 0x8068A7B0
+.definelabel spawnCameraAndKong, 0x806C7D40
+.definelabel resetModelTwoCollisions, 0x806F4778
+.definelabel updateCharChangeStruct, 0x8061EA78
+.definelabel resetDisplayLists, 0x805FE544
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894

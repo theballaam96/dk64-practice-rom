@@ -16,7 +16,8 @@ from recompute_pointer_table import pointer_tables, dumpPointerTableDetails, rep
 from recompute_overlays import isROMAddressOverlay, readOverlayOriginalData, replaceOverlayData, writeModifiedOverlaysToROM
 
 # Patcher functions for the extracted files
-from patch_text import patchDolbyText, patchWrinklyText, patchKlumsyText, patchMainMenu
+import patch_text
+#from patch_text import patchDolbyText, patchWrinklyText, patchKlumsyText, patchMainMenu
 from staticcode import patchStaticCode
 from actor_bin_builder import *
 from snag_bins_builder import *
@@ -35,29 +36,29 @@ file_dict = [
 		"name": "Menu Text",
 		"pointer_table_index": 12,
 		"file_index": 37,
-		"source_file": "Menu.bin",
-		"patcher": patchMainMenu
+		"source_file": "menu_text.bin",
+		"do_not_delete_source": True,
 	},
 	{
 		"name": "Dolby Text",
 		"pointer_table_index": 12,
 		"file_index": 13,
-		"source_file": "DolbyText.bin",
-		"patcher": patchDolbyText,
+		"source_file": "dolby_text.bin",
+		"do_not_delete_source": True,
 	},
 	{
 		"name": "K. Lumsy Text",
 		"pointer_table_index": 12,
 		"file_index": 27,
-		"source_file": "KLumsy.bin",
-		"patcher": patchKlumsyText,
+		"source_file": "klumsy_text.bin",
+		"do_not_delete_source": True,
 	},
 	{
 		"name": "Wrinkly Hint Text",
 		"pointer_table_index": 12,
 		"file_index": 41,
-		"source_file": "Wrinkly.bin",
-		"patcher": patchWrinklyText,
+		"source_file": "wrinkly_text.bin",
+		"do_not_delete_source": True,
 	},
 	{
 		"name": "Static ASM Code",
@@ -389,9 +390,17 @@ with open(newROMName, "r+b") as fh:
 
 import filestatewriter
 
-bins = ["actor_names","snag_names","snag_names_capitals"]
+bins = [
+	"assets/Non-Code/actor_names",
+	"assets/Non-Code/snag_names",
+	"assets/Non-Code/snag_names_capitals"
+	"dolby_text",
+	"wrinkly_text",
+	"menu_text",
+	"klumsy_text",
+]
 for x in bins:
-	pth = "assets/Non-Code/" + x + ".bin"
+	pth = x + ".bin"
 	if os.path.exists(pth):
 		os.remove(pth)
 	else:

@@ -219,18 +219,110 @@ const Screen viewstate_struct = {
 
 int fast_state(int new_map) {
 	if (new_map == CurrentMap) {
+		dk_free((int*)*(int*)(0x8076A050));
+		dk_free((int*)*(int*)(0x8076A054));
+		resetDisplayLists(2);
+		*(int*)(0x8076A0A0) = (int)getMapData(0x13,0,1,1);
+		SetupFilePointer = 0;
 		dk_free(exitPointer);
 		exitPointer = 0;
 		loadExits(new_map);
-		dk_free(ObjectModel2Pointer);
-		ObjectModel2Pointer = 0;
-		int allowance = updateModel2Allowances(new_map, 1);
+		int allowance = updateModel2Allowances(new_map, 0);
+		wipeMemory(ObjectModel2Pointer,allowance*0x90);
 		int* setup = getMapData(9,new_map,1,1);
 		handleSetup(setup,0,0);
 		ObjectModel2Something();
+
+		wipeActors();
+		spawnPersistentActors();
+		spawnCameraAndKong(0);
+		int* char_setup = getMapData(16,new_map,1,1);
+		loadEnemies(char_setup);
+		extraEnemyParser(char_setup);
+
+		updateCharChangeStruct();
+		resetModelTwoCollisions();
 		return 1;
 	}
 	return 0;
+}
+
+void loadVars(void) {
+	int _focused_state = FocusedSavestate;
+	tagBarrel* tag_found_addr = 0;
+	int search_actor_index = 0;
+	float nearest_tag_distance = 999999;
+	float current_tag_distance = 0;
+	int* _perm_flag_block = getFlagBlockAddress(0);
+	if (_perm_flag_block) {
+		dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
+	}
+	for (int i = 0; i < 7; i++) {
+		CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];
+	}
+	dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
+	dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
+	StoredDamage = states[_focused_state]->stored_damage;
+	dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
+	HelmTimerShown = states[_focused_state]->HelmTimerOn;
+	if (HelmTimerShown) {
+		getTimestampDiffInTicks(states[_focused_state]->HelmTimerDifferenceMajor,states[_focused_state]->HelmTimerDifferenceMinor);
+		HelmStartTimestampMajor = TempTimestampStorageMajor;
+		HelmStartTimestampMinor = TempTimestampStorageMinor;
+		HelmStartTime = states[_focused_state]->HelmStart;
+	}
+	ISGActive = states[_focused_state]->ISGOn;
+	if (ISGActive) {
+		getTimestampDiffInTicks(states[_focused_state]->ISGTimerDifferenceMajor,states[_focused_state]->ISGTimerDifferenceMinor);
+		ISGTimestampMajor = TempTimestampStorageMajor;
+		ISGTimestampMinor = TempTimestampStorageMinor;
+		ISGPreviousFadeout = states[_focused_state]->ISGPrevFade;
+	}
+	RNG = states[_focused_state]->rng;
+	if (Player) {
+		if (LastLoadStateAction == 2) {
+			LZFadeoutProgress = 1.0f;
+			Player->facing_angle = states[_focused_state]->facing_angle;
+			Player->skew_angle = states[_focused_state]->skew_angle;
+			Player->floor = states[_focused_state]->floor;
+			if (SwapObject) {
+				for (int i = 0; i < 4; i++) {
+					SwapObject->cameraPositions[i].xPos = states[_focused_state]->cameraPos.xPos;
+					SwapObject->cameraPositions[i].yPos = states[_focused_state]->cameraPos.yPos;
+					SwapObject->cameraPositions[i].zPos = states[_focused_state]->cameraPos.zPos;
+				}
+			}
+			if (Camera) {
+				Camera->viewportX = states[_focused_state]->cameraPos.xPos;
+				Camera->viewportY = states[_focused_state]->cameraPos.yPos;
+				Camera->viewportZ = states[_focused_state]->cameraPos.zPos;
+				Camera->viewportRotation = states[_focused_state]->camera_rotation;
+			}
+			if (Player->camera_pointer) {
+				Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
+			}
+			for (int i = 0; i < LoadedActorCount; i++) {
+				search_actor_index = LoadedActorArray[i].actor->actorType;
+				if ((search_actor_index == 98) || (search_actor_index == 136) || (search_actor_index == 137)) { // Tag Barrel Actors
+					float a_x = LoadedActorArray[i].actor->xPos;
+					float a_z = LoadedActorArray[i].actor->zPos;
+					float p_x = Player->xPos;
+					float p_z = Player->zPos;
+					current_tag_distance = (float)((a_x - p_x) * (a_x - p_x)) + ((a_z - p_z) * (a_z - p_z));
+					if (current_tag_distance < nearest_tag_distance) {
+						tag_found_addr = (tagBarrel*)LoadedActorArray[i].actor;
+						nearest_tag_distance = current_tag_distance;
+					}
+				}
+			}
+			if (tag_found_addr) {
+				tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
+			}
+			clearDKPortal();
+		}
+	}
+	stateLoadTimer = 60;
+	LoadVarsOnMapLoad = 0;
 }
 
 void savestateHandler(void) {
@@ -360,6 +452,11 @@ void savestateHandler(void) {
 							TimerData.TimerPostReduction = 0;
 							HasNeutralStickInput = 0;
 							resetMap();
+							int* _perm_flag_block = getFlagBlockAddress(0);
+							if (_perm_flag_block) {
+								dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
+							}
+							int loading_fast_state = 0;
 							if (states[_focused_state]->par_bool) {
 								handleMapWarping(states[_focused_state]->Map,states[_focused_state]->Exit,0,SAVESTATE);
 								parentData[0].map = states[_focused_state]->par_map;
@@ -370,17 +467,21 @@ void savestateHandler(void) {
 								parentData[0].transition_properties_bitfield = states[_focused_state]->par_tpb;
 								parentData[0].in_submap |= 3;
 							} else {
-								if (!fast_state(states[_focused_state]->Map)) {
+								loading_fast_state = fast_state(states[_focused_state]->Map);
+								if (!loading_fast_state) {
 									initiateTransition(states[_focused_state]->Map,states[_focused_state]->Exit);
 								}
 							}
 							for (int i = 0; i < 7; i++) {
 								CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];
 							}
-							if (MenuSavestateAction == 2) {
-								setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
-							};
-							int* _perm_flag_block = getFlagBlockAddress(0);
+							if (!loading_fast_state) {
+								if (MenuSavestateAction == 2) {
+									setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
+								};
+								CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
+							}
+							_perm_flag_block = getFlagBlockAddress(0);
 							if (_perm_flag_block) {
 								dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
 							}
@@ -391,9 +492,11 @@ void savestateHandler(void) {
 							Character = states[_focused_state]->Character;
 							HelmTimerShown = 0; // Prevent Game Over fadeout
 							ISGActive = 0; // Prevent ISG Fade
-							CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
 							LZFadeoutProgress = 28.0f;
 							LoadVarsOnMapLoad = 1;
+							if (loading_fast_state) {
+								loadVars();
+							}
 						} else {
 							playSFX(Wrong);
 						}
@@ -425,81 +528,7 @@ void shorthandSavestate(void) {
 };
 
 void savestateLoadMapLoadVars(void) {
-	int _focused_state = FocusedSavestate;
-	tagBarrel* tag_found_addr = 0;
-	int search_actor_index = 0;
-	float nearest_tag_distance = 999999;
-	float current_tag_distance = 0;
 	if ((TransitionSpeed < 0) && (ObjectModel2Timer < 2) && (LoadVarsOnMapLoad == 1)) {
-		int* _perm_flag_block = getFlagBlockAddress(0);
-		if (_perm_flag_block) {
-			dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);
-		}
-		for (int i = 0; i < 7; i++) {
-			CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];
-		}
-		dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
-		dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
-		StoredDamage = states[_focused_state]->stored_damage;
-		dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
-		HelmTimerShown = states[_focused_state]->HelmTimerOn;
-		if (HelmTimerShown) {
-			getTimestampDiffInTicks(states[_focused_state]->HelmTimerDifferenceMajor,states[_focused_state]->HelmTimerDifferenceMinor);
-			HelmStartTimestampMajor = TempTimestampStorageMajor;
-			HelmStartTimestampMinor = TempTimestampStorageMinor;
-			HelmStartTime = states[_focused_state]->HelmStart;
-		}
-		ISGActive = states[_focused_state]->ISGOn;
-		if (ISGActive) {
-			getTimestampDiffInTicks(states[_focused_state]->ISGTimerDifferenceMajor,states[_focused_state]->ISGTimerDifferenceMinor);
-			ISGTimestampMajor = TempTimestampStorageMajor;
-			ISGTimestampMinor = TempTimestampStorageMinor;
-			ISGPreviousFadeout = states[_focused_state]->ISGPrevFade;
-		}
-		RNG = states[_focused_state]->rng;
-		if (Player) {
-			if (LastLoadStateAction == 2) {
-				LZFadeoutProgress = 1.0f;
-				Player->facing_angle = states[_focused_state]->facing_angle;
-				Player->skew_angle = states[_focused_state]->skew_angle;
-				Player->floor = states[_focused_state]->floor;
-				if (SwapObject) {
-					for (int i = 0; i < 4; i++) {
-						SwapObject->cameraPositions[i].xPos = states[_focused_state]->cameraPos.xPos;
-						SwapObject->cameraPositions[i].yPos = states[_focused_state]->cameraPos.yPos;
-						SwapObject->cameraPositions[i].zPos = states[_focused_state]->cameraPos.zPos;
-					}
-				}
-				if (Camera) {
-					Camera->viewportX = states[_focused_state]->cameraPos.xPos;
-					Camera->viewportY = states[_focused_state]->cameraPos.yPos;
-					Camera->viewportZ = states[_focused_state]->cameraPos.zPos;
-					Camera->viewportRotation = states[_focused_state]->camera_rotation;
-				}
-				if (Player->camera_pointer) {
-					Player->camera_pointer->facing_angle = states[_focused_state]->camera_angle;
-				}
-				for (int i = 0; i < LoadedActorCount; i++) {
-					search_actor_index = LoadedActorArray[i].actor->actorType;
-					if ((search_actor_index == 98) || (search_actor_index == 136) || (search_actor_index == 137)) { // Tag Barrel Actors
-						float a_x = LoadedActorArray[i].actor->xPos;
-						float a_z = LoadedActorArray[i].actor->zPos;
-						float p_x = Player->xPos;
-						float p_z = Player->zPos;
-						current_tag_distance = (float)((a_x - p_x) * (a_x - p_x)) + ((a_z - p_z) * (a_z - p_z));
-						if (current_tag_distance < nearest_tag_distance) {
-							tag_found_addr = (tagBarrel*)LoadedActorArray[i].actor;
-							nearest_tag_distance = current_tag_distance;
-						}
-					}
-				}
-				if (tag_found_addr) {
-					tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
-				}
-				clearDKPortal();
-			}
-		}
-		stateLoadTimer = 60;
-		LoadVarsOnMapLoad = 0;
+		loadVars();
 	}
 }

@@ -53,6 +53,14 @@ extern void loadExits(int map);
 extern int updateModel2Allowances(int map, int update_pointer);
 extern void handleSetup(void* setup, int unk1, int unk2);
 extern void ObjectModel2Something(void);
+extern void loadEnemies(void* enemy_setup);
+extern void extraEnemyParser(void* enemy_setup);
+extern void wipeActors(void);
+extern void spawnPersistentActors(void);
+extern void spawnCameraAndKong(int exit);
+extern void resetModelTwoCollisions(void);
+extern void updateCharChangeStruct(void);
+extern void resetDisplayLists(int player_count);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
