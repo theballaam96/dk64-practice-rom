@@ -61,6 +61,9 @@ extern void spawnCameraAndKong(int exit);
 extern void resetModelTwoCollisions(void);
 extern void updateCharChangeStruct(void);
 extern void resetDisplayLists(int player_count);
+extern void clearActorDL(void* actor, int unk0);
+extern void deleteActorContainer(void* actor);
+extern void deleteAllObjectModel2(void);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);

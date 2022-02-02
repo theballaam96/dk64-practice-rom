@@ -72,6 +72,9 @@
 .definelabel resetModelTwoCollisions, 0x806F4778
 .definelabel updateCharChangeStruct, 0x8061EA78
 .definelabel resetDisplayLists, 0x805FE544
+.definelabel clearActorDL, 0x80613794
+.definelabel deleteActorContainer, 0x806782C0
+.definelabel deleteAllObjectModel2, 0x80635588
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894

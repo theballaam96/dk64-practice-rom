@@ -217,29 +217,35 @@ const Screen viewstate_struct = {
 	.ParentPosition = 5
 };
 
+void wipeNonLowLevelActors(void) {
+	for (int i = 0; i < ActorCount; i++) {
+		actorData* actor = (actorData*)ActorArray[i];
+		if (actor) {
+			int act_type = actor->actorType;
+			if ((act_type > 15) && (act_type != 188)) {
+				deleteActorContainer(ActorArray[i]);
+			}
+		}
+	}
+}
+
 int fast_state(int new_map) {
 	if (new_map == CurrentMap) {
-		dk_free((int*)*(int*)(0x8076A050));
-		dk_free((int*)*(int*)(0x8076A054));
-		resetDisplayLists(2);
-		*(int*)(0x8076A0A0) = (int)getMapData(0x13,0,1,1);
 		SetupFilePointer = 0;
 		dk_free(exitPointer);
 		exitPointer = 0;
 		loadExits(new_map);
-		int allowance = updateModel2Allowances(new_map, 0);
-		wipeMemory(ObjectModel2Pointer,allowance*0x90);
+		wipeNonLowLevelActors();
+		updateModel2Allowances(new_map, 0);
+		deleteAllObjectModel2();
+		//wipeMemory(ObjectModel2Pointer,allowance*0x90);
 		int* setup = getMapData(9,new_map,1,1);
 		handleSetup(setup,0,0);
 		ObjectModel2Something();
-
-		wipeActors();
-		spawnPersistentActors();
-		spawnCameraAndKong(0);
+		wipeNonLowLevelActors();
 		int* char_setup = getMapData(16,new_map,1,1);
 		loadEnemies(char_setup);
 		extraEnemyParser(char_setup);
-
 		updateCharChangeStruct();
 		resetModelTwoCollisions();
 		return 1;
@@ -480,6 +486,12 @@ void savestateHandler(void) {
 									setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
 								};
 								CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
+							} else {
+								if (Player) {
+									Player->xPos = states[_focused_state]->xPos;
+									Player->yPos = states[_focused_state]->yPos;
+									Player->zPos = states[_focused_state]->zPos;
+								}
 							}
 							_perm_flag_block = getFlagBlockAddress(0);
 							if (_perm_flag_block) {
