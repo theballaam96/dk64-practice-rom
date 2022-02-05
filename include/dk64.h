@@ -64,6 +64,9 @@ extern void resetDisplayLists(int player_count);
 extern void clearActorDL(void* actor, int unk0);
 extern void deleteActorContainer(void* actor);
 extern void deleteAllObjectModel2(void);
+extern void deleteActorSpawner(void* actor_spawner, int delete_actor);
+extern void deleteAllActorSpawners(void);
+extern void complexFree(void* addr);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
@@ -215,6 +218,8 @@ extern int displayListCount;
 extern int IGT;
 extern short CBTurnedInArray[8];
 extern int* exitPointer;
+extern int* BalloonPatchPointer;
+extern int* ChunkArrayPointer;
 
 extern short screenCenterX;
 extern short screenCenterY;

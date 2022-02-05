@@ -191,3 +191,9 @@ void clearDKPortal(void) {
 		}
 	}
 }
+
+void complexFreeCheck(void* ptr) {
+	if (ptr) {
+		complexFree(ptr);
+	}
+}

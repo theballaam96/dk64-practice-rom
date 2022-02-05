@@ -7,6 +7,7 @@ extern void initWarpMenu(void);
 extern void playSFX(short sfxIndex);
 extern float arctan(float val);
 extern float arctan2(float x, float y);
+extern void complexFreeCheck(void* ptr);
 extern void clearDKPortal(void);
 extern void setPermFlag(short flagIndex);
 extern void openStateMenu(void);
@@ -39,6 +40,8 @@ extern int* drawPixelText(int* dl, int x, int y, char* str, int red, int green, 
 extern int* drawPixelTextContainer(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha, int offset);
 extern int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, int blue, int alpha);
 extern int* displaySimpleInput(int* dl);
+extern int getFakeKeyStatus(void);
+extern int getFakeProdRoomStatus(void);
 
 extern void colorWatch(char _red, char _green, char _blue, int slot);
 extern void openWatchSnagMenu(void);
@@ -288,6 +291,7 @@ extern const Screen bonusisles_mapwarp_struct;
 extern const Screen collisionmenu_struct;
 extern const Screen floormenu_struct;
 extern const Screen bports_struct;
+extern const Screen watch_fake_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

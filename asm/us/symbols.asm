@@ -75,6 +75,9 @@
 .definelabel clearActorDL, 0x80613794
 .definelabel deleteActorContainer, 0x806782C0
 .definelabel deleteAllObjectModel2, 0x80635588
+.definelabel deleteActorSpawner, 0x80689710
+.definelabel deleteAllActorSpawners, 0x806898A8
+.definelabel complexFree, 0x8061130C
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894
@@ -205,6 +208,8 @@
 .definelabel IGT, 0x80750AB0
 .definelabel CBTurnedInArray, 0x807FC930
 .definelabel exitPointer, 0x807FC900
+.definelabel BalloonPatchPointer, 0x807FC5C4
+.definelabel ChunkArrayPointer, 0x807F6C18
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494

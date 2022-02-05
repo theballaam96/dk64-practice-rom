@@ -230,30 +230,46 @@ void wipeNonLowLevelActors(void) {
 }
 
 int fast_state(int new_map) {
-	if (new_map == CurrentMap) {
-		SetupFilePointer = 0;
-		dk_free(exitPointer);
-		exitPointer = 0;
-		loadExits(new_map);
-		wipeNonLowLevelActors();
-		updateModel2Allowances(new_map, 0);
-		deleteAllObjectModel2();
-		//wipeMemory(ObjectModel2Pointer,allowance*0x90);
-		int* setup = getMapData(9,new_map,1,1);
-		handleSetup(setup,0,0);
-		ObjectModel2Something();
-		wipeNonLowLevelActors();
-		int* char_setup = getMapData(16,new_map,1,1);
-		loadEnemies(char_setup);
-		extraEnemyParser(char_setup);
-		updateCharChangeStruct();
-		resetModelTwoCollisions();
-		return 1;
-	}
+	// if (new_map == CurrentMap) {
+	// 	SetupFilePointer = 0;
+	// 	complexFree(exitPointer);
+	// 	exitPointer = 0;
+	// 	loadExits(new_map);
+	// 	complexFreeCheck(BalloonPatchPointer);
+	// 	deleteAllActorSpawners();
+	// 	wipeNonLowLevelActors();
+	// 	deleteAllObjectModel2();
+	// 	//updateModel2Allowances(new_map, 0);
+
+	// 	// One of these is generating a build-up of lag
+	// 	int* setup = getMapData(9,new_map,1,1);
+	// 	handleSetup(setup,0,0);
+	// 	ObjectModel2Something();
+
+	// 	SpawnerArray* spawner_array;
+	// 	SpawnerInfo* focused_spawner;
+	// 	spawner_array = SpawnerMasterData.array;
+	// 	for (int i = 0; i < SpawnerMasterData.count; i++) {
+	// 		focused_spawner = getObjectArrayAddr(spawner_array,0x48,i);
+	// 		focused_spawner->spawn_state = focused_spawner->init_spawn_state;
+	// 		focused_spawner->respawn_timer = focused_spawner->respawnTimerInit * 30;
+	// 		focused_spawner->tied_actor = 0;
+	// 	}
+	// 	// int* char_setup = getMapData(16,new_map,1,1);
+	// 	// loadEnemies(char_setup);
+	// 	// extraEnemyParser(char_setup);
+	// 	updateCharChangeStruct();
+	// 	resetModelTwoCollisions();
+		
+	// 	complexFreeCheck(BalloonPatchPointer);
+	// 	SetupFilePointer = 0;
+	// 	wipeNonLowLevelActors();
+	// 	return 1;
+	// }
 	return 0;
 }
 
-void loadVars(void) {
+void loadVars(int instant_load) {
 	int _focused_state = FocusedSavestate;
 	tagBarrel* tag_found_addr = 0;
 	int search_actor_index = 0;
@@ -325,6 +341,9 @@ void loadVars(void) {
 				tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 			}
 			clearDKPortal();
+		}
+		if (instant_load) {
+			LZFadeoutProgress = 0.0f;
 		}
 	}
 	stateLoadTimer = 60;
@@ -507,7 +526,7 @@ void savestateHandler(void) {
 							LZFadeoutProgress = 28.0f;
 							LoadVarsOnMapLoad = 1;
 							if (loading_fast_state) {
-								loadVars();
+								loadVars(1);
 							}
 						} else {
 							playSFX(Wrong);
@@ -541,6 +560,6 @@ void shorthandSavestate(void) {
 
 void savestateLoadMapLoadVars(void) {
 	if ((TransitionSpeed < 0) && (ObjectModel2Timer < 2) && (LoadVarsOnMapLoad == 1)) {
-		loadVars();
+		loadVars(0);
 	}
 }

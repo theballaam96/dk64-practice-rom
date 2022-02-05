@@ -367,7 +367,9 @@ typedef struct sandstormData {
 typedef struct snagData {
 	/* 0x000 */ char unk_00[0x48];
 	/* 0x048 */ char reset;
-	/* 0x049 */ char unk_49[0x54-0x49];
+	/* 0x049 */ char unk_49[0x4B-0x49];
+	/* 0x04B */ char reset_next;
+	/* 0x04C */ char unk_4C[0x54-0x4C];
 	/* 0x054 */ char check;
 	/* 0x055 */ char unk_55[0x60-0x55];
 	/* 0x060 */ char state;
@@ -877,3 +879,8 @@ typedef struct floor_tri_data {
 	/* 0x00C */ int rom_start;
 	/* 0x010 */ int size;
 } floor_tri_data;
+
+typedef struct chunk_struct {
+	/* 0x000 */ char loaded;
+	/* 0x001 */ char unk_001[0x1C8-0x1];
+} chunk_struct;

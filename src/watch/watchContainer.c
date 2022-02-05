@@ -18,6 +18,8 @@ static const char viewed_phaseassistant[] = "} PHASEWALK ASSISTANT";
 static const char viewed_avgspd[] = "} AVERAGE SPEED";
 static const char viewed_igt[] = "} IN-GAME TIME";
 static const char viewed_anglepoint[] = "} ANGLE TO POINT";
+static const char viewed_fakekey[] = "} KEY 8";
+static const char viewed_prodroom[] = "} PRODUCTION ROOM";
 static const char viewed_fairy[] = "} FAIRY VIEWER";
 
 static const char change_lag[] = "{ LAG";
@@ -38,6 +40,8 @@ static const char change_phaseassistant[] = "{ PHASEWALK ASSISTANT";
 static const char change_avgspd[] = "{ AVERAGE SPEED";
 static const char change_igt[] = "{ IN-GAME TIME";
 static const char change_anglepoint[] = "{ ANGLE TO POINT";
+static const char change_fakekey[] = "{ KEY 8";
+static const char change_prodroom[] = "{ PRODUCTION ROOM";
 static const char change_fairy[] = "{ FAIRY VIEWER";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
@@ -55,10 +59,26 @@ static const char phasereason_11[] = "NO DOWN FLICK"; // Pretty self-explanatory
 static const char phasereason_12[] = "POTENTIALLY SUBOPTIMAL ANGLE"; // Trunacted Angle < 150
 static const char phasereason_13[] = "PHASE LOST DUE TO UNKNOWN CAUSES"; // idk wtf happened
 
+static const char fakekey_0[] = "WRONG MAP";
+static const char fakekey_1[] = "FAKE";
+static const char fakekey_2[] = "REAL";
+static const char fakekey_3[] = "KEY OBTAINED";
+static const char fakekey_4[] = "UNKNOWN";
+static const char fakekey_5[] = "KEY NOT IN MAP";
+
+static const char fakeprodroom_0[] = "WRONG MAP";
+static const char fakeprodroom_1[] = "PROD ROOM OFF";
+static const char fakeprodroom_2[] = "UNKNOWN";
+static const char fakeprodroom_3[] = "NOT LOADED";
+static const char fakeprodroom_4[] = "PREPARING BEING FAKE";
+static const char fakeprodroom_5[] = "FAKE";
+static const char fakeprodroom_6[] = "REAL";
+
 static const char watches_player_indexes[] = {11,3,17,7,19,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10,18};
 static const char watches_sysenv_indexes[] = {1,2,8};
 static const char watches_assist_indexes[] = {16,-1};
+static const char watches_fake_indexes[] = {20,21};
 
 static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
@@ -92,6 +112,25 @@ static const char* phasereason_list[] = {
 	phasereason_11,
 	phasereason_12,
 	phasereason_13,
+};
+
+static const char* fakekey_list[] = {
+	fakekey_0,
+	fakekey_1,
+	fakekey_2,
+	fakekey_3,
+	fakekey_4,
+	fakekey_5,
+};
+
+static const char* fakeprodroom_list[] = {
+	fakeprodroom_0,
+	fakeprodroom_1,
+	fakeprodroom_2,
+	fakeprodroom_3,
+	fakeprodroom_4,
+	fakeprodroom_5,
+	fakeprodroom_6,
 };
 
 static float past_speeds[64];
@@ -151,6 +190,8 @@ static const char* watch_listed_array[] = {
 	change_avgspd,
 	change_igt,
 	change_anglepoint,
+	change_fakekey,
+	change_prodroom,
 	change_fairy,
 };
 
@@ -174,6 +215,8 @@ static const char* watch_viewed_array[] = {
 	viewed_avgspd,
 	viewed_igt,
 	viewed_anglepoint,
+	viewed_fakekey,
+	viewed_prodroom,
 	viewed_fairy,
 };
 
@@ -197,6 +240,8 @@ static const char* watch_change_array[] = {
 	change_avgspd,
 	change_igt,
 	change_anglepoint,
+	change_fakekey,
+	change_prodroom,
 	change_fairy,
 };
 
@@ -231,6 +276,11 @@ static const char* watch_assist_array[] = {
 	change_fairy,
 };
 
+static const char* watch_fake_array[] = {
+	change_fakekey,
+	change_prodroom,
+};
+
 static char float_str[22] = {};
 //static float test_floats[2] = {};
 
@@ -239,7 +289,7 @@ void openWatchMenu(void) {
 };
 
 #define INPUT_VIEWER_INDEX 7
-#define FAIRY_VIEWER_INDEX 19
+#define FAIRY_VIEWER_INDEX 21
 void updateWatchText(void) {
 	int _index;
 	int watch_index = 0;
@@ -287,6 +337,12 @@ void updateWatchText(void) {
 			watch_assist_array[i] = watch_listed_array[watch_index];
 		}
 	}
+	for (int i = 0; i < sizeof(watches_fake_indexes); i++) {
+		watch_index = (int)watches_fake_indexes[i] - 1;
+		if (watch_index > -1) {
+			watch_fake_array[i] = watch_listed_array[watch_index];
+		}
+	}
 }
 
 void openWatchPlayerMenu(void) {
@@ -307,6 +363,11 @@ void openWatchSysMenu(void) {
 void openWatchAssistMenu(void) {
 	updateWatchText();
 	changeMenu(83);
+}
+
+void openWatchFakeMenu(void) {
+	updateWatchText();
+	changeMenu(103);
 }
 
 void clearAllWatches(void) {
@@ -340,6 +401,9 @@ void setWatch(void) {
 			break;
 		case 83:
 			intended_watch_index = watches_assist_indexes[(int)ActiveMenu.positionIndex];
+			break;
+		case 103:
+			intended_watch_index = watches_fake_indexes[(int)ActiveMenu.positionIndex];
 		break;
 	}
 	char index_already_spawned = 0;
@@ -377,6 +441,9 @@ void setWatch(void) {
 			break;
 		case 83:
 			openWatchAssistMenu();
+			break;
+		case 103:
+			openWatchFakeMenu();
 		break;
 	}
 };
@@ -431,6 +498,7 @@ static const char* watch_array[] = {
 	"SYSTEM ENVIRONMENT",
 	"SPAWN SNAG COLLECTABLES",
 	"ASSISTANTS",
+	"FAKE ITEMS",
 	"SET REFERENCE POINT",
 	"CLEAR ALL WATCHES",
 };
@@ -441,6 +509,7 @@ static const int watch_functions[] = {
 	(int)&openWatchSysMenu,
 	(int)&openWatchSnagMenu,
 	(int)&openWatchAssistMenu,
+	(int)&openWatchFakeMenu,
 	(int)&setReferencePosition,
 	(int)&clearAllWatches,
 };
@@ -448,7 +517,7 @@ static const int watch_functions[] = {
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 7,
+	.ArrayItems = 8,
 	.ParentScreen = 0,
 	.ParentPosition = 3
 };
@@ -513,6 +582,19 @@ const Screen watch_assist_struct = {
 	.ArrayItems = 2,
 	.ParentScreen = 12,
 	.ParentPosition = 4
+};
+
+static const int watch_fake_functions[] = {
+	(int)&setWatch,
+	(int)&setWatch,
+};
+
+const Screen watch_fake_struct = {
+	.TextArray = (int*)watch_fake_array,
+	.FunctionArray = watch_fake_functions,
+	.ArrayItems = 2,
+	.ParentScreen = 12,
+	.ParentPosition = 5
 };
 
 void clampWatchFloats(void) {
@@ -1130,6 +1212,50 @@ void handleWatch(void) {
 								stringConcat((char *)WatchTextSpace[j],"ANGLE TO POINT: UNDEFINED","");
 							}
 							watch_cache_array[j][0] = 19;
+						}
+						break;
+					case 20:
+						// Fake Key
+						{
+							/*
+								0 = Wrong Map
+								1 = Not Loaded
+								2 = Loaded
+								3 = Key Obtained
+								4 = Unknown
+							*/
+							int fakekey_status = getFakeKeyStatus(); 
+							if ((watch_cache_array[j][1] != fakekey_status) || (watch_cache_array[j][0] != 20)) {
+								if (fakekey_status > 5) {
+									fakekey_status = 4; // Unknown
+								}
+								stringConcat((char *)WatchTextSpace[j],"KEY 8: ",(char*)fakekey_list[fakekey_status]);
+							}
+							watch_cache_array[j][0] = 20;
+							watch_cache_array[j][1] = fakekey_status;
+						}
+						break;
+					case 21:
+						// Fake Production Room
+						{
+							/*
+								0 = Wrong Map
+								1 = Production Room Off
+								2 = Unknown
+								3 = Not Loaded
+								4 = Preparing to be fake
+								5 = Fake
+								6 = Real
+							*/
+							int fakeprod_status = getFakeProdRoomStatus(); 
+							if ((watch_cache_array[j][1] != fakeprod_status) || (watch_cache_array[j][0] != 21)) {
+								if (fakeprod_status > 6) {
+									fakeprod_status = 2; // Unknown
+								}
+								stringConcat((char *)WatchTextSpace[j],"PROD ROOM: ",(char*)fakeprodroom_list[fakeprod_status]);
+							}
+							watch_cache_array[j][0] = 21;
+							watch_cache_array[j][1] = fakeprod_status;
 						}
 					break;
 				}

@@ -377,30 +377,5 @@ START_HOOK:
 		J 		0x805FC54C
 		LW 		a0, 0xA048 (a0)
 
-	fastStateLoad:
-		LUI 	a3, hi(isFastStating)
-		LBU 	a3, lo(isFastStating) (a3)
-		BEQZ 	a3, fastStateLoad_Vanilla
-		NOP
-		ADDI 	a3, s0, -0xC
-		JAL 	dk_malloc
-		LW 		a0, 0x0 (a3) // Size
-		LW 		a3, 0x14 (sp)
-		ADDI 	a2, a3, -0xC
-		LW 		a2, 0x0 (a2) // Size
-		OR 		a1, a3, r0
-		JAL 	dk_memcpy
-		OR 		a0, v0, r0
-		B 		fastStateLoad_Finish
-		ADDIU 	a3, r0, 1
-
-		fastStateLoad_Vanilla:
-			JAL 	0x8066B0F8
-			ADDIU 	a3, r0, 1
-
-		fastStateLoad_Finish:
-			J 		0x80688AB0
-			NOP
-
 .align 0x10
 END_HOOK:
