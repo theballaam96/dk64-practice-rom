@@ -2,10 +2,12 @@
 
 void cFuncLoop(void) {
 	ClosingMenu = 0;
+	IsPauseMenuOpen = 0;
 	if ((PausePointer) && isAddressActor(PausePointer)) {
-		IsPauseMenuOpen = 1;
-	} else {
-		IsPauseMenuOpen = 0;
+		int pause_type = PausePointer->actorType;
+		if ((pause_type == 95) || (pause_type == 343)) {
+			IsPauseMenuOpen = 1;
+		}
 	}
 	if (CurrentMap == 0x51) {
 		CutsceneActive = 0;

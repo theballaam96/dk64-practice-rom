@@ -20,7 +20,7 @@ typedef struct actorData {
 	/* 0x088 */ char unk_80[0xB8-0x88];
 	/* 0x0B8 */ float hSpeed;
 	/* 0x0BC */ char unk_BC[0x154-0xBC];
-	/* 0x154 */ char control_state;
+	/* 0x154 */ unsigned char control_state;
 	/* 0x155 */ char control_state_progress;
 	/* 0x156 */ char unk_156[0x180-0x156];
 	/* 0x180 */ void* tied_character_spawner;
@@ -128,7 +128,7 @@ typedef struct playerData {
 	/* 0x144 */ char unk_140[0x147 - 0x144];
 	/* 0x147 */ char hand_state;
 	/* 0x148 */ char unk_148[0x154 - 0x148];
-	/* 0x154 */ char control_state;
+	/* 0x154 */ unsigned char control_state;
 	/* 0x155 */ char control_state_progress;
 	/* 0x156 */ char unk_156[0x18A-0x156];
 	/* 0x18A */ short moving_angle;
