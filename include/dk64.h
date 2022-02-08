@@ -77,6 +77,13 @@ extern void setArcadeSong(int songIndex);
 
 extern void spawnJetpacText(void* dl, char* str, short x, short y, int background);
 extern void setJetpacTextColor(int red, int green, int blue, int alpha);
+extern void startJetpacGame(void);
+extern void placeJetpacFloor(void);
+extern void resetJetpacVars(void);
+extern void increaseLevel(void);
+extern void spawnJetpacItem(competitor_struct* competitor);
+extern void resetJetpacMap(competitor_struct* competitor);
+extern void changeJetpacMode(int mode_index);
 
 extern void hideHUD(void);
 extern void tagKong(int kong_actor_index);
@@ -243,6 +250,12 @@ extern int arcadeHammerTimer;
 extern arcadeMoveFloorBase arcadeMovableFloor;
 extern unsigned char arcadeRivetBitfield;
 
+extern int jetpacMode;
+extern competitor_struct competitors[2];
+extern int jetpacLevelStartTimer;
+extern jetpac_item1_struct jetpacObjectBase[20];
+extern int jetpacPlayerIndex;
+
 //hack data
 extern int TestVariable;
 extern savedSettings StoredSettings;
@@ -338,7 +351,9 @@ extern short style2Mtx[0x10];
 extern char watchActive;
 extern char stateLoadTimer;
 extern actorData* PausePointer;
-extern char isFastStating;
+extern char jetpacPaused;
+extern char jetpacTimerState;
+extern char jetmanColorIndex;
 
 // Code
 extern int debugColumnLoop;

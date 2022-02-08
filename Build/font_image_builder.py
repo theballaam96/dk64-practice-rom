@@ -37,6 +37,22 @@ fonts = [
 				"w": 8,
 			}
 		]
+	},
+	{
+		"font_key": "jetpac_font",
+		"overall_width": 1024,
+		"images": [
+			{
+				"img": "jetpac/open_squiggle_bracket.png",
+				"x": 720,
+				"w": 8,
+			},
+			{
+				"img": "jetpac/closed_squiggle_bracket.png",
+				"x": 736,
+				"w": 8,
+			}
+		]
 	}
 ];
 

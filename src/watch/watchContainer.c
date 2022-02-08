@@ -1248,14 +1248,16 @@ void handleWatch(void) {
 								6 = Real
 							*/
 							int fakeprod_status = getFakeProdRoomStatus(); 
-							if ((watch_cache_array[j][1] != fakeprod_status) || (watch_cache_array[j][0] != 21)) {
-								if (fakeprod_status > 6) {
-									fakeprod_status = 2; // Unknown
+							if (fakeprod_status != 2) {
+								if ((watch_cache_array[j][1] != fakeprod_status) || (watch_cache_array[j][0] != 21)) {
+									if (fakeprod_status > 6) {
+										fakeprod_status = 2; // Unknown
+									}
+									stringConcat((char *)WatchTextSpace[j],"PROD ROOM: ",(char*)fakeprodroom_list[fakeprod_status]);
 								}
-								stringConcat((char *)WatchTextSpace[j],"PROD ROOM: ",(char*)fakeprodroom_list[fakeprod_status]);
+								watch_cache_array[j][0] = 21;
+								watch_cache_array[j][1] = fakeprod_status;
 							}
-							watch_cache_array[j][0] = 21;
-							watch_cache_array[j][1] = fakeprod_status;
 						}
 					break;
 				}

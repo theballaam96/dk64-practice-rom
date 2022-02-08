@@ -65,9 +65,8 @@ int getFakeProdRoomStatus(void) {
 								return 5;
 							}
 							return 6;
-						} else {
-							return 3;
 						}
+						return 3;
 					}
 				}
 			}

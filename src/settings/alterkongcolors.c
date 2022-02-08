@@ -20,12 +20,25 @@ static char colors_ch_1[] = "CHUNKY: RED";
 static char colors_ch_2[] = "CHUNKY: PURPLE AND BLUE";
 static char colors_ch_3[] = "CHUNKY: GREEN AND PURPLE";
 
+static char jetmancolor_displaytext[20] = "";
+static char* jetmancolortext[] = {
+	"WHITE",
+	"RED",
+	"GREEN",
+	"BLUE",
+	"YELLOW",
+	"PURPLE",
+	"CYAN",
+};
+
 static char* kongcolors_array[] = {
 	colors_dk_1,
 	colors_di_1,
 	colors_la_1,
 	colors_ti_1,
 	colors_ch_1,
+	jetmancolor_displaytext,
+
 };
 
 static char* kongcolors_dk[] = {
@@ -64,6 +77,7 @@ void openKongColorsMenu(void) {
 	kongcolors_array[2] = kongcolors_la[(int)kongcolors[2] - 1];
 	kongcolors_array[3] = kongcolors_ti[(int)kongcolors[3] - 1];
 	kongcolors_array[4] = kongcolors_ch[(int)kongcolors[4] - 1];
+	dk_strFormat((char*)jetmancolor_displaytext,"JETMAN: %s", jetmancolortext[(int)jetmanColorIndex]);
 	changeMenu(58);
 };
 
@@ -77,18 +91,25 @@ void changeKongColor(void) {
 	openKongColorsMenu();
 };
 
+void changeJetmanColor(void) {
+	jetmanColorIndex = (jetmanColorIndex + 1) % 7;
+	saveSettings();
+	openKongColorsMenu();
+}
+
 static const int kongcolors_functions[] = {
 	(int)&changeKongColor,
 	(int)&changeKongColor,
 	(int)&changeKongColor,
 	(int)&changeKongColor,
 	(int)&changeKongColor,
+	(int)&changeJetmanColor,
 };
 
 const Screen kongcolors_struct = {
 	.TextArray = (int*)kongcolors_array,
 	.FunctionArray = kongcolors_functions,
-	.ArrayItems = 5,
+	.ArrayItems = 6,
 	.ParentScreen = 57,
 	.ParentPosition = 4
 };

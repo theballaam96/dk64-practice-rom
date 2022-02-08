@@ -219,6 +219,9 @@ DisplayListHook:
 mapDLHook:
 	J 	mapDLCode
 	NOP
+JetpacHook:
+	J 	jetpacLoopCode
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -260,6 +263,11 @@ loadExtraHooks:
 	LW t3, lo(ArcadeHook) (t3)
 	LUI t4, 0x8060
 	SW 	t3, 0xC144 (t4) // Store Hook
+
+	LUI t3, hi(JetpacHook)
+	LW t3, lo(JetpacHook) (t3)
+	LUI t4, 0x8060
+	SW 	t3, 0xC154 (t4) // Store Hook
 
 	LUI t3, hi(Pause97Hook)
 	LW t3, lo(Pause97Hook) (t3)
@@ -327,6 +335,50 @@ getObjectArrayAddr:
 	MFLO	a1
 	JR 		ra
 	ADD 	v0, a0, a1
+
+drawJetpacPixelFont:
+	ADDIU 	sp, sp, -0x28
+	SW 		ra, 0x24 (sp)
+	SW 		s0, 0x20 (sp)
+	SW 		a0, 0x28 (sp)
+	SW 		a1, 0x2C (sp)
+	SW 		a2, 0x30 (sp)
+	SW 		a3, 0x34 (sp)
+	LW 		s0, 0x0 (a0)
+	OR 		v0, s0, r0
+	LUI 	t8, 0xFA00
+	SW 		t8, 0x0 (v0)
+	LW 		t0, 0x38 (sp)
+	SLL 	t0, t0, 24
+	OR 		t8, t0, r0
+	LW 		t0, 0x3C (sp)
+	SLL 	t0, t0, 16
+	OR 		t8, t8, t0
+	LW 		t0, 0x40 (sp)
+	SLL 	t0, t0, 8
+	OR 		t8, t8, t0
+	LW 		t0, 0x44 (sp)
+	OR 		t8, t8, t0
+	SW 		t8, 0x4 (v0)
+	LUI 	t8, 0xFB00
+	SW 		t8, 0x8 (v0)
+	ADDIU 	t8, r0, 0xFF
+	SW 		t8, 0xC (v0)
+	ADDIU 	s0, s0, 16
+	LW 		t8, 0x2C (sp)
+	OR 		a0, s0, r0
+	ADDIU 	a1, r0, 2
+	LH 		a2, 0x32 (sp)
+	LH 		a3, 0x36 (sp)
+	JAL 	textDraw
+	SW 		t8, 0x10 (sp)
+	LW 		t2, 0x28 (sp)
+	SW 		v0, 0x0 (t2)
+	LW 		ra, 0x24 (sp)
+	LW 		s0, 0x20 (sp)
+	JR 		ra
+	ADDIU 	sp, sp, 0x28
+
 	
 .align 0x10
 END:

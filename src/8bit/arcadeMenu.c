@@ -9,6 +9,10 @@ static int start_level_timer = 0;
 static int start_global_timer = 0;
 static int start_bonus_timer = 0;
 static int start_rng = 0;
+static char maptimerenabled = 0;
+static char maptimer_off[] = "{ MAP TIMER";
+static char maptimer_on[] = "} MAP TIMER";
+static unsigned int maptimervalue = 0;
 
 void toggleArcadeMenu(void) {
 	if (ControllerInput.Buttons & R_Button) {
@@ -156,15 +160,61 @@ static char* arcade_array[] = {
 	"LEVEL SELECT",
 	"LEVITATE JUMPMAN",
 	"RESTOCK LIVES",
+	maptimer_off,
 	"SAVE STATE",
 	"LOAD STATE"
 };
+
+void openBaseArcadeMenu(void) {
+	if (maptimerenabled) {
+		arcade_array[4] = maptimer_on;
+	} else {
+		arcade_array[4] = maptimer_off;
+	}
+	changeArcadeScreen(0);
+}
+
+void controlArcadeTimer(void) {
+	if (maptimerenabled) {
+		if (arcadeMode == 2) {
+			maptimervalue = 0;
+		} else if (arcadeMode == 5) {
+			int pause_value = 3;
+			if ((arcadeMap & 3) == 3) {
+				pause_value = 2;
+			}
+			if (arcadeLevelTimer > 0x3C) {
+				if (arcadePause != pause_value) {
+					maptimervalue = arcadeLevelTimer - 0x3C;
+				} else {
+					if ((arcadeMap & 3) == 1) { // 50m
+						for (int i = 0; i < 0x50; i++) {
+							if (arcadeObjBase[i].type == 25) {
+								maptimervalue = arcadeLevelTimer - 0x3C;
+							}
+						}
+					}
+				}
+			}
+
+		}
+	}
+}
+
+void toggleArcadeTimer(void) {
+	int old_position = arcadeMenu.positionIndex;
+	maptimerenabled = 1 ^ maptimerenabled;
+	openBaseArcadeMenu();
+	arcadeMenu.positionIndex = old_position;
+}
+
 
 static const int arcade_functions[] = {
 	(int)&openArcadeMapScreen,
 	(int)&openArcadeLvlScreen,
 	(int)&arcadeLevitate,
 	(int)&arcadeRestock,
+	(int)&toggleArcadeTimer,
 	(int)&saveArcadeState,
 	(int)&loadArcadeState,
 };
@@ -172,7 +222,7 @@ static const int arcade_functions[] = {
 static const Screen arcade_struct = {
 	.TextArray = (int*)arcade_array,
 	.FunctionArray = arcade_functions,
-	.ArrayItems = 6,
+	.ArrayItems = 7,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };
@@ -237,6 +287,9 @@ const Screen* arcade_screens[] = {
 	&arcadelvl_struct
 };
 
+static char arcade_timer_secs[10] = "";
+static char arcade_timer_text[20] = "";
+
 void spawnArcadeMenu(void* write_location) {
 	int y = 0x28;
 	const Screen* focused_screen = arcade_screens[(int)arcadeMenu.screenIndex];
@@ -264,6 +317,21 @@ void spawnArcadeMenu(void* write_location) {
 		}
 		setArcadeTextXY(0x38,y);
 		spawnArcadeText(write_location,"RETURN");
+	} else if (maptimerenabled) {
+		controlArcadeTimer();
+		setArcadeTextXY(0x38,230);
+		setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
+		float arcade_timer_seconds = (maptimervalue % 3600);
+		int arcade_timer_mins = maptimervalue / 3600;
+		arcade_timer_seconds /= 60;
+		if (arcade_timer_seconds < 10) {
+			dk_strFormat((char*)arcade_timer_secs,"0%f",arcade_timer_seconds);
+		} else {
+			dk_strFormat((char*)arcade_timer_secs,"%f",arcade_timer_seconds);
+		}
+		arcade_timer_secs[5] = 0;
+		dk_strFormat((char *)arcade_timer_text,"TIMER: %d:%s",arcade_timer_mins,arcade_timer_secs);
+		spawnArcadeText(write_location,arcade_timer_text);
 	}
 }
 

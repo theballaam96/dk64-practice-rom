@@ -40,6 +40,8 @@ extern int* drawPixelText(int* dl, int x, int y, char* str, int red, int green, 
 extern int* drawPixelTextContainer(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha, int offset);
 extern int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, int blue, int alpha);
 extern int* displaySimpleInput(int* dl);
+extern void drawJetpacPixelFont(int* dl, char* str, int x, int y, int red, int green, int blue, int alpha);
+
 extern int getFakeKeyStatus(void);
 extern int getFakeProdRoomStatus(void);
 
@@ -175,6 +177,9 @@ extern int* displayFloors(int* dl);
 extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);
 extern void finishLoadingArcadeState(void);
+
+extern void toggleJetpacMenu(void);
+extern void controlJetpacMenuActions(void);
 
 extern void spawnConsoleMenu(void);
 extern void controlConsoleMenu(void);

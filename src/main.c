@@ -112,6 +112,11 @@ void arcadeFuncLoop(void) {
 	finishLoadingArcadeState();
 };
 
+void jetpacFuncLoop(void) {
+	controlJetpacMenuActions();
+	toggleJetpacMenu();
+}
+
 static char stateLoadstr[15] = "";
 #define ACTOR_MAINMENUCONTROLLER 0x146
 

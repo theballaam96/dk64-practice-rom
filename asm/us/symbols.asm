@@ -94,6 +94,13 @@
 
 .definelabel spawnJetpacText, 0x8002AEFC
 .definelabel setJetpacTextColor, 0x8002AE94
+.definelabel startJetpacGame, 0x8002463C
+.definelabel placeJetpacFloor, 0x80028C3C
+.definelabel resetJetpacVars, 0x80024390
+.definelabel increaseLevel, 0x800250A0
+.definelabel spawnJetpacItem, 0x80027D64
+.definelabel resetJetpacMap, 0x800275F4
+.definelabel changeJetpacMode, 0x80024F9C
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -233,6 +240,12 @@
 .definelabel arcadeMovableFloor, 0x8004BC88
 .definelabel arcadeRivetBitfield, 0x8004C718
 
+.definelabel jetpacMode, 0x8002F3BC
+.definelabel jetpacLevelStartTimer, 0x8002F07C
+.definelabel competitors, 0x8002EC4C
+.definelabel jetpacObjectBase, 0x8002EF80
+.definelabel jetpacPlayerIndex, 0x8002EF74
+
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
@@ -333,7 +346,9 @@
 .definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr
 .definelabel assignedConsole, 0x807FFC74 // u32
 .definelabel phasePointer, 0x807FFC78 // ptr
-.definelabel isFastStating, 0x807FFC7C // u8
+.definelabel jetpacPaused, 0x807FFC7C // u8
+.definelabel jetpacTimerState, 0x807FFC7D // u8
+.definelabel jetmanColorIndex, 0x807FFC7E // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

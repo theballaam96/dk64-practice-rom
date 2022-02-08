@@ -22,6 +22,7 @@ void resetSettings(void) {
 	StoredSettings.input_max = 0;
 	StoredSettings.console = 0;
 	StoredSettings.input_type = 0;
+	StoredSettings.jetman_color = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -46,6 +47,7 @@ void loadSettings(void) {
 		InputStickMax = StoredSettings.input_max;
 		assignedConsole = StoredSettings.console;
 		InputDisplayType = StoredSettings.input_type;
+		jetmanColorIndex = StoredSettings.jetman_color;
 	} else {
 		resetSettings();
 	}
@@ -70,5 +72,6 @@ void saveSettings(void) {
 	StoredSettings.input_max = InputStickMax;
 	StoredSettings.console = assignedConsole;
 	StoredSettings.input_type = InputDisplayType;
+	StoredSettings.jetman_color = jetmanColorIndex;
 	SaveToGlobal();
 }

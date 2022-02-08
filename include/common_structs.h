@@ -415,6 +415,7 @@ typedef struct savedSettings {
 	/* 0x012 */ char input_max;
 	/* 0x013 */ char console;
 	/* 0x014 */ char input_type;
+	/* 0x015 */ char jetman_color;
 } savedSettings;
 
 typedef struct flagMenuData {
@@ -884,3 +885,34 @@ typedef struct chunk_struct {
 	/* 0x000 */ char loaded;
 	/* 0x001 */ char unk_001[0x1C8-0x1];
 } chunk_struct;
+
+typedef struct competitor_struct {
+	/* 0x000 */ int level;
+	/* 0x004 */ int score;
+	/* 0x008 */ int lives;
+	/* 0x00C */ int lives_consumed;
+	/* 0x010 */ int unk_010;
+	/* 0x014 */ char unk_014[0x114-0x14];
+	/* 0x114 */ int unk_114;
+	/* 0x118 */ char unk_118[0x194-0x118];
+
+} competitor_struct;
+
+typedef struct jetpac_item1_struct {
+	/* 0x000 */ float x;
+	/* 0x004 */ float y;
+	/* 0x008 */ float velocity_x;
+	/* 0x00C */ float velocity_y;
+	/* 0x010 */ unsigned char red;
+	/* 0x011 */ unsigned char green;
+	/* 0x012 */ unsigned char blue;
+	/* 0x013 */ char unk_13;
+	/* 0x014 */ int state;
+	/* 0x018 */ int facing_direction;
+	/* 0x01C */ int hitbox_xl;
+	/* 0x020 */ int hitbox_yt;
+	/* 0x024 */ int hitbox_xr;
+	/* 0x028 */ int hitbox_yb;
+	/* 0x02C */ int spawn_timer;
+	/* 0x030 */ int width;
+} jetpac_item1_struct;

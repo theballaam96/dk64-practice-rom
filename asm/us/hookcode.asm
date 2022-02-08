@@ -377,5 +377,82 @@ START_HOOK:
 		J 		0x805FC54C
 		LW 		a0, 0xA048 (a0)
 
+	jetpacTextHook:
+		J 		jetpacTextCode
+		NOP
+	jetpacPauseHook:
+		J 		jetpacPauseCode
+		NOP
+	jetpacTimerHook:
+		J 		jetpac5000Code
+		NOP
+
+	jetpacLoopCode:
+		LUI 	t3, hi(jetpacTextHook)
+		LW 		t3, lo(jetpacTextHook) (t3)
+		LUI 	t4, 0x8002
+		SW 		t3, 0x5354 (t4) // Store Hook
+		SW 		r0, 0x5358 (t4) // Store NOP
+
+		LUI 	t3, hi(jetpacPauseHook)
+		LW 		t3, lo(jetpacPauseHook) (t3)
+		LUI 	t4, 0x8002
+		SW 		t3, 0x4954 (t4) // Store Hook
+		SW 		r0, 0x4958 (t4) // Store NOP
+
+		LUI 	t3, hi(jetpacTimerHook)
+		LW 		t3, lo(jetpacTimerHook) (t3)
+		LUI 	t4, 0x8002
+		SW 		t3, 0x7DB0 (t4) // Store Hook
+		SW 		r0, 0x7DB4 (t4) // Store NOP
+
+		JAL 	0x80024000
+		NOP
+		JAL 	jetpacFuncLoop
+		NOP
+		J 		0x805FC15C
+		NOP
+
+	jetpacTextCode:
+		JAL 	spawnJetpacMenu
+		LW 		a0, 0x20 (sp)
+		LW 		ra, 0x1C (sp)
+		J 		0x8002535C
+		LW 		s0, 0x18 (sp)
+
+	jetpacPauseCode:
+		LUI 	v0, hi(jetpacPaused)
+		LBU 	v0, lo(jetpacPaused) (v0)
+		BNEZ 	v0, jetpacPauseCode_Finish
+		NOP
+		LW 		v0, 0x1C (sp)
+		JAL 	0x80026D48
+		SW 		v0, 0x1C (sp)
+		J 		0X80024960
+		NOP
+
+		jetpacPauseCode_Finish:
+			J 	0x800249EC
+			NOP
+
+	jetpac5000Code:
+		LW 		t2, 0x70 (sp)
+		LW 		t3, 0x4 (t2)
+		SLTI 	at, t3, 5000
+		BNEZ 	at, jetpac5000Code_Finish
+		LBU		t1, 0xF3C8 (t1)
+
+		jetpac5000Code_5000Hit:
+			LUI 	at, hi(jetpacTimerState)
+			LBU 	a0, lo(jetpacTimerState) (at)
+			ADDIU 	t3, r0, 2
+			BNE 	a0, t3, jetpac5000Code_Finish
+			ADDIU 	a1, r0, 3
+			SB 		a1, lo(jetpacTimerState) (at)
+
+		jetpac5000Code_Finish:
+			J 		0x80027DB8
+			NOP
+
 .align 0x10
 END_HOOK:

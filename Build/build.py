@@ -135,6 +135,14 @@ file_dict = [
 		"font_key": "arcade_font",
 	},
 	{
+		"name": "Jetpac Font",
+		"pointer_table_index": 14,
+		"file_index": 31,
+		"source_file": "assets/Non-Code/Font/jetpac_font_modified.png",
+		"texture_format": "i4",
+		"font_key": "jetpac_font",
+	},
+	{
 		"name": "Actor Names",
 		"start": 0x2020000,
 		"source_file": "assets/Non-Code/actor_names.bin",
@@ -393,7 +401,7 @@ import filestatewriter
 bins = [
 	"assets/Non-Code/actor_names",
 	"assets/Non-Code/snag_names",
-	"assets/Non-Code/snag_names_capitals"
+	"assets/Non-Code/snag_names_capitals",
 	"dolby_text",
 	"wrinkly_text",
 	"menu_text",
