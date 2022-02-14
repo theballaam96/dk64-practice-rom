@@ -20,6 +20,11 @@ static const char viewed_igt[] = "} IN-GAME TIME";
 static const char viewed_anglepoint[] = "} ANGLE TO POINT";
 static const char viewed_fakekey[] = "} KEY 8";
 static const char viewed_prodroom[] = "} PRODUCTION ROOM";
+static const char viewed_objsignals[] = "} OBJECT SIGNALS COUNT";
+static const char viewed_delayedkills[] = "} DELAYED KILLS COUNT";
+static const char viewed_lockStack[] = "} LOCK STACK COUNT";
+static const char viewed_scriptRun[] = "} SCRIPTS RUNNING COUNT";
+static const char viewed_loadedActorCount[] = "} LOADED ACTOR COUNT";
 static const char viewed_fairy[] = "} FAIRY VIEWER";
 
 static const char change_lag[] = "{ LAG";
@@ -42,6 +47,11 @@ static const char change_igt[] = "{ IN-GAME TIME";
 static const char change_anglepoint[] = "{ ANGLE TO POINT";
 static const char change_fakekey[] = "{ KEY 8";
 static const char change_prodroom[] = "{ PRODUCTION ROOM";
+static const char change_objsignals[] = "{ OBJECT SIGNALS COUNT";
+static const char change_delayedkills[] = "{ DELAYED KILLS COUNT";
+static const char change_lockStack[] = "{ LOCK STACK COUNT";
+static const char change_scriptRun[] = "{ SCRIPTS RUNNING COUNT";
+static const char change_loadedActorCount[] = "{ LOADED ACTOR COUNT";
 static const char change_fairy[] = "{ FAIRY VIEWER";
 
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
@@ -79,6 +89,7 @@ static const char watches_timers_indexes[] = {4,5,10,18};
 static const char watches_sysenv_indexes[] = {1,2,8};
 static const char watches_assist_indexes[] = {16,-1};
 static const char watches_fake_indexes[] = {20,21};
+static const char watches_debug_indexes[] = {22,23,24,25,26};
 
 static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
@@ -151,7 +162,6 @@ int* displayWatches(int* dl) {
 	for (int i = 0; i < WatchCount; i++) {
 		if (WatchIndex[i]) {
 			y = 340 - (k++ * 13);
-			// Note: This is huge for some reason? Is there a way we can shrink this?
 			dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 0);
 		}
 	}
@@ -192,6 +202,11 @@ static const char* watch_listed_array[] = {
 	change_anglepoint,
 	change_fakekey,
 	change_prodroom,
+	change_objsignals,
+	change_delayedkills,
+	change_lockStack,
+	change_scriptRun,
+	change_loadedActorCount,
 	change_fairy,
 };
 
@@ -217,6 +232,11 @@ static const char* watch_viewed_array[] = {
 	viewed_anglepoint,
 	viewed_fakekey,
 	viewed_prodroom,
+	viewed_objsignals,
+	viewed_delayedkills,
+	viewed_lockStack,
+	viewed_scriptRun,
+	viewed_loadedActorCount,
 	viewed_fairy,
 };
 
@@ -242,6 +262,11 @@ static const char* watch_change_array[] = {
 	change_anglepoint,
 	change_fakekey,
 	change_prodroom,
+	change_objsignals,
+	change_delayedkills,
+	change_lockStack,
+	change_scriptRun,
+	change_loadedActorCount,
 	change_fairy,
 };
 
@@ -281,6 +306,14 @@ static const char* watch_fake_array[] = {
 	change_prodroom,
 };
 
+static const char* watch_debug_array[] = {
+	change_objsignals,
+	change_delayedkills,
+	change_lockStack,
+	change_scriptRun,
+	change_loadedActorCount,
+};
+
 static char float_str[22] = {};
 //static float test_floats[2] = {};
 
@@ -289,7 +322,7 @@ void openWatchMenu(void) {
 };
 
 #define INPUT_VIEWER_INDEX 7
-#define FAIRY_VIEWER_INDEX 21
+#define FAIRY_VIEWER_INDEX 26
 void updateWatchText(void) {
 	int _index;
 	int watch_index = 0;
@@ -343,6 +376,12 @@ void updateWatchText(void) {
 			watch_fake_array[i] = watch_listed_array[watch_index];
 		}
 	}
+	for (int i = 0; i < sizeof(watches_debug_indexes); i++) {
+		watch_index = (int)watches_debug_indexes[i] - 1;
+		if (watch_index > -1) {
+			watch_debug_array[i] = watch_listed_array[watch_index];
+		}
+	}
 }
 
 void openWatchPlayerMenu(void) {
@@ -368,6 +407,11 @@ void openWatchAssistMenu(void) {
 void openWatchFakeMenu(void) {
 	updateWatchText();
 	changeMenu(103);
+}
+
+void openWatchDebugMenu(void) {
+	updateWatchText();
+	changeMenu(104);
 }
 
 void clearAllWatches(void) {
@@ -404,6 +448,9 @@ void setWatch(void) {
 			break;
 		case 103:
 			intended_watch_index = watches_fake_indexes[(int)ActiveMenu.positionIndex];
+			break;
+		case 104:
+			intended_watch_index = watches_debug_indexes[(int)ActiveMenu.positionIndex];
 		break;
 	}
 	char index_already_spawned = 0;
@@ -444,6 +491,9 @@ void setWatch(void) {
 			break;
 		case 103:
 			openWatchFakeMenu();
+			break;
+		case 104:
+			openWatchDebugMenu();
 		break;
 	}
 };
@@ -499,6 +549,7 @@ static const char* watch_array[] = {
 	"SPAWN SNAG COLLECTABLES",
 	"ASSISTANTS",
 	"FAKE ITEMS",
+	"DEBUG",
 	"SET REFERENCE POINT",
 	"CLEAR ALL WATCHES",
 };
@@ -510,6 +561,7 @@ static const int watch_functions[] = {
 	(int)&openWatchSnagMenu,
 	(int)&openWatchAssistMenu,
 	(int)&openWatchFakeMenu,
+	(int)&openWatchDebugMenu,
 	(int)&setReferencePosition,
 	(int)&clearAllWatches,
 };
@@ -517,7 +569,7 @@ static const int watch_functions[] = {
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = 0,
 	.ParentPosition = 3
 };
@@ -595,6 +647,22 @@ const Screen watch_fake_struct = {
 	.ArrayItems = 2,
 	.ParentScreen = 12,
 	.ParentPosition = 5
+};
+
+static const int watch_debug_functions[] = {
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+};
+
+const Screen watch_debug_struct = {
+	.TextArray = (int*)watch_debug_array,
+	.FunctionArray = watch_debug_functions,
+	.ArrayItems = 5,
+	.ParentScreen = 12,
+	.ParentPosition = 6
 };
 
 void clampWatchFloats(void) {
@@ -1259,6 +1327,46 @@ void handleWatch(void) {
 								watch_cache_array[j][1] = fakeprod_status;
 							}
 						}
+						break;
+					case 22:
+						// Object Signals Count
+						if ((watch_cache_array[j][1] != objectSignalsCountCopy) || (watch_cache_array[j][0] != 22)) {
+							headerFormatter("OBJECT SIGNALS COUNT: ",0,objectSignalsCountCopy,INT_TYPE,j);
+						}
+						watch_cache_array[j][0] = 22;
+						watch_cache_array[j][1] = objectSignalsCountCopy;
+						break;
+					case 23:
+						// Delayed Kills Count
+						if ((watch_cache_array[j][1] != delayedKillsCountCopy) || (watch_cache_array[j][0] != 23)) {
+							headerFormatter("DELAYED KILLS COUNT: ",0,delayedKillsCountCopy,INT_TYPE,j);
+						}
+						watch_cache_array[j][0] = 23;
+						watch_cache_array[j][1] = delayedKillsCountCopy;
+						break;
+					case 24:
+						// Lock Stack Count
+						if ((watch_cache_array[j][1] != lockStackCountCopy) || (watch_cache_array[j][0] != 24)) {
+							headerFormatter("LOCK STACK COUNT: ",0,lockStackCountCopy,INT_TYPE,j);
+						}
+						watch_cache_array[j][0] = 24;
+						watch_cache_array[j][1] = lockStackCountCopy;
+						break;
+					case 25:
+						// Scripts Running Count
+						if ((watch_cache_array[j][1] != scriptsRunningCount) || (watch_cache_array[j][0] != 25)) {
+							headerFormatter("SCRIPTS RUNNING: ",0,scriptsRunningCount,INT_TYPE,j);
+						}
+						watch_cache_array[j][0] = 25;
+						watch_cache_array[j][1] = scriptsRunningCount;
+						break;
+					case 26:
+						// Loaded Actor Count
+						if ((watch_cache_array[j][1] != LoadedActorCount) || (watch_cache_array[j][0] != 26)) {
+							headerFormatter("ACTORS LOADED: ",0,LoadedActorCount,INT_TYPE,j);
+						}
+						watch_cache_array[j][0] = 26;
+						watch_cache_array[j][1] = LoadedActorCount;
 					break;
 				}
 				_KRoolTimerX = 220;

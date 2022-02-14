@@ -876,7 +876,7 @@ typedef struct floor_tri {
 typedef struct floor_tri_data {
 	/* 0x000 */ int* rdram_start;
 	/* 0x004 */ int* rdram_end;
-	/* 0x008 */ int unk_08;
+	/* 0x008 */ int model2_timer;
 	/* 0x00C */ int rom_start;
 	/* 0x010 */ int size;
 } floor_tri_data;

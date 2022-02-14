@@ -53,6 +53,10 @@ void cFuncLoop(void) {
 	if ((TransitionSpeed > 0) || ((CutsceneActive == 6) && (CurrentMap == 0x50))) {
 		closeMenuOnTransition(); // Into Transition
 		closeInputOnTransition(); // Into Transition
+		if (voidPointer) {
+			complexFree(voidPointer);
+			voidPointer = 0;
+		}
 	}
 	if ((TransitionSpeed < 0) || ((CutsceneActive == 6) && (CurrentMap != 0x50))) {
 		checkMapType(); // Out of Transition
@@ -63,6 +67,9 @@ void cFuncLoop(void) {
 			for (int i = 0; i < 0x10; i++) {
 				TempFlagBlock[i] = 0;
 			}
+		}
+		if (voidMapOn) {
+			preload_map_voids();
 		}
 	}
 	if (stateLoadTimer > 0) {
@@ -149,13 +156,14 @@ int* displayListModifiers(int* dl) {
 		if ((!ActiveMenu.isOpen) && (!RAMDisplayOpen)) {
 			dl = displayWatches(dl);
 			dl = displaySimpleInput(dl);
+			dl = displayVoid(dl);
 		}
 		dl = displayMemory(dl);
 		if (CurrentMap != 0x50) {
 			dl = displayFairy(dl);
 		}
 		//dl = drawTri(dl, 100, 100, 300, 500, 500, 300);
-		dl = displayFloors(dl);
+		//dl = displayFloors(dl);
 	}
 	return dl;
 };

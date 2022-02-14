@@ -127,6 +127,7 @@ const Screen* menu_screens[] = {
 	&floormenu_struct,
 	&bports_struct,
 	&watch_fake_struct,
+	&watch_debug_struct,
 };
 
 void spawnMenu(int screenIndex) {

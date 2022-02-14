@@ -54,6 +54,7 @@
 .definelabel __osPiRawReadIo, 0x800045D0
 .definelabel __osDisableInt, 0x80009020
 .definelabel __osRestoreInt, 0x80009040
+.definelabel __osVirtualToPhysical, 0x80008FA0
 .definelabel copyFunc, 0x805FB750
 .definelabel getMapData, 0x8066B0F8
 .definelabel loadSetup, 0x806886E0
@@ -221,6 +222,16 @@
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494
 
+.definelabel MapVoid_MinX, 0x807F5FE4
+.definelabel MapVoid_MinZ, 0x807F5FE6
+.definelabel MapVoid_MaxX, 0x807F5FE8
+.definelabel MapVoid_MaxZ, 0x807F5FEA
+
+.definelabel objectSignalsCount, 0x807FBFD8 // u16
+.definelabel delayedKillsCount, 0x807FBF10 // u16
+.definelabel lockStackCount, 0x807F5A68 // u16
+.definelabel scriptsRunningCount, 0x807F60A8 // u16
+
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8
 .definelabel arcadeLevel, 0x8004A76C // u8
@@ -349,6 +360,15 @@
 .definelabel jetpacPaused, 0x807FFC7C // u8
 .definelabel jetpacTimerState, 0x807FFC7D // u8
 .definelabel jetmanColorIndex, 0x807FFC7E // u8
+.definelabel disableMapGeometry, 0x807FFC7F // u8
+.definelabel customCollisionVerts, 0x807FFC80 // ptr
+.definelabel vanillaVertBase, 0x807FFC84 // ptr
+.definelabel objectSignalsCountCopy, 0x807FFC88 // u8
+.definelabel delayedKillsCountCopy, 0x807FFC89 // u8
+.definelabel lockStackCountCopy, 0x807FFC8A // u8
+.definelabel voidMapOn, 0x807FFC8B // u8
+.definelabel voidPointer, 0x807FFC8C // ptr
+.definelabel floorsPreloadedVanilla, 0x807FFC90 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

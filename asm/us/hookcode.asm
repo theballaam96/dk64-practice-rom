@@ -454,5 +454,40 @@ START_HOOK:
 			J 		0x80027DB8
 			NOP
 
+	vertBaseStore:
+		ADDU 	t9, v0, t5
+		SW 		t9, 0x5DE8 (at)
+		LUI 	at, hi(vanillaVertBase)
+		J 		0x8062F208
+		SW 		t9, lo(vanillaVertBase) (at)
+
+	signalsStore:
+		LH 		v1, 0x0 (s3)
+		SW 		s1, 0x18 (sp)
+		LUI 	t6, hi(objectSignalsCountCopy)
+		J 		0x8067934C
+		SB 		v1, lo(objectSignalsCountCopy) (t6)
+
+	delayedKillsStore:
+		LH 		t6, 0x0 (s2)
+		SW 		s0, 0x18 (sp)
+		LUI 	a0, hi(delayedKillsCountCopy)
+		J 		0x806783D4
+		SB 		t6, lo(delayedKillsCountCopy) (a0)
+
+	lockStackStore:
+		LW 		v1, 0x0 (t1)
+		LUI 	v0, hi(lockStackCountCopy)
+		SB 		v1, lo(lockStackCountCopy) (v0)
+		J 		0x806109FC
+		ADDIU 	v0, r0, 1
+
+	storeFloorPreload:
+		OR 		s1, v0, r0
+		ANDI	t1, t9, 2
+		LUI 	a1, hi(floorsPreloadedVanilla)
+		J 		0x80666114
+		SB 		t1, lo(floorsPreloadedVanilla) (a1)
+
 .align 0x10
 END_HOOK:

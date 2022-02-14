@@ -28,6 +28,7 @@ extern void setWarpPosition(float x, float y, float z);
 extern void hideRacePosition(int show);
 extern void setDataStates(int state, int eightbit);
 extern void customHideHUD(void);
+extern int* drawText(int* dl, int style, float x, float y, char* str, int red, int green, int blue, int opacity);
 extern int* drawTextContainer(int* dl, int style, float x, float y, char* str, int red, int green, int blue, int opacity, int background);
 extern int* displayMenu(int* dl);
 extern int* displayWatches(int* dl);
@@ -40,6 +41,7 @@ extern int* drawPixelText(int* dl, int x, int y, char* str, int red, int green, 
 extern int* drawPixelTextContainer(int* dl, int x, int y, char* str, int red, int green, int blue, int alpha, int offset);
 extern int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, int blue, int alpha);
 extern int* displaySimpleInput(int* dl);
+extern int* displayVoid(int* dl);
 extern void drawJetpacPixelFont(int* dl, char* str, int x, int y, int red, int green, int blue, int alpha);
 
 extern int getFakeKeyStatus(void);
@@ -194,6 +196,8 @@ extern void resetSettings(void);
 extern void spawnOverlay(void);
 extern void closeOverlay(void);
 
+extern void preload_map_voids(void);
+
 extern const Screen maps_container_struct;
 extern const Screen japes_mapwarp_struct;
 extern const Screen japesmain_mapwarp_struct;
@@ -297,6 +301,7 @@ extern const Screen collisionmenu_struct;
 extern const Screen floormenu_struct;
 extern const Screen bports_struct;
 extern const Screen watch_fake_struct;
+extern const Screen watch_debug_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

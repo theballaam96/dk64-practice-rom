@@ -222,6 +222,21 @@ mapDLHook:
 JetpacHook:
 	J 	jetpacLoopCode
 	NOP
+vertBaseStoreHook:
+	J 	vertBaseStore
+	NOP
+signalsStoreHook:
+	J 	signalsStore
+	NOP
+delayedKillsStoreHook:
+	J 	delayedKillsStore
+	NOP
+lockStackStoreHook:
+	J 	lockStackStore
+	NOP
+storeFloorPreloadHook:
+	J 	storeFloorPreload
+	NOP
 
 loadExtraHooks:
 	ADDIU t3, r0, 0x1000
@@ -304,6 +319,36 @@ loadExtraHooks:
 	LUI t4, 0x8071
 	SW t3, 0x417C (t4) // Store Hook
 	SW r0, 0x4180 (t4) // Store NOP
+
+	LUI t3, hi(vertBaseStoreHook)
+	LW t3, lo(vertBaseStoreHook) (t3)
+	LUI t4, 0x8063
+	SW t3, 0xF200 (t4) // Store Hook
+	SW r0, 0xF204 (t4) // Store NOP
+
+	LUI t3, hi(signalsStoreHook)
+	LW t3, lo(signalsStoreHook) (t3)
+	LUI t4, 0x8068
+	SW t3, 0x9344 (t4) // Store Hook
+	SW r0, 0x9348 (t4) // Store NOP
+
+	LUI t3, hi(delayedKillsStoreHook)
+	LW t3, lo(delayedKillsStoreHook) (t3)
+	LUI t4, 0x8068
+	SW t3, 0x83CC (t4) // Store Hook
+	SW r0, 0x83D0 (t4) // Store NOP
+
+	LUI t3, hi(lockStackStoreHook)
+	LW t3, lo(lockStackStoreHook) (t3)
+	LUI t4, 0x8061
+	SW t3, 0x09F4 (t4) // Store Hook
+	SW r0, 0x09F8 (t4) // Store NOP
+
+	LUI t3, hi(storeFloorPreloadHook)
+	LW t3, lo(storeFloorPreloadHook) (t3)
+	LUI t4, 0x8066
+	SW t3, 0x610C (t4) // Store Hook
+	SW r0, 0x6110 (t4) // Store NOP
 
 	//LUI t3, hi(mapDLHook)
 	//LW t3, lo(mapDLHook) (t3)

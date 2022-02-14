@@ -100,6 +100,7 @@ extern void __osEPiStartDMA(void* unk, void* iomessage, int os_state);
 extern void __osPiRawReadIo(int a0, void* a1);
 extern int __osDisableInt();
 extern void __osRestoreInt(int mask);
+extern unsigned int __osVirtualToPhysical(void* addr);
 extern void copyFunc(int rom_offset, int size, void* write_location);
 extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, char compressbyte1);
 extern void loadSetup(void* setup_file, int unk0, int unk1);
@@ -231,6 +232,11 @@ extern int* ChunkArrayPointer;
 extern short screenCenterX;
 extern short screenCenterY;
 
+extern short MapVoid_MinX;
+extern short MapVoid_MinZ;
+extern short MapVoid_MaxX;
+extern short MapVoid_MaxZ;
+
 extern char arcadeMap;
 extern char arcadeMode;
 extern char arcadeLevel;
@@ -255,6 +261,11 @@ extern competitor_struct competitors[2];
 extern int jetpacLevelStartTimer;
 extern jetpac_item1_struct jetpacObjectBase[20];
 extern int jetpacPlayerIndex;
+
+extern short objectSignalsCount;
+extern short delayedKillsCount;
+extern int lockStackCount;
+extern short scriptsRunningCount;
 
 //hack data
 extern int TestVariable;
@@ -354,6 +365,15 @@ extern actorData* PausePointer;
 extern char jetpacPaused;
 extern char jetpacTimerState;
 extern char jetmanColorIndex;
+extern char disableMapGeometry;
+extern int* customCollisionVerts;
+extern int* vanillaVertBase;
+extern unsigned char objectSignalsCountCopy;
+extern unsigned char delayedKillsCountCopy;
+extern unsigned char lockStackCountCopy;
+extern char voidMapOn;
+extern void* voidPointer;
+extern char floorsPreloadedVanilla;
 
 // Code
 extern int debugColumnLoop;
