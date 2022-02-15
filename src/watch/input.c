@@ -230,12 +230,21 @@ int* drawInputRect(int* dl, int x1, int y1, int x2, int y2, int red, int green, 
 	return dl;
 }
 
+#define INPUT_QUAD_THICKNESS 5
+#define INPUT_QUAD_SIZE 84
+#define INPUT_BORDER_COLOR 0x12
+#define INPUT_INNER_QUAD_COLOR 0x8
+#define INPUT_BORDER_MULT 2
+#define INPUT_STICKBOX_THICKNESS 10
+#define INPUT_TL_OFFSET 2
+
 int* displaySimpleInput(int* dl) {
+	float position_mult = 3.5f;
 	if (InputDisplayOpen) {
 		if (InputDisplayType == 1) {
 			for (int i = 0; i < 10; i++) {
-				int x_min = xsimp_positions[i] * 4;
-				int y_min = ysimp_positions[i] * 4;
+				int x_min = (xsimp_positions[i] * 4) + ((float)(root_x[(int)InputDisplayQuadrant]) * position_mult);
+				int y_min = ysimp_positions[i] * 4 + ((float)(root_y[(int)InputDisplayQuadrant]) * position_mult);
 				int x_max = x_min + 40;
 				int y_max = y_min + 40;
 				if (button_bits[i] == Z_Button) {
@@ -252,17 +261,52 @@ int* displaySimpleInput(int* dl) {
 				}
 				dl = drawInputRect(dl, x_min, y_min, x_max, y_max, simptype_red[buttontype] * color_mult, simptype_green[buttontype] * color_mult, simptype_blue[buttontype] * color_mult);
 			}
-			int stick_quad_x = 0x46 * 4;
-			int stick_quad_y = 0x2E * 4;
-			int stick_x_0 = stick_quad_x + 6;
-			int stick_x_1 = stick_quad_x + 48;
-			int stick_y_0 = stick_quad_y + 6;
-			int stick_y_1 = stick_quad_y + 48;
-			dl = drawInputRect(dl, stick_quad_x, stick_quad_y, stick_quad_x + 84, stick_quad_y + 84, 0x12, 0x12, 0x12);
-			dl = drawInputRect(dl, stick_x_0, stick_y_0, stick_x_0 + 34, stick_y_0 + 34, 0x8, 0x8, 0x8);
-			dl = drawInputRect(dl, stick_x_0, stick_y_1, stick_x_0 + 34, stick_y_1 + 34, 0x8, 0x8, 0x8);
-			dl = drawInputRect(dl, stick_x_1, stick_y_0, stick_x_1 + 34, stick_y_0 + 34, 0x8, 0x8, 0x8);
-			dl = drawInputRect(dl, stick_x_1, stick_y_1, stick_x_1 + 34, stick_y_1 + 34, 0x8, 0x8, 0x8);
+			int stick_quad_x = 0x46 * 4 + ((float)(root_x[(int)InputDisplayQuadrant]) * position_mult);
+			int stick_quad_y = 0x2E * 4 + ((float)(root_y[(int)InputDisplayQuadrant]) * position_mult);
+			dl = drawInputRect(dl, 
+								stick_quad_x, 
+								stick_quad_y, 
+								stick_quad_x + INPUT_QUAD_SIZE, 
+								stick_quad_y + INPUT_QUAD_SIZE,
+								INPUT_BORDER_COLOR, 
+								INPUT_BORDER_COLOR, 
+								INPUT_BORDER_COLOR);
+			// Top Left
+			dl = drawInputRect(dl,
+								stick_quad_x + INPUT_TL_OFFSET + (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								stick_quad_y + INPUT_TL_OFFSET + (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								stick_quad_x + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) - INPUT_QUAD_THICKNESS,
+								stick_quad_y + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) - INPUT_QUAD_THICKNESS,
+								INPUT_INNER_QUAD_COLOR,
+								INPUT_INNER_QUAD_COLOR,
+								INPUT_INNER_QUAD_COLOR);
+			// Top Right
+			dl = drawInputRect(dl,
+								stick_quad_x + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) + INPUT_QUAD_THICKNESS,
+								stick_quad_y + INPUT_TL_OFFSET + (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								stick_quad_x + INPUT_TL_OFFSET + INPUT_QUAD_SIZE - (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								stick_quad_y + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) - INPUT_QUAD_THICKNESS,
+								INPUT_INNER_QUAD_COLOR, 
+								INPUT_INNER_QUAD_COLOR, 
+								INPUT_INNER_QUAD_COLOR);
+			// Bottom Left
+			dl = drawInputRect(dl,
+								stick_quad_x + INPUT_TL_OFFSET + (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								stick_quad_y + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) + INPUT_QUAD_THICKNESS,
+								stick_quad_x + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) - INPUT_QUAD_THICKNESS,
+								stick_quad_y + INPUT_TL_OFFSET + INPUT_QUAD_SIZE - (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								INPUT_INNER_QUAD_COLOR,
+								INPUT_INNER_QUAD_COLOR,
+								INPUT_INNER_QUAD_COLOR);
+			// Bottom Right
+			dl = drawInputRect(dl,
+								stick_quad_x + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) + INPUT_QUAD_THICKNESS,
+								stick_quad_y + INPUT_TL_OFFSET + (INPUT_QUAD_SIZE / 2) + INPUT_QUAD_THICKNESS,
+								stick_quad_x + INPUT_TL_OFFSET + INPUT_QUAD_SIZE - (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								stick_quad_y + INPUT_TL_OFFSET + INPUT_QUAD_SIZE - (INPUT_BORDER_MULT * INPUT_QUAD_THICKNESS),
+								INPUT_INNER_QUAD_COLOR, 
+								INPUT_INNER_QUAD_COLOR, 
+								INPUT_INNER_QUAD_COLOR);
 			int stick_x = ControllerInput.stickX;
 			int stick_y = ControllerInput.stickY;
 			float stick_mult = 0.31496f;
@@ -279,9 +323,14 @@ int* displaySimpleInput(int* dl) {
 				}
 				stick_mult = 0.5f;
 			}
-			float input_square_x = (stick_quad_x + 41) + (stick_mult * stick_x);
-			float input_square_y = (stick_quad_y + 41) - (stick_mult * stick_y);
-			dl = drawInputRect(dl, input_square_x, input_square_y, input_square_x + 8, input_square_y + 8, 0x1F, 0x0, 0x0);
+			float input_square_x = (stick_quad_x + (INPUT_QUAD_SIZE / 2)) + (stick_mult * stick_x) + INPUT_TL_OFFSET;
+			float input_square_y = (stick_quad_y + (INPUT_QUAD_SIZE / 2)) - (stick_mult * stick_y) + INPUT_TL_OFFSET;
+			dl = drawInputRect(dl,
+								input_square_x - INPUT_STICKBOX_THICKNESS,
+								input_square_y - INPUT_STICKBOX_THICKNESS,
+								input_square_x + INPUT_STICKBOX_THICKNESS,
+								input_square_y + INPUT_STICKBOX_THICKNESS,
+								0x1F, 0x0, 0x0);
 		}
 	}
 	return dl;

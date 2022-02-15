@@ -155,6 +155,7 @@ int* drawBoxVoid(int* dl) {
 
 int* drawFloors(int* dl, int x1, int z1, int x2, int z2, int x3, int z3) {
 	float diffs[6] = {};
+	int pass = 1;
 	if (Player) {
 		diffs[0] = Player->xPos - x1;
 		diffs[1] = Player->zPos - z1;
@@ -163,21 +164,27 @@ int* drawFloors(int* dl, int x1, int z1, int x2, int z2, int x3, int z3) {
 		diffs[4] = Player->xPos - x3;
 		diffs[5] = Player->zPos - z3;
 		for (int i = 0; i < 6; i++) {
-			diffs[i] /= VIEWPORT_RANGE;
-			diffs[i] *= MINIMAP_RANGE;
-			diffs[i] += CENTER;
+			if ((diffs[i] >= (-VIEWPORT_RANGE-2)) && (diffs[i] <= (VIEWPORT_RANGE+2))) {
+				diffs[i] /= VIEWPORT_RANGE;
+				diffs[i] *= MINIMAP_RANGE;
+				diffs[i] += CENTER;
+			} else {
+				pass = 0;
+			}
 		}
-		dl = drawTri(dl,
-					diffs[0],
-					diffs[1],
-					diffs[2],
-					diffs[3],
-					diffs[4],
-					diffs[5],
-					VOID_RED_BYTE,
-					VOID_GREEN_BYTE,
-					VOID_BLUE_BYTE,
-					1);
+		if (pass) {
+			dl = drawTri(dl,
+						diffs[0],
+						diffs[1],
+						diffs[2],
+						diffs[3],
+						diffs[4],
+						diffs[5],
+						VOID_RED_BYTE,
+						VOID_GREEN_BYTE,
+						VOID_BLUE_BYTE,
+						1);
+		}
 	}
 	return dl;
 }
