@@ -1,11 +1,5 @@
 #include "../../include/common.h"
 
-static const char toggles_moonkick_off[] = "{ AUTO-MOONKICK";
-static const char toggles_moonkick_on[] = "} AUTO-MOONKICK";
-
-static const char toggles_phase_off[] = "{ D-UP TO AUTO-PHASE";
-static const char toggles_phase_on[] = "} D-UP TO AUTO-PHASE";
-
 static const char toggles_sandstorm_unk[] = "? AZTEC SANDSTORM";
 static const char toggles_sandstorm_off[] = "{ AZTEC SANDSTORM";
 static const char toggles_sandstorm_on[] = "} AZTEC SANDSTORM";
@@ -34,9 +28,10 @@ static const char toggles_ltotoggletb_on[] = "} L TO TOGGLE TAG BARREL VOID";
 static const char toggles_superspeed_off[] = "L TO SUPERSPEED:OFF";
 static const char toggles_superspeed[20] = "L TO SUPERSPEED:1X";
 
+static const char toggles_voiddisable_off[] = "{ DISABLE VOIDS";
+static const char toggles_voiddisable_on[] = "} DISABLE VOIDS";
+
 static const char* toggles_array[] = {
-	toggles_moonkick_off,
-	toggles_phase_off,
 	toggles_sandstorm_unk,
 	toggles_enemyspawn_off,
 	toggles_minigamems_off,
@@ -46,107 +41,103 @@ static const char* toggles_array[] = {
 	toggles_levitate_off,
 	toggles_superspeed,
 	toggles_ltotoggletb_off,
+	toggles_voiddisable_off,
 	"TOGGLE TAG BARREL VOID",
 	"TOGGLE VISIBILITY",
 	"TURN OFF ALL CHEATS",
 };
 
+static const char* toggles_addresses[] = {
+	(char*)&EnemySpawnOff,
+	(char*)&MinigameTimersInMS,
+	(char*)&InfiniteHealthCheatOn,
+	(char*)&LToCancelCSOn,
+	(char*)&LToEndGameOn,
+	(char*)&LToLevitateOn,
+	(char*)&LToToggleTBOn,
+	(char*)&voidsDisabled,
+};
+
+static const char toggles_indexes[] = {
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	8,
+	9,
+};
+
+static const char* toggles_on[] = {
+	toggles_enemyspawn_off,
+	toggles_minigamems_on,
+	toggles_infhealth_on,
+	toggles_ltocancelcs_on,
+	toggles_ltoendminigame_on,
+	toggles_levitate_on,
+	toggles_ltotoggletb_on,
+	toggles_voiddisable_on,
+};
+
+static const char* toggles_off[] = {
+	toggles_enemyspawn_on,
+	toggles_minigamems_off,
+	toggles_infhealth_off,
+	toggles_ltocancelcs_off,
+	toggles_ltoendminigame_off,
+	toggles_levitate_off,
+	toggles_ltotoggletb_off,
+	toggles_voiddisable_off,
+};
+
 void openTogglesMenu(void) {
-	if (AutoMoonkickOn) {
-		toggles_array[0] = toggles_moonkick_on;
-	} else {
-		toggles_array[0] = toggles_moonkick_off;
-	}
-	if (AutoPhaseStateOn) {
-		toggles_array[1] = toggles_phase_on;
-	} else {
-		toggles_array[1] = toggles_phase_off;
-	}
 	if (CurrentMap == 0x26) {
 		if (*(char *)SandstormAddress) {
-			toggles_array[2] = toggles_sandstorm_on;
+			toggles_array[0] = toggles_sandstorm_on;
 		} else {
-			toggles_array[2] = toggles_sandstorm_off;
+			toggles_array[0] = toggles_sandstorm_off;
 		}
 	} else {
-		toggles_array[2] = toggles_sandstorm_unk;
+		toggles_array[0] = toggles_sandstorm_unk;
 	}
-	if (EnemySpawnOff) {
-		toggles_array[3] = toggles_enemyspawn_off;
-	} else {
-		toggles_array[3] = toggles_enemyspawn_on;
-	}
-	if (MinigameTimersInMS) {
-		toggles_array[4] = toggles_minigamems_on;
-	} else {
-		toggles_array[4] = toggles_minigamems_off;
-	}
-	if (InfiniteHealthCheatOn) {
-		toggles_array[5] = toggles_infhealth_on;
-	} else {
-		toggles_array[5] = toggles_infhealth_off;
-	}
-	if (LToCancelCSOn) {
-		toggles_array[6] = toggles_ltocancelcs_on;
-	} else {
-		toggles_array[6] = toggles_ltocancelcs_off;
-	}
-	if (LToEndGameOn) {
-		toggles_array[7] = toggles_ltoendminigame_on;
-	} else {
-		toggles_array[7] = toggles_ltoendminigame_off;
-	}
-	if (LToLevitateOn) {
-		toggles_array[8] = toggles_levitate_on;
-	} else {
-		toggles_array[8] = toggles_levitate_off;
+	for (int i = 0; i < sizeof(toggles_indexes); i++) {
+		if (*(char*)toggles_addresses[i]) {
+			toggles_array[(int)toggles_indexes[i]] = toggles_on[i];
+		} else {
+			toggles_array[(int)toggles_indexes[i]] = toggles_off[i];
+		}
 	}
 	dk_strFormat((char *)toggles_superspeed,"L TO SUPERSPEED:%dX",IsSuperspeedOn);
 	if (IsSuperspeedOn == 1) {
-		toggles_array[9] = toggles_superspeed_off;
+		toggles_array[7] = toggles_superspeed_off;
 	} else {
-		toggles_array[9] = toggles_superspeed;
-	}
-	if (LToToggleTBOn) {
-		toggles_array[10] = toggles_ltotoggletb_on;
-	} else {
-		toggles_array[10] = toggles_ltotoggletb_off;
+		toggles_array[7] = toggles_superspeed;
 	}
 	changeMenu(71);
 }
 
-void toggleAutokick(void) {
-	AutoMoonkickOn = 1 ^ AutoMoonkickOn;
+void toggleCheat(void) {
+	int pos = -1;
+	int am_pos = ActiveMenu.positionIndex;
+	for (int i = 0; i < sizeof(toggles_indexes); i++) {
+		if (toggles_indexes[i] == am_pos) {
+			pos = i;
+		}
+	}
+	if (pos > -1) {
+		*(char*)toggles_addresses[pos] = 1 ^ *(char*)toggles_addresses[pos];
+	}
 	openTogglesMenu();
 }
 
-void toggleAutophase(void) {
-	AutoPhaseStateOn = 1 ^ AutoPhaseStateOn;
-	openTogglesMenu();
-}
-
-void toggleInfHealth(void) {
-	InfiniteHealthCheatOn = 1 ^ InfiniteHealthCheatOn;
-	openTogglesMenu();
-}
-
-void toggleLToCancelCS(void) {
-	LToCancelCSOn = 1 ^ LToCancelCSOn;
-	openTogglesMenu();
-}
-
-void toggleLToEndGame(void) {
-	LToEndGameOn = 1 ^ LToEndGameOn;
-	openTogglesMenu();
-}
-
-void toggleLevitate(void) {
-	LToLevitateOn = 1 ^ LToLevitateOn;
-	openTogglesMenu();
-}
-
-void toggleLtoTB(void) {
-	LToToggleTBOn = 1 ^ LToToggleTBOn;
+void toggleVoidDisable(void) {
+	voidsDisabled = 1 ^ voidsDisabled;
+	if (voidsDisabled == 0) {
+		if (Player) {
+			Player->voiding = 0;
+		}
+	}
 	openTogglesMenu();
 }
 
@@ -171,8 +162,6 @@ void toggleMinigameTimers(void) {
 }
 
 void resetAllCheats(void) {
-	AutoMoonkickOn = 0;
-	AutoPhaseStateOn = 0;
 	InfiniteHealthCheatOn = 0;
 	LToCancelCSOn = 0;
 	LToEndGameOn = 0;
@@ -180,6 +169,7 @@ void resetAllCheats(void) {
 	LToToggleTBOn = 0;
 	IsSuperspeedOn = 1;
 	MinigameTimersInMS = 0;
+	voidsDisabled = 0;
 	if (EnemySpawnOff) {
 		toggleSpawnPrevention();
 	}
@@ -192,17 +182,16 @@ void resetAllCheats(void) {
 }
 
 static const int toggles_functions[] = {
-	(int)&toggleAutokick,
-	(int)&toggleAutophase,
 	(int)&toggleSandstorm,
 	(int)&toggleSpawnPrevention,
 	(int)&toggleMinigameTimers,
-	(int)&toggleInfHealth,
-	(int)&toggleLToCancelCS,
-	(int)&toggleLToEndGame,
-	(int)&toggleLevitate,
+	(int)&toggleCheat,
+	(int)&toggleCheat,
+	(int)&toggleCheat,
+	(int)&toggleCheat,
 	(int)&toggleSuperspeed,
-	(int)&toggleLtoTB,
+	(int)&toggleCheat,
+	(int)&toggleVoidDisable,
 	(int)&toggleTBVoid,
 	(int)&toggleVisify,
 	(int)&resetAllCheats,
@@ -211,7 +200,7 @@ static const int toggles_functions[] = {
 const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
-	.ArrayItems = 14,
+	.ArrayItems = 13,
 	.ParentScreen = 55,
-	.ParentPosition = 5
+	.ParentPosition = 6
 };

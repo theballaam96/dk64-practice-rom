@@ -21,6 +21,19 @@ int convertIDToIndex(short obj_index) {
 	return index;
 }
 
+int convertSubIDToIndex(short obj_index) {
+	int _count = ObjectModel2Count;
+	int index = -1;
+	int* m2location = ObjectModel2Pointer;
+	for (int i = 0; i < _count; i++) {
+		ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,i);
+		if (_object->sub_id == obj_index) {
+			index = i;
+		}
+	}
+	return index;
+}
+
 void checkMapType(void) {
 	int levelIndex = levelIndexMapping[CurrentMap];
 	if ((levelIndex == 0x9) || (levelIndex == 0xD)) {

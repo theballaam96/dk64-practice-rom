@@ -159,6 +159,7 @@ static const char* state_array[] = {
 	"SAVE STATE",
 	"LOAD STATE FROM POSITION",
 	"LOAD STATE FROM EXIT",
+	"SAVESTATE SETTINGS",
 	"VIEW STATE VARIABLES",
 };
 
@@ -174,13 +175,14 @@ static const int state_functions[] = {
 	(int)&stateaction_save,
 	(int)&stateaction_loadpos,
 	(int)&stateaction_loadexit,
+	(int)&openStateSettingsMenu,
 	(int)&openStateViewMenu
 };
 
 const Screen state_struct = {
 	.TextArray = (int*)state_array,
 	.FunctionArray = state_functions,
-	.ArrayItems = 6,
+	.ArrayItems = 7,
 	.ParentScreen = 0,
 	.ParentPosition = 2
 };
@@ -214,7 +216,7 @@ const Screen viewstate_struct = {
 	.FunctionArray = viewstate_functions,
 	.ArrayItems = 12,
 	.ParentScreen = 31,
-	.ParentPosition = 5
+	.ParentPosition = 6
 };
 
 void wipeNonLowLevelActors(void) {
@@ -341,6 +343,9 @@ void loadVars(int instant_load) {
 				tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 			}
 			clearDKPortal();
+			if (savestateSettingsBitfield & 1) {
+				ObjectModel2Timer = 100;
+			}
 		}
 		if (instant_load) {
 			LZFadeoutProgress = 0.0f;

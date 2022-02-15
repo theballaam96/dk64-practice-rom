@@ -231,6 +231,7 @@
 .definelabel delayedKillsCount, 0x807FBF10 // u16
 .definelabel lockStackCount, 0x807F5A68 // u16
 .definelabel scriptsRunningCount, 0x807F60A8 // u16
+.definelabel scriptsAttemptLoadCount, 0x807F7140 // u8
 
 .definelabel arcadeMap, 0x8004C723 // u8
 .definelabel arcadeMode, 0x8004C724 // u8
@@ -369,6 +370,8 @@
 .definelabel voidMapOn, 0x807FFC8B // u8
 .definelabel voidPointer, 0x807FFC8C // ptr
 .definelabel floorsPreloadedVanilla, 0x807FFC90 // u8
+.definelabel savestateSettingsBitfield, 0x807FFC91 // u8
+.definelabel voidsDisabled, 0x807FFC92 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

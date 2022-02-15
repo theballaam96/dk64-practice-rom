@@ -70,13 +70,13 @@ static const short floor_order[] = {
 	FLOORTRI_DAMAGE,
 	FLOORTRI_INSTADEATH,
 };
-static const short floor_check_order[] = {
-	0xFFFF - FLOORTRI_NONSOLID - FLOORTRI_VOID - FLOORTRI_WATER - FLOORTRI_DAMAGE - FLOORTRI_INSTADEATH,
-	FLOORTRI_VOID,
-	FLOORTRI_WATER,
-	FLOORTRI_DAMAGE,
-	FLOORTRI_INSTADEATH,
-};
+// static const short floor_check_order[] = {
+// 	0xFFFF - FLOORTRI_NONSOLID - FLOORTRI_VOID - FLOORTRI_WATER - FLOORTRI_DAMAGE - FLOORTRI_INSTADEATH,
+// 	FLOORTRI_VOID,
+// 	FLOORTRI_WATER,
+// 	FLOORTRI_DAMAGE,
+// 	FLOORTRI_INSTADEATH,
+// };
 
 static char* floor_off_order[] = {
 	floortext_normal_off,

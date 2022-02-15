@@ -86,10 +86,9 @@ static const char fakeprodroom_6[] = "REAL";
 
 static const char watches_player_indexes[] = {11,3,17,7,19,14,6,9,12,13};
 static const char watches_timers_indexes[] = {4,5,10,18};
-static const char watches_sysenv_indexes[] = {1,2,8};
+static const char watches_sysenv_indexes[] = {1,2,8,22,23,24,25,26};
 static const char watches_assist_indexes[] = {16,-1};
 static const char watches_fake_indexes[] = {20,21};
-static const char watches_debug_indexes[] = {22,23,24,25,26};
 
 static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
@@ -294,6 +293,11 @@ static const char* watch_sysenv_array[] = {
 	change_lag,
 	change_avglag,
 	change_input,
+	change_objsignals,
+	change_delayedkills,
+	change_lockStack,
+	change_scriptRun,
+	change_loadedActorCount,
 };
 
 static const char* watch_assist_array[] = {
@@ -304,14 +308,6 @@ static const char* watch_assist_array[] = {
 static const char* watch_fake_array[] = {
 	change_fakekey,
 	change_prodroom,
-};
-
-static const char* watch_debug_array[] = {
-	change_objsignals,
-	change_delayedkills,
-	change_lockStack,
-	change_scriptRun,
-	change_loadedActorCount,
 };
 
 static char float_str[22] = {};
@@ -376,12 +372,6 @@ void updateWatchText(void) {
 			watch_fake_array[i] = watch_listed_array[watch_index];
 		}
 	}
-	for (int i = 0; i < sizeof(watches_debug_indexes); i++) {
-		watch_index = (int)watches_debug_indexes[i] - 1;
-		if (watch_index > -1) {
-			watch_debug_array[i] = watch_listed_array[watch_index];
-		}
-	}
 }
 
 void openWatchPlayerMenu(void) {
@@ -407,11 +397,6 @@ void openWatchAssistMenu(void) {
 void openWatchFakeMenu(void) {
 	updateWatchText();
 	changeMenu(103);
-}
-
-void openWatchDebugMenu(void) {
-	updateWatchText();
-	changeMenu(104);
 }
 
 void clearAllWatches(void) {
@@ -448,9 +433,6 @@ void setWatch(void) {
 			break;
 		case 103:
 			intended_watch_index = watches_fake_indexes[(int)ActiveMenu.positionIndex];
-			break;
-		case 104:
-			intended_watch_index = watches_debug_indexes[(int)ActiveMenu.positionIndex];
 		break;
 	}
 	char index_already_spawned = 0;
@@ -491,9 +473,6 @@ void setWatch(void) {
 			break;
 		case 103:
 			openWatchFakeMenu();
-			break;
-		case 104:
-			openWatchDebugMenu();
 		break;
 	}
 };
@@ -549,7 +528,6 @@ static const char* watch_array[] = {
 	"SPAWN SNAG COLLECTABLES",
 	"ASSISTANTS",
 	"FAKE ITEMS",
-	"DEBUG",
 	"SET REFERENCE POINT",
 	"CLEAR ALL WATCHES",
 };
@@ -561,7 +539,6 @@ static const int watch_functions[] = {
 	(int)&openWatchSnagMenu,
 	(int)&openWatchAssistMenu,
 	(int)&openWatchFakeMenu,
-	(int)&openWatchDebugMenu,
 	(int)&setReferencePosition,
 	(int)&clearAllWatches,
 };
@@ -569,7 +546,7 @@ static const int watch_functions[] = {
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 8,
 	.ParentScreen = 0,
 	.ParentPosition = 3
 };
@@ -613,12 +590,17 @@ static const int watch_sysenv_functions[] = {
 	(int)&setWatch,
 	(int)&setWatch,
 	(int)&toggleInputDisplay,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
+	(int)&setWatch,
 };
 
 const Screen watch_sysenv_struct = {
 	.TextArray = (int*)watch_sysenv_array,
 	.FunctionArray = watch_sysenv_functions,
-	.ArrayItems = 3,
+	.ArrayItems = 8,
 	.ParentScreen = 12,
 	.ParentPosition = 2
 };
@@ -647,22 +629,6 @@ const Screen watch_fake_struct = {
 	.ArrayItems = 2,
 	.ParentScreen = 12,
 	.ParentPosition = 5
-};
-
-static const int watch_debug_functions[] = {
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-};
-
-const Screen watch_debug_struct = {
-	.TextArray = (int*)watch_debug_array,
-	.FunctionArray = watch_debug_functions,
-	.ArrayItems = 5,
-	.ParentScreen = 12,
-	.ParentPosition = 6
 };
 
 void clampWatchFloats(void) {
@@ -1354,11 +1320,16 @@ void handleWatch(void) {
 						break;
 					case 25:
 						// Scripts Running Count
-						if ((watch_cache_array[j][1] != scriptsRunningCount) || (watch_cache_array[j][0] != 25)) {
-							headerFormatter("SCRIPTS RUNNING: ",0,scriptsRunningCount,INT_TYPE,j);
+						if (
+							(watch_cache_array[j][1] != scriptsRunningCount) || 
+							(watch_cache_array[j][2] != scriptsAttemptLoadCount) || 
+							(watch_cache_array[j][0] != 25)
+						) {
+							dk_strFormat((char *)WatchTextSpace[j], "SCRIPTS RUNNING: %d (%d)",scriptsRunningCount,scriptsAttemptLoadCount);
 						}
 						watch_cache_array[j][0] = 25;
 						watch_cache_array[j][1] = scriptsRunningCount;
+						watch_cache_array[j][2] = scriptsAttemptLoadCount;
 						break;
 					case 26:
 						// Loaded Actor Count

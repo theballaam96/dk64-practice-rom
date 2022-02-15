@@ -95,5 +95,5 @@ const Screen transform_struct = {
 	.FunctionArray = transform_functions,
 	.ArrayItems = 5,
 	.ParentScreen = 55,
-	.ParentPosition = 9
+	.ParentPosition = 10
 };

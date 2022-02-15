@@ -54,11 +54,21 @@ static const char* flagmenu_ftt_array[] = {
 	flag_hunkychunky_clear,
 };
 
+void toggleKongFTT(void) {
+	int am_pos = ActiveMenu.positionIndex;
+	if (checkFlag(ftt_flags[am_pos],0)) {
+		for (int i = 0; i < 0xE; i++) {
+			MovesBase[am_pos + 1].gb_count[i] = 0;
+		}
+	}
+	toggleFlag();
+}
+
 static const int flagmenu_ftt_functions[] = {
-	(int)&toggleFlag,
-	(int)&toggleFlag,
-	(int)&toggleFlag,
-	(int)&toggleFlag,
+	(int)&toggleKongFTT,
+	(int)&toggleKongFTT,
+	(int)&toggleKongFTT,
+	(int)&toggleKongFTT,
 	(int)&toggleFlag,
 	(int)&toggleFlag,
 	(int)&toggleFlag,

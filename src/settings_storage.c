@@ -23,6 +23,7 @@ void resetSettings(void) {
 	StoredSettings.console = 0;
 	StoredSettings.input_type = 0;
 	StoredSettings.jetman_color = 0;
+	StoredSettings.savestate_bitfield = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -48,6 +49,7 @@ void loadSettings(void) {
 		assignedConsole = StoredSettings.console;
 		InputDisplayType = StoredSettings.input_type;
 		jetmanColorIndex = StoredSettings.jetman_color;
+		savestateSettingsBitfield = StoredSettings.savestate_bitfield;
 	} else {
 		resetSettings();
 	}
@@ -73,5 +75,6 @@ void saveSettings(void) {
 	StoredSettings.console = assignedConsole;
 	StoredSettings.input_type = InputDisplayType;
 	StoredSettings.jetman_color = jetmanColorIndex;
+	StoredSettings.savestate_bitfield = savestateSettingsBitfield;
 	SaveToGlobal();
 }

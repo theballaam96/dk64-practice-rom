@@ -33,8 +33,9 @@ void initHack(void) {
 		}
 		loadExtraHooks();
 		if (StoredSettings.hasSavedData == 0) {
-			globalFlags[0] = -1;
-			globalFlags[1] = -1;
+			int gfb_start = (int)getFlagBlockAddress(1);
+			*(int*)(gfb_start) = -1;
+			*(int*)(gfb_start + 4) = -1;
 			SaveToGlobal();
 		}
 		if (StoredSettings.console > 0) {

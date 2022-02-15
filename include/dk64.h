@@ -266,6 +266,7 @@ extern short objectSignalsCount;
 extern short delayedKillsCount;
 extern int lockStackCount;
 extern short scriptsRunningCount;
+extern unsigned char scriptsAttemptLoadCount;
 
 //hack data
 extern int TestVariable;
@@ -374,6 +375,8 @@ extern unsigned char lockStackCountCopy;
 extern char voidMapOn;
 extern void* voidPointer;
 extern char floorsPreloadedVanilla;
+extern unsigned char savestateSettingsBitfield;
+extern char voidsDisabled;
 
 // Code
 extern int debugColumnLoop;

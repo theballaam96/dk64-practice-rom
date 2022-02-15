@@ -10,6 +10,7 @@ static const char* cheats_array[] = {
 	"CANCEL CUTSCENE",
 	cheats_instantskew,
 	"SPAWN SNAG CHEATS",
+	"AUTO-TRICKS",
 	"TOGGLES",
 	"UNDO LAST FLAG WRITE",
 	"GAIN CONTROL",
@@ -41,6 +42,7 @@ static const int cheats_functions[] = {
 	(int)&cancelCutscene,
 	(int)&alterSkewAngle,
 	(int)&openSnagMenu,
+	(int)&openTrickToggleMenu,
 	(int)&openTogglesMenu,
 	(int)&undoLastFlagWrite,
 	(int)&gainControl,
@@ -51,7 +53,7 @@ static const int cheats_functions[] = {
 const Screen cheats_struct = {
 	.TextArray = (int*)cheats_array,
 	.FunctionArray = cheats_functions,
-	.ArrayItems = 10,
+	.ArrayItems = 11,
 	.ParentScreen = 0,
 	.ParentPosition = 7
 };

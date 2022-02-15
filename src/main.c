@@ -78,6 +78,8 @@ void cFuncLoop(void) {
 	if (NoVacantWatchTimer > 0) {
 		NoVacantWatchTimer--;
 	}
+	disableVoid();
+	DiddyMoonMoves();
 	startupSkip();
 	colorKong(); // Constant
 	tagAnywhere(); // Constant
@@ -156,7 +158,9 @@ int* displayListModifiers(int* dl) {
 		if ((!ActiveMenu.isOpen) && (!RAMDisplayOpen)) {
 			dl = displayWatches(dl);
 			dl = displaySimpleInput(dl);
-			dl = displayVoid(dl);
+			if (TransitionSpeed <= 0) {
+				dl = displayVoid(dl);
+			}
 		}
 		dl = displayMemory(dl);
 		if (CurrentMap != 0x50) {

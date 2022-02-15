@@ -17,6 +17,7 @@ extern void openFlagSubmenu(int screenIndex);
 extern void toggleFlag(void);
 extern void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode);
 extern int convertIDToIndex(short obj_index);
+extern int convertSubIDToIndex(short obj_index);
 extern void* findActorWithType(int search_actor_type);
 extern void closeMenu(void);
 extern void startRamViewerDisplay(void);
@@ -101,6 +102,8 @@ extern void killBoss(void);
 extern void toggleVisify(void);
 extern void changeTimer_button(void);
 extern void changeTimer_spawnTimer(void);
+extern void openTrickToggleMenu(void);
+extern void DiddyMoonMoves(void);
 
 extern void openSettingsMainMenu(void);
 extern void openKongColorsMenu(void);
@@ -173,6 +176,7 @@ extern void writeFlagsToLog(void);
 extern void controlFairyViewer(void);
 extern void toggleSelectedActor(void);
 extern void loadMapVars_0(void);
+extern void disableVoid(void);
 //extern void correctTagCode(void);
 extern int* displayFloors(int* dl);
 
@@ -197,6 +201,7 @@ extern void spawnOverlay(void);
 extern void closeOverlay(void);
 
 extern void preload_map_voids(void);
+extern void openStateSettingsMenu(void);
 
 extern const Screen maps_container_struct;
 extern const Screen japes_mapwarp_struct;
@@ -301,7 +306,8 @@ extern const Screen collisionmenu_struct;
 extern const Screen floormenu_struct;
 extern const Screen bports_struct;
 extern const Screen watch_fake_struct;
-extern const Screen watch_debug_struct;
+extern const Screen state_settings_struct;
+extern const Screen tricktoggles_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

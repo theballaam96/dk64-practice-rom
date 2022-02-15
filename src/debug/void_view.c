@@ -10,6 +10,7 @@
 #define CENTER 300
 #define VIEWPORT_RANGE 500
 #define MINIMAP_RANGE 180
+#define PLAYER_SQ_SIZE 5
 
 // Cornflower Blue
 #define VOID_RED 12
@@ -69,6 +70,15 @@ int* displayPlayerMarker(int* dl) {
 		y[i] = CENTER - (dist * dk_cos(angle + (i * 2.09439510f)));
 	}
 	dl = drawTri(dl, x[0], y[0], x[1], y[1], x[2], y[2], 0xFF, 0xFF, 0xFF, 0x80);
+	dl = drawScreenRect(dl,
+						CENTER - PLAYER_SQ_SIZE,
+						CENTER - PLAYER_SQ_SIZE,
+						CENTER + PLAYER_SQ_SIZE,
+						CENTER + PLAYER_SQ_SIZE,
+						0x1F,
+						0,
+						0,
+						1);
 	return dl;
 }
 
@@ -145,7 +155,6 @@ int* drawBoxVoid(int* dl) {
 
 int* drawFloors(int* dl, int x1, int z1, int x2, int z2, int x3, int z3) {
 	float diffs[6] = {};
-	int pass = 1;
 	if (Player) {
 		diffs[0] = Player->xPos - x1;
 		diffs[1] = Player->zPos - z1;
@@ -154,119 +163,200 @@ int* drawFloors(int* dl, int x1, int z1, int x2, int z2, int x3, int z3) {
 		diffs[4] = Player->xPos - x3;
 		diffs[5] = Player->zPos - z3;
 		for (int i = 0; i < 6; i++) {
-			if ((diffs[i] >= (-VIEWPORT_RANGE-2)) && (diffs[i] <= (VIEWPORT_RANGE+2))) {
-				diffs[i] /= VIEWPORT_RANGE;
-				diffs[i] *= MINIMAP_RANGE;
-				diffs[i] += CENTER;
-			} else {
-				pass = 0;
-			}
+			diffs[i] /= VIEWPORT_RANGE;
+			diffs[i] *= MINIMAP_RANGE;
+			diffs[i] += CENTER;
 		}
-		if (pass) {
-			dl = drawTri(dl,
-						diffs[0],
-						diffs[1],
-						diffs[2],
-						diffs[3],
-						diffs[4],
-						diffs[5],
-						VOID_RED_BYTE,
-						VOID_GREEN_BYTE,
-						VOID_BLUE_BYTE,
-						1);
-		}
+		dl = drawTri(dl,
+					diffs[0],
+					diffs[1],
+					diffs[2],
+					diffs[3],
+					diffs[4],
+					diffs[5],
+					VOID_RED_BYTE,
+					VOID_GREEN_BYTE,
+					VOID_BLUE_BYTE,
+					1);
 	}
 	return dl;
+}
+
+int point_in_line(int a, int b, int c) {
+	if (a == b) {
+		if (c == a) {
+			return 1;
+		}
+	} else if (a > b) {
+		if ((a >= c) && (c >= b)) {
+			return 1;
+		}
+	} else if (b > a) {
+		if ((b >= c) && (c >= a)) {
+			return 1;
+		}
+	}
+	return 0;
 }
 
 int det(int a0, int a1, int b0, int b1) {
 	return a0 * b1 - a1 * b0;
 }
 
+#define LINE_INTERSECTION_ERROR 0x7FFFFFFF
+
 int getLineIntersection(int ax, int az, int bx, int bz, int cx, int cz, int dx, int dz, int ret_z) {
 	int div = det(ax - bx, cx - dx, az - bz, cz - dz);
 	if (div == 0) {
-		return 0;
+		return LINE_INTERSECTION_ERROR;
 	}
 	int d0 = det(ax,az,bx,bz);
 	int d1 = det(cx,cz,dx,dz);
-	if (ret_z == 0) {
-		return det(d0, d1, ax - bx, cx - dx) / div;
+	int x = det(d0, d1, ax - bx, cx - dx) / div;
+	int z = det(d0, d1, az - bz, cz - dz) / div;
+	int satisfy_counter = 0;
+	satisfy_counter += point_in_line(ax, bx, x);
+	satisfy_counter += point_in_line(cx, dx, x);
+	satisfy_counter += point_in_line(az, bz, z);
+	satisfy_counter += point_in_line(cz, dz, z);
+	if (satisfy_counter != 4) {
+		return LINE_INTERSECTION_ERROR;
 	} else {
-		return det(d0, d1, az - bz, cz - dz) / div;
+		if (ret_z) {
+			return z;
+		} else {
+			return x;
+		}
 	}
 }
 
-static int px[5] = {};
-static int pz[5] = {};
+#define MAX_POLY_VERTICES 12
+static short px[MAX_POLY_VERTICES] = {};
+static short pz[MAX_POLY_VERTICES] = {};
+static char vertex_index = 0;
+static short boundary_x[4] = {};
+static short boundary_z[4] = {};
+static char vertex_order[MAX_POLY_VERTICES] = {};
+static int boundary_x_max = 0;
+static int boundary_x_min = 0;
+static int boundary_z_max = 0;
+static int boundary_z_min = 0;
 
-int* calculateTris(int* dl, int x1, int z1, int x2, int z2, int x3, int z3, int range_count, int range_bitfield, int bx1, int bz1, int bx2, int bz2, int bx3, int bz3) {
+void pushToVertexArray(int x, int z) {
+	px[(int)vertex_index] = x;
+	pz[(int)vertex_index] = z;
+	vertex_index += 1;
+}
+
+float calculateTriArea(int x1, int y1, int x2, int y2, int x3, int y3) {
+	float area = (x1*(y2-y3)) + (x2*(y3-y1)) + (x3*(y1-y2));
+	area /= 2;
+	if (area < 0) {
+		return -area;
+	} else {
+		return area;
+	}
+}
+
+int isPointInsideTri(int ax, int az, int bx, int bz, int cx, int cz, int px, int pz) {
+	float total_tri = calculateTriArea(ax,az,bx,bz,cx,cz);
+	float A1 = calculateTriArea(px,pz,bx,bz,cx,cz);
+	float A2 = calculateTriArea(ax,az,px,pz,cx,cz);
+	float A3 = calculateTriArea(az,az,bx,bz,px,pz);
+	return (total_tri == A1 + A2 + A3);
+}
+
+int isIndexUsed(int index) {
+	for (int i = 0; i < vertex_index; i++) {
+		if (vertex_order[i] > -1) {
+			if (index == vertex_order[i]) {
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+
+void addClosestVertex(int hook_index, int write_index) {
+	int hook_x = px[(int)vertex_order[hook_index]];
+	int hook_z = pz[(int)vertex_order[hook_index]];
+	unsigned int min_dist = 0xFFFFFFFF;
+	int min_index = -1;
+	for (int i = 0; i < vertex_index; i++) {
+		if (!isIndexUsed(i)) {
+			int dx = hook_x - px[i];
+			int dz = hook_z - pz[i];
+			int dist = (dx * dx) + (dz * dx);
+			if (dist < min_dist) {
+				min_dist = dist;
+				min_index = i;
+			}
+		}
+	}
+	if (min_index > -1) {
+		vertex_order[write_index] = min_index;
+	}
+}
+
+int* calculateTris(int* dl, int x1, int z1, int x2, int z2, int x3, int z3, int range_count) {
 	if (Player) {
 		if (range_count == 3) {
 			dl = drawFloors(dl,x1,z1,x2,z2,x3,z3);
-		} else if (range_count == 2) {
-			int far_px = 0;
-			int far_pz = 0;
-			int far_bx = 0;
-			int far_bz = 0;
-			if ((range_bitfield & 0x4) == 0) {
-				px[0] = x1;
-				pz[0] = z1;
-				px[1] = x2;
-				pz[1] = z2;
-				far_px = x3;
-				far_pz = z3;
-				far_bx = bx3;
-				far_bz = bz3;
-			} else if ((range_bitfield & 0x2) == 0) {
-				px[0] = x1;
-				pz[0] = z1;
-				px[1] = x3;
-				pz[1] = z3;
-				far_px = x2;
-				far_pz = z2;
-				far_bx = bx2;
-				far_bz = bz2;
-			} else {
-				px[0] = x2;
-				pz[0] = z2;
-				px[1] = x3;
-				pz[1] = z3;
-				far_px = x1;
-				far_pz = z1;
-				far_bx = bx1;
-				far_bz = bz1;
-			}
-			int absolute_far_bx = Player->xPos + far_bx;
-			int absolute_far_bz = Player->zPos + far_bz;
-			int satisfied_d = 0;
-			int satisfied_e = 0;
-			if (far_bx != 0) {
-				satisfied_d = 1;
-				satisfied_e = 1;
-				px[2] = absolute_far_bx;
-				pz[2] = getLineIntersection(far_px,far_pz,px[0],pz[0],absolute_far_bx,Player->zPos - (5 * VIEWPORT_RANGE),absolute_far_bx,Player->zPos + (5 * VIEWPORT_RANGE),1);
-				px[3] = absolute_far_bx;
-				pz[3] = getLineIntersection(far_px,far_pz,px[1],pz[1],absolute_far_bx,Player->zPos - (5 * VIEWPORT_RANGE),absolute_far_bx,Player->zPos + (5 * VIEWPORT_RANGE),1);
-				if ((pz[2] > Player->zPos + VIEWPORT_RANGE) || (pz[2] < (Player->zPos - VIEWPORT_RANGE))) {
-					satisfied_d = 0;
-				}
-				if ((pz[3] > Player->zPos + VIEWPORT_RANGE) || (pz[3] < (Player->zPos - VIEWPORT_RANGE))) {
-					satisfied_e = 0;
+		} else {
+			vertex_index = 0;
+			int tri_x[] = {x1,x2,x3};
+			int tri_z[] = {z1,z2,z3};
+			for (int i = 0; i < 3; i++) {
+				if ((tri_x[i] >= boundary_x_min) && (tri_x[i] <= boundary_x_max)) {
+					if ((tri_z[i] >= boundary_z_min) && (tri_z[i] <= boundary_z_max)) {
+						pushToVertexArray(tri_x[i],tri_z[i]);
+					}
 				}
 			}
-			if (!satisfied_d) {
-				px[2] = getLineIntersection(far_px,far_pz,px[0],pz[0],Player->xPos - (5 * VIEWPORT_RANGE),absolute_far_bz,Player->xPos + (5 * VIEWPORT_RANGE),absolute_far_bz,0);
-				pz[2] = absolute_far_bz;
+			for (int i = 0; i < 4; i++) {
+				if (isPointInsideTri(x1,z1,x2,z2,x3,z3,boundary_x[i],boundary_z[i])) {
+					pushToVertexArray(boundary_x[i],boundary_z[i]);
+				}
 			}
-			if (!satisfied_e) {
-				px[3] = getLineIntersection(far_px,far_pz,px[1],pz[1],Player->xPos - (5 * VIEWPORT_RANGE),absolute_far_bz,Player->xPos + (5 * VIEWPORT_RANGE),absolute_far_bz,0);
-				px[3] = absolute_far_bz;
+			for (int tri_edge = 0; tri_edge < 3; tri_edge++) {
+				for (int viewport_edge = 0; viewport_edge < 4; viewport_edge++) {
+					int intersect[2] = {};
+					int pass = 1;
+					for (int axis = 0; axis < 2; axis++) {
+						intersect[axis] = getLineIntersection(tri_x[tri_edge], 
+																tri_z[tri_edge],
+																tri_x[(tri_edge + 1) % 3],
+																tri_z[(tri_edge + 1) % 3],
+																boundary_x[viewport_edge],
+																boundary_z[viewport_edge],
+																boundary_x[(viewport_edge + 1) % 4],
+																boundary_z[(viewport_edge + 1) % 4],
+																axis);
+						if (intersect[axis] == LINE_INTERSECTION_ERROR) {
+							pass = 0;
+						} 
+					}
+					if (pass) {
+						pushToVertexArray(intersect[0],intersect[1]);
+					}
+				}
 			}
-			dl = drawFloors(dl,px[0],pz[0],px[1],pz[1],px[2],pz[2]);
-			dl = drawFloors(dl,px[1],pz[1],px[2],pz[2],px[3],pz[3]);
-			if (satisfied_d != satisfied_e) {
-				dl = drawFloors(dl,px[2],pz[2],px[3],pz[3],absolute_far_bx,absolute_far_bz);
+			if (vertex_index == 3) {
+				dl = drawFloors(dl,px[0],pz[0],px[1],pz[1],px[2],pz[2]);
+			} else if (vertex_index > 3) {
+				for (int i = 0; i < MAX_POLY_VERTICES; i++) {
+					vertex_order[i] = -1;
+				}
+				vertex_order[0] = 0;
+				for (int i = 1; i < vertex_index; i++) {
+					addClosestVertex(vertex_order[i - 1],i);
+				}
+				for (int i = 0; i < (vertex_index - 2); i++) {
+					int hook = vertex_order[0];
+					int vertex_1 = vertex_order[i+1];
+					int vertex_2 = vertex_order[i+2];
+					dl = drawFloors(dl,px[hook],pz[hook],px[vertex_1],pz[vertex_1],px[vertex_2],pz[vertex_2]);
+				}
 			}
 		}
 	}
@@ -350,15 +440,25 @@ void preload_map_voids(void) {
 
 int* displayVoidFloors(int* dl) {
 	if (voidPointer) {
+		boundary_x_max = Player->xPos + VIEWPORT_RANGE;
+		boundary_x_min = Player->xPos - VIEWPORT_RANGE;
+		boundary_z_max = Player->zPos + VIEWPORT_RANGE;
+		boundary_z_min = Player->zPos - VIEWPORT_RANGE;
+		boundary_x[0] = boundary_x_max;
+		boundary_x[1] = boundary_x_max;
+		boundary_x[2] = boundary_x_min;
+		boundary_x[3] = boundary_x_min;
+		boundary_z[0] = boundary_z_max;
+		boundary_z[1] = boundary_z_min;
+		boundary_z[2] = boundary_z_max;
+		boundary_z[3] = boundary_z_min;
 		for (int i = 0; i < void_floor_count; i++) {
 			stored_floor* floor_base = getObjectArrayAddr(voidPointer, 0x10, i);
 			if (floor_base->used) {
 				int range_count = 0;
-				int range_bitfield = 0;
 				float x[3] = {};
 				float z[3] = {};
-				float bx[3] = {0.0f,0.0f,0.0f};
-				float bz[3] = {0.0f,0.0f,0.0f};
+				int coord_check[] = {0,0,0,0};
 				for (int j = 0; j < 3; j++) {
 					float tri_x = floor_base->x[j];
 					float tri_z = floor_base->z[j];
@@ -370,23 +470,32 @@ int* displayVoidFloors(int* dl) {
 						if ((dx < VIEWPORT_RANGE) && (dx > (0 - VIEWPORT_RANGE))) {
 							if ((dz < VIEWPORT_RANGE) && (dz > (0 - VIEWPORT_RANGE))) {
 								range_count += 1;
-								range_bitfield |= (1 << j);
 							}
 						}
-						if (dx > VIEWPORT_RANGE) {
-							bx[j] = -VIEWPORT_RANGE;
-						} else if (dx < (0 - VIEWPORT_RANGE)) {
-							bx[j] = VIEWPORT_RANGE;
+						int xp = Player->xPos;
+						int zp = Player->zPos;
+						if (x[j] > xp + VIEWPORT_RANGE) {
+							coord_check[0] += 1;
 						}
-						if (dz > VIEWPORT_RANGE) {
-							bz[j] = -VIEWPORT_RANGE;
-						} else if (dz < (0 - VIEWPORT_RANGE)) {
-							bz[j] = VIEWPORT_RANGE;
+						if (x[j] < xp - VIEWPORT_RANGE) {
+							coord_check[1] += 1;
+						}
+						if (z[j] > zp + VIEWPORT_RANGE) {
+							coord_check[2] += 1;
+						}
+						if (z[j] < zp - VIEWPORT_RANGE) {
+							coord_check[3] += 1;
 						}
 					}
 				}
-				if (range_count > 0) {
-					dl = calculateTris(dl, x[0], z[0], x[1], z[1], x[2], z[2], range_count, range_bitfield, bx[0],bz[0],bx[1],bz[1],bx[2],bz[2]);
+				int pass = 1;
+				for (int j = 0; j < 4; j++) {
+					if (coord_check[j] >= 3) {
+						pass = 0;
+					}
+				}
+				if (pass) {
+					dl = calculateTris(dl, x[0], z[0], x[1], z[1], x[2], z[2], range_count);
 				}
 			}
 		}
