@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Void Viewer</title>
+</head>
+<body>
+	<canvas id="canvas" width="360" height="360">
+
+	</canvas>
+
+	<script type="text/javascript">
+		var player = [1249.59,552.679];
+		var VIEWPORT_RANGE = 500
+		var MINIMAP_RANGE = 180
+		var CENTER = 300
+		var LINE_INTERSECTION_ERROR = 0x7FFFFFFF
+		var attempts = []
+
+		function drawAttempt(index) {
+			var canvas = document.getElementById("canvas")
+			var ctx = canvas.getContext("2d");
+			diffs = attempts[index];
+			ctx.beginPath();
+			ctx.moveTo(diffs[0],diffs[1]);
+			ctx.lineTo(diffs[2],diffs[3]);
+			ctx.lineTo(diffs[4],diffs[5]);
+			ctx.closePath();
+			ctx.stroke();
+		}
+
+		function drawFloors(x1,z1,x2,z2,x3,z3) {
+			var canvas = document.getElementById("canvas")
+			var diffs = [];
+			var pass = true;
+			diffs.push(player[0] - x1)
+			diffs.push(player[1] - z1)
+			diffs.push(player[0] - x2)
+			diffs.push(player[1] - z2)
+			diffs.push(player[0] - x3)
+			diffs.push(player[1] - z3)
+
+			diffs.forEach((coord,index) => {
+				if (diffs[index] >= (-VIEWPORT_RANGE-2) && (diffs[index] <= (VIEWPORT_RANGE+2))) {
+					diffs[index] = ((diffs[index] / VIEWPORT_RANGE) * MINIMAP_RANGE) + CENTER - 120;
+				} else {
+					pass = false;
+				}
+			})
+			if (pass) {
+				if (canvas.getContext) {
+					attempts.push(diffs)
+					var ctx = canvas.getContext("2d");
+					ctx.beginPath();
+					ctx.moveTo(diffs[0],diffs[1]);
+					ctx.lineTo(diffs[2],diffs[3]);
+					ctx.lineTo(diffs[4],diffs[5]);
+					ctx.fill();
+				}
+			}
+		}
+
+		var void_bounds = {'x':[0,1],'z':[0,1]}
+		var void_data = [{"used":0}]
+
+
+		var buffer = 1000;
+		var max_x = (void_bounds.x[1] * 6) + buffer;
+		var min_x = (void_bounds.x[0] * 6) - buffer;
+		var max_z = (void_bounds.z[1] * 6) + buffer;
+		var min_z = (void_bounds.z[0] * 6) - buffer;
+		var scale = 2.5;
+		var w = (max_x-min_x) / scale;
+		var h = (max_z-min_z) / scale;
+		document.getElementById("canvas").setAttribute("width",w)
+		document.getElementById("canvas").setAttribute("height",h)
+
+		function displayVoidFloors() {
+			var canvas = document.getElementById("canvas")
+			if (canvas.getContext) {
+				var ctx = canvas.getContext("2d");
+				ctx.fillRect(0,0,w,h)
+				var scaled_buffer = buffer / scale;
+				ctx.clearRect(scaled_buffer,scaled_buffer,w-(2 * scaled_buffer),h-(2 * scaled_buffer));
+				void_data.forEach(tri=> {
+					if (tri.used != 0) {
+						diffs = [];
+						for (let i = 0; i < 3; i++) {
+							diffs[i] = (tri.x[i] - min_x) / scale;
+							diffs[i + 3] = (tri.z[i] - min_z) / scale;
+						}
+						ctx.beginPath();
+						ctx.moveTo(diffs[0],diffs[3]);
+						ctx.lineTo(diffs[1],diffs[4]);
+						ctx.lineTo(diffs[2],diffs[5]);
+						ctx.fill();
+					}
+				})
+			}
+		}
+		displayVoidFloors();
+	</script>
+</body>
+</html>

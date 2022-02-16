@@ -193,6 +193,8 @@ int point_in_line(int a, int b, int c) {
 	if (a == b) {
 		if (c == a) {
 			return 1;
+		} else if (((a - 2) < c) && (c < (a + 2))) {
+			return 1;
 		}
 	} else if (a > b) {
 		if ((a >= c) && (c >= b)) {
@@ -207,7 +209,7 @@ int point_in_line(int a, int b, int c) {
 }
 
 int det(int a0, int a1, int b0, int b1) {
-	return a0 * b1 - a1 * b0;
+	return (a0 * b1) - (a1 * b0);
 }
 
 #define LINE_INTERSECTION_ERROR 0x7FFFFFFF
@@ -226,10 +228,10 @@ int getLineIntersection(int ax, int az, int bx, int bz, int cx, int cz, int dx, 
 	satisfy_counter += point_in_line(cx, dx, x);
 	satisfy_counter += point_in_line(az, bz, z);
 	satisfy_counter += point_in_line(cz, dz, z);
-	if (satisfy_counter != 4) {
+	if (satisfy_counter < 4) {
 		return LINE_INTERSECTION_ERROR;
 	} else {
-		if (ret_z) {
+		if (ret_z == 1) {
 			return z;
 		} else {
 			return x;
@@ -240,10 +242,10 @@ int getLineIntersection(int ax, int az, int bx, int bz, int cx, int cz, int dx, 
 #define MAX_POLY_VERTICES 12
 static short px[MAX_POLY_VERTICES] = {};
 static short pz[MAX_POLY_VERTICES] = {};
-static char vertex_index = 0;
+static short vertex_index = 0;
 static short boundary_x[4] = {};
 static short boundary_z[4] = {};
-static char vertex_order[MAX_POLY_VERTICES] = {};
+static int vertex_order[MAX_POLY_VERTICES] = {};
 static int boundary_x_max = 0;
 static int boundary_x_min = 0;
 static int boundary_z_max = 0;
@@ -255,22 +257,27 @@ void pushToVertexArray(int x, int z) {
 	vertex_index += 1;
 }
 
-float calculateTriArea(int x1, int y1, int x2, int y2, int x3, int y3) {
-	float area = (x1*(y2-y3)) + (x2*(y3-y1)) + (x3*(y1-y2));
-	area /= 2;
-	if (area < 0) {
-		return -area;
-	} else {
-		return area;
-	}
+int sign(int x1, int y1, int x2, int y2, int x3, int y3) {
+	return (x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3);
 }
 
 int isPointInsideTri(int ax, int az, int bx, int bz, int cx, int cz, int px, int pz) {
-	float total_tri = calculateTriArea(ax,az,bx,bz,cx,cz);
-	float A1 = calculateTriArea(px,pz,bx,bz,cx,cz);
-	float A2 = calculateTriArea(ax,az,px,pz,cx,cz);
-	float A3 = calculateTriArea(az,az,bx,bz,px,pz);
-	return (total_tri == A1 + A2 + A3);
+	int d1 = sign(px,pz,ax,az,bx,bz);
+	int d2 = sign(px,pz,bx,bz,cx,cz);
+	int d3 = sign(px,pz,cx,cz,ax,az);
+	int has_neg = 0;
+	int has_pos = 0;
+	if ((d1 < 0) || (d2 < 0) || (d3 < 0)) {
+		has_neg = 1;
+	}
+	if ((d1 > 0) || (d2 > 0) || (d3 > 0)) {
+		has_pos = 1;
+	}
+	if (has_pos && has_neg) {
+		return 0;
+	} else {
+		return 1;
+	}
 }
 
 int isIndexUsed(int index) {
@@ -293,7 +300,7 @@ void addClosestVertex(int hook_index, int write_index) {
 		if (!isIndexUsed(i)) {
 			int dx = hook_x - px[i];
 			int dz = hook_z - pz[i];
-			int dist = (dx * dx) + (dz * dx);
+			int dist = (dx * dx) + (dz * dz);
 			if (dist < min_dist) {
 				min_dist = dist;
 				min_index = i;
@@ -380,7 +387,10 @@ int correctSize(int size) {
 	}
 }
 
-int upload_void(void* source_mesh, int num_tris, int void_index) {
+int upload_void(void* source_mesh, int num_tris, int void_index, int block_index) {
+	if (block_index == 37) {
+		TestVariable = TestVariable - 1;
+	}
 	for (int j = 0; j < num_tris; j++) {
 		floor_tri* tri_base = getObjectArrayAddr(source_mesh,FLOORTRIANGLE_SIZE,j);
 		if (tri_base) {
@@ -410,10 +420,15 @@ void preload_map_voids(void) {
 			int max_size = 0;
 			for (int i = 0; i < mapFloorBlockCount; i++) {
 				floor_block = getObjectArrayAddr(mapFloorPointer,FLOORTRIANGLE_BLOCKSIZE,i);
+				if (i == 37) {
+					*(int*)(0x807FF804) = (int)floor_block;
+					*(int*)(0x807FF808) = floor_block->size;
+				}
 				if (floor_block->size > max_size) {
 					max_size = correctSize(floor_block->size);
 				}
 			}
+			*(int*)(0x807FF800) = max_size;
 			if (floorsPreloadedVanilla == 0) {
 				block_floors = dk_malloc(max_size);
 			}
@@ -421,17 +436,27 @@ void preload_map_voids(void) {
 				if (floorsPreloadedVanilla == 0) {
 					wipeMemory(block_floors,max_size);
 					floor_block = getObjectArrayAddr(mapFloorPointer,FLOORTRIANGLE_BLOCKSIZE,i);
+					if (i == 37) {
+						*(int*)(0x807FF80C) = floor_block->size;
+					}
 					if (floor_block->size > 0) {
 						int num_tris = floor_block->size / FLOORTRIANGLE_SIZE;
 						*(int*)(&file_size) = floor_block->size;
 						copyFromROM(floor_block->rom_start, block_floors, &file_size, 0, 0, 0, 0);
-						void_index = upload_void(block_floors,num_tris,void_index);
+						if (i == 37) {
+							*(int*)(0x807FF810) = num_tris;
+							int* test = dk_malloc(0x1000);
+							*(int*)(0x807FF814) = (int)test;
+							copyFromROM(floor_block->rom_start, test, &file_size, 0, 0, 0, 0);
+							*(int*)(0x807FF818) = void_index;
+						}
+						void_index = upload_void(block_floors,num_tris,void_index,i);
 					}
 				} else {
 					floor_block = getObjectArrayAddr(mapFloorPointer,FLOORTRIANGLE_BLOCKSIZE,i);
 					if (floor_block->size > 0) {
 						int num_tris = floor_block->size / FLOORTRIANGLE_SIZE;
-						void_index = upload_void(floor_block->rdram_start,num_tris,void_index);
+						void_index = upload_void(floor_block->rdram_start,num_tris,void_index,i);
 					}
 				}
 			}
@@ -441,6 +466,7 @@ void preload_map_voids(void) {
 			stored_floor* floor_base = getObjectArrayAddr(voidPointer, 0x10, void_index);
 			floor_base->used = 0;
 			void_floor_count = void_index;
+			TestVariable = void_floor_count;
 		}
 	}
 }
@@ -457,8 +483,8 @@ int* displayVoidFloors(int* dl) {
 		boundary_x[3] = boundary_x_min;
 		boundary_z[0] = boundary_z_max;
 		boundary_z[1] = boundary_z_min;
-		boundary_z[2] = boundary_z_max;
-		boundary_z[3] = boundary_z_min;
+		boundary_z[2] = boundary_z_min;
+		boundary_z[3] = boundary_z_max;
 		for (int i = 0; i < void_floor_count; i++) {
 			stored_floor* floor_base = getObjectArrayAddr(voidPointer, 0x10, i);
 			if (floor_base->used) {

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Void Viewer</title>
+</head>
+<body>
+	<canvas id="canvas" width="360" height="360">
+
+	</canvas>
+
+	<script type="text/javascript">
+		var player = [3859.183,1098.659];
+		var VIEWPORT_RANGE = 500
+		var MINIMAP_RANGE = 180
+		var CENTER = 300
+		var LINE_INTERSECTION_ERROR = 0x7FFFFFFF
+		var attempts = []
+
+		function drawAttempt(index) {
+			var canvas = document.getElementById("canvas")
+			var ctx = canvas.getContext("2d");
+			diffs = attempts[index];
+			ctx.beginPath();
+			ctx.moveTo(diffs[0],diffs[1]);
+			ctx.lineTo(diffs[2],diffs[3]);
+			ctx.lineTo(diffs[4],diffs[5]);
+			ctx.closePath();
+			ctx.stroke();
+		}
+
+		function drawFloors(x1,z1,x2,z2,x3,z3) {
+			var canvas = document.getElementById("canvas")
+			var diffs = [];
+			var pass = true;
+			diffs.push(player[0] - x1)
+			diffs.push(player[1] - z1)
+			diffs.push(player[0] - x2)
+			diffs.push(player[1] - z2)
+			diffs.push(player[0] - x3)
+			diffs.push(player[1] - z3)
+
+			diffs.forEach((coord,index) => {
+				if (diffs[index] >= (-VIEWPORT_RANGE-2) && (diffs[index] <= (VIEWPORT_RANGE+2))) {
+					diffs[index] = ((diffs[index] / VIEWPORT_RANGE) * MINIMAP_RANGE) + CENTER - 120;
+				} else {
+					pass = false;
+				}
+			})
+			if (pass) {
+				if (canvas.getContext) {
+					attempts.push(diffs)
+					var ctx = canvas.getContext("2d");
+					ctx.beginPath();
+					ctx.moveTo(diffs[0],diffs[1]);
+					ctx.lineTo(diffs[2],diffs[3]);
+					ctx.lineTo(diffs[4],diffs[5]);
+					ctx.fill();
+				}
+			}
+		}
+
+		function point_in_line(a,b,c) {
+			if (a == b) {
+				if (c == a) {
+					return 1;
+				} else if (((a - 1) < c) && (c < (a + 1))) {
+					return 1;
+				}
+			} else if (a > b) {
+				if ((a >= c) && (c >= b)) {
+					return 1;
+				}
+			} else if (b > a) {
+				if ((b >= c) && (c >= a)) {
+					return 1;
+				}
+			}
+			return 0;
+		}
+
+		function det(a0,a1,b0,b1) {
+			return (a0 * b1) - (a1 * b0)
+		}
+
+
+		var proposed = [];
+		function getLineIntersection(ax,az,bx,bz,cx,cz,dx,dz,ret_z) {
+			var div = det(ax-bx,cx-dx,az-bz,cz-dz)
+			proposed[0] = LINE_INTERSECTION_ERROR;
+			proposed[1] = LINE_INTERSECTION_ERROR;
+			if (div == 0) {
+				return LINE_INTERSECTION_ERROR
+			}
+			var d0 = det(ax,az,bx,bz)
+			var d1 = det(cx,cz,dx,dz)
+			var x = det(d0,d1,ax-bx,cx-dx) / div
+			var z = det(d0,d1,az-bz,cz-dz) / div
+			proposed[0] = x;
+			proposed[1] = z;
+			var satisfy_counter = 0;
+			satisfy_counter += point_in_line(ax,bx,x);
+			satisfy_counter += point_in_line(cx,dx,x);
+			satisfy_counter += point_in_line(az,bz,z);
+			satisfy_counter += point_in_line(cz,dz,z);
+			if (satisfy_counter != 4) {
+				return LINE_INTERSECTION_ERROR;
+			} else {
+				if (ret_z == 1) {
+					return z;
+				} else {
+					return x;
+				}
+			}
+		}
+
+		var px = [];
+		var pz = [];
+		var vertex_index = 0;
+		var boundary_x = [];
+		var boundary_z = [];
+		var vertex_order = [];
+		var boundary_x_max = 0;
+		var boundary_x_min = 0;
+		var boundary_z_max = 0;
+		var boundary_z_min = 0;
+		var MAX_POLY_VERTICES = 12;
+		for (let i = 0; i < MAX_POLY_VERTICES; i++) {
+			px[i] = 0;
+			pz[i] = 0;
+		} 
+
+		function pushToVertexArray(x,z) {
+			px[vertex_index] = x;
+			pz[vertex_index] = z;
+			vertex_index += 1;
+		}
+
+		// function calculateTriArea(x1,y1,x2,y2,x3,y3) {
+		// 	area = (x1*(y2-y3)) + (x2*(y3-y1)) + (x3*(y1-y2))
+		// 	area = area / 2;
+		// 	return Math.abs(area);
+		// }
+
+		// function isPointInsideTri(ax,az,bx,bz,cx,cz,px,pz) {
+		// 	total_tri = calculateTriArea(ax,az,bx,bz,cx,cz);
+		// 	A1 = calculateTriArea(px,pz,bx,bz,cx,cz);
+		// 	A2 = calculateTriArea(ax,az,px,pz,cx,cz);
+		// 	A3 = calculateTriArea(az,az,bx,bz,px,pz);
+		// 	return (total_tri == A1 + A2 + A3);
+		// }
+
+		// function getTriPointAreaComparison(ax,az,bx,bz,cx,cz,px,pz) {
+		// 	total_tri = calculateTriArea(ax,az,bx,bz,cx,cz);
+		// 	A1 = calculateTriArea(px,pz,bx,bz,cx,cz);
+		// 	A2 = calculateTriArea(ax,az,px,pz,cx,cz);
+		// 	A3 = calculateTriArea(az,az,bx,bz,px,pz);
+		// 	return {"tri": total_tri, "sum": A1+A2+A3};
+		// }
+
+		function sign(x1,y1,x2,y2,x3,y3) {
+			return (x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)
+		}
+
+		function isPointInsideTri(ax,az,bx,bz,cx,cz,px,pz) {
+			d1 = sign(px,pz,ax,az,bx,bz);
+			d2 = sign(px,pz,bx,bz,cx,cz);
+			d3 = sign(px,pz,cx,cz,ax,az);
+			has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+			has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+			return !(has_neg && has_pos)
+		}
+
+		// function isPointInsideTri(ax,az,bx,bz,cx,cz,px,pz) {
+		// 	total_tri = calculateTriArea(ax,az,bx,bz,cx,cz);
+		// 	A1 = calculateTriArea(px,pz,bx,bz,cx,cz);
+		// 	A2 = calculateTriArea(ax,az,px,pz,cx,cz);
+		// 	A3 = calculateTriArea(az,az,bx,bz,px,pz);
+		// 	return (total_tri == A1 + A2 + A3);
+		// }
+
+
+		function isIndexUsed(index) {
+			for (let i = 0; i < vertex_index; i++) {
+				if (vertex_order[i] > -1) {
+					if (index == vertex_order[i]) {
+						return 1;
+					}
+				}
+			}
+			return 0;
+		}
+
+		function addClosestVertex(hook_index,write_index) {
+			var hook_x = px[vertex_order[hook_index]]
+			var hook_z = pz[vertex_order[hook_index]]
+			var min_dist = 0xFFFFFFFF
+			var min_index = -1
+			for (let i = 0; i < vertex_index; i++) {
+				if (!isIndexUsed(i)) {
+					var dx = hook_x - px[i]
+					var dz = hook_z - pz[i]
+					var dist = (dx * dx) + (dz * dz) // Should be dz at the end, just checking match first
+					if (dist < min_dist) {
+						min_dist = dist;
+						min_index = i;
+					}
+				}
+			}
+			if (min_index > -1) {
+				vertex_order[write_index] = min_index;
+			}
+		}
+
+		function calculateTris(x1,z1,x2,z2,x3,z3,range_count) {
+			if (range_count == 3) {
+				drawFloors(x1,z1,x2,z2,x3,z3)
+				console.log([[x1,z1],[x2,z2],[x3,z3]])
+			} else {
+				vertex_index = 0;
+				var tri_x = [x1,x2,x3];
+				var tri_z = [z1,z2,z3];
+				var debug_info = {
+					"tri_vertices": [],
+					"viewport_vertices": [],
+					"poly_vertices": [],
+					"intersects": [],
+				}
+				for (let i = 0; i < 3; i++) {
+					added = false;
+					if ((tri_x[i] >= boundary_x_min) && (tri_x[i] <= boundary_x_max)) {
+						if ((tri_z[i] >= boundary_z_min) && (tri_z[i] <= boundary_z_max)) {
+							pushToVertexArray(tri_x[i],tri_z[i]);
+							added = true;
+						}
+					}
+					debug_info.tri_vertices.push({
+						"x": tri_x[i],
+						"z": tri_z[i],
+						"added": added,
+					})
+				}
+				for (let i = 0; i < 4; i++) {
+					added = false;
+					if (isPointInsideTri(x1,z1,x2,z2,x3,z3,boundary_x[i],boundary_z[i])) {
+						pushToVertexArray(boundary_x[i],boundary_z[i]);
+						added = true
+					}
+					debug_info.viewport_vertices.push({
+						"x": boundary_x[i],
+						"z": boundary_z[i],
+						// "comparison": getTriPointAreaComparison(x1,z1,x2,z2,x3,z3,boundary_x[i],boundary_z[i]),
+						"added": added,
+					})
+				}
+				for (let tri_edge = 0; tri_edge < 3; tri_edge++) {
+					for (let viewport_edge = 0; viewport_edge < 4; viewport_edge++) {
+						var intersect = [0,0];
+						var pass = 1;
+						for (let axis = 0; axis < 2; axis++) {
+							intersect[axis] = getLineIntersection(tri_x[tri_edge], 
+																	tri_z[tri_edge],
+																	tri_x[(tri_edge + 1) % 3],
+																	tri_z[(tri_edge + 1) % 3],
+																	boundary_x[viewport_edge],
+																	boundary_z[viewport_edge],
+																	boundary_x[(viewport_edge + 1) % 4],
+																	boundary_z[(viewport_edge + 1) % 4],
+																	axis);
+							if (intersect[axis] == LINE_INTERSECTION_ERROR) {
+								pass = 0;
+							} 
+						}
+						if (pass) {
+							pushToVertexArray(intersect[0],intersect[1]);
+						}
+						debug_info.intersects.push({
+							"x": intersect[0],
+							"z": intersect[1],
+							"proposed": {
+								"x": proposed[0],
+								"z": proposed[1],
+							},
+							"tri_edge": [
+								[
+									tri_x[tri_edge], 
+									tri_z[tri_edge],
+								],
+								[
+									tri_x[(tri_edge + 1) % 3],
+									tri_z[(tri_edge + 1) % 3],
+								]
+							],
+							"viewport_edge": [
+								[
+									boundary_x[viewport_edge],
+									boundary_z[viewport_edge],
+								],
+								[
+									boundary_x[(viewport_edge + 1) % 4],
+									boundary_z[(viewport_edge + 1) % 4],
+								]
+							],
+							"checks": {
+								"tri_x": point_in_line(tri_x[tri_edge],tri_x[(tri_edge + 1) % 3],proposed[0]),
+								"tri_z": point_in_line(tri_z[tri_edge],tri_z[(tri_edge + 1) % 3],proposed[1]),
+								"vpt_x": point_in_line(boundary_x[viewport_edge],boundary_x[(viewport_edge + 1) % 4],proposed[0]),
+								"vpt_z": point_in_line(boundary_z[viewport_edge],boundary_z[(viewport_edge + 1) % 4],proposed[1]),
+							},
+							"added": pass != 0
+						})
+					}
+				}
+				for (let i = 0; i < vertex_index; i++) {
+					debug_info.poly_vertices.push([px[i],pz[i]])
+				}
+				console.log(debug_info)
+				if (vertex_index == 3) {
+					drawFloors(px[0],pz[0],px[1],pz[1],px[2],pz[2]);
+				} else if (vertex_index > 3) {
+					for (let i = 0; i < MAX_POLY_VERTICES; i++) {
+						vertex_order[i] = -1;
+					}
+					vertex_order[0] = 0;
+					for (let i = 1; i < vertex_index; i++) {
+						addClosestVertex(vertex_order[i - 1],i);
+					}
+					for (let i = 0; i < (vertex_index - 2); i++) {
+						hook = vertex_order[0];
+						vertex_1 = vertex_order[i+1];
+						vertex_2 = vertex_order[i+2];
+						drawFloors(px[hook],pz[hook],px[vertex_1],pz[vertex_1],px[vertex_2],pz[vertex_2]);
+					}
+				}
+			}
+		}
+
+		var void_data = [{"used":0}]
+
+		var out_of_box = []
+		var in_box = []
+
+		function displayVoidFloors() {
+			boundary_x_max = player[0] + VIEWPORT_RANGE;
+			boundary_x_min = player[0] - VIEWPORT_RANGE;
+			boundary_z_max = player[1] + VIEWPORT_RANGE;
+			boundary_z_min = player[1] - VIEWPORT_RANGE;
+			boundary_x[0] = boundary_x_max;
+			boundary_x[1] = boundary_x_max;
+			boundary_x[2] = boundary_x_min;
+			boundary_x[3] = boundary_x_min;
+			boundary_z[0] = boundary_z_max;
+			boundary_z[1] = boundary_z_min;
+			boundary_z[2] = boundary_z_min;
+			boundary_z[3] = boundary_z_max;
+			void_data.forEach((floor_base,index) => {
+				if (floor_base.used != 0) {
+					var range_count = 0;
+					var x = [0,0,0];
+					var z = [0,0,0];
+					var coord_check = [0,0,0,0]
+					for (let j = 0; j < 3; j++) {
+						tri_x = floor_base.x[j]
+						tri_z = floor_base.z[j]
+						x[j] = tri_x / 6;
+						z[j] = tri_z / 6;
+						var dx = player[0] - x[j]
+						var dz = player[1] - z[j]
+						if ((dx < VIEWPORT_RANGE) && (dx > (0 - VIEWPORT_RANGE))) {
+							if ((dz < VIEWPORT_RANGE) && (dz > (0 - VIEWPORT_RANGE))) {
+								range_count += 1;
+							}
+						}
+						var xp = player[0];
+						var zp = player[1];
+						if (x[j] > xp + VIEWPORT_RANGE) {
+							coord_check[0] += 1;
+						}
+						if (x[j] < xp - VIEWPORT_RANGE) {
+							coord_check[1] += 1;
+						}
+						if (z[j] > zp + VIEWPORT_RANGE) {
+							coord_check[2] += 1;
+						}
+						if (z[j] < zp - VIEWPORT_RANGE) {
+							coord_check[3] += 1;
+						}
+					}
+					var pass = 1;
+					for (let j = 0; j < 4; j++) {
+						if (coord_check[j] >= 3) {
+							pass = 0;
+						}
+					}
+					if (pass) {
+						it = []
+						for (let j = 0; j < 3; j++) {
+							it.push({"x":x[j],"z":z[j]})
+						}
+						in_box.push(it)
+						calculateTris(x[0], z[0], x[1], z[1], x[2], z[2], range_count);
+					} else {
+						it = []
+						for (let j = 0; j < 3; j++) {
+							it.push({"x":x[j],"z":z[j]})
+						}
+						out_of_box.push(it)
+					}
+				}
+			})
+			console.log(out_of_box.length + "/" + void_data.length + " tris dismissed (REASON: OUT OF BOX)")
+		}
+		displayVoidFloors();
+	</script>
+</body>
+</html>
