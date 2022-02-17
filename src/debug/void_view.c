@@ -208,34 +208,37 @@ int point_in_line(int a, int b, int c) {
 	return 0;
 }
 
-int det(int a0, int a1, int b0, int b1) {
+float det(float a0, float a1, float b0, float b1) {
 	return (a0 * b1) - (a1 * b0);
 }
 
 #define LINE_INTERSECTION_ERROR 0x7FFFFFFF
+static int detected_intersects[2] = {};
 
-int getLineIntersection(int ax, int az, int bx, int bz, int cx, int cz, int dx, int dz, int ret_z) {
+void getLineIntersection(int ax, int az, int bx, int bz, int cx, int cz, int dx, int dz) {
 	int div = det(ax - bx, cx - dx, az - bz, cz - dz);
 	if (div == 0) {
-		return LINE_INTERSECTION_ERROR;
+		detected_intersects[0] = LINE_INTERSECTION_ERROR;
+		detected_intersects[1] = LINE_INTERSECTION_ERROR;
+		return;
 	}
 	int d0 = det(ax,az,bx,bz);
 	int d1 = det(cx,cz,dx,dz);
-	int x = det(d0, d1, ax - bx, cx - dx) / div;
-	int z = det(d0, d1, az - bz, cz - dz) / div;
+	float x = det(d0, d1, ax - bx, cx - dx);
+	float z = det(d0, d1, az - bz, cz - dz);
+	x /= div;
+	z /= div;
 	int satisfy_counter = 0;
 	satisfy_counter += point_in_line(ax, bx, x);
 	satisfy_counter += point_in_line(cx, dx, x);
 	satisfy_counter += point_in_line(az, bz, z);
 	satisfy_counter += point_in_line(cz, dz, z);
 	if (satisfy_counter < 4) {
-		return LINE_INTERSECTION_ERROR;
+		detected_intersects[0] = LINE_INTERSECTION_ERROR;
+		detected_intersects[1] = LINE_INTERSECTION_ERROR;
 	} else {
-		if (ret_z == 1) {
-			return z;
-		} else {
-			return x;
-		}
+		detected_intersects[0] = x;
+		detected_intersects[1] = z;
 	}
 }
 
@@ -312,7 +315,21 @@ void addClosestVertex(int hook_index, int write_index) {
 	}
 }
 
-int* calculateTris(int* dl, int x1, int z1, int x2, int z2, int x3, int z3, int range_count) {
+int getMin(int a, int b, int c, int d) {
+	int min = a;
+	if (b < min) {
+		min = b;
+	}
+	if (c < min) {
+		min = c;
+	}
+	if (d < min) {
+		min = d;
+	}
+	return min;
+}
+
+int* calculateTris(int* dl, int x1, int z1, int x2, int z2, int x3, int z3, int range_count, int tri_index) {
 	if (Player) {
 		if (range_count == 3) {
 			dl = drawFloors(dl,x1,z1,x2,z2,x3,z3);
@@ -334,24 +351,32 @@ int* calculateTris(int* dl, int x1, int z1, int x2, int z2, int x3, int z3, int 
 			}
 			for (int tri_edge = 0; tri_edge < 3; tri_edge++) {
 				for (int viewport_edge = 0; viewport_edge < 4; viewport_edge++) {
-					int intersect[2] = {};
 					int pass = 1;
+					int x_min = getMin(tri_x[tri_edge],tri_x[(tri_edge + 1) % 3],boundary_x[viewport_edge],boundary_x[(viewport_edge + 1) % 4]);
+					int z_min = getMin(tri_z[tri_edge],tri_z[(tri_edge + 1) % 3],boundary_z[viewport_edge],boundary_z[(viewport_edge + 1) % 4]);
+					int x_offsets[4] = {
+						tri_x[tri_edge] - x_min,
+						tri_x[(tri_edge + 1) % 3] - x_min,
+						boundary_x[viewport_edge] - x_min,
+						boundary_x[(viewport_edge + 1) % 4] - x_min
+					};
+					int z_offsets[4] = {
+						tri_z[tri_edge] - z_min,
+						tri_z[(tri_edge + 1) % 3] - z_min,
+						boundary_z[viewport_edge] - z_min,
+						boundary_z[(viewport_edge + 1) % 4] - z_min
+					};
+					getLineIntersection(x_offsets[0],z_offsets[0],
+										x_offsets[1],z_offsets[1],
+										x_offsets[2],z_offsets[2],
+										x_offsets[3],z_offsets[3]);
 					for (int axis = 0; axis < 2; axis++) {
-						intersect[axis] = getLineIntersection(tri_x[tri_edge], 
-																tri_z[tri_edge],
-																tri_x[(tri_edge + 1) % 3],
-																tri_z[(tri_edge + 1) % 3],
-																boundary_x[viewport_edge],
-																boundary_z[viewport_edge],
-																boundary_x[(viewport_edge + 1) % 4],
-																boundary_z[(viewport_edge + 1) % 4],
-																axis);
-						if (intersect[axis] == LINE_INTERSECTION_ERROR) {
+						if (detected_intersects[axis] == LINE_INTERSECTION_ERROR) {
 							pass = 0;
 						} 
 					}
 					if (pass) {
-						pushToVertexArray(intersect[0],intersect[1]);
+						pushToVertexArray(detected_intersects[0] + x_min,detected_intersects[1] + z_min);
 					}
 				}
 			}
@@ -363,7 +388,7 @@ int* calculateTris(int* dl, int x1, int z1, int x2, int z2, int x3, int z3, int 
 				}
 				vertex_order[0] = 0;
 				for (int i = 1; i < vertex_index; i++) {
-					addClosestVertex(vertex_order[i - 1],i);
+					addClosestVertex(i - 1,i);
 				}
 				for (int i = 0; i < (vertex_index - 2); i++) {
 					int hook = vertex_order[0];
@@ -396,12 +421,32 @@ int upload_void(void* source_mesh, int num_tris, int void_index, int block_index
 		if (tri_base) {
 			if ((tri_base->state_bitfield & FLOORTRI_VOID) && (void_index < 511)) {
 				stored_floor* floor_base = getObjectArrayAddr(voidPointer, 0x10, void_index);
-				void_index += 1;
-				for (int k = 0; k < 3; k++) {
-					floor_base->x[k] = tri_base->x[k];
-					floor_base->z[k] = tri_base->z[k];
+				int upload = 1;
+				for (int a = 0; a < void_index; a++) {
+					stored_floor* floor_base_test = getObjectArrayAddr(voidPointer, 0x10, a);
+					int indiv_check = 0;
+					if (floor_base_test->used) {
+						indiv_check = 1;
+						for (int b = 0; b < 3; b++) {
+							int new = 0;
+							if (floor_base_test->x[b] == tri_base->x[b]) {
+								if (floor_base_test->z[b] == tri_base->z[b]) {
+									new = 1;
+								}
+							}
+							indiv_check &= new;
+						}
+					}
+					upload &= (1 ^ indiv_check);
 				}
-				floor_base->used = 1;
+				if (upload) {
+					void_index += 1;
+					for (int k = 0; k < 3; k++) {
+						floor_base->x[k] = tri_base->x[k];
+						floor_base->z[k] = tri_base->z[k];
+					}
+					floor_base->used = 1;
+				}
 			}
 		}
 	}
@@ -420,15 +465,10 @@ void preload_map_voids(void) {
 			int max_size = 0;
 			for (int i = 0; i < mapFloorBlockCount; i++) {
 				floor_block = getObjectArrayAddr(mapFloorPointer,FLOORTRIANGLE_BLOCKSIZE,i);
-				if (i == 37) {
-					*(int*)(0x807FF804) = (int)floor_block;
-					*(int*)(0x807FF808) = floor_block->size;
-				}
 				if (floor_block->size > max_size) {
 					max_size = correctSize(floor_block->size);
 				}
 			}
-			*(int*)(0x807FF800) = max_size;
 			if (floorsPreloadedVanilla == 0) {
 				block_floors = dk_malloc(max_size);
 			}
@@ -436,20 +476,10 @@ void preload_map_voids(void) {
 				if (floorsPreloadedVanilla == 0) {
 					wipeMemory(block_floors,max_size);
 					floor_block = getObjectArrayAddr(mapFloorPointer,FLOORTRIANGLE_BLOCKSIZE,i);
-					if (i == 37) {
-						*(int*)(0x807FF80C) = floor_block->size;
-					}
 					if (floor_block->size > 0) {
 						int num_tris = floor_block->size / FLOORTRIANGLE_SIZE;
 						*(int*)(&file_size) = floor_block->size;
 						copyFromROM(floor_block->rom_start, block_floors, &file_size, 0, 0, 0, 0);
-						if (i == 37) {
-							*(int*)(0x807FF810) = num_tris;
-							int* test = dk_malloc(0x1000);
-							*(int*)(0x807FF814) = (int)test;
-							copyFromROM(floor_block->rom_start, test, &file_size, 0, 0, 0, 0);
-							*(int*)(0x807FF818) = void_index;
-						}
 						void_index = upload_void(block_floors,num_tris,void_index,i);
 					}
 				} else {
@@ -466,7 +496,6 @@ void preload_map_voids(void) {
 			stored_floor* floor_base = getObjectArrayAddr(voidPointer, 0x10, void_index);
 			floor_base->used = 0;
 			void_floor_count = void_index;
-			TestVariable = void_floor_count;
 		}
 	}
 }
@@ -528,7 +557,7 @@ int* displayVoidFloors(int* dl) {
 					}
 				}
 				if (pass) {
-					dl = calculateTris(dl, x[0], z[0], x[1], z[1], x[2], z[2], range_count);
+					dl = calculateTris(dl, x[0], z[0], x[1], z[1], x[2], z[2], range_count, i);
 				}
 			}
 		}
@@ -540,9 +569,10 @@ int* displayVoid(int* dl) {
 	if (voidMapOn) {
 		dl = displayVoidBorder(dl);
 		dl = drawBoxVoid(dl);
-		dl = drawText(dl, 6, 40, 100, "VOID MAP", 0xFF, 0xFF, 0xFF, 0xFF);
+		dl = drawText(dl, 6, 40, 100, "V", 0xFF, 0xFF, 0xFF, 0xFF);
 		dl = displayVoidFloors(dl);
 		dl = displayPlayerMarker(dl);
+		dl = drawText(dl, 6, 40, 100, "VOID MAP", 0xFF, 0xFF, 0xFF, 0xFF);
 	}
 	return dl;
 }
