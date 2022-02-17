@@ -28,6 +28,13 @@
 #define AngleRGB_PhaseState 0xFF4500 // CSS OrangeRed
 #define HeldObject_ObjectExists 0xFF4500 // CSS OrangeRed
 
+// Master Type
+#define ACTOR_MASTER_TYPE_UNASSIGNED 0
+#define ACTOR_MASTER_TYPE_UNUSED 1
+#define ACTOR_MASTER_TYPE_3D 2
+#define ACTOR_MASTER_TYPE_CONTROLLER 3
+#define ACTOR_MASTER_TYPE_2D 4
+
 // SFX Index
 #define Banana 0x2A0
 #define Okay 0x23C

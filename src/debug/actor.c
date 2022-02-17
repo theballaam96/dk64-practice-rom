@@ -23,6 +23,7 @@ static const char detailsscreen_z[15] = "Z:0";
 static const char detailsscreen_grab[] = "GRAB ACTOR";
 static const char detailsscreen_warp[] = "WARP TO ACTOR";
 static const char detailsscreen_memory[] = "VIEW IN MEMORY";
+static const char detailsscreen_focus[] = "FOCUS ON ACTOR";
 
 static char startingActorIndex = 0;
 static int previousNoTOCount = 0;
@@ -76,6 +77,7 @@ static const char* detailsscreen_array[] = {
 	detailsscreen_grab,
 	detailsscreen_warp,
 	detailsscreen_memory,
+	detailsscreen_focus,
 };
 
 void openActorMenu(void) {
@@ -150,15 +152,47 @@ void viewActorInfo(int index) {
 	changeMenu(78);
 }
 
-void grabViewedActor(void) {
+#define ACTOR_FILTER_VALID_POINTER 1
+#define ACTOR_FILTER_IS_ACTOR 2
+#define ACTOR_FILTER_IS_SAFE 4
+
+int filterActor(int play_error) {
+	int ret = 0;
 	if (FocusedActorViewPointer) {
+		ret |= ACTOR_FILTER_VALID_POINTER;
 		if (isAddressActor(FocusedActorViewPointer)) {
-			if (Player) {
-				Player->held_actor = FocusedActorViewPointer;
+			ret |= ACTOR_FILTER_IS_ACTOR;
+			int actor_type = FocusedActorViewPointer->actorType;
+			int actor_master_type = ActorMasterType[actor_type];
+			if (((actor_master_type == ACTOR_MASTER_TYPE_3D) || (actor_master_type == ACTOR_MASTER_TYPE_2D)) && (actor_type != 0xBC)) {
+				ret |= ACTOR_FILTER_IS_SAFE;
+			} else if (play_error) {
+				playSFX(Wrong);
 			}
-		} else {
-			openActorMenu();
 		}
+	}
+	return ret;
+}
+
+void grabViewedActor(void) {
+	int state = filterActor(1);
+	if (state & ACTOR_FILTER_IS_SAFE) {
+		if (Player) {
+			Player->held_actor = FocusedActorViewPointer;
+		}
+	} else if ((state & ACTOR_FILTER_IS_ACTOR) == 0) {
+		openActorMenu();
+	}
+}
+
+void focusViewedActor(void) {
+	int state = filterActor(1);
+	if (state & ACTOR_FILTER_IS_SAFE) {
+		if (Camera) {
+			Camera->focused_actor_pointer = FocusedActorViewPointer;
+		}
+	} else if ((state & ACTOR_FILTER_IS_ACTOR) == 0) {
+		openActorMenu();
 	}
 }
 
@@ -174,18 +208,17 @@ void openActorRAM(void) {
 }
 
 void warpToActor(void) {
-	if (FocusedActorViewPointer) {
-		if (isAddressActor(FocusedActorViewPointer)) {
-			if (Player) {
-				Player->xPos = FocusedActorViewPointer->xPos;
-				Player->yPos = FocusedActorViewPointer->yPos;
-				Player->zPos = FocusedActorViewPointer->zPos;
-				Player->touching_object = 0;
-				Player->collision_queue_pointer = 0;
-			}
-		} else {
-			openActorMenu();
+	int state = filterActor(1);
+	if (state & ACTOR_FILTER_IS_SAFE) {
+		if (Player) {
+			Player->xPos = FocusedActorViewPointer->xPos;
+			Player->yPos = FocusedActorViewPointer->yPos;
+			Player->zPos = FocusedActorViewPointer->zPos;
+			Player->touching_object = 0;
+			Player->collision_queue_pointer = 0;
 		}
+	} else if ((state & ACTOR_FILTER_IS_ACTOR) == 0) {
+		openActorMenu();
 	}
 }
 
@@ -247,12 +280,13 @@ static const int detailsscreen_functions[] = {
 	(int)&grabViewedActor,
 	(int)&warpToActor,
 	(int)&openActorRAM,
+	(int)&focusViewedActor,
 };
 
 const Screen detailsscreen_struct = {
 	.TextArray = (int*)detailsscreen_array,
 	.FunctionArray = detailsscreen_functions,
-	.ArrayItems = 10,
+	.ArrayItems = 11,
 	.ParentScreen = 77,
 	.ParentPosition = 0
 };

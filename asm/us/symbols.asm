@@ -218,6 +218,7 @@
 .definelabel exitPointer, 0x807FC900
 .definelabel BalloonPatchPointer, 0x807FC5C4
 .definelabel ChunkArrayPointer, 0x807F6C18
+.definelabel ActorMasterType, 0x8074D8D4
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494

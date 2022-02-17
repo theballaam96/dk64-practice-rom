@@ -228,6 +228,7 @@ extern short CBTurnedInArray[8];
 extern int* exitPointer;
 extern int* BalloonPatchPointer;
 extern int* ChunkArrayPointer;
+extern char ActorMasterType[348];
 
 extern short screenCenterX;
 extern short screenCenterY;

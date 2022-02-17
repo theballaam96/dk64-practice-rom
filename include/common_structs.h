@@ -33,7 +33,9 @@ typedef struct cameraData {
 	/* 0x084 */ float zPos;
 	/* 0x088 */ char unk_88[0x15F-0x88];
 	/* 0x15F */ char facing_angle;
-	/* 0x160 */ char unk_160[0x1FC-0x160];
+	/* 0x160 */ char unk_160[0x178-0x160];
+	/* 0x178 */ void* focused_actor_pointer;
+	/* 0x17C */ char unk_17C[0x1FC-0x17C];
 	/* 0x1FC */ float viewportX;
 	/* 0x200 */ float viewportY;
 	/* 0x204 */ float viewportZ;
