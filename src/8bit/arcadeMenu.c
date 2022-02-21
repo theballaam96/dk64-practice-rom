@@ -55,6 +55,7 @@ void arcadeLevitate(void) {
 	int jump_index = arcadeGetObjIndexOfType(13);
 	if (jump_index > -1) {
 		arcadeObjBase[jump_index].y -= 1;
+		arcadeObjBase[jump_index].jump_init_y = arcadeObjBase[jump_index].y;
 	}
 }
 

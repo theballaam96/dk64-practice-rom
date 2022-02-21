@@ -728,7 +728,9 @@ typedef struct arcadeObject {
 	/* 0x014 */ void* image_data_pointer;
 	/* 0x018 */ char type;
 	/* 0x019 */ char movement;
-	/* 0x01A */ char unk_1A[0x20-0x1A];
+	/* 0x01A */ char unk_1A[0x1D-0x1A];
+	/* 0x01D */ char jump_init_y;
+	/* 0x01E */ char unk_1E[0x20-0x1E];
 } arcadeObject;
 
 typedef struct arcadeObjectBase {
