@@ -219,6 +219,7 @@
 .definelabel BalloonPatchPointer, 0x807FC5C4
 .definelabel ChunkArrayPointer, 0x807F6C18
 .definelabel ActorMasterType, 0x8074D8D4
+.definelabel MapPropertiesBitfield, 0x807FBB64
 
 .definelabel screenCenterX, 0x80744490
 .definelabel screenCenterY, 0x80744494
@@ -258,6 +259,7 @@
 .definelabel competitors, 0x8002EC4C
 .definelabel jetpacObjectBase, 0x8002EF80
 .definelabel jetpacPlayerIndex, 0x8002EF74
+.definelabel jetpacPlayerCount, 0x8002EF78
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)

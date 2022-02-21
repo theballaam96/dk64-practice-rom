@@ -229,6 +229,7 @@ extern int* exitPointer;
 extern int* BalloonPatchPointer;
 extern int* ChunkArrayPointer;
 extern char ActorMasterType[348];
+extern unsigned int MapPropertiesBitfield;
 
 extern short screenCenterX;
 extern short screenCenterY;
@@ -262,6 +263,7 @@ extern competitor_struct competitors[2];
 extern int jetpacLevelStartTimer;
 extern jetpac_item1_struct jetpacObjectBase[20];
 extern int jetpacPlayerIndex;
+extern int jetpacPlayerCount;
 
 extern short objectSignalsCount;
 extern short delayedKillsCount;

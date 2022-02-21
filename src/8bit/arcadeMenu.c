@@ -318,9 +318,11 @@ void spawnArcadeMenu(void* write_location) {
 		setArcadeTextXY(0x38,y);
 		spawnArcadeText(write_location,"RETURN");
 	} else if (maptimerenabled) {
+		int x = 0x38;
+		int y = 224;
 		controlArcadeTimer();
-		setArcadeTextXY(0x38,230);
-		setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
+		setArcadeTextXY(x-1,y+1);
+		setArcadeTextColor(0,0,0,0xFF);
 		float arcade_timer_seconds = (maptimervalue % 3600);
 		int arcade_timer_mins = maptimervalue / 3600;
 		arcade_timer_seconds /= 60;
@@ -331,6 +333,9 @@ void spawnArcadeMenu(void* write_location) {
 		}
 		arcade_timer_secs[5] = 0;
 		dk_strFormat((char *)arcade_timer_text,"TIMER: %d:%s",arcade_timer_mins,arcade_timer_secs);
+		spawnArcadeText(write_location,arcade_timer_text);
+		setArcadeTextXY(x,y);
+		setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
 		spawnArcadeText(write_location,arcade_timer_text);
 	}
 }

@@ -64,14 +64,13 @@ int* drawImage(int* dl, int text_index, codecs codec_index, int img_width, int i
 
 int* drawTri(int* dl, short x1, short y1, short x2, short y2, short x3, short y3, int red, int green, int blue, int alpha) {
 	dl = initDisplayList(dl);
-	// Set Combine
-	*(unsigned int*)(dl++) = 0xFC7EA004;
-	*(unsigned int*)(dl++) = 0x100C00F4;
-	// Mtx
-	*(unsigned int*)(dl++) = 0xDA380003;
-	*(unsigned int*)(dl++) = 0x02000180;
-	*(unsigned int*)(dl++) = 0xDA380007;
-	*(unsigned int*)(dl++) = 0x02000080;
+	if (assignedConsole != WIIU) {
+		// Set Combine
+		*(unsigned int*)(dl++) = 0xFC7EA004;
+		*(unsigned int*)(dl++) = 0x100C00F4;
+	} else {
+		alpha = 0xFF;
+	}
 	// Vertex 0
 	*(unsigned int*)(dl++) = 0x02180000;
 	*(unsigned int*)(dl++) = (x1 << 16) | y1;

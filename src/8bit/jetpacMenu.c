@@ -51,7 +51,7 @@ void openJetpacLevelMenu(void) {
 }
 
 void restockJetpacLives(void) {
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < jetpacPlayerCount; i++) {
 		competitors[i].lives = 3;
 	}
 }
@@ -60,7 +60,7 @@ void setJetpacLevel(void) {
 	int jetpac_level = jetpacMenu.positionIndex;
 	placeJetpacFloor();
 	resetJetpacVars();
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < jetpacPlayerCount; i++) {
 		competitors[i].level = jetpac_level - 1;
 	}
 	int old_level = competitors[jetpacPlayerIndex].level;

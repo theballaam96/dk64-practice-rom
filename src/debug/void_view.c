@@ -89,61 +89,76 @@ int* drawBoxVoid(int* dl) {
 		int minZ_dz = Player->zPos - MapVoid_MinZ;
 		int maxZ_dz = Player->zPos - MapVoid_MaxZ;
 		float delta = 0;
-		if ((maxZ_dz < VIEWPORT_RANGE) && (maxZ_dz > (0 - VIEWPORT_RANGE))) {
-			delta = maxZ_dz;
-			delta /= VIEWPORT_RANGE;
-			delta *= MINIMAP_RANGE;
+		int drawn = 0;
+		if ((maxZ_dz > VIEWPORT_RANGE) || (minZ_dz < (0 - VIEWPORT_RANGE)) || (maxX_dx > VIEWPORT_RANGE) || (minX_dx < (0 - VIEWPORT_RANGE))) {
 			dl = drawScreenRect(dl,
-								BORDER_TL + BORDER_PD,
-								BORDER_TL + BORDER_PD,
-								BORDER_BR - BORDER_PD,
-								CENTER + delta,
-								VOID_RED,
-								VOID_GREEN,
-								VOID_BLUE,
-								1);
+				BORDER_TL + BORDER_PD,
+				BORDER_TL + BORDER_PD,
+				BORDER_BR - BORDER_PD,
+				BORDER_BR - BORDER_PD,
+				VOID_RED,
+				VOID_GREEN,
+				VOID_BLUE,
+				1);
+			drawn = 1;
 		}
-		if ((minZ_dz < VIEWPORT_RANGE) && (minZ_dz > (0 - VIEWPORT_RANGE))) {
-			delta = minZ_dz;
-			delta /= VIEWPORT_RANGE;
-			delta *= MINIMAP_RANGE;
-			dl = drawScreenRect(dl,
-								BORDER_TL + BORDER_PD,
-								CENTER + delta,
-								BORDER_BR - BORDER_PD,
-								BORDER_BR - BORDER_PD,
-								VOID_RED,
-								VOID_GREEN,
-								VOID_BLUE,
-								1);
-		}
-		if ((maxX_dx < VIEWPORT_RANGE) && (maxX_dx > (0 - VIEWPORT_RANGE))) {
-			delta = maxX_dx;
-			delta /= VIEWPORT_RANGE;
-			delta *= MINIMAP_RANGE;
-			dl = drawScreenRect(dl,
-								BORDER_TL + BORDER_PD,
-								BORDER_TL + BORDER_PD,
-								CENTER + delta,
-								BORDER_BR - BORDER_PD,
-								VOID_RED,
-								VOID_GREEN,
-								VOID_BLUE,
-								1);
-		}
-		if ((minX_dx < VIEWPORT_RANGE) && (minX_dx > (0 - VIEWPORT_RANGE))) {
-			delta = minX_dx;
-			delta /= VIEWPORT_RANGE;
-			delta *= MINIMAP_RANGE;
-			dl = drawScreenRect(dl,
-								CENTER + delta,
-								BORDER_TL + BORDER_PD,
-								BORDER_BR - BORDER_PD,
-								BORDER_BR - BORDER_PD,
-								VOID_RED,
-								VOID_GREEN,
-								VOID_BLUE,
-								1);
+		if (!drawn) {
+			if ((maxZ_dz < VIEWPORT_RANGE) && (maxZ_dz > (0 - VIEWPORT_RANGE))) {
+				delta = maxZ_dz;
+				delta /= VIEWPORT_RANGE;
+				delta *= MINIMAP_RANGE;
+				dl = drawScreenRect(dl,
+									BORDER_TL + BORDER_PD,
+									BORDER_TL + BORDER_PD,
+									BORDER_BR - BORDER_PD,
+									CENTER + delta,
+									VOID_RED,
+									VOID_GREEN,
+									VOID_BLUE,
+									1);
+			}
+			if ((minZ_dz < VIEWPORT_RANGE) && (minZ_dz > (0 - VIEWPORT_RANGE))) {
+				delta = minZ_dz;
+				delta /= VIEWPORT_RANGE;
+				delta *= MINIMAP_RANGE;
+				dl = drawScreenRect(dl,
+									BORDER_TL + BORDER_PD,
+									CENTER + delta,
+									BORDER_BR - BORDER_PD,
+									BORDER_BR - BORDER_PD,
+									VOID_RED,
+									VOID_GREEN,
+									VOID_BLUE,
+									1);
+			}
+			if ((maxX_dx < VIEWPORT_RANGE) && (maxX_dx > (0 - VIEWPORT_RANGE))) {
+				delta = maxX_dx;
+				delta /= VIEWPORT_RANGE;
+				delta *= MINIMAP_RANGE;
+				dl = drawScreenRect(dl,
+									BORDER_TL + BORDER_PD,
+									BORDER_TL + BORDER_PD,
+									CENTER + delta,
+									BORDER_BR - BORDER_PD,
+									VOID_RED,
+									VOID_GREEN,
+									VOID_BLUE,
+									1);
+			}
+			if ((minX_dx < VIEWPORT_RANGE) && (minX_dx > (0 - VIEWPORT_RANGE))) {
+				delta = minX_dx;
+				delta /= VIEWPORT_RANGE;
+				delta *= MINIMAP_RANGE;
+				dl = drawScreenRect(dl,
+									CENTER + delta,
+									BORDER_TL + BORDER_PD,
+									BORDER_BR - BORDER_PD,
+									BORDER_BR - BORDER_PD,
+									VOID_RED,
+									VOID_GREEN,
+									VOID_BLUE,
+									1);
+			}
 		}
 	}
 	return dl;
@@ -566,13 +581,22 @@ int* displayVoidFloors(int* dl) {
 }
 
 int* displayVoid(int* dl) {
+	int void_enabled = !(MapPropertiesBitfield & 0x4000);
 	if (voidMapOn) {
 		dl = displayVoidBorder(dl);
-		dl = drawBoxVoid(dl);
-		dl = drawText(dl, 6, 40, 100, "V", 0xFF, 0xFF, 0xFF, 0xFF);
-		dl = displayVoidFloors(dl);
+		if (void_enabled) {
+			dl = drawBoxVoid(dl);
+			if (assignedConsole != WIIU) {
+				dl = drawText(dl, 6, 40, 100, "V", 0xFF, 0xFF, 0xFF, 0xFF);
+				dl = displayVoidFloors(dl);
+			}
+		}
 		dl = displayPlayerMarker(dl);
-		dl = drawText(dl, 6, 40, 100, "VOID MAP", 0xFF, 0xFF, 0xFF, 0xFF);
+		if (assignedConsole != WIIU) {
+			dl = drawText(dl, 6, 40, 100, "VOID MAP", 0xFF, 0xFF, 0xFF, 0xFF);
+		} else {
+			dl = drawText(dl, 6, 40, 100, "VOID BOUNDARIES", 0xFF, 0xFF, 0xFF, 0xFF);
+		}
 	}
 	return dl;
 }

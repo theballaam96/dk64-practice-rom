@@ -1,7 +1,9 @@
 #include "../../include/common.h"
 
-static char voidmap_off[] = "{ VOID MAP";
-static char voidmap_on[] = "} VOID MAP";
+static char voidmap_off[20] = "";
+static char voidmap_on[20] = "";
+static char voidmap_wiiu[] = "VOID BOUNDARIES";
+static char voidmap_other[] = "VOID MAP";
 
 void openRAMViewer(void) {
 	if (assignedConsole != WIIU) {
@@ -24,6 +26,13 @@ static char* debug_array[] = {
 };
 
 void openDebugMenu(void) {
+	if (assignedConsole != WIIU) {
+		dk_strFormat(voidmap_off,"{ %s",voidmap_other);
+		dk_strFormat(voidmap_on,"} %s",voidmap_other);
+	} else {
+		dk_strFormat(voidmap_off,"{ %s",voidmap_wiiu);
+		dk_strFormat(voidmap_on,"} %s",voidmap_wiiu);
+	}
 	if (voidMapOn) {
 		debug_array[5] = voidmap_on;
 	} else {
