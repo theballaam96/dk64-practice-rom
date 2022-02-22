@@ -290,6 +290,7 @@ const Screen* arcade_screens[] = {
 
 static char arcade_timer_secs[10] = "";
 static char arcade_timer_text[20] = "";
+#define MENU_GRACE_PERIOD 3
 
 void spawnArcadeMenu(void* write_location) {
 	int y = 0x28;
@@ -300,44 +301,46 @@ void spawnArcadeMenu(void* write_location) {
 		arcadeMenu.positionIndex = array_count;
 	}
 	int _position = arcadeMenu.positionIndex;
-	if (arcadeMenu.isOpen) {
-		for (int i = 0; i < array_count; i++) {
-			if (_position == i) {
-				setArcadeTextColor(0xFF,0xD7,0x00,0xFF);
+	if (ObjectModel2Timer >= MENU_GRACE_PERIOD) {
+		if (arcadeMenu.isOpen) {
+			for (int i = 0; i < array_count; i++) {
+				if (_position == i) {
+					setArcadeTextColor(0xFF,0xD7,0x00,0xFF);
+				} else {
+					setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
+				}
+				setArcadeTextXY(0x38,y);
+				spawnArcadeText(write_location,(char*)focused_text_array[i]);
+				y += 0xC;
+			}
+			if (arcadeMenu.positionIndex == array_count) {
+				setArcadeTextColor(0xFF,0x45,0x00,0xFF);
 			} else {
 				setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
 			}
 			setArcadeTextXY(0x38,y);
-			spawnArcadeText(write_location,(char*)focused_text_array[i]);
-			y += 0xC;
-		}
-		if (arcadeMenu.positionIndex == array_count) {
-			setArcadeTextColor(0xFF,0x45,0x00,0xFF);
-		} else {
+			spawnArcadeText(write_location,"RETURN");
+		} else if (maptimerenabled) {
+			int x = 0x38;
+			int y = 224;
+			controlArcadeTimer();
+			setArcadeTextXY(x-1,y+1);
+			setArcadeTextColor(0,0,0,0xFF);
+			float arcade_timer_seconds = (maptimervalue % 3600);
+			int arcade_timer_mins = maptimervalue / 3600;
+			arcade_timer_seconds /= 60;
+			if (arcade_timer_seconds < 10) {
+				dk_strFormat((char*)arcade_timer_secs,"0%f",arcade_timer_seconds);
+			} else {
+				dk_strFormat((char*)arcade_timer_secs,"%f",arcade_timer_seconds);
+			}
+			arcade_timer_secs[5] = 0;
+			dk_strFormat((char *)arcade_timer_text,"TIMER: %d:%s",arcade_timer_mins,arcade_timer_secs);
+			spawnArcadeText(write_location,arcade_timer_text);
+			setArcadeTextXY(x,y);
 			setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
+			spawnArcadeText(write_location,arcade_timer_text);
 		}
-		setArcadeTextXY(0x38,y);
-		spawnArcadeText(write_location,"RETURN");
-	} else if (maptimerenabled) {
-		int x = 0x38;
-		int y = 224;
-		controlArcadeTimer();
-		setArcadeTextXY(x-1,y+1);
-		setArcadeTextColor(0,0,0,0xFF);
-		float arcade_timer_seconds = (maptimervalue % 3600);
-		int arcade_timer_mins = maptimervalue / 3600;
-		arcade_timer_seconds /= 60;
-		if (arcade_timer_seconds < 10) {
-			dk_strFormat((char*)arcade_timer_secs,"0%f",arcade_timer_seconds);
-		} else {
-			dk_strFormat((char*)arcade_timer_secs,"%f",arcade_timer_seconds);
-		}
-		arcade_timer_secs[5] = 0;
-		dk_strFormat((char *)arcade_timer_text,"TIMER: %d:%s",arcade_timer_mins,arcade_timer_secs);
-		spawnArcadeText(write_location,arcade_timer_text);
-		setArcadeTextXY(x,y);
-		setArcadeTextColor(0xFF,0xFF,0xFF,0xFF);
-		spawnArcadeText(write_location,arcade_timer_text);
 	}
 }
 
@@ -370,21 +373,32 @@ void controlArcadeMenuActions(void) {
 	const Screen* focused_screen = arcade_screens[(int)arcadeMenu.screenIndex];
 	int cap = focused_screen->ArrayItems;
 	int _position = arcadeMenu.positionIndex;
-	if  (arcadeMenu.isOpen) {
-		if ((_position > 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
-			arcadeMenu.positionIndex -= 1;
-		} else if ((_position == 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
-			arcadeMenu.positionIndex = cap;
-		} else if ((_position < cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
-			arcadeMenu.positionIndex += 1;
-		} else if ((_position == cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
-			arcadeMenu.positionIndex = 0;
-		} else if (((ControllerInput.Buttons & L_Button) || ((ControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && (arcadeMenu.positionIndex == 2) && (arcadeMenu.screenIndex == 0) && ((ControllerInput.Buttons & R_Button) == 0)) {
-			returnArcade();
-		} else if (((NewlyPressedControllerInput.Buttons & L_Button) || ((NewlyPressedControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && ((ControllerInput.Buttons & R_Button) == 0)) {
-			returnArcade();
-		} else if ((NewlyPressedControllerInput.Buttons & D_Left) && ((ControllerInput.Buttons & R_Button) == 0) && (MenuShortcutButtonsOff == 0)) {
-			closeArcadeMenu();
+	if (ObjectModel2Timer >= MENU_GRACE_PERIOD) {
+		if  (arcadeMenu.isOpen) {
+			if ((_position > 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
+				arcadeMenu.positionIndex -= 1;
+			} else if ((_position == 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
+				arcadeMenu.positionIndex = cap;
+			} else if ((_position < cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
+				arcadeMenu.positionIndex += 1;
+			} else if ((_position == cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
+				arcadeMenu.positionIndex = 0;
+			} else if (((ControllerInput.Buttons & L_Button) || ((ControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && (arcadeMenu.positionIndex == 2) && (arcadeMenu.screenIndex == 0) && ((ControllerInput.Buttons & R_Button) == 0)) {
+				returnArcade();
+			} else if (((NewlyPressedControllerInput.Buttons & L_Button) || ((NewlyPressedControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && ((ControllerInput.Buttons & R_Button) == 0)) {
+				returnArcade();
+			} else if ((NewlyPressedControllerInput.Buttons & D_Left) && ((ControllerInput.Buttons & R_Button) == 0) && (MenuShortcutButtonsOff == 0)) {
+				closeArcadeMenu();
+			}
 		}
+	}
+}
+
+void autoCloseArcadeMenu(void) {
+	if (ObjectModel2Timer < MENU_GRACE_PERIOD) {
+		arcadeMenu.isOpen = 0;
+		maptimerenabled = 0;
+		maptimervalue = 0;
+		arcade_array[4] = maptimer_off;
 	}
 }

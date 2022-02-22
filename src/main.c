@@ -116,12 +116,14 @@ void cFuncLoop(void) {
 };
 
 void arcadeFuncLoop(void) {
+	autoCloseArcadeMenu();
 	controlArcadeMenuActions();
 	toggleArcadeMenu();
 	finishLoadingArcadeState();
 };
 
 void jetpacFuncLoop(void) {
+	autoCloseJetpacMenu();
 	controlJetpacMenuActions();
 	toggleJetpacMenu();
 }

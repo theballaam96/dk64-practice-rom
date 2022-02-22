@@ -183,9 +183,11 @@ extern int* displayFloors(int* dl);
 extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);
 extern void finishLoadingArcadeState(void);
+extern void autoCloseArcadeMenu(void);
 
 extern void toggleJetpacMenu(void);
 extern void controlJetpacMenuActions(void);
+extern void autoCloseJetpacMenu(void);
 
 extern void spawnConsoleMenu(void);
 extern void controlConsoleMenu(void);

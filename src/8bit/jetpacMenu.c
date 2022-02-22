@@ -198,6 +198,7 @@ void updateJetmanColor(void) {
 }
 
 #define JETPAC_TEXT_X 0x28
+#define MENU_GRACE_PERIOD 3
 static char rareware_timer_text[20] = "";
 static char rareware_timer_secs[10] = "";
 
@@ -215,55 +216,57 @@ void spawnJetpacMenu(void* dl) {
 	// int blue = 0;
 	jetpacPaused = 0;
 	updateJetmanColor();
-	if (jetpacMenu.isOpen) {
-		jetpacPaused = 1;
-		if (level_load) {
-			jetpacLevelStartTimer = 179;
-			level_load = 0;
-		}
-		for (int i = 0; i < array_count; i++) {
-			if (_position == i) {
-				setJetpacTextColor(0xFF,0xD7,0x00,0xFF);
+	if (ObjectModel2Timer >= MENU_GRACE_PERIOD) {
+		if (jetpacMenu.isOpen) {
+			jetpacPaused = 1;
+			if (level_load) {
+				jetpacLevelStartTimer = 179;
+				level_load = 0;
+			}
+			for (int i = 0; i < array_count; i++) {
+				if (_position == i) {
+					setJetpacTextColor(0xFF,0xD7,0x00,0xFF);
+					// red = 0xFF;
+					// green = 0xD7;
+					// blue = 0x00;
+				} else {
+					setJetpacTextColor(0xFF,0xFF,0xFF,0xFF);
+					// red = 0xFF;
+					// green = 0xFF;
+					// blue = 0xFF;
+				}
+				// drawJetpacPixelFont(dl, (char*)focused_text_array[i], JETPAC_TEXT_X, y, red, green, blue, 0xFF);
+				spawnJetpacText(dl,(char*)focused_text_array[i],JETPAC_TEXT_X,y,0);
+				y += 0xC;
+			}
+			if (jetpacMenu.positionIndex == array_count) {
 				// red = 0xFF;
-				// green = 0xD7;
+				// green = 0x45;
 				// blue = 0x00;
+				setJetpacTextColor(0xFF,0x45,0x00,0xFF);
 			} else {
-				setJetpacTextColor(0xFF,0xFF,0xFF,0xFF);
 				// red = 0xFF;
 				// green = 0xFF;
 				// blue = 0xFF;
+				setJetpacTextColor(0xFF,0xFF,0xFF,0xFF);
 			}
-			// drawJetpacPixelFont(dl, (char*)focused_text_array[i], JETPAC_TEXT_X, y, red, green, blue, 0xFF);
-			spawnJetpacText(dl,(char*)focused_text_array[i],JETPAC_TEXT_X,y,0);
-			y += 0xC;
-		}
-		if (jetpacMenu.positionIndex == array_count) {
-			// red = 0xFF;
-			// green = 0x45;
-			// blue = 0x00;
-			setJetpacTextColor(0xFF,0x45,0x00,0xFF);
-		} else {
-			// red = 0xFF;
-			// green = 0xFF;
-			// blue = 0xFF;
+			// drawJetpacPixelFont(dl, "RETURN", JETPAC_TEXT_X, y, red, green, blue, 0xFF);
+			spawnJetpacText(dl,"RETURN",JETPAC_TEXT_X,y,0);
+		} else if (rarewaretimerenabled && (jetpacMode != 0)) {
+			controlJetpacTimer();
 			setJetpacTextColor(0xFF,0xFF,0xFF,0xFF);
+			float rareware_timer_seconds = (rareware_timer % 3600);
+			int rareware_timer_mins = rareware_timer / 3600;
+			rareware_timer_seconds /= 60;
+			if (rareware_timer_seconds < 10) {
+				dk_strFormat((char*)rareware_timer_secs,"0%f",rareware_timer_seconds);
+			} else {
+				dk_strFormat((char*)rareware_timer_secs,"%f",rareware_timer_seconds);
+			}
+			rareware_timer_secs[5] = 0;
+			dk_strFormat((char *)rareware_timer_text,"TIMER: %d:%s",rareware_timer_mins,rareware_timer_secs);
+			spawnJetpacText(dl,rareware_timer_text,JETPAC_TEXT_X,200,0);
 		}
-		// drawJetpacPixelFont(dl, "RETURN", JETPAC_TEXT_X, y, red, green, blue, 0xFF);
-		spawnJetpacText(dl,"RETURN",JETPAC_TEXT_X,y,0);
-	} else if (rarewaretimerenabled && (jetpacMode != 0)) {
-		controlJetpacTimer();
-		setJetpacTextColor(0xFF,0xFF,0xFF,0xFF);
-		float rareware_timer_seconds = (rareware_timer % 3600);
-		int rareware_timer_mins = rareware_timer / 3600;
-		rareware_timer_seconds /= 60;
-		if (rareware_timer_seconds < 10) {
-			dk_strFormat((char*)rareware_timer_secs,"0%f",rareware_timer_seconds);
-		} else {
-			dk_strFormat((char*)rareware_timer_secs,"%f",rareware_timer_seconds);
-		}
-		rareware_timer_secs[5] = 0;
-		dk_strFormat((char *)rareware_timer_text,"TIMER: %d:%s",rareware_timer_mins,rareware_timer_secs);
-		spawnJetpacText(dl,rareware_timer_text,JETPAC_TEXT_X,200,0);
 	}
 }
 
@@ -296,21 +299,32 @@ void controlJetpacMenuActions(void) {
 	const Screen* focused_screen = jetpac_screens[(int)jetpacMenu.screenIndex];
 	int cap = focused_screen->ArrayItems;
 	int _position = jetpacMenu.positionIndex;
-	if  (jetpacMenu.isOpen) {
-		if ((_position > 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
-			jetpacMenu.positionIndex -= 1;
-		} else if ((_position == 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
-			jetpacMenu.positionIndex = cap;
-		} else if ((_position < cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
-			jetpacMenu.positionIndex += 1;
-		} else if ((_position == cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
-			jetpacMenu.positionIndex = 0;
-		} else if (((ControllerInput.Buttons & L_Button) || ((ControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && (jetpacMenu.positionIndex == 2) && (jetpacMenu.screenIndex == 0) && ((ControllerInput.Buttons & R_Button) == 0)) {
-			returnJetpac();
-		} else if (((NewlyPressedControllerInput.Buttons & L_Button) || ((NewlyPressedControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && ((ControllerInput.Buttons & R_Button) == 0)) {
-			returnJetpac();
-		} else if ((NewlyPressedControllerInput.Buttons & D_Left) && ((ControllerInput.Buttons & R_Button) == 0) && (MenuShortcutButtonsOff == 0)) {
-			closeJetpacMenu();
+	if (ObjectModel2Timer >= MENU_GRACE_PERIOD) {
+		if  (jetpacMenu.isOpen) {
+			if ((_position > 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
+				jetpacMenu.positionIndex -= 1;
+			} else if ((_position == 0) && (NewlyPressedControllerInput.Buttons & D_Up)) {
+				jetpacMenu.positionIndex = cap;
+			} else if ((_position < cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
+				jetpacMenu.positionIndex += 1;
+			} else if ((_position == cap) && (NewlyPressedControllerInput.Buttons & D_Down)) {
+				jetpacMenu.positionIndex = 0;
+			} else if (((ControllerInput.Buttons & L_Button) || ((ControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && (jetpacMenu.positionIndex == 2) && (jetpacMenu.screenIndex == 0) && ((ControllerInput.Buttons & R_Button) == 0)) {
+				returnJetpac();
+			} else if (((NewlyPressedControllerInput.Buttons & L_Button) || ((NewlyPressedControllerInput.Buttons & D_Right) && (MenuShortcutButtonsOff == 0))) && ((ControllerInput.Buttons & R_Button) == 0)) {
+				returnJetpac();
+			} else if ((NewlyPressedControllerInput.Buttons & D_Left) && ((ControllerInput.Buttons & R_Button) == 0) && (MenuShortcutButtonsOff == 0)) {
+				closeJetpacMenu();
+			}
 		}
+	}
+}
+
+void autoCloseJetpacMenu(void) {
+	if (ObjectModel2Timer < MENU_GRACE_PERIOD) {
+		jetpacMenu.isOpen = 0;
+		rarewaretimerenabled = 0;
+		rareware_timer = 0;
+		jetpac_array[3] = rarewaretimer_off;
 	}
 }
