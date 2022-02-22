@@ -428,11 +428,21 @@ START_HOOK:
 		LW 		v0, 0x1C (sp)
 		JAL 	0x80026D48
 		SW 		v0, 0x1C (sp)
-		J 		0X80024960
+		J 		0x80024960
 		NOP
 
 		jetpacPauseCode_Finish:
-			J 	0x800249EC
+			JAL 	0x800255D4
+			LW 		a0, 0x20 (sp)
+			JAL 	0x80028E88 // Draw Floors
+			NOP
+			JAL 	0x80026AB0 // Draw Jetman
+			NOP
+			JAL 	0x8002AD8C // Draw Enemies
+			NOP
+			JAL 	0x80028544 // Draw Rocket
+			NOP
+			J 		0x800249E4
 			NOP
 
 	jetpac5000Code:
