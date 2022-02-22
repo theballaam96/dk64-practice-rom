@@ -160,7 +160,11 @@ void updateActorInfo(actorData* actor) {
 			lastActorRecording = actor;
 			lastHeader = collision->header;
 			actorData* collision_target = collision->targetActor;
-			lastActorType = collision_target->actorType;
+			if (collision_target) {
+				lastActorType = collision_target->actorType;
+			} else {
+				lastActorType = 0;
+			}
 			while (collision) {
 				collision_count += 1;
 				if (collision->next_collision == 0) {
@@ -168,7 +172,11 @@ void updateActorInfo(actorData* actor) {
 				} else {
 					lastHeader = collision->header;
 					collision_target = collision->targetActor;
-					lastActorType = collision_target->actorType;
+					if (collision_target) {
+						lastActorType = collision_target->actorType;
+					} else {
+						lastActorType = 0;
+					}
 				}
 				collision = collision->next_collision;
 			}
