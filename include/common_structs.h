@@ -19,7 +19,9 @@ typedef struct actorData {
 	/* 0x084 */ float zPos;
 	/* 0x088 */ char unk_80[0xB8-0x88];
 	/* 0x0B8 */ float hSpeed;
-	/* 0x0BC */ char unk_BC[0x154-0xBC];
+	/* 0x0BC */ char unk_BC[0x13C-0xBC];
+	/* 0x13C */ void* collision_queue_pointer;
+	/* 0x140 */ char unk_140[0x154-0x140];
 	/* 0x154 */ unsigned char control_state;
 	/* 0x155 */ char control_state_progress;
 	/* 0x156 */ char unk_156[0x180-0x156];
@@ -928,3 +930,13 @@ typedef struct jetpac_item1_struct {
 	/* 0x02C */ int spawn_timer;
 	/* 0x030 */ int width;
 } jetpac_item1_struct;
+
+typedef struct collision_struct {
+	/* 0x000 */ int header;
+	/* 0x004 */ int unk_04;
+	/* 0x008 */ void* targetActor;
+	/* 0x00C */ int unk_0C;
+	/* 0x010 */ int unk_10;
+	/* 0x014 */ void* next_collision;
+	/* 0x018 */ void* previous_collision;
+} collision_struct;

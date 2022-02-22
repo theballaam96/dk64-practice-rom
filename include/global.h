@@ -119,6 +119,7 @@ extern void openHeapMenu(void);
 extern void openFlagLogMenu(void);
 extern void openForceSpawnActorMenu(void);
 extern void openCollisionMenu(void);
+extern void updateActorScreen(void);
 
 extern void openWatchMenu(void);
 extern void endClose(void);

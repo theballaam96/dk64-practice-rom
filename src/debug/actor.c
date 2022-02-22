@@ -20,6 +20,8 @@ static const char detailsscreen_sizehex[15] = "SIZE:0X0";
 static const char detailsscreen_x[15] = "X:0";
 static const char detailsscreen_y[15] = "Y:0";
 static const char detailsscreen_z[15] = "Z:0";
+static const char detailsscreen_collisions[15] = "COLLISIONS:0";
+static const char detailsscreen_lastcollision[50] = "LAST COLLISION: 0";
 static const char detailsscreen_grab[] = "GRAB ACTOR";
 static const char detailsscreen_warp[] = "WARP TO ACTOR";
 static const char detailsscreen_memory[] = "VIEW IN MEMORY";
@@ -74,6 +76,8 @@ static const char* detailsscreen_array[] = {
 	detailsscreen_x,
 	detailsscreen_y,
 	detailsscreen_z,
+	detailsscreen_collisions,
+	detailsscreen_lastcollision,
 	detailsscreen_grab,
 	detailsscreen_warp,
 	detailsscreen_memory,
@@ -137,6 +141,51 @@ void shouldRefreshTOMenu(void) {
 	}
 }
 
+static void* lastActorRecording = 0;
+static unsigned int lastHeader = 0;
+static unsigned short lastActorType = 0;
+
+void updateActorInfo(actorData* actor) {
+	if (isAddressActor(actor)) {
+		dk_strFormat((char *)detailsscreen_x,"X:%f",actor->xPos);
+		dk_strFormat((char *)detailsscreen_y,"Y:%f",actor->yPos);
+		dk_strFormat((char *)detailsscreen_z,"Z:%f",actor->zPos);
+		unsigned int collision_count = 0;
+		collision_struct* collision = actor->collision_queue_pointer;
+		if (lastActorRecording != actor) {
+			lastActorRecording = 0;
+			dk_strFormat((char*)detailsscreen_lastcollision,"LAST COL:NONE");
+		}
+		if (collision) {
+			lastActorRecording = actor;
+			lastHeader = collision->header;
+			actorData* collision_target = collision->targetActor;
+			lastActorType = collision_target->actorType;
+			while (collision) {
+				collision_count += 1;
+				if (collision->next_collision == 0) {
+					break;
+				} else {
+					lastHeader = collision->header;
+					collision_target = collision->targetActor;
+					lastActorType = collision_target->actorType;
+				}
+				collision = collision->next_collision;
+			}
+		}
+		if (lastActorRecording) {
+			dk_strFormat((char*)detailsscreen_lastcollision,"LAST COL:%s<0X%X>",ActorNamesTable->actor_name[lastActorType],lastHeader);
+		}
+		dk_strFormat((char *)detailsscreen_collisions,"COLLISIONS:%d",collision_count);
+	}
+}
+
+void updateActorScreen(void) {
+	if (FocusedActorViewPointer) {
+		updateActorInfo((actorData*)FocusedActorViewPointer);
+	}
+}
+
 void viewActorInfo(int index) {
 	int actorAddr = 0;
 	actorAddr = (int)LoadedActorArray[index].actor;
@@ -146,9 +195,7 @@ void viewActorInfo(int index) {
 	dk_strFormat((char *)detailsscreen_typename,"NAME:%s",ActorNamesTable->actor_name[actorType]);
 	dk_strFormat((char *)detailsscreen_typehex,"TYPE:0X%X",actorType);
 	dk_strFormat((char *)detailsscreen_sizehex,"SIZE:0X%X",*(int*)(actorAddr - 0xC));
-	dk_strFormat((char *)detailsscreen_x,"X:%f",LoadedActorArray[index].actor->xPos);
-	dk_strFormat((char *)detailsscreen_y,"Y:%f",LoadedActorArray[index].actor->yPos);
-	dk_strFormat((char *)detailsscreen_z,"Z:%f",LoadedActorArray[index].actor->zPos);
+	updateActorInfo((actorData*)LoadedActorArray[index].actor);
 	changeMenu(78);
 }
 
@@ -277,6 +324,8 @@ static const int detailsscreen_functions[] = {
 	0,
 	0,
 	0,
+	0,
+	0,
 	(int)&grabViewedActor,
 	(int)&warpToActor,
 	(int)&openActorRAM,
@@ -286,7 +335,7 @@ static const int detailsscreen_functions[] = {
 const Screen detailsscreen_struct = {
 	.TextArray = (int*)detailsscreen_array,
 	.FunctionArray = detailsscreen_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 13,
 	.ParentScreen = 77,
 	.ParentPosition = 0
 };
