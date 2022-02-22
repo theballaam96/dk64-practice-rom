@@ -12,6 +12,7 @@ static char rarewaretimerenabled = 0;
 static char rarewaretimer_off[] = "{ 5000 POINT TIMER";
 static char rarewaretimer_on[] = "} 5000 POINT TIMER";
 static unsigned int rareware_timer = 0;
+static char jetman_color_text[15] = "";
 
 static const int jetman_colors[] = {
 	0xFFFFFF, // White
@@ -23,12 +24,27 @@ static const int jetman_colors[] = {
 	0x008B8B, // Cyan
 };
 
+static char* jetman_color_names[] = {
+	"WHITE",
+	"RED",
+	"GREEN",
+	"BLUE",
+	"YELLOW",
+	"PURPLE",
+	"CYAN",
+};
+
+void alterJetmanColorText(void) {
+	dk_strFormat((char*)jetman_color_text,"JETMAN: %s",jetman_color_names[(int)jetmanColorIndex]);
+}
+
 void toggleJetpacMenu(void) {
 	if (ControllerInput.Buttons & R_Button) {
 		if (NewlyPressedControllerInput.Buttons & L_Button) {
 			if (jetpacMenu.isOpen) {
 				jetpacMenu.isOpen = 0;
 			} else {
+				alterJetmanColorText();
 				jetpacMenu.screenIndex = 0;
 				jetpacMenu.positionIndex = 0;
 				// start_level_timer = jetpacLevelTimer;
@@ -87,6 +103,7 @@ static char* jetpac_array[] = {
 	"RESTOCK LIVES",
 	"RESET JETPAC",
 	rarewaretimer_off,
+	jetman_color_text,
 };
 
 void openBaseJetpacMenu(void) {
@@ -95,7 +112,16 @@ void openBaseJetpacMenu(void) {
 	} else {
 		jetpac_array[3] = rarewaretimer_off;
 	}
+	alterJetmanColorText();
 	changeJetpacScreen(0);
+}
+
+void toggleJetmanColor(void) {
+	jetmanColorIndex = (jetmanColorIndex + 1) % 7;
+	int old_position = jetpacMenu.positionIndex;
+	openBaseJetpacMenu();
+	saveSettings();
+	jetpacMenu.positionIndex = old_position;
 }
 
 void toggleRWTimer(void) {
@@ -110,12 +136,13 @@ static const int jetpac_functions[] = {
 	(int)&restockJetpacLives,
 	(int)&resetJetpacScore,
 	(int)&toggleRWTimer,
+	(int)&toggleJetmanColor,
 };
 
 static const Screen jetpac_struct = {
 	.TextArray = (int*)jetpac_array,
 	.FunctionArray = jetpac_functions,
-	.ArrayItems = 4,
+	.ArrayItems = 5,
 	.ParentScreen = 0,
 	.ParentPosition = 0
 };
@@ -190,11 +217,9 @@ void controlJetpacTimer(void) {
 
 void updateJetmanColor(void) {
 	int color_index = jetmanColorIndex;
-	if (color_index > 0) {
-		jetpacObjectBase[4].red = (jetman_colors[color_index] >> 16) & 0xFF;
-		jetpacObjectBase[4].green = (jetman_colors[color_index] >> 8) & 0xFF;
-		jetpacObjectBase[4].blue = jetman_colors[color_index] & 0xFF;
-	}
+	jetpacObjectBase[4].red = (jetman_colors[color_index] >> 16) & 0xFF;
+	jetpacObjectBase[4].green = (jetman_colors[color_index] >> 8) & 0xFF;
+	jetpacObjectBase[4].blue = jetman_colors[color_index] & 0xFF;
 }
 
 #define JETPAC_TEXT_X 0x28
