@@ -8,6 +8,10 @@ START:
 		SB t4, 0x00B0 (t3)
 		LUI t3, 0x8074
 		SB t4, 0x7D78 (t3)
+		LUI t3, hi(bootSpeedupFunc)
+		LW t3, lo(bootSpeedupFunc) (t3)
+		LUI t4, 0x8060
+		SW t3, 0xEB00 (t4)
 		//write per frame hook
 		//
 		LUI t3, hi(mainASMFunctionJump)
@@ -173,6 +177,10 @@ timestampAdd:
 	LUI	 	t6, hi(TempTimestampStorageMajor)
 	JR 		ra
 	SD 		t0, lo(TempTimestampStorageMajor) (t6)
+
+bootSpeedupFunc:
+	JAL bootSpeedup
+	NOP
 
 pauseHook:
 	J 	setPauseVolume

@@ -1,36 +1,41 @@
 #include "../include/common.h"
 
+static char boot_speedup_done = 0;
+
 void bootSpeedup(void) {
-	int balloon_patch_count = 0;
-	for (int j = 0; j < 8; j++) {
-		coloredBananaCounts[j] = 0;
-	}
-	for (int i = 0; i < 221; i++) {
-		balloonPatchCounts[i] = balloon_patch_count;
-		int* setup = getMapData(9,i,1,1);
-		char* modeltwo_setup = 0;
-		char* actor_setup = 0;
-		if (setup) {
-			int world = getWorld(i,1);
-			getModel2AndActorInfo(setup,(int**)&modeltwo_setup,(int**)&actor_setup);
-			int model2_count = *(int*)(modeltwo_setup);
-			int actor_count = *(int*)(actor_setup);
-			char* focused_actor = (char*)(actor_setup + 4);
-			char* focused_model2 = (char*)(modeltwo_setup + 4);
-			if (actor_count > 0) {
-				for (int j = 0; j < actor_count; j++) {
-					balloon_patch_count += isBalloonOrPatch(*(short*)((int)focused_actor + 0x32) + 0x10);
-					focused_actor += 0x38;
+	if (!boot_speedup_done) {
+		boot_speedup_done = 1;
+		int balloon_patch_count = 0;
+		for (int j = 0; j < 8; j++) {
+			coloredBananaCounts[j] = 0;
+		}
+		for (int i = 0; i < 221; i++) {
+			balloonPatchCounts[i] = balloon_patch_count;
+			int* setup = getMapData(9,i,1,1);
+			char* modeltwo_setup = 0;
+			char* actor_setup = 0;
+			if (setup) {
+				int world = getWorld(i,1);
+				getModel2AndActorInfo(setup,(int**)&modeltwo_setup,(int**)&actor_setup);
+				int model2_count = *(int*)(modeltwo_setup);
+				int actor_count = *(int*)(actor_setup);
+				char* focused_actor = (char*)(actor_setup + 4);
+				char* focused_model2 = (char*)(modeltwo_setup + 4);
+				if (actor_count > 0) {
+					for (int j = 0; j < actor_count; j++) {
+						balloon_patch_count += isBalloonOrPatch(*(short*)((int)focused_actor + 0x32) + 0x10);
+						focused_actor += 0x38;
+					}
 				}
-			}
-			if (model2_count > 0) {
-				for (int j = 0; j < model2_count; j++) {
-					coloredBananaCounts[world] += isSingleOrBunch(*(unsigned short*)(focused_model2 + 0x28));
-					focused_model2 += 0x30;
+				if (model2_count > 0) {
+					for (int j = 0; j < model2_count; j++) {
+						coloredBananaCounts[world] += isSingleOrBunch(*(unsigned short*)(focused_model2 + 0x28));
+						focused_model2 += 0x30;
+					}
 				}
+				enableComplexFree();
+				complexFreeWrapper(setup);
 			}
-			enableComplexFree();
-			complexFreeWrapper(setup);
 		}
 	}
 }
@@ -58,7 +63,7 @@ void initHack(void) {
 		style2Mtx[0x0] = base_mtx;
 		style2Mtx[0x5] = base_mtx;
 		style2Mtx[0xF] = 10;
-		bootSpeedup();
+		//bootSpeedup();
 		// base_mtx = 85;
 		// style128Mtx[0x0] = base_mtx;
 		// style128Mtx[0x5] = base_mtx;
