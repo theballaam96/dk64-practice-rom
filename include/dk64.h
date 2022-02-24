@@ -67,6 +67,12 @@ extern void deleteAllObjectModel2(void);
 extern void deleteActorSpawner(void* actor_spawner, int delete_actor);
 extern void deleteAllActorSpawners(void);
 extern void complexFree(void* addr);
+extern void getModel2AndActorInfo(void* setup, int** model2_write, int** actor_write);
+extern int isBalloonOrPatch(int actor_type);
+extern void enableComplexFree(void);
+extern void complexFreeWrapper(void* addr);
+extern int getWorld(int map, int lobby_is_isles);
+extern int isSingleOrBunch(int object_type);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
@@ -238,6 +244,9 @@ extern short MapVoid_MinX;
 extern short MapVoid_MinZ;
 extern short MapVoid_MaxX;
 extern short MapVoid_MaxZ;
+
+extern unsigned short balloonPatchCounts[221];
+extern unsigned short coloredBananaCounts[8];
 
 extern char arcadeMap;
 extern char arcadeMode;

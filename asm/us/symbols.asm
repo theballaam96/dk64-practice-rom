@@ -79,6 +79,12 @@
 .definelabel deleteActorSpawner, 0x80689710
 .definelabel deleteAllActorSpawners, 0x806898A8
 .definelabel complexFree, 0x8061130C
+.definelabel getModel2AndActorInfo, 0x80631F58
+.definelabel isBalloonOrPatch, 0x80688C84
+.definelabel enableComplexFree, 0x8066B424
+.definelabel complexFreeWrapper, 0x8066B434
+.definelabel getWorld, 0x805FF030
+.definelabel isSingleOrBunch, 0x80631EB8
 
 .definelabel initDisplayList, 0x807132DC
 .definelabel getTextStyleHeight, 0x806FD894
@@ -228,6 +234,9 @@
 .definelabel MapVoid_MinZ, 0x807F5FE6
 .definelabel MapVoid_MaxX, 0x807F5FE8
 .definelabel MapVoid_MaxZ, 0x807F5FEA
+
+.definelabel balloonPatchCounts, 0x807FC408
+.definelabel coloredBananaCounts, 0x807F6150
 
 .definelabel objectSignalsCount, 0x807FBFD8 // u16
 .definelabel delayedKillsCount, 0x807FBF10 // u16
