@@ -286,7 +286,6 @@ extern savedSettings StoredSettings;
 
 extern TextOverlay* ActiveTools_Error;
 extern char InBadMap;
-extern char MenuSavestateAction;
 extern char WatchIndex[4];
 extern unsigned char NoVacantWatchTimer;
 extern char InputDisplayType;
@@ -388,6 +387,7 @@ extern char voidMapOn;
 extern void* voidPointer;
 extern char floorsPreloadedVanilla;
 extern unsigned char savestateSettingsBitfield;
+extern char disableSavestateCombo;
 extern char voidsDisabled;
 extern char disableCustomSFX;
 

@@ -42,6 +42,9 @@ static char hack_console_emu[] = "CONSOLE:EMULATOR";
 static char hack_sfx_off[] = "{ PRACTICE ROM SOUND EFFECTS";
 static char hack_sfx_on[] = "} PRACTICE ROM SOUND EFFECTS";
 
+static char hack_savecombo_off[] = "{ SAVESTATE SHORTHAND COMBO";
+static char hack_savecombo_on[] = "} SAVESTATE SHORTHAND COMBO";
+
 static char* hack_array[] = {
 	hack_quickstartup_on,
 	hack_forcedstoryskip_on,
@@ -56,6 +59,7 @@ static char* hack_array[] = {
 	hack_inputtype_detailed,
 	hack_console_none,
 	hack_sfx_on,
+	hack_savecombo_on,
 };
 
 static char* hack_console_list[] = {
@@ -130,6 +134,11 @@ void openHackVarsMenu(void) {
 		hack_array[12] = hack_sfx_off;
 	} else {
 		hack_array[12] = hack_sfx_on;
+	}
+	if (disableSavestateCombo) {
+		hack_array[13] = hack_savecombo_off;
+	} else {
+		hack_array[13] = hack_savecombo_on;
 	}
 	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_HACK);
 };
@@ -227,6 +236,12 @@ void toggleSFX(void) {
 	openHackVarsMenu();
 }
 
+void toggleSaveCombo(void) {
+	disableSavestateCombo = 1 ^ disableSavestateCombo;
+	saveSettings();
+	openHackVarsMenu();
+}
+
 static const int hack_functions[] = {
 	(int)&toggleQuickStartup,
 	(int)&toggleForcedStorySkip,
@@ -241,12 +256,13 @@ static const int hack_functions[] = {
 	(int)&toggleInputType,
 	(int)&toggleConsole,
 	(int)&toggleSFX,
+	(int)&toggleSaveCombo,
 };
 
 const Screen hack_struct = {
 	.TextArray = (int*)hack_array,
 	.FunctionArray = hack_functions,
-	.ArrayItems = 13,
+	.ArrayItems = 14,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 3
 };

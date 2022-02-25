@@ -23,6 +23,10 @@ void tagAnywhere(void) {
   		return;
 	}
 
+	if (!disableSavestateCombo && (ControllerInput.Buttons & R_Button) && (ControllerInput.Buttons & L_Button)) {
+		return;
+	}
+
 	if (DisableTagAnywhere) {
 		return;
 	}

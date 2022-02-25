@@ -286,7 +286,6 @@
 
 .definelabel WatchIndex, 0x807FFFF8 // u8 x 4
 .definelabel InBadMap, 0x807FFFF7 // u8 - Bool
-.definelabel MenuSavestateAction, 0x807FFFF6 // u8 - 0 = Save, 1 = Load
 .definelabel InputDisplayIndex, 0x807FFFF5 // u8
 .definelabel RAMDisplayOpen, 0x807FFFF4 // u8
 .definelabel LoadVarsOnMapLoad, 0x807FFFF3 // u8 - For savestates
@@ -383,6 +382,7 @@
 .definelabel savestateSettingsBitfield, 0x807FFC91 // u8
 .definelabel voidsDisabled, 0x807FFC92 // u8
 .definelabel disableCustomSFX, 0x807FFC93 // u8
+.definelabel disableSavestateCombo, 0x807FFFC4 // u8
 .definelabel ActiveMenu, 0x807FFDC4 // 0x6
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
 

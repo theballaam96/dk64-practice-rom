@@ -141,7 +141,7 @@ extern void tagAnywhere(void);
 extern void initHack(void);
 extern void handleTimer(void);
 extern void hideInputDisplay(void);
-extern void savestateHandler(void);
+extern void savestateHandler(int action);
 extern void shorthandSavestate(void);
 extern void initRamViewerTab(void);
 extern void ramViewUpdate(void);

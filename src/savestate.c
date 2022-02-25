@@ -137,20 +137,17 @@ void openStateViewMenu(void) {
 }
 
 void stateaction_save(void) {
-	MenuSavestateAction = 1;
-	savestateHandler();
+	savestateHandler(1);
 }
 
 void stateaction_loadpos(void) {
-	MenuSavestateAction = 2;
 	LastLoadStateAction = 2;
-	savestateHandler();
+	savestateHandler(2);
 }
 
 void stateaction_loadexit(void) {
-	MenuSavestateAction = 3;
 	LastLoadStateAction = 3;
-	savestateHandler();
+	savestateHandler(3);
 }
 
 static const char* state_array[] = {
@@ -355,20 +352,20 @@ void loadVars(int instant_load) {
 	LoadVarsOnMapLoad = 0;
 }
 
-void savestateHandler(void) {
+void savestateHandler(int action) {
 	int _focused_state = FocusedSavestate;
 	int tag_found = 0;
 	int search_actor_index = 0;
 	float tag_y = 0;
 	float nearest_tag_distance = 999999;
 	float current_tag_distance = 0;
-	if (MenuSavestateAction > 0) {
+	if (action > 0) {
 		if (CurrentMap == 0x51) { // Prevent savestate load in console menu
 			playSFX(Wrong);
 		} else {
 			int* _perm_flag_block = getFlagBlockAddress(0);
 			if (_perm_flag_block) {
-				switch(MenuSavestateAction) {
+				switch(action) {
 					case 1:
 						// Save State
 						dk_memcpy((int *)states[_focused_state]->PermanentFlagBlock,_perm_flag_block,0x13C);
@@ -473,7 +470,7 @@ void savestateHandler(void) {
 					case 2:
 					case 3:
 						// Load State (2 = from position, 3 = from exit)
-						LastLoadStateAction = MenuSavestateAction;
+						LastLoadStateAction = action;
 						if (states[_focused_state]->HasData) {
 							TimerData.Mode = 0;
 							TimerData.Timer = 0;
@@ -506,7 +503,7 @@ void savestateHandler(void) {
 								CBTurnedInArray[i] = states[_focused_state]->cbs_turned_in[i];
 							}
 							if (!loading_fast_state) {
-								if (MenuSavestateAction == 2) {
+								if (action == 2) {
 									setWarpPosition(states[_focused_state]->xPos, states[_focused_state]->yPos, states[_focused_state]->zPos);
 								};
 								CutsceneFadeActive = 0; // Prevent wrong cutscene crashes
@@ -543,7 +540,6 @@ void savestateHandler(void) {
 			}
 		}
 	}
-	MenuSavestateAction = 0;
 };
 
 void shorthandSavestate(void) {
@@ -556,8 +552,11 @@ void shorthandSavestate(void) {
 			if (states[(int)FocusedSavestate]->HasData == 0) {
 				playSFX(Wrong);
 			} else {
-				MenuSavestateAction = _action;
-				savestateHandler();
+				savestateHandler(_action);
+			}
+		} else if (NewlyPressedControllerInput.Buttons & D_Down) {
+			if (!disableSavestateCombo) {
+				savestateHandler(1);
 			}
 		}
 	}

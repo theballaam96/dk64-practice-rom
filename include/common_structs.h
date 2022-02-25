@@ -432,6 +432,7 @@ typedef struct savedSettings {
 	/* 0x015 */ char jetman_color;
 	/* 0x016 */ char savestate_bitfield;
 	/* 0x017 */ char disable_sfx;
+	/* 0x018 */ char disable_save_combo;
 } savedSettings;
 
 typedef struct flagMenuData {

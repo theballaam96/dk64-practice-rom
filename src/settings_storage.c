@@ -25,6 +25,7 @@ void resetSettings(void) {
 	StoredSettings.jetman_color = 0;
 	StoredSettings.savestate_bitfield = 0;
 	StoredSettings.disable_sfx = 0;
+	StoredSettings.disable_save_combo = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -52,6 +53,7 @@ void loadSettings(void) {
 		jetmanColorIndex = StoredSettings.jetman_color;
 		savestateSettingsBitfield = StoredSettings.savestate_bitfield;
 		disableCustomSFX = StoredSettings.disable_sfx;
+		disableSavestateCombo = StoredSettings.disable_save_combo;
 	} else {
 		resetSettings();
 	}
@@ -79,5 +81,6 @@ void saveSettings(void) {
 	StoredSettings.jetman_color = jetmanColorIndex;
 	StoredSettings.savestate_bitfield = savestateSettingsBitfield;
 	StoredSettings.disable_sfx = disableCustomSFX;
+	StoredSettings.disable_save_combo = disableSavestateCombo;
 	SaveToGlobal();
 }
