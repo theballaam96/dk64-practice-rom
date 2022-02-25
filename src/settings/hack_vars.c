@@ -131,7 +131,7 @@ void openHackVarsMenu(void) {
 	} else {
 		hack_array[12] = hack_sfx_on;
 	}
-	changeMenu(69);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_HACK);
 };
 
 void toggleQuickStartup(void) {
@@ -247,6 +247,6 @@ const Screen hack_struct = {
 	.TextArray = (int*)hack_array,
 	.FunctionArray = hack_functions,
 	.ArrayItems = 13,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 3
 };

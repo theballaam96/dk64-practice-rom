@@ -27,7 +27,7 @@ static const unsigned char helmrool_destexit[] = {
 const MapWarp map_helmrool_struct = {
 	.maps = helmrool_destmap,
 	.exits = helmrool_destexit,
-	.screen = 30
+	.screen = ACTIVEMENU_SCREEN_MAP_HELMROOL
 };
 
 static const char* helmrool_mapwarp_array[] = {
@@ -58,11 +58,11 @@ const Screen helmrool_mapwarp_struct = {
 	.TextArray = (int*)helmrool_mapwarp_array,
 	.FunctionArray = helmrool_mapwarp_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 7
 };
 
 void openHelmRoolMenu(void) {
-	changeMenu(30);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_HELMROOL);
 }
 

@@ -116,7 +116,7 @@ void openBPortsMenu(void) {
 	} else {
 		bports_array[9] = bports_clear[9];
 	}
-	changeMenu(102);
+	changeMenu(ACTIVEMENU_SCREEN_FLAG_BANANAPORTS);
 }
 
 void toggleWarpLevel(int idx, int use_all_set) {
@@ -160,6 +160,6 @@ const Screen bports_struct = {
 	.TextArray = (int*)bports_array,
 	.FunctionArray = bports_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 9
 };

@@ -314,7 +314,7 @@ static char float_str[22] = {};
 //static float test_floats[2] = {};
 
 void openWatchMenu(void) {
-	changeMenu(12);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_ROOT);
 };
 
 #define INPUT_VIEWER_INDEX 7
@@ -376,27 +376,27 @@ void updateWatchText(void) {
 
 void openWatchPlayerMenu(void) {
 	updateWatchText();
-	changeMenu(79);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_PLAYER);
 }
 
 void openWatchTimersMenu(void) {
 	updateWatchText();
-	changeMenu(80);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_TIMERS);
 }
 
 void openWatchSysMenu(void) {
 	updateWatchText();
-	changeMenu(81);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_SYSTEM);
 }
 
 void openWatchAssistMenu(void) {
 	updateWatchText();
-	changeMenu(83);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_ASSISTS);
 }
 
 void openWatchFakeMenu(void) {
 	updateWatchText();
-	changeMenu(103);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_FAKE);
 }
 
 void clearAllWatches(void) {
@@ -419,19 +419,19 @@ void setWatch(void) {
 	int i = 0;
 	int intended_watch_index = 0;
 	switch(ActiveMenu.screenIndex) {
-		case 79:
+		case ACTIVEMENU_SCREEN_WATCH_PLAYER:
 			intended_watch_index = watches_player_indexes[(int)ActiveMenu.positionIndex];
 			break;
-		case 80:
+		case ACTIVEMENU_SCREEN_WATCH_TIMERS:
 			intended_watch_index = watches_timers_indexes[(int)ActiveMenu.positionIndex];
 			break;
-		case 81:
+		case ACTIVEMENU_SCREEN_WATCH_SYSTEM:
 			intended_watch_index = watches_sysenv_indexes[(int)ActiveMenu.positionIndex];
 			break;
-		case 83:
+		case ACTIVEMENU_SCREEN_WATCH_ASSISTS:
 			intended_watch_index = watches_assist_indexes[(int)ActiveMenu.positionIndex];
 			break;
-		case 103:
+		case ACTIVEMENU_SCREEN_WATCH_FAKE:
 			intended_watch_index = watches_fake_indexes[(int)ActiveMenu.positionIndex];
 		break;
 	}
@@ -459,19 +459,19 @@ void setWatch(void) {
 		}
 	}
 	switch(ActiveMenu.screenIndex) {
-		case 79:
+		case ACTIVEMENU_SCREEN_WATCH_PLAYER:
 			openWatchPlayerMenu();
 			break;
-		case 80:
+		case ACTIVEMENU_SCREEN_WATCH_TIMERS:
 			openWatchTimersMenu();
 			break;
-		case 81:
+		case ACTIVEMENU_SCREEN_WATCH_SYSTEM:
 			openWatchSysMenu();
 			break;
-		case 83:
+		case ACTIVEMENU_SCREEN_WATCH_ASSISTS:
 			openWatchAssistMenu();
 			break;
-		case 103:
+		case ACTIVEMENU_SCREEN_WATCH_FAKE:
 			openWatchFakeMenu();
 		break;
 	}
@@ -547,7 +547,7 @@ const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 3
 };
 
@@ -567,7 +567,7 @@ const Screen watch_player_struct = {
 	.TextArray = (int*)watch_player_array,
 	.FunctionArray = watch_player_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 12,
+	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 0
 };
 
@@ -582,7 +582,7 @@ const Screen watch_timers_struct = {
 	.TextArray = (int*)watch_timers_array,
 	.FunctionArray = watch_timers_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 12,
+	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 1
 };
 
@@ -601,7 +601,7 @@ const Screen watch_sysenv_struct = {
 	.TextArray = (int*)watch_sysenv_array,
 	.FunctionArray = watch_sysenv_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 12,
+	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 2
 };
 
@@ -614,7 +614,7 @@ const Screen watch_assist_struct = {
 	.TextArray = (int*)watch_assist_array,
 	.FunctionArray = watch_assist_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 12,
+	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 4
 };
 
@@ -627,7 +627,7 @@ const Screen watch_fake_struct = {
 	.TextArray = (int*)watch_fake_array,
 	.FunctionArray = watch_fake_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 12,
+	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 5
 };
 

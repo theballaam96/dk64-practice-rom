@@ -19,7 +19,7 @@ static const short kong_flags[] = {0x0181,0x0006,0x0046,0x0042,0x0075};
 static const char kong_flag_types[] = {0,0,0,0,0};
 
 void openFlagsKongMenu(void) {
-	openFlagSubmenu(44);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_KONGS);
 }
 
 static const char* flagmenu_kongs_array[] = {
@@ -42,7 +42,7 @@ const Screen flagmenu_kongs_struct = {
 	.TextArray = (int*)flagmenu_kongs_array,
 	.FunctionArray = flagmenu_kongs_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 0
 };
 
@@ -83,6 +83,6 @@ const flagMenuData flagmenu_kongmenu = {
 	.flagArray = kong_flags,
 	.flagTypeArray = kong_flag_types,
 	.flagText = (const int*)flagkong_array,
-	.screenIndex = 44,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_KONGS,
 	.flagCount = 5,
 };

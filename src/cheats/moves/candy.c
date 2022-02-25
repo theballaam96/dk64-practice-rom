@@ -82,7 +82,7 @@ void openCandyMenu(void) {
 	for (int i = 0; i < 5; i++) {
 		candy_array[i] = (char*)candy_list_kong[i][(int)MovesBase[i].instrument_bitfield & 1];
 	}
-	changeMenu(66);
+	changeMenu(ACTIVEMENU_SCREEN_MOVES_CANDY);
 };
 
 void toggleMelonCount(void) {
@@ -141,6 +141,6 @@ const Screen candy_struct = {
 	.TextArray = (int*)candy_array,
 	.FunctionArray = candy_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 63,
+	.ParentScreen = ACTIVEMENU_SCREEN_MOVES_ROOT,
 	.ParentPosition = 4
 };

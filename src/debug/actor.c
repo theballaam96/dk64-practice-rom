@@ -64,7 +64,7 @@ Screen actor_struct = {
 	.TextArray = (int*)actor_array,
 	.FunctionArray = actor_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 76,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ROOT,
 	.ParentPosition = 0
 };
 
@@ -92,7 +92,7 @@ void openActorMenu(void) {
 		*(int*)(&file_size) = 0x1580;
 		copyFromROM(0x2020000,copy_space,&file_size,0,0,0,0);
 	}
-	if (ActiveMenu.screenIndex != 77) {
+	if (ActiveMenu.screenIndex != ACTIVEMENU_SCREEN_DEBUG_ACTORLIST) {
 		startingActorIndex = 0;
 	}
 	int actorAddr = 0;
@@ -125,12 +125,12 @@ void openActorMenu(void) {
 		actor_array[shown_items] = actorscreen_viewprev;
 	}
 	
-	changeMenu(77);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_ACTORLIST);
 };
 
 void shouldRefreshTOMenu(void) {
 	if (ActiveMenu.isOpen) {
-		if (ActiveMenu.screenIndex == 77) {
+		if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_DEBUG_ACTORLIST) {
 			if (LoadedActorCount != previousNoTOCount) {
 				if (LoadedActorCount < (startingActorIndex + 1)) {
 					startingActorIndex = LoadedActorCount - (LoadedActorCount % 10);
@@ -204,7 +204,7 @@ void viewActorInfo(int index) {
 	dk_strFormat((char *)detailsscreen_typehex,"TYPE:0X%X",actorType);
 	dk_strFormat((char *)detailsscreen_sizehex,"SIZE:0X%X",*(int*)(actorAddr - 0xC));
 	updateActorInfo((actorData*)LoadedActorArray[index].actor);
-	changeMenu(78);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_ACTORDETAILS);
 }
 
 #define ACTOR_FILTER_VALID_POINTER 1
@@ -344,6 +344,6 @@ const Screen detailsscreen_struct = {
 	.TextArray = (int*)detailsscreen_array,
 	.FunctionArray = detailsscreen_functions,
 	.ArrayItems = 13,
-	.ParentScreen = 77,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ACTORLIST,
 	.ParentPosition = 0
 };

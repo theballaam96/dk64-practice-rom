@@ -25,7 +25,7 @@ static const short leveltns_flags[] = {0x002E,0x006C,0x0098,0x00CB,0x0102,0x012E
 static const char leveltns_flag_types[] = {0,0,0,0,0,0,0};
 
 void openFlagsLeveltnsMenu(void) {
-	openFlagSubmenu(48);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_TNS);
 }
 
 static const char* flagmenu_leveltns_array[] = {
@@ -52,7 +52,7 @@ const Screen flagmenu_leveltns_struct = {
 	.TextArray = (int*)flagmenu_leveltns_array,
 	.FunctionArray = flagmenu_leveltns_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 4
 };
 
@@ -105,6 +105,6 @@ const flagMenuData flagmenu_leveltnsmenu = {
 	.flagArray = leveltns_flags,
 	.flagTypeArray = leveltns_flag_types,
 	.flagText = (const int*)flagleveltns_array,
-	.screenIndex = 48,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_TNS,
 	.flagCount = 7,
 };

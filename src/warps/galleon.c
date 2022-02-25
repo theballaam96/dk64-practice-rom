@@ -1,11 +1,11 @@
 #include "../../include/common.h"
 
 void openGalleonMainMenu(void) {
-	changeMenu(10);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_GALLEONMAIN);
 }
 
 void openGalleonShipsMenu(void) {
-	changeMenu(11);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_GALLEONSHIPS);
 }
 
 static const unsigned char galleon_destmap[] = {
@@ -41,7 +41,7 @@ static const unsigned char galleon_destexit[] = {
 const MapWarp map_galleon_struct = {
 	.maps = galleon_destmap,
 	.exits = galleon_destexit,
-	.screen = 9
+	.screen = ACTIVEMENU_SCREEN_MAP_GALLEON
 };
 
 static const char* galleon_mapwarp_array[] = {
@@ -78,7 +78,7 @@ const Screen galleon_mapwarp_struct = {
 	.TextArray = (int*)galleon_mapwarp_array,
 	.FunctionArray = galleon_mapwarp_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 3
 };
 
@@ -99,7 +99,7 @@ static const unsigned char galleon_main_destexit[] = {
 const MapWarp map_galleonmain_struct = {
 	.maps = galleon_main_destmap,
 	.exits = galleon_main_destexit,
-	.screen = 10
+	.screen = ACTIVEMENU_SCREEN_MAP_GALLEONMAIN
 };
 
 static const char* galleonmain_mapwarp_array[] = {
@@ -120,7 +120,7 @@ const Screen galleonmain_mapwarp_struct = {
 	.TextArray = (int*)galleonmain_mapwarp_array,
 	.FunctionArray = galleonmain_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 9,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_GALLEON,
 	.ParentPosition = 0
 };
 
@@ -147,7 +147,7 @@ static const unsigned char galleon_ships_destexit[] = {
 const MapWarp map_galleonships_struct = {
 	.maps = galleon_ships_destmap,
 	.exits = galleon_ships_destexit,
-	.screen = 11
+	.screen = ACTIVEMENU_SCREEN_MAP_GALLEONSHIPS
 };
 
 static const char* galleonships_mapwarp_array[] = {
@@ -174,11 +174,11 @@ const Screen galleonships_mapwarp_struct = {
 	.TextArray = (int*)galleonships_mapwarp_array,
 	.FunctionArray = galleonships_mapwarp_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 9,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_GALLEON,
 	.ParentPosition = 9
 };
 
 void openGalleonMenu(void) {
-	changeMenu(9);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_GALLEON);
 }
 

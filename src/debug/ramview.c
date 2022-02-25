@@ -26,8 +26,6 @@ char formatter04[] = "%02X:%04X %04X %04X %04X";
 char formatter02[] = "%02X:%02X %02X %02X %02X %02X %02X %02X %02X";
 char formatterheaderViewText[] = "ADDR:0X%08X";
 
-char openRamViewText[] = "OPEN RAM VIEW";
-char closeRamViewText[] = "CLOSE RAM VIEW";
 char headerViewText[30] = "HEADER";
 char line1[60] = "1";
 char line2[60] = "2";
@@ -76,11 +74,6 @@ char* addrEndPtr = addrEndBytes;
 TextOverlay* textOverlayInstances[12] = {0};
 
 static freeze_struct freeze_data[maxFreeze] = {};
-
-static char* ramview_array[] = {
-    openRamViewText,
-    closeRamViewText,
-};
 
 char ramview_size_full[15] = "";
 static char* ramview_sizes[] = {
@@ -633,21 +626,3 @@ void startRamViewerDisplay (void) {
         RAMDisplayOpen = 1;
     }
 }
-
-void initRamViewerTab(void) {
-	changeMenu(34);
-};
-
-static const int ramview_functions[] = {
-	(int)&startRamViewerDisplay,
-	(int)&closeRamViewerDisplay,
-};
-
-const Screen ramview_struct = {
-	.TextArray = (int*)ramview_array,
-	.FunctionArray = ramview_functions,
-	.ArrayItems = 2,
-	.ParentScreen = 76,
-	.ParentPosition = 1
-};
-

@@ -20,43 +20,43 @@ static const char mapBonusTTTrouble[] = "TEETERING TURTLE TROUBLE";
 
 
 void openBonusMainMenu(void) {
-	changeMenu(90);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_ROOT);
 }
 
 void openBonusJapesMenu(void) {
-	changeMenu(91);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_JAPES);
 }
 
 void openBonusAztecMenu(void) {
-	changeMenu(92);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_AZTEC);
 }
 
 void openBonusFactoryMenu(void) {
-	changeMenu(93);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_FACTORY);
 }
 
 void openBonusGalleonMenu(void) {
-	changeMenu(94);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_GALLEON);
 }
 
 void openBonusFungiMenu(void) {
-	changeMenu(95);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_FUNGI);
 }
 
 void openBonusCavesMenu(void) {
-	changeMenu(96);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_CAVES);
 }
 
 void openBonusCastleMenu(void) {
-	changeMenu(97);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_CASTLE);
 }
 
 void openBonusHelmMenu(void) {
-	changeMenu(98);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_HELM);
 }
 
 void openBonusIslesMenu(void) {
-	changeMenu(99);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_ISLES);
 }
 
 void initMapWarpLast(void) {
@@ -98,7 +98,7 @@ const Screen bonusmain_mapwarp_struct = {
 	.TextArray = (int*)bonusmain_mapwarp_array,
 	.FunctionArray = bonusmain_mapwarp_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 10
 };
 
@@ -123,7 +123,7 @@ static const unsigned char bonusjapes_destexit[] = {
 const MapWarp map_bonusjapes_struct = {
 	.maps = bonusjapes_destmap,
 	.exits = bonusjapes_destexit,
-	.screen = 91
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_JAPES
 };
 
 static const char* bonusjapes_mapwarp_array[] = {
@@ -144,7 +144,7 @@ const Screen bonusjapes_mapwarp_struct = {
 	.TextArray = (int*)bonusjapes_mapwarp_array,
 	.FunctionArray = bonusjapes_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 0
 };
 
@@ -171,7 +171,7 @@ static const unsigned char bonusaztec_destexit[] = {
 const MapWarp map_bonusaztec_struct = {
 	.maps = bonusaztec_destmap,
 	.exits = bonusaztec_destexit,
-	.screen = 92
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_AZTEC
 };
 
 static const char* bonusaztec_mapwarp_array[] = {
@@ -194,7 +194,7 @@ const Screen bonusaztec_mapwarp_struct = {
 	.TextArray = (int*)bonusaztec_mapwarp_array,
 	.FunctionArray = bonusaztec_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 1
 };
 
@@ -221,7 +221,7 @@ static const unsigned char bonusfactory_destexit[] = {
 const MapWarp map_bonusfactory_struct = {
 	.maps = bonusfactory_destmap,
 	.exits = bonusfactory_destexit,
-	.screen = 93
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_FACTORY
 };
 
 static const char* bonusfactory_mapwarp_array[] = {
@@ -244,7 +244,7 @@ const Screen bonusfactory_mapwarp_struct = {
 	.TextArray = (int*)bonusfactory_mapwarp_array,
 	.FunctionArray = bonusfactory_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 2
 };
 
@@ -275,7 +275,7 @@ static const unsigned char bonusgalleon_destexit[] = {
 const MapWarp map_bonusgalleon_struct = {
 	.maps = bonusgalleon_destmap,
 	.exits = bonusgalleon_destexit,
-	.screen = 94
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_GALLEON
 };
 
 static const char* bonusgalleon_mapwarp_array[] = {
@@ -302,7 +302,7 @@ const Screen bonusgalleon_mapwarp_struct = {
 	.TextArray = (int*)bonusgalleon_mapwarp_array,
 	.FunctionArray = bonusgalleon_mapwarp_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 3
 };
 
@@ -331,7 +331,7 @@ static const unsigned char bonusfungi_destexit[] = {
 const MapWarp map_bonusfungi_struct = {
 	.maps = bonusfungi_destmap,
 	.exits = bonusfungi_destexit,
-	.screen = 95
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_FUNGI
 };
 
 static const char* bonusfungi_mapwarp_array[] = {
@@ -356,7 +356,7 @@ const Screen bonusfungi_mapwarp_struct = {
 	.TextArray = (int*)bonusfungi_mapwarp_array,
 	.FunctionArray = bonusfungi_mapwarp_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 4
 };
 
@@ -381,7 +381,7 @@ static const unsigned char bonuscaves_destexit[] = {
 const MapWarp map_bonuscaves_struct = {
 	.maps = bonuscaves_destmap,
 	.exits = bonuscaves_destexit,
-	.screen = 96
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_CAVES
 };
 
 static const char* bonuscaves_mapwarp_array[] = {
@@ -402,7 +402,7 @@ const Screen bonuscaves_mapwarp_struct = {
 	.TextArray = (int*)bonuscaves_mapwarp_array,
 	.FunctionArray = bonuscaves_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 5
 };
 
@@ -433,7 +433,7 @@ static const unsigned char bonuscastle_destexit[] = {
 const MapWarp map_bonuscastle_struct = {
 	.maps = bonuscastle_destmap,
 	.exits = bonuscastle_destexit,
-	.screen = 97
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_CASTLE
 };
 
 static const char* bonuscastle_mapwarp_array[] = {
@@ -460,7 +460,7 @@ const Screen bonuscastle_mapwarp_struct = {
 	.TextArray = (int*)bonuscastle_mapwarp_array,
 	.FunctionArray = bonuscastle_mapwarp_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 6
 };
 
@@ -497,7 +497,7 @@ static const unsigned char bonushelm_destexit[] = {
 const MapWarp map_bonushelm_struct = {
 	.maps = bonushelm_destmap,
 	.exits = bonushelm_destexit,
-	.screen = 98
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_HELM
 };
 
 static const char* bonushelm_mapwarp_array[] = {
@@ -530,7 +530,7 @@ const Screen bonushelm_mapwarp_struct = {
 	.TextArray = (int*)bonushelm_mapwarp_array,
 	.FunctionArray = bonushelm_mapwarp_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 7
 };
 
@@ -557,7 +557,7 @@ static const unsigned char bonusisles_destexit[] = {
 const MapWarp map_bonusisles_struct = {
 	.maps = bonusisles_destmap,
 	.exits = bonusisles_destexit,
-	.screen = 99
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_ISLES
 };
 
 static const char* bonusisles_mapwarp_array[] = {
@@ -580,6 +580,6 @@ const Screen bonusisles_mapwarp_struct = {
 	.TextArray = (int*)bonusisles_mapwarp_array,
 	.FunctionArray = bonusisles_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 90,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 8
 };

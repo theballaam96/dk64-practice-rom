@@ -22,7 +22,7 @@ static const short modifier_flags[] = {0x006F,0x00A0,0x009C,0x00CE,0x012C,0x0302
 static const char modifier_flag_types[] = {0,0,0,0,0,0};
 
 void openFlagsModifierMenu(void) {
-	openFlagSubmenu(51);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_MODIFIER);
 }
 
 static const char* flagmenu_modifier_array[] = {
@@ -47,7 +47,7 @@ const Screen flagmenu_modifier_struct = {
 	.TextArray = (int*)flagmenu_modifier_array,
 	.FunctionArray = flagmenu_modifier_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 7
 };
 
@@ -94,6 +94,6 @@ const flagMenuData flagmenu_modifiermenu = {
 	.flagArray = modifier_flags,
 	.flagTypeArray = modifier_flag_types,
 	.flagText = (const int*)flagmodifier_array,
-	.screenIndex = 51,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_MODIFIER,
 	.flagCount = 6,
 };

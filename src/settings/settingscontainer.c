@@ -12,7 +12,7 @@ static const char* settings_array[] = {
 };
 
 void openSettingsMainMenu(void) {
-	changeMenu(57);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_ROOT);
 }
 
 void resetSettingsHandler(void) {
@@ -36,6 +36,6 @@ const Screen settings_struct = {
 	.TextArray = (int*)settings_array,
 	.FunctionArray = settings_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 8
 };

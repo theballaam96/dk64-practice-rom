@@ -104,7 +104,7 @@ Screen watch_snag_struct = {
 	.TextArray = (int*)watch_snag_array,
 	.FunctionArray = watch_snag_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 12,
+	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 3
 };
 
@@ -152,7 +152,7 @@ void openWatchSnagMenu(void) {
 		snag_counter = 1;
 	}
 	watch_snag_struct.ArrayItems = snag_counter;
-	changeMenu(82);
+	changeMenu(ACTIVEMENU_SCREEN_WATCH_SNAG);
 }
 
 void toggleSnagWatch(void) {

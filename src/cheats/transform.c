@@ -1,7 +1,7 @@
 #include "../../include/common.h"
 
 void openTransformMenu(void) {
-	changeMenu(62);
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_TRANSFORM);
 }
 
 void checkCrystals(void) {
@@ -94,6 +94,6 @@ const Screen transform_struct = {
 	.TextArray = (int*)transform_array,
 	.FunctionArray = transform_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 55,
+	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 11
 };

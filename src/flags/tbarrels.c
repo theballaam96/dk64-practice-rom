@@ -19,7 +19,7 @@ static const short tbarrel_flags[] = {0x0182,0x0184,0x0185,0x0183,0x017F};
 static const char tbarrel_flag_types[] = {0,0,0,0,0};
 
 void openFlagsTBarrelMenu(void) {
-	openFlagSubmenu(67);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_MOVES_TBARRELS);
 }
 
 void tbarrelSetFlag(void) {
@@ -51,7 +51,7 @@ const Screen flagmenu_tbarrels_struct = {
 	.TextArray = (int*)flagmenu_tbarrels_array,
 	.FunctionArray = flagmenu_tbarrels_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 63,
+	.ParentScreen = ACTIVEMENU_SCREEN_MOVES_ROOT,
 	.ParentPosition = 5
 };
 
@@ -92,6 +92,6 @@ const flagMenuData flagmenu_tbarrelmenu = {
 	.flagArray = tbarrel_flags,
 	.flagTypeArray = tbarrel_flag_types,
 	.flagText = (const int*)flagtbarrel_array,
-	.screenIndex = 67,
+	.screenIndex = ACTIVEMENU_SCREEN_MOVES_TBARRELS,
 	.flagCount = 5,
 };

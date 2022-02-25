@@ -1,7 +1,7 @@
 #include "../../include/common.h"
 
 void openFlagsMainMenu(void) {
-	changeMenu(43);
+	changeMenu(ACTIVEMENU_SCREEN_FLAG_ROOT);
 }
 
 void openFlagSubmenu(int screenIndex) {
@@ -60,6 +60,6 @@ const Screen flagmain_struct = {
 	.TextArray = (int*)flagmain_array,
 	.FunctionArray = flagmain_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 1
 };

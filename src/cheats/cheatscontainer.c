@@ -27,7 +27,7 @@ void openCheatsMenu(void) {
 			cheats_array[3] = cheats_instantskew;
 		}
 	}
-	changeMenu(55);
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_ROOT);
 }
 
 void undoLastFlagWrite(void) {
@@ -56,6 +56,6 @@ const Screen cheats_struct = {
 	.TextArray = (int*)cheats_array,
 	.FunctionArray = cheats_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 7
 };

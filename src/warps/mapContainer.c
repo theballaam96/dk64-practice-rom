@@ -23,7 +23,7 @@ const Screen maps_container_struct = {
 };
 
 void initWarpMenu(void) {
-	changeMenu(1);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_ROOT);
 }
 
 void warpToMap(void) {

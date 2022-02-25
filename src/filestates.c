@@ -11,35 +11,35 @@ static char load_filestate_vars = 0;
 static short filestate_floor = 0;
 
 void openFileStateMainMenu(void) {
-	changeMenu(35);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_ROOT);
 }
 
 void openFileStateNLEMenu(void) {
-	changeMenu(36);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_NLE);
 }
 
 void openFileState101MainMenu(void) {
-	changeMenu(37);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_101ROOT);
 }
 
 void openFileStateGeneralMenu(void) {
-	changeMenu(38);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_GENERAL);
 }
 
 void openFileState101OrganicMenu(void) {
-	changeMenu(39);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_101ORG);
 }
 
 void openFileState101JFMMenu(void) {
-	changeMenu(40);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_101JFM);
 }
 
 void openFileState101FFMMenu(void) {
-	changeMenu(41);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_101FFM);
 }
 
 void openFileStateGlitchlessMenu(void) {
-	changeMenu(89);
+	changeMenu(ACTIVEMENU_SCREEN_FILE_GLITCHLESSANY);
 }
 
 void portFileStateToMemory(int state_index) {
@@ -93,27 +93,27 @@ void loadFileState(void) {
 	int _position = ActiveMenu.positionIndex;
 	int _stateindex = -1;
 	switch(ActiveMenu.screenIndex){
-		case 36:
+		case ACTIVEMENU_SCREEN_FILE_NLE:
 			// NLE
 			_stateindex = filestates_nle_stateindex[_position];
 			break;
-		case 38:
+		case ACTIVEMENU_SCREEN_FILE_GENERAL:
 			// General
 			_stateindex = filestates_general_stateindex[_position];
 			break;
-		case 39:
+		case ACTIVEMENU_SCREEN_FILE_101ORG:
 			// 101% Organic Route
 			_stateindex = filestates_101org_stateindex[_position];
 			break;
-		case 40:
+		case ACTIVEMENU_SCREEN_FILE_101JFM:
 			// 101% JFM Route
 			_stateindex = filestates_101jfm_stateindex[_position];
 			break;
-		case 41:
+		case ACTIVEMENU_SCREEN_FILE_101FFM:
 			// 101% FFM Route
 			_stateindex = filestates_101ffm_stateindex[_position];
 			break;
-		case 89:
+		case ACTIVEMENU_SCREEN_FILE_GLITCHLESSANY:
 			_stateindex = filestates_glitchless_stateindex[_position];
 		break;
 	}
@@ -151,7 +151,7 @@ const Screen filestates_main_struct = {
 	.TextArray = (int*)filestates_main_array,
 	.FunctionArray = filestates_main_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 6
 };
 
@@ -185,7 +185,7 @@ const Screen filestates_nle_struct = {
 	.TextArray = (int*)filestates_nle_array,
 	.FunctionArray = filestates_nle_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 35,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
 	.ParentPosition = 1
 };
 
@@ -205,7 +205,7 @@ const Screen filestates_101main_struct = {
 	.TextArray = (int*)filestates_101main_array,
 	.FunctionArray = filestates_101main_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 35,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
 	.ParentPosition = 2
 };
 
@@ -221,7 +221,7 @@ const Screen filestates_general_struct = {
 	.TextArray = (int*)filestates_general_array,
 	.FunctionArray = filestates_general_functions,
 	.ArrayItems = 1,
-	.ParentScreen = 35,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
 	.ParentPosition = 0
 };
 
@@ -257,7 +257,7 @@ const Screen filestates_101org_struct = {
 	.TextArray = (int*)filestates_101org_array,
 	.FunctionArray = filestates_101org_functions,
 	.ArrayItems = 11,
-	.ParentScreen = 37,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
 	.ParentPosition = 0
 };
 
@@ -291,7 +291,7 @@ const Screen filestates_101jfm_struct = {
 	.TextArray = (int*)filestates_101jfm_array,
 	.FunctionArray = filestates_101jfm_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 37,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
 	.ParentPosition = 1
 };
 
@@ -325,7 +325,7 @@ const Screen filestates_101ffm_struct = {
 	.TextArray = (int*)filestates_101ffm_array,
 	.FunctionArray = filestates_101ffm_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 37,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
 	.ParentPosition = 2
 };
 
@@ -357,6 +357,6 @@ const Screen filestates_glitchless_struct = {
 	.TextArray = (int*)filestates_glitchless_array,
 	.FunctionArray = filestates_glitchless_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 35,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
 	.ParentPosition = 3
 };

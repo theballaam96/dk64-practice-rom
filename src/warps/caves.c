@@ -1,15 +1,15 @@
 #include "../../include/common.h"
 
 void openCavesMainMenu(void) {
-	changeMenu(18);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CAVESMAIN);
 }
 
 void openCaves5DCMenu(void) {
-	changeMenu(19);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CAVES5DC);
 }
 
 void openCaves5DIMenu(void) {
-	changeMenu(20);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CAVES5DI);
 }
 
 static const unsigned char caves_destmap[] = {
@@ -41,7 +41,7 @@ static const unsigned char caves_destexit[] = {
 const MapWarp map_caves_struct = {
 	.maps = caves_destmap,
 	.exits = caves_destexit,
-	.screen = 17
+	.screen = ACTIVEMENU_SCREEN_MAP_CAVES
 };
 
 static const char* caves_mapwarp_array[] = {
@@ -74,7 +74,7 @@ const Screen caves_mapwarp_struct = {
 	.TextArray = (int*)caves_mapwarp_array,
 	.FunctionArray = caves_mapwarp_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 5
 };
 
@@ -99,7 +99,7 @@ static const unsigned char caves_main_destexit[] = {
 const MapWarp map_cavesmain_struct = {
 	.maps = caves_main_destmap,
 	.exits = caves_main_destexit,
-	.screen = 18
+	.screen = ACTIVEMENU_SCREEN_MAP_CAVESMAIN
 };
 
 static const char* cavesmain_mapwarp_array[] = {
@@ -124,7 +124,7 @@ const Screen cavesmain_mapwarp_struct = {
 	.TextArray = (int*)cavesmain_mapwarp_array,
 	.FunctionArray = cavesmain_mapwarp_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 17,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CAVES,
 	.ParentPosition = 0
 };
 
@@ -147,7 +147,7 @@ static const unsigned char caves_5dc_destexit[] = {
 const MapWarp map_caves5dc_struct = {
 	.maps = caves_5dc_destmap,
 	.exits = caves_5dc_destexit,
-	.screen = 19
+	.screen = ACTIVEMENU_SCREEN_MAP_CAVES5DC
 };
 
 static const char* caves5dc_mapwarp_array[] = {
@@ -170,7 +170,7 @@ const Screen caves5dc_mapwarp_struct = {
 	.TextArray = (int*)caves5dc_mapwarp_array,
 	.FunctionArray = caves5dc_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 17,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CAVES,
 	.ParentPosition = 5
 };
 
@@ -194,7 +194,7 @@ static const unsigned char caves_5di_destexit[] = {
 const MapWarp map_caves5di_struct = {
 	.maps = caves_5di_destmap,
 	.exits = caves_5di_destexit,
-	.screen = 20
+	.screen = ACTIVEMENU_SCREEN_MAP_CAVES5DI
 };
 
 static const char* caves5di_mapwarp_array[] = {
@@ -217,11 +217,11 @@ const Screen caves5di_mapwarp_struct = {
 	.TextArray = (int*)caves5di_mapwarp_array,
 	.FunctionArray = caves5di_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 17,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CAVES,
 	.ParentPosition = 6
 };
 
 void openCavesMenu(void) {
-	changeMenu(17);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CAVES);
 }
 

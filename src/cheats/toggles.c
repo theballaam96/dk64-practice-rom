@@ -106,7 +106,7 @@ void openTogglesMenu(void) {
 	} else {
 		toggles_array[6] = toggles_superspeed;
 	}
-	changeMenu(71);
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_TOGGLES);
 }
 
 void toggleCheat(void) {
@@ -185,6 +185,6 @@ const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 55,
+	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 6
 };

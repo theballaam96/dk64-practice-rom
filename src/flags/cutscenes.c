@@ -13,7 +13,7 @@ static const short cutscene_flags[] = {0x002A,0x005C,0x012B};
 static const char cutscene_flag_types[] = {0,0,0};
 
 void openFlagsCutsceneMenu(void) {
-	openFlagSubmenu(50);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_CUTSCENE);
 }
 
 static const char* flagmenu_cutscene_array[] = {
@@ -32,7 +32,7 @@ const Screen flagmenu_cutscene_struct = {
 	.TextArray = (int*)flagmenu_cutscene_array,
 	.FunctionArray = flagmenu_cutscene_functions,
 	.ArrayItems = 3,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT ,
 	.ParentPosition = 6
 };
 
@@ -61,6 +61,6 @@ const flagMenuData flagmenu_cutscenemenu = {
 	.flagArray = cutscene_flags,
 	.flagTypeArray = cutscene_flag_types,
 	.flagText = (const int*)flagcutscene_array,
-	.screenIndex = 50,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_CUTSCENE,
 	.flagCount = 3,
 };

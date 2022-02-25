@@ -92,7 +92,7 @@ void openTrickToggleMenu(void) {
 			tricktoggles_array[i] = tricktoggles_off[i];
 		}
 	}
-	changeMenu(105);
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_TRICKS);
 }
 
 void toggleTrick(void) {
@@ -112,6 +112,6 @@ const Screen tricktoggles_struct = {
 	.TextArray = (int*)tricktoggles_array,
 	.FunctionArray = tricktoggles_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 55,
+	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 5
 };

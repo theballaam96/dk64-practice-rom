@@ -10,7 +10,7 @@ static const short misc_flags[] = {0x0082,0x00F8};
 static const char misc_flag_types[] = {0,0};
 
 void openFlagsMiscMenu(void) {
-	openFlagSubmenu(53);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_MISC);
 }
 
 static const char* flagmenu_misc_array[] = {
@@ -27,7 +27,7 @@ const Screen flagmenu_misc_struct = {
 	.TextArray = (int*)flagmenu_misc_array,
 	.FunctionArray = flagmenu_misc_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 10
 };
 
@@ -50,6 +50,6 @@ const flagMenuData flagmenu_miscmenu = {
 	.flagArray = misc_flags,
 	.flagTypeArray = misc_flag_types,
 	.flagText = (const int*)flagmisc_array,
-	.screenIndex = 53,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_MISC,
 	.flagCount = 2,
 };

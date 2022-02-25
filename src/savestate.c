@@ -16,7 +16,7 @@ static const char var_map[10] = "MAP:0X0";
 static const char var_exit[10] = "EXIT:0";
 static const char var_character[13] = "CHARACTER:0";
 static const char var_helmtimer_off[] = "HELM TIMER:OFF";
-static const char var_helmtimer_time[25] = "Helm Timer:00:00.00";
+static const char var_helmtimer_time[25] = "HELM TIMER:00:00.00";
 static const char var_isgtimer_off[] = "ISG TIMER:OFF";
 static const char var_isgtimer_timer[25] = "ISG TIMER:00:00.00";
 static const char var_created_off[] = "CREATED:UNKNOWN";
@@ -57,11 +57,11 @@ static const char* viewstate_array[] = {
 };
 
 void openStateMenu(void) {
-	changeMenu(31);
+	changeMenu(ACTIVEMENU_SCREEN_SAVESTATE_ROOT);
 }
 
 void openChangeStateMenu(void) {
-	changeMenu(32);
+	changeMenu(ACTIVEMENU_SCREEN_SAVESTATE_CHANGE);
 }
 
 void openStateViewMenu(void) {
@@ -183,7 +183,7 @@ const Screen state_struct = {
 	.TextArray = (int*)state_array,
 	.FunctionArray = state_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 2
 };
 
@@ -205,7 +205,7 @@ const Screen changestate_struct = {
 	.TextArray = (int*)changestate_array,
 	.FunctionArray = changestate_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 31,
+	.ParentScreen = ACTIVEMENU_SCREEN_SAVESTATE_ROOT,
 	.ParentPosition = 1
 };
 
@@ -215,7 +215,7 @@ const Screen viewstate_struct = {
 	.TextArray = (int*)viewstate_array,
 	.FunctionArray = viewstate_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 31,
+	.ParentScreen = ACTIVEMENU_SCREEN_SAVESTATE_ROOT,
 	.ParentPosition = 6
 };
 

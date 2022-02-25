@@ -1,7 +1,7 @@
 #include "../../include/common.h"
 
 void openJapesMainMenu(void) {
-	changeMenu(3);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_JAPESMAIN);
 }
 
 static const unsigned char japes_destmap[] = {
@@ -31,7 +31,7 @@ static const unsigned char japes_destexit[] = {
 const MapWarp map_japes_struct = {
 	.maps = japes_destmap,
 	.exits = japes_destexit,
-	.screen = 2
+	.screen = ACTIVEMENU_SCREEN_MAP_JAPES
 };
 
 static const char* japes_mapwarp_array[] = {
@@ -62,7 +62,7 @@ const Screen japes_mapwarp_struct = {
 	.TextArray = (int*)japes_mapwarp_array,
 	.FunctionArray = japes_mapwarp_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 0
 };
 
@@ -87,7 +87,7 @@ static const unsigned char japes_main_destexit[] = {
 const MapWarp map_japesmain_struct = {
 	.maps = japes_main_destmap,
 	.exits = japes_main_destexit,
-	.screen = 3
+	.screen = ACTIVEMENU_SCREEN_MAP_JAPESMAIN
 };
 
 static const char* japesmain_mapwarp_array[] = {
@@ -112,11 +112,11 @@ const Screen japesmain_mapwarp_struct = {
 	.TextArray = (int*)japesmain_mapwarp_array,
 	.FunctionArray = japesmain_mapwarp_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 2,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_JAPES,
 	.ParentPosition = 0
 };
 
 void openJapesMenu(void) {
-	changeMenu(2);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_JAPES);
 }
 

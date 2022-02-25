@@ -16,7 +16,7 @@ static char* dpadd_array[] = {
 
 void openDPadDMenu(void) {
 	dpadd_array[0] = current_dpadd[(int)DisableTagAnywhere];
-	changeMenu(61);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_DPADD);
 };
 
 void changeDPadDFunction(void) {
@@ -35,6 +35,6 @@ const Screen dpadd_struct = {
 	.TextArray = (int*)dpadd_array,
 	.FunctionArray = dpadd_functions,
 	.ArrayItems = 3,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 1
 };

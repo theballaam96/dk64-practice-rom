@@ -22,7 +22,7 @@ void openVanillaVarsMenu(void) {
 	} else {
 		vanilla_array[1] = vanilla_chimpycam_free;
 	}
-	changeMenu(68);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_VANILLA);
 };
 
 void toggleScreenRatio(void) {
@@ -44,6 +44,6 @@ const Screen vanilla_struct = {
 	.TextArray = (int*)vanilla_array,
 	.FunctionArray = vanilla_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 2
 };

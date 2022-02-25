@@ -13,7 +13,7 @@ void openStateSettingsMenu(void) {
 	} else {
 		state_settings_array[0] = void_grace_on;
 	}
-	changeMenu(104);
+	changeMenu(ACTIVEMENU_SCREEN_SAVESTATE_SETTINGS);
 }
 
 void toggleStateSettingOption(void) {
@@ -35,6 +35,6 @@ const Screen state_settings_struct = {
 	.TextArray = (int*)state_settings_array,
 	.FunctionArray = state_settings_functions,
 	.ArrayItems = 1,
-	.ParentScreen = 31,
+	.ParentScreen = ACTIVEMENU_SCREEN_SAVESTATE_ROOT,
 	.ParentPosition = 5
 };

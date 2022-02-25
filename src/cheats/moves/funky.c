@@ -82,7 +82,7 @@ void openFunkyMenu(void) {
 	for (int i = 0; i < 5; i++) {
 		funky_array[i] = (char*)funky_list_kong[i][(int)MovesBase[i].weapon_bitfield & 1];
 	}
-	changeMenu(65);
+	changeMenu(ACTIVEMENU_SCREEN_MOVES_FUNKY);
 };
 
 void toggleAmmoBelt(void) {
@@ -145,6 +145,6 @@ const Screen funky_struct = {
 	.TextArray = (int*)funky_array,
 	.FunctionArray = funky_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 63,
+	.ParentScreen = ACTIVEMENU_SCREEN_MOVES_ROOT,
 	.ParentPosition = 3
 };

@@ -38,7 +38,7 @@ void openDebugMenu(void) {
 	} else {
 		debug_array[5] = voidmap_off;
 	}
-	changeMenu(76);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_ROOT);
 }
 
 void toggleVoidMap(void) {
@@ -64,6 +64,6 @@ const Screen debug_struct = {
 	.TextArray = (int*)debug_array,
 	.FunctionArray = debug_functions,
 	.ArrayItems = 7, // 8
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 4
 };

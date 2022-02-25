@@ -19,7 +19,7 @@ static char* dpadlr_array[] = {
 
 void openDPadLRMenu(void) {
 	dpadlr_array[0] = current_dpadlr[(int)DisablePositionButtons];
-	changeMenu(60);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_DPADLR);
 };
 
 void changeDPadLRFunction(void) {
@@ -39,6 +39,6 @@ const Screen dpadlr_struct = {
 	.TextArray = (int*)dpadlr_array,
 	.FunctionArray = dpadlr_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 0
 };

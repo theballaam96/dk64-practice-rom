@@ -1,11 +1,11 @@
 #include "../../include/common.h"
 
 void openAztecMainMenu(void) {
-	changeMenu(5);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_AZTECMAIN);
 }
 
 void openAztec5DTMenu(void) {
-	changeMenu(6);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_AZTEC5DT);
 }
 
 static const unsigned char aztec_destmap[] = {
@@ -33,7 +33,7 @@ static const unsigned char aztec_destexit[] = {
 const MapWarp map_aztec_struct = {
 	.maps = aztec_destmap,
 	.exits = aztec_destexit,
-	.screen = 4
+	.screen = ACTIVEMENU_SCREEN_MAP_AZTEC
 };
 
 static const char* aztec_mapwarp_array[] = {
@@ -62,7 +62,7 @@ const Screen aztec_mapwarp_struct = {
 	.TextArray = (int*)aztec_mapwarp_array,
 	.FunctionArray = aztec_mapwarp_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 1
 };
 
@@ -83,7 +83,7 @@ static const unsigned char aztec_main_destexit[] = {
 const MapWarp map_aztecmain_struct = {
 	.maps = aztec_main_destmap,
 	.exits = aztec_main_destexit,
-	.screen = 5
+	.screen = ACTIVEMENU_SCREEN_MAP_AZTECMAIN
 };
 
 static const char* aztecmain_mapwarp_array[] = {
@@ -104,7 +104,7 @@ const Screen aztecmain_mapwarp_struct = {
 	.TextArray = (int*)aztecmain_mapwarp_array,
 	.FunctionArray = aztecmain_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 4,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_AZTEC,
 	.ParentPosition = 0
 };
 
@@ -127,7 +127,7 @@ static const unsigned char aztec_fivedt_destexit[] = {
 const MapWarp map_aztecfivedt_struct = {
 	.maps = aztec_fivedt_destmap,
 	.exits = aztec_fivedt_destexit,
-	.screen = 6
+	.screen = ACTIVEMENU_SCREEN_MAP_AZTEC5DT
 };
 
 static const char* aztecfivedt_mapwarp_array[] = {
@@ -150,11 +150,11 @@ const Screen aztecfivedt_mapwarp_struct = {
 	.TextArray = (int*)aztecfivedt_mapwarp_array,
 	.FunctionArray = aztecfivedt_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 4,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_AZTEC,
 	.ParentPosition = 5
 };
 
 void openAztecMenu(void) {
-	changeMenu(4);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_AZTEC);
 }
 

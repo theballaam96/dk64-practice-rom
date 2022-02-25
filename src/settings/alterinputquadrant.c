@@ -27,7 +27,7 @@ static char* quadrant_array[] = {
 
 void openInputQuadrantMenu(void) {
 	quadrant_array[0] = current_quadrants[(int)InputDisplayQuadrant];
-	changeMenu(59);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_INPUTQUAD);
 };
 
 void changeInputQuadrant(void) {
@@ -48,6 +48,6 @@ const Screen quadrant_struct = {
 	.TextArray = (int*)quadrant_array,
 	.FunctionArray = quadrant_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 5
 };

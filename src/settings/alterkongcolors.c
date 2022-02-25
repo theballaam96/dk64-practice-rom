@@ -78,7 +78,7 @@ void openKongColorsMenu(void) {
 	kongcolors_array[3] = kongcolors_ti[(int)kongcolors[3] - 1];
 	kongcolors_array[4] = kongcolors_ch[(int)kongcolors[4] - 1];
 	dk_strFormat((char*)jetmancolor_displaytext,"JETMAN: %s", jetmancolortext[(int)jetmanColorIndex]);
-	changeMenu(58);
+	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_COLORS);
 };
 
 void changeKongColor(void) {
@@ -110,6 +110,6 @@ const Screen kongcolors_struct = {
 	.TextArray = (int*)kongcolors_array,
 	.FunctionArray = kongcolors_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 4
 };

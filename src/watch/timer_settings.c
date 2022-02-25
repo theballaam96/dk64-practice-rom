@@ -42,7 +42,7 @@ void openTimerSettingsMenu(void) {
 	timersettings_array[0] = start_modes[(int)TimerData.StartMode];
 	timersettings_array[1] = pause_modes[(int)TimerData.PauseMode];
 	timersettings_array[2] = finish_modes[(int)TimerData.FinishMode];
-	changeMenu(33);
+	changeMenu(ACTIVEMENU_SCREEN_TIMERSETTINGS);
 }
 
 
@@ -79,6 +79,6 @@ const Screen timersettings_struct = {
 	.TextArray = (int*)timersettings_array,
 	.FunctionArray = timersettings_functions,
 	.ArrayItems = 3,
-	.ParentScreen = 0,
+	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 5
 };

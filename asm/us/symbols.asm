@@ -271,7 +271,7 @@
 .definelabel jetpacPlayerCount, 0x8002EF78
 
 //hack data
-.definelabel ViewedSnagWatches, 0x807FFF18 // u8 array (size = 4)
+.definelabel ViewedSnagWatches, 0x807FFF18 // u8 x 4
 .definelabel ActiveTools_Error, 0x807FFF1C // 0x4
 .definelabel style128Mtx, 0x807FF900 // 0x20
 .definelabel style6Mtx, 0x807FF920 // 0x20
@@ -282,9 +282,9 @@
 
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes
 
-.definelabel TestVariable, 0x807FFFFC
+.definelabel TestVariable, 0x807FFFFC // 0x4
 
-.definelabel WatchIndex, 0x807FFFF8 // u8 array (size 4)
+.definelabel WatchIndex, 0x807FFFF8 // u8 x 4
 .definelabel InBadMap, 0x807FFFF7 // u8 - Bool
 .definelabel MenuSavestateAction, 0x807FFFF6 // u8 - 0 = Save, 1 = Load
 .definelabel InputDisplayIndex, 0x807FFFF5 // u8
@@ -331,13 +331,12 @@
 .definelabel ArtificialPauseOn, 0x807FFDD9 // u8
 .definelabel InfiniteHealthCheatOn, 0x807FFDD8 // u8
 .definelabel LToLevitateOn, 0x807FFDD7 // u8
-.definelabel ActiveMenu, 0x807FFDC4 // 0x3
 .definelabel NewMenu_ErrorStart, 0x807FFDC0 // u32
 .definelabel FocusedSavestate, 0x807FFDBF // u8
 .definelabel AutoMoonkickOn, 0x807FFDBE // u8
 .definelabel EnemySpawnOff, 0x807FFDBD // u8
 
-.definelabel CustomFlag, 0x807FFF80 // follows customflagdata struct
+.definelabel CustomFlag, 0x807FFF80 // 0x5 follows customflagdata struct
 
 .definelabel ISGStage, 0x807FFF85 // u8
 .definelabel IsPauseMenuOpen, 0x807FFF86 // u8
@@ -357,16 +356,15 @@
 .definelabel HackVersion, 0x807FFFA4 // u32
 .definelabel SnagCapitalsTable, 0x807FFFA8 // u32
 .definelabel SpriteAddress, 0x807FFFAC // u32
-.definelabel PreviousLagArray, 0x807FFFB0; // u8 array
+.definelabel PreviousLagArray, 0x807FFFB0 // u8 x 16
 
 .definelabel graphicalOverlaySpace, 0x807FFA00 // 0x180
 .definelabel PausePointer, 0x807FFB80 // ptr
 .definelabel WatchTextSpace, 0x807FFB90 // 0x30 x 4
-.definelabel PhaseChecker, 0x807FFC50 // follows phasecheckerdata struct
+.definelabel PhaseChecker, 0x807FFC50 // 0x7 follows phasecheckerdata struct
 .definelabel UndoFlag, 0x807FFC58 // u16
-.definelabel FairyViewerData, 0x807FFC60 // fairyInfo Struct
+.definelabel FairyViewerData, 0x807FFC60 // 0x6 fairyInfo Struct
 .definelabel FairyViewerFocus, 0x807FFC68 // ptr
-.definelabel arcadeMenu, 0x807FFC6C // Follows Struct
 .definelabel MemoryViewerLastAddress, 0x807FFC70 // ptr
 .definelabel assignedConsole, 0x807FFC74 // u32
 .definelabel phasePointer, 0x807FFC78 // ptr
@@ -385,6 +383,8 @@
 .definelabel savestateSettingsBitfield, 0x807FFC91 // u8
 .definelabel voidsDisabled, 0x807FFC92 // u8
 .definelabel disableCustomSFX, 0x807FFC93 // u8
+.definelabel ActiveMenu, 0x807FFDC4 // 0x6
+.definelabel arcadeMenu, 0x807FFDDD // 0x6
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

@@ -6,7 +6,7 @@ static const char* snagcheats_array[] = {
 };
 
 void openSnagMenu(void) {
-	changeMenu(72);
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_SNAG);
 }
 
 void visifySnagGBs(void) {
@@ -49,6 +49,6 @@ const Screen snagcheats_struct = {
 	.TextArray = (int*)snagcheats_array,
 	.FunctionArray = snagcheats_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 55,
+	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 4
 };

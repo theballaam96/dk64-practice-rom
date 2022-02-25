@@ -72,7 +72,7 @@ START_HOOK:
 		NOP
 		LUI		t1, hi(ActiveMenu)
 		ADDIU 	t1, t1, lo(ActiveMenu)
-		LBU 	t1, 0x2 (t1)
+		LBU 	t1, 0x0 (t1)
 		BNEZ 	t1, controlSuperspeed_Finish
 		NOP
 		LBU 	t1, ClosingMenu
@@ -257,7 +257,7 @@ START_HOOK:
 	arcadeHasControlLoop:
 		LUI 	t6, hi(arcadeMenu)
 		ADDIU 	t6, t6, lo(arcadeMenu)
-		LBU 	t6, 0x0002 (t6)
+		LBU 	t6, 0x0000 (t6)
 		BNEZ 	t6, arcadeHasControlLoop_Finish
 		NOP
 		LUI 	t6, 0x8005
@@ -272,7 +272,7 @@ START_HOOK:
 	arcadeHasControl2Loop:
 		LUI 	t8, hi(arcadeMenu)
 		ADDIU 	t8, t8, lo(arcadeMenu)
-		LBU 	t8, 0x0002 (t8)
+		LBU 	t8, 0x0000 (t8)
 		BNEZ 	t8, arcadeHasControl2Loop_Finish
 		NOP
 		LUI 	t8, 0x8005
@@ -287,7 +287,7 @@ START_HOOK:
 	arcadeHasControl3Loop:
 		LUI 	at, hi(arcadeMenu)
 		ADDIU 	at, at, lo(arcadeMenu)
-		LBU 	at, 0x0002 (at)
+		LBU 	at, 0x0000 (at)
 		BNEZ 	at, arcadeHasControl3Loop_Finish
 		NOP
 		LWC1 	f4, 0x4 (s1)

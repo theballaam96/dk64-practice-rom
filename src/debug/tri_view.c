@@ -489,7 +489,7 @@ void openFloorMenu(void) {
 		}
 	}
 	floormenu_array[FLOOR_TYPE_COUNT] = floortext_clear;
-	changeMenu(101);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_COLLISION_FLOOR);
 }
 
 void openWallMenu(void) {
@@ -530,14 +530,14 @@ static int floormenu_functions[] = {
 };
 
 void openCollisionMenu(void) {
-	changeMenu(100);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_COLLISION_ROOT);
 }
 
 const Screen floormenu_struct = {
 	.TextArray = (int*)floormenu_array,
 	.FunctionArray = floormenu_functions,
 	.ArrayItems = FLOOR_TYPE_COUNT + 1,
-	.ParentScreen = 100,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_COLLISION_ROOT,
 	.ParentPosition = 0
 };
 
@@ -545,7 +545,7 @@ const Screen collisionmenu_struct = {
 	.TextArray = (int*)collisionmenu_array,
 	.FunctionArray = collisionmenu_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 76,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ROOT,
 	.ParentPosition = 6
 };
 

@@ -31,7 +31,7 @@ static const short keysin_flags[] = {0x01BB,0x01BC,0x01BD,0x01BE,0x01BF,0x01C0,0
 static const char keysin_flag_types[] = {0,0,0,0,0,0,0,0,0};
 
 void openFlagsKeysinMenu(void) {
-	openFlagSubmenu(45);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_KEYSIN);
 }
 
 static const char* flagmenu_keysin_array[] = {
@@ -62,7 +62,7 @@ const Screen flagmenu_keysin_struct = {
 	.TextArray = (int*)flagmenu_keysin_array,
 	.FunctionArray = flagmenu_keysin_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 1
 };
 
@@ -127,6 +127,6 @@ const flagMenuData flagmenu_keysinmenu = {
 	.flagArray = keysin_flags,
 	.flagTypeArray = keysin_flag_types,
 	.flagText = (const int*)flagkeysin_array,
-	.screenIndex = 45,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_KEYSIN,
 	.flagCount = 9,
 };

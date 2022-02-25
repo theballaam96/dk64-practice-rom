@@ -24,7 +24,7 @@ void cFuncLoop(void) {
 			toggleSelectedActor(); // Active Menu Open
 			customHideHUD();
 			hideRacePosition(0);
-			if (ActiveMenu.screenIndex == 78) {
+			if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_DEBUG_ACTORDETAILS) {
 				updateActorScreen();
 			}
 		} else {

@@ -1,23 +1,23 @@
 #include "../../include/common.h"
 
 void openCastleMainMenu(void) {
-	changeMenu(22);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CASTLEMAIN);
 }
 
 void openCastleCryptMenu(void) {
-	changeMenu(23);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CASTLECRYPT);
 }
 
 void openCastleDungeonTunnelMenu(void) {
-	changeMenu(24);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CASTLETUNNEL);
 }
 
 void openCastleOutsideBuildingsMenu(void) {
-	changeMenu(25);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CASTLEOUTSIDE);
 }
 
 void openCastleRoomsMenu(void) {
-	changeMenu(26);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CASTLEROOMS);
 }
 
 static const unsigned char castle_destmap[] = {
@@ -49,7 +49,7 @@ static const unsigned char castle_destexit[] = {
 const MapWarp map_castle_struct = {
 	.maps = castle_destmap,
 	.exits = castle_destexit,
-	.screen = 21
+	.screen = ACTIVEMENU_SCREEN_MAP_CASTLE
 };
 
 static const char* castle_mapwarp_array[] = {
@@ -82,7 +82,7 @@ const Screen castle_mapwarp_struct = {
 	.TextArray = (int*)castle_mapwarp_array,
 	.FunctionArray = castle_mapwarp_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 6
 };
 
@@ -105,7 +105,7 @@ static const unsigned char castle_main_destexit[] = {
 const MapWarp map_castlemain_struct = {
 	.maps = castle_main_destmap,
 	.exits = castle_main_destexit,
-	.screen = 22
+	.screen = ACTIVEMENU_SCREEN_MAP_CASTLEMAIN
 };
 
 static const char* castlemain_mapwarp_array[] = {
@@ -128,7 +128,7 @@ const Screen castlemain_mapwarp_struct = {
 	.TextArray = (int*)castlemain_mapwarp_array,
 	.FunctionArray = castlemain_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 21,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CASTLE,
 	.ParentPosition = 0
 };
 
@@ -149,7 +149,7 @@ static const unsigned char castle_crypt_destexit[] = {
 const MapWarp map_castlecrypt_struct = {
 	.maps = castle_crypt_destmap,
 	.exits = castle_crypt_destexit,
-	.screen = 23
+	.screen = ACTIVEMENU_SCREEN_MAP_CASTLECRYPT
 };
 
 static const char* castlecrypt_mapwarp_array[] = {
@@ -170,7 +170,7 @@ const Screen castlecrypt_mapwarp_struct = {
 	.TextArray = (int*)castlecrypt_mapwarp_array,
 	.FunctionArray = castlecrypt_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 21,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CASTLE,
 	.ParentPosition = 5
 };
 
@@ -188,7 +188,7 @@ static const unsigned char castle_tunnel_destexit[] = {
 const MapWarp map_castletunnel_struct = {
 	.maps = castle_tunnel_destmap,
 	.exits = castle_tunnel_destexit,
-	.screen = 24
+	.screen = ACTIVEMENU_SCREEN_MAP_CASTLETUNNEL
 };
 
 static const char* castletunnel_mapwarp_array[] = {
@@ -205,7 +205,7 @@ const Screen castletunnel_mapwarp_struct = {
 	.TextArray = (int*)castletunnel_mapwarp_array,
 	.FunctionArray = castletunnel_mapwarp_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 21,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CASTLE,
 	.ParentPosition = 7
 };
 
@@ -226,7 +226,7 @@ static const unsigned char castle_outside_destexit[] = {
 const MapWarp map_castleoutside_struct = {
 	.maps = castle_outside_destmap,
 	.exits = castle_outside_destexit,
-	.screen = 25
+	.screen = ACTIVEMENU_SCREEN_MAP_CASTLEOUTSIDE
 };
 
 static const char* castleoutside_mapwarp_array[] = {
@@ -247,7 +247,7 @@ const Screen castleoutside_mapwarp_struct = {
 	.TextArray = (int*)castleoutside_mapwarp_array,
 	.FunctionArray = castleoutside_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 21,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CASTLE,
 	.ParentPosition = 8
 };
 
@@ -268,7 +268,7 @@ static const unsigned char castle_rooms_destexit[] = {
 const MapWarp map_castlerooms_struct = {
 	.maps = castle_rooms_destmap,
 	.exits = castle_rooms_destexit,
-	.screen = 26
+	.screen = ACTIVEMENU_SCREEN_MAP_CASTLEROOMS
 };
 
 static const char* castlerooms_mapwarp_array[] = {
@@ -289,11 +289,11 @@ const Screen castlerooms_mapwarp_struct = {
 	.TextArray = (int*)castlerooms_mapwarp_array,
 	.FunctionArray = castlerooms_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 21,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_CASTLE,
 	.ParentPosition = 9
 };
 
 void openCastleMenu(void) {
-	changeMenu(21);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_CASTLE);
 }
 

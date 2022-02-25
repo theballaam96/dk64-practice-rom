@@ -1,15 +1,15 @@
 #include "../../include/common.h"
 
 void openFungiMainMenu(void) {
-	changeMenu(14);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_FUNGIMAIN);
 }
 
 void openFungiGMushMenu(void) {
-	changeMenu(15);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_FUNGIMUSH);
 }
 
 void openFungiMillsMenu(void) {
-	changeMenu(16);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_FUNGIMILL);
 }
 
 static const unsigned char fungi_destmap[] = {
@@ -45,7 +45,7 @@ static const unsigned char fungi_destexit[] = {
 const MapWarp map_fungi_struct = {
 	.maps = fungi_destmap,
 	.exits = fungi_destexit,
-	.screen = 13
+	.screen = ACTIVEMENU_SCREEN_MAP_FUNGI
 };
 
 static const char* fungi_mapwarp_array[] = {
@@ -82,7 +82,7 @@ const Screen fungi_mapwarp_struct = {
 	.TextArray = (int*)fungi_mapwarp_array,
 	.FunctionArray = fungi_mapwarp_functions,
 	.ArrayItems = 12,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 4
 };
 
@@ -107,7 +107,7 @@ static const unsigned char fungi_main_destexit[] = {
 const MapWarp map_fungimain_struct = {
 	.maps = fungi_main_destmap,
 	.exits = fungi_main_destexit,
-	.screen = 14
+	.screen = ACTIVEMENU_SCREEN_MAP_FUNGIMAIN
 };
 
 static const char* fungimain_mapwarp_array[] = {
@@ -132,7 +132,7 @@ const Screen fungimain_mapwarp_struct = {
 	.TextArray = (int*)fungimain_mapwarp_array,
 	.FunctionArray = fungimain_mapwarp_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 13,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_FUNGI,
 	.ParentPosition = 0
 };
 
@@ -157,7 +157,7 @@ static const unsigned char fungi_gmush_destexit[] = {
 const MapWarp map_fungigmush_struct = {
 	.maps = fungi_gmush_destmap,
 	.exits = fungi_gmush_destexit,
-	.screen = 15
+	.screen = ACTIVEMENU_SCREEN_MAP_FUNGIMUSH
 };
 
 static const char* fungigmush_mapwarp_array[] = {
@@ -182,7 +182,7 @@ const Screen fungigmush_mapwarp_struct = {
 	.TextArray = (int*)fungigmush_mapwarp_array,
 	.FunctionArray = fungigmush_mapwarp_functions,
 	.ArrayItems = 6,
-	.ParentScreen = 13,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_FUNGI,
 	.ParentPosition = 7
 };
 
@@ -202,7 +202,7 @@ static const unsigned char fungi_mills_destexit[] = {
 const MapWarp map_fungimills_struct = {
 	.maps = fungi_mills_destmap,
 	.exits = fungi_mills_destexit,
-	.screen = 16
+	.screen = ACTIVEMENU_SCREEN_MAP_FUNGIMILL
 };
 
 static const char* fungimills_mapwarp_array[] = {
@@ -221,11 +221,11 @@ const Screen fungimills_mapwarp_struct = {
 	.TextArray = (int*)fungimills_mapwarp_array,
 	.FunctionArray = fungimills_mapwarp_functions,
 	.ArrayItems = 3,
-	.ParentScreen = 13,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_FUNGI,
 	.ParentPosition = 9
 };
 
 void openFungiMenu(void) {
-	changeMenu(13);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_FUNGI);
 }
 

@@ -40,7 +40,7 @@ void openFlagsCustomMenu(void) {
 		flagcustom_array[3] = flag_state_clear;
 		flagcustom_array[4] = flag_change_set;
 	}
-	changeMenu(54);
+	changeMenu(ACTIVEMENU_SCREEN_FLAG_CUSTOM);
 }
 
 short getByteCap(char flagType) {
@@ -63,7 +63,7 @@ void changeCustomFlagVariable(void) {
 	short _bytecap = 0x13C;
 	short _newdata;
 	if (ActiveMenu.isOpen) {
-		if (ActiveMenu.screenIndex == 54) {
+		if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_FLAG_CUSTOM) {
 			if (NewlyPressedControllerInput.Buttons & D_Left) {
 				_change = -1;
 			} else {
@@ -145,6 +145,6 @@ const Screen flagcustom_struct = {
 	.TextArray = (int*)flagcustom_array,
 	.FunctionArray = flagcustom_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 11
 };

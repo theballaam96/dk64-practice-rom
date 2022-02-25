@@ -76,7 +76,7 @@ void openInfinitesMenu(void) {
 		int val = *(char*)infinite_addrs[i];
 		dk_strFormat(infinite_array[i],"%s %s",on_off[val],infinite_names[i]);
 	}
-	changeMenu(106);
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_INFINITES);
 }
 
 void toggleInfinite(void) {
@@ -108,7 +108,7 @@ const Screen infinite_struct = {
 	.TextArray = (int*)infinite_array,
 	.FunctionArray = infinite_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 55,
+	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 7
 };
 

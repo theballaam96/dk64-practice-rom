@@ -1,7 +1,7 @@
 #include "../../include/common.h"
 
 void openFactoryMainMenu(void) {
-	changeMenu(8);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_FACTORYMAIN);
 }
 
 static const unsigned char factory_destmap[] = {
@@ -27,7 +27,7 @@ static const unsigned char factory_destexit[] = {
 const MapWarp map_factory_struct = {
 	.maps = factory_destmap,
 	.exits = factory_destexit,
-	.screen = 7
+	.screen = ACTIVEMENU_SCREEN_MAP_FACTORY
 };
 
 static const char* factory_mapwarp_array[] = {
@@ -54,7 +54,7 @@ const Screen factory_mapwarp_struct = {
 	.TextArray = (int*)factory_mapwarp_array,
 	.FunctionArray = factory_mapwarp_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 2
 };
 
@@ -85,7 +85,7 @@ static const unsigned char factory_main_destexit[] = {
 const MapWarp map_factorymain_struct = {
 	.maps = factory_main_destmap,
 	.exits = factory_main_destexit,
-	.screen = 8
+	.screen = ACTIVEMENU_SCREEN_MAP_FACTORYMAIN
 };
 
 static const char* factorymain_mapwarp_array[] = {
@@ -116,11 +116,11 @@ const Screen factorymain_mapwarp_struct = {
 	.TextArray = (int*)factorymain_mapwarp_array,
 	.FunctionArray = factorymain_mapwarp_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 7,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_FACTORY,
 	.ParentPosition = 0
 };
 
 void openFactoryMenu(void) {
-	changeMenu(7);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_FACTORY);
 }
 

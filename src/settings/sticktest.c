@@ -67,7 +67,7 @@ void startTest(void) {
 		test_initial_y = Player->yPos;
 		test_initial_z = Player->zPos;
 	}
-	changeMenu(86);
+	changeMenu(ACTIVEMENU_SCREEN_STICK_INSTRUCTIONS);
 };
 
 int clampRatio(int input_ratio) {
@@ -94,7 +94,7 @@ void showTestResults(void) {
 			ratio_threshold
 		);
 	};
-	changeMenu(87);
+	changeMenu(ACTIVEMENU_SCREEN_STICK_RESULTS);
 }
 
 void runTest(void) {
@@ -102,7 +102,7 @@ void runTest(void) {
 	int _max_mag = 0;
 	int _threshold_mag = 0;
 	if (ActiveMenu.isOpen) {
-		if (ActiveMenu.screenIndex == 86) {
+		if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_STICK_INSTRUCTIONS) {
 			if (instruction_stage < 4) {
 				if (Player) {
 					Player->xPos = test_initial_x;
@@ -124,7 +124,7 @@ void runTest(void) {
 					if (instruction_stage < 4) {
 						instruction_timer = 100;
 						instruction_array[0] = instruction_list[(int)instruction_stage];
-						changeMenu(86);
+						changeMenu(ACTIVEMENU_SCREEN_STICK_INSTRUCTIONS);
 					} else {
 						showTestResults();
 					}
@@ -142,7 +142,7 @@ const Screen instruction_struct = {
 	.TextArray = (int*)instruction_array,
 	.FunctionArray = instruction_functions,
 	.ArrayItems = 1,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 6
 };
 
@@ -157,6 +157,6 @@ const Screen testinfo_struct = {
 	.TextArray = (int*)testinfo_array,
 	.FunctionArray = testinfo_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 57,
+	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 6
 };

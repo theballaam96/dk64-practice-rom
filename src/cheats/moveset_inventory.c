@@ -23,7 +23,7 @@ void openMovesetInventoryMenu(void) {
 	} else {
 		moveset_array[6] = moveset_camerashockwave_off;
 	}
-	changeMenu(63);
+	changeMenu(ACTIVEMENU_SCREEN_MOVES_ROOT);
 };
 
 void giveCoins(void) {
@@ -113,6 +113,6 @@ const Screen moveset_struct = {
 	.TextArray = (int*)moveset_array,
 	.FunctionArray = moveset_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 55,
+	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 0
 };

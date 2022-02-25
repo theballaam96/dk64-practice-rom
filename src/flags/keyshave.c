@@ -28,7 +28,7 @@ static const short keyshave_flags[] = {0x001A,0x004A,0x008A,0x00A8,0x00EC,0x0124
 static const char keyshave_flag_types[] = {0,0,0,0,0,0,0,0};
 
 void openFlagsKeyshaveMenu(void) {
-	openFlagSubmenu(46);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_KEYSPOSSESS);
 }
 
 static const char* flagmenu_keyshave_array[] = {
@@ -57,7 +57,7 @@ const Screen flagmenu_keyshave_struct = {
 	.TextArray = (int*)flagmenu_keyshave_array,
 	.FunctionArray = flagmenu_keyshave_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 2
 };
 
@@ -116,6 +116,6 @@ const flagMenuData flagmenu_keyshavemenu = {
 	.flagArray = keyshave_flags,
 	.flagTypeArray = keyshave_flag_types,
 	.flagText = (const int*)flagkeyshave_array,
-	.screenIndex = 46,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_KEYSPOSSESS,
 	.flagCount = 8,
 };

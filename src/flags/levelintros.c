@@ -25,7 +25,7 @@ static const short levelintros_flags[] = {0x001B,0x005F,0x008C,0x00C2,0x0101,0x0
 static const char levelintros_flag_types[] = {0,0,0,0,0,0,0};
 
 void openFlagsLevelintrosMenu(void) {
-	openFlagSubmenu(47);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_LEVELINTROS);
 }
 
 static const char* flagmenu_levelintros_array[] = {
@@ -52,7 +52,7 @@ const Screen flagmenu_levelintros_struct = {
 	.TextArray = (int*)flagmenu_levelintros_array,
 	.FunctionArray = flagmenu_levelintros_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 3
 };
 
@@ -105,6 +105,6 @@ const flagMenuData flagmenu_levelintrosmenu = {
 	.flagArray = levelintros_flags,
 	.flagTypeArray = levelintros_flag_types,
 	.flagText = (const int*)flaglevelintros_array,
-	.screenIndex = 47,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_LEVELINTROS,
 	.flagCount = 7,
 };

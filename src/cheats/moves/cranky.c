@@ -98,23 +98,23 @@ void openCrankyMenu(void) {
 	for (int i = 0; i < 5; i++) {
 		cranky_array[i + 1] = (char*)cranky_list_kong[i][(int)MovesBase[i].special_moves];
 	}
-	char _flag = checkFlag(0x180,0);
+	int _flag = checkFlag(0x180,0);
 	if (_flag) {
 		cranky_array[6] = cranky_ssflag_on;
 	} else {
 		cranky_array[6] = cranky_ssflag_off;
 	}
-	changeMenu(64);
+	changeMenu(ACTIVEMENU_SCREEN_MOVES_CRANKY);
 };
 
 void toggleSlamFlag(void) {
-	char _flag = checkFlag(0x180,0);
+	int _flag = checkFlag(0x180,0);
 	setFlag(0x180,1 ^ _flag,0);
 	openCrankyMenu();
 }
 
 void toggleSlam(void) {
-	char _base = MovesBase[0].simian_slam + 1;
+	int _base = MovesBase[0].simian_slam + 1;
 	if (_base > 3) {
 		_base = 0;
 	}
@@ -125,7 +125,7 @@ void toggleSlam(void) {
 };
 
 void toggleKongMove(void) {
-	char _base = MovesBase[(int)ActiveMenu.positionIndex - 1].special_moves + 1;
+	int _base = MovesBase[(int)ActiveMenu.positionIndex - 1].special_moves + 1;
 	if (_base > 3) {
 		_base = 0;
 	};
@@ -147,6 +147,6 @@ const Screen cranky_struct = {
 	.TextArray = (int*)cranky_array,
 	.FunctionArray = cranky_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 63,
+	.ParentScreen = ACTIVEMENU_SCREEN_MOVES_ROOT,
 	.ParentPosition = 2
 };

@@ -25,7 +25,7 @@ static const short levelboss_flags[] = {0x0068,0x0067,0x006A,0x006B,0x0069,0x006
 static const char levelboss_flag_types[] = {2,2,2,2,2,2,2};
 
 void openFlagsLevelbossMenu(void) {
-	openFlagSubmenu(49);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_BOSSINTRO);
 }
 
 static const char* flagmenu_levelboss_array[] = {
@@ -52,7 +52,7 @@ const Screen flagmenu_levelboss_struct = {
 	.TextArray = (int*)flagmenu_levelboss_array,
 	.FunctionArray = flagmenu_levelboss_functions,
 	.ArrayItems = 7,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 5
 };
 
@@ -105,6 +105,6 @@ const flagMenuData flagmenu_levelbossmenu = {
 	.flagArray = levelboss_flags,
 	.flagTypeArray = levelboss_flag_types,
 	.flagText = (const int*)flaglevelboss_array,
-	.screenIndex = 49,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_BOSSINTRO,
 	.flagCount = 7,
 };

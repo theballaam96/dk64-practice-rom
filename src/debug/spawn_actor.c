@@ -316,12 +316,12 @@ void openForceSpawnActorMenu(void) {
 	} else {
 		dk_strFormat(viewed_actor_name,"ACTOR:0X%X",spawnActorData.actor_type);
 	}
-	changeMenu(88);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_SPAWNACTOR);
 }
 
 void toggleSelectedActor(void) {
 	if (ActiveMenu.isOpen) {
-		if (ActiveMenu.screenIndex == 88) {
+		if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_DEBUG_SPAWNACTOR) {
 			if (ActiveMenu.positionIndex == 0) {
 				if (NewlyPressedControllerInput.Buttons & D_Left) {
 					if (spawnActorData.actor_type == 0) {
@@ -356,6 +356,6 @@ const Screen forcespawn_struct = {
 	.TextArray = (int*)forcespawn_array,
 	.FunctionArray = forcespawn_functions,
 	.ArrayItems = 2,
-	.ParentScreen = 76,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ROOT,
 	.ParentPosition = 4
 };

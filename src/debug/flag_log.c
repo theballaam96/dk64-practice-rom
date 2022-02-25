@@ -93,7 +93,7 @@ Screen flaglog_struct = {
 	.TextArray = (int*)flaglog_array,
 	.FunctionArray = flaglog_functions,
 	.ArrayItems = 10,
-	.ParentScreen = 76,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ROOT,
 	.ParentPosition = 3
 };
 
@@ -175,5 +175,5 @@ void openFlagLogMenu(void) {
 		count = 1;
 	}
 	flaglog_struct.ArrayItems = count;
-	changeMenu(85);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_FLAGLOG);
 }

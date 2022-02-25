@@ -37,7 +37,7 @@ static const short ftt_flags[] = {0x016F,0x0170,0x0171,0x0172,0x017E,0x0163,0x01
 static const char ftt_flag_types[] = {0,0,0,0,0,0,0,0,0,0,0};
 
 void openFlagsFTTMenu(void) {
-	openFlagSubmenu(52);
+	openFlagSubmenu(ACTIVEMENU_SCREEN_FLAG_FTT);
 }
 
 static const char* flagmenu_ftt_array[] = {
@@ -82,7 +82,7 @@ const Screen flagmenu_ftt_struct = {
 	.TextArray = (int*)flagmenu_ftt_array,
 	.FunctionArray = flagmenu_ftt_functions,
 	.ArrayItems = 11,
-	.ParentScreen = 43,
+	.ParentScreen = ACTIVEMENU_SCREEN_FLAG_ROOT,
 	.ParentPosition = 8
 };
 
@@ -159,6 +159,6 @@ const flagMenuData flagmenu_fttmenu = {
 	.flagArray = ftt_flags,
 	.flagTypeArray = ftt_flag_types,
 	.flagText = (const int*)flagftt_array,
-	.screenIndex = 52,
+	.screenIndex = ACTIVEMENU_SCREEN_FLAG_FTT,
 	.flagCount = 11,
 };

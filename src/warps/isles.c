@@ -1,11 +1,11 @@
 #include "../../include/common.h"
 
 void openIslesMainMenu(void) {
-	changeMenu(28);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_ISLESMAIN);
 }
 
 void openIslesLobbyMenu(void) {
-	changeMenu(29);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_ISLESLOBBIES);
 }
 
 static const unsigned char isles_destmap[] = {
@@ -35,7 +35,7 @@ static const unsigned char isles_destexit[] = {
 const MapWarp map_isles_struct = {
 	.maps = isles_destmap,
 	.exits = isles_destexit,
-	.screen = 27
+	.screen = ACTIVEMENU_SCREEN_MAP_ISLES
 };
 
 static const char* isles_mapwarp_array[] = {
@@ -66,7 +66,7 @@ const Screen isles_mapwarp_struct = {
 	.TextArray = (int*)isles_mapwarp_array,
 	.FunctionArray = isles_mapwarp_functions,
 	.ArrayItems = 9,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 8
 };
 
@@ -89,7 +89,7 @@ static const unsigned char isles_main_destexit[] = {
 const MapWarp map_islesmain_struct = {
 	.maps = isles_main_destmap,
 	.exits = isles_main_destexit,
-	.screen = 28
+	.screen = ACTIVEMENU_SCREEN_MAP_ISLESMAIN
 };
 
 static const char* islesmain_mapwarp_array[] = {
@@ -112,7 +112,7 @@ const Screen islesmain_mapwarp_struct = {
 	.TextArray = (int*)islesmain_mapwarp_array,
 	.FunctionArray = islesmain_mapwarp_functions,
 	.ArrayItems = 5,
-	.ParentScreen = 27,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ISLES,
 	.ParentPosition = 0
 };
 
@@ -141,7 +141,7 @@ static const unsigned char isles_lobbies_destexit[] = {
 const MapWarp map_isleslobbies_struct = {
 	.maps = isles_lobbies_destmap,
 	.exits = isles_lobbies_destexit,
-	.screen = 29
+	.screen = ACTIVEMENU_SCREEN_MAP_ISLESLOBBIES
 };
 
 static const char* isleslobbies_mapwarp_array[] = {
@@ -170,11 +170,11 @@ const Screen isleslobbies_mapwarp_struct = {
 	.TextArray = (int*)isleslobbies_mapwarp_array,
 	.FunctionArray = isleslobbies_mapwarp_functions,
 	.ArrayItems = 8,
-	.ParentScreen = 27,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ISLES,
 	.ParentPosition = 5
 };
 
 void openIslesMenu(void) {
-	changeMenu(27);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_ISLES);
 }
 

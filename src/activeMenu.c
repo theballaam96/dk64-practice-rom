@@ -1,4 +1,5 @@
 #include "../include/common.h"
+#define MAX_ELEMENTS 13
 
 static const char* main_array[] = {
 	"WARP TO MAP",
@@ -14,7 +15,7 @@ static const char* main_array[] = {
 
 static const int main_functions[9];
 
-static const Screen main_struct = {
+const Screen main_struct = {
 	.TextArray = (int*)main_array,
 	.FunctionArray = main_functions,
 	.ArrayItems = 9,
@@ -22,125 +23,49 @@ static const Screen main_struct = {
 	.ParentPosition = 0
 };
 
-const Screen* menu_screens[] = {
-	&main_struct,
-	&maps_container_struct,
-	&japes_mapwarp_struct,
-	&japesmain_mapwarp_struct,
-	&aztec_mapwarp_struct,
-	&aztecmain_mapwarp_struct,
-	&aztecfivedt_mapwarp_struct,
-	&factory_mapwarp_struct,
-	&factorymain_mapwarp_struct,
-	&galleon_mapwarp_struct,
-	&galleonmain_mapwarp_struct,
-	&galleonships_mapwarp_struct,
-	&watch_struct,
-	&fungi_mapwarp_struct,
-	&fungimain_mapwarp_struct,
-	&fungigmush_mapwarp_struct,
-	&fungimills_mapwarp_struct,
-	&caves_mapwarp_struct,
-	&cavesmain_mapwarp_struct,
-	&caves5dc_mapwarp_struct,
-	&caves5di_mapwarp_struct,
-	&castle_mapwarp_struct,
-	&castlemain_mapwarp_struct,
-	&castlecrypt_mapwarp_struct,
-	&castletunnel_mapwarp_struct,
-	&castleoutside_mapwarp_struct,
-	&castlerooms_mapwarp_struct,
-	&isles_mapwarp_struct,
-	&islesmain_mapwarp_struct,
-	&isleslobbies_mapwarp_struct,
-	&helmrool_mapwarp_struct,
-	&state_struct,
-	&changestate_struct,
-	&timersettings_struct,
-	&ramview_struct,
-	&filestates_main_struct,
-	&filestates_nle_struct,
-	&filestates_101main_struct,
-	&filestates_general_struct,
-	&filestates_101org_struct,
-	&filestates_101jfm_struct,
-	&filestates_101ffm_struct,
-	&viewstate_struct,
-	&flagmain_struct,
-	&flagmenu_kongs_struct,
-	&flagmenu_keysin_struct,
-	&flagmenu_keyshave_struct,
-	&flagmenu_levelintros_struct,
-	&flagmenu_leveltns_struct,
-	&flagmenu_levelboss_struct,
-	&flagmenu_cutscene_struct,
-	&flagmenu_modifier_struct,
-	&flagmenu_ftt_struct,
-	&flagmenu_misc_struct,
-	&flagcustom_struct,
-	&cheats_struct,
-	&gamemode_struct,
-	&settings_struct,
-	&kongcolors_struct,
-	&quadrant_struct,
-	&dpadlr_struct,
-	&dpadd_struct,
-	&transform_struct,
-	&moveset_struct,
-	&cranky_struct,
-	&funky_struct,
-	&candy_struct,
-	&flagmenu_tbarrels_struct,
-	&vanilla_struct,
-	&hack_struct,
-	&other_mapwarp_struct,
-	&toggles_struct,
-	&snagcheats_struct,
-	&gamemode_gameplay_struct,
-	&gamemode_cutscenes_struct,
-	&gamemode_unused_struct,
-	&debug_struct,
-	&actor_struct,
-	&detailsscreen_struct,
-	&watch_player_struct,
-	&watch_timers_struct,
-	&watch_sysenv_struct,
-	&watch_snag_struct,
-	&watch_assist_struct,
-	&heap_struct,
-	&flaglog_struct,
-	&instruction_struct,
-	&testinfo_struct,
-	&forcespawn_struct,
-	&filestates_glitchless_struct,
-	&bonusmain_mapwarp_struct,
-	&bonusjapes_mapwarp_struct,
-	&bonusaztec_mapwarp_struct,
-	&bonusfactory_mapwarp_struct,
-	&bonusgalleon_mapwarp_struct,
-	&bonusfungi_mapwarp_struct,
-	&bonuscaves_mapwarp_struct,
-	&bonuscastle_mapwarp_struct,
-	&bonushelm_mapwarp_struct,
-	&bonusisles_mapwarp_struct,
-	&collisionmenu_struct,
-	&floormenu_struct,
-	&bports_struct,
-	&watch_fake_struct,
-	&state_settings_struct,
-	&tricktoggles_struct,
-	&infinite_struct,
-};
-
 void spawnMenu(int screenIndex) {
 	ActiveMenu.screenIndex = screenIndex;
 	const Screen* focused_screen = menu_screens[screenIndex];
 	int array_count = focused_screen->ArrayItems;
-	if (ActiveMenu.positionIndex >= array_count) {
-		ActiveMenu.positionIndex = array_count - 1;
+	ActiveMenu.totalItems = array_count;
+	if (array_count > MAX_ELEMENTS) {
+		array_count = MAX_ELEMENTS;
+		ActiveMenu.hasScroll = 1;
+	} else {
+		ActiveMenu.hasScroll = 0;
+	}
+	if (ActiveMenu.positionIndex >= ActiveMenu.totalItems) {
+		ActiveMenu.positionIndex = ActiveMenu.totalItems - 1;
+	}
+	if (ActiveMenu.positionIndex > array_count) {
+		ActiveMenu.startIndex = (ActiveMenu.positionIndex - MAX_ELEMENTS) + 1;
+	}
+	if (!ActiveMenu.hasScroll) {
+		ActiveMenu.startIndex = 0;
 	}
 	ActiveMenu.isOpen = 1;
 };
+
+int* displayScrollBar(int* dl) {
+	if (ActiveMenu.hasScroll) {
+		int line_shade = 10;
+		int box_shade = 20;
+		int left = 62;
+		int thickness = 15;
+		int pad = 5;
+		int top = 100;
+		int height = 700;
+		float box_height = height * MAX_ELEMENTS;
+		box_height /= ActiveMenu.totalItems;
+		int box_graduation_limit = height - box_height;
+		float box_top = ActiveMenu.startIndex * box_graduation_limit;
+		box_top /= (ActiveMenu.totalItems - MAX_ELEMENTS);
+		box_top += top;
+		dl = drawScreenRect(dl, left, top, left + thickness, top + height, line_shade, line_shade, line_shade, 1);
+		dl = drawScreenRect(dl, left - pad, box_top - pad, left + thickness + pad, box_top + box_height + pad, box_shade, box_shade, box_shade, 1);
+	}
+	return dl;
+}
 
 int* displayMenu(int* dl) {
 	if (ActiveMenu.isOpen) {
@@ -152,20 +77,24 @@ int* displayMenu(int* dl) {
 		const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
 		int* focused_text_array = (int*)focused_screen->TextArray;
 		int array_count = focused_screen->ArrayItems;
+		if (array_count > MAX_ELEMENTS) {
+			array_count = MAX_ELEMENTS;
+		}
 		int background = 1;
+		int relative_pos = ActiveMenu.positionIndex - ActiveMenu.startIndex;
 		for (int i = 0; i < array_count; i++) {
 			red = 0xFF;
 			green = 0xFF;
 			blue = 0xFF;
-			if (i == ActiveMenu.positionIndex) {
+			if (i == relative_pos) {
 				red = 0xFF;
 				green = 0xD7;
 				blue = 0;
 			}
-			dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[i], red, green, blue, 0xFF,background);
+			dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[i + ActiveMenu.startIndex], red, green, blue, 0xFF,background);
 			y += 13;
 		}
-		if (ActiveMenu.positionIndex == array_count) {
+		if (ActiveMenu.positionIndex == ActiveMenu.totalItems) {
 			red = 0xFF;
 			green = 0x45;
 			blue = 0;
@@ -174,11 +103,12 @@ int* displayMenu(int* dl) {
 			green = 0xFF;
 			blue = 0xFF;
 		}
-		int check_char = ((char*)focused_text_array[array_count - 1])[0];
+		int check_char = ((char*)focused_text_array[ActiveMenu.totalItems - 1])[0];
 		if ((check_char == 0x7B) || (check_char == 0x7D)) {
 			y += 6;
 		}
 		dl = drawPixelTextContainer(dl, x, y, "RETURN", red, green, blue, 0xFF,background);
+		dl = displayScrollBar(dl);
 	}
 	return dl;
 }
@@ -216,8 +146,10 @@ void toggleMenu(void) {
 				if ((ControllerInput.Buttons & R_Button) && (NewlyPressedControllerInput.Buttons & L_Button)) {
 					ActiveMenu.screenIndex = 0;
 					ActiveMenu.positionIndex = 0;
+					ActiveMenu.hasScroll = 0;
+					ActiveMenu.startIndex = 0;
 					if (ActiveMenu.isOpen == 0) {
-						spawnMenu(0);
+						spawnMenu(ACTIVEMENU_SCREEN_ROOT);
 						closeRamViewerDisplay();
 						wipeText();
 					} else {
@@ -238,17 +170,34 @@ void moveSlot(void) {
 					const Screen* focused_screen = menu_screens[screenIndex];
 					int cap = focused_screen->ArrayItems + 1;
 					int _position = ActiveMenu.positionIndex;
+					int rel_pos = ActiveMenu.positionIndex - ActiveMenu.startIndex;
 					if (NewlyPressedControllerInput.Buttons & D_Up) {
+						if (ActiveMenu.hasScroll) {
+							if ((rel_pos == 0) && (ActiveMenu.startIndex > 0)) {
+								ActiveMenu.startIndex -= 1;
+							}
+						}
 						if (_position == 0) {
 							_position = cap - 1;
+							if (ActiveMenu.hasScroll) {
+								ActiveMenu.startIndex = _position - MAX_ELEMENTS;
+							}
 						} else {
 							_position -= 1;
 						}
 					} else {
 						if (NewlyPressedControllerInput.Buttons & D_Down) {
+							if (ActiveMenu.hasScroll) {
+								if ((rel_pos == (MAX_ELEMENTS - 1)) && (ActiveMenu.startIndex < (ActiveMenu.totalItems - MAX_ELEMENTS))) {
+									ActiveMenu.startIndex += 1;
+								}
+							}
 							_position += 1;
 							if (_position == cap) {
 								_position = 0;
+								if (ActiveMenu.hasScroll) {
+									ActiveMenu.startIndex = 0;
+								}
 							}
 						}
 					}
@@ -271,7 +220,7 @@ void closeMenuOnTransition(void) {
 void previousScreen(void) {
 	int screenIndex = ActiveMenu.screenIndex;
 	clearMenu();
-	if (screenIndex == 0) {
+	if (screenIndex == ACTIVEMENU_SCREEN_ROOT) {
 		ClosingMenu = 1;
 		wipeText();
 	} else {
@@ -280,6 +229,8 @@ void previousScreen(void) {
 		int newPosition = focused_screen->ParentPosition;
 		ActiveMenu.screenIndex = newScreen;
 		ActiveMenu.positionIndex = newPosition;
+		ActiveMenu.startIndex = 0;
+		ActiveMenu.hasScroll = 0;
 		spawnMenu(newScreen);
 	}
 }
@@ -287,7 +238,7 @@ void previousScreen(void) {
 void confirmOptionBackground(void) {
 	const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
 	int* focused_function_array = (int *)focused_screen->FunctionArray;
-	int cap = focused_screen->ArrayItems;
+	int cap = ActiveMenu.totalItems;
 	if (ActiveMenu.positionIndex == cap) {
 		previousScreen();
 	} else {
@@ -318,7 +269,7 @@ void menuShortcutButtons(void) {
 		if ((_buttons & L_Button) == 0) {
 			if (ActiveMenu.isOpen) {
 				if (ClosingMenu == 0) {
-					if ((ActiveMenu.screenIndex != 54) && (ActiveMenu.screenIndex != 88)) {
+					if ((ActiveMenu.screenIndex != ACTIVEMENU_SCREEN_FLAG_CUSTOM) && (ActiveMenu.screenIndex != ACTIVEMENU_SCREEN_DEBUG_SPAWNACTOR)) {
 						if (_buttons & D_Left) {
 							previousScreen();
 						} else {
@@ -338,6 +289,8 @@ void changeMenu(int newScreenIndex) {
 	if (ActiveMenu.screenIndex != newScreenIndex) {
 		ActiveMenu.positionIndex = 0;
 		ActiveMenu.screenIndex = newScreenIndex;
+		ActiveMenu.startIndex = 0;
+		ActiveMenu.hasScroll = 0;
 	}
 	spawnMenu(newScreenIndex);
 }

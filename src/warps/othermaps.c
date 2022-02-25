@@ -37,7 +37,7 @@ static const unsigned char other_destexit[] = {
 const MapWarp map_other_struct = {
 	.maps = other_destmap,
 	.exits = other_destexit,
-	.screen = 70
+	.screen = ACTIVEMENU_SCREEN_MAP_OTHER
 };
 
 static const char* other_mapwarp_array[] = {
@@ -58,11 +58,11 @@ const Screen other_mapwarp_struct = {
 	.TextArray = (int*)other_mapwarp_array,
 	.FunctionArray = other_mapwarp_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 1,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 9
 };
 
 void openOtherMapsMenu(void) {
-	changeMenu(70);
+	changeMenu(ACTIVEMENU_SCREEN_MAP_OTHER);
 };
 

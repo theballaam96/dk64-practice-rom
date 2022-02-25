@@ -299,9 +299,12 @@ typedef struct TimerInfo {
 } TimerInfo;
 
 typedef struct ActiveMenuData {
-	/* 0x000 */ unsigned char screenIndex;
-	/* 0x001 */ unsigned char positionIndex;
-	/* 0x002 */ char isOpen;
+	/* 0x000 */ char isOpen;
+	/* 0x001 */ unsigned char screenIndex;
+	/* 0x002 */ unsigned char positionIndex;
+	/* 0x003 */ unsigned char startIndex;
+	/* 0x004 */ char hasScroll;
+	/* 0x005 */ unsigned char totalItems;
 } ActiveMenuData;
 
 typedef struct AutowalkData {

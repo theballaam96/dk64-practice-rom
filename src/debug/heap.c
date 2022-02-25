@@ -50,7 +50,7 @@ void openHeapMenu(void) {
 	dk_strFormat(memory_used, "USED:0X%X BYTES <%f$>",heap_used,heap_used_percent);
 	dk_strFormat(memory_allocated, "ALLOCATED:%d",heap_allocated);
 	dk_strFormat(memory_total, "TOTAL:0X%X BYTES",heap_total);
-	changeMenu(84);
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_HEAP);
 }
 
 static const char* heap_array[] = {
@@ -71,6 +71,6 @@ const Screen heap_struct = {
 	.TextArray = (int*)heap_array,
 	.FunctionArray = heap_functions,
 	.ArrayItems = 4,
-	.ParentScreen = 76,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ROOT,
 	.ParentPosition = 2
 };
