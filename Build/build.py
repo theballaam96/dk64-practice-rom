@@ -22,6 +22,7 @@ from staticcode import patchStaticCode
 from actor_bin_builder import *
 from snag_bins_builder import *
 from font_image_builder import build_font
+from filestatewriter import writeFileStatesToDict, wipeStateFiles
 import check_unused
 
 ROMName = "rom/dk64.z64"
@@ -164,6 +165,8 @@ file_dict = [
 		"do_not_compress": True,
 	},
 ]
+
+file_dict = writeFileStatesToDict(file_dict)
 
 map_replacements = [
 	# {
@@ -396,8 +399,6 @@ with open(newROMName, "r+b") as fh:
 # if os.path.exists("assets/Non-Code/Font/font_boundaries.bin"):
 # 	os.remove("assets/Non-Code/Font/font_boundaries.bin")
 
-import filestatewriter
-
 bins = [
 	"assets/Non-Code/actor_names",
 	"assets/Non-Code/snag_names",
@@ -413,6 +414,7 @@ for x in bins:
 		os.remove(pth)
 	else:
 		print(x + "doesn't exist")
+wipeStateFiles();
 
 print("[7 / 7] - Generating BizHawk RAM watch")
 import generate_watch_file

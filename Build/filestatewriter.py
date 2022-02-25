@@ -5,7 +5,7 @@ import math
 file_size = 0x340 # 0x1 at end, rounded up
 ROM_start = 0x2022000
 ROM_name = "rom/dk64-practice-rom.z64"
-state_index = 0
+file_dir_start = "assets/File States/"
 state_files = [
 	{
 		"folder": "No Levels Early",
@@ -137,26 +137,36 @@ def grabFileState(input_file,output_file):
 			fh.seek(0x7FDD90)
 			fg.write(fh.read(0x10))
 			
-
-file_dir_start = "assets/File States/"
-for x in state_files:
-	state_dir = file_dir_start + x["folder"] + "/State Files/"
-	dump_dir = file_dir_start + x["folder"] + "/RAM Dump/"
-	for y in x["files"]:
-		#print(file_dir + y)
-		if not os.path.exists(state_dir):
-			os.mkdir(state_dir)
-		if os.path.exists(state_dir + y):
-			os.remove(state_dir + y)
-		grabFileState(dump_dir + y, state_dir + y)
-		with open(state_dir + y, "rb") as fh:
-			with open(ROM_name, "r+b") as fg:
-				_byteread = fh.read()
-				if (len(_byteread) > file_size):
-					print("File State is too big: " + hex(len(_byteread)) + " > " + hex(file_size))
-				fg.seek(ROM_start + (file_size * state_index))
-				fg.write(_byteread)
-				state_index += 1
-		if os.path.exists(state_dir + y):
-			os.remove(state_dir + y)
-print("Generated File States")
+def wipeStateFiles():
+	for x in state_files:
+		state_dir = file_dir_start + x["folder"] + "/State Files/"
+		for y in x["files"]:
+			if os.path.exists(state_dir + y):
+				os.remove(state_dir + y)
+				
+def writeFileStatesToDict(original_dict):
+	state_index = 0
+	for x in state_files:
+		state_dir = file_dir_start + x["folder"] + "/State Files/"
+		dump_dir = file_dir_start + x["folder"] + "/RAM Dump/"
+		for y in x["files"]:
+			#print(file_dir + y)
+			if not os.path.exists(state_dir):
+				os.mkdir(state_dir)
+			if os.path.exists(state_dir + y):
+				os.remove(state_dir + y)
+			grabFileState(dump_dir + y, state_dir + y)
+			with open(state_dir + y, "rb") as fh:
+				with open(ROM_name, "r+b") as fg:
+					_byteread = fh.read()
+					if (len(_byteread) > file_size):
+						print("File State is too big: " + hex(len(_byteread)) + " > " + hex(file_size))
+					original_dict.append({
+						"name": "File State: " + y.replace(".bin","") + " (" + x["folder"] + ")",
+						"start": ROM_start + (file_size * state_index),
+						"source_file": state_dir + y,
+						"do_not_extract": True,
+						"do_not_compress": True,
+					})
+					state_index += 1
+	return original_dict;
