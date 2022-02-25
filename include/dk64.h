@@ -389,6 +389,7 @@ extern void* voidPointer;
 extern char floorsPreloadedVanilla;
 extern unsigned char savestateSettingsBitfield;
 extern char voidsDisabled;
+extern char disableCustomSFX;
 
 // Code
 extern int debugColumnLoop;

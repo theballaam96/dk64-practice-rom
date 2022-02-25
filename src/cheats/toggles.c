@@ -10,9 +10,6 @@ static const char toggles_enemyspawn_on[] = "{ DISABLE ENEMY SPAWNING";
 static const char toggles_minigamems_off[] = "{ MINIGAME TIMERS IN MILLISECONDS";
 static const char toggles_minigamems_on[] = "} MINIGAME TIMERS IN MILLISECONDS";
 
-static const char toggles_infhealth_off[] = "{ INFINITE HEALTH";
-static const char toggles_infhealth_on[] = "} INFINITE HEALTH";
-
 static const char toggles_ltocancelcs_off[] = "{ L TO CANCEL CUTSCENE";
 static const char toggles_ltocancelcs_on[] = "} L TO CANCEL CUTSCENE";
 
@@ -35,7 +32,6 @@ static const char* toggles_array[] = {
 	toggles_sandstorm_unk,
 	toggles_enemyspawn_off,
 	toggles_minigamems_off,
-	toggles_infhealth_off,
 	toggles_ltocancelcs_off,
 	toggles_ltoendminigame_off,
 	toggles_levitate_off,
@@ -50,7 +46,6 @@ static const char* toggles_array[] = {
 static const char* toggles_addresses[] = {
 	(char*)&EnemySpawnOff,
 	(char*)&MinigameTimersInMS,
-	(char*)&InfiniteHealthCheatOn,
 	(char*)&LToCancelCSOn,
 	(char*)&LToEndGameOn,
 	(char*)&LToLevitateOn,
@@ -64,15 +59,13 @@ static const char toggles_indexes[] = {
 	3,
 	4,
 	5,
-	6,
+	7,
 	8,
-	9,
 };
 
 static const char* toggles_on[] = {
 	toggles_enemyspawn_off,
 	toggles_minigamems_on,
-	toggles_infhealth_on,
 	toggles_ltocancelcs_on,
 	toggles_ltoendminigame_on,
 	toggles_levitate_on,
@@ -83,7 +76,6 @@ static const char* toggles_on[] = {
 static const char* toggles_off[] = {
 	toggles_enemyspawn_on,
 	toggles_minigamems_off,
-	toggles_infhealth_off,
 	toggles_ltocancelcs_off,
 	toggles_ltoendminigame_off,
 	toggles_levitate_off,
@@ -110,9 +102,9 @@ void openTogglesMenu(void) {
 	}
 	dk_strFormat((char *)toggles_superspeed,"L TO SUPERSPEED:%dX",IsSuperspeedOn);
 	if (IsSuperspeedOn == 1) {
-		toggles_array[7] = toggles_superspeed_off;
+		toggles_array[6] = toggles_superspeed_off;
 	} else {
-		toggles_array[7] = toggles_superspeed;
+		toggles_array[6] = toggles_superspeed;
 	}
 	changeMenu(71);
 }
@@ -149,12 +141,6 @@ void toggleSuperspeed(void) {
 	openTogglesMenu();
 }
 
-void infiniteHealth(void) {
-	if (InfiniteHealthCheatOn) {
-		CollectableBase.Health = CollectableBase.Melons << 2;
-	}
-};
-
 void toggleMinigameTimers(void) {
 	MinigameTimersInMS = 1 ^ MinigameTimersInMS;
 	changeTimer_button();
@@ -162,7 +148,6 @@ void toggleMinigameTimers(void) {
 }
 
 void resetAllCheats(void) {
-	InfiniteHealthCheatOn = 0;
 	LToCancelCSOn = 0;
 	LToEndGameOn = 0;
 	LToLevitateOn = 0;
@@ -188,7 +173,6 @@ static const int toggles_functions[] = {
 	(int)&toggleCheat,
 	(int)&toggleCheat,
 	(int)&toggleCheat,
-	(int)&toggleCheat,
 	(int)&toggleSuperspeed,
 	(int)&toggleCheat,
 	(int)&toggleVoidDisable,
@@ -200,7 +184,7 @@ static const int toggles_functions[] = {
 const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
-	.ArrayItems = 13,
+	.ArrayItems = 12,
 	.ParentScreen = 55,
 	.ParentPosition = 6
 };

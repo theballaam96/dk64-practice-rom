@@ -166,7 +166,7 @@ extern void handleAutomoonkick(void);
 extern void getSandstormAddress(void);
 extern void handleSpawnPrevention(void);
 extern void handleLToTBV(void);
-extern void infiniteHealth(void);
+extern void handleInfinites(void);
 extern void isPaused(void);
 extern void checkMapType(void);
 extern void fileInit(void);
@@ -180,6 +180,7 @@ extern void loadMapVars_0(void);
 extern void disableVoid(void);
 //extern void correctTagCode(void);
 extern int* displayFloors(int* dl);
+extern void openInfinitesMenu(void);
 
 extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);
@@ -311,6 +312,7 @@ extern const Screen bports_struct;
 extern const Screen watch_fake_struct;
 extern const Screen state_settings_struct;
 extern const Screen tricktoggles_struct;
+extern const Screen infinite_struct;
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

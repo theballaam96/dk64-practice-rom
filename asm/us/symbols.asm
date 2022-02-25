@@ -384,6 +384,7 @@
 .definelabel floorsPreloadedVanilla, 0x807FFC90 // u8
 .definelabel savestateSettingsBitfield, 0x807FFC91 // u8
 .definelabel voidsDisabled, 0x807FFC92 // u8
+.definelabel disableCustomSFX, 0x807FFC93 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

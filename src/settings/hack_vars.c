@@ -1,23 +1,23 @@
 #include "../../include/common.h"
 
-static char hack_quickstartup_on[] = "QUICK STARTUP:ON";
-static char hack_quickstartup_off[] = "QUICK STARTUP:OFF";
+static char hack_quickstartup_on[] = "} QUICK STARTUP";
+static char hack_quickstartup_off[] = "{ QUICK STARTUP";
 
-static char hack_forcedstoryskip_on[] = "FORCED STORY SKIP:ON";
-static char hack_forcedstoryskip_off[] = "FORCED STORY SKIP:OFF";
+static char hack_forcedstoryskip_on[] = "{ FORCED STORY SKIP";
+static char hack_forcedstoryskip_off[] = "} FORCED STORY SKIP";
 
 static char hack_pausevolume_normal[] = "PAUSE VOLUME:NORMAL";
 static char hack_pausevolume_quiet[] = "PAUSE VOLUME:QUIET";
 static char hack_pausevolume_silent[] = "PAUSE VOLUME:SILENT";
 
-static char hack_dpadnavigate_on[] = "D-PAD TO NAVIGATE MENU:ON";
-static char hack_dpadnavigate_off[] = "D-PAD TO NAVIGATE MENU:OFF";
+static char hack_dpadnavigate_on[] = "} D-PAD TO NAVIGATE MENU";
+static char hack_dpadnavigate_off[] = "{ D-PAD TO NAVIGATE MENU";
 
 static char hack_transformautostock_on[] = "TRANSFORM CHEAT:DON^T CONSUME";
 static char hack_transformautostock_off[] = "TRANSFORM CHEAT:CONSUME";
 
-static char hack_savenotifs_on[] = "SAVE NOTIFICATIONS:ON";
-static char hack_savenotifs_off[] = "SAVE NOTIFICATIONS:OFF";
+static char hack_savenotifs_on[] = "} SAVE NOTIFICATIONS";
+static char hack_savenotifs_off[] = "{ SAVE NOTIFICATIONS";
 
 static char hack_precision[16] = "PRECISION:0";
 
@@ -39,6 +39,9 @@ static char hack_console_n64[] = "CONSOLE:NINTENDO 64";
 static char hack_console_wiiu[] = "CONSOLE:WII U";
 static char hack_console_emu[] = "CONSOLE:EMULATOR";
 
+static char hack_sfx_off[] = "{ PRACTICE ROM SOUND EFFECTS";
+static char hack_sfx_on[] = "} PRACTICE ROM SOUND EFFECTS";
+
 static char* hack_array[] = {
 	hack_quickstartup_on,
 	hack_forcedstoryskip_on,
@@ -52,6 +55,7 @@ static char* hack_array[] = {
 	hack_inputmax_70,
 	hack_inputtype_detailed,
 	hack_console_none,
+	hack_sfx_on,
 };
 
 static char* hack_console_list[] = {
@@ -122,6 +126,11 @@ void openHackVarsMenu(void) {
 		hack_array[10] = hack_inputtype_detailed;
 	}
 	hack_array[11] = hack_console_list[(int)assignedConsole];
+	if (disableCustomSFX) {
+		hack_array[12] = hack_sfx_off;
+	} else {
+		hack_array[12] = hack_sfx_on;
+	}
 	changeMenu(69);
 };
 
@@ -212,6 +221,12 @@ void toggleInputType(void) {
 	openHackVarsMenu();
 }
 
+void toggleSFX(void) {
+	disableCustomSFX = 1 ^ disableCustomSFX;
+	saveSettings();
+	openHackVarsMenu();
+}
+
 static const int hack_functions[] = {
 	(int)&toggleQuickStartup,
 	(int)&toggleForcedStorySkip,
@@ -225,12 +240,13 @@ static const int hack_functions[] = {
 	(int)&toggleInputMax,
 	(int)&toggleInputType,
 	(int)&toggleConsole,
+	(int)&toggleSFX,
 };
 
 const Screen hack_struct = {
 	.TextArray = (int*)hack_array,
 	.FunctionArray = hack_functions,
-	.ArrayItems = 12,
+	.ArrayItems = 13,
 	.ParentScreen = 57,
 	.ParentPosition = 3
 };

@@ -110,7 +110,7 @@ void cFuncLoop(void) {
 	}
 	setKRoolRound(); // Constant
 	handleAutomoonkick(); // AutoMoonkickOn
-	infiniteHealth(); // InfiniteHealthCheatOn
+	handleInfinites();
 	fileInit(); // File Init
 	analyzeInputs(); // PhaseChecker.assistant_on
 	writeFlagsToLog(); // Constant

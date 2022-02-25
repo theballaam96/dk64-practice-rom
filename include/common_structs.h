@@ -428,6 +428,7 @@ typedef struct savedSettings {
 	/* 0x014 */ char input_type;
 	/* 0x015 */ char jetman_color;
 	/* 0x016 */ char savestate_bitfield;
+	/* 0x017 */ char disable_sfx;
 } savedSettings;
 
 typedef struct flagMenuData {

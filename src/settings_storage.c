@@ -24,6 +24,7 @@ void resetSettings(void) {
 	StoredSettings.input_type = 0;
 	StoredSettings.jetman_color = 0;
 	StoredSettings.savestate_bitfield = 0;
+	StoredSettings.disable_sfx = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -50,6 +51,7 @@ void loadSettings(void) {
 		InputDisplayType = StoredSettings.input_type;
 		jetmanColorIndex = StoredSettings.jetman_color;
 		savestateSettingsBitfield = StoredSettings.savestate_bitfield;
+		disableCustomSFX = StoredSettings.disable_sfx;
 	} else {
 		resetSettings();
 	}
@@ -76,5 +78,6 @@ void saveSettings(void) {
 	StoredSettings.input_type = InputDisplayType;
 	StoredSettings.jetman_color = jetmanColorIndex;
 	StoredSettings.savestate_bitfield = savestateSettingsBitfield;
+	StoredSettings.disable_sfx = disableCustomSFX;
 	SaveToGlobal();
 }

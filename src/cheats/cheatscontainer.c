@@ -12,6 +12,7 @@ static const char* cheats_array[] = {
 	"SPAWN SNAG CHEATS",
 	"AUTO-TRICKS",
 	"TOGGLES",
+	"INFINITES",
 	"UNDO LAST FLAG WRITE",
 	"GAIN CONTROL",
 	"FORCE END MINIGAME",
@@ -44,6 +45,7 @@ static const int cheats_functions[] = {
 	(int)&openSnagMenu,
 	(int)&openTrickToggleMenu,
 	(int)&openTogglesMenu,
+	(int)&openInfinitesMenu,
 	(int)&undoLastFlagWrite,
 	(int)&gainControl,
 	(int)&endMinigame,
@@ -53,7 +55,7 @@ static const int cheats_functions[] = {
 const Screen cheats_struct = {
 	.TextArray = (int*)cheats_array,
 	.FunctionArray = cheats_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 12,
 	.ParentScreen = 0,
 	.ParentPosition = 7
 };

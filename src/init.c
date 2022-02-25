@@ -63,7 +63,6 @@ void initHack(void) {
 		style2Mtx[0x0] = base_mtx;
 		style2Mtx[0x5] = base_mtx;
 		style2Mtx[0xF] = 10;
-		//bootSpeedup();
 		// base_mtx = 85;
 		// style128Mtx[0x0] = base_mtx;
 		// style128Mtx[0x5] = base_mtx;
@@ -73,7 +72,7 @@ void initHack(void) {
 			ViewedSnagWatches[i] = -1;
 		}
 		loadExtraHooks();
-		if (StoredSettings.hasSavedData == 0) {
+		if (StoredSettings.console == 0) {
 			int gfb_start = (int)getFlagBlockAddress(1);
 			*(int*)(gfb_start) = -1;
 			*(int*)(gfb_start + 4) = -1;
