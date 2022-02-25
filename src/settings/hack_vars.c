@@ -62,6 +62,57 @@ static char* hack_array[] = {
 	hack_savecombo_on,
 };
 
+static char* hack_true[] = {
+	hack_quickstartup_off,
+	hack_forcedstoryskip_off,
+	0,
+	hack_dpadnavigate_off,
+	hack_transformautostock_off,
+	hack_savenotifs_on,
+	0,
+	0,
+	hack_fileinitqol_off,
+	hack_inputmax_127,
+	hack_inputtype_lowlag,
+	0,
+	hack_sfx_off,
+	hack_savecombo_off,
+};
+
+static char* hack_false[] = {
+	hack_quickstartup_on,
+	hack_forcedstoryskip_on,
+	0,
+	hack_dpadnavigate_on,
+	hack_transformautostock_on,
+	hack_savenotifs_off,
+	0,
+	0,
+	hack_fileinitqol_on,
+	hack_inputmax_70,
+	hack_inputtype_detailed,
+	0,
+	hack_sfx_on,
+	hack_savecombo_on,
+};
+
+static char* hack_addr[] = {
+	(char*)&DisableStartupSkip,
+	(char*)&DisableForcedStorySkip,
+	0,
+	(char*)&MenuShortcutButtonsOff,
+	(char*)&TransformAutoRestockOff,
+	(char*)&ShowSavePrompts,
+	0,
+	0,
+	(char*)&FileInitQOLOff,
+	(char*)&InputStickMax,
+	(char*)&InputDisplayType,
+	0,
+	(char*)&disableCustomSFX,
+	(char*)&disableSavestateCombo,
+};
+
 static char* hack_console_list[] = {
 	hack_console_none,
 	hack_console_n64,
@@ -70,15 +121,14 @@ static char* hack_console_list[] = {
 };
 
 void openHackVarsMenu(void) {
-	if (DisableStartupSkip) {
-		hack_array[0] = hack_quickstartup_off;
-	} else {
-		hack_array[0] = hack_quickstartup_on;
-	}
-	if (DisableForcedStorySkip) {
-		hack_array[1] = hack_forcedstoryskip_off;
-	} else {
-		hack_array[1] = hack_forcedstoryskip_on;
+	for (int i = 0; i < sizeof(hack_addr)/4; i++) {
+		if (hack_addr[i] != 0) {
+			if (*(char*)hack_addr[i]) {
+				hack_array[i] = hack_true[i];
+			} else {
+				hack_array[i] = hack_false[i];
+			}
+		}
 	}
 	if (PauseMenuMusicSetting == 2) {
 		hack_array[2] = hack_pausevolume_silent;
@@ -88,21 +138,6 @@ void openHackVarsMenu(void) {
 		} else {
 			hack_array[2] = hack_pausevolume_normal;
 		}
-	}
-	if (MenuShortcutButtonsOff) {
-		hack_array[3] = hack_dpadnavigate_off;
-	} else {
-		hack_array[3] = hack_dpadnavigate_on;
-	}
-	if (TransformAutoRestockOff) {
-		hack_array[4] = hack_transformautostock_off;
-	} else {
-		hack_array[4] = hack_transformautostock_on;
-	}
-	if (ShowSavePrompts) {
-		hack_array[5] = hack_savenotifs_on;
-	} else {
-		hack_array[5] = hack_savenotifs_off;
 	}
 	dk_strFormat((char *)hack_precision,"PRECISION: %d",Precision);
 	if (KRoolRoundSetting == 2) {
@@ -114,46 +149,9 @@ void openHackVarsMenu(void) {
 			hack_array[7] = hack_kroolround_random;
 		}
 	}
-	if (FileInitQOLOff) {
-		hack_array[8] = hack_fileinitqol_off;
-	} else {
-		hack_array[8] = hack_fileinitqol_on;
-	}
-	if (InputStickMax) {
-		hack_array[9] = hack_inputmax_127;
-	} else {
-		hack_array[9] = hack_inputmax_70;
-	}
-	if (InputDisplayType) {
-		hack_array[10] = hack_inputtype_lowlag;
-	} else {
-		hack_array[10] = hack_inputtype_detailed;
-	}
 	hack_array[11] = hack_console_list[(int)assignedConsole];
-	if (disableCustomSFX) {
-		hack_array[12] = hack_sfx_off;
-	} else {
-		hack_array[12] = hack_sfx_on;
-	}
-	if (disableSavestateCombo) {
-		hack_array[13] = hack_savecombo_off;
-	} else {
-		hack_array[13] = hack_savecombo_on;
-	}
 	changeMenu(ACTIVEMENU_SCREEN_SETTINGS_HACK);
 };
-
-void toggleQuickStartup(void) {
-	DisableStartupSkip = 1 ^ DisableStartupSkip;
-	saveSettings();
-	openHackVarsMenu();
-}
-
-void toggleForcedStorySkip(void) {
-	DisableForcedStorySkip = 1 ^ DisableForcedStorySkip;
-	saveSettings();
-	openHackVarsMenu();
-}
 
 void togglePauseVolume(void) {
 	PauseMenuMusicSetting += 1;
@@ -163,24 +161,6 @@ void togglePauseVolume(void) {
 	saveSettings();
 	openHackVarsMenu();
 }
-
-void toggleDPadNavigation(void) {
-	MenuShortcutButtonsOff = 1 ^ MenuShortcutButtonsOff;
-	saveSettings();
-	openHackVarsMenu();
-}
-
-void toggleTransformAutostock(void) {
-	TransformAutoRestockOff = 1 ^ TransformAutoRestockOff;
-	saveSettings();
-	openHackVarsMenu();
-}
-
-void toggleSaveNotifications(void) {
-	ShowSavePrompts = 1 ^ ShowSavePrompts;
-	saveSettings();
-	openHackVarsMenu();
-};
 
 void togglePrecision(void) {
 	Precision += 1;
@@ -200,18 +180,6 @@ void toggleKRoolRoundSetting(void) {
 	openHackVarsMenu();
 }
 
-void toggleFileStartState(void) {
-	FileInitQOLOff = 1 ^ FileInitQOLOff;
-	saveSettings();
-	openHackVarsMenu();
-}
-
-void toggleInputMax(void) {
-	InputStickMax = 1 ^ InputStickMax;
-	saveSettings();
-	openHackVarsMenu();
-}
-
 void toggleConsole(void) {
 	if (assignedConsole < 3) {
 		assignedConsole += 1;
@@ -222,41 +190,34 @@ void toggleConsole(void) {
 	openHackVarsMenu();
 }
 
-void toggleInputType(void) {
-	InputDisplayType = 1 ^ InputDisplayType;
+void toggleSetting(void) {
+	int pos = ActiveMenu.positionIndex;
+	if (hack_addr[pos] != 0) {
+		*(char*)hack_addr[pos] = 1 ^ *(char*)hack_addr[pos];
+	}
 	saveSettings();
-	closeOverlay();
-	spawnOverlay();
-	openHackVarsMenu();
-}
-
-void toggleSFX(void) {
-	disableCustomSFX = 1 ^ disableCustomSFX;
-	saveSettings();
-	openHackVarsMenu();
-}
-
-void toggleSaveCombo(void) {
-	disableSavestateCombo = 1 ^ disableSavestateCombo;
-	saveSettings();
+	if (hack_addr[pos] == (char*)&InputDisplayType) {
+		closeOverlay();
+		spawnOverlay();
+	}
 	openHackVarsMenu();
 }
 
 static const int hack_functions[] = {
-	(int)&toggleQuickStartup,
-	(int)&toggleForcedStorySkip,
+	(int)&toggleSetting,
+	(int)&toggleSetting,
 	(int)&togglePauseVolume,
-	(int)&toggleDPadNavigation,
-	(int)&toggleTransformAutostock,
-	(int)&toggleSaveNotifications,
+	(int)&toggleSetting,
+	(int)&toggleSetting,
+	(int)&toggleSetting,
 	(int)&togglePrecision,
 	(int)&toggleKRoolRoundSetting,
-	(int)&toggleFileStartState,
-	(int)&toggleInputMax,
-	(int)&toggleInputType,
+	(int)&toggleSetting,
+	(int)&toggleSetting,
+	(int)&toggleSetting,
 	(int)&toggleConsole,
-	(int)&toggleSFX,
-	(int)&toggleSaveCombo,
+	(int)&toggleSetting,
+	(int)&toggleSetting,
 };
 
 const Screen hack_struct = {
