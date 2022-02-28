@@ -7,8 +7,8 @@ Practice ROM for Donkey Kong 64 that assists with practising the game for speedr
 
 ## Build Setup
 1. Create a folder called `/rom` in the root of the repo
-2. Place a vanilla US DK64 ROM named `dk64.z64` in the `/rom` directory. You must source this yourself (this file must not be marked as read only)
-3. Through a command window, run `./build.bat dk64.z64` in the root directory
+2. Place a vanilla US DK64 ROM in the `/rom` directory. You must source this yourself (this file must not be marked as read only)
+3. Through a command window, run `./build.bat {file_name}` in the root directory (eg. `./build.bat dk64.z64`)
 4. In the `/rom` directory, the developer version of the practice rom `dk64-practice-rom-dev.z64`.
 
 ## Development Tools

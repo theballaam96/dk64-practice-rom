@@ -1,10 +1,14 @@
 import os
+import shutil
 from datetime import date, datetime, timedelta
 
 with open(".rom","r") as fh:
 	rom_file = "./rom/" + fh.readlines()[0].replace("\n","")
-	version = 3
 	if os.path.exists(rom_file):
+		if os.path.exists("./rom/temp_rom.z64"):
+		    os.remove("./rom/temp_rom.z64")
+		shutil.copyfile(rom_file, "./rom/temp_rom.z64")
+		version = 3
 		with open(rom_file,"rb") as rom:
 			rom.seek(0x3E)
 			rom_letter = rom.read(1)
@@ -19,6 +23,7 @@ with open(".rom","r") as fh:
 			print(version_names[version] + " detected!")
 	else:
 		print("ERROR: ROM File doesn't exist")
+		exit()
 	with open(".version","w") as vfile:
 		vfile.write(str(version))
 	with open("./include/build_date.h","w") as bdfile:

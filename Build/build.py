@@ -22,7 +22,7 @@ from font_image_builder import build_font
 from filestatewriter import writeFileStatesToDict, wipeStateFiles
 import check_unused
 
-ROMName = "rom/dk64.z64"
+ROMName = "rom/temp_rom.z64"
 newROMName = "rom/dk64-practice-rom.z64"
 
 if os.path.exists(newROMName):

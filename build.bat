@@ -4,6 +4,14 @@ set bps_arg=%2
 echo Started: %date% %time%
 mkdir obj
 
+IF "%src_file%" == "temp_rom.z64" GOTO invalid_name
+GOTO valid_name
+
+:invalid_name
+echo ROM Name can't be "temp_rom.z64"
+GOTO finish
+
+:valid_name
 echo %src_file% > .rom
 python detect_version.py
 set /p vfile=< .version
@@ -33,8 +41,9 @@ del rom\dk64-practice-rom-temp.z64
 del rom\dk64-practice-rom.z64
 if "%bps_arg%" == "--bps" (
 	echo Building BPS Patch
-	build\flips.exe --create "rom\dk64.z64" "rom\dk64-practice-rom-dev.z64" "rom\dk64-practice-rom-dev.bps"
+	build\flips.exe --create "rom\temp_rom.z64" "rom\dk64-practice-rom-dev.z64" "rom\dk64-practice-rom-dev.bps"
 )
+del rom\temp_rom.z64
 
 :finish
 echo Completed: %date% %time%

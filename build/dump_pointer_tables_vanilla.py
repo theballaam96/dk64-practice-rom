@@ -1,6 +1,6 @@
 from recompute_pointer_table import parsePointerTables, dumpPointerTableDetails
 
-newROMName = "./rom/dk64.z64"
+newROMName = "./rom/temp_rom.z64"
 
 with open(newROMName, "rb") as fh:
     parsePointerTables(fh)
