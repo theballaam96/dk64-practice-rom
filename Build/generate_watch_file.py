@@ -17,7 +17,7 @@ def read_symbols():
 	with open(sym_path,"r") as fh:
 		lines = fh.readlines()
 		for x in lines:
-			if ".definelabel" in x:
+			if ".definelabel" in x and ".definelabel" == x[:12]:
 				name = x.split(".definelabel ")[1].split(", ")[0]
 				addr = "0x" + x.split(", ")[1][4:10]
 				addr_set.append({name,addr})

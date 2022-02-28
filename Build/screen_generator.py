@@ -1,11 +1,15 @@
 import json
+import os
 
 data_file = "include/screens_list.json";
 list_file = "include/screens_list.h";
 def_file = "include/screen_struct_def.h";
 c_file = "src/activeMenu_screens.c";
 
+cwd = os.getcwd()
 pre_app = ""; # "../" if running just this file. Otherwise "" since it'll be run from build.bat
+if "\\Build" in cwd:
+	pre_app = "../"
 data_file = pre_app + data_file;
 list_file = pre_app + list_file;
 def_file = pre_app + def_file;

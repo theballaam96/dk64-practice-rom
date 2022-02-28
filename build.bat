@@ -18,6 +18,7 @@ GOTO finish
 :compile
 echo valid version
 
+python build/symbols_generator.py
 python build/screen_generator.py
 python build\compile.py
 build\armips.exe %jl_file%

@@ -13,11 +13,19 @@
 # If your variable isn't an array, the " x {count}" isn't necessary
 # This won't be able to read your structs file, so you will need to update your symbols file with the struct sizes should you alter the size of your struct
 
-symbols_file = "../asm/us/symbols.asm" # Relative path to your symbols.asm file
+symbols_file = "../asm/$$/symbols.asm" # Relative path to your symbols.asm file. Use $$ for your version
 start_text = "//hack data" # Text which precedes the data you want to analyze
 end_text = "// Code" # Text which is immediately after the data you want to analyze
+version = "us" # Change to either "us", "pal", or "jp"
 
-min_vanilla_unused = 0x807FF310 # Last unused item is a copy of size 0x210 for data at 0x101A50->0x101C50 to 0x7FF100 (0x805FBE38)
+versions = ["us","pal","jp"]
+min_unused = [0x807FF310,0x807FF310,0x807FF7A0]
+symbols_file = symbols_file.replace("$$",version)
+
+min_vanilla_unused = min_unused[0]
+for x in range(len(versions)):
+	if versions[x] == version:
+		min_vanilla_unused = min_unused[x]
 min_end = 0x80800000 # First address out of range
 
 bytes_used = []
