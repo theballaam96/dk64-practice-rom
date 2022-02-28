@@ -4,11 +4,8 @@ import shutil
 import gzip
 import zlib
 
-rom_version = 3
-with open(".version","r") as fh:
-	rom_version = int(fh.readlines()[0][0])
-if rom_version > 2:
-	exit()
+from getVersion import getVersion
+rom_version = getVersion();
 
 # Infrastructure for recomputing DK64 global pointer tables
 from map_names import maps
@@ -63,8 +60,8 @@ file_dict = [
 	},
 	{
 		"name": "Static ASM Code",
-		"start": 0x113F0,
-		"compressed_size": 0xB15E4,
+		"start": [0x113F0,0x119B0,0x116F0][rom_version],
+		"compressed_size": [0xB15E4,0xBB9C0,0xBC150][rom_version],
 		"source_file": "StaticCode.bin",
 		"use_external_gzip": True,
 		"patcher": patchStaticCode,

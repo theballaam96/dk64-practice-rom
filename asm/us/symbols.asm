@@ -6,8 +6,8 @@
 	Stats:
 		Functions: 106/106(100.0%)
 		Vanilla Vars: 153/153(100.0%)
-		Hack Vars: 108/108(100.0%)
-		Code: 4/4(100.0%)
+		Hack Vars: 107/107(100.0%)
+		Code: 11/11(100.0%)
 */
 
 //functions
@@ -354,7 +354,6 @@
 .definelabel SnagCapitalsTable, 0x807FFFA8 // u32
 .definelabel SpriteAddress, 0x807FFFAC // u32
 .definelabel PreviousLagArray, 0x807FFFB0 // u8 x 16
-.definelabel graphicalOverlaySpace, 0x807FFA00 // 0x180
 .definelabel PausePointer, 0x807FFB80 // ptr
 .definelabel WatchTextSpace, 0x807FFB90 // 0x30 x 4
 .definelabel PhaseChecker, 0x807FFC50 // 0x7 follows phasecheckerdata struct
@@ -388,3 +387,10 @@
 .definelabel characterSpawnerMalloc, 0x80728670
 .definelabel nfrTitleScreenSong, 0x80745D20
 .definelabel globalFlags, 0x807ED558
+.definelabel heapEndWrite, 0x80610512
+.definelabel fileStartMap, 0x80714547
+.definelabel fileStartExit, 0x8071455B
+.definelabel kongColor1, 0x8068A62F
+.definelabel kongColor2, 0x8068A450
+.definelabel kongColor3, 0x8068A458
+.definelabel eepromPatch, 0x8060D588

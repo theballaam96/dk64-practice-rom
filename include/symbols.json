@@ -24,25 +24,29 @@
 		{
 			"name":"dk_free",
 			"versions":{
-				"us":"0x80611408"
+				"us":"0x80611408",
+				"jp":"0x8060EE74"
 			}
 		},
 		{
 			"name":"playSound",
 			"versions":{
-				"us":"0x80609140"
+				"us":"0x80609140",
+				"jp":"0x80606B30"
 			}
 		},
 		{
 			"name":"initiateTransition",
 			"versions":{
-				"us":"0x805FF378"
+				"us":"0x805FF378",
+				"jp":"0x805FCD18"
 			}
 		},
 		{
 			"name":"initiateTransition_0",
 			"versions":{
-				"us":"0x805FF9AC"
+				"us":"0x805FF9AC",
+				"jp":"0x805FD34C"
 			}
 		},
 		{
@@ -55,31 +59,36 @@
 		{
 			"name":"isAddressActor",
 			"versions":{
-				"us":"0x8067AF44"
+				"us":"0x8067AF44",
+				"jp":"0x806790F0"
 			}
 		},
 		{
 			"name":"getTimestamp",
 			"versions":{
-				"us":"0x800060B0"
+				"us":"0x800060B0",
+				"jp":"0x80006320"
 			}
 		},
 		{
 			"name":"dmaFileTransfer",
 			"versions":{
-				"us":"0x80000450"
+				"us":"0x80000450",
+				"jp":"0x800004CC"
 			}
 		},
 		{
 			"name":"deleteActor",
 			"versions":{
-				"us":"0x806785D4"
+				"us":"0x806785D4",
+				"jp":"0x806766B4"
 			}
 		},
 		{
 			"name":"spawnActor",
 			"versions":{
-				"us":"0x80677FA8"
+				"us":"0x80677FA8",
+				"jp":"0x80676088"
 			}
 		},
 		{
@@ -91,73 +100,85 @@
 		{
 			"name":"dk_sqrt",
 			"versions":{
-				"us":"0x8000AC60"
+				"us":"0x8000AC60",
+				"jp":"0x8000AED0"
 			}
 		},
 		{
 			"name":"dk_cos",
 			"versions":{
-				"us":"0x8000A930"
+				"us":"0x8000A930",
+				"jp":"0x8000ABA0"
 			}
 		},
 		{
 			"name":"dk_sin",
 			"versions":{
-				"us":"0x8000AAA0"
+				"us":"0x8000AAA0",
+				"jp":"0x8000AD10"
 			}
 		},
 		{
 			"name":"dk_strFormat",
 			"versions":{
-				"us":"0x800031E0"
+				"us":"0x800031E0",
+				"jp":"0x800033F0"
 			}
 		},
 		{
 			"name":"dk_multiply",
 			"versions":{
-				"us":"0x80005918"
+				"us":"0x80005918",
+				"jp":"0x80005B88"
 			}
 		},
 		{
 			"name":"convertTimestamp",
 			"versions":{
-				"us":"0x80005818"
+				"us":"0x80005818",
+				"jp":"0x80005A88"
 			}
 		},
 		{
 			"name":"resetMap",
 			"versions":{
-				"us":"0x805FFFC8"
+				"us":"0x805FFFC8",
+				"jp":"0x805FD974"
 			}
 		},
 		{
 			"name":"prepKongColoring",
 			"versions":{
-				"us":"0x8068A508"
+				"us":"0x8068A508",
+				"jp":"0x80688788"
 			}
 		},
 		{
 			"name":"dk_memcpy",
 			"versions":{
-				"us":"0x80003000"
+				"us":"0x80003000",
+				"jp":"0x80003210"
 			}
 		},
 		{
 			"name":"SaveToGlobal",
 			"versions":{
-				"us":"0x8060DEA8"
+				"us":"0x8060DEA8",
+				"jp":"0x8060B8A8"
 			}
 		},
 		{
 			"name":"DetectGameOver",
 			"versions":{
-				"us":"0x80714394"
+				"us":"0x80714394",
+				"jp":"0x80713A30"
 			}
 		},
 		{
 			"name":"DetectAdventure",
 			"versions":{
-				"us":"0x8071432C"
+				"us":"0x8071432C",
+				"jp":"0x807139C8"
 			}
 		},
 		{
@@ -169,31 +190,36 @@
 		{
 			"name":"alterSize",
 			"versions":{
-				"us":"0x806D0468"
+				"us":"0x806D0468",
+				"jp":"0x806CF45C"
 			}
 		},
 		{
 			"name":"unkSizeFunction",
 			"versions":{
-				"us":"0x806CFF9C"
+				"us":"0x806CFF9C",
+				"jp":"0x806CEF90"
 			}
 		},
 		{
 			"name":"spawnRocketbarrel",
 			"versions":{
-				"us":"0x806C7BAC"
+				"us":"0x806C7BAC",
+				"jp":"0x806C68EC"
 			}
 		},
 		{
 			"name":"playSong",
 			"versions":{
-				"us":"0x80602A94"
+				"us":"0x80602A94",
+				"jp":"0x80600484"
 			}
 		},
 		{
 			"name":"playCutscene",
 			"versions":{
-				"us":"0x8061CC40"
+				"us":"0x8061CC40",
+				"jp":"0x8061A6CC"
 			}
 		},
 		{
@@ -225,7 +251,8 @@
 		{
 			"name":"textOverlayCode",
 			"versions":{
-				"us":"0x8069DA54"
+				"us":"0x8069DA54",
+				"jp":"0x8069BF74"
 			}
 		},
 		{
@@ -243,7 +270,8 @@
 		{
 			"name":"wipeMemory",
 			"versions":{
-				"us":"0x800051C0"
+				"us":"0x800051C0",
+				"jp":"0x80005430"
 			}
 		},
 		{
@@ -279,7 +307,8 @@
 		{
 			"name":"initiateTransitionFade",
 			"versions":{
-				"us":"0x807124B8"
+				"us":"0x807124B8",
+				"jp":"0x80711A88"
 			}
 		},
 		{
@@ -291,7 +320,8 @@
 		{
 			"name":"__osInvalDCache",
 			"versions":{
-				"us":"0x80004520"
+				"us":"0x80004520",
+				"jp":"0x80004800"
 			}
 		},
 		{
@@ -309,7 +339,8 @@
 		{
 			"name":"__osRecvMesg",
 			"versions":{
-				"us":"0x800046C0"
+				"us":"0x800046C0",
+				"jp":"0x800049A0"
 			}
 		},
 		{
@@ -345,7 +376,8 @@
 		{
 			"name":"copyFunc",
 			"versions":{
-				"us":"0x805FB750"
+				"us":"0x805FB750",
+				"jp":"0x805F8F90"
 			}
 		},
 		{
@@ -370,79 +402,92 @@
 		{
 			"name":"getScreenPosition",
 			"versions":{
-				"us":"0x80626F8C"
+				"us":"0x80626F8C",
+				"jp":"0x80624AC4"
 			}
 		},
 		{
 			"name":"getNewSaveTime",
 			"versions":{
-				"us":"0x805FC98C"
+				"us":"0x805FC98C",
+				"jp":"0x805FA32C"
 			}
 		},
 		{
 			"name":"loadExits",
 			"versions":{
-				"us":"0x806C95D0"
+				"us":"0x806C95D0",
+				"jp":"0x806C8314"
 			}
 		},
 		{
 			"name":"updateModel2Allowances",
 			"versions":{
-				"us":"0x80631FAC"
+				"us":"0x80631FAC",
+				"jp":"0x8062FC0C"
 			}
 		},
 		{
 			"name":"handleSetup",
 			"versions":{
-				"us":"0x806886E0"
+				"us":"0x806886E0",
+				"jp":"0x806868E0"
 			}
 		},
 		{
 			"name":"ObjectModel2Something",
 			"versions":{
-				"us":"0x80663DA0"
+				"us":"0x80663DA0",
+				"jp":"0x80661D10"
 			}
 		},
 		{
 			"name":"loadEnemies",
 			"versions":{
-				"us":"0x80724C78"
+				"us":"0x80724C78",
+				"jp":"0x807243E8"
 			}
 		},
 		{
 			"name":"extraEnemyParser",
 			"versions":{
-				"us":"0x8066B434"
+				"us":"0x8066B434",
+				"jp":"0x80669444"
 			}
 		},
 		{
 			"name":"wipeActors",
 			"versions":{
-				"us":"0x80677D80"
+				"us":"0x80677D80",
+				"jp":"0x80675E60"
 			}
 		},
 		{
 			"name":"spawnPersistentActors",
 			"versions":{
-				"us":"0x8068A7B0"
+				"us":"0x8068A7B0",
+				"jp":"0x80688A20"
 			}
 		},
 		{
 			"name":"spawnCameraAndKong",
 			"versions":{
-				"us":"0x806C7D40"
+				"us":"0x806C7D40",
+				"jp":"0x806C6A80"
 			}
 		},
 		{
 			"name":"resetModelTwoCollisions",
 			"versions":{
-				"us":"0x806F4778"
+				"us":"0x806F4778",
+				"jp":"0x806F3D78"
 			}
 		},
 		{
 			"name":"updateCharChangeStruct",
 			"versions":{
-				"us":"0x8061EA78"
+				"us":"0x8061EA78",
+				"jp":"0x8061C58C"
 			}
 		},
 		{
@@ -455,13 +500,15 @@
 		{
 			"name":"clearActorDL",
 			"versions":{
-				"us":"0x80613794"
+				"us":"0x80613794",
+				"jp":"0x80611204"
 			}
 		},
 		{
 			"name":"deleteActorContainer",
 			"versions":{
-				"us":"0x806782C0"
+				"us":"0x806782C0",
+				"jp":"0x806763A0"
 			}
 		},
 		{
@@ -485,49 +532,57 @@
 		{
 			"name":"complexFree",
 			"versions":{
-				"us":"0x8061130C"
+				"us":"0x8061130C",
+				"jp":"0x8060ED78"
 			}
 		},
 		{
 			"name":"getModel2AndActorInfo",
 			"versions":{
-				"us":"0x80631F58"
+				"us":"0x80631F58",
+				"jp":"0x8062FBB8"
 			}
 		},
 		{
 			"name":"isBalloonOrPatch",
 			"versions":{
-				"us":"0x80688C84"
+				"us":"0x80688C84",
+				"jp":"0x80686E84"
 			}
 		},
 		{
 			"name":"enableComplexFree",
 			"versions":{
-				"us":"0x8066B424"
+				"us":"0x8066B424",
+				"jp":"0x80669434"
 			}
 		},
 		{
 			"name":"complexFreeWrapper",
 			"versions":{
-				"us":"0x8066B434"
+				"us":"0x8066B434",
+				"jp":"0x80669444"
 			}
 		},
 		{
 			"name":"getWorld",
 			"versions":{
-				"us":"0x805FF030"
+				"us":"0x805FF030",
+				"jp":"0x805FC9D0"
 			}
 		},
 		{
 			"name":"isSingleOrBunch",
 			"versions":{
-				"us":"0x80631EB8"
+				"us":"0x80631EB8",
+				"jp":"0x8062FB18"
 			}
 		},
 		{
 			"name":"initDisplayList",
 			"versions":{
-				"us":"0x807132DC"
+				"us":"0x807132DC",
+				"jp":"0x807128AC"
 			}
 		},
 		{
@@ -545,13 +600,15 @@
 		{
 			"name":"displayImage",
 			"versions":{
-				"us":"0x8068C5A8"
+				"us":"0x8068C5A8",
+				"jp":"0x8068A87C"
 			}
 		},
 		{
 			"name":"textDraw",
 			"versions":{
-				"us":"0x806FD490"
+				"us":"0x806FD490",
+				"jp":"0x806FCA98"
 			}
 		},
 		{
@@ -649,37 +706,43 @@
 		{
 			"name":"TransitionSpeed",
 			"versions":{
-				"us":"0x807FD88C"
+				"us":"0x807FD88C",
+				"jp":"0x807FDD1C"
 			}
 		},
 		{
 			"name":"CutsceneWillPlay",
 			"versions":{
-				"us":"0x8075533B"
+				"us":"0x8075533B",
+				"jp":"0x807553FB"
 			}
 		},
 		{
 			"name":"KRoolRound",
 			"versions":{
-				"us":"0x80750AD4"
+				"us":"0x80750AD4",
+				"jp":"0x807503B4"
 			}
 		},
 		{
 			"name":"MovesBase",
 			"versions":{
-				"us":"0x807FC950"
+				"us":"0x807FC950",
+				"jp":"0x807FCDE0"
 			}
 		},
 		{
 			"name":"PlayerOneColor",
 			"versions":{
-				"us":"0x807552F4"
+				"us":"0x807552F4",
+				"jp":"0x807553B4"
 			}
 		},
 		{
 			"name":"Mode",
 			"versions":{
-				"us":"0x80755318"
+				"us":"0x80755318",
+				"jp":"0x807553D8"
 			}
 		},
 		{
@@ -712,13 +775,15 @@
 		{
 			"name":"StorySkip",
 			"versions":{
-				"us":"0x8074452C"
+				"us":"0x8074452C",
+				"jp":"0x80743DEC"
 			}
 		},
 		{
 			"name":"HelmTimerShown",
 			"versions":{
-				"us":"0x80755350"
+				"us":"0x80755350",
+				"jp":"0x80755410"
 			}
 		},
 		{
@@ -731,67 +796,78 @@
 		{
 			"name":"SubmapData",
 			"versions":{
-				"us":"0x8076A160"
+				"us":"0x8076A160",
+				"jp":"0x8076A350"
 			}
 		},
 		{
 			"name":"HelmTimerPaused",
 			"versions":{
-				"us":"0x80713C9B"
+				"us":"0x80713C9B",
+				"jp":"0x80713337"
 			}
 		},
 		{
 			"name":"LagBoost",
 			"versions":{
-				"us":"0x80744478"
+				"us":"0x80744478",
+				"jp":"0x80743D38"
 			}
 		},
 		{
 			"name":"FrameLag",
 			"versions":{
-				"us":"0x8076AF10"
+				"us":"0x8076AF10",
+				"jp":"0x8076B100"
 			}
 		},
 		{
 			"name":"FrameReal",
 			"versions":{
-				"us":"0x80767CC4"
+				"us":"0x80767CC4",
+				"jp":"0x807F09D0"
 			}
 		},
 		{
 			"name":"RNG",
 			"versions":{
-				"us":"0x80746A40"
+				"us":"0x80746A40",
+				"jp":"0x80746300"
 			}
 		},
 		{
 			"name":"BetaNinRWSkip",
 			"versions":{
-				"us":"0x80755324"
+				"us":"0x80755324",
+				"jp":"0x807553E4"
 			}
 		},
 		{
 			"name":"LogosDestMap",
 			"versions":{
-				"us":"0x807132BF"
+				"us":"0x807132BF",
+				"jp":"0X8071288F"
 			}
 		},
 		{
 			"name":"LogosDestMode",
 			"versions":{
-				"us":"0x807132CB"
+				"us":"0x807132CB",
+				"jp":"0x8071289B"
 			}
 		},
 		{
 			"name":"Gamemode",
 			"versions":{
-				"us":"0x80755314"
+				"us":"0x80755314",
+				"jp":"0x807553D4"
 			}
 		},
 		{
 			"name":"ObjectModel2Pointer",
 			"versions":{
-				"us":"0x807F6000"
+				"us":"0x807F6000",
+				"jp":"0x807F6470"
 			}
 		},
 		{
@@ -804,19 +880,22 @@
 		{
 			"name":"ObjectModel2Count",
 			"versions":{
-				"us":"0x807F6004"
+				"us":"0x807F6004",
+				"jp":"0x807F6474"
 			}
 		},
 		{
 			"name":"ObjectModel2Count_Dupe",
 			"versions":{
-				"us":"0x80747D70"
+				"us":"0x80747D70",
+				"jp":"0x80747630"
 			}
 		},
 		{
 			"name":"CutsceneIndex",
 			"versions":{
-				"us":"0x807476F4"
+				"us":"0x807476F4",
+				"jp":"0x80746FB4"
 			}
 		},
 		{
@@ -829,91 +908,106 @@
 		{
 			"name":"CutsceneTypePointer",
 			"versions":{
-				"us":"0x807476FC"
+				"us":"0x807476FC",
+				"jp":"0x80746FBC"
 			}
 		},
 		{
 			"name":"PreviousCameraState",
 			"versions":{
-				"us":"0x807F5CF0"
+				"us":"0x807F5CF0",
+				"jp":"0x807F6160"
 			}
 		},
 		{
 			"name":"CurrentCameraState",
 			"versions":{
-				"us":"0x807F5CF2"
+				"us":"0x807F5CF2",
+				"jp":"0x807F6160"
 			}
 		},
 		{
 			"name":"CameraStateChangeTimer",
 			"versions":{
-				"us":"0x807F5CEC"
+				"us":"0x807F5CEC",
+				"jp":"0x807F615C"
 			}
 		},
 		{
 			"name":"AutowalkPointer",
 			"versions":{
-				"us":"0x807FD70C"
+				"us":"0x807FD70C",
+				"jp":"0x807FDB9C"
 			}
 		},
 		{
 			"name":"IsAutowalking",
 			"versions":{
-				"us":"0x807463B8"
+				"us":"0x807463B8",
+				"jp":"0x80745C78"
 			}
 		},
 		{
 			"name":"PositionWarpInfo",
 			"versions":{
-				"us":"0x807FC918"
+				"us":"0x807FC918",
+				"jp":"0x807FCDA8"
 			}
 		},
 		{
 			"name":"PositionWarpBitfield",
 			"versions":{
-				"us":"0x8076AEE2"
+				"us":"0x8076AEE2",
+				"jp":"0x8076B0D2"
 			}
 		},
 		{
 			"name":"PositionFloatWarps",
 			"versions":{
-				"us":"0x8076AEE4"
+				"us":"0x8076AEE4",
+				"jp":"0x8076B0D4"
 			}
 		},
 		{
 			"name":"PositionFacingAngle",
 			"versions":{
-				"us":"0x8076AEF0"
+				"us":"0x8076AEF0",
+				"jp":"0x8076B0E0"
 			}
 		},
 		{
 			"name":"ChimpyCam",
 			"versions":{
-				"us":"0x80744530"
+				"us":"0x80744530",
+				"jp":"0x80743DF0"
 			}
 		},
 		{
 			"name":"ScreenRatio",
 			"versions":{
-				"us":"0x807444C0"
+				"us":"0x807444C0",
+				"jp":"0x80743D80"
 			}
 		},
 		{
 			"name":"CurrentActorPointer",
 			"versions":{
-				"us":"0x807FBB44"
+				"us":"0x807FBB44",
+				"jp":"0x807FBFB4"
 			}
 		},
 		{
 			"name":"LoadedActorCount",
 			"versions":{
-				"us":"0x807FBB35"
+				"us":"0x807FBB35",
+				"jp":"0x807FBFA5"
 			}
 		},
 		{
 			"name":"LoadedActorArray",
 			"versions":{
-				"us":"0x807FB930"
+				"us":"0x807FB930",
+				"jp":"0x807FBDA0"
 			}
 		},
 		{
@@ -937,13 +1031,15 @@
 		{
 			"name":"ActorArray",
 			"versions":{
-				"us":"0x807FBFF0"
+				"us":"0x807FBFF0",
+				"jp":"0x807FC460"
 			}
 		},
 		{
 			"name":"ActorCount",
 			"versions":{
-				"us":"0x807FC3F0"
+				"us":"0x807FC3F0",
+				"jp":"0x807FC860"
 			}
 		},
 		{
@@ -986,7 +1082,8 @@
 		{
 			"name":"Player",
 			"versions":{
-				"us":"0x807FBB4C"
+				"us":"0x807FBB4C",
+				"jp":"0x807FBFBC"
 			}
 		},
 		{
@@ -998,7 +1095,8 @@
 		{
 			"name":"Character",
 			"versions":{
-				"us":"0x8074E77C"
+				"us":"0x8074E77C",
+				"jp":"0x8074E05C"
 			}
 		},
 		{
@@ -1010,7 +1108,8 @@
 		{
 			"name":"ISGActive",
 			"versions":{
-				"us":"0x80755070"
+				"us":"0x80755070",
+				"jp":"0x80755130"
 			}
 		},
 		{
@@ -1052,13 +1151,15 @@
 		{
 			"name":"CollectableBase",
 			"versions":{
-				"us":"0x807FCC40"
+				"us":"0x807FCC40",
+				"jp":"0x807FD0D0"
 			}
 		},
 		{
 			"name":"ModelTwoTouchCount",
 			"versions":{
-				"us":"0x807FD798"
+				"us":"0x807FD798",
+				"jp":"0x807FDC28"
 			}
 		},
 		{
@@ -1094,19 +1195,22 @@
 		{
 			"name":"HelmStartTimestampMajor",
 			"versions":{
-				"us":"0x80755340"
+				"us":"0x80755340",
+				"jp":"0x80755400"
 			}
 		},
 		{
 			"name":"HelmStartTimestampMinor",
 			"versions":{
-				"us":"0x80755344"
+				"us":"0x80755344",
+				"jp":"0x80755404"
 			}
 		},
 		{
 			"name":"HelmStartTime",
 			"versions":{
-				"us":"0x8075534C"
+				"us":"0x8075534C",
+				"jp":"0x8075540C"
 			}
 		},
 		{
@@ -1154,25 +1258,29 @@
 		{
 			"name":"ActorSpawnerPointer",
 			"versions":{
-				"us":"0x807FC400"
+				"us":"0x807FC400",
+				"jp":"0x807FC870"
 			}
 		},
 		{
 			"name":"DebugInfoOn",
 			"versions":{
-				"us":"0x807563B4"
+				"us":"0x807563B4",
+				"jp":"0x8075648C"
 			}
 		},
 		{
 			"name":"CutsceneFadeActive",
 			"versions":{
-				"us":"0x8075533B"
+				"us":"0x8075533B",
+				"jp":"0x807553FB"
 			}
 		},
 		{
 			"name":"CutsceneFadeIndex",
 			"versions":{
-				"us":"0x8075533E"
+				"us":"0x8075533E",
+				"jp":"0x807553FE"
 			}
 		},
 		{
@@ -1184,7 +1292,8 @@
 		{
 			"name":"heap_pointer",
 			"versions":{
-				"us":"0x807F0990"
+				"us":"0x807F0990",
+				"jp":"0x807F0E00"
 			}
 		},
 		{
@@ -1208,13 +1317,15 @@
 		{
 			"name":"fairy_data",
 			"versions":{
-				"us":"0x807FD802"
+				"us":"0x807FD802",
+				"jp":"0x807FDC94"
 			}
 		},
 		{
 			"name":"transferredActorType",
 			"versions":{
-				"us":"0x807FD570"
+				"us":"0x807FD570",
+				"jp":"0x807FDA00"
 			}
 		},
 		{
@@ -1226,7 +1337,8 @@
 		{
 			"name":"levelIndexMapping",
 			"versions":{
-				"us":"0x807445E0"
+				"us":"0x807445E0",
+				"jp":"0x80743EA0"
 			}
 		},
 		{
@@ -1287,7 +1399,8 @@
 		{
 			"name":"LZFadeoutProgress",
 			"versions":{
-				"us":"0x807FD888"
+				"us":"0x807FD888",
+				"jp":"0x807FDD18"
 			}
 		},
 		{
@@ -1305,13 +1418,15 @@
 		{
 			"name":"displayListCount",
 			"versions":{
-				"us":"0x8076A088"
+				"us":"0x8076A088",
+				"jp":"0x8076A278"
 			}
 		},
 		{
 			"name":"IGT",
 			"versions":{
-				"us":"0x80750AB0"
+				"us":"0x80750AB0",
+				"jp":"0x80750390"
 			}
 		},
 		{
@@ -1341,7 +1456,8 @@
 		{
 			"name":"ActorMasterType",
 			"versions":{
-				"us":"0x8074D8D4"
+				"us":"0x8074D8D4",
+				"jp":"0x8074D1B4"
 			}
 		},
 		{
@@ -1365,55 +1481,64 @@
 		{
 			"name":"MapVoid_MinX",
 			"versions":{
-				"us":"0x807F5FE4"
+				"us":"0x807F5FE4",
+				"jp":"0x807F6454"
 			}
 		},
 		{
 			"name":"MapVoid_MinZ",
 			"versions":{
-				"us":"0x807F5FE6"
+				"us":"0x807F5FE6",
+				"jp":"0x807F6456"
 			}
 		},
 		{
 			"name":"MapVoid_MaxX",
 			"versions":{
-				"us":"0x807F5FE8"
+				"us":"0x807F5FE8",
+				"jp":"0x807F6458"
 			}
 		},
 		{
 			"name":"MapVoid_MaxZ",
 			"versions":{
-				"us":"0x807F5FEA"
+				"us":"0x807F5FEA",
+				"jp":"0x807F645A"
 			}
 		},
 		{
 			"name":"balloonPatchCounts",
 			"versions":{
-				"us":"0x807FC408"
+				"us":"0x807FC408",
+				"jp":"0x807FC878"
 			}
 		},
 		{
 			"name":"coloredBananaCounts",
 			"versions":{
-				"us":"0x807F6150"
+				"us":"0x807F6150",
+				"jp":"0x807F65C0"
 			}
 		},
 		{
 			"name":"objectSignalsCount",
 			"versions":{
-				"us":"0x807FBFD8"
+				"us":"0x807FBFD8",
+				"jp":"0x807FC448"
 			}
 		},
 		{
 			"name":"delayedKillsCount",
 			"versions":{
-				"us":"0x807FBF10"
+				"us":"0x807FBF10",
+				"jp":"0x807FC380"
 			}
 		},
 		{
 			"name":"lockStackCount",
 			"versions":{
-				"us":"0x807F5A68"
+				"us":"0x807F5A68",
+				"jp":"0x807F5ED8"
 			}
 		},
 		{
@@ -1975,11 +2100,6 @@
 			"size_comment":"u8 x 16"
 		},
 		{
-			"name":"graphicalOverlaySpace",
-			"address":"0x807FFA00",
-			"size_comment":"0x180"
-		},
-		{
 			"name":"PausePointer",
 			"address":"0x807FFB80",
 			"size_comment":"ptr"
@@ -2138,6 +2258,48 @@
 			"name":"globalFlags",
 			"versions":{
 				"us":"0x807ED558"
+			}
+		},
+		{
+			"name":"heapEndWrite",
+			"versions":{
+				"us":"0x80610512"
+			}
+		},
+		{
+			"name":"fileStartMap",
+			"versions":{
+				"us":"0x80714547"
+			}
+		},
+		{
+			"name":"fileStartExit",
+			"versions":{
+				"us":"0x8071455B"
+			}
+		},
+		{
+			"name":"kongColor1",
+			"versions":{
+				"us":"0x8068A62F"
+			}
+		},
+		{
+			"name":"kongColor2",
+			"versions":{
+				"us":"0x8068A450"
+			}
+		},
+		{
+			"name":"kongColor3",
+			"versions":{
+				"us":"0x8068A458"
+			}
+		},
+		{
+			"name":"eepromPatch",
+			"versions":{
+				"us":"0x8060D588"
 			}
 		}
 	]

@@ -189,7 +189,10 @@ pointer_tables = [
 ]
 
 num_tables = len(pointer_tables)
-main_pointer_table_offset = 0x101C50
+ptr_table_offsets = [0x101C50,0x1038D0,0x1039C0] # 0 = US, 1 = PAL, 2 = JP
+from getVersion import getVersion
+rom_version = getVersion();
+main_pointer_table_offset = ptr_table_offsets[rom_version]
 
 # The address of the next available byte of free space in ROM
 # used when appending files to the end of the ROM

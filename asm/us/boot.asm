@@ -2,6 +2,7 @@ START:
 	displacedBootCode:
 		LUI v0, 0x8001
 		ADDIU v0, v0, 0xDCC4
+
 		// Bypass Setup Checks
 		LUI t3, 0x8075
 		ADDIU t4, r0, 1
@@ -12,6 +13,31 @@ START:
 		LW t3, lo(bootSpeedupFunc) (t3)
 		LUI t4, 0x8060
 		SW t3, 0xEB00 (t4)
+
+		//write heap size
+		LUI t3, hi(heapEndWrite)
+		ADDIU t4, r0, 0x805D
+		SH t4, lo(heapEndWrite) (t3)
+
+		//write file start stuff
+		LUI t3, hi(fileStartMap)
+		ADDIU t4, r0, 0x22
+		SB t4, lo(fileStartMap) (t3)
+		LUI t3, hi(fileStartExit)
+		SB r0, lo(fileStartExit) (t3)
+
+		// write kong color stuff
+		LUI t3, hi(kongColor1)
+		SB r0, lo(kongColor1) (t3)
+		LUI t3, hi(kongColor1)
+		SW r0, lo(kongColor2) (t3)
+		LUI t3, hi(kongColor1)
+		SW r0, lo(kongColor3) (t3)
+
+		// Write EEPROM patch
+		LUI t3, hi(eepromPatch)
+		SW r0, lo(eepromPatch) (t3)
+
 		//write per frame hook
 		//
 		LUI t3, hi(mainASMFunctionJump)

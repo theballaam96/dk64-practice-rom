@@ -335,7 +335,6 @@ extern unsigned int TempTimestampStorageMajor;
 extern unsigned int TempTimestampStorageMinor;
 extern TextOverlay* HackTitle;
 extern TextOverlay* HackVersion;
-extern int* graphicalOverlaySpace[32][3];
 extern char Precision;
 extern char LoadedHooks;
 extern char PreviousLagArray[16];
