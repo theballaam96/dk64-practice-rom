@@ -44,6 +44,7 @@ extern int* drawScreenRect(int* dl, int x1, int y1, int x2, int y2, int red, int
 extern int* displaySimpleInput(int* dl);
 extern int* displayVoid(int* dl);
 extern void drawJetpacPixelFont(int* dl, char* str, int x, int y, int red, int green, int blue, int alpha);
+extern int* displaySavePrompt(int* dl);
 
 extern int getFakeKeyStatus(void);
 extern int getFakeProdRoomStatus(void);
@@ -149,7 +150,6 @@ extern void savestateLoadMapLoadVars(void);
 extern void fileStateMapLoadVars(void);
 extern void changeCustomFlagVariable(void);
 extern void LToCancelCS(void);
-extern void displaySavePrompt(void);
 extern void clearSavePromptFlag(void);
 extern void displayInput(void);
 extern void openInputOnTransition(void);

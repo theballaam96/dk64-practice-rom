@@ -491,5 +491,22 @@ START_HOOK:
 		J 		0x80666114
 		SB 		t1, lo(floorsPreloadedVanilla) (a1)
 
+	getGiantKoshaAddress:
+		LW 		v1, 0x0 (a0)
+		ADDIU 	s0, v1, 6
+		SW 		r0, GiantKoshaTimerAddress
+		SRA  	t8, s0, 16
+		SLTIU 	t8, t8, 0x8000
+		BNEZ 	t8, getGiantKoshaAddress_Finish
+		SRA 	t8, s0, 16
+		SLTIU 	t8, t8, 0x8080
+		BEQZ 	t8, getGiantKoshaAddress_Finish
+		NOP
+		SW 		s0, GiantKoshaTimerAddress
+
+		getGiantKoshaAddress_Finish:
+			J 		0x8064607c
+			OR 		s0, a0, r0
+
 .align 0x10
 END_HOOK:

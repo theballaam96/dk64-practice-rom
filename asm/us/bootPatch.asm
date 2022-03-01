@@ -2,7 +2,7 @@
 .definelabel bootStart, 0x02000000
 
 .headersize 0x7FFFF400
-.org 0x80000764
+.org bootJumpStart
 LUI a0, hi(bootStart) //start of ROM copy
 LUI a1, hi(bootStart + 0x20000)
 ADDIU a1, a1, lo(bootStart + 0x20000)

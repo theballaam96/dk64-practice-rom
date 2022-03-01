@@ -1,22 +1,22 @@
 START:
 	displacedBootCode:
-		LUI v0, 0x8001
-		ADDIU v0, v0, 0xDCC4
+		LUI v0, boot_lui1
+		ADDIU v0, v0, boot_lui2
 
 		// Bypass Setup Checks
-		LUI t3, 0x8075
+		LUI t3, hi(SetupCheck1)
 		ADDIU t4, r0, 1
-		SB t4, 0x00B0 (t3)
-		LUI t3, 0x8074
-		SB t4, 0x7D78 (t3)
+		SB t4, lo(SetupCheck1) (t3)
+		LUI t3, hi(SetupCheck2)
+		SB t4, lo(SetupCheck2) (t3)
 		LUI t3, hi(bootSpeedupFunc)
 		LW t3, lo(bootSpeedupFunc) (t3)
-		LUI t4, 0x8060
-		SW t3, 0xEB00 (t4)
+		LUI t4, hi(setupCheckOverwrite)
+		SW t3, lo(setupCheckOverwrite) (t4)
 
 		//write heap size
 		LUI t3, hi(heapEndWrite)
-		ADDIU t4, r0, 0x805D
+		ADDIU t4, r0, customCodeUpper
 		SH t4, lo(heapEndWrite) (t3)
 
 		//write file start stuff
@@ -42,25 +42,25 @@ START:
 		//
 		LUI t3, hi(mainASMFunctionJump)
 		LW t3, lo(mainASMFunctionJump) (t3)
-		LUI t4, 0x8060
-		SW t3, 0xC164 (t4) //store per frame hook
+		LUI t4, hi(frameHookLocation)
+		SW t3, lo(frameHookLocation) (t4) //store per frame hook
 		LUI t3, 0
 		LUI t4, 1
 		LUI t5, 1
 		LUI t9, 0xD
 		LUI t8, 0xD
-		J 0x80000784
+		J bootJumpReturn
 		LUI t6, 0x000D
 		//end of boot code
 		/////////////////////////////////////////////////////
 
 mainASMFunction:
-	JAL	0x805FC2B0
+	JAL	frameLoop
 	NOP
 	JAL cFuncLoop
 	NOP
 	NOP
-	J 0x805FC16C
+	J customLoopReturn
 	NOP
 
 mainASMFunctionJump:
@@ -68,7 +68,7 @@ mainASMFunctionJump:
 	NOP
 
 mainASMFunctionVanilla:
-	JAL	0x805FC2B0
+	JAL	frameLoop
 	NOP
 
 callFunc:
@@ -155,23 +155,6 @@ timestampDiffToMilliseconds:
 	ADDIU 	sp, sp, 0xA8
 	JR 		ra
 	ADDIU 	v0, v1, 0
-
-getGiantKoshaAddress:
-	LW 		v1, 0x0 (a0)
-	ADDIU 	s0, v1, 6
-	SW 		r0, GiantKoshaTimerAddress
-	SRA  	t8, s0, 16
-	SLTIU 	t8, t8, 0x8000
-	BNEZ 	t8, getGiantKoshaAddress_Finish
-	SRA 	t8, s0, 16
-	SLTIU 	t8, t8, 0x8080
-	BEQZ 	t8, getGiantKoshaAddress_Finish
-	NOP
-	SW 		s0, GiantKoshaTimerAddress
-
-	getGiantKoshaAddress_Finish:
-		J 		0x8064607c
-		OR 		s0, a0, r0
 
 getOtherSpritePointer:
 	JR 		ra
@@ -285,10 +268,6 @@ speedHook:
 	NOP
 
 loadExtraHooks:
-	ADDIU t3, r0, 0x1000
-	LUI t4, 0x806A
-	SH 	t3, 0xD738 (t4)
-
 	LUI t3, hi(pauseHook)
 	LW t3, lo(pauseHook) (t3)
 	LUI t4, 0x8060

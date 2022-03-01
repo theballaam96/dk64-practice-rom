@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 0/106(0.0%)
-		Vanilla Vars: 0/153(0.0%)
-		Hack Vars: 107/107(100.0%)
-		Code: 0/11(0.0%)
+		Functions: 0/107(0.0%)
+		Vanilla Vars: 0/155(0.0%)
+		Hack Vars: 106/106(100.0%)
+		Code: 0/21(0.0%)
 */
 
 //functions
@@ -102,6 +102,7 @@
 //.definelabel displayText
 //.definelabel displayImage
 //.definelabel textDraw
+//.definelabel frameLoop
 //.definelabel setArcadeTextXY
 //.definelabel spawnArcadeText
 //.definelabel setArcadeTextColor
@@ -200,7 +201,6 @@
 //.definelabel player_count
 //.definelabel sprite_table
 //.definelabel sprite_translucency
-//.definelabel bbbandit_array
 //.definelabel StoredDamage
 //.definelabel ActorSpawnerPointer
 //.definelabel DebugInfoOn
@@ -248,6 +248,9 @@
 //.definelabel lockStackCount
 //.definelabel scriptsRunningCount
 //.definelabel scriptsAttemptLoadCount
+//.definelabel StoredSettings
+//.definelabel SetupCheck1
+//.definelabel SetupCheck2
 //.definelabel arcadeMap
 //.definelabel arcadeMode
 //.definelabel arcadeLevel
@@ -281,7 +284,6 @@
 .definelabel style2Mtx, 0x807FF940 // 0x20
 .definelabel watchActive, 0x807FFF60 // u8
 .definelabel stateLoadTimer, 0x807FFF61 // u8
-.definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes
 .definelabel TestVariable, 0x807FFFFC // 0x4
 .definelabel WatchIndex, 0x807FFFF8 // u8 x 4
@@ -394,3 +396,13 @@
 //.definelabel kongColor2
 //.definelabel kongColor3
 //.definelabel eepromPatch
+//.definelabel bbbandit_array
+//.definelabel boot_lui1
+//.definelabel boot_lui2
+//.definelabel setupCheckOverwrite
+//.definelabel frameHookLocation
+//.definelabel customCodeStart
+//.definelabel customCodeUpper
+//.definelabel bootJumpStart
+//.definelabel bootJumpReturn
+//.definelabel customLoopReturn

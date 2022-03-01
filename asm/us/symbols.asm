@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 106/106(100.0%)
-		Vanilla Vars: 153/153(100.0%)
-		Hack Vars: 107/107(100.0%)
-		Code: 11/11(100.0%)
+		Functions: 107/107(100.0%)
+		Vanilla Vars: 155/155(100.0%)
+		Hack Vars: 106/106(100.0%)
+		Code: 21/21(100.0%)
 */
 
 //functions
@@ -102,6 +102,7 @@
 .definelabel displayText, 0x806FC530
 .definelabel displayImage, 0x8068C5A8
 .definelabel textDraw, 0x806FD490
+.definelabel frameLoop, 0x805FC2B0
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
 .definelabel setArcadeTextColor, 0x800244E4
@@ -200,7 +201,6 @@
 .definelabel player_count, 0x807FC928
 .definelabel sprite_table, 0x80755390
 .definelabel sprite_translucency, 0x807FC80F
-.definelabel bbbandit_array, 0x8002DB80
 .definelabel StoredDamage, 0x807FCC4D
 .definelabel ActorSpawnerPointer, 0x807FC400
 .definelabel DebugInfoOn, 0x807563B4
@@ -248,6 +248,9 @@
 .definelabel lockStackCount, 0x807F5A68
 .definelabel scriptsRunningCount, 0x807F60A8
 .definelabel scriptsAttemptLoadCount, 0x807F7140
+.definelabel StoredSettings, 0x807ED5A0
+.definelabel SetupCheck1, 0x807500B0
+.definelabel SetupCheck2, 0x80747D78
 .definelabel arcadeMap, 0x8004C723
 .definelabel arcadeMode, 0x8004C724
 .definelabel arcadeLevel, 0x8004A76C
@@ -281,7 +284,6 @@
 .definelabel style2Mtx, 0x807FF940 // 0x20
 .definelabel watchActive, 0x807FFF60 // u8
 .definelabel stateLoadTimer, 0x807FFF61 // u8
-.definelabel StoredSettings, 0x807ED5A0 // Follows savedSettings struct
 .definelabel TimerData, 0x807FFE90 // 0x14 bytes
 .definelabel TestVariable, 0x807FFFFC // 0x4
 .definelabel WatchIndex, 0x807FFFF8 // u8 x 4
@@ -394,3 +396,13 @@
 .definelabel kongColor2, 0x8068A450
 .definelabel kongColor3, 0x8068A458
 .definelabel eepromPatch, 0x8060D588
+.definelabel bbbandit_array, 0x8002DB80
+.definelabel boot_lui1, 0x8001
+.definelabel boot_lui2, 0xDCC4
+.definelabel setupCheckOverwrite, 0x805FEB00
+.definelabel frameHookLocation, 0x805FC164
+.definelabel customCodeStart, 0x805DAE00
+.definelabel customCodeUpper, 0x805D
+.definelabel bootJumpStart, 0x80000764
+.definelabel bootJumpReturn, 0x80000784
+.definelabel customLoopReturn, 0x805FC16C

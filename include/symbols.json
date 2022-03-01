@@ -94,7 +94,8 @@
 		{
 			"name":"spawnTextOverlay",
 			"versions":{
-				"us":"0x8069D0F8"
+				"us":"0x8069D0F8",
+				"jp":"0x8069B608"
 			}
 		},
 		{
@@ -184,7 +185,8 @@
 		{
 			"name":"displaySprite",
 			"versions":{
-				"us":"0x806AB4EC"
+				"us":"0x806AB4EC",
+				"jp":"0x806A9D04"
 			}
 		},
 		{
@@ -225,7 +227,8 @@
 		{
 			"name":"setHUDItemAsInfinite",
 			"versions":{
-				"us":"0x806FB370"
+				"us":"0x806FB370",
+				"jp":"0x806FA9D4"
 			}
 		},
 		{
@@ -245,7 +248,8 @@
 		{
 			"name":"getActorSpawnerIDFromTiedActor",
 			"versions":{
-				"us":"0x80688E68"
+				"us":"0x80688E68",
+				"jp":"0x80687068"
 			}
 		},
 		{
@@ -258,13 +262,15 @@
 		{
 			"name":"spawnTransferredActor",
 			"versions":{
-				"us":"0x806C80E4"
+				"us":"0x806C80E4",
+				"jp":"0x806C6E28"
 			}
 		},
 		{
 			"name":"resolveMovementBox",
 			"versions":{
-				"us":"0x8072827C"
+				"us":"0x8072827C",
+				"jp":"0x80727A18"
 			}
 		},
 		{
@@ -277,31 +283,36 @@
 		{
 			"name":"hideHUD",
 			"versions":{
-				"us":"0x806FB218"
+				"us":"0x806FB218",
+				"jp":"0x806FA8F4"
 			}
 		},
 		{
 			"name":"tagKong",
 			"versions":{
-				"us":"0x806C8E58"
+				"us":"0x806C8E58",
+				"jp":"0x806C7B9C"
 			}
 		},
 		{
 			"name":"clearGun",
 			"versions":{
-				"us":"0x806F0C18"
+				"us":"0x806F0C18",
+				"jp":"0x806F01D8"
 			}
 		},
 		{
 			"name":"playAnimation",
 			"versions":{
-				"us":"0x80614E78"
+				"us":"0x80614E78",
+				"jp":"0x806128E8"
 			}
 		},
 		{
 			"name":"clearTagSlide",
 			"versions":{
-				"us":"0x806CFF9C"
+				"us":"0x806CFF9C",
+				"jp":"0x806CEF90"
 			}
 		},
 		{
@@ -314,7 +325,8 @@
 		{
 			"name":"__osInvalICache",
 			"versions":{
-				"us":"0x80005260"
+				"us":"0x80005260",
+				"jp":"0x800054D0"
 			}
 		},
 		{
@@ -327,13 +339,15 @@
 		{
 			"name":"__osWritebackDCache",
 			"versions":{
-				"us":"0x80005670"
+				"us":"0x80005670",
+				"jp":"0x800058E0"
 			}
 		},
 		{
 			"name":"__osCreateMesgQueue",
 			"versions":{
-				"us":"0x80004950"
+				"us":"0x80004950",
+				"jp":"0x80004C20"
 			}
 		},
 		{
@@ -346,31 +360,36 @@
 		{
 			"name":"__osEPiStartDMA",
 			"versions":{
-				"us":"0x80006F10"
+				"us":"0x80006F10",
+				"jp":"0x80007180"
 			}
 		},
 		{
 			"name":"__osPiRawReadIo",
 			"versions":{
-				"us":"0x800045D0"
+				"us":"0x800045D0",
+				"jp":"0x800048B0"
 			}
 		},
 		{
 			"name":"__osDisableInt",
 			"versions":{
-				"us":"0x80009020"
+				"us":"0x80009020",
+				"jp":"0x80009210"
 			}
 		},
 		{
 			"name":"__osRestoreInt",
 			"versions":{
-				"us":"0x80009040"
+				"us":"0x80009040",
+				"jp":"0x80009230"
 			}
 		},
 		{
 			"name":"__osVirtualToPhysical",
 			"versions":{
-				"us":"0x80008FA0"
+				"us":"0x80008FA0",
+				"jp":"0x80009390"
 			}
 		},
 		{
@@ -390,13 +409,15 @@
 		{
 			"name":"loadSetup",
 			"versions":{
-				"us":"0x806886E0"
+				"us":"0x806886E0",
+				"jp":"0x806868E0"
 			}
 		},
 		{
 			"name":"getParentDataIndex",
 			"versions":{
-				"us":"0x80688D64"
+				"us":"0x80688D64",
+				"jp":"0x80686F20"
 			}
 		},
 		{
@@ -514,19 +535,22 @@
 		{
 			"name":"deleteAllObjectModel2",
 			"versions":{
-				"us":"0x80635588"
+				"us":"0x80635588",
+				"jp":"0x80633224"
 			}
 		},
 		{
 			"name":"deleteActorSpawner",
 			"versions":{
-				"us":"0x80689710"
+				"us":"0x80689710",
+				"jp":"0x80687910"
 			}
 		},
 		{
 			"name":"deleteAllActorSpawners",
 			"versions":{
-				"us":"0x806898A8"
+				"us":"0x806898A8",
+				"jp":"0x80687AA8"
 			}
 		},
 		{
@@ -588,13 +612,15 @@
 		{
 			"name":"getTextStyleHeight",
 			"versions":{
-				"us":"0x806FD894"
+				"us":"0x806FD894",
+				"jp":"0x806FCEC0"
 			}
 		},
 		{
 			"name":"displayText",
 			"versions":{
-				"us":"0x806FC530"
+				"us":"0x806FC530",
+				"jp":"0x806FBA74"
 			}
 		},
 		{
@@ -612,93 +638,115 @@
 			}
 		},
 		{
+			"name":"frameLoop",
+			"versions":{
+				"us":"0x805FC2B0",
+				"jp":"0x805F9B74"
+			}
+		},
+		{
 			"name":"setArcadeTextXY",
 			"versions":{
-				"us":"0x80024508"
+				"us":"0x80024508",
+				"jp":"0x80017508"
 			}
 		},
 		{
 			"name":"spawnArcadeText",
 			"versions":{
-				"us":"0x8002451C"
+				"us":"0x8002451C",
+				"jp":"0x8001751C"
 			}
 		},
 		{
 			"name":"setArcadeTextColor",
 			"versions":{
-				"us":"0x800244E4"
+				"us":"0x800244E4",
+				"jp":"0x800174E4"
 			}
 		},
 		{
 			"name":"arcadeGetObjIndexOfType",
 			"versions":{
-				"us":"0x80024860"
+				"us":"0x80024860",
+				"jp":"0x8001783C"
 			}
 		},
 		{
 			"name":"arcadeGetNextVacantSlot",
 			"versions":{
-				"us":"0x800247B8"
+				"us":"0x800247B8",
+				"jp":"0x80017794"
 			}
 		},
 		{
 			"name":"setArcadeSong",
 			"versions":{
-				"us":"0x800252A4"
+				"us":"0x800252A4",
+				"jp":"0x80018280"
 			}
 		},
 		{
 			"name":"spawnJetpacText",
 			"versions":{
-				"us":"0x8002AEFC"
+				"us":"0x8002AEFC",
+				"jp":"0x8001DF1C"
 			}
 		},
 		{
 			"name":"setJetpacTextColor",
 			"versions":{
-				"us":"0x8002AE94"
+				"us":"0x8002AE94",
+				"jp":"0x8001DEB4"
 			}
 		},
 		{
 			"name":"startJetpacGame",
 			"versions":{
-				"us":"0x8002463C"
+				"us":"0x8002463C",
+				"jp":"0x8001763C"
 			}
 		},
 		{
 			"name":"placeJetpacFloor",
 			"versions":{
-				"us":"0x80028C3C"
+				"us":"0x80028C3C",
+				"jp":"0x8001BC4C"
 			}
 		},
 		{
 			"name":"resetJetpacVars",
 			"versions":{
-				"us":"0x80024390"
+				"us":"0x80024390",
+				"jp":"0x80017390"
 			}
 		},
 		{
 			"name":"increaseLevel",
 			"versions":{
-				"us":"0x800250A0"
+				"us":"0x800250A0",
+				"jp":"0x800180B0"
 			}
 		},
 		{
 			"name":"spawnJetpacItem",
 			"versions":{
-				"us":"0x80027D64"
+				"us":"0x80027D64",
+				"jp":"0x8001AD74"
 			}
 		},
 		{
 			"name":"resetJetpacMap",
 			"versions":{
-				"us":"0x800275F4"
+				"us":"0x800275F4",
+				"jp":"0x8001A604"
 			}
 		},
 		{
 			"name":"changeJetpacMode",
 			"versions":{
-				"us":"0x80024F9C"
+				"us":"0x80024F9C",
+				"jp":"0x80017F9C"
 			}
 		}
 	],
@@ -748,7 +796,8 @@
 		{
 			"name":"TBVoidByte",
 			"versions":{
-				"us":"0x807FBB63"
+				"us":"0x807FBB63",
+				"jp":"0x807FBFD3"
 			}
 		},
 		{
@@ -1013,19 +1062,22 @@
 		{
 			"name":"SpawnerMasterData",
 			"versions":{
-				"us":"0x807FDC88"
+				"us":"0x807FDC88",
+				"jp":"0x807FE118"
 			}
 		},
 		{
 			"name":"MenuSkyTopRGB",
 			"versions":{
-				"us":"0x80754F4C"
+				"us":"0x80754F4C",
+				"jp":"0x8075500C"
 			}
 		},
 		{
 			"name":"MenuSkyRGB",
 			"versions":{
-				"us":"0x80754F4F"
+				"us":"0x80754F4F",
+				"jp":"0x8075500F"
 			}
 		},
 		{
@@ -1045,19 +1097,22 @@
 		{
 			"name":"ButtonsEnabledBitfield",
 			"versions":{
-				"us":"0x80755308"
+				"us":"0x80755308",
+				"jp":"0x807553C8"
 			}
 		},
 		{
 			"name":"JoystickEnabledX",
 			"versions":{
-				"us":"0x8075530C"
+				"us":"0x8075530C",
+				"jp":"0x807553CC"
 			}
 		},
 		{
 			"name":"JoystickEnabledY",
 			"versions":{
-				"us":"0x80755310"
+				"us":"0x80755310",
+				"jp":"0x807553D0"
 			}
 		},
 		{
@@ -1070,13 +1125,15 @@
 		{
 			"name":"ControllerInput",
 			"versions":{
-				"us":"0x80014DC4"
+				"us":"0x80014DC4",
+				"jp":"0x800150E4"
 			}
 		},
 		{
 			"name":"NewlyPressedControllerInput",
 			"versions":{
-				"us":"0x807ECD66"
+				"us":"0x807ECD66",
+				"jp":"0x807ED1D6"
 			}
 		},
 		{
@@ -1089,7 +1146,8 @@
 		{
 			"name":"SwapObject",
 			"versions":{
-				"us":"0x807FC924"
+				"us":"0x807FC924",
+				"jp":"0x807FCDB4"
 			}
 		},
 		{
@@ -1102,7 +1160,8 @@
 		{
 			"name":"Camera",
 			"versions":{
-				"us":"0x807FB968"
+				"us":"0x807FB968",
+				"jp":"0x807FBDD8"
 			}
 		},
 		{
@@ -1115,37 +1174,43 @@
 		{
 			"name":"ISGTimestampMajor",
 			"versions":{
-				"us":"0x807F5CE0"
+				"us":"0x807F5CE0",
+				"jp":"0x807F6150"
 			}
 		},
 		{
 			"name":"ISGTimestampMinor",
 			"versions":{
-				"us":"0x807F5CE4"
+				"us":"0x807F5CE4",
+				"jp":"0x807F6154"
 			}
 		},
 		{
 			"name":"ISGPreviousFadeout",
 			"versions":{
-				"us":"0x807F5D14"
+				"us":"0x807F5D14",
+				"jp":"0x807F6184"
 			}
 		},
 		{
 			"name":"CurrentTimestampMajor",
 			"versions":{
-				"us":"0x80014FE0"
+				"us":"0x80014FE0",
+				"jp":"0x80015300"
 			}
 		},
 		{
 			"name":"CurrentTimestampMinor",
 			"versions":{
-				"us":"0x80014FE4"
+				"us":"0x80014FE4",
+				"jp":"0x80015304"
 			}
 		},
 		{
 			"name":"ISGFadeoutArray",
 			"versions":{
-				"us":"0x80747708"
+				"us":"0x80747708",
+				"jp":"0x80746FC8"
 			}
 		},
 		{
@@ -1165,31 +1230,36 @@
 		{
 			"name":"ModelTwoTouchArray",
 			"versions":{
-				"us":"0x807FD790"
+				"us":"0x807FD790",
+				"jp":"0x807FDC20"
 			}
 		},
 		{
 			"name":"TransitionProgress",
 			"versions":{
-				"us":"0x807ECC60"
+				"us":"0x807ECC60",
+				"jp":"0x807ECE50"
 			}
 		},
 		{
 			"name":"BackgroundHeldInput",
 			"versions":{
-				"us":"0x807ECD40"
+				"us":"0x807ECD40",
+				"jp":"0x807ED1B0"
 			}
 		},
 		{
 			"name":"PauseTimestampMajor",
 			"versions":{
-				"us":"0x807445C0"
+				"us":"0x807445C0",
+				"jp":"0x80743E80"
 			}
 		},
 		{
 			"name":"PauseTimestampMinor",
 			"versions":{
-				"us":"0x807445C4"
+				"us":"0x807445C4",
+				"jp":"0x80743E84"
 			}
 		},
 		{
@@ -1216,43 +1286,43 @@
 		{
 			"name":"p1PressedButtons",
 			"versions":{
-				"us":"0x807ECD48"
+				"us":"0x807ECD48",
+				"jp":"0x807ED1B8"
 			}
 		},
 		{
 			"name":"p1HeldButtons",
 			"versions":{
-				"us":"0x807ECD58"
+				"us":"0x807ECD58",
+				"jp":"0x807ED1C8"
 			}
 		},
 		{
 			"name":"player_count",
 			"versions":{
-				"us":"0x807FC928"
+				"us":"0x807FC928",
+				"jp":"0x807FCDB8"
 			}
 		},
 		{
 			"name":"sprite_table",
 			"versions":{
-				"us":"0x80755390"
+				"us":"0x80755390",
+				"jp":"0x80755450"
 			}
 		},
 		{
 			"name":"sprite_translucency",
 			"versions":{
-				"us":"0x807FC80F"
-			}
-		},
-		{
-			"name":"bbbandit_array",
-			"versions":{
-				"us":"0x8002DB80"
+				"us":"0x807FC80F",
+				"jp":"0x807FCC87"
 			}
 		},
 		{
 			"name":"StoredDamage",
 			"versions":{
-				"us":"0x807FCC4D"
+				"us":"0x807FCC4D",
+				"jp":"0x807FD0DD"
 			}
 		},
 		{
@@ -1286,7 +1356,8 @@
 		{
 			"name":"PreviouslyPressedButtons",
 			"versions":{
-				"us":"0x807ECD60"
+				"us":"0x807ECD60",
+				"jp":"0x807ED1D0"
 			}
 		},
 		{
@@ -1299,19 +1370,22 @@
 		{
 			"name":"stickX_magnitude",
 			"versions":{
-				"us":"0x807FD640"
+				"us":"0x807FD640",
+				"jp":"0x807FDAD0"
 			}
 		},
 		{
 			"name":"stickY_magnitude",
 			"versions":{
-				"us":"0x807FD641"
+				"us":"0x807FD641",
+				"jp":"0x807FDAD1"
 			}
 		},
 		{
 			"name":"phasewalk_stickmagnitude",
 			"versions":{
-				"us":"0x807FD614"
+				"us":"0x807FD614",
+				"jp":"0x807FDAA4"
 			}
 		},
 		{
@@ -1331,7 +1405,8 @@
 		{
 			"name":"characterSpawnerActors",
 			"versions":{
-				"us":"0x8075EB80"
+				"us":"0x8075EB80",
+				"jp":"0x8075ED40"
 			}
 		},
 		{
@@ -1344,31 +1419,36 @@
 		{
 			"name":"stickX_interpretted",
 			"versions":{
-				"us":"0x807FD63E"
+				"us":"0x807FD63E",
+				"jp":"0x807FDACE"
 			}
 		},
 		{
 			"name":"stickY_interpretted",
 			"versions":{
-				"us":"0x807FD63F"
+				"us":"0x807FD63F",
+				"jp":"0x807FDACF"
 			}
 		},
 		{
 			"name":"preventSongPlaying",
 			"versions":{
-				"us":"0x80745650"
+				"us":"0x80745650",
+				"jp":"0x80744F10"
 			}
 		},
 		{
 			"name":"parentDataCount",
 			"versions":{
-				"us":"0x807F5A68"
+				"us":"0x807F5A68",
+				"jp":"0x807F5ED8"
 			}
 		},
 		{
 			"name":"parentData",
 			"versions":{
-				"us":"0x8076A160"
+				"us":"0x8076A160",
+				"jp":"0x8076A350"
 			}
 		},
 		{
@@ -1381,19 +1461,22 @@
 		{
 			"name":"focusedParentDataSetup",
 			"versions":{
-				"us":"0x807F5A70"
+				"us":"0x807F5A70",
+				"jp":"0x807F5EE0"
 			}
 		},
 		{
 			"name":"HUD",
 			"versions":{
-				"us":"0x80754280"
+				"us":"0x80754280",
+				"jp":"0x80753B70"
 			}
 		},
 		{
 			"name":"textData",
 			"versions":{
-				"us":"0x80754A34"
+				"us":"0x80754A34",
+				"jp":"0x80754B10"
 			}
 		},
 		{
@@ -1406,13 +1489,15 @@
 		{
 			"name":"mapFloorPointer",
 			"versions":{
-				"us":"0x807F9514"
+				"us":"0x807F9514",
+				"jp":"0x807F9984"
 			}
 		},
 		{
 			"name":"mapFloorBlockCount",
 			"versions":{
-				"us":"0x807F9518"
+				"us":"0x807F9518",
+				"jp":"0x807F9988"
 			}
 		},
 		{
@@ -1432,25 +1517,29 @@
 		{
 			"name":"CBTurnedInArray",
 			"versions":{
-				"us":"0x807FC930"
+				"us":"0x807FC930",
+				"jp":"0x807FCDC0"
 			}
 		},
 		{
 			"name":"exitPointer",
 			"versions":{
-				"us":"0x807FC900"
+				"us":"0x807FC900",
+				"jp":"0x807FCD90"
 			}
 		},
 		{
 			"name":"BalloonPatchPointer",
 			"versions":{
-				"us":"0x807FC5C4"
+				"us":"0x807FC5C4",
+				"jp":"0x807FCA34"
 			}
 		},
 		{
 			"name":"ChunkArrayPointer",
 			"versions":{
-				"us":"0x807F6C18"
+				"us":"0x807F6C18",
+				"jp":"0x807F7088"
 			}
 		},
 		{
@@ -1463,19 +1552,22 @@
 		{
 			"name":"MapPropertiesBitfield",
 			"versions":{
-				"us":"0x807FBB64"
+				"us":"0x807FBB64",
+				"jp":"0x807FBFD4"
 			}
 		},
 		{
 			"name":"screenCenterX",
 			"versions":{
-				"us":"0x80744490"
+				"us":"0x80744490",
+				"jp":"0x80743D50"
 			}
 		},
 		{
 			"name":"screenCenterY",
 			"versions":{
-				"us":"0x80744494"
+				"us":"0x80744494",
+				"jp":"0x80743D54"
 			}
 		},
 		{
@@ -1544,157 +1636,204 @@
 		{
 			"name":"scriptsRunningCount",
 			"versions":{
-				"us":"0x807F60A8"
+				"us":"0x807F60A8",
+				"jp":"0x807F6518"
 			}
 		},
 		{
 			"name":"scriptsAttemptLoadCount",
 			"versions":{
-				"us":"0x807F7140"
+				"us":"0x807F7140",
+				"jp":"0x807F75B0"
+			}
+		},
+		{
+			"name":"StoredSettings",
+			"versions":{
+				"us":"0x807ED5A0",
+				"jp":"0x807EDA10"
+			}
+		},
+		{
+			"name":"SetupCheck1",
+			"versions":{
+				"us":"0x807500B0",
+				"jp":"0x8074F9D0"
+			}
+		},
+		{
+			"name":"SetupCheck2",
+			"versions":{
+				"us":"0x80747D78",
+				"jp":"0x80747638"
 			}
 		},
 		{
 			"name":"arcadeMap",
 			"versions":{
-				"us":"0x8004C723"
+				"us":"0x8004C723",
+				"jp":"0x8003F4B3"
 			}
 		},
 		{
 			"name":"arcadeMode",
 			"versions":{
-				"us":"0x8004C724"
+				"us":"0x8004C724",
+				"jp":"0x8003F4B4"
 			}
 		},
 		{
 			"name":"arcadeLevel",
 			"versions":{
-				"us":"0x8004A76C"
+				"us":"0x8004A76C",
+				"jp":"0x8003D4FC"
 			}
 		},
 		{
 			"name":"arcadeObjBase",
 			"versions":{
-				"us":"0x8004BCD0"
+				"us":"0x8004BCD0",
+				"jp":"0x8003EA60"
 			}
 		},
 		{
 			"name":"arcadeLives",
 			"versions":{
-				"us":"0x8004C71B"
+				"us":"0x8004C71B",
+				"jp":"0x8003F4AB"
 			}
 		},
 		{
 			"name":"arcadeLivesVisual",
 			"versions":{
-				"us":"0x8004C71C"
+				"us":"0x8004C71C",
+				"jp":"0x8003F4AC"
 			}
 		},
 		{
 			"name":"arcadeLevelTimer",
 			"versions":{
-				"us":"0x8004C6DC"
+				"us":"0x8004C6DC",
+				"jp":"0x8003F46C"
 			}
 		},
 		{
 			"name":"arcadeGlobalTimer",
 			"versions":{
-				"us":"0x8004C6D8"
+				"us":"0x8004C6D8",
+				"jp":"0x8003F468"
 			}
 		},
 		{
 			"name":"arcadePause",
 			"versions":{
-				"us":"0x8004C71D"
+				"us":"0x8004C71D",
+				"jp":"0x8003F4AD"
 			}
 		},
 		{
 			"name":"arcadeRNG",
 			"versions":{
-				"us":"0x8004A738"
+				"us":"0x8004A738",
+				"jp":"0x8003D4C8"
 			}
 		},
 		{
 			"name":"arcadeJumpmanIndex",
 			"versions":{
-				"us":"0x8004C71F"
+				"us":"0x8004C71F",
+				"jp":"0x8003F4AF"
 			}
 		},
 		{
 			"name":"arcadeCurrentScore",
 			"versions":{
-				"us":"0x8004A748"
+				"us":"0x8004A748",
+				"jp":"0x8003D4D8"
 			}
 		},
 		{
 			"name":"arcadeHighScore",
 			"versions":{
-				"us":"0x8004A760"
+				"us":"0x8004A760",
+				"jp":"0x8003D4F0"
 			}
 		},
 		{
 			"name":"arcadeBonusTimer",
 			"versions":{
-				"us":"0x8004C71E"
+				"us":"0x8004C71E",
+				"jp":"0x8003F4AE"
 			}
 		},
 		{
 			"name":"arcadeSong",
 			"versions":{
-				"us":"0x8004C714"
+				"us":"0x8004C714",
+				"jp":"0x8003F4A4"
 			}
 		},
 		{
 			"name":"arcadeHammerTimer",
 			"versions":{
-				"us":"0x8004C710"
+				"us":"0x8004C710",
+				"jp":"0x8003F4A0"
 			}
 		},
 		{
 			"name":"arcadeMovableFloor",
 			"versions":{
-				"us":"0x8004BC88"
+				"us":"0x8004BC88",
+				"jp":"0x8003EA18"
 			}
 		},
 		{
 			"name":"arcadeRivetBitfield",
 			"versions":{
-				"us":"0x8004C718"
+				"us":"0x8004C718",
+				"jp":"0x8003F4A8"
 			}
 		},
 		{
 			"name":"jetpacMode",
 			"versions":{
-				"us":"0x8002F3BC"
+				"us":"0x8002F3BC",
+				"jp":"0x800223CC"
 			}
 		},
 		{
 			"name":"jetpacLevelStartTimer",
 			"versions":{
-				"us":"0x8002F07C"
+				"us":"0x8002F07C",
+				"jp":"0x8002208C"
 			}
 		},
 		{
 			"name":"competitors",
 			"versions":{
-				"us":"0x8002EC4C"
+				"us":"0x8002EC4C",
+				"jp":"0x80021C5C"
 			}
 		},
 		{
 			"name":"jetpacObjectBase",
 			"versions":{
-				"us":"0x8002EF80"
+				"us":"0x8002EF80",
+				"jp":"0x80021F90"
 			}
 		},
 		{
 			"name":"jetpacPlayerIndex",
 			"versions":{
-				"us":"0x8002EF74"
+				"us":"0x8002EF74",
+				"jp":"0x80021F84"
 			}
 		},
 		{
 			"name":"jetpacPlayerCount",
 			"versions":{
-				"us":"0x8002EF78"
+				"us":"0x8002EF78",
+				"jp":"0x80021F88"
 			}
 		}
 	],
@@ -1733,11 +1872,6 @@
 			"name":"stateLoadTimer",
 			"address":"0x807FFF61",
 			"size_comment":"u8"
-		},
-		{
-			"name":"StoredSettings",
-			"address":"0x807ED5A0",
-			"size_comment":"Follows savedSettings struct"
 		},
 		{
 			"name":"TimerData",
@@ -2300,6 +2434,74 @@
 			"name":"eepromPatch",
 			"versions":{
 				"us":"0x8060D588"
+			}
+		},
+		{
+			"name":"bbbandit_array",
+			"versions":{
+				"us":"0x8002DB80",
+				"jp":"0x80020C60"
+			}
+		},
+		{
+			"name":"boot_lui1",
+			"versions":{
+				"us":"0x8001",
+				"jp":"0x8001"
+			}
+		},
+		{
+			"name":"boot_lui2",
+			"versions":{
+				"us":"0xDCC4",
+				"jp":"0xDF34"
+			}
+		},
+		{
+			"name":"setupCheckOverwrite",
+			"versions":{
+				"us":"0x805FEB00",
+				"jp":"0x805FC4A0"
+			}
+		},
+		{
+			"name":"frameHookLocation",
+			"versions":{
+				"us":"0x805FC164",
+				"jp":"0x805F99F0"
+			}
+		},
+		{
+			"name":"customCodeStart",
+			"versions":{
+				"us":"0x805DAE00"
+			}
+		},
+		{
+			"name":"customCodeUpper",
+			"versions":{
+				"us":"0x805D"
+			}
+		},
+		{
+			"name":"bootJumpStart",
+			"versions":{
+				"us":"0x80000764",
+				"jp":"0x8000081C"
+			}
+		},
+		{
+			"name":"bootJumpReturn",
+			"versions":{
+				"us":"0x80000784",
+				"jp":"0x8000083C"
+			}
+		},
+		{
+			"name":"customLoopReturn",
+			"versions":{
+				"us":"0x805FC16C",
+				"jp":"0x805F99F8"
 			}
 		}
 	]

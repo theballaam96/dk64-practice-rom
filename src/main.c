@@ -95,9 +95,6 @@ void cFuncLoop(void) {
 		fileStateMapLoadVars();
 		loadMapVars_0();
 	}
-	if (ShowSavePrompts) {
-		displaySavePrompt(); // ShowSavePrompts
-	}
 	SavePromptIsSaving = 0;
 	displayInput(); // Constant
 	if (DisablePositionButtons == 1) {
@@ -155,6 +152,7 @@ int* displayListModifiers(int* dl) {
 		dk_strFormat((char *)stateLoadstr, "STATE %d LOADED", FocusedSavestate + 1);
 		dl = drawPixelTextContainer(dl, 185, 207, (char *)stateLoadstr, 0xFF, 0xFF, 0xFF, 0xFF, 1);
 	}
+	dl = displaySavePrompt(dl);
 	if (NoVacantWatchTimer > 0) {
 		dl = drawPixelTextContainer(dl, 130, 207, "NO VACANT WATCH SLOTS", 0xFF, 0xFF, 0xFF, 0xFF, 1);
 	}
