@@ -250,9 +250,6 @@ ResolveBarrelHook:
 DisplayListHook:
 	J 	displayListCode
 	NOP
-mapDLHook:
-	J 	mapDLCode
-	NOP
 JetpacHook:
 	J 	jetpacLoopCode
 	NOP
@@ -270,6 +267,21 @@ lockStackStoreHook:
 	NOP
 storeFloorPreloadHook:
 	J 	storeFloorPreload
+	NOP
+giantKoshaHook:
+	J 	getGiantKoshaAddress
+	NOP
+lagHook:
+	J 	updateLag
+	NOP
+saveHook:
+	J 	isSaving
+	NOP
+spriteHook:
+	J 	logSpriteAddress
+	NOP
+speedHook:
+	J 	controlSuperspeed
 	NOP
 
 loadExtraHooks:
@@ -384,11 +396,35 @@ loadExtraHooks:
 	SW t3, 0x610C (t4) // Store Hook
 	SW r0, 0x6110 (t4) // Store NOP
 
-	//LUI t3, hi(mapDLHook)
-	//LW t3, lo(mapDLHook) (t3)
-	//LUI t4, 0x8060
-	//SW t3, 0xC544 (t4) // Store Hook
-	//SW r0, 0xC548 (t4) // Store NOP
+	LUI t3, hi(giantKoshaHook)
+	LW t3, lo(giantKoshaHook) (t3)
+	LUI t4, 0x8064
+	SW t3, 0x6074 (t4) // Store Hook
+	SW r0, 0x6078 (t4) // Store NOP
+
+	LUI t3, hi(lagHook)
+	LW t3, lo(lagHook) (t3)
+	LUI t4, 0x8060
+	SW t3, 0x0674 (t4) // Store Hook
+	SW r0, 0x0678 (t4) // Store NOP
+
+	LUI t3, hi(saveHook)
+	LW t3, lo(saveHook) (t3)
+	LUI t4, 0x8061
+	SW t3, 0xDECC (t4) // Store Hook
+	SW r0, 0xDED0 (t4) // Store NOP
+
+	LUI t3, hi(spriteHook)
+	LW t3, lo(spriteHook) (t3)
+	LUI t4, 0x806B
+	SW t3, 0xB7D0 (t4) // Store Hook
+	SW r0, 0xB7D4 (t4) // Store NOP
+
+	LUI t3, hi(speedHook)
+	LW t3, lo(speedHook) (t3)
+	LUI t4, 0x8066
+	SW t3, 0x5354 (t4) // Store Hook
+	SW r0, 0x5358 (t4) // Store NOP
 
 	// Negative Kerning
 	LUI t3, 0x8070

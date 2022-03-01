@@ -176,8 +176,3 @@ int* displayListModifiers(int* dl) {
 	}
 	return dl;
 };
-
-int* mapDLModifiers(int* dl) {
-	
-	return dl;
-}

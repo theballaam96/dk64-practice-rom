@@ -14,8 +14,6 @@ from recompute_overlays import isROMAddressOverlay, readOverlayOriginalData, rep
 
 # Patcher functions for the extracted files
 import patch_text
-#from patch_text import patchDolbyText, patchWrinklyText, patchKlumsyText, patchMainMenu
-from staticcode import patchStaticCode
 from actor_bin_builder import *
 from snag_bins_builder import *
 from font_image_builder import build_font
@@ -59,14 +57,6 @@ file_dict = [
 		"do_not_delete_source": True,
 	},
 	{
-		"name": "Static ASM Code",
-		"start": [0x113F0,0x119B0,0x116F0][rom_version],
-		"compressed_size": [0xB15E4,0xBB9C0,0xBC150][rom_version],
-		"source_file": "StaticCode.bin",
-		"use_external_gzip": True,
-		"patcher": patchStaticCode,
-	},
-	{
 		"name": "Thumb Image",
 		"pointer_table_index": 14,
 		"file_index": 94,
@@ -103,27 +93,6 @@ file_dict = [
 		"texture_format": "rgba5551",
 		"do_not_extract": True,
 	},
-	# {
-	# 	"name": "Groovy Font Symbols Image",
-	# 	"pointer_table_index": 14,
-	# 	"file_index": 0,
-	# 	"source_file": "assets/Non-Code/Font/symbols.png",
-	# 	"texture_format": "ia4",
-	# },
-	# {
-	# 	"name": "Groovy Font Uppercase Image",
-	# 	"pointer_table_index": 14,
-	# 	"file_index": 1,
-	# 	"source_file": "assets/Non-Code/Font/capitals.png",
-	# 	"texture_format": "ia4",
-	# },
-	# {
-	# 	"name": "Groovy Font Lowercase Image",
-	# 	"pointer_table_index": 14,
-	# 	"file_index": 2,
-	# 	"source_file": "assets/Non-Code/Font/lower.png",
-	# 	"texture_format": "ia4",
-	# },
 	{
 		"name": "Arcade Font",
 		"pointer_table_index": 14,

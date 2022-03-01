@@ -8,7 +8,4 @@
 .org 0x805DAE00
 .include "asm/us/boot.asm" //include modified boot code
 .include "asm/objects.asm"
-.headersize 0x7E5FBE00 // Jump instructions located at 0x1FFF000 in ROM. Header size calculated by org_dest - rom_dest
-.org 0x805FAE00
-.include "asm/us/jump_instructions.asm" // jump instructions
 .close // Close the ROM file
