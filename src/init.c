@@ -53,7 +53,7 @@ void initHack(void) {
 		// *(int*)(&file_size) = 0x180;
 		// copyFromROM(0x2021600,(int*)0x807546D0,&file_size,0,0,0,0);
 		// textData[0].kerning_char = -3;
-		textData[0].kerning_anim = 5;
+		//textData[0].kerning_anim = 5;
 		// Style 6 Mtx
 		int base_mtx = 75;
 		style6Mtx[0x0] = base_mtx;

@@ -7,7 +7,7 @@
 		Functions: 0/107(0.0%)
 		Vanilla Vars: 0/155(0.0%)
 		Hack Vars: 106/106(100.0%)
-		Code: 0/21(0.0%)
+		Code: 0/48(0.0%)
 */
 
 //functions
@@ -402,7 +402,34 @@
 //.definelabel setupCheckOverwrite
 //.definelabel frameHookLocation
 //.definelabel customCodeStart
+//.definelabel customBootCodeStart
 //.definelabel customCodeUpper
+//.definelabel customCodeLower
 //.definelabel bootJumpStart
 //.definelabel bootJumpReturn
 //.definelabel customLoopReturn
+//.definelabel pauseHookWrite
+//.definelabel flagHookWrite
+//.definelabel spawnTimerHookWrite
+//.definelabel phaseCorrectionHookWrite
+//.definelabel arcadeHookWrite
+//.definelabel jetpacHookWrite
+//.definelabel pause97HookWrite
+//.definelabel pause343HookWrite
+//.definelabel loadSetupHookWrite
+//.definelabel resolveBarrelHookWrite
+//.definelabel fairyStoreHookWrite
+//.definelabel displayListHookWrite
+//.definelabel vertBaseStoreHookWrite
+//.definelabel signalsStoreHookWrite
+//.definelabel delayedKillsStoreHookWrite
+//.definelabel lockStackStoreHookWrite
+//.definelabel storeFloorPreloadHookWrite
+//.definelabel giantKoshaHookWrite
+//.definelabel lagHookWrite
+//.definelabel saveHookWrite
+//.definelabel spriteHookWrite
+//.definelabel speedHookWrite
+//.definelabel kongHookWrite
+//.definelabel crcPatchMemory
+//.definelabel crcPatchROM

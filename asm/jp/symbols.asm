@@ -7,7 +7,7 @@
 		Functions: 107/107(100.0%)
 		Vanilla Vars: 155/155(100.0%)
 		Hack Vars: 106/106(100.0%)
-		Code: 8/21(38.1%)
+		Code: 48/48(100.0%)
 */
 
 //functions
@@ -385,24 +385,51 @@
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
 
 // Code
-//.definelabel debugColumnLoop
-//.definelabel characterSpawnerMalloc
-//.definelabel nfrTitleScreenSong
-//.definelabel globalFlags
-//.definelabel heapEndWrite
-//.definelabel fileStartMap
-//.definelabel fileStartExit
-//.definelabel kongColor1
-//.definelabel kongColor2
-//.definelabel kongColor3
-//.definelabel eepromPatch
+.definelabel debugColumnLoop, 0x80731720
+.definelabel characterSpawnerMalloc, 0x80727E0C
+.definelabel nfrTitleScreenSong, 0x807455E0
+.definelabel globalFlags, 0x807ED9C8
+.definelabel heapEndWrite, 0x8060DF70
+.definelabel fileStartMap, 0x80713BE3
+.definelabel fileStartExit, 0x80713BF7
+.definelabel kongColor1, 0x806888BB
+.definelabel kongColor2, 0x806886C0
+.definelabel kongColor3, 0x806886C8
+.definelabel eepromPatch, 0x8060AF88
 .definelabel bbbandit_array, 0x80020C60
 .definelabel boot_lui1, 0x8001
 .definelabel boot_lui2, 0xDF34
 .definelabel setupCheckOverwrite, 0x805FC4A0
 .definelabel frameHookLocation, 0x805F99F0
-//.definelabel customCodeStart
-//.definelabel customCodeUpper
+.definelabel customCodeStart, 0x805D8600
+.definelabel customBootCodeStart, 0x80000AD0
+.definelabel customCodeUpper, 0x805D
+.definelabel customCodeLower, 0x8600
 .definelabel bootJumpStart, 0x8000081C
 .definelabel bootJumpReturn, 0x8000083C
 .definelabel customLoopReturn, 0x805F99F8
+.definelabel pauseHookWrite, 0x805FA230
+.definelabel flagHookWrite, 0x80730A60
+.definelabel spawnTimerHookWrite, 0x806A1168
+.definelabel phaseCorrectionHookWrite, 0x806DF90C
+.definelabel arcadeHookWrite, 0x805F99D0
+.definelabel jetpacHookWrite, 0x805F99E0
+.definelabel pause97HookWrite, 0x806A6928
+.definelabel pause343HookWrite, 0x806ABB6C
+.definelabel loadSetupHookWrite, 0x80686914
+.definelabel resolveBarrelHookWrite, 0x80686F64
+.definelabel fairyStoreHookWrite, 0x806C4AAC
+.definelabel displayListHookWrite, 0x80713818
+.definelabel vertBaseStoreHookWrite, 0x8062CE6C
+.definelabel signalsStoreHookWrite, 0x806774F0
+.definelabel delayedKillsStoreHookWrite, 0x806764AC
+.definelabel lockStackStoreHookWrite, 0x8060E460
+.definelabel storeFloorPreloadHookWrite, 0x806640DC
+.definelabel giantKoshaHookWrite, 0x80643DB4
+.definelabel lagHookWrite, 0x805FE024
+.definelabel saveHookWrite, 0x8060B8CC
+.definelabel spriteHookWrite, 0x806A9FE8
+.definelabel speedHookWrite, 0x806632C4
+.definelabel kongHookWrite, 0x806F2D10
+.definelabel crcPatchMemory, 0x80002624
+.definelabel crcPatchROM, 0x3224

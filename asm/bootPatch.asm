@@ -7,8 +7,8 @@ LUI a0, hi(bootStart) //start of ROM copy
 LUI a1, hi(bootStart + 0x20000)
 ADDIU a1, a1, lo(bootStart + 0x20000)
 ADDIU a0, a0, lo(bootStart)
-LUI a2, 0x805D
+LUI a2, customCodeUpper
 JAL dmaFileTransfer
-ORI a2, a2, 0xAE00 //RAM location to copy to
+ORI a2, a2, customCodeLower //RAM location to copy to
 J displacedBootCode
 NOP

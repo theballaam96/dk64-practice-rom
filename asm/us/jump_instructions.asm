@@ -1,4 +1,0 @@
-START_JUMP:
-
-.align 0x10
-END_JUMP:

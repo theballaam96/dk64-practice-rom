@@ -200,12 +200,6 @@ kongHook:
 flagHook:
 	J 	writeLastUpdatedFlags
 	NOP
-TextResizeHook:
-	J 	resizeActiveMenuFont
-	NOP
-DefineAMFontHook:
-	J 	defineActiveMenuOtherParams
-	NOP
 SpawnTimerHook:
 	J 	controlTimer
 	NOP
@@ -270,156 +264,136 @@ speedHook:
 loadExtraHooks:
 	LUI t3, hi(pauseHook)
 	LW t3, lo(pauseHook) (t3)
-	LUI t4, 0x8060
-	SW t3, 0xC890 (t4) // Store Hook
+	LUI t4, hi(pauseHookWrite)
+	SW t3, lo(pauseHookWrite) (t4) // Store Hook
 
 	LUI t3, hi(flagHook)
 	LW t3, lo(flagHook) (t3)
-	LUI t4, 0x8073
-	SW t3, 0x129C (t4) // Store Hook
-
-	LUI t3, hi(TextResizeHook)
-	LW t3, lo(TextResizeHook) (t3)
-	LUI t4, 0x806A
-	SW 	t3, 0xD88C (t4) // Store Hook
-
-	LUI t3, hi(DefineAMFontHook)
-	LW t3, lo(DefineAMFontHook) (t3)
-	LUI t4, 0x806A
-	SW 	t3, 0xD8B0 (t4) // Store Hook
+	LUI t4, hi(flagHookWrite)
+	SW t3, lo(flagHookWrite) (t4) // Store Hook
 
 	LUI t3, hi(SpawnTimerHook)
 	LW t3, lo(SpawnTimerHook) (t3)
-	LUI t4, 0x806A
-	SW 	t3, 0x2AF8 (t4) // Store Hook
-	SW 	r0, 0x2AFC (t4) // Store NOP
+	LUI t4, hi(spawnTimerHookWrite)
+	SW 	t3, lo(spawnTimerHookWrite) (t4) // Store Hook
+	SW 	r0, lo(spawnTimerHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(PhaseCorrectionHook)
 	LW t3, lo(PhaseCorrectionHook) (t3)
-	LUI t4, 0x806E
-	SW 	t3, 0x063C (t4) // Store Hook
+	LUI t4, hi(phaseCorrectionHookWrite)
+	SW 	t3, lo(phaseCorrectionHookWrite) (t4) // Store Hook
 
 	LUI t3, hi(ArcadeHook)
 	LW t3, lo(ArcadeHook) (t3)
-	LUI t4, 0x8060
-	SW 	t3, 0xC144 (t4) // Store Hook
+	LUI t4, hi(arcadeHookWrite)
+	SW 	t3, lo(arcadeHookWrite) (t4) // Store Hook
 
 	LUI t3, hi(JetpacHook)
 	LW t3, lo(JetpacHook) (t3)
-	LUI t4, 0x8060
-	SW 	t3, 0xC154 (t4) // Store Hook
+	LUI t4, hi(jetpacHookWrite)
+	SW 	t3, lo(jetpacHookWrite) (t4) // Store Hook
 
 	LUI t3, hi(Pause97Hook)
 	LW t3, lo(Pause97Hook) (t3)
-	LUI t4, 0x806B
-	SW 	t3, 0x8158 (t4) // Store Hook
-	SW 	r0, 0x815C (t4) // Store NOP
+	LUI t4, hi(pause97HookWrite)
+	SW 	t3, lo(pause97HookWrite) (t4) // Store Hook
+	SW 	r0, lo(pause97HookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(Pause343Hook)
 	LW t3, lo(Pause343Hook) (t3)
-	LUI t4, 0x806B
-	SW 	t3, 0xCFFC (t4) // Store Hook
-	SW 	r0, 0xD000 (t4) // Store NOP 
+	LUI t4, hi(pause343HookWrite)
+	SW 	t3, lo(pause343HookWrite) (t4) // Store Hook
+	SW 	r0, lo(pause343HookWrite)+4 (t4) // Store NOP 
 
 	LUI t3, hi(LoadSetupHook)
 	LW t3, lo(LoadSetupHook) (t3)
-	LUI t4, 0x8069
-	SW 	t3, 0x8714 (t4) // Store Hook
-	SW 	r0, 0x8718 (t4) // Store NOP 
+	LUI t4, hi(loadSetupHookWrite)
+	SW 	t3, lo(loadSetupHookWrite) (t4) // Store Hook
+	SW 	r0, lo(loadSetupHookWrite)+4 (t4) // Store NOP 
 
 	LUI t3, hi(ResolveBarrelHook)
 	LW t3, lo(ResolveBarrelHook) (t3)
-	LUI t4, 0x8069
-	SW t3, 0x8D64 (t4) // Store Hook
-	SW r0, 0x8D68 (t4) // Store NOP
+	LUI t4, hi(resolveBarrelHookWrite)
+	SW t3, lo(resolveBarrelHookWrite) (t4) // Store Hook
+	SW r0, lo(resolveBarrelHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(FairyStoreHook)
 	LW t3, lo(FairyStoreHook) (t3)
-	LUI t4, 0x806C
-	SW 	t3, 0x5D9C (t4) // Store Hook
-	SW 	r0, 0x5DA0 (t4) // Store NOP
+	LUI t4, hi(fairyStoreHookWrite)
+	SW 	t3, lo(fairyStoreHookWrite) (t4) // Store Hook
+	SW 	r0, lo(fairyStoreHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(DisplayListHook)
 	LW t3, lo(DisplayListHook) (t3)
-	LUI t4, 0x8071
-	SW t3, 0x417C (t4) // Store Hook
-	SW r0, 0x4180 (t4) // Store NOP
+	LUI t4, hi(displayListHookWrite)
+	SW t3, lo(displayListHookWrite) (t4) // Store Hook
+	SW r0, lo(displayListHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(vertBaseStoreHook)
 	LW t3, lo(vertBaseStoreHook) (t3)
-	LUI t4, 0x8063
-	SW t3, 0xF200 (t4) // Store Hook
-	SW r0, 0xF204 (t4) // Store NOP
+	LUI t4, hi(vertBaseStoreHookWrite)
+	SW t3, lo(vertBaseStoreHookWrite) (t4) // Store Hook
+	SW r0, lo(vertBaseStoreHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(signalsStoreHook)
 	LW t3, lo(signalsStoreHook) (t3)
-	LUI t4, 0x8068
-	SW t3, 0x9344 (t4) // Store Hook
-	SW r0, 0x9348 (t4) // Store NOP
+	LUI t4, hi(signalsStoreHookWrite)
+	SW t3, lo(signalsStoreHookWrite) (t4) // Store Hook
+	SW r0, lo(signalsStoreHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(delayedKillsStoreHook)
 	LW t3, lo(delayedKillsStoreHook) (t3)
-	LUI t4, 0x8068
-	SW t3, 0x83CC (t4) // Store Hook
-	SW r0, 0x83D0 (t4) // Store NOP
+	LUI t4, hi(delayedKillsStoreHookWrite)
+	SW t3, lo(delayedKillsStoreHookWrite) (t4) // Store Hook
+	SW r0, lo(delayedKillsStoreHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(lockStackStoreHook)
 	LW t3, lo(lockStackStoreHook) (t3)
-	LUI t4, 0x8061
-	SW t3, 0x09F4 (t4) // Store Hook
-	SW r0, 0x09F8 (t4) // Store NOP
+	LUI t4, hi(lockStackStoreHookWrite)
+	SW t3, lo(lockStackStoreHookWrite) (t4) // Store Hook
+	SW r0, lo(lockStackStoreHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(storeFloorPreloadHook)
 	LW t3, lo(storeFloorPreloadHook) (t3)
-	LUI t4, 0x8066
-	SW t3, 0x610C (t4) // Store Hook
-	SW r0, 0x6110 (t4) // Store NOP
+	LUI t4, hi(storeFloorPreloadHookWrite)
+	SW t3, lo(storeFloorPreloadHookWrite) (t4) // Store Hook
+	SW r0, lo(storeFloorPreloadHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(giantKoshaHook)
 	LW t3, lo(giantKoshaHook) (t3)
-	LUI t4, 0x8064
-	SW t3, 0x6074 (t4) // Store Hook
-	SW r0, 0x6078 (t4) // Store NOP
+	LUI t4, hi(giantKoshaHookWrite)
+	SW t3, lo(giantKoshaHookWrite) (t4) // Store Hook
+	SW r0, lo(giantKoshaHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(lagHook)
 	LW t3, lo(lagHook) (t3)
-	LUI t4, 0x8060
-	SW t3, 0x0674 (t4) // Store Hook
-	SW r0, 0x0678 (t4) // Store NOP
+	LUI t4, hi(lagHookWrite)
+	SW t3, lo(lagHookWrite) (t4) // Store Hook
+	SW r0, lo(lagHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(saveHook)
 	LW t3, lo(saveHook) (t3)
-	LUI t4, 0x8061
-	SW t3, 0xDECC (t4) // Store Hook
-	SW r0, 0xDED0 (t4) // Store NOP
+	LUI t4, hi(saveHookWrite)
+	SW t3, lo(saveHookWrite) (t4) // Store Hook
+	SW r0, lo(saveHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(spriteHook)
 	LW t3, lo(spriteHook) (t3)
-	LUI t4, 0x806B
-	SW t3, 0xB7D0 (t4) // Store Hook
-	SW r0, 0xB7D4 (t4) // Store NOP
+	LUI t4, hi(spriteHookWrite)
+	SW t3, lo(spriteHookWrite) (t4) // Store Hook
+	SW r0, lo(spriteHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(speedHook)
 	LW t3, lo(speedHook) (t3)
-	LUI t4, 0x8066
-	SW t3, 0x5354 (t4) // Store Hook
-	SW r0, 0x5358 (t4) // Store NOP
-
-	// Negative Kerning
-	LUI t3, 0x8070
-	ADDIU t4, r0, 0x81
-	SB t4, 0xCB10 (t3)
-	SB t4, 0xCACC (t3)
-
-	LUI t3, 0x8070
-	ADDIU t4, r0, 0x50
-	SB t4, 0xCA68 (t3)
+	LUI t4, hi(speedHookWrite)
+	SW t3, lo(speedHookWrite) (t4) // Store Hook
+	SW r0, lo(speedHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)
-	LUI t4, 0x806F
+	LUI t4, hi(kongHookWrite)
 	JR 	ra
-	SW t3, 0x3750 (t4) // Store Hook
+	SW t3, lo(kongHookWrite) (t4) // Store Hook
 
 getObjectArrayAddr:
 	// a0 = initial address

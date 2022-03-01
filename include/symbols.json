@@ -2373,67 +2373,78 @@
 		{
 			"name":"debugColumnLoop",
 			"versions":{
-				"us":"0x80731F78"
+				"us":"0x80731F78",
+				"jp":"0x80731720"
 			}
 		},
 		{
 			"name":"characterSpawnerMalloc",
 			"versions":{
-				"us":"0x80728670"
+				"us":"0x80728670",
+				"jp":"0x80727E0C"
 			}
 		},
 		{
 			"name":"nfrTitleScreenSong",
 			"versions":{
-				"us":"0x80745D20"
+				"us":"0x80745D20",
+				"jp":"0x807455E0"
 			}
 		},
 		{
 			"name":"globalFlags",
 			"versions":{
-				"us":"0x807ED558"
+				"us":"0x807ED558",
+				"jp":"0x807ED9C8"
 			}
 		},
 		{
 			"name":"heapEndWrite",
 			"versions":{
-				"us":"0x80610512"
+				"us":"0x80610512",
+				"jp":"0x8060DF70"
 			}
 		},
 		{
 			"name":"fileStartMap",
 			"versions":{
-				"us":"0x80714547"
+				"us":"0x80714547",
+				"jp":"0x80713BE3"
 			}
 		},
 		{
 			"name":"fileStartExit",
 			"versions":{
-				"us":"0x8071455B"
+				"us":"0x8071455B",
+				"jp":"0x80713BF7"
 			}
 		},
 		{
 			"name":"kongColor1",
 			"versions":{
-				"us":"0x8068A62F"
+				"us":"0x8068A62F",
+				"jp":"0x806888BB"
 			}
 		},
 		{
 			"name":"kongColor2",
 			"versions":{
-				"us":"0x8068A450"
+				"us":"0x8068A450",
+				"jp":"0x806886C0"
 			}
 		},
 		{
 			"name":"kongColor3",
 			"versions":{
-				"us":"0x8068A458"
+				"us":"0x8068A458",
+				"jp":"0x806886C8"
 			}
 		},
 		{
 			"name":"eepromPatch",
 			"versions":{
-				"us":"0x8060D588"
+				"us":"0x8060D588",
+				"jp":"0x8060AF88"
 			}
 		},
 		{
@@ -2474,13 +2485,29 @@
 		{
 			"name":"customCodeStart",
 			"versions":{
-				"us":"0x805DAE00"
+				"us":"0x805DAE00",
+				"jp":"0x805D8600"
+			}
+		},
+		{
+			"name":"customBootCodeStart",
+			"versions":{
+				"us":"0x80000A30",
+				"jp":"0x80000AD0"
 			}
 		},
 		{
 			"name":"customCodeUpper",
 			"versions":{
-				"us":"0x805D"
+				"us":"0x805D",
+				"jp":"0x805D"
+			}
+		},
+		{
+			"name":"customCodeLower",
+			"versions":{
+				"us":"0xAE00",
+				"jp":"0x8600"
 			}
 		},
 		{
@@ -2502,6 +2529,181 @@
 			"versions":{
 				"us":"0x805FC16C",
 				"jp":"0x805F99F8"
+			}
+		},
+		{
+			"name":"pauseHookWrite",
+			"versions":{
+				"us":"0x805FC890",
+				"jp":"0x805FA230"
+			}
+		},
+		{
+			"name":"flagHookWrite",
+			"versions":{
+				"us":"0x8073129C",
+				"jp":"0x80730A60"
+			}	
+		},
+		{
+			"name":"spawnTimerHookWrite",
+			"versions":{
+				"us":"0x806A2AF8",
+				"jp":"0x806A1168"
+			}
+		},
+		{
+			"name":"phaseCorrectionHookWrite",
+			"versions":{
+				"us":"0x806E063C",
+				"jp":"0x806DF90C"
+			}
+		},
+		{
+			"name":"arcadeHookWrite",
+			"versions":{
+				"us":"0x805FC144",
+				"jp":"0x805F99D0"
+			}
+		},
+		{
+			"name":"jetpacHookWrite",
+			"versions":{
+				"us":"0x805FC154",
+				"jp":"0x805F99E0"
+			}
+		},
+		{
+			"name":"pause97HookWrite",
+			"versions":{
+				"us":"0x806A8158",
+				"jp":"0x806A6928"
+			}
+		},
+		{
+			"name":"pause343HookWrite",
+			"versions":{
+				"us":"0x806ACFFC",
+				"jp":"0x806ABB6C"
+			}
+		},
+		{
+			"name":"loadSetupHookWrite",
+			"versions":{
+				"us":"0x80688714",
+				"jp":"0x80686914"
+			}
+		},
+		{
+			"name":"resolveBarrelHookWrite",
+			"versions":{
+				"us":"0x80688D64",
+				"jp":"0x80686F64"
+			}
+		},
+		{
+			"name":"fairyStoreHookWrite",
+			"versions":{
+				"us":"0x806C5D9C",
+				"jp":"0x806C4AAC"
+			}
+		},
+		{
+			"name":"displayListHookWrite",
+			"versions":{
+				"us":"0x8071417C",
+				"jp":"0x80713818"
+			}
+		},
+		{
+			"name":"vertBaseStoreHookWrite",
+			"versions":{
+				"us":"0x8062F200",
+				"jp":"0x8062CE6C"
+			}
+		},
+		{
+			"name":"signalsStoreHookWrite",
+			"versions":{
+				"us":"0x80679344",
+				"jp":"0x806774F0"
+			}
+		},
+		{
+			"name":"delayedKillsStoreHookWrite",
+			"versions":{
+				"us":"0x806783CC",
+				"jp":"0x806764AC"
+			}
+		},
+		{
+			"name":"lockStackStoreHookWrite",
+			"versions":{
+				"us":"0x806109F4",
+				"jp":"0x8060E460"
+			}
+		},
+		{
+			"name":"storeFloorPreloadHookWrite",
+			"versions":{
+				"us":"0x8066610C",
+				"jp":"0x806640DC"
+			}
+		},
+		{
+			"name":"giantKoshaHookWrite",
+			"versions":{
+				"us":"0x80646074",
+				"jp":"0x80643DB4"
+			}
+		},
+		{
+			"name":"lagHookWrite",
+			"versions":{
+				"us":"0x80600674",
+				"jp":"0x805FE024"
+			}
+		},
+		{
+			"name":"saveHookWrite",
+			"versions":{
+				"us":"0x8060DECC",
+				"jp":"0x8060B8CC"
+			}
+		},
+		{
+			"name":"spriteHookWrite",
+			"versions":{
+				"us":"0x806AB7D0",
+				"jp":"0x806A9FE8"
+			}
+		},
+		{
+			"name":"speedHookWrite",
+			"versions":{
+				"us":"0x80665354",
+				"jp":"0x806632C4"
+			}
+		},
+		{
+			"name":"kongHookWrite",
+			"versions":{
+				"us":"0x806F3750",
+				"jp":"0x806F2D10"
+			}
+		},
+		{
+			"name":"crcPatchMemory",
+			"versions":{
+				"us":"0x80002554",
+				"jp":"0x80002624"
+			}
+		},
+		{
+			"name":"crcPatchROM",
+			"versions":{
+				"us":"0x3154",
+				"jp":"0x3224"
 			}
 		}
 	]

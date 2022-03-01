@@ -7,7 +7,7 @@
 		Functions: 107/107(100.0%)
 		Vanilla Vars: 155/155(100.0%)
 		Hack Vars: 106/106(100.0%)
-		Code: 21/21(100.0%)
+		Code: 48/48(100.0%)
 */
 
 //functions
@@ -402,7 +402,34 @@
 .definelabel setupCheckOverwrite, 0x805FEB00
 .definelabel frameHookLocation, 0x805FC164
 .definelabel customCodeStart, 0x805DAE00
+.definelabel customBootCodeStart, 0x80000A30
 .definelabel customCodeUpper, 0x805D
+.definelabel customCodeLower, 0xAE00
 .definelabel bootJumpStart, 0x80000764
 .definelabel bootJumpReturn, 0x80000784
 .definelabel customLoopReturn, 0x805FC16C
+.definelabel pauseHookWrite, 0x805FC890
+.definelabel flagHookWrite, 0x8073129C
+.definelabel spawnTimerHookWrite, 0x806A2AF8
+.definelabel phaseCorrectionHookWrite, 0x806E063C
+.definelabel arcadeHookWrite, 0x805FC144
+.definelabel jetpacHookWrite, 0x805FC154
+.definelabel pause97HookWrite, 0x806A8158
+.definelabel pause343HookWrite, 0x806ACFFC
+.definelabel loadSetupHookWrite, 0x80688714
+.definelabel resolveBarrelHookWrite, 0x80688D64
+.definelabel fairyStoreHookWrite, 0x806C5D9C
+.definelabel displayListHookWrite, 0x8071417C
+.definelabel vertBaseStoreHookWrite, 0x8062F200
+.definelabel signalsStoreHookWrite, 0x80679344
+.definelabel delayedKillsStoreHookWrite, 0x806783CC
+.definelabel lockStackStoreHookWrite, 0x806109F4
+.definelabel storeFloorPreloadHookWrite, 0x8066610C
+.definelabel giantKoshaHookWrite, 0x80646074
+.definelabel lagHookWrite, 0x80600674
+.definelabel saveHookWrite, 0x8060DECC
+.definelabel spriteHookWrite, 0x806AB7D0
+.definelabel speedHookWrite, 0x80665354
+.definelabel kongHookWrite, 0x806F3750
+.definelabel crcPatchMemory, 0x80002554
+.definelabel crcPatchROM, 0x3154

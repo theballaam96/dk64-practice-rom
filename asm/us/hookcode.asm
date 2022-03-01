@@ -119,41 +119,6 @@ START_HOOK:
 			J 		0x807312A4
 			NOP
 
-	resizeActiveMenuFont:
-		LUI 	a3, 0x3F4C
-		ORI 	a3, a3, 0xCCCD
-		BEQ 	t0, at, resizeActiveMenuFont_NormalStyle10
-		NOP
-		LUI 	a3, 0x3F99
-		ORI 	a3, a3, 0x999A
-		ADDI 	t0, t0, -5
-		BEQZ 	t0, resizeActiveMenuFont_NormalStyle10
-		ADDIU 	t0, t0, 5
-		LUI 	a3, 0x3F66 // Groovy Font Size
-		ORI 	a3, a3, 0x6666
-
-		resizeActiveMenuFont_NormalStyle10:
-			J 	0x8069D898
-			SB 	t0, 0x0056 (sp)
-
-	defineActiveMenuOtherParams:
-		LBU 	t0, 0x0056 (sp)
-		ADDIU 	a2, r0, 10
-		BEQ 	t0, a2, defineActiveMenuOtherParams_Finish
-		ADDIU 	a3, r0, 6
-		ADDIU 	a2, r0, 5
-		BEQ 	t0, a2, defineActiveMenuOtherParams_Finish
-		ADDIU 	a3, r0, 2
-		ADDIU 	a3, r0, 0
-
-		defineActiveMenuOtherParams_Finish:
-			ADDIU a2, r0, 6
-			SB 	a2, 0x0056 (sp)
-			OR 	a2, r0, r0
-			OR 	t0, a3, r0
-			J 	0x8069D8BC
-			OR 	a3, r0, r0
-
 	controlTimer:
 		LUI 	t8, hi(ConvertTimerCountdown)
 		ADDIU 	t6, r0, 2
