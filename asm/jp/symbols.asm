@@ -32,7 +32,7 @@
 .definelabel dk_multiply, 0x80005B88
 .definelabel convertTimestamp, 0x80005A88
 .definelabel resetMap, 0x805FD974
-.definelabel prepKongColoring, 0x80688788
+.definelabel prepKongColoring, 0x80688778
 .definelabel dk_memcpy, 0x80003210
 .definelabel SaveToGlobal, 0x8060B8A8
 .definelabel DetectGameOver, 0x80713A30
@@ -392,7 +392,7 @@
 .definelabel heapEndWrite, 0x8060DF72
 .definelabel fileStartMap, 0x80713BE3
 .definelabel fileStartExit, 0x80713BF7
-.definelabel kongColor1, 0x806888BB
+.definelabel kongColor1, 0x8068889F
 .definelabel kongColor2, 0x806886C0
 .definelabel kongColor3, 0x806886C8
 .definelabel eepromPatch, 0x8060AF88

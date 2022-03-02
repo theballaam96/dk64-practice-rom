@@ -151,7 +151,7 @@
 			"name":"prepKongColoring",
 			"versions":{
 				"us":"0x8068A508",
-				"jp":"0x80688788"
+				"jp":"0x80688778"
 			}
 		},
 		{
@@ -2423,7 +2423,7 @@
 			"name":"kongColor1",
 			"versions":{
 				"us":"0x8068A62F",
-				"jp":"0x806888BB"
+				"jp":"0x8068889F"
 			}
 		},
 		{

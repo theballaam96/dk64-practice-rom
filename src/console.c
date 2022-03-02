@@ -3,16 +3,25 @@
 static char spawned_menu = 0;
 static char menu_slot = 0;
 
+#if ROM_VERSION == 2
+	#define FIRST_LINE "WELCOME TO THE PRACTICE ROM <JP>"
+	#define LAST_LINE "THIS CAN BE CHANGED LATER"
+#else
+	#define FIRST_LINE "THIS IS THE FIRST TIME YOU'VE BOOTED UP THE ROM"
+	#define LAST_LINE "YOU CAN CHANGE THIS IN THE SETTINGS MENU LATER"
+#endif
+
 static const char* console_text_list[] = {
-	"THIS IS THE FIRST TIME YOU'VE BOOTED UP THE ROM",
+	FIRST_LINE,
 	"PLEASE SELECT YOUR CONSOLE",
 	"NINTENDO 64",
 	"WII U VIRTUAL CONSOLE",
 	"EMULATOR",
-	"YOU CAN CHANGE THIS IN THE SETTINGS MENU LATER",
+	LAST_LINE,
 };
 static const short console_x[] = {25,100,160,125,167,25};
 static const short console_y[] = {55,68,101,114,127,160};
+static const short console_x_jp[] = {30,55,108,75,120,60};
 
 int* spawnConsoleMenu(int* dl) {
 	if ((spawned_menu == 0) && (ObjectModel2Timer == 5)) {
@@ -30,7 +39,11 @@ int* spawnConsoleMenu(int* dl) {
 				blue = 0;
 			}
 		}
-		dl = drawTextContainer(dl, 6, console_x[i], console_y[i] + 100, (char *)console_text_list[i], red, green, blue, 0xFF, 0);
+		if (ROM_VERSION < 2) {
+			dl = drawTextContainer(dl, 6, console_x[i], console_y[i] + 100, (char *)console_text_list[i], red, green, blue, 0xFF, 0);
+		} else {
+			dl = drawPixelTextContainer(dl, console_x_jp[i], console_y[i], (char *)console_text_list[i], red, green, blue, 0xFF,0);
+		}
 	}
 	return dl;	
 }

@@ -132,19 +132,21 @@ static char stateLoadstr[15] = "";
 
 int* displayListModifiers(int* dl) {
 	if (CurrentMap == 0x50) {
-		int i = 0;
-		while (i < LoadedActorCount) {
-			if (LoadedActorArray[i].actor) {
-				if (LoadedActorArray[i].actor->actorType == ACTOR_MAINMENUCONTROLLER) {
-					int screen = *(char*)((int)(LoadedActorArray[i].actor) + 0x18A);
-					//int next_screen = *(char*)((int)(LoadedActorArray[i].actor) + 0x18B);
-					if (screen < 2) {
-						dl = displayInfo(dl);
+		if (ROM_VERSION < 2) {
+			int i = 0;
+			while (i < LoadedActorCount) {
+				if (LoadedActorArray[i].actor) {
+					if (LoadedActorArray[i].actor->actorType == ACTOR_MAINMENUCONTROLLER) {
+						int screen = *(char*)((int)(LoadedActorArray[i].actor) + 0x18A);
+						//int next_screen = *(char*)((int)(LoadedActorArray[i].actor) + 0x18B);
+						if (screen < 2) {
+							dl = displayInfo(dl);
+						}
+						break;
 					}
-					break;
 				}
+				i++;
 			}
-			i++;
 		}
 	} else if (CurrentMap == 0x51) {
 		dl = spawnConsoleMenu(dl);
