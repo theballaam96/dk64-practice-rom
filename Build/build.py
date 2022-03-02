@@ -27,13 +27,14 @@ if os.path.exists(newROMName):
     os.remove(newROMName)
 shutil.copyfile(ROMName, newROMName)
 
-file_dict = [
+base_file_dict = [
 	{
 		"name": "Menu Text",
 		"pointer_table_index": 12,
 		"file_index": 37,
 		"source_file": "menu_text.bin",
 		"do_not_delete_source": True,
+		"versions":[0],
 	},
 	{
 		"name": "Dolby Text",
@@ -41,6 +42,7 @@ file_dict = [
 		"file_index": 13,
 		"source_file": "dolby_text.bin",
 		"do_not_delete_source": True,
+		"versions":[0,2],
 	},
 	{
 		"name": "K. Lumsy Text",
@@ -48,6 +50,7 @@ file_dict = [
 		"file_index": 27,
 		"source_file": "klumsy_text.bin",
 		"do_not_delete_source": True,
+		"versions":[0],
 	},
 	{
 		"name": "Wrinkly Hint Text",
@@ -55,20 +58,31 @@ file_dict = [
 		"file_index": 41,
 		"source_file": "wrinkly_text.bin",
 		"do_not_delete_source": True,
+		"versions":[0],
 	},
 	{
-		"name": "Thumb Image",
+		"name": "Thumb Image (US)",
 		"pointer_table_index": 14,
 		"file_index": 94,
 		"source_file": "assets/Non-Code/Nintendo Logo/Nintendo.png",
 		"texture_format": "rgba5551",
+		"versions":[0],
+	},
+	{
+		"name": "Thumb Image (JP)",
+		"pointer_table_index": 14,
+		"file_index": 240,
+		"source_file": "assets/Non-Code/Nintendo Logo/NintendoJP.png",
+		"texture_format": "rgba5551",
+		"versions":[2],
 	},
 	{
 		"name": "Dolby Logo",
 		"pointer_table_index": 14,
-		"file_index": 176,
+		"file_index": [176,176,322][rom_version],
 		"source_file": "assets/Non-Code/Dolby/DolbyThin.png",
 		"texture_format": "i4",
+		"versions":[0,2],
 	},
 	{
 		"name": "Employee Head Image",
@@ -76,38 +90,52 @@ file_dict = [
 		"file_index": 5003,
 		"source_file": "assets/Non-Code/Employee Head/employee_head.png",
 		"texture_format": "i8",
+		"versions":[0,2],
 	},
 	{
 		"name": "Fairy Viewer Square",
 		"pointer_table_index": 14,
-		"file_index": 48,
+		"file_index": [48,48,194][rom_version],
 		"source_file": "assets/Non-Code/Fairy Viewer/fairy_square.png",
 		"texture_format": "rgba5551",
 		"do_not_extract": True,
+		"versions":[0,2],
 	},
 	{
 		"name": "Fairy Viewer Dot",
 		"pointer_table_index": 14,
-		"file_index": 49,
+		"file_index": [49,49,195][rom_version],
 		"source_file": "assets/Non-Code/Fairy Viewer/fairy_dot.png",
 		"texture_format": "rgba5551",
 		"do_not_extract": True,
+		"versions":[0,2],
 	},
 	{
-		"name": "Arcade Font",
+		"name": "Arcade Font (US)",
 		"pointer_table_index": 14,
 		"file_index": 19,
-		"source_file": "assets/Non-Code/Font/arcade_font_modified.png",
+		"source_file": "assets/Non-Code/Font/arcade_font_modified_us.png",
 		"texture_format": "i4",
-		"font_key": "arcade_font",
+		"font_key": "arcade_font_us",
+		"versions":[0],
+	},
+	{
+		"name": "Arcade Font (JP)",
+		"pointer_table_index": 14,
+		"file_index": 165,
+		"source_file": "assets/Non-Code/Font/arcade_font_modified_jp.png",
+		"texture_format": "i4",
+		"font_key": "arcade_font_jp",
+		"versions":[2],
 	},
 	{
 		"name": "Jetpac Font",
 		"pointer_table_index": 14,
-		"file_index": 31,
+		"file_index": [31,31,177][rom_version],
 		"source_file": "assets/Non-Code/Font/jetpac_font_modified.png",
 		"texture_format": "i4",
 		"font_key": "jetpac_font",
+		"versions":[0,2],
 	},
 	{
 		"name": "Actor Names",
@@ -115,6 +143,7 @@ file_dict = [
 		"source_file": "assets/Non-Code/actor_names.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
+		"versions":[0,1,2],
 	},
 	{
 		"name": "Snag Names",
@@ -122,6 +151,7 @@ file_dict = [
 		"source_file": "assets/Non-Code/snag_names.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
+		"versions":[0,1,2],
 	},
 	{
 		"name": "Snag Names (Capitals)",
@@ -129,10 +159,21 @@ file_dict = [
 		"source_file": "assets/Non-Code/snag_names_capitals.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
+		"versions":[0,1,2],
 	},
 ]
 
-file_dict = writeFileStatesToDict(file_dict)
+base_file_dict = writeFileStatesToDict(base_file_dict)
+
+file_dict = []
+for x in base_file_dict:
+	allowed = True;
+	if "versions" in x:
+		allowed = False;
+		if rom_version in x["versions"]:
+			allowed = True;
+	if allowed:
+		file_dict.append(x)
 
 map_replacements = [
 	# {
@@ -351,7 +392,8 @@ with open(newROMName, "r+b") as fh:
 
 	print("[5 / 7] - Writing recomputed pointer tables to ROM")
 	writeModifiedPointerTablesToROM(fh)
-	writeModifiedOverlaysToROM(fh)
+	if rom_version == 0:
+		writeModifiedOverlaysToROM(fh) # US Only for now
 
 	print("[6 / 7] - Dumping details of all pointer tables to rom/build.log")
 	dumpPointerTableDetails("rom/build.log", fh)

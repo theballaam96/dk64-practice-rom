@@ -7,7 +7,7 @@
 		Functions: 0/107(0.0%)
 		Vanilla Vars: 0/155(0.0%)
 		Hack Vars: 106/106(100.0%)
-		Code: 0/48(0.0%)
+		Code: 0/50(0.0%)
 */
 
 //functions
@@ -407,6 +407,8 @@
 //.definelabel customCodeLower
 //.definelabel bootJumpStart
 //.definelabel bootJumpReturn
+//.definelabel bootFinalValue
+//.definelabel t4BootAddition
 //.definelabel customLoopReturn
 //.definelabel pauseHookWrite
 //.definelabel flagHookWrite

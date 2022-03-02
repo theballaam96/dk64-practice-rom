@@ -2402,7 +2402,7 @@
 			"name":"heapEndWrite",
 			"versions":{
 				"us":"0x80610512",
-				"jp":"0x8060DF70"
+				"jp":"0x8060DF72"
 			}
 		},
 		{
@@ -2522,6 +2522,20 @@
 			"versions":{
 				"us":"0x80000784",
 				"jp":"0x8000083C"
+			}
+		},
+		{
+			"name":"bootFinalValue",
+			"versions":{
+				"us":"0xD",
+				"jp":"0xE"
+			}
+		},
+		{
+			"name":"t4BootAddition",
+			"versions":{
+				"us":"0x1320",
+				"jp":"0x1620"
 			}
 		},
 		{

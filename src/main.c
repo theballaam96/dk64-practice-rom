@@ -11,7 +11,6 @@ void cFuncLoop(void) {
 	}
 	if (CurrentMap == 0x51) {
 		CutsceneActive = 0;
-		spawnConsoleMenu();
 		controlConsoleMenu();
 	} else {
 		if (ActiveMenu.isOpen) {
@@ -147,6 +146,8 @@ int* displayListModifiers(int* dl) {
 			}
 			i++;
 		}
+	} else if (CurrentMap == 0x51) {
+		dl = spawnConsoleMenu(dl);
 	}
 	if (stateLoadTimer > 0) {
 		dk_strFormat((char *)stateLoadstr, "STATE %d LOADED", FocusedSavestate + 1);

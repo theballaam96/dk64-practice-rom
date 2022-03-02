@@ -3,8 +3,44 @@ import os
 
 fonts = [
 	{
-		"font_key": "arcade_font",
+		"font_key": "arcade_font_us",
 		"overall_width": 512,
+		"images": [
+			{
+				"img": "arcade/colon.png",
+				"x": 248,
+				"w": 8,
+			},
+			{
+				"img": "arcade/ampersand.png",
+				"x": 392,
+				"w": 8,
+			},
+			{
+				"img": "arcade/apostrophe.png",
+				"x": 416,
+				"w": 8,
+			},
+			{
+				"img": "arcade/percent.png",
+				"x": 400,
+				"w": 8,
+			},
+			{
+				"img": "arcade/roman_1.png",
+				"x": 232,
+				"w": 8,
+			},
+			{
+				"img": "arcade/roman_2.png",
+				"x": 240,
+				"w": 8,
+			}
+		]
+	},
+	{
+		"font_key": "arcade_font_jp",
+		"overall_width": 1024,
 		"images": [
 			{
 				"img": "arcade/colon.png",

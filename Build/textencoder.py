@@ -1,5 +1,6 @@
 """Encode text file to ROM."""
-
+from getVersion import getVersion
+rom_version = getVersion();
 
 def writeText(file_name, text):
     """Write the text to ROM."""
@@ -17,4 +18,17 @@ def writeText(file_name, text):
         fh.write(bytearray(position.to_bytes(2,"big")))
         for textbox in text:
             for string in textbox:
-                fh.write(string.encode("ascii"))
+                if rom_version < 2:
+                    fh.write(string.encode("ascii"))
+                else:
+                    index = 0;
+                    for x in string.encode("ascii"):
+                        if x >= 0x30:
+                            fh.write(bytearray([x-0x17]))
+                        elif x == 0x20:
+                            fh.write(bytearray([0x1F]))
+                        elif x == 0 and index == 0:
+                            fh.write(bytearray([0x10]))
+                        else:
+                            fh.write(bytearray([x]))
+                        x += 1

@@ -167,6 +167,7 @@ def writeFileStatesToDict(original_dict):
 						"source_file": state_dir + y,
 						"do_not_extract": True,
 						"do_not_compress": True,
+						"versions":[0],
 					})
 					state_index += 1
 	return original_dict;

@@ -13,7 +13,9 @@ char kongcolors[5] = {1,2,2,2,1};
 
 void colorKong(void) {
 	int _char = Character;
-	prepKongColoring();
+	if (ROM_VERSION == 0) {
+		prepKongColoring();
+	}
 	// DK = 1 (Blue)
 	// Diddy = 2 (Yellow Cap)
 	// Lanky = 2 (Purple Straps)

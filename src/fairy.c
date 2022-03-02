@@ -27,9 +27,13 @@ void destroyFairyViewer(void) {
 int* displayFairy(int* dl) {
 	if (FairyViewerOpen && !ActiveMenu.isOpen) {
 		int y = 140;
-		dl = drawImage(dl, 48, RGBA16, 32, 32, 623, 467, 5.19f, 4.83f, 0x80);
+		int fairy_image_start_index = 48;
+		if (ROM_VERSION == 2) {
+			fairy_image_start_index = 194;
+		}
+		dl = drawImage(dl, fairy_image_start_index, RGBA16, 32, 32, 623, 467, 5.19f, 4.83f, 0x80);
 		if (show_dot) {
-			dl = drawImage(dl, 49, RGBA16, 16, 16, (3.9498f * fairy_x) + 8.5118f, (3.9178f * fairy_y) + 10.822f, 1.0f, 1.0f, 0xFF);
+			dl = drawImage(dl, fairy_image_start_index + 1, RGBA16, 16, 16, (3.9498f * fairy_x) + 8.5118f, (3.9178f * fairy_y) + 10.822f, 1.0f, 1.0f, 0xFF);
 			int diff = max_dist - fairy_dist;
 			int red_col = 0xFF;
 			dk_strFormat(fairy_text, "DIST:%d",diff);

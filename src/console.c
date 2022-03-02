@@ -11,38 +11,32 @@ static const char* console_text_list[] = {
 	"EMULATOR",
 	"YOU CAN CHANGE THIS IN THE SETTINGS MENU LATER",
 };
-static const float console_y[] = {55,68,101,114,127,160};
+static const short console_x[] = {25,100,160,125,167,25};
+static const short console_y[] = {55,68,101,114,127,160};
 
-static TextOverlay* text_actors[6];
-
-void spawnConsoleMenu(void) {
-	TextOverlay* textOverlay;
+int* spawnConsoleMenu(int* dl) {
 	if ((spawned_menu == 0) && (ObjectModel2Timer == 5)) {
 		preventSongPlaying = 0;
 		playSFX(173);
-		for (int i = 0; i < 6; i++) {
-			spawnTextOverlay(0,25,console_y[i],(char *)console_text_list[i],0,0,2,0);
-			textOverlay = (TextOverlay *)CurrentActorPointer;
-			text_actors[i] = textOverlay;
-			textOverlay->opacity = 0xFF;
-		}
 		spawned_menu = 1;
-	}	
+	}
+	for (int i = 0; i < 6; i++) {
+		int red = 0xFF;
+		int green = 0xFF;
+		int blue = 0xFF;
+		if ((i > 1) && (i < 5)) {
+			if (menu_slot == (i - 2)) {
+				green = 0xD7;
+				blue = 0;
+			}
+		}
+		dl = drawTextContainer(dl, 6, console_x[i], console_y[i] + 100, (char *)console_text_list[i], red, green, blue, 0xFF, 0);
+	}
+	return dl;	
 }
 
 void controlConsoleMenu(void) {
 	if (spawned_menu) {
-		for (int i = 0; i < 3; i++) {
-			if (menu_slot == i) {
-				text_actors[2+i]->red = 0xFF;
-				text_actors[2+i]->green = 0xD7;
-				text_actors[2+i]->blue = 0;
-			} else {
-				text_actors[2+i]->red = 0xFF;
-				text_actors[2+i]->green = 0xFF;
-				text_actors[2+i]->blue = 0xFF;
-			}
-		}
 		if (NewlyPressedControllerInput.Buttons & D_Up) {
 			if (menu_slot > 0) {
 				menu_slot -= 1;

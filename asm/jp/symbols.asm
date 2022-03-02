@@ -7,7 +7,7 @@
 		Functions: 107/107(100.0%)
 		Vanilla Vars: 155/155(100.0%)
 		Hack Vars: 106/106(100.0%)
-		Code: 48/48(100.0%)
+		Code: 50/50(100.0%)
 */
 
 //functions
@@ -389,7 +389,7 @@
 .definelabel characterSpawnerMalloc, 0x80727E0C
 .definelabel nfrTitleScreenSong, 0x807455E0
 .definelabel globalFlags, 0x807ED9C8
-.definelabel heapEndWrite, 0x8060DF70
+.definelabel heapEndWrite, 0x8060DF72
 .definelabel fileStartMap, 0x80713BE3
 .definelabel fileStartExit, 0x80713BF7
 .definelabel kongColor1, 0x806888BB
@@ -407,6 +407,8 @@
 .definelabel customCodeLower, 0x8600
 .definelabel bootJumpStart, 0x8000081C
 .definelabel bootJumpReturn, 0x8000083C
+.definelabel bootFinalValue, 0xE
+.definelabel t4BootAddition, 0x1620
 .definelabel customLoopReturn, 0x805F99F8
 .definelabel pauseHookWrite, 0x805FA230
 .definelabel flagHookWrite, 0x80730A60

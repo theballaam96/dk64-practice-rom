@@ -191,7 +191,7 @@ extern void toggleJetpacMenu(void);
 extern void controlJetpacMenuActions(void);
 extern void autoCloseJetpacMenu(void);
 
-extern void spawnConsoleMenu(void);
+extern int* spawnConsoleMenu(int* dl);
 extern void controlConsoleMenu(void);
 
 extern void runTest(void);
