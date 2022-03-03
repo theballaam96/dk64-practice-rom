@@ -21,7 +21,15 @@ static const char flag_cavesintro_clear[] = "CAVES INTRO: NOT WATCHED";
 static const char flag_castleintro_set[] = "CASTLE INTRO: WATCHED";
 static const char flag_castleintro_clear[] = "CASTLE INTRO: NOT WATCHED";
 
-static const short levelintros_flags[] = {0x001B,0x005F,0x008C,0x00C2,0x0101,0x011A,0x015D};
+static const short levelintros_flags[] = {
+	FLAG_INTRO_JAPES,
+	FLAG_INTRO_AZTEC,
+	FLAG_INTRO_FACTORY,
+	FLAG_INTRO_GALLEON,
+	FLAG_INTRO_FUNGI,
+	FLAG_INTRO_CAVES,
+	FLAG_INTRO_CASTLE,
+};
 static const char levelintros_flag_types[] = {0,0,0,0,0,0,0};
 
 void openFlagsLevelintrosMenu(void) {

@@ -47,7 +47,7 @@ void initHack(void) {
 		DebugInfoOn = 1;
 		debugColumnLoop = 0; // Debug 1 Column
 		characterSpawnerMalloc = 0x240447B8; // Increases the malloc for character spawners
-		*(int*)(0x805FE9E0) = 0x24040002; // Expand Display List Cap
+		displayListCap = 0x24040002; // Expand Display List Cap
 		nfrTitleScreenSong = 113; // NFR Title Screen Song
 		// int* file_size;
 		// *(int*)(&file_size) = 0x180;

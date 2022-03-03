@@ -73,6 +73,7 @@ extern void enableComplexFree(void);
 extern void complexFreeWrapper(void* addr);
 extern int getWorld(int map, int lobby_is_isles);
 extern int isSingleOrBunch(int object_type);
+extern void cancelPausedCutscenes(void);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
@@ -248,6 +249,8 @@ extern short MapVoid_MaxZ;
 extern unsigned short balloonPatchCounts[221];
 extern unsigned short coloredBananaCounts[8];
 
+extern overlay_struct overlayArray[8];
+
 extern char arcadeMap;
 extern char arcadeMode;
 extern char arcadeLevel;
@@ -389,9 +392,11 @@ extern unsigned char savestateSettingsBitfield;
 extern char disableSavestateCombo;
 extern char voidsDisabled;
 extern char disableCustomSFX;
+extern char textboxCancel;
 
 // Code
 extern int debugColumnLoop;
 extern int characterSpawnerMalloc;
 extern char nfrTitleScreenSong;
 extern int globalFlags[2];
+extern int displayListCap;

@@ -161,7 +161,11 @@ int* displayWatches(int* dl) {
 	for (int i = 0; i < WatchCount; i++) {
 		if (WatchIndex[i]) {
 			y = 340 - (k++ * 13);
-			dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 0);
+			if (ROM_VERSION < 2) {
+				dl = drawTextContainer(dl, 6, 20, y, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF, 0);
+			} else {
+				dl = drawPixelTextContainer(dl, 20, y - 130, (char*)WatchTextSpace[i], watch_red[i], watch_green[i], watch_blue[i], 0xFF,0);
+			}
 		}
 	}
 	return dl;
@@ -610,12 +614,19 @@ static const int watch_assist_functions[] = {
 	(int)&fairyViewerContainerToggle,
 };
 
+static const char watch_assist_access[] = {
+	1,
+	7,
+};
+
 const Screen watch_assist_struct = {
 	.TextArray = (int*)watch_assist_array,
 	.FunctionArray = watch_assist_functions,
 	.ArrayItems = 2,
 	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
-	.ParentPosition = 4
+	.ParentPosition = 4,
+	.hasAccessArray = 1,
+	.AccessArray = watch_assist_access
 };
 
 static const int watch_fake_functions[] = {

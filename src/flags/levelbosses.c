@@ -21,7 +21,15 @@ static const char flag_cavesboss_clear[] = "ARMY DILLO 2 INTRO: NOT WATCHED";
 static const char flag_castleboss_set[] = "KING KUT OUT INTRO: WATCHED";
 static const char flag_castleboss_clear[] = "KING KUT OUT INTRO: NOT WATCHED";
 
-static const short levelboss_flags[] = {0x0068,0x0067,0x006A,0x006B,0x0069,0x006D,0x006C};
+static const short levelboss_flags[] = {
+	FLAG_INTRO_ARMYDILLO1,
+	FLAG_INTRO_DOGADON1,
+	FLAG_INTRO_MADJACK,
+	FLAG_INTRO_PUFFTOSS,
+	FLAG_INTRO_DOGADON2,
+	FLAG_INTRO_ARMYDILLO2,
+	FLAG_INTRO_KINGKUTOUT
+};
 static const char levelboss_flag_types[] = {2,2,2,2,2,2,2};
 
 void openFlagsLevelbossMenu(void) {

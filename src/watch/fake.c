@@ -13,7 +13,7 @@ int getFakeKeyStatus(void) {
 		5 = Key not in map
 	*/
 	if (CurrentMap == HIDEOUT_HELM) {
-		if (checkFlag(380,0)) {
+		if (checkFlag(FLAG_KEYHAVE_KEY8,0)) {
 			return 3;
 		} else {
 			int key_index = convertIDToIndex(0x5A);
@@ -41,7 +41,7 @@ int getFakeProdRoomStatus(void) {
 		6 = Real
 	*/
 	if (CurrentMap == FRANTIC_FACTORY) {
-		if (checkFlag(111,0)) {
+		if (checkFlag(FLAG_MODIFIER_PRODROOM,0)) {
 			int* m2location = ObjectModel2Pointer;
 			int lms_index = -1;
 			int crusher_index = -1;

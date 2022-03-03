@@ -9,7 +9,11 @@ static const char flag_llamacutscene_clear[] = "LLAMA CUTSCENE: NOT WATCHED";
 static const char flag_giantkoshacutscene_set[] = "GIANT KOSHA CUTSCENE: WATCHED";
 static const char flag_giantkoshacutscene_clear[] = "GIANT KOSHA CUTSCENE: NOT WATCHED";
 
-static const short cutscene_flags[] = {0x002A,0x005C,0x012B};
+static const short cutscene_flags[] = {
+	FLAG_CUTSCENE_DIDDYHELPME,
+	FLAG_CUTSCENE_LLAMA,
+	FLAG_CUTSCENE_KOSHA
+};
 static const char cutscene_flag_types[] = {0,0,0};
 
 void openFlagsCutsceneMenu(void) {

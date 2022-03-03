@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 0/107(0.0%)
-		Vanilla Vars: 0/155(0.0%)
-		Hack Vars: 106/106(100.0%)
-		Code: 0/50(0.0%)
+		Functions: 0/108(0.0%)
+		Vanilla Vars: 0/156(0.0%)
+		Hack Vars: 107/107(100.0%)
+		Code: 0/51(0.0%)
 */
 
 //functions
@@ -103,6 +103,7 @@
 //.definelabel displayImage
 //.definelabel textDraw
 //.definelabel frameLoop
+//.definelabel cancelPausedCutscenes
 //.definelabel setArcadeTextXY
 //.definelabel spawnArcadeText
 //.definelabel setArcadeTextColor
@@ -251,6 +252,7 @@
 //.definelabel StoredSettings
 //.definelabel SetupCheck1
 //.definelabel SetupCheck2
+//.definelabel overlayArray
 //.definelabel arcadeMap
 //.definelabel arcadeMode
 //.definelabel arcadeLevel
@@ -383,6 +385,7 @@
 .definelabel disableSavestateCombo, 0x807FFFC4 // u8
 .definelabel ActiveMenu, 0x807FFDC4 // 0x6
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
+.definelabel textboxCancel, 0x807FFDF9 // u8
 
 // Code
 //.definelabel debugColumnLoop
@@ -435,3 +438,4 @@
 //.definelabel kongHookWrite
 //.definelabel crcPatchMemory
 //.definelabel crcPatchROM
+//.definelabel displayListCap

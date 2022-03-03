@@ -80,6 +80,9 @@ void cFuncLoop(void) {
 	if (NoVacantWatchTimer > 0) {
 		NoVacantWatchTimer--;
 	}
+	if (ROM_VERSION == 2) {
+		cancelTextbox();
+	}
 	disableVoid();
 	DiddyMoonMoves();
 	startupSkip();

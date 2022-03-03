@@ -23,6 +23,7 @@
 #include "common_structs.h"
 #include "dk64.h"
 #include "enums.h"
+#include "flags.h"
 #include "screen_struct_def.h"
 #include "global.h"
 #include "screens_list.h"

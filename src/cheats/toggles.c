@@ -28,7 +28,11 @@ static const char toggles_superspeed[20] = "L TO SUPERSPEED:1X";
 static const char toggles_voiddisable_off[] = "{ DISABLE VOIDS";
 static const char toggles_voiddisable_on[] = "} DISABLE VOIDS";
 
+static const char toggles_enabletextboxcancel_off[] = "{ ENABLE TEXTBOX CANCELLING";
+static const char toggles_enabletextboxcancel_on[] = "} ENABLE TEXTBOX CANCELLING";
+
 static const char* toggles_array[] = {
+	toggles_enabletextboxcancel_off,
 	toggles_sandstorm_unk,
 	toggles_enemyspawn_off,
 	toggles_minigamems_off,
@@ -43,7 +47,24 @@ static const char* toggles_array[] = {
 	"TURN OFF ALL CHEATS",
 };
 
+static const char toggles_access[] = {
+	4, // Textbox Cancel
+	7, // Sandstorm
+	7, // Enemy Spawn
+	7, // Minigame MS
+	7, // Cancel CS
+	7, // End Minigame
+	7, // Levitate
+	7, // Superspeed
+	7, // Toggle TB w L
+	7, // Disable Void
+	7, // Toggle TB
+	7, // Visibility
+	7, // Turn off all
+};
+
 static const char* toggles_addresses[] = {
+	(char*)&textboxCancel,
 	(char*)&EnemySpawnOff,
 	(char*)&MinigameTimersInMS,
 	(char*)&LToCancelCSOn,
@@ -54,16 +75,18 @@ static const char* toggles_addresses[] = {
 };
 
 static const char toggles_indexes[] = {
-	1,
+	0,
 	2,
 	3,
 	4,
 	5,
-	7,
+	6,
 	8,
+	9,
 };
 
 static const char* toggles_on[] = {
+	toggles_enabletextboxcancel_on,
 	toggles_enemyspawn_off,
 	toggles_minigamems_on,
 	toggles_ltocancelcs_on,
@@ -74,6 +97,7 @@ static const char* toggles_on[] = {
 };
 
 static const char* toggles_off[] = {
+	toggles_enabletextboxcancel_off,
 	toggles_enemyspawn_on,
 	toggles_minigamems_off,
 	toggles_ltocancelcs_off,
@@ -86,12 +110,12 @@ static const char* toggles_off[] = {
 void openTogglesMenu(void) {
 	if (CurrentMap == 0x26) {
 		if (*(char *)SandstormAddress) {
-			toggles_array[0] = toggles_sandstorm_on;
+			toggles_array[1] = toggles_sandstorm_on;
 		} else {
-			toggles_array[0] = toggles_sandstorm_off;
+			toggles_array[1] = toggles_sandstorm_off;
 		}
 	} else {
-		toggles_array[0] = toggles_sandstorm_unk;
+		toggles_array[1] = toggles_sandstorm_unk;
 	}
 	for (int i = 0; i < sizeof(toggles_indexes); i++) {
 		if (*(char*)toggles_addresses[i]) {
@@ -102,9 +126,9 @@ void openTogglesMenu(void) {
 	}
 	dk_strFormat((char *)toggles_superspeed,"L TO SUPERSPEED:%dX",IsSuperspeedOn);
 	if (IsSuperspeedOn == 1) {
-		toggles_array[6] = toggles_superspeed_off;
+		toggles_array[7] = toggles_superspeed_off;
 	} else {
-		toggles_array[6] = toggles_superspeed;
+		toggles_array[7] = toggles_superspeed;
 	}
 	changeMenu(ACTIVEMENU_SCREEN_CHEATS_TOGGLES);
 }
@@ -147,7 +171,28 @@ void toggleMinigameTimers(void) {
 	openTogglesMenu();
 }
 
+void cancelTextbox(void) {
+	if (textboxCancel) {
+		if (NewlyPressedControllerInput.Buttons & B_Button) {
+			for (int i = 0; i < 8; i++) {
+				actorData* focused_actor = overlayArray[i].actor;
+				if (focused_actor) {
+					if (isAddressActor(focused_actor)) {
+						if (focused_actor->actorType == 299) {
+							if ((focused_actor->control_state < 4) || (focused_actor->control_state > 5)) {
+								focused_actor->control_state = 5;
+								cancelPausedCutscenes();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 void resetAllCheats(void) {
+	textboxCancel = 0;
 	LToCancelCSOn = 0;
 	LToEndGameOn = 0;
 	LToLevitateOn = 0;
@@ -167,6 +212,7 @@ void resetAllCheats(void) {
 }
 
 static const int toggles_functions[] = {
+	(int)&toggleCheat,
 	(int)&toggleSandstorm,
 	(int)&toggleSpawnPrevention,
 	(int)&toggleMinigameTimers,
@@ -184,7 +230,9 @@ static const int toggles_functions[] = {
 const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
-	.ArrayItems = 12,
+	.ArrayItems = 13,
 	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
-	.ParentPosition = 6
+	.ParentPosition = 6,
+	.hasAccessArray = 1,
+	.AccessArray = toggles_access
 };

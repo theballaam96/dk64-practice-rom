@@ -87,7 +87,7 @@ base_file_dict = [
 	{
 		"name": "Employee Head Image",
 		"pointer_table_index": 25,
-		"file_index": 5003,
+		"file_index": [5003,5003,4927][rom_version],
 		"source_file": "assets/Non-Code/Employee Head/employee_head.png",
 		"texture_format": "i8",
 		"versions":[0,2],

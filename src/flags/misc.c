@@ -6,7 +6,10 @@ static const char flag_arcader1_clear[] = "ARCADE ROUND 1: NOT BEATEN";
 static const char flag_rabbitr1_set[] = "RABBIT RACE ROUND 1: BEATEN";
 static const char flag_rabbitr1_clear[] = "RABBIT RACE ROUND 1: NOT BEATEN";
 
-static const short misc_flags[] = {0x0082,0x00F8};
+static const short misc_flags[] = {
+	FLAG_ARCADE_ROUND1,
+	FLAG_RABBIT_ROUND1
+};
 static const char misc_flag_types[] = {0,0};
 
 void openFlagsMiscMenu(void) {

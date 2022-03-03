@@ -21,7 +21,15 @@ static const char flag_cavestns_clear[] = "CAVES TROFF AND SCOFF: SPAWNED";
 static const char flag_castletns_set[] = "CASTLE TROFF AND SCOFF: CLEARED";
 static const char flag_castletns_clear[] = "CASTLE TROFF AND SCOFF: SPAWNED";
 
-static const short leveltns_flags[] = {0x002E,0x006C,0x0098,0x00CB,0x0102,0x012E,0x0160};
+static const short leveltns_flags[] = {
+	FLAG_PORTAL_JAPES,
+	FLAG_PORTAL_AZTEC,
+	FLAG_PORTAL_FACTORY,
+	FLAG_PORTAL_GALLEON,
+	FLAG_PORTAL_FUNGI,
+	FLAG_PORTAL_CAVES,
+	FLAG_PORTAL_CASTLE
+};
 static const char leveltns_flag_types[] = {0,0,0,0,0,0,0};
 
 void openFlagsLeveltnsMenu(void) {

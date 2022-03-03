@@ -165,7 +165,7 @@ START_HOOK:
 		LHU 	v0, 0x4 (t2)
 		SH 		v0, 0x4 (s0)
 		LUI 	t2, 0x8080
-		LW 		t2, 0xBFB4 (t2)
+		LW 		t2, 0xBFB0 (t2)
 		LUI 	s0, hi(FairyViewerFocus)
 		SW 		t2, lo(FairyViewerFocus) (s0)
 		LUI 	t2, 0x8080
@@ -320,7 +320,7 @@ START_HOOK:
 		LI  	v0, -1
 
 		resolveBonusBarrelCode_Finish:
-			J 	0x80686F80
+			J 	0x80686F70
 			LI  at, -1
 
 	displayListCode:

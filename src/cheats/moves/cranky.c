@@ -98,7 +98,7 @@ void openCrankyMenu(void) {
 	for (int i = 0; i < 5; i++) {
 		cranky_array[i + 1] = (char*)cranky_list_kong[i][(int)MovesBase[i].special_moves];
 	}
-	int _flag = checkFlag(0x180,0);
+	int _flag = checkFlag(FLAG_ABILITY_SIMSLAM,0);
 	if (_flag) {
 		cranky_array[6] = cranky_ssflag_on;
 	} else {
@@ -108,8 +108,8 @@ void openCrankyMenu(void) {
 };
 
 void toggleSlamFlag(void) {
-	int _flag = checkFlag(0x180,0);
-	setFlag(0x180,1 ^ _flag,0);
+	int _flag = checkFlag(FLAG_ABILITY_SIMSLAM,0);
+	setFlag(FLAG_ABILITY_SIMSLAM,1 ^ _flag,0);
 	openCrankyMenu();
 }
 

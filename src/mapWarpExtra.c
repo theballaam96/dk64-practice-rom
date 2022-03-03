@@ -581,7 +581,7 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 	}
 	if (load_mode == MAPWARP) {
 		if (eightbit_state == 1) { // Arcade
-			setFlag(0x63,1,2);
+			setFlag(FLAG_STORY_ARCADE,1,2);
 			initiateTransition_0(map,exit,0xA,0x2);
 			parentData[0].in_submap |= 2;
 			parentData[0].transition_properties_bitfield = 3;
@@ -591,17 +591,17 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 			parentData[0].map = 0x1A;
 			parentData[0].exit = 0;
 		} else if (eightbit_state == 2) { // Jetpac
-			setFlag(0x61,1,2);
+			setFlag(FLAG_STORY_JETPAC,1,2);
 			initiateTransition_0(map,exit,0xA,0x2);
 			parentData[0].in_submap |= 2;
 			parentData[0].transition_properties_bitfield = 2;
 			parentData[0].map = 0x57;
 			parentData[0].exit = 0x12;
 		} else if (eightbit_state == 3) {
-			setFlag(0x63,0,2);
+			setFlag(FLAG_STORY_ARCADE,0,2);
 			initiateTransition(map,exit);
 		} else if (eightbit_state == 4) {
-			setFlag(0x61,0,2);
+			setFlag(FLAG_STORY_JETPAC,0,2);
 			initiateTransition(map,exit);
 		} else {
 			if ((boss_index > -1)) {

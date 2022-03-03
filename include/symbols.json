@@ -645,6 +645,13 @@
 			}
 		},
 		{
+			"name":"cancelPausedCutscenes",
+			"versions":{
+				"us":"0x8061CB08",
+				"jp":"0x8061A594"
+			}
+		},
+		{
 			"name":"setArcadeTextXY",
 			"versions":{
 				"us":"0x80024508",
@@ -1392,7 +1399,7 @@
 			"name":"fairy_data",
 			"versions":{
 				"us":"0x807FD802",
-				"jp":"0x807FDC94"
+				"jp":"0x807FDC92"
 			}
 		},
 		{
@@ -1666,6 +1673,13 @@
 			"versions":{
 				"us":"0x80747D78",
 				"jp":"0x80747638"
+			}
+		},
+		{
+			"name":"overlayArray",
+			"versions":{
+				"us":"0x807FC630",
+				"jp":"0x807FCAA0"
 			}
 		},
 		{
@@ -2367,6 +2381,11 @@
 			"name":"arcadeMenu",
 			"address":"0x807FFDDD",
 			"size_comment":"0x6"
+		},
+		{
+			"name":"textboxCancel",
+			"address":"0x807FFDF9",
+			"size_comment":"u8"
 		}
 	],
 	"code":[
@@ -2718,6 +2737,13 @@
 			"versions":{
 				"us":"0x3154",
 				"jp":"0x3224"
+			}
+		},
+		{
+			"name":"displayListCap",
+			"versions":{
+				"us":"0x805FE9E0",
+				"jp":"0x805FC380"
 			}
 		}
 	]

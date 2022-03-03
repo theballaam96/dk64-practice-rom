@@ -24,7 +24,16 @@ static const char flag_key7have_clear[] = "KEY 7: NOT OBTAINED";
 static const char flag_key8have_set[] = "KEY 8: OBTAINED";
 static const char flag_key8have_clear[] = "KEY 8: NOT OBTAINED";
 
-static const short keyshave_flags[] = {0x001A,0x004A,0x008A,0x00A8,0x00EC,0x0124,0x013D,0x017C};
+static const short keyshave_flags[] = {
+	FLAG_KEYHAVE_KEY1,
+	FLAG_KEYHAVE_KEY2,
+	FLAG_KEYHAVE_KEY3,
+	FLAG_KEYHAVE_KEY4,
+	FLAG_KEYHAVE_KEY5,
+	FLAG_KEYHAVE_KEY6,
+	FLAG_KEYHAVE_KEY7,
+	FLAG_KEYHAVE_KEY8
+};
 static const char keyshave_flag_types[] = {0,0,0,0,0,0,0,0};
 
 void openFlagsKeyshaveMenu(void) {

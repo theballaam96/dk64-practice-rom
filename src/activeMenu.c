@@ -14,14 +14,69 @@ static const char* main_array[] = {
 };
 
 static const int main_functions[9];
+static const char main_access[] = {
+	7, // Warp
+	7, // Flags
+	7, // Save States
+	7, // Watches
+	7, // Debug
+	7, // Timer Settings
+	1, // File States
+	7, // Cheats
+	7, // Settings
+};
 
 const Screen main_struct = {
 	.TextArray = (int*)main_array,
 	.FunctionArray = main_functions,
 	.ArrayItems = 9,
 	.ParentScreen = 0,
-	.ParentPosition = 0
+	.ParentPosition = 0,
+	.hasAccessArray = 1,
+	.AccessArray = main_access
 };
+
+int isValidSpot(int position) {
+	const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
+	int hasAccessArray = focused_screen->hasAccessArray;
+	int ret = 1;
+	if (hasAccessArray) {
+		char* focused_access_array = (char*)focused_screen->AccessArray;
+		ret = (focused_access_array[position] & (1 << ROM_VERSION)) != 0;
+	}
+	*(char*)(0x807FF800 + position) = ret;
+	return ret;
+}
+
+void skipEmptyOptions(int direction) {
+	int pos = ActiveMenu.positionIndex;
+	int startPos = pos;
+	int total = ActiveMenu.totalItems;
+	const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
+	int hasAccessArray = focused_screen->hasAccessArray;
+	if ((hasAccessArray) && (direction != 0) && (pos >= 0) && (pos < total)) {
+		if (!isValidSpot(pos)) {
+			int pass = 1;
+			while(pass) {
+				pos += direction;
+				if ((pos < 0) || (pos > (total - 1))) {
+					pos = total;
+					pass = 0;
+					break;
+				}
+				if (pos == startPos) {
+					pos = total;
+					pass = 0;
+					break;
+				} else if (isValidSpot(pos)) {
+					pass = 0;
+					break;
+				}
+			}
+		}
+	}
+	ActiveMenu.positionIndex = pos;
+}
 
 void spawnMenu(int screenIndex) {
 	ActiveMenu.screenIndex = screenIndex;
@@ -37,6 +92,7 @@ void spawnMenu(int screenIndex) {
 	if (ActiveMenu.positionIndex >= ActiveMenu.totalItems) {
 		ActiveMenu.positionIndex = ActiveMenu.totalItems - 1;
 	}
+	skipEmptyOptions(1);
 	if (ActiveMenu.positionIndex > array_count) {
 		ActiveMenu.startIndex = (ActiveMenu.positionIndex - MAX_ELEMENTS) + 1;
 	}
@@ -91,8 +147,10 @@ int* displayMenu(int* dl) {
 				green = 0xD7;
 				blue = 0;
 			}
-			dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[i + ActiveMenu.startIndex], red, green, blue, 0xFF,background);
-			y += 13;
+			if (isValidSpot(i + ActiveMenu.startIndex)) {
+				dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[i + ActiveMenu.startIndex], red, green, blue, 0xFF,background);
+				y += 13;
+			}
 		}
 		if (ActiveMenu.positionIndex == ActiveMenu.totalItems) {
 			red = 0xFF;
@@ -172,6 +230,8 @@ void moveSlot(void) {
 					int _position = ActiveMenu.positionIndex;
 					int rel_pos = ActiveMenu.positionIndex - ActiveMenu.startIndex;
 					if (NewlyPressedControllerInput.Buttons & D_Up) {
+						_position = ActiveMenu.positionIndex;
+						rel_pos = ActiveMenu.positionIndex - ActiveMenu.startIndex;
 						if (ActiveMenu.hasScroll) {
 							if ((rel_pos == 0) && (ActiveMenu.startIndex > 0)) {
 								ActiveMenu.startIndex -= 1;
@@ -185,23 +245,34 @@ void moveSlot(void) {
 						} else {
 							_position -= 1;
 						}
-					} else {
-						if (NewlyPressedControllerInput.Buttons & D_Down) {
-							if (ActiveMenu.hasScroll) {
-								if ((rel_pos == (MAX_ELEMENTS - 1)) && (ActiveMenu.startIndex < (ActiveMenu.totalItems - MAX_ELEMENTS))) {
-									ActiveMenu.startIndex += 1;
-								}
-							}
-							_position += 1;
-							if (_position == cap) {
-								_position = 0;
-								if (ActiveMenu.hasScroll) {
-									ActiveMenu.startIndex = 0;
-								}
+						ActiveMenu.positionIndex = _position;
+						skipEmptyOptions(-1);
+						if (ActiveMenu.hasScroll) {
+							ActiveMenu.startIndex += (ActiveMenu.positionIndex - _position);
+							if (ActiveMenu.startIndex < 0) {
+								ActiveMenu.startIndex = 0;
+							} else if (ActiveMenu.startIndex > (ActiveMenu.totalItems - MAX_ELEMENTS)) {
+								ActiveMenu.startIndex = ActiveMenu.totalItems - MAX_ELEMENTS;
 							}
 						}
+					} else if (NewlyPressedControllerInput.Buttons & D_Down) {
+						_position = ActiveMenu.positionIndex;
+						rel_pos = ActiveMenu.positionIndex - ActiveMenu.startIndex;
+						if (ActiveMenu.hasScroll) {
+							if ((rel_pos == (MAX_ELEMENTS - 1)) && (ActiveMenu.startIndex < (ActiveMenu.totalItems - MAX_ELEMENTS))) {
+								ActiveMenu.startIndex += 1;
+							}
+						}
+						_position += 1;
+						if (_position == cap) {
+							_position = 0;
+							if (ActiveMenu.hasScroll) {
+								ActiveMenu.startIndex = 0;
+							}
+						}
+						ActiveMenu.positionIndex = _position;
+						skipEmptyOptions(1);
 					}
-					ActiveMenu.positionIndex = _position;
 				}
 			}
 		}

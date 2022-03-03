@@ -22,6 +22,13 @@ static const char* tricktoggles_array[] = {
 	toggles_startail_off,
 };
 
+static const char tricktoggles_access[] = {
+	7,
+	1,
+	7,
+	7,
+};
+
 static const char* tricktoggles_on[] = {
 	toggles_moonkick_on,
 	toggles_phase_on,
@@ -113,5 +120,7 @@ const Screen tricktoggles_struct = {
 	.FunctionArray = tricktoggles_functions,
 	.ArrayItems = 4,
 	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
-	.ParentPosition = 5
+	.ParentPosition = 5,
+	.hasAccessArray = 1,
+	.AccessArray = tricktoggles_access
 };

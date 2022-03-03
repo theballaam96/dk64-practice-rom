@@ -17,7 +17,7 @@ static const char* moveset_array[] = {
 };
 
 void openMovesetInventoryMenu(void) {
-	char _camera = checkFlag(0x179,0);
+	char _camera = checkFlag(FLAG_ABILITY_CAMERA,0);
 	if (_camera) {
 		moveset_array[6] = moveset_camerashockwave_on;
 	} else {
@@ -52,8 +52,8 @@ void restockHoming(void) {
 }
 
 void toggleCamera(void) {
-	int _camera = checkFlag(0x179,0);
-	setFlag(0x179,1 ^ _camera,0);
+	int _camera = checkFlag(FLAG_ABILITY_CAMERA,0);
+	setFlag(FLAG_ABILITY_CAMERA,1 ^ _camera,0);
 	openMovesetInventoryMenu();
 }
 
@@ -68,18 +68,18 @@ void setMoveState(int state) {
 	CollectableBase.Melons = (2 * state) + 1;
 	CollectableBase.Health = (8 * state) + 4;
 	for (int i = 0; i < 4; i++) {
-		setFlag(0x182 + i,state,0); // Training Barrels
+		setFlag(FLAG_TBARREL_DIVE + i,state,0); // Training Barrels
 	}
-	setFlag(0x179,state,0); // Canera
-	setFlag(0x17F,state,0); // Spawned TBarrels
-	setFlag(0x180,state,0); // SSlam purchased from Cranky
-	setFlag(0x187,state,0); // All TBarrels cleared
+	setFlag(FLAG_ABILITY_CAMERA,state,0); // Canera
+	setFlag(FLAG_TBARREL_SPAWNED,state,0); // Spawned TBarrels
+	setFlag(FLAG_ABILITY_SIMSLAM,state,0); // SSlam purchased from Cranky
+	setFlag(FLAG_TBARREL_COMPLETE,state,0); // All TBarrels cleared
 	// Kong flags
-	setFlag(0x6,state,0);
-	setFlag(0x42,state,0);
-	setFlag(0x46,state,0);
-	setFlag(0x75,state,0);
-	setFlag(0x181,state,0);
+	setFlag(FLAG_KONG_DK,state,0);
+	setFlag(FLAG_KONG_DIDDY,state,0);
+	setFlag(FLAG_KONG_LANKY,state,0);
+	setFlag(FLAG_KONG_TINY,state,0);
+	setFlag(FLAG_KONG_CHUNKY,state,0);
 	if (state) {
 		playSFX(Potion);
 	} else {

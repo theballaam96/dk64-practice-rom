@@ -27,7 +27,17 @@ static const char flag_key7_clear[] = "KEY 7: NOT TURNED";
 static const char flag_key8_set[] = "KEY 8: TURNED";
 static const char flag_key8_clear[] = "KEY 8: NOT TURNED";
 
-static const short keysin_flags[] = {0x01BB,0x01BC,0x01BD,0x01BE,0x01BF,0x01C0,0x01C1,0x01C2,0x01C3};
+static const short keysin_flags[] = {
+	FLAG_KEYIN_JAPES,
+	FLAG_KEYIN_KEY1,
+	FLAG_KEYIN_KEY2,
+	FLAG_KEYIN_KEY3,
+	FLAG_KEYIN_KEY4,
+	FLAG_KEYIN_KEY5,
+	FLAG_KEYIN_KEY6,
+	FLAG_KEYIN_KEY7,
+	FLAG_KEYIN_KEY8
+};
 static const char keysin_flag_types[] = {0,0,0,0,0,0,0,0,0};
 
 void openFlagsKeysinMenu(void) {

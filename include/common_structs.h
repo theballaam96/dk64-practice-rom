@@ -24,7 +24,9 @@ typedef struct actorData {
 	/* 0x140 */ char unk_140[0x154-0x140];
 	/* 0x154 */ unsigned char control_state;
 	/* 0x155 */ char control_state_progress;
-	/* 0x156 */ char unk_156[0x180-0x156];
+	/* 0x156 */ char unk_156[0x174-0x156];
+	/* 0x174 */ void* paad;
+	/* 0x178 */ char unk_178[0x180-0x178];
 	/* 0x180 */ void* tied_character_spawner;
 } actorData;
 
@@ -233,9 +235,11 @@ typedef struct Savestate {
 typedef struct Screen {
 	/* 0x000 */ int* TextArray;
 	/* 0x004 */ const int* FunctionArray;
-	/* 0x005 */ char ArrayItems;
-	/* 0x006 */ char ParentScreen;
-	/* 0x007 */ char ParentPosition;
+	/* 0x008 */ char ArrayItems;
+	/* 0x009 */ char ParentScreen;
+	/* 0x00A */ char ParentPosition;
+	/* 0x00B */ char hasAccessArray;
+	/* 0x00C */ const char* AccessArray;
 } Screen;
 
 typedef const struct MapWarp {
@@ -945,3 +949,10 @@ typedef struct collision_struct {
 	/* 0x014 */ void* next_collision;
 	/* 0x018 */ void* previous_collision;
 } collision_struct;
+
+typedef struct overlay_struct {
+	/* 0x000 */ void* draw_code;
+	/* 0x004 */ actorData* actor;
+	/* 0x008 */ char order;
+	/* 0x009 */ char unk_09[0xC-0x9];
+} overlay_struct;

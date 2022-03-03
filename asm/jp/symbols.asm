@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 107/107(100.0%)
-		Vanilla Vars: 155/155(100.0%)
-		Hack Vars: 106/106(100.0%)
-		Code: 50/50(100.0%)
+		Functions: 108/108(100.0%)
+		Vanilla Vars: 156/156(100.0%)
+		Hack Vars: 107/107(100.0%)
+		Code: 51/51(100.0%)
 */
 
 //functions
@@ -103,6 +103,7 @@
 .definelabel displayImage, 0x8068A87C
 .definelabel textDraw, 0x806FCA98
 .definelabel frameLoop, 0x805F9B74
+.definelabel cancelPausedCutscenes, 0x8061A594
 .definelabel setArcadeTextXY, 0x80017508
 .definelabel spawnArcadeText, 0x8001751C
 .definelabel setArcadeTextColor, 0x800174E4
@@ -211,7 +212,7 @@
 .definelabel stickX_magnitude, 0x807FDAD0
 .definelabel stickY_magnitude, 0x807FDAD1
 .definelabel phasewalk_stickmagnitude, 0x807FDAA4
-.definelabel fairy_data, 0x807FDC94
+.definelabel fairy_data, 0x807FDC92
 .definelabel transferredActorType, 0x807FDA00
 .definelabel characterSpawnerActors, 0x8075ED40
 .definelabel levelIndexMapping, 0x80743EA0
@@ -251,6 +252,7 @@
 .definelabel StoredSettings, 0x807EDA10
 .definelabel SetupCheck1, 0x8074F9D0
 .definelabel SetupCheck2, 0x80747638
+.definelabel overlayArray, 0x807FCAA0
 .definelabel arcadeMap, 0x8003F4B3
 .definelabel arcadeMode, 0x8003F4B4
 .definelabel arcadeLevel, 0x8003D4FC
@@ -383,6 +385,7 @@
 .definelabel disableSavestateCombo, 0x807FFFC4 // u8
 .definelabel ActiveMenu, 0x807FFDC4 // 0x6
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
+.definelabel textboxCancel, 0x807FFDF9 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731720
@@ -435,3 +438,4 @@
 .definelabel kongHookWrite, 0x806F2D10
 .definelabel crcPatchMemory, 0x80002624
 .definelabel crcPatchROM, 0x3224
+.definelabel displayListCap, 0x805FC380

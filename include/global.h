@@ -178,6 +178,7 @@ extern void controlFairyViewer(void);
 extern void toggleSelectedActor(void);
 extern void loadMapVars_0(void);
 extern void disableVoid(void);
+extern void cancelTextbox(void);
 //extern void correctTagCode(void);
 extern int* displayFloors(int* dl);
 extern void openInfinitesMenu(void);

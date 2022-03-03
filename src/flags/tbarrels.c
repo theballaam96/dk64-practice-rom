@@ -15,7 +15,13 @@ static const char flag_vine_clear[] = "VINE BARREL: INCOMPLETE";
 static const char flag_tbarrelsspawned_set[] = "TRAINING BARRELS: SPAWNED";
 static const char flag_tbarrelsspawned_clear[] = "TRAINING BARRELS: NOT SPAWNED";
 
-static const short tbarrel_flags[] = {0x0182,0x0184,0x0185,0x0183,0x017F};
+static const short tbarrel_flags[] = {
+	FLAG_TBARREL_DIVE,
+	FLAG_TBARREL_ORANGE,
+	FLAG_TBARREL_BARREL,
+	FLAG_TBARREL_VINE,
+	FLAG_TBARREL_SPAWNED
+};
 static const char tbarrel_flag_types[] = {0,0,0,0,0};
 
 void openFlagsTBarrelMenu(void) {
@@ -26,9 +32,9 @@ void tbarrelSetFlag(void) {
 	toggleFlag();
 	char _bool = 1;
 	for (int i = 0; i < 4; i++) {
-		_bool = checkFlag(0x182 + i,0) & _bool;
+		_bool = checkFlag(FLAG_TBARREL_DIVE + i,0) & _bool;
 	}
-	setFlag(0x187,_bool,0);
+	setFlag(FLAG_TBARREL_COMPLETE,_bool,0);
 }
 
 static const char* flagmenu_tbarrels_array[] = {

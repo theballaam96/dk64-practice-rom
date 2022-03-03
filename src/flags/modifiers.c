@@ -18,7 +18,14 @@ static const char flag_koshadead_clear[] = "GIANT KOSHA: ALIVE";
 static const char flag_bom_set[] = "BLAST O MATIC: OFF";
 static const char flag_bom_clear[] = "BLAST O MATIC: ON";
 
-static const short modifier_flags[] = {0x006F,0x00A0,0x009C,0x00CE,0x012C,0x0302};
+static const short modifier_flags[] = {
+	FLAG_MODIFIER_PRODROOM,
+	FLAG_MODIFIER_GALLEONWATER,
+	FLAG_MODIFIER_GALLEONSHIP,
+	FLAG_MODIFIER_FUNGINIGHT,
+	FLAG_MODIFIER_KOSHADEAD,
+	FLAG_MODIFIER_HELMBOM
+};
 static const char modifier_flag_types[] = {0,0,0,0,0,0};
 
 void openFlagsModifierMenu(void) {

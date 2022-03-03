@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 107/107(100.0%)
-		Vanilla Vars: 155/155(100.0%)
-		Hack Vars: 106/106(100.0%)
-		Code: 50/50(100.0%)
+		Functions: 108/108(100.0%)
+		Vanilla Vars: 156/156(100.0%)
+		Hack Vars: 107/107(100.0%)
+		Code: 51/51(100.0%)
 */
 
 //functions
@@ -103,6 +103,7 @@
 .definelabel displayImage, 0x8068C5A8
 .definelabel textDraw, 0x806FD490
 .definelabel frameLoop, 0x805FC2B0
+.definelabel cancelPausedCutscenes, 0x8061CB08
 .definelabel setArcadeTextXY, 0x80024508
 .definelabel spawnArcadeText, 0x8002451C
 .definelabel setArcadeTextColor, 0x800244E4
@@ -251,6 +252,7 @@
 .definelabel StoredSettings, 0x807ED5A0
 .definelabel SetupCheck1, 0x807500B0
 .definelabel SetupCheck2, 0x80747D78
+.definelabel overlayArray, 0x807FC630
 .definelabel arcadeMap, 0x8004C723
 .definelabel arcadeMode, 0x8004C724
 .definelabel arcadeLevel, 0x8004A76C
@@ -383,6 +385,7 @@
 .definelabel disableSavestateCombo, 0x807FFFC4 // u8
 .definelabel ActiveMenu, 0x807FFDC4 // 0x6
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
+.definelabel textboxCancel, 0x807FFDF9 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78
@@ -435,3 +438,4 @@
 .definelabel kongHookWrite, 0x806F3750
 .definelabel crcPatchMemory, 0x80002554
 .definelabel crcPatchROM, 0x3154
+.definelabel displayListCap, 0x805FE9E0

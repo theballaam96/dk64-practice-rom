@@ -15,7 +15,13 @@ static const char flag_tiny_clear[] = "TINY: LOCKED";
 static const char flag_chunky_set[] = "CHUNKY: FREED";
 static const char flag_chunky_clear[] = "CHUNKY: LOCKED";
 
-static const short kong_flags[] = {0x0181,0x0006,0x0046,0x0042,0x0075};
+static const short kong_flags[] = {
+	FLAG_KONG_DK,
+	FLAG_KONG_DIDDY,
+	FLAG_KONG_LANKY,
+	FLAG_KONG_TINY,
+	FLAG_KONG_CHUNKY
+};
 static const char kong_flag_types[] = {0,0,0,0,0};
 
 void openFlagsKongMenu(void) {

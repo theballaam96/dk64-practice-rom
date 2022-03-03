@@ -33,7 +33,19 @@ static const char flag_minimonkey_clear[] = "MINI MONKEY FTT: NOT WATCHED";
 static const char flag_hunkychunky_set[] = "HUNKY CHUNKY FTT: WATCHED";
 static const char flag_hunkychunky_clear[] = "HUNKY CHUNKY FTT: NOT WATCHED";
 
-static const short ftt_flags[] = {0x016F,0x0170,0x0171,0x0172,0x017E,0x0163,0x0166,0x016B,0x016A,0x0168,0x0169};
+static const short ftt_flags[] = {
+	FLAG_FTT_DIDDY,
+	FLAG_FTT_LANKY,
+	FLAG_FTT_TINY,
+	FLAG_FTT_CHUNKY,
+	FLAG_FTT_BLOCKER,
+	FLAG_FTT_BANANAPORT,
+	FLAG_FTT_CROWNPAD,
+	FLAG_FTT_STRONGKONG,
+	FLAG_FTT_ORANGSPRINT,
+	FLAG_FTT_MINIMONKEY,
+	FLAG_FTT_HUNKYCHUNKY
+};
 static const char ftt_flag_types[] = {0,0,0,0,0,0,0,0,0,0,0};
 
 void openFlagsFTTMenu(void) {
