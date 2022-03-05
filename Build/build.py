@@ -7,11 +7,6 @@ import zlib
 from getVersion import getVersion
 rom_version = getVersion();
 
-# Infrastructure for recomputing DK64 global pointer tables
-from map_names import maps
-from recompute_pointer_table import pointer_tables, dumpPointerTableDetails, replaceROMFile, writeModifiedPointerTablesToROM, parsePointerTables, getFileInfo, make_safe_filename
-from recompute_overlays import isROMAddressOverlay, readOverlayOriginalData, replaceOverlayData, writeModifiedOverlaysToROM
-
 # Patcher functions for the extracted files
 import patch_text
 from actor_bin_builder import *
@@ -111,6 +106,15 @@ base_file_dict = [
 		"versions":[0,2],
 	},
 	{
+		"name": "GitHub Logo",
+		"pointer_table_index": 14,
+		"file_index": [50,50,196][rom_version],
+		"source_file": "assets/Non-Code/Info/GitHub.png",
+		"texture_format": "rgba5551",
+		"do_not_extract": True,
+		"versions": [0],
+	},
+	{
 		"name": "Arcade Font (US)",
 		"pointer_table_index": 14,
 		"file_index": 19,
@@ -163,7 +167,21 @@ base_file_dict = [
 	},
 ]
 
+progress_index = 0;
+def printProgress(sub):
+	global progress_index
+	progress_index += 1;
+	print(f"[{progress_index} / 8] - {sub}")
+
+print("DK64 Extractor")
+printProgress("Importing File States")
+
 base_file_dict = writeFileStatesToDict(base_file_dict)
+
+# Infrastructure for recomputing DK64 global pointer tables
+from map_names import maps
+from recompute_pointer_table import pointer_tables, dumpPointerTableDetails, replaceROMFile, writeModifiedPointerTablesToROM, parsePointerTables, getFileInfo, make_safe_filename
+from recompute_overlays import isROMAddressOverlay, readOverlayOriginalData, replaceOverlayData, writeModifiedOverlaysToROM
 
 file_dict = []
 for x in base_file_dict:
@@ -183,10 +201,10 @@ map_replacements = [
 	# },
 ]
 
-print("DK64 Extractor")
+
 
 with open(ROMName, "rb") as fh:
-	print("[1 / 7] - Parsing pointer tables")
+	printProgress("Parsing pointer tables")
 	parsePointerTables(fh)
 	readOverlayOriginalData(fh)
 
@@ -256,7 +274,7 @@ with open(ROMName, "rb") as fh:
 						"use_external_gzip": "use_external_gzip" in y and y["use_external_gzip"],
 					})
 
-	print("[2 / 7] - Extracting files from ROM")
+	printProgress("Extracting files from ROM")
 	for x in file_dict:
 		# N64Tex conversions do not need to be extracted to disk from ROM
 		if "texture_format" in x:
@@ -313,14 +331,14 @@ with open(ROMName, "rb") as fh:
 					dec = zlib.decompress(byte_read, 15 + 32)
 					fg.write(dec)
 
-print("[3 / 7] - Patching Extracted Files")
+printProgress("Patching Extracted Files")
 for x in file_dict:
 	if "patcher" in x and callable(x["patcher"]):
 		print(" - Running patcher for " + x["source_file"])
 		x["patcher"](x["source_file"])
 
 with open(newROMName, "r+b") as fh:
-	print("[4 / 7] - Writing patched files to ROM")
+	printProgress("Writing patched files to ROM")
 	for x in file_dict:
 		if "texture_format" in x and not "font_key" in x:
 			if x["texture_format"] in ["rgba5551", "i4", "ia4", "i8", "ia8"]:
@@ -390,12 +408,12 @@ with open(newROMName, "r+b") as fh:
 				if os.path.exists(x["source_file"]):
 					os.remove(x["source_file"])
 
-	print("[5 / 7] - Writing recomputed pointer tables to ROM")
+	printProgress("Writing recomputed pointer tables to ROM")
 	writeModifiedPointerTablesToROM(fh)
 	if rom_version == 0:
 		writeModifiedOverlaysToROM(fh) # US Only for now
 
-	print("[6 / 7] - Dumping details of all pointer tables to rom/build.log")
+	printProgress("Dumping details of all pointer tables to rom/build.log")
 	dumpPointerTableDetails("rom/build.log", fh)
 
 # import font_builder
@@ -424,7 +442,7 @@ for x in bins:
 		print(x + "doesn't exist")
 wipeStateFiles();
 
-print("[7 / 7] - Generating BizHawk RAM watch")
+printProgress("Generating BizHawk RAM watch")
 import generate_watch_file
 
 exit()

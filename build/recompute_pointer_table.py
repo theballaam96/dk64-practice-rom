@@ -1,6 +1,7 @@
 import hashlib
 from map_names import maps
 from typing import BinaryIO
+from filestatewriter import getFileStateEnd
 
 import encoders
 
@@ -198,7 +199,7 @@ main_pointer_table_offset = ptr_table_offsets[rom_version]
 # used when appending files to the end of the ROM
 # next_available_free_space = 0x1FED020
 # next_available_free_space = 0x2000000
-next_available_free_space = 0x2030000 # TODO: Get this calculating automatically
+next_available_free_space = getFileStateEnd()
 
 # These will be indexed by pointer table index then by SHA1 hash of the data
 pointer_table_files = []

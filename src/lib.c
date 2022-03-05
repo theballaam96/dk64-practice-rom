@@ -212,3 +212,7 @@ void complexFreeCheck(void* ptr) {
 		complexFree(ptr);
 	}
 }
+
+int getCenter(int style, char* str) {
+	return (screenCenterX + 100 - (getCenterOffset(style,str))) * 0.5f;
+}

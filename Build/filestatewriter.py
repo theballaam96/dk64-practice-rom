@@ -20,6 +20,15 @@ state_files = [
 			"castle.bin",
 			"helm.bin",
 			"takeoffskip.bin",
+			"aztec40bp.bin",
+			"factory40bp.bin",
+			"japes240bp.bin",
+			"galleon40bp.bin",
+			"fungi40bp.bin",
+			"caves40bp.bin",
+			"castle40bp.bin",
+			"aztec240bp.bin",
+			"helm40bp.bin",
 		]
 	},
 	{
@@ -143,8 +152,11 @@ def wipeStateFiles():
 		for y in x["files"]:
 			if os.path.exists(state_dir + y):
 				os.remove(state_dir + y)
-				
+
+file_state_count = 0;
+			
 def writeFileStatesToDict(original_dict):
+	global file_state_count
 	state_index = 0
 	for x in state_files:
 		state_dir = file_dir_start + x["folder"] + "/State Files/"
@@ -161,13 +173,20 @@ def writeFileStatesToDict(original_dict):
 					_byteread = fh.read()
 					if (len(_byteread) > file_size):
 						print("File State is too big: " + hex(len(_byteread)) + " > " + hex(file_size))
+					state_name = y.replace(".bin","")
+					folder_name = x["folder"]
 					original_dict.append({
-						"name": "File State: " + y.replace(".bin","") + " (" + x["folder"] + ")",
+						"name": f"File State: {state_name} + ({folder_name})",
 						"start": ROM_start + (file_size * state_index),
 						"source_file": state_dir + y,
 						"do_not_extract": True,
 						"do_not_compress": True,
 						"versions":[0],
 					})
+					file_state_count += 1;
+					print(f"- {state_name} ({folder_name}): {hex(ROM_start + (file_size * state_index))} -> {hex(ROM_start + (file_size * (state_index + 1)))}")
 					state_index += 1
 	return original_dict;
+
+def getFileStateEnd():
+	return ROM_start + (file_size * file_state_count)

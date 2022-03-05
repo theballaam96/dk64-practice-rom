@@ -113,3 +113,5 @@ extern const Screen watch_fake_struct;
 extern const Screen state_settings_struct;
 extern const Screen tricktoggles_struct;
 extern const Screen infinite_struct;
+extern const Screen filestates_nlemain_struct;
+extern const Screen filestates_nle40_struct;

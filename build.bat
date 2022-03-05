@@ -56,10 +56,7 @@ if "%bps_arg%" == "--bps" (
 	echo Building BPS Patch
 	build\flips.exe --create "rom\temp_rom.z64" "rom\dk64-practice-rom-dev.z64" %final_bps%
 )
-del rom\temp_rom.z64
-del %final_rom%
-xcopy rom\dk64-practice-rom-dev.z64 %final_rom%*
-del rom\dk64-practice-rom-dev.z64
+python build/segmentFile.py
 
 :finish
 echo Completed: %date% %time%

@@ -114,4 +114,6 @@ const Screen* menu_screens[] = {
 	&state_settings_struct,
 	&tricktoggles_struct,
 	&infinite_struct,
+	&filestates_nlemain_struct,
+	&filestates_nle40_struct,
 };

@@ -1,1 +1,1 @@
-#define ROM_VERSION 2
+#define ROM_VERSION 0

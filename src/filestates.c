@@ -1,11 +1,69 @@
 #include "../include/common.h"
 
-static const char filestates_nle_stateindex[] = {0,1,2,3,4,5,6,7,8,9};
-static const char filestates_101org_stateindex[] = {11,12,13,14,15,16,17,18,19,20,21};
-static const char filestates_101jfm_stateindex[] = {22,23,24,25,26,27,28,29,30,21};
-static const char filestates_101ffm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
-static const char filestates_glitchless_stateindex[] = {31,32,33,34,35,36,37,38,39};
-static const char filestates_general_stateindex[] = {10};
+static const file_state_indexes filestates_nle_stateindex[] = {
+	NLE_GENERAL_JAPES1,
+	NLE_HELMESCAPE_AZTEC,
+	NLE_HELMESCAPE_FACTORY,
+	NLE_HELMESCAPE_JAPES2,
+	NLE_HELMESCAPE_GALLEON,
+	NLE_HELMESCAPE_FUNGI,
+	NLE_HELMESCAPE_CAVES,
+	NLE_HELMESCAPE_CASTLE,
+	NLE_HELMESCAPE_HELM,
+	NLE_HELMESCAPE_TAKEOFF,
+};
+static const file_state_indexes filestates_101org_stateindex[] = {
+	_101ORG_CAVES1,
+	_101ORG_JAPES1,
+	_101ORG_AZTEC1,
+	_101ORG_FACTORY,
+	_101ORG_GALLEON,
+	_101ORG_HELM,
+	_101ORG_CASTLE,
+	_101ORG_AZTEC2,
+	_101ORG_CAVES2,
+	_101ORG_JAPES2,
+	_101GEN_FUNGI,
+};
+static const file_state_indexes filestates_101jfm_stateindex[] = {
+	_101JFM_AZTEC1,
+	_101JFM_CASTLE1,
+	_101JFM_JAPES,
+	_101JFM_FACTORY,
+	_101JFM_GALLEON,
+	_101JFM_HELM,
+	_101JFM_CASTLE2,
+	_101JFM_AZTEC2,
+	_101JFM_CAVES,
+	_101GEN_FUNGI,
+};
+static const file_state_indexes filestates_101ffm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+static const file_state_indexes filestates_glitchless_stateindex[] = {
+	GLITCHLESS_ANY_JAPES1,
+	GLITCHLESS_ANY_AZTEC,
+	GLITCHLESS_ANY_FACTORY,
+	GLITCHLESS_ANY_JAPES2,
+	GLITCHLESS_ANY_GALLEON,
+	GLITCHLESS_ANY_FUNGI,
+	GLITCHLESS_ANY_CAVES,
+	GLITCHLESS_ANY_CASTLE,
+	GLITCHLESS_ANY_HELM,
+};
+static const file_state_indexes filestates_nle40_stateindex[] = {
+	NLE_GENERAL_JAPES1,
+	NLE_40BP_AZTEC1,
+	NLE_40BP_FACTORY,
+	NLE_40BP_JAPES2,
+	NLE_40BP_GALLEON,
+	NLE_40BP_FUNGI,
+	NLE_40BP_CAVES,
+	NLE_40BP_CASTLE,
+	NLE_40BP_AZTEC2,
+	NLE_40BP_HELM,
+};
+static const file_state_indexes filestates_general_stateindex[] = {
+	GENERAL_EMPTY
+};
 
 static char load_filestate_vars = 0;
 static short filestate_floor = 0;
@@ -42,6 +100,14 @@ void openFileStateGlitchlessMenu(void) {
 	changeMenu(ACTIVEMENU_SCREEN_FILE_GLITCHLESSANY);
 }
 
+void openFileStateNLE40Menu(void) {
+	changeMenu(ACTIVEMENU_SCREEN_FILE_NLE40);
+}
+
+void openFileStateNLEMainMenu(void) {
+	changeMenu(ACTIVEMENU_SCREEN_FILE_NLE_ROOT);
+}
+
 void portFileStateToMemory(int state_index) {
 	unsigned int _start = FileStatesROMStart + (state_index * FileStateSize);
 	filestateInfo* copy_space = dk_malloc(FileStateSize);
@@ -60,7 +126,7 @@ void portFileStateToMemory(int state_index) {
 	resetMap();
 	int _map = 0x22;
 	int _character = 0;
-	if (state_index != 10) {
+	if ((file_state_indexes)state_index != GENERAL_EMPTY) {
 		_map = copy_space->map;
 		_character = copy_space->kong;
 		initiateTransition(_map,0);
@@ -95,26 +161,29 @@ void loadFileState(void) {
 	switch(ActiveMenu.screenIndex){
 		case ACTIVEMENU_SCREEN_FILE_NLE:
 			// NLE
-			_stateindex = filestates_nle_stateindex[_position];
+			_stateindex = (int)filestates_nle_stateindex[_position];
 			break;
 		case ACTIVEMENU_SCREEN_FILE_GENERAL:
 			// General
-			_stateindex = filestates_general_stateindex[_position];
+			_stateindex = (int)filestates_general_stateindex[_position];
 			break;
 		case ACTIVEMENU_SCREEN_FILE_101ORG:
 			// 101% Organic Route
-			_stateindex = filestates_101org_stateindex[_position];
+			_stateindex = (int)filestates_101org_stateindex[_position];
 			break;
 		case ACTIVEMENU_SCREEN_FILE_101JFM:
 			// 101% JFM Route
-			_stateindex = filestates_101jfm_stateindex[_position];
+			_stateindex = (int)filestates_101jfm_stateindex[_position];
 			break;
 		case ACTIVEMENU_SCREEN_FILE_101FFM:
 			// 101% FFM Route
-			_stateindex = filestates_101ffm_stateindex[_position];
+			_stateindex = (int)filestates_101ffm_stateindex[_position];
 			break;
 		case ACTIVEMENU_SCREEN_FILE_GLITCHLESSANY:
-			_stateindex = filestates_glitchless_stateindex[_position];
+			_stateindex = (int)filestates_glitchless_stateindex[_position];
+			break;
+		case ACTIVEMENU_SCREEN_FILE_NLE40:
+			_stateindex = (int)filestates_nle40_stateindex[_position];
 		break;
 	}
 	if (_stateindex > -1) {
@@ -142,7 +211,7 @@ static const char* filestates_main_array[] = {
 
 static const int filestates_main_functions[] = {
 	(int)&openFileStateGeneralMenu,
-	(int)&openFileStateNLEMenu,
+	(int)&openFileStateNLEMainMenu,
 	(int)&openFileState101MainMenu,
 	(int)&openFileStateGlitchlessMenu,
 };
@@ -153,6 +222,58 @@ const Screen filestates_main_struct = {
 	.ArrayItems = 4,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 6
+};
+
+static const char* filestates_nlemain_array[] = {
+	"HELM ESCAPE",
+	"40 BLUEPRINTS",
+};
+
+static const int filestates_nlemain_functions[] = {
+	(int)&openFileStateNLEMenu,
+	(int)&openFileStateNLE40Menu,
+};
+
+const Screen filestates_nlemain_struct = {
+	.TextArray = (int*)filestates_nlemain_array,
+	.FunctionArray = filestates_nlemain_functions,
+	.ArrayItems = 2,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
+	.ParentPosition = 1
+};
+
+static const char* filestates_nle40_array[] = {
+	"JAPES 1",
+	"AZTEC 1",
+	"FACTORY",
+	"JAPES 2",
+	"GALLEON",
+	"FUNGI",
+	"CAVES",
+	"CASTLE",
+	"AZTEC 2",
+	"HELM"
+};
+
+static const int filestates_nle40_functions[] = {
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+};
+
+const Screen filestates_nle40_struct = {
+	.TextArray = (int*)filestates_nle40_array,
+	.FunctionArray = filestates_nle40_functions,
+	.ArrayItems = 10,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_NLE_ROOT,
+	.ParentPosition = 1
 };
 
 static const char* filestates_nle_array[] = {
@@ -185,8 +306,8 @@ const Screen filestates_nle_struct = {
 	.TextArray = (int*)filestates_nle_array,
 	.FunctionArray = filestates_nle_functions,
 	.ArrayItems = 10,
-	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
-	.ParentPosition = 1
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_NLE_ROOT,
+	.ParentPosition = 0
 };
 
 static const char* filestates_101main_array[] = {

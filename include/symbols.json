@@ -652,6 +652,13 @@
 			}
 		},
 		{
+			"name":"getCenterOffset",
+			"versions":{
+				"us":"0x806FBD5C",
+				"jp":"0x806FB184"
+			}
+		},
+		{
 			"name":"setArcadeTextXY",
 			"versions":{
 				"us":"0x80024508",

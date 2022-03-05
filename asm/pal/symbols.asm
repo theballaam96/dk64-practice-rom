@@ -4,7 +4,7 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 0/108(0.0%)
+		Functions: 0/109(0.0%)
 		Vanilla Vars: 0/156(0.0%)
 		Hack Vars: 107/107(100.0%)
 		Code: 0/51(0.0%)
@@ -104,6 +104,7 @@
 //.definelabel textDraw
 //.definelabel frameLoop
 //.definelabel cancelPausedCutscenes
+//.definelabel getCenterOffset
 //.definelabel setArcadeTextXY
 //.definelabel spawnArcadeText
 //.definelabel setArcadeTextColor
