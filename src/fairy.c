@@ -27,7 +27,7 @@ void destroyFairyViewer(void) {
 int* displayFairy(int* dl) {
 	if (FairyViewerOpen && !ActiveMenu.isOpen) {
 		int y = 140;
-		int fairy_image_start_index = 48;
+		int fairy_image_start_index = 107;
 		if (ROM_VERSION == 2) {
 			fairy_image_start_index = 194;
 		}

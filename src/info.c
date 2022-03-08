@@ -5,6 +5,9 @@
 
 static char info_on = 0;
 static char info_screen_index = 0;
+static char info_next_screen_index = 0;
+static short info_opacity = 0xFF;
+static char info_opacity_direction = 0;
 static const char* info_0[] = {
 	"DK64 PRACTICE ROM",
 	BUILD_DATE,
@@ -54,27 +57,6 @@ static const char* info_3[] = {
 	"2DOS, CANDYBOOTS, ZNERNICUS",
 	"HORHAY, ZORULDA, MINIOVEN"
 };
-/*
-	INFO PAGE IDEAS
-		General:
-			DK64 Practice ROM
-			Build Date/Release Version
-			Website
-			GitHub
-		Getting Started
-			R + L to open menu
-			D-Pad to navigate
-			L or D-Right to accept option
-			Manual for more
-		Developers:
-			Ballaam (K. Lumsy)
-			Iso (Mad Jack)
-			Rain (Snide)
-		Other Credits:
-			Adam, CV64, GL, Wed
-			2dos, Candy, Znernicus
-			Horhay, Zorulda
-*/
 
 int getYDiff(const char* text) {
 	if (text != 0) {
@@ -90,13 +72,16 @@ int* drawInfoText(int* dl, int x_offset, int y, char* str) {
 	if (x_offset == -1) {
 		x = getCenter(INFO_STYLE,str);
 	}
-	return drawTextContainer(dl, INFO_STYLE, x, y, str, 0xFF, 0xFF, 0xFF, 0xFF, 0);
+	return drawTextContainer(dl, INFO_STYLE, x, y, str, 0xFF, 0xFF, 0xFF, info_opacity, 0);
 }
 int* displayInfo(int* dl) {
 	if (NewlyPressedControllerInput.Buttons & Start_Button) {
 		info_on = 1 ^ info_on;
 		if (info_on) {
 			info_screen_index = 0;
+			info_next_screen_index = 0;
+			info_opacity = 0xFF;
+			info_opacity_direction = 0;
 		}
 	}
 	if (info_on) {
@@ -109,7 +94,7 @@ int* displayInfo(int* dl) {
 						dl = drawInfoText(dl, info_x0[i], info_y0[i], (char*)info_0[i]);
 					}
 				}
-				dl = drawImage(dl, 50, RGBA16, 32, 32, 630, 500, 3.0f, 3.0f, 0xFF);
+				dl = drawImage(dl, 109, RGBA16, 32, 32, 630, 500, 3.0f, 3.0f, info_opacity);
 				break;
 			case 1:
 				for (int i = 0; i < sizeof(info_1)/4;i++) {
@@ -125,6 +110,9 @@ int* displayInfo(int* dl) {
 					}
 					y += getYDiff(info_2[i]);
 				}
+				dl = drawImage(dl, 110, RGBA16, 32, 32, 350, 350, 3.0f, 3.0f, info_opacity);
+				dl = drawImage(dl, 111, RGBA16, 32, 32, 910, 430, 3.0f, 3.0f, info_opacity);
+				dl = drawImage(dl, 112, RGBA16, 32, 32, 350, 550, 3.0f, 3.0f, info_opacity);
 				break;
 			case 3:
 				for (int i = 0; i < sizeof(info_3)/4;i++) {
@@ -135,16 +123,36 @@ int* displayInfo(int* dl) {
 				}
 			break;
 		}
-		dk_strFormat((char*)page_str,"PAGE %d",info_screen_index + 1);
+		if (info_opacity_direction < 0) {
+			info_opacity -= 20;
+			if (info_opacity < 0) {
+				info_opacity = 0;
+				info_opacity_direction = 1;
+				info_screen_index = info_next_screen_index;
+			}
+		} else if (info_opacity_direction > 0) {
+			info_opacity += 20;
+			if (info_opacity > 255) {
+				info_opacity = 255;
+				info_opacity_direction = 0;
+			}
+		}
+		dk_strFormat((char*)page_str,"PAGE %d",info_next_screen_index + 1);
 		int line_center = getCenter(INFO_STYLE,page_str);
 		dl = drawTextContainer(dl, INFO_STYLE, line_center, 275, (char*)page_str, 0xFF, 0xFF, 0xFF, 0xFF, 0);
 		if (NewlyPressedControllerInput.Buttons & R_Button) {
-			if (info_screen_index < 3) {
-				info_screen_index += 1;
+			if (info_next_screen_index < 3) {
+				info_next_screen_index += 1;
+				if (info_opacity_direction >= 0) {
+					info_opacity_direction = -1;
+				}
 			}
 		} else if (NewlyPressedControllerInput.Buttons & L_Button) {
-			if (info_screen_index > 0) {
-				info_screen_index -= 1;
+			if (info_next_screen_index > 0) {
+				info_next_screen_index -= 1;
+				if (info_opacity_direction >= 0) {
+					info_opacity_direction = -1;
+				}
 			}
 		}
 	} else {
