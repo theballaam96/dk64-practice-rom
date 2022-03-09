@@ -49,5 +49,5 @@ const Screen quadrant_struct = {
 	.FunctionArray = quadrant_functions,
 	.ArrayItems = 5,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
-	.ParentPosition = 5
+	.ParentPosition = 6
 };

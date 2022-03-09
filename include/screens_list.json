@@ -539,6 +539,11 @@
 			"index_var":"ACTIVEMENU_SCREEN_FILE_NLE40",
 			"struct":"filestates_nle40_struct",
 			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_SETTINGS_FIXES",
+			"struct":"fixes_struct",
+			"const":true
 		}
 	]
 }

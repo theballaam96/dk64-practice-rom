@@ -170,7 +170,7 @@ base_file_dict = [
 	},
 	{
 		"name": "Actor Names",
-		"start": 0x2020000,
+		"start": 0x2040000,
 		"source_file": "assets/Non-Code/actor_names.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
@@ -178,7 +178,7 @@ base_file_dict = [
 	},
 	{
 		"name": "Snag Names",
-		"start": 0x2021800,
+		"start": 0x2041800,
 		"source_file": "assets/Non-Code/snag_names.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
@@ -186,7 +186,7 @@ base_file_dict = [
 	},
 	{
 		"name": "Snag Names (Capitals)",
-		"start": 0x2021C00,
+		"start": 0x2041C00,
 		"source_file": "assets/Non-Code/snag_names_capitals.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,

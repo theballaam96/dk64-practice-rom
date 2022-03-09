@@ -115,3 +115,4 @@ extern const Screen tricktoggles_struct;
 extern const Screen infinite_struct;
 extern const Screen filestates_nlemain_struct;
 extern const Screen filestates_nle40_struct;
+extern const Screen fixes_struct;

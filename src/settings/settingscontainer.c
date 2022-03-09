@@ -5,6 +5,7 @@ static const char* settings_array[] = {
 	"D-PAD DOWN FUNCTION",
 	"VANILLA VARIABLES",
 	"HACK VARIABLES",
+	"FIXES",
 	"CHANGE KONG COLORS",
 	"CHANGE INPUT DISPLAY QUADRANT",
 	"RUN STICK ASSESSMENT TEST",
@@ -26,6 +27,7 @@ static const int settings_functions[] = {
 	(int)&openDPadDMenu,
 	(int)&openVanillaVarsMenu,
 	(int)&openHackVarsMenu,
+	(int)&openFixesMenu,
 	(int)&openKongColorsMenu,
 	(int)&openInputQuadrantMenu,
 	(int)&startTest,
@@ -35,7 +37,7 @@ static const int settings_functions[] = {
 const Screen settings_struct = {
 	.TextArray = (int*)settings_array,
 	.FunctionArray = settings_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 8
 };

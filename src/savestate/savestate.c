@@ -1,4 +1,4 @@
-#include "../include/common.h"
+#include "../../include/common.h"
 
 static const char state_selected1[] = "SELECTED STATE:1";
 static const char state_selected2[] = "SELECTED STATE:2";
@@ -341,6 +341,7 @@ void loadVars(int instant_load) {
 			}
 			clearDKPortal();
 			if (savestateSettingsBitfield & 1) {
+				fixModifiers();
 				ObjectModel2Timer = 100;
 			}
 		}
@@ -351,6 +352,11 @@ void loadVars(int instant_load) {
 	stateLoadTimer = 60;
 	LoadVarsOnMapLoad = 0;
 }
+
+#define GLOOMY_GALLEON 0x1E
+#define ANGRY_AZTEC 0x26
+#define FUNGI_FOREST 0x30
+#define CRYSTAL_CAVES 0x48
 
 void savestateHandler(int action) {
 	int _focused_state = FocusedSavestate;

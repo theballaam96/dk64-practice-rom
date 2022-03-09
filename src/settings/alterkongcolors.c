@@ -111,5 +111,5 @@ const Screen kongcolors_struct = {
 	.FunctionArray = kongcolors_functions,
 	.ArrayItems = 6,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
-	.ParentPosition = 4
+	.ParentPosition = 5
 };

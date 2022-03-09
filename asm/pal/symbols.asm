@@ -4,9 +4,9 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 0/109(0.0%)
-		Vanilla Vars: 0/156(0.0%)
-		Hack Vars: 107/107(100.0%)
+		Functions: 0/112(0.0%)
+		Vanilla Vars: 0/157(0.0%)
+		Hack Vars: 108/108(100.0%)
 		Code: 0/51(0.0%)
 */
 
@@ -105,6 +105,9 @@
 //.definelabel frameLoop
 //.definelabel cancelPausedCutscenes
 //.definelabel getCenterOffset
+//.definelabel setWaterHeight
+//.definelabel updateObjectScript
+//.definelabel executeBehaviourScript
 //.definelabel setArcadeTextXY
 //.definelabel spawnArcadeText
 //.definelabel setArcadeTextColor
@@ -250,6 +253,7 @@
 //.definelabel lockStackCount
 //.definelabel scriptsRunningCount
 //.definelabel scriptsAttemptLoadCount
+//.definelabel scriptsLoadedArray
 //.definelabel StoredSettings
 //.definelabel SetupCheck1
 //.definelabel SetupCheck2
@@ -387,6 +391,7 @@
 .definelabel ActiveMenu, 0x807FFDC4 // 0x6
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
 .definelabel textboxCancel, 0x807FFDF9 // u8
+.definelabel scriptsNotAutoloading, 0x807FFF8A // u8
 
 // Code
 //.definelabel debugColumnLoop

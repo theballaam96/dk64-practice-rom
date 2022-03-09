@@ -26,6 +26,7 @@ void resetSettings(void) {
 	StoredSettings.savestate_bitfield = 0;
 	StoredSettings.disable_sfx = 0;
 	StoredSettings.disable_save_combo = 0;
+	StoredSettings.disabled_object_fixes = 0;
 	SaveToGlobal();
 	loadSettings();
 }
@@ -54,6 +55,7 @@ void loadSettings(void) {
 		savestateSettingsBitfield = StoredSettings.savestate_bitfield;
 		disableCustomSFX = StoredSettings.disable_sfx;
 		disableSavestateCombo = StoredSettings.disable_save_combo;
+		scriptsNotAutoloading = StoredSettings.disabled_object_fixes;
 	} else {
 		resetSettings();
 	}
@@ -82,5 +84,6 @@ void saveSettings(void) {
 	StoredSettings.savestate_bitfield = savestateSettingsBitfield;
 	StoredSettings.disable_sfx = disableCustomSFX;
 	StoredSettings.disable_save_combo = disableSavestateCombo;
+	StoredSettings.disabled_object_fixes = scriptsNotAutoloading;
 	SaveToGlobal();
 }

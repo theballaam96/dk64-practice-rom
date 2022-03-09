@@ -4,8 +4,8 @@
 .headersize 0x7FFFF400
 .org bootJumpStart
 LUI a0, hi(bootStart) //start of ROM copy
-LUI a1, hi(bootStart + 0x20000)
-ADDIU a1, a1, lo(bootStart + 0x20000)
+LUI a1, hi(bootStart + 0x40000)
+ADDIU a1, a1, lo(bootStart + 0x40000)
 ADDIU a0, a0, lo(bootStart)
 LUI a2, customCodeUpper
 JAL dmaFileTransfer

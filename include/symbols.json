@@ -659,6 +659,27 @@
 			}
 		},
 		{
+			"name":"setWaterHeight",
+			"versions":{
+				"us":"0x80661398",
+				"jp":"0x8065F308"
+			}
+		},
+		{
+			"name":"updateObjectScript",
+			"versions":{
+				"us":"0x8063E078",
+				"jp":"0x8063BDB0"
+			}
+		},
+		{
+			"name":"executeBehaviourScript",
+			"versions":{
+				"us":"0x8063E0D4",
+				"jp":"0x8063BE0C"
+			}
+		},
+		{
 			"name":"setArcadeTextXY",
 			"versions":{
 				"us":"0x80024508",
@@ -1662,6 +1683,13 @@
 			}
 		},
 		{
+			"name":"scriptsLoadedArray",
+			"versions":{
+				"us":"0x807F60B0",
+				"jp":"0x807F6520"
+			}
+		},
+		{
 			"name":"StoredSettings",
 			"versions":{
 				"us":"0x807ED5A0",
@@ -2393,6 +2421,11 @@
 			"name":"textboxCancel",
 			"address":"0x807FFDF9",
 			"size_comment":"u8"
+		},
+		{
+			"name":"scriptsNotAutoloading",
+			"address":"0x807FFF8A",
+			"size_comment":"u8"
 		}
 	],
 	"code":[
@@ -2511,8 +2544,8 @@
 		{
 			"name":"customCodeStart",
 			"versions":{
-				"us":"0x805DAE00",
-				"jp":"0x805D8600"
+				"us":"0x805BAE00",
+				"jp":"0x805B8600"
 			}
 		},
 		{
@@ -2525,8 +2558,8 @@
 		{
 			"name":"customCodeUpper",
 			"versions":{
-				"us":"0x805D",
-				"jp":"0x805D"
+				"us":"0x805B",
+				"jp":"0x805B"
 			}
 		},
 		{

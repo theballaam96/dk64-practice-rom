@@ -1,4 +1,4 @@
-#include "../include/common.h"
+#include "../../include/common.h"
 
 static const file_state_indexes filestates_nle_stateindex[] = {
 	NLE_GENERAL_JAPES1,

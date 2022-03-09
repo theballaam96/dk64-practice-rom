@@ -114,6 +114,10 @@ extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, c
 extern void loadSetup(void* setup_file, int unk0, int unk1);
 extern int getParentDataIndex(int map);
 
+extern void setWaterHeight(int chunk, float height, float delta);
+extern void updateObjectScript(void* behaviour_pointer);
+extern void executeBehaviourScript(void* behaviour_pointer, int unk0);
+
 extern int* initDisplayList(int* dl);
 extern int getTextStyleHeight(int style);
 extern int* displayText(int* dl, int style, int x, int y, void* text_pointer, char unk0);
@@ -238,6 +242,7 @@ extern int* BalloonPatchPointer;
 extern int* ChunkArrayPointer;
 extern char ActorMasterType[348];
 extern unsigned int MapPropertiesBitfield;
+extern short scriptsLoadedArray[0x46];
 
 extern short screenCenterX;
 extern short screenCenterY;
@@ -394,6 +399,7 @@ extern char disableSavestateCombo;
 extern char voidsDisabled;
 extern char disableCustomSFX;
 extern char textboxCancel;
+extern unsigned char scriptsNotAutoloading;
 
 // Code
 extern int debugColumnLoop;

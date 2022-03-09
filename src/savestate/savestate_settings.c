@@ -1,4 +1,4 @@
-#include "../include/common.h"
+#include "../../include/common.h"
 
 static char void_grace_on[] = "} VOID GRACE PERIOD";
 static char void_grace_off[] = "{ VOID GRACE PERIOD";

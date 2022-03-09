@@ -4,9 +4,9 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 109/109(100.0%)
-		Vanilla Vars: 156/156(100.0%)
-		Hack Vars: 107/107(100.0%)
+		Functions: 112/112(100.0%)
+		Vanilla Vars: 157/157(100.0%)
+		Hack Vars: 108/108(100.0%)
 		Code: 51/51(100.0%)
 */
 
@@ -105,6 +105,9 @@
 .definelabel frameLoop, 0x805F9B74
 .definelabel cancelPausedCutscenes, 0x8061A594
 .definelabel getCenterOffset, 0x806FB184
+.definelabel setWaterHeight, 0x8065F308
+.definelabel updateObjectScript, 0x8063BDB0
+.definelabel executeBehaviourScript, 0x8063BE0C
 .definelabel setArcadeTextXY, 0x80017508
 .definelabel spawnArcadeText, 0x8001751C
 .definelabel setArcadeTextColor, 0x800174E4
@@ -250,6 +253,7 @@
 .definelabel lockStackCount, 0x807F5ED8
 .definelabel scriptsRunningCount, 0x807F6518
 .definelabel scriptsAttemptLoadCount, 0x807F75B0
+.definelabel scriptsLoadedArray, 0x807F6520
 .definelabel StoredSettings, 0x807EDA10
 .definelabel SetupCheck1, 0x8074F9D0
 .definelabel SetupCheck2, 0x80747638
@@ -387,6 +391,7 @@
 .definelabel ActiveMenu, 0x807FFDC4 // 0x6
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
 .definelabel textboxCancel, 0x807FFDF9 // u8
+.definelabel scriptsNotAutoloading, 0x807FFF8A // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731720
@@ -405,9 +410,9 @@
 .definelabel boot_lui2, 0xDF34
 .definelabel setupCheckOverwrite, 0x805FC4A0
 .definelabel frameHookLocation, 0x805F99F0
-.definelabel customCodeStart, 0x805D8600
+.definelabel customCodeStart, 0x805B8600
 .definelabel customBootCodeStart, 0x80000AD0
-.definelabel customCodeUpper, 0x805D
+.definelabel customCodeUpper, 0x805B
 .definelabel customCodeLower, 0x8600
 .definelabel bootJumpStart, 0x8000081C
 .definelabel bootJumpReturn, 0x8000083C

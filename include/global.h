@@ -46,6 +46,8 @@ extern int* displayVoid(int* dl);
 extern void drawJetpacPixelFont(int* dl, char* str, int x, int y, int red, int green, int blue, int alpha);
 extern int* displaySavePrompt(int* dl);
 extern int getCenter(int style, char* str);
+extern int isScriptLoaded(int idx);
+extern void fixModifiers(void);
 
 extern int getFakeKeyStatus(void);
 extern int getFakeProdRoomStatus(void);
@@ -208,6 +210,8 @@ extern void closeOverlay(void);
 
 extern void preload_map_voids(void);
 extern void openStateSettingsMenu(void);
+
+extern void openFixesMenu(void);
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

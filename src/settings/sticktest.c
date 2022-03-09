@@ -143,7 +143,7 @@ const Screen instruction_struct = {
 	.FunctionArray = instruction_functions,
 	.ArrayItems = 1,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
-	.ParentPosition = 6
+	.ParentPosition = 7
 };
 
 static const int testinfo_functions[] = {
@@ -158,5 +158,5 @@ const Screen testinfo_struct = {
 	.FunctionArray = testinfo_functions,
 	.ArrayItems = 4,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
-	.ParentPosition = 6
+	.ParentPosition = 7
 };

@@ -116,4 +116,5 @@ const Screen* menu_screens[] = {
 	&infinite_struct,
 	&filestates_nlemain_struct,
 	&filestates_nle40_struct,
+	&fixes_struct,
 };

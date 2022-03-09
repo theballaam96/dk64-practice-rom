@@ -1,4 +1,4 @@
-#include "../include/common.h"
+#include "../../include/common.h"
 
 static short fairy_x = 0;
 static short fairy_y = 0;
