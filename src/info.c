@@ -140,6 +140,12 @@ int* displayInfo(int* dl) {
 		dk_strFormat((char*)page_str,"PAGE %d",info_next_screen_index + 1);
 		int line_center = getCenter(INFO_STYLE,page_str);
 		dl = drawTextContainer(dl, INFO_STYLE, line_center, 275, (char*)page_str, 0xFF, 0xFF, 0xFF, 0xFF, 0);
+		if (info_next_screen_index > 0) {
+			dl = drawTextContainer(dl, 1, 255, 442, "l", 0xFF, 0xFF, 0xFF, 0xFF, 0); // L
+		}
+		if (info_next_screen_index < 3) {
+			dl = drawTextContainer(dl, 1, 360, 442, "r", 0xFF, 0xFF, 0xFF, 0xFF, 0); // R
+		}
 		if (NewlyPressedControllerInput.Buttons & R_Button) {
 			if (info_next_screen_index < 3) {
 				info_next_screen_index += 1;
