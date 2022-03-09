@@ -64,6 +64,8 @@ void openChangeStateMenu(void) {
 	changeMenu(ACTIVEMENU_SCREEN_SAVESTATE_CHANGE);
 }
 
+static char squawks_timer = 0;
+
 void openStateViewMenu(void) {
 	int _focused_state = FocusedSavestate;
 	float helmTimerUsed;
@@ -268,6 +270,22 @@ int fast_state(int new_map) {
 	return 0;
 }
 
+void handleSquawksTimer(void) {
+	int _focused_state = FocusedSavestate;
+	if (squawks_timer > 0) {
+		squawks_timer -= 1;
+	}
+	if (squawks_timer == 1) {
+		actorData* squawks_actor = (actorData*)findActorWithType(0xF9);
+		if (squawks_actor) {
+			squawks_actor->xPos = states[_focused_state]->dark_attic_squawks_x;
+			squawks_actor->yPos = states[_focused_state]->dark_attic_squawks_y;
+			squawks_actor->zPos = states[_focused_state]->dark_attic_squawks_z;
+			squawks_actor->facing_angle = states[_focused_state]->dark_attic_squawks_angle;
+		}
+	}
+}
+
 void loadVars(int instant_load) {
 	int _focused_state = FocusedSavestate;
 	tagBarrel* tag_found_addr = 0;
@@ -340,6 +358,23 @@ void loadVars(int instant_load) {
 				tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 			}
 			clearDKPortal();
+			if (states[_focused_state]->dark_attic_squawks_spawned) {
+				if (CurrentMap == 56) {
+					// In Dark Attic
+					int* m2location = ObjectModel2Pointer;
+					if (m2location) {
+						int guitar_index = convertIDToIndex(0x0);
+						if (guitar_index > -1) {
+							ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,guitar_index);
+							if (_object->behaviour_pointer) {
+								snagData* _behaviour = _object->behaviour_pointer;
+								_behaviour->reset = 2;
+								squawks_timer = 3;
+							}
+						}
+					}
+				}
+			}
 			if (savestateSettingsBitfield & 1) {
 				fixModifiers();
 				ObjectModel2Timer = 100;
@@ -408,7 +443,40 @@ void savestateHandler(int action) {
 						for (int i = 0; i < 7; i++) {
 							states[_focused_state]->cbs_turned_in[i] = CBTurnedInArray[i];
 						}
-						
+						// Dark Attic Squawks
+						int squawks_spawned = 0;
+						float squawks_x = 0;
+						float squawks_y = 0;
+						float squawks_z = 0;
+						short squawks_a = 0;
+						if (CurrentMap == 56) {
+							// In Dark Attic
+							int* m2location = ObjectModel2Pointer;
+							if (m2location) {
+								int guitar_index = convertIDToIndex(0x0);
+								if (guitar_index > -1) {
+									ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,guitar_index);
+									if (_object->behaviour_pointer) {
+										snagData* _behaviour = _object->behaviour_pointer;
+										if (_behaviour->reset >= 2) {
+											squawks_spawned = 1;
+											actorData* squawks_actor = (actorData*)findActorWithType(0xF9);
+											if (squawks_actor) {
+												squawks_x = squawks_actor->xPos;
+												squawks_y = squawks_actor->yPos;
+												squawks_z = squawks_actor->zPos;
+												squawks_a = squawks_actor->facing_angle;
+											}
+										}
+									}
+								}
+							}
+						}
+						states[_focused_state]->dark_attic_squawks_spawned = squawks_spawned;
+						states[_focused_state]->dark_attic_squawks_x = squawks_x;
+						states[_focused_state]->dark_attic_squawks_y = squawks_y;
+						states[_focused_state]->dark_attic_squawks_z = squawks_z;
+						states[_focused_state]->dark_attic_squawks_angle = squawks_a;
 
 						// Parent Map Shenanigans
 						int levelIndex = levelIndexMapping[CurrentMap];

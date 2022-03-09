@@ -37,7 +37,7 @@ with open('asm/objects.asm', 'w') as obj_asm:
                     opt = "-O1"
                     opt_lvl = 1
                 print("(" + str(opt_lvl) + ") " + os.path.join(root, file))
-                obj_asm.write(".importobj \"obj/"+ _o + "\"\n")
+                obj_asm.write(f".importobj \"obj/{_o}\"\n")
                 cmd = ["mips64-elf-gcc", "-Wall", opt, "-mtune=vr4300", "-march=vr4300", "-mabi=32", "-fomit-frame-pointer", "-G0", "-c", os.path.join(root, file)]  
                 subprocess.Popen(cmd).wait()
                 shutil.move("./" + file.replace(".c",".o"), "./obj/" + _o)

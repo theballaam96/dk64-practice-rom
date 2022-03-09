@@ -89,6 +89,7 @@ void cFuncLoop(void) {
 	colorKong(); // Constant
 	tagAnywhere(); // Constant
 	fixModifiers();
+	handleSquawksTimer();
 	//correctTagCode();
 	initHack(); // Map == 0x28
 	shorthandSavestate(); // Constant

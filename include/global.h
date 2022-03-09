@@ -57,6 +57,8 @@ extern void openWatchSnagMenu(void);
 extern void toggleFairyViewer(void);
 extern void checkWatchCapacity(void);
 
+extern void handleSquawksTimer(void);
+
 extern void warpToMap(void);
 extern void openJapesMenu(void);
 extern void openAztecMenu(void);

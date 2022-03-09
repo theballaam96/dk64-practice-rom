@@ -19,7 +19,9 @@ typedef struct actorData {
 	/* 0x084 */ float zPos;
 	/* 0x088 */ char unk_80[0xB8-0x88];
 	/* 0x0B8 */ float hSpeed;
-	/* 0x0BC */ char unk_BC[0x13C-0xBC];
+	/* 0x0BC */ char unk_BC[0xE6-0xBC];
+	/* 0x0E6 */ short facing_angle;
+	/* 0x0E8 */ char unk_E8[0x13C-0xE8];
 	/* 0x13C */ void* collision_queue_pointer;
 	/* 0x140 */ char unk_140[0x154-0x140];
 	/* 0x154 */ unsigned char control_state;
@@ -230,6 +232,11 @@ typedef struct Savestate {
 	/* 0x384 */ floatPos cameraPos;
 	/* 0x390 */ short camera_rotation;
 	/* 0x392 */ short cbs_turned_in[7];
+	/* 0x3A0 */ float dark_attic_squawks_x;
+	/* 0x3A4 */ float dark_attic_squawks_y;
+	/* 0x3A8 */ float dark_attic_squawks_z;
+	/* 0x3AC */ short dark_attic_squawks_angle;
+	/* 0x3AE */ char dark_attic_squawks_spawned;
 } Savestate;
 
 typedef struct Screen {
