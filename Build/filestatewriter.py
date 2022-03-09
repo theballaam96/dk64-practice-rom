@@ -1,9 +1,10 @@
 import os
 import struct
 import math
+from heap_handle import getHeapLocation, getHeapSize
 
 file_size = 0x340 # 0x1 at end, rounded up
-ROM_start = 0x2042000
+ROM_start = getHeapLocation(0x2002000)
 ROM_name = "rom/dk64-practice-rom.z64"
 file_dir_start = "assets/File States/"
 state_files = [

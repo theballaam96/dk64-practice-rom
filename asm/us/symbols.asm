@@ -5,9 +5,9 @@
 	Thanks.
 	Stats:
 		Functions: 112/112(100.0%)
-		Vanilla Vars: 157/157(100.0%)
+		Vanilla Vars: 161/161(100.0%)
 		Hack Vars: 108/108(100.0%)
-		Code: 51/51(100.0%)
+		Code: 48/48(100.0%)
 */
 
 //functions
@@ -258,6 +258,10 @@
 .definelabel SetupCheck1, 0x807500B0
 .definelabel SetupCheck2, 0x80747D78
 .definelabel overlayArray, 0x807FC630
+.definelabel heap_arena_count, 0x807F0A28
+.definelabel heap_arena_meta, 0x807F0988
+.definelabel heap_end_pointer, 0x8076A060
+.definelabel fbufferPointers, 0x80744470
 .definelabel arcadeMap, 0x8004C723
 .definelabel arcadeMode, 0x8004C724
 .definelabel arcadeLevel, 0x8004A76C
@@ -410,10 +414,7 @@
 .definelabel boot_lui2, 0xDCC4
 .definelabel setupCheckOverwrite, 0x805FEB00
 .definelabel frameHookLocation, 0x805FC164
-.definelabel customCodeStart, 0x805BAE00
 .definelabel customBootCodeStart, 0x80000A30
-.definelabel customCodeUpper, 0x805B
-.definelabel customCodeLower, 0xAE00
 .definelabel bootJumpStart, 0x80000764
 .definelabel bootJumpReturn, 0x80000784
 .definelabel bootFinalValue, 0xD
@@ -445,3 +446,8 @@
 .definelabel crcPatchMemory, 0x80002554
 .definelabel crcPatchROM, 0x3154
 .definelabel displayListCap, 0x805FE9E0
+
+.definelabel customCodeStart, 0x805d9e00
+.definelabel customCodeUpper, 0x805d
+.definelabel customCodeLower, 0x9e00
+.definelabel customCodeSize, 0x21000

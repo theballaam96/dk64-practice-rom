@@ -1718,6 +1718,34 @@
 			}
 		},
 		{
+			"name":"heap_arena_count",
+			"versions":{
+				"us":"0x807F0A28",
+				"jp":"0x807F0E98"
+			}
+		},
+		{
+			"name":"heap_arena_meta",
+			"versions":{
+				"us":"0x807F0988",
+				"jp":"0x807F0DF8"
+			}
+		},
+		{
+			"name":"heap_end_pointer",
+			"versions":{
+				"us":"0x8076A060",
+				"jp":"0x8076A250"
+			}
+		},
+		{
+			"name":"fbufferPointers",
+			"versions":{
+				"us":"0x80744470",
+				"jp":"0x80743D30"
+			}
+		},
+		{
 			"name":"arcadeMap",
 			"versions":{
 				"us":"0x8004C723",
@@ -2542,31 +2570,10 @@
 			}
 		},
 		{
-			"name":"customCodeStart",
-			"versions":{
-				"us":"0x805BAE00",
-				"jp":"0x805B8600"
-			}
-		},
-		{
 			"name":"customBootCodeStart",
 			"versions":{
 				"us":"0x80000A30",
 				"jp":"0x80000AD0"
-			}
-		},
-		{
-			"name":"customCodeUpper",
-			"versions":{
-				"us":"0x805B",
-				"jp":"0x805B"
-			}
-		},
-		{
-			"name":"customCodeLower",
-			"versions":{
-				"us":"0xAE00",
-				"jp":"0x8600"
 			}
 		},
 		{

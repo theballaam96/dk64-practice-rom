@@ -90,7 +90,7 @@ void openActorMenu(void) {
 		ActorNamesTable = copy_space;
 		int* file_size;
 		*(int*)(&file_size) = 0x1580;
-		copyFromROM(0x2020000,copy_space,&file_size,0,0,0,0);
+		copyFromROM(ActorNamesStart,copy_space,&file_size,0,0,0,0);
 	}
 	if (ActiveMenu.screenIndex != ACTIVEMENU_SCREEN_DEBUG_ACTORLIST) {
 		startingActorIndex = 0;

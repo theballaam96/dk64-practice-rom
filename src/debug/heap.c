@@ -13,33 +13,35 @@ float heap_free_percent = 0;
 float heap_used_percent = 0;
 
 void getMemoryStats(void) {
-	int next_active = 0;
-	int prev_active = 0;
 	heap_free = 0;
 	heap_used = 0;
 	heap_allocated = 0;
-	unsigned int size = 0;
-	heap* heap_dupe = heap_pointer;
-	if (heap_dupe) {
+	for (int i = 0; i < heap_arena_count; i++) {
+		heap* heap_dupe = heap_arena_meta[i].tail_pointer;
 		while (0 == 0) {
-			next_active = isRDRAM(heap_dupe->next);
-			prev_active = isRDRAM(heap_dupe->prev);
-			if ((next_active) || (prev_active)) {
-				heap_free += heap_dupe->size;
-			} else {
+			if (isRDRAM(heap_dupe)) {
 				heap_used += heap_dupe->size;
 				heap_allocated += 1;
-			}
-			size = heap_dupe->size;
-			heap_dupe = (heap *)((int)heap_dupe + 0x10 + size);
-			prev_active = isRDRAM(heap_dupe);
-			next_active = isRDRAM(heap_dupe->unk);
-			if ((prev_active == 0) || (next_active == 0)) {
+				heap_dupe = (heap*)(heap_dupe->next);
+			} else {
 				break;
 			}
 		}
 	}
-	heap_total = heap_free + heap_used;
+	int end = 0;
+	int fb1 = 0;
+	int fb2 = 0;
+	if (isRDRAM(heap_end_pointer)) {
+		end = (unsigned int)(heap_end_pointer) - 0x80000000;
+	}
+	if (isRDRAM(fbufferPointers[1])) {
+		fb2 = (unsigned int)(fbufferPointers[1]) - 0x80000000;
+	}
+	if (isRDRAM(fbufferPointers[0])) {
+		fb1 = (unsigned int)(fbufferPointers[0]) - 0x80000000;
+	}
+	heap_total = end - ((2 * fb2) - fb1);
+	heap_free = heap_total - heap_used;
 	heap_free_percent = 100*((float)heap_free / (float)heap_total);
 	heap_used_percent = 100*((float)heap_used / (float)heap_total);
 }

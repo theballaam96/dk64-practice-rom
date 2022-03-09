@@ -2,6 +2,7 @@ import json
 import os
 
 raw_json = "include/symbols.json"
+dyn_json = "include/dyn_symbols.json"
 
 cwd = os.getcwd()
 pre_app = ""; # "../" if running just this file. Otherwise "" since it'll be run from build.bat
@@ -9,6 +10,7 @@ if "\\Build" in cwd:
 	pre_app = "../"
 
 raw_json = pre_app + raw_json;
+dyn_json = pre_app + dyn_json;
 
 def getSymFile(version):
 	return pre_app + "asm/" + version + "/symbols.asm";
@@ -81,7 +83,17 @@ def writeSymbols(version):
 			fg.write("\n// Code\n")
 			for x in sym_code:
 				fg.write(x + "\n")
-
+	with open(dyn_json,"r") as fh:
+		data = json.load(fh)
+		dyn_vars = data["dynamic_vars"]
+		dyn_list = [];
+		for dyn in dyn_vars:
+			if version in dyn["versions"]:
+				dyn_list.append(".definelabel " + dyn["name"] + ", " + dyn["versions"][version])
+		with open(getSymFile(version),"a") as fg:
+			fg.write("\n")
+			for x in dyn_list:
+				fg.write(x + "\n")
 versions = ["us","pal","jp"]
 for x in versions:
 	writeSymbols(x);

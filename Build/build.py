@@ -13,6 +13,7 @@ from actor_bin_builder import *
 from snag_bins_builder import *
 from font_image_builder import build_font
 from filestatewriter import writeFileStatesToDict, wipeStateFiles
+from heap_handle import getHeapLocation, getHeapSize
 import check_unused
 
 ROMName = "rom/temp_rom.z64"
@@ -170,7 +171,7 @@ base_file_dict = [
 	},
 	{
 		"name": "Actor Names",
-		"start": 0x2040000,
+		"start": getHeapLocation(0x2000000),
 		"source_file": "assets/Non-Code/actor_names.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
@@ -178,7 +179,7 @@ base_file_dict = [
 	},
 	{
 		"name": "Snag Names",
-		"start": 0x2041800,
+		"start": getHeapLocation(0x2001800),
 		"source_file": "assets/Non-Code/snag_names.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,
@@ -186,7 +187,7 @@ base_file_dict = [
 	},
 	{
 		"name": "Snag Names (Capitals)",
-		"start": 0x2041C00,
+		"start": getHeapLocation(0x2001C00),
 		"source_file": "assets/Non-Code/snag_names_capitals.bin",
 		"do_not_extract": True,
 		"do_not_compress": True,

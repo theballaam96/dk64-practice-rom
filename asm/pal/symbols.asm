@@ -5,9 +5,9 @@
 	Thanks.
 	Stats:
 		Functions: 0/112(0.0%)
-		Vanilla Vars: 0/157(0.0%)
+		Vanilla Vars: 0/161(0.0%)
 		Hack Vars: 108/108(100.0%)
-		Code: 0/51(0.0%)
+		Code: 0/48(0.0%)
 */
 
 //functions
@@ -258,6 +258,10 @@
 //.definelabel SetupCheck1
 //.definelabel SetupCheck2
 //.definelabel overlayArray
+//.definelabel heap_arena_count
+//.definelabel heap_arena_meta
+//.definelabel heap_end_pointer
+//.definelabel fbufferPointers
 //.definelabel arcadeMap
 //.definelabel arcadeMode
 //.definelabel arcadeLevel
@@ -410,10 +414,7 @@
 //.definelabel boot_lui2
 //.definelabel setupCheckOverwrite
 //.definelabel frameHookLocation
-//.definelabel customCodeStart
 //.definelabel customBootCodeStart
-//.definelabel customCodeUpper
-//.definelabel customCodeLower
 //.definelabel bootJumpStart
 //.definelabel bootJumpReturn
 //.definelabel bootFinalValue
@@ -445,3 +446,4 @@
 //.definelabel crcPatchMemory
 //.definelabel crcPatchROM
 //.definelabel displayListCap
+

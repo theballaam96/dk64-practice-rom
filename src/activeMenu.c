@@ -44,7 +44,6 @@ int isValidSpot(int position) {
 		char* focused_access_array = (char*)focused_screen->AccessArray;
 		ret = (focused_access_array[position] & (1 << ROM_VERSION)) != 0;
 	}
-	*(char*)(0x807FF800 + position) = ret;
 	return ret;
 }
 

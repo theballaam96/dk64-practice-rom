@@ -18,6 +18,8 @@ START:
 		LUI t3, hi(heapEndWrite)
 		ADDIU t4, r0, customCodeUpper
 		SH t4, lo(heapEndWrite) (t3)
+		ADDIU t4, r0, customCodeLower
+		SH t4, lo(heapEndWrite + 8) (t3)
 
 		//write file start stuff
 		LUI t3, hi(fileStartMap)

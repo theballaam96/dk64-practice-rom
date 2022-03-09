@@ -256,6 +256,10 @@ extern unsigned short balloonPatchCounts[221];
 extern unsigned short coloredBananaCounts[8];
 
 extern overlay_struct overlayArray[8];
+extern unsigned int heap_arena_count;
+extern heap_arena_struct heap_arena_meta[5];
+extern int* fbufferPointers[2];
+extern int* heap_end_pointer;
 
 extern char arcadeMap;
 extern char arcadeMode;

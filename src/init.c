@@ -49,11 +49,6 @@ void initHack(void) {
 		characterSpawnerMalloc = 0x240447B8; // Increases the malloc for character spawners
 		displayListCap = 0x24040002; // Expand Display List Cap
 		nfrTitleScreenSong = 113; // NFR Title Screen Song
-		// int* file_size;
-		// *(int*)(&file_size) = 0x180;
-		// copyFromROM(0x2021600,(int*)0x807546D0,&file_size,0,0,0,0);
-		// textData[0].kerning_char = -3;
-		//textData[0].kerning_anim = 5;
 		// Style 6 Mtx
 		int base_mtx = 75;
 		style6Mtx[0x0] = base_mtx;
@@ -63,10 +58,6 @@ void initHack(void) {
 		style2Mtx[0x0] = base_mtx;
 		style2Mtx[0x5] = base_mtx;
 		style2Mtx[0xF] = 10;
-		// base_mtx = 85;
-		// style128Mtx[0x0] = base_mtx;
-		// style128Mtx[0x5] = base_mtx;
-		// style128Mtx[0xF] = 100;
 		colorMenuSky();
 		for (int i = 0; i < WatchCount; i++) {
 			ViewedSnagWatches[i] = -1;

@@ -32,6 +32,9 @@ GOTO finish
 :compile
 echo valid version
 
+python build/heap_handle.py
+set /p heap_size=< heap.shrink
+echo Honey, I shrunk the heap by %heap_size% bytes
 python build/symbols_generator.py
 python build/screen_generator.py
 python build\compile.py
@@ -50,6 +53,7 @@ python build\dump_pointer_tables_vanilla.py
 python build\dump_pointer_tables_modified.py
 
 :cleanup
+del heap.shrink
 del rom\dk64-practice-rom-temp.z64
 del rom\dk64-practice-rom.z64
 if "%bps_arg%" == "--bps" (

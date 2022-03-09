@@ -1009,3 +1009,12 @@ typedef enum file_state_indexes {
 	GLITCHLESS_ANY_CASTLE,
 	GLITCHLESS_ANY_HELM,
 } file_state_indexes;
+
+typedef struct heap_arena_struct {
+	/* 0x000 */ void* index_pointer;
+	/* 0x004 */ void* start;
+	/* 0x008 */ void* tail_pointer;
+	/* 0x00C */ unsigned int bin_size;
+	/* 0x010 */ unsigned short chunk_data_size;
+	/* 0x012 */ char unk_12[2];
+} heap_arena_struct;

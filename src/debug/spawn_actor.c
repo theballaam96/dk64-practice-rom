@@ -309,7 +309,7 @@ void openForceSpawnActorMenu(void) {
 		ActorNamesTable = copy_space;
 		int* file_size;
 		*(int*)(&file_size) = 0x1580;
-		copyFromROM(0x2020000,copy_space,&file_size,0,0,0,0);
+		copyFromROM(ActorNamesStart,copy_space,&file_size,0,0,0,0);
 	}
 	if (ActorNamesTable) {
 		dk_strFormat(viewed_actor_name,"ACTOR:%s",ActorNamesTable->actor_name[(int)spawnActorData.actor_type]);
