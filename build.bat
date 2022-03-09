@@ -53,7 +53,6 @@ python build\dump_pointer_tables_vanilla.py
 python build\dump_pointer_tables_modified.py
 
 :cleanup
-del heap.shrink
 del rom\dk64-practice-rom-temp.z64
 del rom\dk64-practice-rom.z64
 if "%bps_arg%" == "--bps" (
@@ -61,6 +60,7 @@ if "%bps_arg%" == "--bps" (
 	build\flips.exe --create "rom\temp_rom.z64" "rom\dk64-practice-rom-dev.z64" %final_bps%
 )
 python build/segmentFile.py
+del heap.shrink
 
 :finish
 echo Completed: %date% %time%
