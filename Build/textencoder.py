@@ -26,7 +26,7 @@ def writeText(file_name, text):
                         if x >= 0x30:
                             fh.write(bytearray([x-0x17]))
                         elif x == 0x20:
-                            fh.write(bytearray([0xF]))
+                            fh.write(bytearray([0x1F]))
                         elif x == 0 and index == 0:
                             fh.write(bytearray([0x10]))
                         else:
