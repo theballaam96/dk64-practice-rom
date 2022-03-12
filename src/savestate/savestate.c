@@ -319,6 +319,39 @@ void loadVars(int instant_load) {
 	}
 	RNG = states[_focused_state]->rng;
 	if (Player) {
+		int* m2location = ObjectModel2Pointer;
+		int switch_press_state = states[_focused_state]->japes_freediddy_switches_pressed_bitfield;
+		if (CurrentMap == 7) {
+			if (!checkFlag(FLAG_KONG_DIDDY,0)) {
+				if (m2location) {
+					int switch_press_count = 0;
+					for (int i = 0; i < 3; i++) {
+						int switch_index = convertIDToIndex(0x30 + i);
+						if (switch_index > -1) {
+							ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,switch_index);
+							if (_object->behaviour_pointer) {
+								snagData* _behaviour = _object->behaviour_pointer;
+								if (switch_press_state & (1 << i)) {
+									_behaviour->reset = 20;
+									switch_press_count += 1;
+								}
+							}
+						}
+					}
+					if (switch_press_count > 0) {
+						int gate_index = convertIDToIndex(0x47);
+						if (gate_index > -1) {
+							ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,gate_index);
+							if (_object->behaviour_pointer) {
+								snagData* _behaviour = _object->behaviour_pointer;
+								_behaviour->reset = switch_press_count;
+								_behaviour->check = 2;
+							}
+						}
+					}
+				}
+			}
+		}
 		if (LastLoadStateAction == 2) {
 			LZFadeoutProgress = 1.0f;
 			Player->facing_angle = states[_focused_state]->facing_angle;
@@ -361,7 +394,6 @@ void loadVars(int instant_load) {
 			if (states[_focused_state]->dark_attic_squawks_spawned) {
 				if (CurrentMap == 56) {
 					// In Dark Attic
-					int* m2location = ObjectModel2Pointer;
 					if (m2location) {
 						int guitar_index = convertIDToIndex(0x0);
 						if (guitar_index > -1) {
@@ -375,6 +407,7 @@ void loadVars(int instant_load) {
 					}
 				}
 			}
+
 			if (savestateSettingsBitfield & 1) {
 				fixModifiers();
 				ObjectModel2Timer = 100;
@@ -449,16 +482,16 @@ void savestateHandler(int action) {
 						float squawks_y = 0;
 						float squawks_z = 0;
 						short squawks_a = 0;
+						int* m2location = ObjectModel2Pointer;
 						if (CurrentMap == 56) {
 							// In Dark Attic
-							int* m2location = ObjectModel2Pointer;
 							if (m2location) {
 								int guitar_index = convertIDToIndex(0x0);
 								if (guitar_index > -1) {
 									ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,guitar_index);
 									if (_object->behaviour_pointer) {
 										snagData* _behaviour = _object->behaviour_pointer;
-										if (_behaviour->reset >= 2) {
+										if (_behaviour->reset == 2) {
 											squawks_spawned = 1;
 											actorData* squawks_actor = (actorData*)findActorWithType(0xF9);
 											if (squawks_actor) {
@@ -477,6 +510,26 @@ void savestateHandler(int action) {
 						states[_focused_state]->dark_attic_squawks_y = squawks_y;
 						states[_focused_state]->dark_attic_squawks_z = squawks_z;
 						states[_focused_state]->dark_attic_squawks_angle = squawks_a;
+						int switch_press_state = 0;
+						if (CurrentMap == 7) {
+							if (!checkFlag(FLAG_KONG_DIDDY,0)) {
+								if (m2location) {
+									for (int i = 0; i < 3; i++) {
+										int switch_index = convertIDToIndex(0x30 + i);
+										if (switch_index > -1) {
+											ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,switch_index);
+											if (_object->behaviour_pointer) {
+												snagData* _behaviour = _object->behaviour_pointer;
+												if (_behaviour->reset >= 2) {
+													switch_press_state |= (1 << i);
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						states[_focused_state]->japes_freediddy_switches_pressed_bitfield = switch_press_state;
 
 						// Parent Map Shenanigans
 						int levelIndex = levelIndexMapping[CurrentMap];

@@ -237,6 +237,7 @@ typedef struct Savestate {
 	/* 0x3A8 */ float dark_attic_squawks_z;
 	/* 0x3AC */ short dark_attic_squawks_angle;
 	/* 0x3AE */ char dark_attic_squawks_spawned;
+	/* 0x3AF */ unsigned char japes_freediddy_switches_pressed_bitfield;
 } Savestate;
 
 typedef struct Screen {
