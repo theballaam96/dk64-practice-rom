@@ -615,8 +615,8 @@ static const int watch_assist_functions[] = {
 };
 
 static const char watch_assist_access[] = {
-	1,
-	7,
+	ACCESS_US | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
 };
 
 const Screen watch_assist_struct = {

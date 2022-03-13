@@ -48,19 +48,19 @@ static const char* toggles_array[] = {
 };
 
 static const char toggles_access[] = {
-	4, // Textbox Cancel
-	7, // Sandstorm
-	7, // Enemy Spawn
-	7, // Minigame MS
-	7, // Cancel CS
-	7, // End Minigame
-	7, // Levitate
-	7, // Superspeed
-	7, // Toggle TB w L
-	7, // Disable Void
-	7, // Toggle TB
-	7, // Visibility
-	7, // Turn off all
+	ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Textbox Cancel
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Sandstorm
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Enemy Spawn
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Minigame MS
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Cancel CS
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // End Minigame
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Levitate
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Superspeed
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Toggle TB w L
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Disable Void
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Toggle TB
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Visibility
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Turn off all
 };
 
 static const char* toggles_addresses[] = {

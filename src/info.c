@@ -94,7 +94,7 @@ int* displayInfo(int* dl) {
 						dl = drawInfoText(dl, info_x0[i], info_y0[i], (char*)info_0[i]);
 					}
 				}
-				dl = drawImage(dl, 109, RGBA16, 32, 32, 630, 500, 3.0f, 3.0f, info_opacity);
+				dl = drawImage(dl, IMAGE_GITHUB, RGBA16, 32, 32, 630, 500, 3.0f, 3.0f, info_opacity);
 				break;
 			case 1:
 				for (int i = 0; i < sizeof(info_1)/4;i++) {
@@ -110,9 +110,9 @@ int* displayInfo(int* dl) {
 					}
 					y += getYDiff(info_2[i]);
 				}
-				dl = drawImage(dl, 110, RGBA16, 32, 32, 350, 350, 3.0f, 3.0f, info_opacity);
-				dl = drawImage(dl, 111, RGBA16, 32, 32, 910, 430, 3.0f, 3.0f, info_opacity);
-				dl = drawImage(dl, 112, RGBA16, 32, 32, 350, 550, 3.0f, 3.0f, info_opacity);
+				dl = drawImage(dl, IMAGE_BALLAAM, RGBA16, 32, 32, 350, 350, 3.0f, 3.0f, info_opacity);
+				dl = drawImage(dl, IMAGE_RAIN, RGBA16, 32, 32, 910, 430, 3.0f, 3.0f, info_opacity);
+				dl = drawImage(dl, IMAGE_ISOTARGE, RGBA16, 32, 32, 350, 550, 3.0f, 3.0f, info_opacity);
 				break;
 			case 3:
 				for (int i = 0; i < sizeof(info_3)/4;i++) {

@@ -12,12 +12,6 @@
 */
 #include "rom_version.h"
 
-#if ROM_VERSION == 1
-	#define HERTZ 50 // PAL = 50Hz
-#else
-	#define HERTZ 60 // US/JP = 60 Hz
-#endif
-
 #define F3DEX_GBI_2
 #include "ultra64.h"
 #include "common_structs.h"

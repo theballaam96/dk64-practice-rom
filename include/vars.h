@@ -75,3 +75,33 @@
 #define FileStateSize 0x340
 #define flagMenuScreenCount 11
 #define pointer_table_offset 0x101C50
+
+#if ROM_VERSION == 1
+	#define HERTZ 50 // PAL = 50Hz
+#else
+	#define HERTZ 60 // US/JP = 60 Hz
+#endif
+
+// Version Access
+#define ACCESS_US 1
+#define ACCESS_PAL 2
+#define ACCESS_JP 4
+#define ACCESS_N64 8
+#define ACCESS_WIIU 16
+#define ACCESS_EMU 32
+
+#if ROM_VERSION == 0
+	#define IMAGE_FAIRYBOX 107
+	#define IMAGE_FAIRYDOT 108
+	#define IMAGE_GITHUB 109
+	#define IMAGE_BALLAAM 110
+	#define IMAGE_RAIN 111
+	#define IMAGE_ISOTARGE 112
+#else
+	#define IMAGE_FAIRYBOX 194
+	#define IMAGE_FAIRYDOT 195
+	#define IMAGE_GITHUB 109
+	#define IMAGE_BALLAAM 110
+	#define IMAGE_RAIN 111
+	#define IMAGE_ISOTARGE 112
+#endif

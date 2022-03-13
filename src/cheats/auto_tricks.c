@@ -23,10 +23,10 @@ static const char* tricktoggles_array[] = {
 };
 
 static const char tricktoggles_access[] = {
-	7,
-	1,
-	7,
-	7,
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
+	ACCESS_US | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
 };
 
 static const char* tricktoggles_on[] = {

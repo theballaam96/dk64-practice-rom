@@ -4,7 +4,7 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 112/112(100.0%)
+		Functions: 113/113(100.0%)
 		Vanilla Vars: 161/161(100.0%)
 		Hack Vars: 108/108(100.0%)
 		Code: 48/48(100.0%)
@@ -103,6 +103,7 @@
 .definelabel displayImage, 0x8068C5A8
 .definelabel textDraw, 0x806FD490
 .definelabel frameLoop, 0x805FC2B0
+.definelabel getPointerTable14Texture, 0x8068C12C
 .definelabel cancelPausedCutscenes, 0x8061CB08
 .definelabel getCenterOffset, 0x806FBD5C
 .definelabel setWaterHeight, 0x80661398

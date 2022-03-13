@@ -73,6 +73,7 @@ extern void enableComplexFree(void);
 extern void complexFreeWrapper(void* addr);
 extern int getWorld(int map, int lobby_is_isles);
 extern int isSingleOrBunch(int object_type);
+extern int* getPointerTable14Texture(int texture_index);
 extern void cancelPausedCutscenes(void);
 extern int getCenterOffset(int style, char* str);
 

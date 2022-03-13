@@ -14,6 +14,17 @@ void openRAMViewer(void) {
 	}
 }
 
+static const char debug_access[] = {
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Actor List
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_EMU, // Memory
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Analyze Heap
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Flag Log
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Spawn Actors
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Void Map
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Corrupt
+	0, // Collision View
+};
+
 static char* debug_array[] = {
 	"ACTORS",
 	"MEMORY",
@@ -65,5 +76,7 @@ const Screen debug_struct = {
 	.FunctionArray = debug_functions,
 	.ArrayItems = 7, // 8
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 4
+	.ParentPosition = 4,
+	.hasAccessArray = 1,
+	.AccessArray = debug_access
 };

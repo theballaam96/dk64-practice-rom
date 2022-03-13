@@ -15,15 +15,15 @@ static const char* main_array[] = {
 
 static const int main_functions[9];
 static const char main_access[] = {
-	7, // Warp
-	7, // Flags
-	7, // Save States
-	7, // Watches
-	7, // Debug
-	7, // Timer Settings
-	1, // File States
-	7, // Cheats
-	7, // Settings
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Warp
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Flags
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Save States
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Watches
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Debug
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Timer Settings
+	ACCESS_US | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // File States
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Cheats
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Settings
 };
 
 const Screen main_struct = {
@@ -39,12 +39,16 @@ const Screen main_struct = {
 int isValidSpot(int position) {
 	const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
 	int hasAccessArray = focused_screen->hasAccessArray;
-	int ret = 1;
+	int ret_ver = 1;
+	int ret_console = 1;
 	if (hasAccessArray) {
 		char* focused_access_array = (char*)focused_screen->AccessArray;
-		ret = (focused_access_array[position] & (1 << ROM_VERSION)) != 0;
+		ret_ver = (focused_access_array[position] & (1 << ROM_VERSION)) != 0;
+		if (assignedConsole != NONE) {
+			ret_console = (focused_access_array[position] & (8 << ((int)(assignedConsole) - 1))) != 0;
+		}
 	}
-	return ret;
+	return ret_ver & ret_console;
 }
 
 void skipEmptyOptions(int direction) {

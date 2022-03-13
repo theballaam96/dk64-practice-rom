@@ -645,6 +645,13 @@
 			}
 		},
 		{
+			"name":"getPointerTable14Texture",
+			"versions":{
+				"us":"0x8068C12C",
+				"jp":"0x8068A3EC"
+			}
+		},
+		{
 			"name":"cancelPausedCutscenes",
 			"versions":{
 				"us":"0x8061CB08",
