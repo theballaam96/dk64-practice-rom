@@ -659,6 +659,20 @@
 			}
 		},
 		{
+			"name":"processPhase",
+			"versions":{
+				"us":"0x806DF494",
+				"jp":"0x806DE764"
+			}
+		},
+		{
+			"name":"getParentMapIndexFromCurrentMap",
+			"versions":{
+				"us":"0x80600080",
+				"jp":"0x805FDA2C"
+			}
+		},
+		{
 			"name":"getCenterOffset",
 			"versions":{
 				"us":"0x806FBD5C",
@@ -789,6 +803,48 @@
 			"versions":{
 				"us":"0x80024F9C",
 				"jp":"0x80017F9C"
+			}
+		},
+		{
+			"name":"jetpacInitDL",
+			"versions":{
+				"us":"0x800255D4",
+				"jp":"0x800185E4"
+			}
+		},
+		{
+			"name":"jetpacDrawFloors",
+			"versions":{
+				"us":"0x80028E88",
+				"jp":"0x8001BE98"
+			}
+		},
+		{
+			"name":"jetpacDrawJetman",
+			"versions":{
+				"us":"0x80026AB0",
+				"jp":"0x80019AC0"
+			}
+		},
+		{
+			"name":"jetpacDrawEnemies",
+			"versions":{
+				"us":"0x8002AD8C",
+				"jp":"0x8001DDAC"
+			}
+		},
+		{
+			"name":"jetpacDrawRocket",
+			"versions":{
+				"us":"0x80028544",
+				"jp":"0x8001B554"
+			}
+		},
+		{
+			"name":"jetpacUnkFunc",
+			"versions":{
+				"us":"0x80026D48",
+				"jp":"0x80019D58"
 			}
 		}
 	],
@@ -1634,6 +1690,13 @@
 			}
 		},
 		{
+			"name":"MapVertsPointer",
+			"versions":{
+				"us":"0x807F5DE8",
+				"jp":"0x807F6258"
+			}
+		},
+		{
 			"name":"MapVoid_MaxZ",
 			"versions":{
 				"us":"0x807F5FEA",
@@ -1750,6 +1813,20 @@
 			"versions":{
 				"us":"0x80744470",
 				"jp":"0x80743D30"
+			}
+		},
+		{
+			"name":"simpleLagCalcDisabled",
+			"versions":{
+				"us":"0x8076AF14",
+				"jp":"0x8076B104"
+			}
+		},
+		{
+			"name":"DemoFadeoutTimer",
+			"versions":{
+				"us":"0x8075531C",
+				"jp":"0x807553DC"
 			}
 		},
 		{
@@ -1918,6 +1995,13 @@
 			"versions":{
 				"us":"0x8002EF78",
 				"jp":"0x80021F88"
+			}
+		},
+		{
+			"name":"jetpacStoryMode",
+			"versions":{
+				"us":"0x8002F3C8",
+				"jp":"0x800223D8"
 			}
 		}
 	],
@@ -2461,6 +2545,11 @@
 			"name":"scriptsNotAutoloading",
 			"address":"0x807FFF8A",
 			"size_comment":"u8"
+		},
+		{
+			"name":"disableLockedCam",
+			"address":"0x807FFF8B",
+			"size_comment":"u8"
 		}
 	],
 	"code":[
@@ -2798,6 +2887,69 @@
 			"versions":{
 				"us":"0x805FE9E0",
 				"jp":"0x805FC380"
+			}
+		},
+		{
+			"name":"lockedCamHookWrite",
+			"versions":{
+				"us":"0x8061F6CC",
+				"jp":"0x8061D1E0"
+			}
+		},
+		{
+			"name":"overlayEntryPoint",
+			"versions":{
+				"us":"0x80024000",
+				"jp":"0x80017000"
+			}
+		},
+		{
+			"name":"arcadeTextHookWrite",
+			"versions":{
+				"us":"0x80031C30",
+				"jp":"0x800249C0"
+			}
+		},
+		{
+			"name":"arcadeHasControlHookWrite",
+			"versions":{
+				"us":"0x80025410",
+				"jp":"0x800183EC"
+			}
+		},
+		{
+			"name":"arcadeHasControl2HookWrite",
+			"versions":{
+				"us":"0x800252F4",
+				"jp":"0x800182D0"
+			}
+		},
+		{
+			"name":"arcadeHasControl3HookWrite",
+			"versions":{
+				"us":"0x80027914",
+				"jp":"0x8001A8F0"
+			}
+		},
+		{
+			"name":"jetpacTextHookWrite",
+			"versions":{
+				"us":"0x80025354",
+				"jp":"0x80018364"
+			}
+		},
+		{
+			"name":"jetpacPauseHookWrite",
+			"versions":{
+				"us":"0x80024954",
+				"jp":"0x80017954"
+			}
+		},
+		{
+			"name":"jetpac5000HookWrite",
+			"versions":{
+				"us":"0x80027DB0",
+				"jp":"0x8001ADC0"
 			}
 		}
 	]

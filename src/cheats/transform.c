@@ -6,10 +6,7 @@ void openTransformMenu(void) {
 
 void checkCrystals(void) {
 	if (TransformAutoRestockOff == 0) {
-	// 	if (CollectableBase.Crystals < 450) {
-	// 		CollectableBase.Crystals = 3000;
-	// 	}
-		setHUDItemAsInfinite(5,0,1);
+		//setHUDItemAsInfinite(5,0,1);
 	}
 }
 

@@ -69,6 +69,8 @@ int* drawTri(int* dl, short x1, short y1, short x2, short y2, short x3, short y3
 		*(unsigned int*)(dl++) = 0xFC7EA004;
 		*(unsigned int*)(dl++) = 0x100C00F4;
 	} else {
+		// *(unsigned int*)(dl++) = 0xFC7EA004;
+		// *(unsigned int*)(dl++) = 0x1FFC00FC;
 		alpha = 0xFF;
 	}
 	// Vertex 0

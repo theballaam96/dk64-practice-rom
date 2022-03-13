@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 113/113(100.0%)
-		Vanilla Vars: 161/161(100.0%)
-		Hack Vars: 108/108(100.0%)
-		Code: 48/48(100.0%)
+		Functions: 121/121(100.0%)
+		Vanilla Vars: 165/165(100.0%)
+		Hack Vars: 109/109(100.0%)
+		Code: 57/57(100.0%)
 */
 
 //functions
@@ -105,6 +105,8 @@
 .definelabel frameLoop, 0x805FC2B0
 .definelabel getPointerTable14Texture, 0x8068C12C
 .definelabel cancelPausedCutscenes, 0x8061CB08
+.definelabel processPhase, 0x806DF494
+.definelabel getParentMapIndexFromCurrentMap, 0x80600080
 .definelabel getCenterOffset, 0x806FBD5C
 .definelabel setWaterHeight, 0x80661398
 .definelabel updateObjectScript, 0x8063E078
@@ -124,6 +126,12 @@
 .definelabel spawnJetpacItem, 0x80027D64
 .definelabel resetJetpacMap, 0x800275F4
 .definelabel changeJetpacMode, 0x80024F9C
+.definelabel jetpacInitDL, 0x800255D4
+.definelabel jetpacDrawFloors, 0x80028E88
+.definelabel jetpacDrawJetman, 0x80026AB0
+.definelabel jetpacDrawEnemies, 0x8002AD8C
+.definelabel jetpacDrawRocket, 0x80028544
+.definelabel jetpacUnkFunc, 0x80026D48
 
 //vanilla data
 .definelabel TransitionSpeed, 0x807FD88C
@@ -246,6 +254,7 @@
 .definelabel MapVoid_MinX, 0x807F5FE4
 .definelabel MapVoid_MinZ, 0x807F5FE6
 .definelabel MapVoid_MaxX, 0x807F5FE8
+.definelabel MapVertsPointer, 0x807F5DE8
 .definelabel MapVoid_MaxZ, 0x807F5FEA
 .definelabel balloonPatchCounts, 0x807FC408
 .definelabel coloredBananaCounts, 0x807F6150
@@ -263,6 +272,8 @@
 .definelabel heap_arena_meta, 0x807F0988
 .definelabel heap_end_pointer, 0x8076A060
 .definelabel fbufferPointers, 0x80744470
+.definelabel simpleLagCalcDisabled, 0x8076AF14
+.definelabel DemoFadeoutTimer, 0x8075531C
 .definelabel arcadeMap, 0x8004C723
 .definelabel arcadeMode, 0x8004C724
 .definelabel arcadeLevel, 0x8004A76C
@@ -287,6 +298,7 @@
 .definelabel jetpacObjectBase, 0x8002EF80
 .definelabel jetpacPlayerIndex, 0x8002EF74
 .definelabel jetpacPlayerCount, 0x8002EF78
+.definelabel jetpacStoryMode, 0x8002F3C8
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 x 4
@@ -397,6 +409,7 @@
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
 .definelabel textboxCancel, 0x807FFDF9 // u8
 .definelabel scriptsNotAutoloading, 0x807FFF8A // u8
+.definelabel disableLockedCam, 0x807FFF8B // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78
@@ -447,6 +460,15 @@
 .definelabel crcPatchMemory, 0x80002554
 .definelabel crcPatchROM, 0x3154
 .definelabel displayListCap, 0x805FE9E0
+.definelabel lockedCamHookWrite, 0x8061F6CC
+.definelabel overlayEntryPoint, 0x80024000
+.definelabel arcadeTextHookWrite, 0x80031C30
+.definelabel arcadeHasControlHookWrite, 0x80025410
+.definelabel arcadeHasControl2HookWrite, 0x800252F4
+.definelabel arcadeHasControl3HookWrite, 0x80027914
+.definelabel jetpacTextHookWrite, 0x80025354
+.definelabel jetpacPauseHookWrite, 0x80024954
+.definelabel jetpac5000HookWrite, 0x80027DB0
 
 .definelabel customCodeStart, 0x805d9e00
 .definelabel customCodeUpper, 0x805d

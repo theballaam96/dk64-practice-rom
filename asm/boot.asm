@@ -263,6 +263,9 @@ spriteHook:
 speedHook:
 	J 	controlSuperspeed
 	NOP
+lockedCamHook:
+	J 	lockedCamCode
+	NOP
 
 loadExtraHooks:
 	LUI t3, hi(pauseHook)
@@ -391,6 +394,12 @@ loadExtraHooks:
 	LUI t4, hi(speedHookWrite)
 	SW t3, lo(speedHookWrite) (t4) // Store Hook
 	SW r0, lo(speedHookWrite)+4 (t4) // Store NOP
+
+	LUI t3, hi(lockedCamHook)
+	LW t3, lo(lockedCamHook) (t3)
+	LUI t4, hi(lockedCamHookWrite)
+	SW t3, lo(lockedCamHookWrite) (t4) // Store Hook
+	SW r0, lo(lockedCamHookWrite)+4 (t4) // Store NOP
 
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

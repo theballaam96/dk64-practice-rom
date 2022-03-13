@@ -428,9 +428,6 @@ int correctSize(int size) {
 }
 
 int upload_void(void* source_mesh, int num_tris, int void_index, int block_index) {
-	if (block_index == 37) {
-		TestVariable = TestVariable - 1;
-	}
 	for (int j = 0; j < num_tris; j++) {
 		floor_tri* tri_base = getObjectArrayAddr(source_mesh,FLOORTRIANGLE_SIZE,j);
 		if (tri_base) {
@@ -583,13 +580,16 @@ int* displayVoidFloors(int* dl) {
 int* displayVoid(int* dl) {
 	int void_enabled = !(MapPropertiesBitfield & 0x4000);
 	if (voidMapOn) {
+		if (assignedConsole == WIIU) {
+			dl = drawPixelTextContainer(dl, 20, 210, "REMOVECHRISTIAN", 0xFF, 0xFF, 0xFF, 0xFF,0);
+		}
 		dl = displayVoidBorder(dl);
 		if (void_enabled) {
 			dl = drawBoxVoid(dl);
 			if (assignedConsole != WIIU) {
 				dl = drawText(dl, 6, 40, 100, "V", 0xFF, 0xFF, 0xFF, 0xFF);
-				dl = displayVoidFloors(dl);
 			}
+			dl = displayVoidFloors(dl);
 		}
 		dl = displayPlayerMarker(dl);
 		if (assignedConsole != WIIU) {

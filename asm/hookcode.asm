@@ -1,26 +1,26 @@
 START_HOOK:
 	updateLag:
-		LW 		a0, FrameReal
-		LW 		a1, FrameLag
-		SUBU 	a1, a0, a1
-		SH 		a1, StoredLag
-		LUI 	t6, 0x8077
-		J 		0x8060067C
-		LBU 	t6, 0xAF14 (t6)
+		LW 		t6, FrameReal
+		LW 		a2, FrameLag
+		SUBU 	a2, t6, a2
+		SH 		a2, StoredLag
+		LUI 	t6, hi(simpleLagCalcDisabled)
+		J 		lagHookWrite+8
+		LBU 	t6, lo(simpleLagCalcDisabled) (t6)
 
 	isSaving:
 		ADDIU 	t6, r0, 1
 		SB 	 	t6, SavePromptIsSaving
-		LUI 	t6, 0x8080
-		J 		0x8060DED4
-		LBU 	t6, 0xC928 (t6)
+		LUI 	t6, hi(player_count)
+		J 		saveHookWrite+8
+		LBU 	t6, lo(player_count) (t6)
 
 	logSpriteAddress:
 		LUI 	t6, hi(SpriteAddress)
 		SW 		v0, lo(SpriteAddress) (t6)
-		LUI 	v1, 0x8080
-		J 		0x806AB7D8
-		ADDIU 	v1, v1, 0xC80F
+		LUI 	v1, hi(sprite_translucency)
+		J 		spriteHookWrite+8
+		ADDIU 	v1, v1, lo(sprite_translucency)
 
 	setPauseVolume:
 		LUI 	a0, hi(PauseMenuMusicSetting)
@@ -49,14 +49,14 @@ START_HOOK:
 		setPauseVolume_Finish:
 			JAL 	playSong
 			ADDIU 	a0, r0, 0x22
-			J 		0x805FC898
+			J 		pauseHookWrite+8
 			NOP
 
 	kongCode:
 		JAL 	handleAutophase
 		NOP
 		LW 		ra, -0x4C (sp)
-		J 		0x806F3758
+		J 		kongHookWrite+8
 		LW 		s0, -0x50 (sp)
 
 	controlSuperspeed:
@@ -83,7 +83,7 @@ START_HOOK:
 		MUL.D 	f8, f8, f16
 
 		controlSuperspeed_Finish:
-			J 	0x8066535C
+			J 	speedHookWrite+8
 			NOP
 
 	writeLastUpdatedFlags:
@@ -116,7 +116,7 @@ START_HOOK:
 
 		writeLastUpdatedFlags_Finish:
 			SLL 	a3, a0, 0x10
-			J 		0x807312A4
+			J 		flagHookWrite+8
 			NOP
 
 	controlTimer:
@@ -124,11 +124,11 @@ START_HOOK:
 		ADDIU 	t6, r0, 2
 		SB 		t6, lo(ConvertTimerCountdown) (t8)
 		LW 		ra, 0x14 (sp)
-		J 		0x806A2B00
+		J 		spawnTimerHookWrite+8
 		ADDIU 	sp, sp, 0x18
 
 	preventPhasewalkingOverride:
-		JAL 	0x806DF494
+		JAL 	processPhase
 		SRA 	a2, t4, 0x10
 		LUI 	a2, hi(AutoPhaseStateOn)
 		LBU 	a2, lo(AutoPhaseStateOn) (a2)
@@ -150,7 +150,7 @@ START_HOOK:
 		SH 		a3, 0xE6 (a2)
 
 		preventPhasewalkingOverride_Finish:
-			J 	0x806E0644
+			J 	phaseCorrectionHookWrite+8
 			NOP
 
 	fairyDataStorageCode:
@@ -164,13 +164,13 @@ START_HOOK:
 		SH 		v0, 0x2 (s0)
 		LHU 	v0, 0x4 (t2)
 		SH 		v0, 0x4 (s0)
-		LUI 	t2, 0x8080
-		LW 		t2, 0xBB40 (t2)
+		LUI 	t2, hi(CurrentActorPointer-4)
+		LW 		t2, lo(CurrentActorPointer-4) (t2)
 		LUI 	s0, hi(FairyViewerFocus)
 		SW 		t2, lo(FairyViewerFocus) (s0)
-		LUI 	t2, 0x8080
-		J 		0x806C5DA4
-		LW 		t2, 0xC924 (t2)
+		LUI 	t2, hi(SwapObject)
+		J 		fairyStoreHookWrite+8
+		LW 		t2, lo(SwapObject) (t2)
 
 	arcadeTextHook:
 		J 		arcadeTextLoop
@@ -187,37 +187,37 @@ START_HOOK:
 	arcadeLoopCode:
 		LUI 	t3, hi(arcadeTextHook)
 		LW 		t3, lo(arcadeTextHook) (t3)
-		LUI 	t4, 0x8003
-		SW 		t3, 0x1C30 (t4) // Store Hook
-		SW 		r0, 0x1C34 (t4) // Store NOP
+		LUI 	t4, hi(arcadeTextHookWrite)
+		SW 		t3, lo(arcadeTextHookWrite) (t4) // Store Hook
+		SW 		r0, lo(arcadeTextHookWrite)+4 (t4) // Store NOP
 		LUI 	t3, hi(arcadeHasControlHook)
 		LW 		t3, lo(arcadeHasControlHook) (t3)
-		LUI 	t4, 0x8002
-		SW 		t3, 0x5410 (t4)
-		SW 		r0, 0x5414 (t4)
+		LUI 	t4, hi(arcadeHasControlHookWrite)
+		SW 		t3, lo(arcadeHasControlHookWrite) (t4)
+		SW 		r0, lo(arcadeHasControlHookWrite)+4 (t4)
 		LUI 	t3, hi(arcadeHasControl2Hook)
 		LW 		t3, lo(arcadeHasControl2Hook) (t3)
-		LUI 	t4, 0x8002
-		SW 		t3, 0x52F4 (t4)
-		SW 		r0, 0x52F8 (t4)
+		LUI 	t4, hi(arcadeHasControl2HookWrite)
+		SW 		t3, lo(arcadeHasControl2HookWrite) (t4)
+		SW 		r0, lo(arcadeHasControl2HookWrite)+4 (t4)
 		LUI 	t3, hi(arcadeHasControl3Hook)
 		LW 		t3, lo(arcadeHasControl3Hook) (t3)
-		LUI 	t4, 0x8002
-		SW 		t3, 0x7914 (t4)
-		SW 		r0, 0x7918 (t4)
-		JAL 	0x80024000
+		LUI 	t4, hi(arcadeHasControl3HookWrite)
+		SW 		t3, lo(arcadeHasControl3HookWrite) (t4)
+		SW 		r0, lo(arcadeHasControl3HookWrite)+4 (t4)
+		JAL 	overlayEntryPoint
 		NOP
 		JAL 	arcadeFuncLoop
 		NOP
-		J 		0x805FC14C
+		J 		arcadeHookWrite+8
 		NOP
 
 	arcadeTextLoop:
 		JAL 	spawnArcadeMenu
 		ADDIU 	a0, sp, 0x90
-		LUI 	v0, 0x8005
-		J 		0x80031C38
-		LBU 	v0, 0xC724 (v0)
+		LUI 	v0, hi(arcadeMode)
+		J 		arcadeTextHookWrite+8
+		LBU 	v0, lo(arcadeMode) (v0)
 
 	arcadeHasControlLoop:
 		LUI 	t6, hi(arcadeMenu)
@@ -225,14 +225,14 @@ START_HOOK:
 		LBU 	t6, 0x0000 (t6)
 		BNEZ 	t6, arcadeHasControlLoop_Finish
 		NOP
-		LUI 	t6, 0x8005
-		J 		0x80025418
-		LBU 	t6, 0xC71D (t6)
+		LUI 	t6, hi(arcadePause)
+		J 		arcadeHasControlHookWrite+8
+		LBU 	t6, lo(arcadePause) (t6)
 
 		arcadeHasControlLoop_Finish:
-			LUI 	t6, 0x8005
-			J 		0x80025484
-			LBU 	t6, 0xC71D (t6)
+			LUI 	t6, hi(arcadePause)
+			J 		arcadeHasControlHookWrite+0x74
+			LBU 	t6, lo(arcadePause) (t6)
 
 	arcadeHasControl2Loop:
 		LUI 	t8, hi(arcadeMenu)
@@ -240,14 +240,14 @@ START_HOOK:
 		LBU 	t8, 0x0000 (t8)
 		BNEZ 	t8, arcadeHasControl2Loop_Finish
 		NOP
-		LUI 	t8, 0x8005
-		J 		0x800252FC
-		LB 		t8, 0xC71E (t8)
+		LUI 	t8, hi(arcadeBonusTimer)
+		J 		arcadeHasControl2HookWrite+8
+		LB 		t8, lo(arcadeBonusTimer) (t8)
 
 		arcadeHasControl2Loop_Finish:
-			LUI 	t8, 0x8005
-			J 		0x80025408
-			LB 		t8, 0xC71E (t8)
+			LUI 	t8, hi(arcadeBonusTimer)
+			J 		arcadeHasControl2HookWrite+0x114
+			LB 		t8, lo(arcadeBonusTimer) (t8)
 
 	arcadeHasControl3Loop:
 		LUI 	at, hi(arcadeMenu)
@@ -256,34 +256,34 @@ START_HOOK:
 		BNEZ 	at, arcadeHasControl3Loop_Finish
 		NOP
 		LWC1 	f4, 0x4 (s1)
-		J 		0x8002791C
+		J 		arcadeHasControl3HookWrite+8
 		LWC1	f6, 0x8 (s1)
 
 		arcadeHasControl3Loop_Finish:
-			J 		0x8002796C
+			J 		arcadeHasControl3HookWrite+0x58
 			NOP
 
 	pauseMenu97Code:
 		LUI 	v0, hi(PausePointer)
-		LUI 	v1, 0x8080
-		LW 		v1, 0xBB40 (v1)
+		LUI 	v1, hi(CurrentActorPointer-4)
+		LW 		v1, lo(CurrentActorPointer-4) (v1)
 		SW 		v1, lo(PausePointer) (v0)
-		LUI 	v0, 0x8077
-		J 		0x806A8160
-		LW 		v0, 0xA0A8 (v0)
+		LUI 	v0, hi(CurrentMap)
+		J 		pause97HookWrite+8
+		LW 		v0, lo(CurrentMap) (v0)
 
 	pauseMenu343Code:
 		LUI 	t6, hi(PausePointer)
-		LUI 	t7, 0x8080
-		LW 		t7, 0xBB40 (t7)
+		LUI 	t7, hi(CurrentActorPointer-4)
+		LW 		t7, lo(CurrentActorPointer-4) (t7)
 		SB 		t7, lo(PausePointer) (t6)
 		ADDIU 	sp, sp, -0x30
-		J 		0x806AD004
+		J 		pause343HookWrite+8
 		SW 		s0, 0x1C (sp)
 
 	loadSetupCode:
-		JAL 	0x80600080
-		LW 		a0, 0xA0A8 (a0)
+		JAL 	getParentMapIndexFromCurrentMap
+		LW 		a0, lo(CurrentMap) (a0)
 		LI 		at, -1
 		BEQ 	v0, at, loadSetupCode_Finish
 		ADDIU 	t6, r0, 0xC0
@@ -299,11 +299,11 @@ START_HOOK:
 		LI 		v0, -1
 
 		loadSetupCode_Finish:
-			J 		0x80688720
+			J 		loadSetupHookWrite+0xC
 			LI 		at, -1
 
 	resolveBonusBarrelCode:
-		JAL 	0x80600080
+		JAL 	getParentMapIndexFromCurrentMap
 		SWC1 	f12, 0x4c (sp)
 		LI 		at, -1
 		BEQ 	v0, at, resolveBonusBarrelCode_Finish
@@ -320,19 +320,19 @@ START_HOOK:
 		LI  	v0, -1
 
 		resolveBonusBarrelCode_Finish:
-			J 	0x80688D70
+			J 	resolveBarrelHookWrite+0xC
 			LI  at, -1
 
 	displayListCode:
 		JAL 	displayListModifiers
 		OR 		a0, s0, r0
 		OR 		s0, v0, r0
-		LUI 	a0, 0x8075
-		ADDIU 	a0, a0, 0x531C
+		LUI 	a0, hi(DemoFadeoutTimer)
+		ADDIU 	a0, a0, lo(DemoFadeoutTimer)
 		LHU 	v1, 0x0 (a0)
-		LUI 	v0, 0x8075
-		J 		0x80714184
-		LBU 	v0, 0x5314 (v0)
+		LUI 	v0, hi(Gamemode)
+		J 		displayListHookWrite+8
+		LBU 	v0, lo(Gamemode) (v0)
 
 	jetpacTextHook:
 		J 		jetpacTextCode
@@ -347,34 +347,34 @@ START_HOOK:
 	jetpacLoopCode:
 		LUI 	t3, hi(jetpacTextHook)
 		LW 		t3, lo(jetpacTextHook) (t3)
-		LUI 	t4, 0x8002
-		SW 		t3, 0x5354 (t4) // Store Hook
-		SW 		r0, 0x5358 (t4) // Store NOP
+		LUI 	t4, hi(jetpacTextHookWrite)
+		SW 		t3, lo(jetpacTextHookWrite) (t4) // Store Hook
+		SW 		r0, lo(jetpacTextHookWrite)+4 (t4) // Store NOP
 
 		LUI 	t3, hi(jetpacPauseHook)
 		LW 		t3, lo(jetpacPauseHook) (t3)
-		LUI 	t4, 0x8002
-		SW 		t3, 0x4954 (t4) // Store Hook
-		SW 		r0, 0x4958 (t4) // Store NOP
+		LUI 	t4, hi(jetpacPauseHookWrite)
+		SW 		t3, lo(jetpacPauseHookWrite) (t4) // Store Hook
+		SW 		r0, lo(jetpacPauseHookWrite)+4 (t4) // Store NOP
 
 		LUI 	t3, hi(jetpacTimerHook)
 		LW 		t3, lo(jetpacTimerHook) (t3)
-		LUI 	t4, 0x8002
-		SW 		t3, 0x7DB0 (t4) // Store Hook
-		SW 		r0, 0x7DB4 (t4) // Store NOP
+		LUI 	t4, hi(jetpac5000HookWrite)
+		SW 		t3, lo(jetpac5000HookWrite) (t4) // Store Hook
+		SW 		r0, lo(jetpac5000HookWrite)+4 (t4) // Store NOP
 
-		JAL 	0x80024000
+		JAL 	overlayEntryPoint
 		NOP
 		JAL 	jetpacFuncLoop
 		NOP
-		J 		0x805FC15C
+		J 		jetpacHookWrite+8
 		NOP
 
 	jetpacTextCode:
 		JAL 	spawnJetpacMenu
 		LW 		a0, 0x20 (sp)
 		LW 		ra, 0x1C (sp)
-		J 		0x8002535C
+		J 		jetpacTextHookWrite+8
 		LW 		s0, 0x18 (sp)
 
 	jetpacPauseCode:
@@ -383,23 +383,23 @@ START_HOOK:
 		BNEZ 	v0, jetpacPauseCode_Finish
 		NOP
 		LW 		v0, 0x1C (sp)
-		JAL 	0x80026D48
+		JAL 	jetpacUnkFunc
 		SW 		v0, 0x1C (sp)
-		J 		0x80024960
+		J 		jetpacPauseHookWrite+0xC
 		NOP
 
 		jetpacPauseCode_Finish:
-			JAL 	0x800255D4
+			JAL 	jetpacInitDL
 			LW 		a0, 0x20 (sp)
-			JAL 	0x80028E88 // Draw Floors
+			JAL 	jetpacDrawFloors // Draw Floors
 			NOP
-			JAL 	0x80026AB0 // Draw Jetman
+			JAL 	jetpacDrawJetman // Draw Jetman
 			NOP
-			JAL 	0x8002AD8C // Draw Enemies
+			JAL 	jetpacDrawEnemies // Draw Enemies
 			NOP
-			JAL 	0x80028544 // Draw Rocket
+			JAL 	jetpacDrawRocket // Draw Rocket
 			NOP
-			J 		0x800249E4
+			J 		jetpacPauseHookWrite+0x90
 			NOP
 
 	jetpac5000Code:
@@ -407,7 +407,7 @@ START_HOOK:
 		LW 		t3, 0x4 (t2)
 		SLTI 	at, t3, 5000
 		BNEZ 	at, jetpac5000Code_Finish
-		LBU		t1, 0xF3C8 (t1)
+		LBU		t1, lo(jetpacStoryMode) (t1)
 
 		jetpac5000Code_5000Hit:
 			LUI 	at, hi(jetpacTimerState)
@@ -418,42 +418,42 @@ START_HOOK:
 			SB 		a1, lo(jetpacTimerState) (at)
 
 		jetpac5000Code_Finish:
-			J 		0x80027DB8
+			J 		jetpac5000HookWrite+8
 			NOP
 
 	vertBaseStore:
 		ADDU 	t9, v0, t5
-		SW 		t9, 0x5DE8 (at)
+		SW 		t9, lo(MapVertsPointer) (at)
 		LUI 	at, hi(vanillaVertBase)
-		J 		0x8062F208
+		J 		vertBaseStoreHookWrite+8
 		SW 		t9, lo(vanillaVertBase) (at)
 
 	signalsStore:
 		LH 		v1, 0x0 (s3)
 		SW 		s1, 0x18 (sp)
 		LUI 	t6, hi(objectSignalsCountCopy)
-		J 		0x8067934C
+		J 		signalsStoreHookWrite+8
 		SB 		v1, lo(objectSignalsCountCopy) (t6)
 
 	delayedKillsStore:
 		LH 		t6, 0x0 (s2)
 		SW 		s0, 0x18 (sp)
 		LUI 	a0, hi(delayedKillsCountCopy)
-		J 		0x806783D4
+		J 		delayedKillsStoreHookWrite+8
 		SB 		t6, lo(delayedKillsCountCopy) (a0)
 
 	lockStackStore:
 		LW 		v1, 0x0 (t1)
 		LUI 	v0, hi(lockStackCountCopy)
 		SB 		v1, lo(lockStackCountCopy) (v0)
-		J 		0x806109FC
+		J 		lockStackStoreHookWrite+8
 		ADDIU 	v0, r0, 1
 
 	storeFloorPreload:
 		OR 		s1, v0, r0
 		ANDI	t1, t9, 2
 		LUI 	a1, hi(floorsPreloadedVanilla)
-		J 		0x80666114
+		J 		storeFloorPreloadHookWrite+8
 		SB 		t1, lo(floorsPreloadedVanilla) (a1)
 
 	getGiantKoshaAddress:
@@ -470,8 +470,22 @@ START_HOOK:
 		SW 		s0, GiantKoshaTimerAddress
 
 		getGiantKoshaAddress_Finish:
-			J 		0x8064607c
+			J 		giantKoshaHookWrite+8
 			OR 		s0, a0, r0
+
+	lockedCamCode:
+		BEQZ 	t7, lockedCamCode_None
+		NOP
+		LUI 	t9, hi(disableLockedCam)
+		LBU 	t9, lo(disableLockedCam) (t9)
+		BNEZ 	t9, lockedCamCode_None
+		NOP
+		J 		lockedCamHookWrite+8
+		NOP
+
+		lockedCamCode_None:
+			J 	lockedCamHookWrite+0x4C4
+			MTC1 r0, f28
 
 .align 0x10
 END_HOOK:

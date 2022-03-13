@@ -405,6 +405,7 @@ extern char voidsDisabled;
 extern char disableCustomSFX;
 extern char textboxCancel;
 extern unsigned char scriptsNotAutoloading;
+extern char disableLockedCam;
 
 // Code
 extern int debugColumnLoop;

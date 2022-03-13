@@ -4,10 +4,10 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 0/113(0.0%)
-		Vanilla Vars: 0/161(0.0%)
-		Hack Vars: 108/108(100.0%)
-		Code: 0/48(0.0%)
+		Functions: 0/121(0.0%)
+		Vanilla Vars: 0/165(0.0%)
+		Hack Vars: 109/109(100.0%)
+		Code: 0/57(0.0%)
 */
 
 //functions
@@ -105,6 +105,8 @@
 //.definelabel frameLoop
 //.definelabel getPointerTable14Texture
 //.definelabel cancelPausedCutscenes
+//.definelabel processPhase
+//.definelabel getParentMapIndexFromCurrentMap
 //.definelabel getCenterOffset
 //.definelabel setWaterHeight
 //.definelabel updateObjectScript
@@ -124,6 +126,12 @@
 //.definelabel spawnJetpacItem
 //.definelabel resetJetpacMap
 //.definelabel changeJetpacMode
+//.definelabel jetpacInitDL
+//.definelabel jetpacDrawFloors
+//.definelabel jetpacDrawJetman
+//.definelabel jetpacDrawEnemies
+//.definelabel jetpacDrawRocket
+//.definelabel jetpacUnkFunc
 
 //vanilla data
 //.definelabel TransitionSpeed
@@ -246,6 +254,7 @@
 //.definelabel MapVoid_MinX
 //.definelabel MapVoid_MinZ
 //.definelabel MapVoid_MaxX
+//.definelabel MapVertsPointer
 //.definelabel MapVoid_MaxZ
 //.definelabel balloonPatchCounts
 //.definelabel coloredBananaCounts
@@ -263,6 +272,8 @@
 //.definelabel heap_arena_meta
 //.definelabel heap_end_pointer
 //.definelabel fbufferPointers
+//.definelabel simpleLagCalcDisabled
+//.definelabel DemoFadeoutTimer
 //.definelabel arcadeMap
 //.definelabel arcadeMode
 //.definelabel arcadeLevel
@@ -287,6 +298,7 @@
 //.definelabel jetpacObjectBase
 //.definelabel jetpacPlayerIndex
 //.definelabel jetpacPlayerCount
+//.definelabel jetpacStoryMode
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 x 4
@@ -397,6 +409,7 @@
 .definelabel arcadeMenu, 0x807FFDDD // 0x6
 .definelabel textboxCancel, 0x807FFDF9 // u8
 .definelabel scriptsNotAutoloading, 0x807FFF8A // u8
+.definelabel disableLockedCam, 0x807FFF8B // u8
 
 // Code
 //.definelabel debugColumnLoop
@@ -447,4 +460,13 @@
 //.definelabel crcPatchMemory
 //.definelabel crcPatchROM
 //.definelabel displayListCap
+//.definelabel lockedCamHookWrite
+//.definelabel overlayEntryPoint
+//.definelabel arcadeTextHookWrite
+//.definelabel arcadeHasControlHookWrite
+//.definelabel arcadeHasControl2HookWrite
+//.definelabel arcadeHasControl3HookWrite
+//.definelabel jetpacTextHookWrite
+//.definelabel jetpacPauseHookWrite
+//.definelabel jetpac5000HookWrite
 
