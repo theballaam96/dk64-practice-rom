@@ -31,6 +31,9 @@ static const char toggles_voiddisable_on[] = "} DISABLE VOIDS";
 static const char toggles_enabletextboxcancel_off[] = "{ ENABLE TEXTBOX CANCELLING";
 static const char toggles_enabletextboxcancel_on[] = "} ENABLE TEXTBOX CANCELLING";
 
+static const char toggles_lockedcamdisable_off[] = "{ DISABLE LOCKED CAMERA";
+static const char toggles_lockedcamdisable_on[] = "} DISABLE LOCKED CAMERA";
+
 static const char* toggles_array[] = {
 	toggles_enabletextboxcancel_off,
 	toggles_sandstorm_unk,
@@ -42,6 +45,7 @@ static const char* toggles_array[] = {
 	toggles_superspeed,
 	toggles_ltotoggletb_off,
 	toggles_voiddisable_off,
+	toggles_lockedcamdisable_off,
 	"TOGGLE TAG BARREL VOID",
 	"TOGGLE VISIBILITY",
 	"TURN OFF ALL CHEATS",
@@ -58,6 +62,7 @@ static const char toggles_access[] = {
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Superspeed
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Toggle TB w L
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Disable Void
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Disable Locked Camera
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Toggle TB
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Visibility
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Turn off all
@@ -72,6 +77,7 @@ static const char* toggles_addresses[] = {
 	(char*)&LToLevitateOn,
 	(char*)&LToToggleTBOn,
 	(char*)&voidsDisabled,
+	(char*)&disableLockedCam,
 };
 
 static const char toggles_indexes[] = {
@@ -83,6 +89,7 @@ static const char toggles_indexes[] = {
 	6,
 	8,
 	9,
+	10,
 };
 
 static const char* toggles_on[] = {
@@ -94,6 +101,7 @@ static const char* toggles_on[] = {
 	toggles_levitate_on,
 	toggles_ltotoggletb_on,
 	toggles_voiddisable_on,
+	toggles_lockedcamdisable_on,
 };
 
 static const char* toggles_off[] = {
@@ -105,6 +113,7 @@ static const char* toggles_off[] = {
 	toggles_levitate_off,
 	toggles_ltotoggletb_off,
 	toggles_voiddisable_off,
+	toggles_lockedcamdisable_off,
 };
 
 void openTogglesMenu(void) {
@@ -200,6 +209,7 @@ void resetAllCheats(void) {
 	IsSuperspeedOn = 1;
 	MinigameTimersInMS = 0;
 	voidsDisabled = 0;
+	disableLockedCam = 0;
 	if (EnemySpawnOff) {
 		toggleSpawnPrevention();
 	}
@@ -222,6 +232,7 @@ static const int toggles_functions[] = {
 	(int)&toggleSuperspeed,
 	(int)&toggleCheat,
 	(int)&toggleVoidDisable,
+	(int)&toggleCheat,
 	(int)&toggleTBVoid,
 	(int)&toggleVisify,
 	(int)&resetAllCheats,
@@ -230,7 +241,7 @@ static const int toggles_functions[] = {
 const Screen toggles_struct = {
 	.TextArray = (int*)toggles_array,
 	.FunctionArray = toggles_functions,
-	.ArrayItems = 13,
+	.ArrayItems = 14,
 	.ParentScreen = ACTIVEMENU_SCREEN_CHEATS_ROOT,
 	.ParentPosition = 6,
 	.hasAccessArray = 1,

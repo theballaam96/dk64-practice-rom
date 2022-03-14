@@ -45,6 +45,7 @@ extern int* displaySimpleInput(int* dl);
 extern int* displayVoid(int* dl);
 extern void drawJetpacPixelFont(int* dl, char* str, int x, int y, int red, int green, int blue, int alpha);
 extern int* displaySavePrompt(int* dl);
+extern int* drawString(int* dl, int style, float x, float y, char* str);
 extern int getCenter(int style, char* str);
 extern int isScriptLoaded(int idx);
 extern void fixModifiers(void);

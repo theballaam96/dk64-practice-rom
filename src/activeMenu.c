@@ -36,8 +36,8 @@ const Screen main_struct = {
 	.AccessArray = main_access
 };
 
-int isValidSpot(int position) {
-	const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
+int isValidSpotInternal(int position, int screenIndex) {
+	const Screen* focused_screen = menu_screens[screenIndex];
 	int hasAccessArray = focused_screen->hasAccessArray;
 	int ret_ver = 1;
 	int ret_console = 1;
@@ -49,6 +49,20 @@ int isValidSpot(int position) {
 		}
 	}
 	return ret_ver & ret_console;
+}
+
+int isValidSpot(int position) {
+	return isValidSpotInternal(position,ActiveMenu.screenIndex);
+}
+
+int getScreenItemCount(int screenIndex) {
+	const Screen* focused_screen = menu_screens[screenIndex];
+	int count = focused_screen->ArrayItems;
+	int item_count = 0;
+	for (int i = 0; i < count; i++) {
+		item_count += isValidSpotInternal(i,screenIndex);
+	}
+	return item_count;
 }
 
 void skipEmptyOptions(int direction) {
@@ -83,9 +97,9 @@ void skipEmptyOptions(int direction) {
 
 void spawnMenu(int screenIndex) {
 	ActiveMenu.screenIndex = screenIndex;
+	int array_count = getScreenItemCount(screenIndex);
 	const Screen* focused_screen = menu_screens[screenIndex];
-	int array_count = focused_screen->ArrayItems;
-	ActiveMenu.totalItems = array_count;
+	ActiveMenu.totalItems = focused_screen->ArrayItems;
 	if (array_count > MAX_ELEMENTS) {
 		array_count = MAX_ELEMENTS;
 		ActiveMenu.hasScroll = 1;
@@ -135,24 +149,31 @@ int* displayMenu(int* dl) {
 		int blue = 0xFF;
 		const Screen* focused_screen = menu_screens[(int)ActiveMenu.screenIndex];
 		int* focused_text_array = (int*)focused_screen->TextArray;
-		int array_count = focused_screen->ArrayItems;
+		int array_count = getScreenItemCount(ActiveMenu.screenIndex);
 		if (array_count > MAX_ELEMENTS) {
 			array_count = MAX_ELEMENTS;
 		}
 		int background = 1;
 		int relative_pos = ActiveMenu.positionIndex - ActiveMenu.startIndex;
-		for (int i = 0; i < array_count; i++) {
+		int i = 0;
+		int j = 0;
+		while (i < array_count) {
 			red = 0xFF;
 			green = 0xFF;
 			blue = 0xFF;
-			if (i == relative_pos) {
+			if (j == relative_pos) {
 				red = 0xFF;
 				green = 0xD7;
 				blue = 0;
 			}
-			if (isValidSpot(i + ActiveMenu.startIndex)) {
-				dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[i + ActiveMenu.startIndex], red, green, blue, 0xFF,background);
+			if (isValidSpot(j + ActiveMenu.startIndex)) {
+				dl = drawPixelTextContainer(dl, x, y, (char *)focused_text_array[j + ActiveMenu.startIndex], red, green, blue, 0xFF,background);
 				y += 13;
+				i += 1;
+			}
+			j += 1;
+			if ((j + ActiveMenu.startIndex) > ActiveMenu.totalItems) {
+				break;
 			}
 		}
 		if (ActiveMenu.positionIndex == ActiveMenu.totalItems) {

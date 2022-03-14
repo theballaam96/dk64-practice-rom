@@ -361,21 +361,6 @@
 			"const":true
 		},
 		{
-			"index_var":"ACTIVEMENU_SCREEN_CHEATS_GAMEMODE_GAMEPLAY",
-			"struct":"gamemode_gameplay_struct",
-			"const":true
-		},
-		{
-			"index_var":"ACTIVEMENU_SCREEN_CHEATS_GAMEMODE_CUTSCENE",
-			"struct":"gamemode_cutscenes_struct",
-			"const":true
-		},
-		{
-			"index_var":"ACTIVEMENU_SCREEN_CHEATS_GAMEMODE_UNUSED",
-			"struct":"gamemode_unused_struct",
-			"const":true
-		},
-		{
 			"index_var":"ACTIVEMENU_SCREEN_DEBUG_ROOT",
 			"struct":"debug_struct",
 			"const":true
