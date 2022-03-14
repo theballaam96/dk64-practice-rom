@@ -114,4 +114,7 @@ const Screen* menu_screens[] = {
 	&filestates_nlemain_struct,
 	&filestates_nle40_struct,
 	&fixes_struct,
+	&memory_struct,
+	&freeze_screen_struct,
+	&dynwatch_manage_struct,
 };

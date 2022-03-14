@@ -1026,3 +1026,10 @@ typedef struct heap_arena_struct {
 	/* 0x010 */ unsigned short chunk_data_size;
 	/* 0x012 */ char unk_12[2];
 } heap_arena_struct;
+
+typedef struct dynamicWatchStruct {
+	/* 0x000 */ void* address;
+	/* 0x004 */ short size;
+	/* 0x006 */ char watch_index;
+	/* 0x007 */ char used;
+} dynamicWatchStruct;

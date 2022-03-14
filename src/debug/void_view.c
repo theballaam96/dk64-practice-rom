@@ -69,7 +69,15 @@ int* displayPlayerMarker(int* dl) {
 		x[i] = CENTER + (dist * dk_sin(angle + (i * 2.09439510f)));
 		y[i] = CENTER - (dist * dk_cos(angle + (i * 2.09439510f)));
 	}
-	dl = drawTri(dl, x[0], y[0], x[1], y[1], x[2], y[2], 0xFF, 0xFF, 0xFF, 0x80);
+	int red = 0xFF;
+	int green = 0xFF;
+	int blue = 0xFF;
+	if (assignedConsole == WIIU) {
+		red = 0;
+		green = 0;
+		blue = 0;
+	}
+	dl = drawTri(dl, x[0], y[0], x[1], y[1], x[2], y[2], red, green, blue, 0x80);
 	dl = drawScreenRect(dl,
 						CENTER - PLAYER_SQ_SIZE,
 						CENTER - PLAYER_SQ_SIZE,
@@ -187,6 +195,14 @@ int* drawFloors(int* dl, int x1, int z1, int x2, int z2, int x3, int z3) {
 				pass = 0;
 			}
 		}
+		int red = VOID_RED_BYTE;
+		int green = VOID_GREEN_BYTE;
+		int blue = VOID_BLUE_BYTE;
+		if (assignedConsole == WIIU) {
+			red = 0;
+			green = 0;
+			blue = 0;
+		}
 		if (pass) {
 			dl = drawTri(dl,
 						diffs[0],
@@ -195,9 +211,9 @@ int* drawFloors(int* dl, int x1, int z1, int x2, int z2, int x3, int z3) {
 						diffs[3],
 						diffs[4],
 						diffs[5],
-						VOID_RED_BYTE,
-						VOID_GREEN_BYTE,
-						VOID_BLUE_BYTE,
+						red,
+						green,
+						blue,
 						1);
 		}
 	}
@@ -581,6 +597,7 @@ int* displayVoid(int* dl) {
 	int void_enabled = !(MapPropertiesBitfield & 0x4000);
 	if (voidMapOn) {
 		if (assignedConsole == WIIU) {
+			//dl = drawString(dl,6,20,210,"TEST");
 			dl = drawPixelTextContainer(dl, 20, 210, "REMOVECHRISTIAN", 0xFF, 0xFF, 0xFF, 0xFF,0);
 		}
 		dl = displayVoidBorder(dl);

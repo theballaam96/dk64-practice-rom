@@ -8,7 +8,7 @@
 #define validRamReadStart 0x80000000
 #define validRamReadEnd 0x807FFFB8
 
-#define extraFuncCount 3
+#define extraFuncCount 6
 #define maxFreeze 8
 
 #define menuStateChangeStartAddr 00000000
@@ -56,14 +56,6 @@ char editing_address = 0;
 float focusbyte_x = 0;
 float focusbyte_y = 0;
 
-// static const char addToWatches[] = "ADD TO WATCH";
-// static const char freezeValue[] = "FREEZE VALUE";
-// static const char frozenMenu[] = "FROZEN VALUES";
-// static const char watchTypeInt0[] = "Int";
-// static const char watchTypeInt1[] = "Float";
-// static const char watchTypeShort0[] = "Short";
-// static const char watchTypeByte0[] = "Byte";
-// static const char watchTypeByte1[] = "Bool";
 static int extraFuncs[extraFuncCount] = {};
 int* focused_address = 0;
 
@@ -92,6 +84,7 @@ void defineRAMViewerParameters(int* start, int* end, int source) {
     } else {
         printStartAddr = start;
     }
+    focus_menu = FOCUSMENU_DEFAULT;
 }
 
 void dk_strFormatWrapper(char* destination, int byteFormat, int* address) {
@@ -410,12 +403,16 @@ void ramViewUpdate(void) {
             ramViewEditMode = 3;
         }
         if (NewlyPressedControllerInput.Buttons & Z_Button) {
-            focus_menu += 1;
-            if (focus_menu == 2) {
-                focus_menu = 0;
-            }
-            if (focus_menu == FOCUSMENU_DETAILS) {
-                details_index = 0;
+            if (currentFormat == ByteFormatH) {
+                focus_menu = FOCUSMENU_DEFAULT;
+            } else {
+                focus_menu += 1;
+                if (focus_menu == 2) {
+                    focus_menu = 0;
+                }
+                if (focus_menu == FOCUSMENU_DETAILS) {
+                    details_index = 0;
+                }
             }
         }
         if (focus_menu == FOCUSMENU_DEFAULT) {
@@ -441,7 +438,7 @@ void ramViewUpdate(void) {
 
 int* drawExtraText(int* dl, char* str, int y, int focus_index, int details_index, int background, int func) {
     int colors[6] = {0xFF,0xFF,0xFF,0xFF,0xD7,0x00};
-    dl = drawPixelTextContainer(dl, 185, y, str,
+    dl = drawPixelTextContainer(dl, 120, y, str,
     //dl = drawTextContainer(dl, 128, 200, y, str,
         colors[(3 * (focus_index == details_index)) + 0],
         colors[(3 * (focus_index == details_index)) + 1],
@@ -461,15 +458,77 @@ void followPointerFunc(void) {
     focus_menu = FOCUSMENU_DEFAULT;
 }
 
-void addToWatchFunc(void) {
+void addToWatchFunc(int index) {
     //TestVariable = 2;
+    int found_used = 0;
+    int i = 0;
+    while((i < 4) && !found_used) {
+        if (!dynamic_watches[i].used) {
+            found_used = 1;
+            dynamic_watches[i].address = focused_address;
+            int _used = 1;
+            if (currentFormat == ByteFormat4) {
+                dynamic_watches[i].size = DYNWATCH_UINT + index;
+            } else if (currentFormat == ByteFormat2) {
+                dynamic_watches[i].size = DYNWATCH_USHORT + index;
+            } else if (currentFormat == ByteFormat1) {
+                dynamic_watches[i].size = DYNWATCH_UBYTE + index;
+            } else {
+                _used = 0;
+            }
+            dynamic_watches[i].used = _used;
+            int added_watch = 0;
+            for (int j = 0; j < WatchCount; j++) {
+                if ((WatchIndex[j] == 0) && (!added_watch)) {
+                    dynamic_watches[i].watch_index = j;
+                    WatchIndex[j] = 27;
+                    added_watch = 1;
+                }
+            }
+            break;
+        } else if (dynamic_watches[i].address == focused_address) {
+            dynamic_watches[i].used = 0;
+            WatchIndex[((int)dynamic_watches[i].watch_index) % WatchCount] = 0;
+            break;
+        }
+        i++;
+        if (i == 4) {
+            playSFX(Wrong);
+        }
+    }
+}
+
+void addToWatchFuncU(void) {
+    addToWatchFunc(0);
+}
+
+void addToWatchFuncS(void) {
+    addToWatchFunc(1);
+}
+
+void addToWatchFuncH(void) {
+    addToWatchFunc(2);
+}
+
+void addToWatchFuncF(void) {
+    addToWatchFunc(3);
+}
+
+int getDynWatchIndex(void) {
+    for (int i = 0; i < 4; i++) {
+        if (dynamic_watches[i].used) {
+            if (dynamic_watches[i].address == focused_address) {
+                return i;
+            }
+        }
+    }
+    return -1;
 }
 
 void freezeValueFunc(void) {
-    //TestVariable = 3;
     int found_used = 0;
     int i = 0;
-    while ((i < 8) && !found_used) {
+    while ((i < maxFreeze) && !found_used) {
         if (!freeze_data[i].used) {
             found_used = 1;
             freeze_data[i].addr = focused_address;
@@ -490,13 +549,71 @@ void freezeValueFunc(void) {
                 freeze_data[i].size = SIZE_UNKNOWN;
             }
             break;
+        } else if (freeze_data[i].addr == focused_address) {
+            freeze_data[i].used = 0;
+            break;
         }
         i++;
-        if (i == 8) {
+        if (i == maxFreeze) {
             playSFX(Wrong);
         }
     }
 }
+
+int getFreezeIndex(void) {
+    for (int i = 0; i < maxFreeze; i++) {
+        if (freeze_data[i].used) {
+            if (freeze_data[i].addr == focused_address) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+void handleFrozenValues(void) {
+    for (int i = 0; i < maxFreeze; i++) {
+        if (freeze_data[i].used) {
+            int size = freeze_data[i].size;
+            int val = freeze_data[i].value;
+            if (size == SIZE_INT) {
+                *(unsigned int*)(freeze_data[i].addr) = val;
+            } else if (size == SIZE_SHORT) {
+                *(unsigned short*)(freeze_data[i].addr) = val;
+            } else if (size == SIZE_BYTE) {
+                *(unsigned char*)(freeze_data[i].addr) = val;
+            }
+        }
+    }
+}
+
+static char freeze_name[20] = "";
+
+static char* watch_types[] = {
+    "UNSIGNED",
+    "SIGNED",
+    "HEX",
+    "FLOAT",
+};
+
+static char watch_name0[20] = "";
+static char watch_name1[20] = "";
+static char watch_name2[20] = "";
+static char watch_name3[20] = "";
+
+static char* watch_names[] = {
+    watch_name0,
+    watch_name1,
+    watch_name2,
+    watch_name3,
+};
+
+static int watch_funcs[] = {
+    (int)&addToWatchFuncU,
+    (int)&addToWatchFuncS,
+    (int)&addToWatchFuncH,
+    (int)&addToWatchFuncF,
+};
 
 int* displayMemory(int* dl) {
     int focus_index = 0;
@@ -599,7 +716,7 @@ int* displayMemory(int* dl) {
         if (focus_menu == FOCUSMENU_DETAILS) {
             int background = 1;
             // int y = 265;
-            int y = 181;
+            int y = 150;
             if (currentFormat == ByteFormat4) {
                 int val = *(int*)(focused_address);
                 if ((val >= 0x80000000) && (val < 0x80800000)) {
@@ -608,12 +725,35 @@ int* displayMemory(int* dl) {
                     y += 13;
                 }
             }
-            dl = drawExtraText(dl, "ADD TO WATCH", y, focus_index, details_index, background, (int)&addToWatchFunc);
-            focus_index += 1;
-            y += 13;
-            dl = drawExtraText(dl, "FREEZE VALUE", y, focus_index, details_index, background, (int)&freezeValueFunc);
-            focus_index += 1;
-            y += 13;
+            if (currentFormat != ByteFormatH) {
+                if (getDynWatchIndex() > -1) {
+                    dl = drawExtraText(dl, "REMOVE AS WATCH", y, focus_index, details_index, background, watch_funcs[0]);
+                    focus_index += 1;
+                    y += 13;
+                } else {
+                    int type_count = 3;
+                    if (currentFormat == ByteFormat4) {
+                        type_count = 4;
+                    }
+                    for (int k = 0; k < type_count; k++) {
+                        dk_strFormat((char*)watch_names[k],"ADD AS WATCH <%s>",watch_types[k]);
+                        dl = drawExtraText(dl, (char*)watch_names[k], y, focus_index, details_index, background, watch_funcs[k]);
+                        focus_index += 1;
+                        y += 13;
+                    }
+                }
+                if (getFreezeIndex() > -1) {
+                    dk_strFormat((char*)freeze_name,"%s","UNFREEZE VALUE");
+                } else {
+                    dk_strFormat((char*)freeze_name,"%s","FREEZE VALUE");
+                }
+                dl = drawExtraText(dl, (char*)freeze_name, y, focus_index, details_index, background, (int)&freezeValueFunc);
+                focus_index += 1;
+                y += 13;
+            }
+            if (details_index >= focus_index) {
+                details_index = focus_index - 1;
+            }
         }
         details_cap = focus_index;
     }
@@ -625,4 +765,179 @@ void startRamViewerDisplay (void) {
         closeMenu();
         RAMDisplayOpen = 1;
     }
+}
+
+static char freeze_name_0[30] = "";
+static char freeze_name_1[30] = "";
+static char freeze_name_2[30] = "";
+static char freeze_name_3[30] = "";
+static char freeze_name_4[30] = "";
+static char freeze_name_5[30] = "";
+static char freeze_name_6[30] = "";
+static char freeze_name_7[30] = "";
+
+static char* freeze_screen_array[] = {
+    freeze_name_0,
+    freeze_name_1,
+    freeze_name_2,
+    freeze_name_3,
+    freeze_name_4,
+    freeze_name_5,
+    freeze_name_6,
+    freeze_name_7,
+};
+
+static char has_freeze = 0;
+static char freeze_indexes[] = {
+    -1,-1,-1,-1,
+    -1,-1,-1,-1,
+};
+
+void turnOffFreeze(void) {
+    if (has_freeze) {
+        int freeze_index = freeze_indexes[(int)ActiveMenu.positionIndex];
+        freeze_data[freeze_index].used = 0;
+        openFreezeScreen();
+    }
+}
+
+static const int freeze_screen_functions[] = {
+    (int)&turnOffFreeze,
+    (int)&turnOffFreeze,
+    (int)&turnOffFreeze,
+    (int)&turnOffFreeze,
+    (int)&turnOffFreeze,
+    (int)&turnOffFreeze,
+    (int)&turnOffFreeze,
+};
+
+Screen freeze_screen_struct = {
+    .TextArray = (int*)freeze_screen_array,
+    .FunctionArray = freeze_screen_functions,
+    .ArrayItems = maxFreeze,
+    .ParentScreen = ACTIVEMENU_SCREEN_DEBUG_MEMORYROOT,
+    .ParentPosition = 1,
+};
+
+static char* size_names[] = {
+    "BYTE",
+    "SHORT",
+    "INT",
+    "HEX DIGIT",
+    "UNKNOWN"
+};
+
+void openFreezeScreen(void) {
+    int search_start = 0;
+    int found_item = 0;
+    for (int i = 0; i < maxFreeze; i++) {
+        while (search_start < maxFreeze) {
+            if (freeze_data[search_start].used) {
+                dk_strFormat(
+                    (char*)freeze_screen_array[i],
+                    "} %X <%s>: 0X%X",
+                    freeze_data[search_start].addr,
+                    (char*)size_names[freeze_data[search_start].size],
+                    freeze_data[search_start].value
+                );
+                freeze_indexes[i] = search_start;
+                search_start += 1;
+                found_item += 1;
+                break;
+            } else {
+                search_start += 1;
+            }
+        }
+    }
+    has_freeze = found_item != 0;
+    if (found_item == 0) {
+        dk_strFormat((char*)freeze_screen_array[0],"NO FROZEN VALUES");
+        found_item += 1;
+    }
+    freeze_screen_struct.ArrayItems = found_item;
+    changeMenu(ACTIVEMENU_SCREEN_DEBUG_MEMORYFREEZE);
+}
+
+static char dynwatch_name_0[30] = "";
+static char dynwatch_name_1[30] = "";
+static char dynwatch_name_2[30] = "";
+static char dynwatch_name_3[30] = "";
+
+static char* dynwatch_manage_array[] = {
+    dynwatch_name_0,
+    dynwatch_name_1,
+    dynwatch_name_2,
+    dynwatch_name_3,
+};
+
+static char has_dynwatch = 0;
+static char dynwatch_indexes[] = {
+    -1,-1,-1,-1
+};
+
+void turnOffDynWatch(void) {
+    if (has_dynwatch) {
+        int dynwatch_index = dynwatch_indexes[(int)ActiveMenu.positionIndex];
+        dynamic_watches[dynwatch_index].used = 0;
+        WatchIndex[(int)dynamic_watches[dynwatch_index].watch_index] = 0;
+        openDynwatchScreen();
+    }
+}
+
+static const int dynwatch_manage_functions[] = {
+    (int)&turnOffDynWatch,
+    (int)&turnOffDynWatch,
+    (int)&turnOffDynWatch,
+    (int)&turnOffDynWatch,
+};
+
+Screen dynwatch_manage_struct = {
+    .TextArray = (int*)dynwatch_manage_array,
+    .FunctionArray = dynwatch_manage_functions,
+    .ArrayItems = 4,
+    .ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
+    .ParentPosition = 6,
+};
+
+void openDynwatchScreen(void) {
+    int search_start = 0;
+    int found_item = 0;
+    int sizes[] = {0,0,0,1,1,1,2,2,2,2};
+    int types[] = {0,1,2,0,1,2,0,1,2,3};
+    for (int i = 0; i < 4; i++) {
+        while (search_start < 4) {
+            if (dynamic_watches[search_start].used) {
+                int size = sizes[(int)dynamic_watches[search_start].size];
+                int _type = types[(int)dynamic_watches[search_start].size];
+                if (_type != 3) {
+                    dk_strFormat(
+                        (char*)dynwatch_manage_array[i],
+                        "} %X <%s %s>",
+                        dynamic_watches[search_start].address,
+                        (char*)watch_types[_type],
+                        (char*)size_names[size]
+                    );
+                } else {
+                    dk_strFormat(
+                        (char*)dynwatch_manage_array[i],
+                        "} %X <FLOAT>",
+                        dynamic_watches[search_start].address
+                    );
+                }
+                dynwatch_indexes[i] = search_start;
+                search_start += 1;
+                found_item += 1;
+                break;
+            } else {
+                search_start += 1;
+            }
+        }
+    }
+    has_dynwatch = found_item != 0;
+    if (found_item == 0) {
+        dk_strFormat((char*)dynwatch_manage_array[0],"NO DYNAMIC WATCHES");
+        found_item += 1;
+    }
+    dynwatch_manage_struct.ArrayItems = found_item;
+    changeMenu(ACTIVEMENU_SCREEN_WATCH_DYNWATCH);
 }

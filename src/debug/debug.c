@@ -14,6 +14,10 @@ void openRAMViewer(void) {
 	}
 }
 
+void openMemoryScreen(void) {
+	changeMenu(ACTIVEMENU_SCREEN_DEBUG_MEMORYROOT);
+}
+
 static const char debug_access[] = {
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Actor List
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_EMU, // Memory
@@ -62,7 +66,7 @@ void toggleVoidMap(void) {
 
 static const int debug_functions[] = {
 	(int)&openActorMenu,
-	(int)&openRAMViewer,
+	(int)&openMemoryScreen,
 	(int)&openHeapMenu,
 	(int)&openFlagLogMenu,
 	(int)&openForceSpawnActorMenu,
@@ -79,4 +83,22 @@ const Screen debug_struct = {
 	.ParentPosition = 4,
 	.hasAccessArray = 1,
 	.AccessArray = debug_access
+};
+
+static char* memory_array[] = {
+	"OPEN MEMORY VIEWER",
+	"MANAGE FROZEN VALUES",
+};
+
+static const int memory_functions[] = {
+	(int)&openRAMViewer,
+	(int)&openFreezeScreen,
+};
+
+const Screen memory_struct = {
+	.TextArray = (int*)memory_array,
+	.FunctionArray = memory_functions,
+	.ArrayItems = 2,
+	.ParentScreen = ACTIVEMENU_SCREEN_DEBUG_ROOT,
+	.ParentPosition = 1,
 };

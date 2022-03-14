@@ -529,6 +529,21 @@
 			"index_var":"ACTIVEMENU_SCREEN_SETTINGS_FIXES",
 			"struct":"fixes_struct",
 			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_DEBUG_MEMORYROOT",
+			"struct":"memory_struct",
+			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_DEBUG_MEMORYFREEZE",
+			"struct":"freeze_screen_struct",
+			"const":false
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_WATCH_DYNWATCH",
+			"struct":"dynwatch_manage_struct",
+			"const":false
 		}
 	]
 }

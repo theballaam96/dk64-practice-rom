@@ -406,6 +406,7 @@ extern char disableCustomSFX;
 extern char textboxCancel;
 extern unsigned char scriptsNotAutoloading;
 extern char disableLockedCam;
+extern dynamicWatchStruct dynamic_watches[4];
 
 // Code
 extern int debugColumnLoop;

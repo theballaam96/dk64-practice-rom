@@ -2550,6 +2550,11 @@
 			"name":"disableLockedCam",
 			"address":"0x807FFF8B",
 			"size_comment":"u8"
+		},
+		{
+			"name":"dynamic_watches",
+			"address":"0x807FFEB0",
+			"size_comment":"0x8 x 4"
 		}
 	],
 	"code":[

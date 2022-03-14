@@ -90,6 +90,18 @@
 #define ACCESS_WIIU 16
 #define ACCESS_EMU 32
 
+// Dynamic Watch Types
+#define DYNWATCH_UBYTE 0
+#define DYNWATCH_SBYTE 1
+#define DYNWATCH_HBYTE 2
+#define DYNWATCH_USHORT 3
+#define DYNWATCH_SSHORT 4
+#define DYNWATCH_HSHORT 5
+#define DYNWATCH_UINT 6
+#define DYNWATCH_SINT 7
+#define DYNWATCH_HINT 8
+#define DYNWATCH_FLOAT 9
+
 #if ROM_VERSION == 0
 	#define IMAGE_FAIRYBOX 107
 	#define IMAGE_FAIRYDOT 108

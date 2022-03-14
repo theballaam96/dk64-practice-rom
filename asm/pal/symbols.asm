@@ -6,7 +6,7 @@
 	Stats:
 		Functions: 0/121(0.0%)
 		Vanilla Vars: 0/165(0.0%)
-		Hack Vars: 109/109(100.0%)
+		Hack Vars: 110/110(100.0%)
 		Code: 0/57(0.0%)
 */
 
@@ -410,6 +410,7 @@
 .definelabel textboxCancel, 0x807FFDF9 // u8
 .definelabel scriptsNotAutoloading, 0x807FFF8A // u8
 .definelabel disableLockedCam, 0x807FFF8B // u8
+.definelabel dynamic_watches, 0x807FFEB0 // 0x8 x 4
 
 // Code
 //.definelabel debugColumnLoop

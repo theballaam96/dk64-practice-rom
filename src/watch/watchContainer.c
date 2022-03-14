@@ -210,6 +210,7 @@ static const char* watch_listed_array[] = {
 	change_lockStack,
 	change_scriptRun,
 	change_loadedActorCount,
+	0,
 	change_fairy,
 };
 
@@ -240,6 +241,7 @@ static const char* watch_viewed_array[] = {
 	viewed_lockStack,
 	viewed_scriptRun,
 	viewed_loadedActorCount,
+	0,
 	viewed_fairy,
 };
 
@@ -270,6 +272,7 @@ static const char* watch_change_array[] = {
 	change_lockStack,
 	change_scriptRun,
 	change_loadedActorCount,
+	0,
 	change_fairy,
 };
 
@@ -322,7 +325,7 @@ void openWatchMenu(void) {
 };
 
 #define INPUT_VIEWER_INDEX 7
-#define FAIRY_VIEWER_INDEX 26
+#define FAIRY_VIEWER_INDEX 27
 void updateWatchText(void) {
 	int _index;
 	int watch_index = 0;
@@ -416,6 +419,7 @@ void clearAllWatches(void) {
 	for (int i = 0; i < WatchCount; i++) {
 		WatchIndex[i] = 0;
 		ViewedSnagWatches[i] = -1;
+		dynamic_watches[i].used = -1;
 	}
 }
 
@@ -532,6 +536,7 @@ static const char* watch_array[] = {
 	"SPAWN SNAG COLLECTABLES",
 	"ASSISTANTS",
 	"FAKE ITEMS",
+	"DYNAMIC WATCHES",
 	"SET REFERENCE POINT",
 	"CLEAR ALL WATCHES",
 };
@@ -543,6 +548,7 @@ static const int watch_functions[] = {
 	(int)&openWatchSnagMenu,
 	(int)&openWatchAssistMenu,
 	(int)&openWatchFakeMenu,
+	(int)&openDynwatchScreen,
 	(int)&setReferencePosition,
 	(int)&clearAllWatches,
 };
@@ -550,7 +556,7 @@ static const int watch_functions[] = {
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 8,
+	.ArrayItems = 9,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 3
 };
@@ -1349,6 +1355,66 @@ void handleWatch(void) {
 						}
 						watch_cache_array[j][0] = 26;
 						watch_cache_array[j][1] = LoadedActorCount;
+						break;
+					case 27:
+						// Dynamic Watches
+						{
+							int dyn_index = -1;
+							int k = 0;
+							while (k < 4) {
+								if (dynamic_watches[k].used) {
+									if (dynamic_watches[k].watch_index == j) {
+										dyn_index = k;
+										break;
+									}
+								}
+								k++;
+							}
+							if (dyn_index > -1) {
+								int hex_value = 0;
+								int sizes[] = {1,1,1,2,2,2,4,4,4,4};
+								int types[] = {0,1,2,0,1,2,0,1,2,3};
+								int size = sizes[(int)dynamic_watches[dyn_index].size];
+								int _type = types[(int)dynamic_watches[dyn_index].size];
+								int s_val = 0;
+								float f_val = 0;
+								unsigned int u_val = 0;
+								if (size == 1) {
+									hex_value = *(unsigned char*)(dynamic_watches[dyn_index].address);
+									u_val = hex_value;
+									s_val = *(char*)(dynamic_watches[dyn_index].address);
+								} else if (size == 2) {
+									hex_value = *(unsigned short*)(dynamic_watches[dyn_index].address);
+									u_val = hex_value;
+									s_val = *(short*)(dynamic_watches[dyn_index].address);
+								} else if (size == 4) {
+									hex_value = *(unsigned int*)(dynamic_watches[dyn_index].address);
+									u_val = hex_value;
+									s_val = *(int*)(dynamic_watches[dyn_index].address);
+									if (_type == 3) {
+										f_val = *(float*)(dynamic_watches[dyn_index].address);
+									}
+								}
+								if ((watch_cache_array[j][1] != hex_value)
+									|| (watch_cache_array[j][2] != dynamic_watches[dyn_index].size)
+									|| (watch_cache_array[j][3] != (int)dynamic_watches[dyn_index].address)
+									|| (watch_cache_array[j][0] != 27)) {
+									if (_type == 0) {
+										dk_strFormat((char *)WatchTextSpace[j], "0X%X:%u",dynamic_watches[dyn_index].address,u_val);
+									} else if (_type == 1) {
+										dk_strFormat((char *)WatchTextSpace[j], "0X%X:%d",dynamic_watches[dyn_index].address,s_val);
+									} else if (_type == 2) {
+										dk_strFormat((char *)WatchTextSpace[j], "0X%X:%X",dynamic_watches[dyn_index].address,u_val);
+									} else if (_type == 3) {
+										dk_strFormat((char *)WatchTextSpace[j], "0X%X:%f",dynamic_watches[dyn_index].address,f_val);
+									}
+								}
+								watch_cache_array[j][0] = 27;
+								watch_cache_array[j][1] = hex_value;
+								watch_cache_array[j][2] = dynamic_watches[dyn_index].size;
+								watch_cache_array[j][3] = (int)dynamic_watches[dyn_index].address;
+							}
+						}
 					break;
 				}
 				_KRoolTimerX = 220;

@@ -59,6 +59,7 @@ extern void toggleFairyViewer(void);
 extern void checkWatchCapacity(void);
 
 extern void handleSquawksTimer(void);
+extern void handleFrozenValues(void);
 
 extern void warpToMap(void);
 extern void openJapesMenu(void);
@@ -127,6 +128,8 @@ extern void openFlagLogMenu(void);
 extern void openForceSpawnActorMenu(void);
 extern void openCollisionMenu(void);
 extern void updateActorScreen(void);
+extern void openFreezeScreen(void);
+extern void openDynwatchScreen(void);
 
 extern void openWatchMenu(void);
 extern void endClose(void);

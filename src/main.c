@@ -89,6 +89,7 @@ void cFuncLoop(void) {
 	colorKong(); // Constant
 	tagAnywhere(); // Constant
 	fixModifiers();
+	handleFrozenValues();
 	handleSquawksTimer();
 	//correctTagCode();
 	initHack(); // Map == 0x28
