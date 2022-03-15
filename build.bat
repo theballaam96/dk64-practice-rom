@@ -17,13 +17,14 @@ python detect_version.py
 set /p vfile=< .version
 set jl_file="asm/us/jump_list.asm"
 set ml_file="asm/us/main.asm"
-set final_rom="rom\dk64-practice-rom-dev-us.z64"
 set final_bps="rom\dk64-practice-rom-dev-us.bps"
 IF "%vfile%" == "0" GOTO compile
-rem IF "%vfile%" == "1" GOTO compile
+set jl_file="asm/pal/jump_list.asm"
+set ml_file="asm/pal/main.asm"
+set final_bps="rom\dk64-practice-rom-dev-pal.bps"
+IF "%vfile%" == "1" GOTO compile
 set jl_file="asm/jp/jump_list.asm"
 set ml_file="asm/jp/main.asm"
-set final_rom="rom\dk64-practice-rom-dev-jp.z64"
 set final_bps="rom\dk64-practice-rom-dev-jp.bps"
 IF "%vfile%" == "2" GOTO compile
 echo invalid version

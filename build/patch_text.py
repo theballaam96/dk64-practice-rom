@@ -1,4 +1,15 @@
 from textencoder import writeText
+from getVersion import getVersion
+rom_version = getVersion();
+
+def PALifyText(input_text_arr):
+    output = []
+    for x in input_text_arr:
+        temp = []
+        for y in range(4):
+            temp.append(x)
+        output.append(temp)
+    return output
 
 dolby = [
     ["PRESENTED BY"], # Originally "PRESENTED IN"
@@ -306,6 +317,12 @@ wrinkly = [
         "PRACTICEROM.COM",
     ],
 ]
+
+if rom_version == 1:
+    dolby = PALifyText(dolby);
+    main_menu = PALifyText(main_menu);
+    klumsy = PALifyText(klumsy);
+    wrinkly = PALifyText(wrinkly);
 
 writeText("dolby_text.bin",dolby);
 writeText("menu_text.bin",main_menu);

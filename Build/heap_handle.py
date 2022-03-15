@@ -17,9 +17,20 @@ with open("include/heap.h","w") as fh:
 	snagcapsstart = hex(getHeapLocation(0x2001C00))
 	fh.write(f"#define SnagCapitalsStart {snagcapsstart}\n")
 
-us_heap_end = 0x805FAE00;
-jp_heap_end = 0x805F8600;
-pal_heap_end = 0x805F3E00;
+heap_end = {
+	"us":0x805FAE00,
+	"pal":0x805F3E00,
+	"jp":0x805F8600
+}
+
+def getHeapEnd(ver):
+	return heap_end[ver]
+
+def getCustomCodeUpper(ver):
+	return ((heap_end[ver] - getHeapSize()) >> 16) & 0xFFFF
+
+def getCustomCodeLower(ver):
+	return (heap_end[ver] - getHeapSize()) & 0xFFFF
 
 dyn_vars = [
 	{
@@ -27,8 +38,9 @@ dyn_vars = [
 		"offset_dir":-1,
 		"value":getHeapSize(),
 		"versions":{
-			"us":us_heap_end,
-			"jp":jp_heap_end,
+			"us":getHeapEnd("us"),
+			"pal":getHeapEnd("pal"),
+			"jp":getHeapEnd("jp"),
 		}
 	},
 	{
@@ -36,8 +48,9 @@ dyn_vars = [
 		"offset_dir":-1,
 		"value":0,
 		"versions":{
-			"us":((us_heap_end - getHeapSize()) >> 16) & 0xFFFF,
-			"jp":((jp_heap_end - getHeapSize()) >> 16) & 0xFFFF,
+			"us":getCustomCodeUpper("us"),
+			"pal":getCustomCodeUpper("pal"),
+			"jp":getCustomCodeUpper("jp"),
 		}
 	},
 	{
@@ -45,8 +58,9 @@ dyn_vars = [
 		"offset_dir":-1,
 		"value":0,
 		"versions":{
-			"us":(us_heap_end - getHeapSize()) & 0xFFFF,
-			"jp":(jp_heap_end - getHeapSize()) & 0xFFFF,
+			"us":getCustomCodeLower("us"),
+			"pal":getCustomCodeLower("pal"),
+			"jp":getCustomCodeLower("jp"),
 		}
 	},
 	{
@@ -55,7 +69,8 @@ dyn_vars = [
 		"value":0,
 		"versions":{
 			"us":getHeapSize(),
-			"jp":getHeapSize(),
+			"pal":getHeapSize(),
+			"jp":getHeapSize()
 		}
 	}
 ]

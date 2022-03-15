@@ -30,7 +30,7 @@ base_file_dict = [
 		"file_index": 37,
 		"source_file": "menu_text.bin",
 		"do_not_delete_source": True,
-		"versions":[0],
+		"versions":[0,1],
 	},
 	{
 		"name": "Dolby Text",
@@ -38,7 +38,7 @@ base_file_dict = [
 		"file_index": 13,
 		"source_file": "dolby_text.bin",
 		"do_not_delete_source": True,
-		"versions":[0,2],
+		"versions":[0,1,2],
 	},
 	{
 		"name": "K. Lumsy Text",
@@ -46,7 +46,7 @@ base_file_dict = [
 		"file_index": 27,
 		"source_file": "klumsy_text.bin",
 		"do_not_delete_source": True,
-		"versions":[0],
+		"versions":[0,1],
 	},
 	{
 		"name": "Wrinkly Hint Text",
@@ -54,7 +54,7 @@ base_file_dict = [
 		"file_index": 41,
 		"source_file": "wrinkly_text.bin",
 		"do_not_delete_source": True,
-		"versions":[0],
+		"versions":[0,1],
 	},
 	{
 		"name": "Thumb Image (US)",
@@ -204,7 +204,8 @@ def printProgress(sub):
 print("DK64 Extractor")
 printProgress("Importing File States")
 
-base_file_dict = writeFileStatesToDict(base_file_dict)
+if rom_version == 0:
+	base_file_dict = writeFileStatesToDict(base_file_dict)
 
 # Infrastructure for recomputing DK64 global pointer tables
 from map_names import maps
