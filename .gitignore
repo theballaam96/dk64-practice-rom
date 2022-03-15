@@ -6,7 +6,6 @@
 *.bak
 *.pckg
 include/build_date.h
-include/rom_version.h
 fungi.py
 
 *.sym
@@ -16,3 +15,6 @@ asm/objects.asm
 *.log
 .rom
 .version
+heap.shrink
+
+include/rom_version.h
