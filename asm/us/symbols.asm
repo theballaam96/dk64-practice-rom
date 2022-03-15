@@ -8,6 +8,7 @@
 		Vanilla Vars: 165/165(100.0%)
 		Hack Vars: 110/110(100.0%)
 		Code: 57/57(100.0%)
+		Overall: 453/453(100.0%)
 */
 
 //functions
@@ -70,7 +71,7 @@
 .definelabel copyFunc, 0x805FB750
 .definelabel getMapData, 0x8066B0F8
 .definelabel loadSetup, 0x806886E0
-.definelabel getParentDataIndex, 0x80688D64
+.definelabel getParentDataIndex, 0x80688D20
 .definelabel getScreenPosition, 0x80626F8C
 .definelabel getNewSaveTime, 0x805FC98C
 .definelabel loadExits, 0x806C95D0

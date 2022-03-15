@@ -61,6 +61,8 @@ def writeSymbols(version):
 				code_count += 1;
 			else:
 				sym_code.append("//.definelabel " + code["name"])
+		total_count = func_count + vanilla_count + hack_count + code_count;
+		total_length = func_length + vanilla_length + hack_length + code_length
 		with open(getSymFile(version),"w") as fg:
 			fg.write("/*\n")
 			for x in warnings:
@@ -70,6 +72,7 @@ def writeSymbols(version):
 			fg.write("\t\tVanilla Vars: " + str(vanilla_count) + "/" + str(vanilla_length) + "(" + str(round(100 * (vanilla_count /  max(vanilla_length,1)),2)) + "%)\n")
 			fg.write("\t\tHack Vars: " + str(hack_count) + "/" + str(hack_length) + "(" + str(round(100 * (hack_count /  max(hack_length,1)),2)) + "%)\n")
 			fg.write("\t\tCode: " + str(code_count) + "/" + str(code_length) + "(" + str(round(100 * (code_count /  max(code_length,1)),2)) + "%)\n")
+			fg.write("\t\tOverall: " + str(total_count) + "/" + str(total_length) + "(" + str(round(100 * (total_count /  max(total_length,1)),2)) + "%)\n")
 			fg.write("*/\n\n")
 			fg.write("//functions\n")
 			for x in sym_func:

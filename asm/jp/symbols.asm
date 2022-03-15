@@ -8,6 +8,7 @@
 		Vanilla Vars: 165/165(100.0%)
 		Hack Vars: 110/110(100.0%)
 		Code: 57/57(100.0%)
+		Overall: 453/453(100.0%)
 */
 
 //functions

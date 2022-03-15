@@ -19,6 +19,7 @@ with open("include/heap.h","w") as fh:
 
 us_heap_end = 0x805FAE00;
 jp_heap_end = 0x805F8600;
+pal_heap_end = 0x805F3E00;
 
 dyn_vars = [
 	{
