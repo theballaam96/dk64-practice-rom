@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 95/121(78.51%)
-		Vanilla Vars: 28/165(16.97%)
+		Functions: 121/121(100.0%)
+		Vanilla Vars: 165/165(100.0%)
 		Hack Vars: 110/110(100.0%)
-		Code: 1/57(1.75%)
-		Overall: 234/453(51.66%)
+		Code: 57/57(100.0%)
+		Overall: 453/453(100.0%)
 */
 
 //functions
@@ -38,7 +38,7 @@
 .definelabel SaveToGlobal, 0x80606F7C
 .definelabel DetectGameOver, 0x8070E9E0
 .definelabel DetectAdventure, 0x8070E978
-//.definelabel displaySprite
+.definelabel displaySprite, 0x806A4DF4
 .definelabel alterSize, 0x806CA610
 .definelabel unkSizeFunction, 0x806CA144
 .definelabel spawnRocketbarrel, 0x806C1B2C
@@ -49,7 +49,7 @@
 .definelabel copyFromROM, 0x80604210
 .definelabel getActorSpawnerIDFromTiedActor, 0x806822A8
 .definelabel textOverlayCode, 0x80697130
-.definelabel spawnTransferredActor, 0X806C2064
+.definelabel spawnTransferredActor, 0x806C2064
 .definelabel resolveMovementBox, 0x80722988
 .definelabel wipeMemory, 0x800053D0
 .definelabel hideHUD, 0x806F59B0
@@ -102,204 +102,204 @@
 .definelabel getTextStyleHeight, 0x806F7F04
 .definelabel displayText, 0x806F6AB8
 .definelabel displayImage, 0x80685A38
-//.definelabel textDraw
+.definelabel textDraw, 0x806F7ADC
 .definelabel frameLoop, 0x805F5330
 .definelabel getPointerTable14Texture, 0x806855BC
 .definelabel cancelPausedCutscenes, 0x80615DD4
-//.definelabel processPhase
+.definelabel processPhase, 0x806D98B4
 .definelabel getParentMapIndexFromCurrentMap, 0x805F910C
 .definelabel getCenterOffset, 0x806F6298
 .definelabel setWaterHeight, 0x806588BC
-//.definelabel updateObjectScript
-//.definelabel executeBehaviourScript
-//.definelabel setArcadeTextXY
-//.definelabel spawnArcadeText
-//.definelabel setArcadeTextColor
-//.definelabel arcadeGetObjIndexOfType
-//.definelabel arcadeGetNextVacantSlot
-//.definelabel setArcadeSong
-//.definelabel spawnJetpacText
-//.definelabel setJetpacTextColor
-//.definelabel startJetpacGame
-//.definelabel placeJetpacFloor
-//.definelabel resetJetpacVars
-//.definelabel increaseLevel
-//.definelabel spawnJetpacItem
-//.definelabel resetJetpacMap
-//.definelabel changeJetpacMode
-//.definelabel jetpacInitDL
-//.definelabel jetpacDrawFloors
-//.definelabel jetpacDrawJetman
-//.definelabel jetpacDrawEnemies
-//.definelabel jetpacDrawRocket
-//.definelabel jetpacUnkFunc
+.definelabel updateObjectScript, 0x80637398
+.definelabel executeBehaviourScript, 0x806373F4
+.definelabel setArcadeTextXY, 0x80017508
+.definelabel spawnArcadeText, 0x8001751C
+.definelabel setArcadeTextColor, 0x800174E4
+.definelabel arcadeGetObjIndexOfType, 0x8001783C
+.definelabel arcadeGetNextVacantSlot, 0x80017794
+.definelabel setArcadeSong, 0x80018280
+.definelabel spawnJetpacText, 0x8001DF8C
+.definelabel setJetpacTextColor, 0x8001DF24
+.definelabel startJetpacGame, 0x8001763C
+.definelabel placeJetpacFloor, 0x8001BC5C
+.definelabel resetJetpacVars, 0x80017390
+.definelabel increaseLevel, 0x800180B0
+.definelabel spawnJetpacItem, 0x8001AD8C
+.definelabel resetJetpacMap, 0x8001A61C
+.definelabel changeJetpacMode, 0x80017F9C
+.definelabel jetpacInitDL, 0x800185E4
+.definelabel jetpacDrawFloors, 0x8001BEA8
+.definelabel jetpacDrawJetman, 0x80019AC8
+.definelabel jetpacDrawEnemies, 0x8001DE1C
+.definelabel jetpacDrawRocket, 0x8001B564
+.definelabel jetpacUnkFunc, 0x80019D60
 
 //vanilla data
-//.definelabel TransitionSpeed
-//.definelabel CutsceneWillPlay
-//.definelabel KRoolRound
-//.definelabel MovesBase
+.definelabel TransitionSpeed, 0x807FD7CC
+.definelabel CutsceneWillPlay, 0x8074FBBB
+.definelabel KRoolRound, 0x8074B224
+.definelabel MovesBase, 0x807FC890
 .definelabel PlayerOneColor, 0x8074FB74
 .definelabel Mode, 0x8074FB98
-//.definelabel TBVoidByte
+.definelabel TBVoidByte, 0x807FBA83
 .definelabel CurrentMap, 0x80764BC8
 .definelabel DestMap, 0x8073EC34
 .definelabel DestExit, 0x8073EC38
-//.definelabel StorySkip
-//.definelabel HelmTimerShown
+.definelabel StorySkip, 0x8073EC7C
+.definelabel HelmTimerShown, 0x8074FBD0
 .definelabel TempFlagBlock, 0x807FDCD0
-//.definelabel SubmapData
-//.definelabel HelmTimerPaused
-//.definelabel LagBoost
+.definelabel SubmapData, 0x80764C80
+.definelabel HelmTimerPaused, 0x8070E2E7
+.definelabel LagBoost, 0x8073EBC8
 .definelabel FrameLag, 0x80765A30
 .definelabel FrameReal, 0x807627E4
 .definelabel RNG, 0x807411A0
-//.definelabel BetaNinRWSkip
-//.definelabel LogosDestMap
-//.definelabel LogosDestMode
+.definelabel BetaNinRWSkip, 0x8074FBA4
+.definelabel LogosDestMap, 0x8070D83F
+.definelabel LogosDestMode, 0x8070D84B
 .definelabel Gamemode, 0x8074FB94
-//.definelabel ObjectModel2Pointer
-//.definelabel ObjectModel2Timer
-//.definelabel ObjectModel2Count
-//.definelabel ObjectModel2Count_Dupe
-//.definelabel CutsceneIndex
+.definelabel ObjectModel2Pointer, 0x807F5F20
+.definelabel ObjectModel2Timer, 0x80764B84
+.definelabel ObjectModel2Count, 0x807F5F24
+.definelabel ObjectModel2Count_Dupe, 0x807424D0
+.definelabel CutsceneIndex, 0x80741E54
 .definelabel CutsceneActive, 0x8073EC3C
-//.definelabel CutsceneTypePointer
-//.definelabel PreviousCameraState
-//.definelabel CurrentCameraState
-//.definelabel CameraStateChangeTimer
-//.definelabel AutowalkPointer
-//.definelabel IsAutowalking
-//.definelabel PositionWarpInfo
-//.definelabel PositionWarpBitfield
-//.definelabel PositionFloatWarps
-//.definelabel PositionFacingAngle
-//.definelabel ChimpyCam
+.definelabel CutsceneTypePointer, 0x80741E5C
+.definelabel PreviousCameraState, 0x807F5C10
+.definelabel CurrentCameraState, 0x807F5C12
+.definelabel CameraStateChangeTimer, 0x807F5C0C
+.definelabel AutowalkPointer, 0x807FD64C
+.definelabel IsAutowalking, 0x80740B08
+.definelabel PositionWarpInfo, 0x807FC858
+.definelabel PositionWarpBitfield, 0x80765A02
+.definelabel PositionFloatWarps, 0x80765A04
+.definelabel PositionFacingAngle, 0x80765A10
+.definelabel ChimpyCam, 0x8073EC80
 .definelabel ScreenRatio, 0x8073EC10
 .definelabel CurrentActorPointer, 0x807FBA64
 .definelabel LoadedActorCount, 0x807FBA54
 .definelabel LoadedActorArray, 0x807FB850
-//.definelabel SpawnerMasterData
-//.definelabel MenuSkyTopRGB
-//.definelabel MenuSkyRGB
-//.definelabel ActorArray
-//.definelabel ActorCount
-//.definelabel ButtonsEnabledBitfield
-//.definelabel JoystickEnabledX
-//.definelabel JoystickEnabledY
+.definelabel SpawnerMasterData, 0x807FDBC8
+.definelabel MenuSkyTopRGB, 0x8074F7CC
+.definelabel MenuSkyRGB, 0x8074F7CF
+.definelabel ActorArray, 0x807FBF10
+.definelabel ActorCount, 0x807FC310
+.definelabel ButtonsEnabledBitfield, 0x8074FB88
+.definelabel JoystickEnabledX, 0x8074FB8C
+.definelabel JoystickEnabledY, 0x8074FB90
 .definelabel MapState, 0x80764BD1
-//.definelabel ControllerInput
-//.definelabel NewlyPressedControllerInput
-//.definelabel Player
+.definelabel ControllerInput, 0x800153A4
+.definelabel NewlyPressedControllerInput, 0x807ECC86
+.definelabel Player, 0x807FBA6C
 .definelabel SwapObject, 0x807FC864
-//.definelabel Character
-//.definelabel Camera
-//.definelabel ISGActive
-//.definelabel ISGTimestampMajor
-//.definelabel ISGTimestampMinor
-//.definelabel ISGPreviousFadeout
-//.definelabel CurrentTimestampMajor
-//.definelabel CurrentTimestampMinor
-//.definelabel ISGFadeoutArray
-//.definelabel CollectableBase
-//.definelabel ModelTwoTouchCount
-//.definelabel ModelTwoTouchArray
-//.definelabel TransitionProgress
-//.definelabel BackgroundHeldInput
-//.definelabel PauseTimestampMajor
-//.definelabel PauseTimestampMinor
-//.definelabel HelmStartTimestampMajor
-//.definelabel HelmStartTimestampMinor
-//.definelabel HelmStartTime
-//.definelabel p1PressedButtons
-//.definelabel p1HeldButtons
+.definelabel Character, 0x80748EDC
+.definelabel Camera, 0x8007FB888
+.definelabel ISGActive, 0x8074F8F0
+.definelabel ISGTimestampMajor, 0x807F5C00
+.definelabel ISGTimestampMinor, 0x807F5C04
+.definelabel ISGPreviousFadeout, 0x807F5C34
+.definelabel CurrentTimestampMajor, 0x800155C0
+.definelabel CurrentTimestampMinor, 0x800155C4
+.definelabel ISGFadeoutArray, 0x80741E68
+.definelabel CollectableBase, 0x807FCB80
+.definelabel ModelTwoTouchCount, 0x807FD6D8
+.definelabel ModelTwoTouchArray, 0x807FD6D0
+.definelabel TransitionProgress, 0x807ECBA0
+.definelabel BackgroundHeldInput, 0x807ECC60
+.definelabel PauseTimestampMajor, 0x8073ED10
+.definelabel PauseTimestampMinor, 0x8073ED14
+.definelabel HelmStartTimestampMajor, 0x8074FBC0
+.definelabel HelmStartTimestampMinor, 0x8074FBC4
+.definelabel HelmStartTime, 0x8074FBCC
+.definelabel p1PressedButtons, 0x807ECC68
+.definelabel p1HeldButtons, 0x807ECC78
 .definelabel player_count, 0x807FC868
-//.definelabel sprite_table
-//.definelabel sprite_translucency
-//.definelabel StoredDamage
+.definelabel sprite_table, 0x8074FC10
+.definelabel sprite_translucency, 0x807FC737
+.definelabel StoredDamage, 0x807FCB8D
 .definelabel ActorSpawnerPointer, 0x807FC320
 .definelabel DebugInfoOn, 0x80750C44
-//.definelabel CutsceneFadeActive
-//.definelabel CutsceneFadeIndex
-//.definelabel PreviouslyPressedButtons
-//.definelabel heap_pointer
-//.definelabel stickX_magnitude
-//.definelabel stickY_magnitude
-//.definelabel phasewalk_stickmagnitude
-//.definelabel fairy_data
-//.definelabel transferredActorType
-//.definelabel characterSpawnerActors
-//.definelabel levelIndexMapping
-//.definelabel stickX_interpretted
-//.definelabel stickY_interpretted
+.definelabel CutsceneFadeActive, 0x8074FBBB
+.definelabel CutsceneFadeIndex, 0x8074FBBE
+.definelabel PreviouslyPressedButtons, 0x807ECC80
+.definelabel heap_pointer, 0x807F08B0
+.definelabel stickX_magnitude, 0x807FD580
+.definelabel stickY_magnitude, 0x807FD581
+.definelabel phasewalk_stickmagnitude, 0x807FD554
+.definelabel fairy_data, 0x807FD742
+.definelabel transferredActorType, 0x807FD4B0
+.definelabel characterSpawnerActors, 0x80759690
+.definelabel levelIndexMapping, 0x8073ED30
+.definelabel stickX_interpretted, 0x807FD57E
+.definelabel stickY_interpretted, 0x807FD57F
 .definelabel preventSongPlaying, 0x8073FDA0
-//.definelabel parentDataCount
-//.definelabel parentData
-//.definelabel SetupFilePointer
-//.definelabel focusedParentDataSetup
-//.definelabel HUD
-//.definelabel textData
+.definelabel parentDataCount, 0x807F5988
+.definelabel parentData, 0x80764C80
+.definelabel SetupFilePointer, 0x807F5F30
+.definelabel focusedParentDataSetup, 0x807F5990
+.definelabel HUD, 0x8074E9E0
+.definelabel textData, 0x8074F24C
 .definelabel LZFadeoutProgress, 0x807FD7C8
-//.definelabel mapFloorPointer
-//.definelabel mapFloorBlockCount
+.definelabel mapFloorPointer, 0x807F9434
+.definelabel mapFloorBlockCount, 0x807F9438
 .definelabel displayListCount, 0x80764BA8
-//.definelabel IGT
-//.definelabel CBTurnedInArray
-//.definelabel exitPointer
-//.definelabel BalloonPatchPointer
-//.definelabel ChunkArrayPointer
-//.definelabel ActorMasterType
-//.definelabel MapPropertiesBitfield
-//.definelabel screenCenterX
-//.definelabel screenCenterY
-//.definelabel MapVoid_MinX
-//.definelabel MapVoid_MinZ
-//.definelabel MapVoid_MaxX
-//.definelabel MapVertsPointer
-//.definelabel MapVoid_MaxZ
-//.definelabel balloonPatchCounts
-//.definelabel coloredBananaCounts
+.definelabel IGT, 0x8074B200
+.definelabel CBTurnedInArray, 0x807FC870
+.definelabel exitPointer, 0x807FC840
+.definelabel BalloonPatchPointer, 0x807FC4E4
+.definelabel ChunkArrayPointer, 0x807F6B38
+.definelabel ActorMasterType, 0x80748034
+.definelabel MapPropertiesBitfield, 0x807FBA84
+.definelabel screenCenterX, 0x8073EBE0
+.definelabel screenCenterY, 0x8073EBE4
+.definelabel MapVoid_MinX, 0x807F5F04
+.definelabel MapVoid_MinZ, 0x807F5F06
+.definelabel MapVoid_MaxX, 0x807F5F08
+.definelabel MapVoid_MaxZ, 0x807F5F0A
+.definelabel MapVertsPointer, 0x807F5D08
+.definelabel balloonPatchCounts, 0x807FC328
+.definelabel coloredBananaCounts, 0x807F6070
 .definelabel objectSignalsCount, 0x807FBEF8
 .definelabel delayedKillsCount, 0x807FBE30
-//.definelabel lockStackCount
-//.definelabel scriptsRunningCount
-//.definelabel scriptsAttemptLoadCount
-//.definelabel scriptsLoadedArray
-//.definelabel StoredSettings
-//.definelabel SetupCheck1
-//.definelabel SetupCheck2
-//.definelabel overlayArray
+.definelabel lockStackCount, 0x807F5988
+.definelabel scriptsRunningCount, 0x807F5FC8
+.definelabel scriptsAttemptLoadCount, 0x807F7060
+.definelabel scriptsLoadedArray, 0x807F5FD0
+.definelabel StoredSettings, 0x807ED4C0
+.definelabel SetupCheck1, 0x8074A810
+.definelabel SetupCheck2, 0x807424D8
+.definelabel overlayArray, 0x807FC550
 .definelabel heap_arena_count, 0x807F0948
 .definelabel heap_arena_meta, 0x807F08A8
-//.definelabel heap_end_pointer
-//.definelabel fbufferPointers
+.definelabel heap_end_pointer, 0x80764B80
+.definelabel fbufferPointers, 0x8073EBC0
 .definelabel simpleLagCalcDisabled, 0x80765A34
-//.definelabel DemoFadeoutTimer
-//.definelabel arcadeMap
-//.definelabel arcadeMode
-//.definelabel arcadeLevel
-//.definelabel arcadeObjBase
-//.definelabel arcadeLives
-//.definelabel arcadeLivesVisual
-//.definelabel arcadeLevelTimer
-//.definelabel arcadeGlobalTimer
-//.definelabel arcadePause
-//.definelabel arcadeRNG
-//.definelabel arcadeJumpmanIndex
-//.definelabel arcadeCurrentScore
-//.definelabel arcadeHighScore
-//.definelabel arcadeBonusTimer
-//.definelabel arcadeSong
-//.definelabel arcadeHammerTimer
-//.definelabel arcadeMovableFloor
-//.definelabel arcadeRivetBitfield
-//.definelabel jetpacMode
-//.definelabel jetpacLevelStartTimer
-//.definelabel competitors
-//.definelabel jetpacObjectBase
-//.definelabel jetpacPlayerIndex
-//.definelabel jetpacPlayerCount
-//.definelabel jetpacStoryMode
+.definelabel DemoFadeoutTimer, 0x8074FB9C
+.definelabel arcadeMap, 0x8003F683
+.definelabel arcadeMode, 0x8003F684
+.definelabel arcadeLevel, 0x8003D65C
+.definelabel arcadeObjBase, 0x8003EC30
+.definelabel arcadeLives, 0x8003F67B
+.definelabel arcadeLivesVisual, 0x8003F67C
+.definelabel arcadeLevelTimer, 0x8003F63C
+.definelabel arcadeGlobalTimer, 0x8003F638
+.definelabel arcadePause, 0x8003F67D
+.definelabel arcadeRNG, 0x8003D628
+.definelabel arcadeJumpmanIndex, 0x8003F67F
+.definelabel arcadeCurrentScore, 0x8003D638
+.definelabel arcadeHighScore, 0x8003D650
+.definelabel arcadeBonusTimer, 0x8003F67E
+.definelabel arcadeSong, 0x8003F674
+.definelabel arcadeHammerTimer, 0x8003F670
+.definelabel arcadeMovableFloor, 0x8003EBE8
+.definelabel arcadeRivetBitfield, 0x8003F678
+.definelabel jetpacMode, 0x8002246C
+.definelabel jetpacLevelStartTimer, 0x8002212C
+.definelabel competitors, 0x80021CFC
+.definelabel jetpacObjectBase, 0x80022030
+.definelabel jetpacPlayerIndex, 0x80022024
+.definelabel jetpacPlayerCount, 0x80022028
+.definelabel jetpacStoryMode, 0x80022478
 
 //hack data
 .definelabel ViewedSnagWatches, 0x807FFF18 // u8 x 4
@@ -414,61 +414,65 @@
 .definelabel dynamic_watches, 0x807FFEB0 // 0x8 x 4
 
 // Code
-//.definelabel debugColumnLoop
-//.definelabel characterSpawnerMalloc
-//.definelabel nfrTitleScreenSong
-//.definelabel globalFlags
-//.definelabel heapEndWrite
-//.definelabel fileStartMap
-//.definelabel fileStartExit
-//.definelabel kongColor1
-//.definelabel kongColor2
-//.definelabel kongColor3
-//.definelabel eepromPatch
-//.definelabel bbbandit_array
-//.definelabel boot_lui1
-//.definelabel boot_lui2
-//.definelabel setupCheckOverwrite
-//.definelabel frameHookLocation
-//.definelabel customBootCodeStart
-//.definelabel bootJumpStart
-//.definelabel bootJumpReturn
-//.definelabel bootFinalValue
-//.definelabel t4BootAddition
-//.definelabel customLoopReturn
-//.definelabel pauseHookWrite
-//.definelabel flagHookWrite
-//.definelabel spawnTimerHookWrite
-//.definelabel phaseCorrectionHookWrite
-//.definelabel arcadeHookWrite
-//.definelabel jetpacHookWrite
-//.definelabel pause97HookWrite
-//.definelabel pause343HookWrite
-//.definelabel loadSetupHookWrite
-//.definelabel resolveBarrelHookWrite
-//.definelabel fairyStoreHookWrite
-//.definelabel displayListHookWrite
-//.definelabel vertBaseStoreHookWrite
-//.definelabel signalsStoreHookWrite
-//.definelabel delayedKillsStoreHookWrite
-//.definelabel lockStackStoreHookWrite
-//.definelabel storeFloorPreloadHookWrite
-//.definelabel giantKoshaHookWrite
-//.definelabel lagHookWrite
-//.definelabel saveHookWrite
-//.definelabel spriteHookWrite
-//.definelabel speedHookWrite
-//.definelabel kongHookWrite
-//.definelabel crcPatchMemory
-//.definelabel crcPatchROM
-//.definelabel displayListCap
-//.definelabel lockedCamHookWrite
+.definelabel debugColumnLoop, 0x8072C6B8
+.definelabel characterSpawnerMalloc, 0x80722D7C
+.definelabel nfrTitleScreenSong, 0x80740470
+.definelabel globalFlags, 0x807ED478
+.definelabel heapEndWrite, 0x80609762
+.definelabel fileStartMap, 0x8070EB93
+.definelabel fileStartExit, 0x8070EBA7
+.definelabel kongColor1, 0x80683A6F
+.definelabel kongColor2, 0x80683890
+.definelabel kongColor3, 0x80683898
+.definelabel eepromPatch, 0x8060665C
+.definelabel bbbandit_array, 0x80020C40
+.definelabel boot_lui1, 0x8001
+.definelabel boot_lui2, 0xDED4
+.definelabel setupCheckOverwrite, 0x805F7B80
+.definelabel frameHookLocation, 0x805F51E4
+.definelabel customBootCodeStart, 0x80000AD0
+.definelabel bootJumpStart, 0x80000820
+.definelabel bootJumpReturn, 0x80000840
+.definelabel bootFinalValue, 0xE
+.definelabel t4BootAddition, 0x18E0
+.definelabel customLoopReturn, 0x805F51EC
+.definelabel pauseHookWrite, 0x805F5910
+.definelabel flagHookWrite, 0x8072B9E0
+.definelabel spawnTimerHookWrite, 0x8069C298
+.definelabel phaseCorrectionHookWrite, 0x806DAA5C
+.definelabel arcadeHookWrite, 0x805F51C4
+.definelabel jetpacHookWrite, 0x805F51D4
+.definelabel pause97HookWrite, 0x806A1A18
+.definelabel pause343HookWrite, 0x806A6C5C
+.definelabel loadSetupHookWrite, 0x80681B54
+.definelabel resolveBarrelHookWrite, 0x806821A4
+.definelabel fairyStoreHookWrite, 0x806BFD14
+.definelabel displayListHookWrite, 0x8070E7C8
+.definelabel vertBaseStoreHookWrite, 0x80628520
+.definelabel signalsStoreHookWrite, 0x80672774
+.definelabel delayedKillsStoreHookWrite, 0x806717FC
+.definelabel lockStackStoreHookWrite, 0x80609C50
+.definelabel storeFloorPreloadHookWrite, 0x8065F53C
+.definelabel giantKoshaHookWrite, 0x8063F394
+.definelabel lagHookWrite, 0x805F9704
+.definelabel saveHookWrite, 0x80606FA0
+.definelabel spriteHookWrite, 0x806A50D8
+.definelabel speedHookWrite, 0x8065E8FC
+.definelabel kongHookWrite, 0x806EDE50
+.definelabel crcPatchMemory, 0x800026D4
+.definelabel crcPatchROM, 0x32D4
+.definelabel displayListCap, 0x805F7A60
+.definelabel lockedCamHookWrite, 0x806189AC
 .definelabel overlayEntryPoint, 0x80017000
-//.definelabel arcadeTextHookWrite
-//.definelabel arcadeHasControlHookWrite
-//.definelabel arcadeHasControl2HookWrite
-//.definelabel arcadeHasControl3HookWrite
-//.definelabel jetpacTextHookWrite
-//.definelabel jetpacPauseHookWrite
-//.definelabel jetpac5000HookWrite
+.definelabel arcadeTextHookWrite, 0x80024B20
+.definelabel arcadeHasControlHookWrite, 0x800183EC
+.definelabel arcadeHasControl2HookWrite, 0x800182D0
+.definelabel arcadeHasControl3HookWrite, 0x8001A918
+.definelabel jetpacTextHookWrite, 0x80018364
+.definelabel jetpacPauseHookWrite, 0x80017954
+.definelabel jetpac5000HookWrite, 0x8001ADD8
 
+.definelabel customCodeStart, 0x805d2e00
+.definelabel customCodeUpper, 0x805d
+.definelabel customCodeLower, 0x2e00
+.definelabel customCodeSize, 0x21000

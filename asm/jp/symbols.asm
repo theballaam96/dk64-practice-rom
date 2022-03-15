@@ -155,7 +155,7 @@
 .definelabel FrameReal, 0x807F09D0
 .definelabel RNG, 0x80746300
 .definelabel BetaNinRWSkip, 0x807553E4
-.definelabel LogosDestMap, 0X8071288F
+.definelabel LogosDestMap, 0x8071288F
 .definelabel LogosDestMode, 0x8071289B
 .definelabel Gamemode, 0x807553D4
 .definelabel ObjectModel2Pointer, 0x807F6470
@@ -255,8 +255,8 @@
 .definelabel MapVoid_MinX, 0x807F6454
 .definelabel MapVoid_MinZ, 0x807F6456
 .definelabel MapVoid_MaxX, 0x807F6458
-.definelabel MapVertsPointer, 0x807F6258
 .definelabel MapVoid_MaxZ, 0x807F645A
+.definelabel MapVertsPointer, 0x807F6258
 .definelabel balloonPatchCounts, 0x807FC878
 .definelabel coloredBananaCounts, 0x807F65C0
 .definelabel objectSignalsCount, 0x807FC448

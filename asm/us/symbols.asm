@@ -255,8 +255,8 @@
 .definelabel MapVoid_MinX, 0x807F5FE4
 .definelabel MapVoid_MinZ, 0x807F5FE6
 .definelabel MapVoid_MaxX, 0x807F5FE8
-.definelabel MapVertsPointer, 0x807F5DE8
 .definelabel MapVoid_MaxZ, 0x807F5FEA
+.definelabel MapVertsPointer, 0x807F5DE8
 .definelabel balloonPatchCounts, 0x807FC408
 .definelabel coloredBananaCounts, 0x807F6150
 .definelabel objectSignalsCount, 0x807FBFD8

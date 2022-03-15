@@ -2,3 +2,5 @@
 .open "rom/dk64-practice-rom.z64", "rom/dk64-practice-rom-dev.z64", 0 // Open the ROM file
 .include "asm/jp/symbols.asm" // Include dk64.asm to tell armips' linker where to find the game's function(s)
 .include "asm/main_0.asm"
+.include "asm/jp/hookdef.asm"
+.include "asm/main_1.asm"

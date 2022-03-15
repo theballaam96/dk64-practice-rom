@@ -4,6 +4,7 @@
 			"name":"customCodeStart",
 			"versions":{
 				"us":"0x805d9e00",
+				"pal":"0x805d2e00",
 				"jp":"0x805d7600"
 			}
 		},
@@ -11,6 +12,7 @@
 			"name":"customCodeUpper",
 			"versions":{
 				"us":"0x805d",
+				"pal":"0x805d",
 				"jp":"0x805d"
 			}
 		},
@@ -18,6 +20,7 @@
 			"name":"customCodeLower",
 			"versions":{
 				"us":"0x9e00",
+				"pal":"0x2e00",
 				"jp":"0x7600"
 			}
 		},
@@ -25,6 +28,7 @@
 			"name":"customCodeSize",
 			"versions":{
 				"us":"0x21000",
+				"pal":"0x21000",
 				"jp":"0x21000"
 			}
 		}
