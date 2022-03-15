@@ -1,7 +1,7 @@
 """Encode text file to ROM."""
-# from getVersion import getVersion
-# rom_version = getVersion();
-rom_version = 1;
+from getVersion import getVersion
+rom_version = getVersion();
+
 def writeText(file_name, text):
     """Write the text to ROM."""
     with open(file_name, "wb") as fh:
