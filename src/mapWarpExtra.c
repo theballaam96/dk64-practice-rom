@@ -620,7 +620,7 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 				parentData[0].map = crowns[crown_index].level_map;
 				parentData[0].exit = 0;
 			} else if (barrel_index > -1) {
-				initiateTransition_0(map,exit,0,3);
+				initiateTransition_0(map,exit,0,2);
 				parentData[0].in_submap |= 2;
 				parentData[0].transition_properties_bitfield = 3;
 				parentData[0].positions.xPos = barrels[barrel_index].x;
@@ -636,7 +636,7 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 		eightbit_state = 0;
 	} else if (load_mode == SAVESTATE) {
 		if (barrel_index > -1) {
-			initiateTransition_0(map,exit,0,3);
+			initiateTransition_0(map,exit,0,2);
 		} else {
 			initiateTransition_0(map,exit,0xA,0x2);
 		}
