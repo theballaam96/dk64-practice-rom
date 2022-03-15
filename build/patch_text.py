@@ -2,13 +2,22 @@ from textencoder import writeText
 from getVersion import getVersion
 rom_version = getVersion();
 
-def PALifyText(input_text_arr):
+languages = ["English","French","German","Spanish"]
+
+def PALifyText(input_text_arr,text_name):
     output = []
+    print(f"Converting {text_name}")
     for x in input_text_arr:
-        temp = []
-        for y in range(4):
-            temp.append(x)
-        output.append(temp)
+        new = []
+        for z in range(4):
+            temp = []
+            for y in x:
+                if y.upper() == "ENGLISH":
+                    temp.append(languages[z].upper())
+                else:
+                    temp.append(y)
+            new.append(temp)
+        output.append(new)
     return output
 
 dolby = [
@@ -319,10 +328,10 @@ wrinkly = [
 ]
 
 if rom_version == 1:
-    dolby = PALifyText(dolby);
-    main_menu = PALifyText(main_menu);
-    klumsy = PALifyText(klumsy);
-    wrinkly = PALifyText(wrinkly);
+    dolby = PALifyText(dolby,"Dolby Text");
+    main_menu = PALifyText(main_menu,"Main Menu Text");
+    klumsy = PALifyText(klumsy,"K. Lumsy Text");
+    wrinkly = PALifyText(wrinkly,"Wrinkly Text");
 
 writeText("dolby_text.bin",dolby);
 writeText("menu_text.bin",main_menu);

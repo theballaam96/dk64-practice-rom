@@ -109,6 +109,19 @@
 	#define IMAGE_BALLAAM 110
 	#define IMAGE_RAIN 111
 	#define IMAGE_ISOTARGE 112
+	#define INFO_SHOWN 1
+	#define TEXT_Y_OFFSET 0
+	#define INFO_TEXT "INFO"
+#elif ROM_VERSION == 1
+	#define IMAGE_FAIRYBOX 110
+	#define IMAGE_FAIRYDOT 111
+	#define IMAGE_GITHUB 112
+	#define IMAGE_BALLAAM 113
+	#define IMAGE_RAIN 114
+	#define IMAGE_ISOTARGE 115
+	#define INFO_SHOWN 1
+	#define TEXT_Y_OFFSET 16
+	#define INFO_TEXT "START FOR INFO"
 #else
 	#define IMAGE_FAIRYBOX 194
 	#define IMAGE_FAIRYDOT 195
@@ -116,4 +129,7 @@
 	#define IMAGE_BALLAAM 110
 	#define IMAGE_RAIN 111
 	#define IMAGE_ISOTARGE 112
+	#define INFO_SHOWN 0
+	#define TEXT_Y_OFFSET 0
+	#define INFO_TEXT ""
 #endif

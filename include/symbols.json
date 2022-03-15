@@ -1310,7 +1310,7 @@
 			"name":"LoadedActorCount",
 			"versions":{
 				"us":"0x807FBB35",
-				"pal":"0x807FBA54",
+				"pal":"0x807FBA55",
 				"jp":"0x807FBFA5"
 			}
 		},

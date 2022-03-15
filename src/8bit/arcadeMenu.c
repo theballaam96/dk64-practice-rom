@@ -326,9 +326,9 @@ void spawnArcadeMenu(void* write_location) {
 			controlArcadeTimer();
 			setArcadeTextXY(x-1,y+1);
 			setArcadeTextColor(0,0,0,0xFF);
-			float arcade_timer_seconds = (maptimervalue % 3600);
-			int arcade_timer_mins = maptimervalue / 3600;
-			arcade_timer_seconds /= 60;
+			float arcade_timer_seconds = (maptimervalue % (60 * HERTZ));
+			int arcade_timer_mins = maptimervalue / (06 * HERTZ);
+			arcade_timer_seconds /= HERTZ;
 			if (arcade_timer_seconds < 10) {
 				dk_strFormat((char*)arcade_timer_secs,"0%f",arcade_timer_seconds);
 			} else {

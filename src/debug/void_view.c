@@ -66,7 +66,7 @@ int* displayPlayerMarker(int* dl) {
 		} else {
 			dist = POINTER_MIN;
 		}
-		x[i] = CENTER + (dist * dk_sin(angle + (i * 2.09439510f)));
+		x[i] = CENTER + (dist * dk_sin(angle + (i * 2.09439510f))); // 2.09439 = 2 * PI / 3
 		y[i] = CENTER - (dist * dk_cos(angle + (i * 2.09439510f)));
 	}
 	int red = 0xFF;

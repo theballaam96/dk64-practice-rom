@@ -153,9 +153,9 @@ void openFlagLogMenu(void) {
 			// 1: 0x000>0 PS 00:00:00 AGO
 			_byte = flagLog_dataitems[i]->encoded_flag>>3;
 			_bit = flagLog_dataitems[i]->encoded_flag - (_byte<<3);
-			_diff = (FrameReal - flagLog_dataitems[i]->set_frame) / 60;
-			_hour = _diff / 3600;
-			_min = (_diff - (60 * _hour)) / 60;
+			_diff = (FrameReal - flagLog_dataitems[i]->set_frame) / HERTZ;
+			_hour = _diff / (60 * HERTZ);
+			_min = (_diff - (60 * _hour)) / HERTZ;
 			_sec = _diff - (3600 * _hour) - (60 * _min);
 			dk_strFormat(
 				flagLog_items[i],

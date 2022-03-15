@@ -177,7 +177,7 @@
 .definelabel ChimpyCam, 0x8073EC80
 .definelabel ScreenRatio, 0x8073EC10
 .definelabel CurrentActorPointer, 0x807FBA64
-.definelabel LoadedActorCount, 0x807FBA54
+.definelabel LoadedActorCount, 0x807FBA55
 .definelabel LoadedActorArray, 0x807FB850
 .definelabel SpawnerMasterData, 0x807FDBC8
 .definelabel MenuSkyTopRGB, 0x8074F7CC

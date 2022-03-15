@@ -83,9 +83,9 @@ void openStateViewMenu(void) {
 		viewstate_array[0] = var_data_true;
 		viewstate_array[1] = var_created_diff;
 		int _frame_diff = FrameReal - states[_focused_state]->createdTime;
-		int _time_diff = _frame_diff / 60;
+		int _time_diff = _frame_diff / HERTZ;
 		createdHours = _time_diff / 3600;
-		createdMins = (_time_diff - (60 * createdHours)) / 60;
+		createdMins = (_time_diff - (60 * createdHours)) / HERTZ;
 		createdSecs = _time_diff - (3600 * createdHours) - (60 * createdMins);
 		dk_strFormat((char *)var_created_diff,"CREATED:%02d:%02d:%02d AGO",createdHours,createdMins,createdSecs);
 	} else {
@@ -97,7 +97,7 @@ void openStateViewMenu(void) {
 		helmTimerUsed = timestampDiffToMilliseconds(states[_focused_state]->HelmTimerDifferenceMajor,states[_focused_state]->HelmTimerDifferenceMinor);
 		helmTimerUsed = (float)(states[_focused_state]->HelmStart * 100) - helmTimerUsed;
 		helmTimerUsed = helmTimerUsed / 100;
-		helmTimeMins = (int)(float)(helmTimerUsed / 60);
+		helmTimeMins = (int)(float)(helmTimerUsed / HERTZ);
 		helmTimeSecs = helmTimerUsed - (60 * helmTimeMins);
 		if (helmTimeSecs < 10) {
 			dk_strFormat((char *)var_helmtimer_time,"HELM TIMER:%d:0%f",helmTimeMins,helmTimeSecs);
@@ -111,7 +111,7 @@ void openStateViewMenu(void) {
 		viewstate_array[11] = var_isgtimer_timer;
 		isgTimerUsed = timestampDiffToMilliseconds(states[_focused_state]->ISGTimerDifferenceMajor,states[_focused_state]->ISGTimerDifferenceMinor);
 		isgTimerUsed = (isgTimerUsed + 200) / 100;
-		isgTimeMins = (int)(float)(isgTimerUsed / 60);
+		isgTimeMins = (int)(float)(isgTimerUsed / HERTZ);
 		isgTimeSecs = isgTimerUsed - (60 * isgTimeMins);
 		if (isgTimeSecs < 10) {
 			dk_strFormat((char *)var_isgtimer_timer,"ISG TIMER:%d:0%f",isgTimeMins,isgTimeSecs);
@@ -417,7 +417,7 @@ void loadVars(int instant_load) {
 			LZFadeoutProgress = 0.0f;
 		}
 	}
-	stateLoadTimer = 60;
+	stateLoadTimer = HERTZ;
 	LoadVarsOnMapLoad = 0;
 }
 

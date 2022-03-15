@@ -138,7 +138,7 @@ static char stateLoadstr[15] = "";
 
 int* displayListModifiers(int* dl) {
 	if (CurrentMap == 0x50) {
-		if (ROM_VERSION < 2) {
+		if (INFO_SHOWN) {
 			int i = 0;
 			while (i < LoadedActorCount) {
 				if (LoadedActorArray[i].actor) {

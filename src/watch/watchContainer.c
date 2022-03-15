@@ -179,7 +179,7 @@ void checkWatchCapacity(void) {
 		}
 	}
 	if (!slot_vacant) {
-		NoVacantWatchTimer = 60;
+		NoVacantWatchTimer = HERTZ;;
 	}
 }
 
@@ -871,8 +871,8 @@ void handleWatch(void) {
 							float _time = 0;
 							int _timemins = 0;
 							_time = TimerData.TimerPostReduction;
-							_time = _time / 60;
-							_timemins = (int)(float)(_time / 60);
+							_time = _time / HERTZ;
+							_timemins = (int)(float)(_time / HERTZ);
 							_time = _time - (60 * _timemins);
 							if ((watch_cache_array[j][1] != TimerData.TimerPostReduction) || (watch_cache_array[j][0] != 4)) {
 								if (_time >= 10) {
@@ -1025,7 +1025,7 @@ void handleWatch(void) {
 								};
 							};
 							_isgsecs = _isgtime / 100;
-							_isgmins = (int)(float)(_isgsecs / 60);
+							_isgmins = (int)(float)(_isgsecs / HERTZ);
 							_isgsecs = _isgsecs - (60 * _isgmins);
 							if ((watch_cache_array[j][1] != ISGTimer) || (watch_cache_array[j][0] != 10)) {
 								if (_isgsecs >= 10) {
@@ -1224,7 +1224,7 @@ void handleWatch(void) {
 								igt_secs = IGT;
 							}
 							if ((watch_cache_array[j][1] != igt_secs) || (watch_cache_array[j][0] != 18)) {
-								int igt_split_secs = igt_secs % 60;
+								int igt_split_secs = igt_secs % HERTZ;
 								int igt_split_mins = ((igt_secs % 3600) - igt_split_secs) / 60;
 								int igt_split_hours = (igt_secs - (60 * igt_split_mins) - igt_split_secs) / 3600;
 								dk_strFormat((char *)WatchTextSpace[j], "IGT: %d:%02d:%02d",igt_split_hours,igt_split_mins,igt_split_secs);

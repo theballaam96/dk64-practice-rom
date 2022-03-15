@@ -8,7 +8,7 @@ int* displaySavePrompt(int* dl) {
 					int _ingameover = DetectGameOver();
 					int _inadventure = DetectAdventure();
 					if ((_ingameover) || (_inadventure)) {
-						SavePromptTimer = 60;
+						SavePromptTimer = HERTZ;
 					}
 				}
 			}

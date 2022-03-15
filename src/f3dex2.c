@@ -22,16 +22,10 @@ int* drawText(int* dl, int style, float x, float y, char* str, int red, int gree
 		if (style == 6) {
 			*(unsigned int*)(dl++) = 0xDA380003;
 			*(unsigned int*)(dl++) = (int)&style6Mtx[0];
-			// gSPMatrix(dl, (int)&style6Mtx[0], 3);
-			// dl += 2;
+			y += TEXT_Y_OFFSET;
 		} else if (style == 2) {
 			*(unsigned int*)(dl++) = 0xDA380003;
 			*(unsigned int*)(dl++) = (int)&style2Mtx[0];
-			// gSPMatrix(dl, (int)&style2Mtx[0], 3);
-			// dl += 2;
-		// } else if (style == 128) {
-			// gSPMatrix(dl, (int)&style128Mtx[0], 3);
-			// dl += 2;
 		}
 		gDPSetPrimColor(dl, 0, 0, red, green, blue, opacity);
 		dl += 2;
