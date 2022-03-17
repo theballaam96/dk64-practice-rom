@@ -458,3 +458,26 @@
 		lockedCamCode_None:
 			J 	lockedCamHookWrite+0x4C4
 			MTC1 r0, f28
+
+	doubleBeaverCode:
+		LBU 	t1, 0x154 (t0)
+		ADDIU 	t9, r0, 0x40
+		BEQ 	t1, t9, doubleBeaverCode_activated
+		NOP
+
+		doubleBeaverCode_nosuccess:
+			ADDIU 	t9, r0, 0x10
+			SB 		t9, 0x154 (t0)
+			LW 		t1, 0x0 (a3)
+			J 		doubleBeaverHookWrite+0x24
+			SB 		r0, 0x155 (t1)
+
+		doubleBeaverCode_activated:
+			ADDIU 	t9, r0, 0x10
+			SB 		t9, 0x154 (t0)
+			LW 		t1, 0x0 (a3)
+			SB 		r0, 0x155 (t1)
+			JAL 	playBeaverSuccessDing
+			NOP
+			J 		doubleBeaverHookWrite+0x24
+			NOP

@@ -544,6 +544,11 @@
 			"index_var":"ACTIVEMENU_SCREEN_WATCH_DYNWATCH",
 			"struct":"dynwatch_manage_struct",
 			"const":false
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_WATCH_DOUBLEBEAVER",
+			"struct":"beaver_struct",
+			"const":true
 		}
 	]
 }

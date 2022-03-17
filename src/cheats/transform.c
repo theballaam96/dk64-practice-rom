@@ -6,7 +6,11 @@ void openTransformMenu(void) {
 
 void checkCrystals(void) {
 	if (TransformAutoRestockOff == 0) {
-		//setHUDItemAsInfinite(5,0,1);
+		if (HUD) {
+			if (!HUD->item[5].infinite_check) {
+				HUD->item[5].is_infinite = 1;
+			}
+		}
 	}
 }
 

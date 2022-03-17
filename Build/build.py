@@ -171,6 +171,14 @@ base_file_dict = [
 		"versions":[1,2],
 	},
 	{
+		"name": "Double Beaver Circle",
+		"pointer_table_index":14,
+		"file_index": [113,116,200][rom_version],
+		"source_file": "assets/Non-Code/Double Beaver/circle.png",
+		"texture_format": "rgba5551",
+		"versions":[0,1,2],
+	},
+	{
 		"name": "Jetpac Font",
 		"pointer_table_index": 14,
 		"file_index": [31,34,177][rom_version],

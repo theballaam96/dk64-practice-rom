@@ -2841,6 +2841,11 @@
 			"name":"dynamic_watches",
 			"address":"0x807FFEB0",
 			"size_comment":"0x8 x 4"
+		},
+		{
+			"name":"doubleBeaverEnabledBitfield",
+			"address":"0x807FFF8C",
+			"size_comment":"u8"
 		}
 	],
 	"code":[
@@ -3298,6 +3303,14 @@
 				"us":"0x80027DB0",
 				"pal":"0x8001ADD8",
 				"jp":"0x8001ADC0"
+			}
+		},
+		{
+			"name":"doubleBeaverHookWrite",
+			"versions":{
+				"us":"0x806AD728",
+				"pal":"0x806A7388",
+				"jp":"0x806AC298"
 			}
 		}
 	]

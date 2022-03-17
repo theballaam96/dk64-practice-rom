@@ -598,7 +598,7 @@ int* displayVoid(int* dl) {
 	if (voidMapOn) {
 		if (assignedConsole == WIIU) {
 			//dl = drawString(dl,6,20,210,"TEST");
-			dl = drawPixelTextContainer(dl, 20, 210, "REMOVECHRISTIAN", 0xFF, 0xFF, 0xFF, 0xFF,0);
+			dl = drawPixelTextContainer(dl, 30, 100, "V", 0xFF, 0xFF, 0xFF, 0xFF,0);
 		}
 		dl = displayVoidBorder(dl);
 		if (void_enabled) {

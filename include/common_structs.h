@@ -13,7 +13,9 @@ typedef struct shortPos {
 typedef struct actorData {
 	/* 0x000 */ char unk_00[0x58];
 	/* 0x058 */ int actorType;
-	/* 0x05C */ char unk_5C[0x7C-0x5C];
+	/* 0x05C */ char unk_5C[0x60-0x5C];
+	/* 0x060 */ unsigned int obj_props_bitfield;
+	/* 0x064 */ char unk_64[0x7C-0x64];
 	/* 0x07C */ float xPos;
 	/* 0x080 */ float yPos;
 	/* 0x084 */ float zPos;
@@ -26,11 +28,21 @@ typedef struct actorData {
 	/* 0x140 */ char unk_140[0x154-0x140];
 	/* 0x154 */ unsigned char control_state;
 	/* 0x155 */ char control_state_progress;
-	/* 0x156 */ char unk_156[0x174-0x156];
+	/* 0x156 */ char unk_156[0x16A-0x156];
+	/* 0x16A */ unsigned char red;
+	/* 0x16B */ unsigned char green;
+	/* 0x16C */ unsigned char blue;
+	/* 0x16D */ char unk_16D[0x174-0x16D];
 	/* 0x174 */ void* paad;
 	/* 0x178 */ char unk_178[0x180-0x178];
 	/* 0x180 */ void* tied_character_spawner;
 } actorData;
+
+typedef struct beaverData {
+	/* 0x000 */ actorData main;
+	/* 0x184 */ char unk_184[0x192-0x184];
+	/* 0x192 */ short scare_bitfield;
+} beaverData;
 
 typedef struct cameraData {
 	/* 0x000 */ char unk_00[0x7C];
@@ -857,7 +869,10 @@ typedef struct hud_element {
 	/* 0x00C */ int y;
 	/* 0x010 */ float unk_10[4];
 	/* 0x020 */ int hud_state;
-	/* 0x024 */ char unk_24[0xC];
+	/* 0x024 */ char unk_24[0x2C-0x24];
+	/* 0x02C */ char is_infinite;
+	/* 0x02D */ char infinite_check;
+	/* 0x02E */ char unk_2E[2];
 } hud_element;
 
 typedef struct hudData {

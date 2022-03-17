@@ -537,6 +537,7 @@ static const char* watch_array[] = {
 	"ASSISTANTS",
 	"FAKE ITEMS",
 	"DYNAMIC WATCHES",
+	"BEAVER BOTHER",
 	"SET REFERENCE POINT",
 	"CLEAR ALL WATCHES",
 };
@@ -549,6 +550,7 @@ static const int watch_functions[] = {
 	(int)&openWatchAssistMenu,
 	(int)&openWatchFakeMenu,
 	(int)&openDynwatchScreen,
+	(int)&openBeaverBotherMenu,
 	(int)&setReferencePosition,
 	(int)&clearAllWatches,
 };
@@ -556,7 +558,7 @@ static const int watch_functions[] = {
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 3
 };

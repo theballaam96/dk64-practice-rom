@@ -6,9 +6,9 @@
 	Stats:
 		Functions: 121/121(100.0%)
 		Vanilla Vars: 165/165(100.0%)
-		Hack Vars: 110/110(100.0%)
-		Code: 57/57(100.0%)
-		Overall: 453/453(100.0%)
+		Hack Vars: 111/111(100.0%)
+		Code: 58/58(100.0%)
+		Overall: 455/455(100.0%)
 */
 
 //functions
@@ -412,6 +412,7 @@
 .definelabel scriptsNotAutoloading, 0x807FFF8A // u8
 .definelabel disableLockedCam, 0x807FFF8B // u8
 .definelabel dynamic_watches, 0x807FFEB0 // 0x8 x 4
+.definelabel doubleBeaverEnabledBitfield, 0x807FFF8C // u8
 
 // Code
 .definelabel debugColumnLoop, 0x8072C6B8
@@ -471,8 +472,9 @@
 .definelabel jetpacTextHookWrite, 0x80018364
 .definelabel jetpacPauseHookWrite, 0x80017954
 .definelabel jetpac5000HookWrite, 0x8001ADD8
+.definelabel doubleBeaverHookWrite, 0x806A7388
 
-.definelabel customCodeStart, 0x805d2e00
+.definelabel customCodeStart, 0x805d1e00
 .definelabel customCodeUpper, 0x805d
-.definelabel customCodeLower, 0x2e00
-.definelabel customCodeSize, 0x21000
+.definelabel customCodeLower, 0x1e00
+.definelabel customCodeSize, 0x22000

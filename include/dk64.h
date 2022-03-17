@@ -407,6 +407,7 @@ extern char textboxCancel;
 extern unsigned char scriptsNotAutoloading;
 extern char disableLockedCam;
 extern dynamicWatchStruct dynamic_watches[4];
+extern unsigned char doubleBeaverEnabledBitfield;
 
 // Code
 extern int debugColumnLoop;

@@ -266,6 +266,9 @@ speedHook:
 lockedCamHook:
 	J 	lockedCamCode
 	NOP
+doubleBeaverHook:
+	J 	doubleBeaverCode
+	NOP
 
 loadExtraHooks:
 	LUI t3, hi(pauseHook)
@@ -401,6 +404,12 @@ loadExtraHooks:
 	SW t3, lo(lockedCamHookWrite) (t4) // Store Hook
 	SW r0, lo(lockedCamHookWrite)+4 (t4) // Store NOP
 
+	LUI t3, hi(doubleBeaverHook)
+	LW t3, lo(doubleBeaverHook) (t3)
+	LUI t4, hi(doubleBeaverHookWrite)
+	SW t3, lo(doubleBeaverHookWrite) (t4) // Store Hook
+	SW r0, lo(doubleBeaverHookWrite)+4 (t4) // Store NOP
+	
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)
 	LUI t4, hi(kongHookWrite)

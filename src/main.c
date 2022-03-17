@@ -74,6 +74,10 @@ void cFuncLoop(void) {
 			preload_map_voids();
 		}
 	}
+	if ((CurrentMap == 0x68) || (CurrentMap == 0x88) || (CurrentMap == 0x89)) {
+		// In Beaver Bother
+		controlDoubleBeaver();
+	}
 	if (stateLoadTimer > 0) {
 		stateLoadTimer--;
 	}
@@ -177,6 +181,10 @@ int* displayListModifiers(int* dl) {
 		dl = displayMemory(dl);
 		if (CurrentMap != 0x50) {
 			dl = displayFairy(dl);
+		}
+		if ((CurrentMap == 0x68) || (CurrentMap == 0x88) || (CurrentMap == 0x89)) {
+			// In Beaver Bother
+			dl = displayDropCircle(dl);
 		}
 		//dl = drawTri(dl, 100, 100, 300, 500, 500, 300);
 		//dl = displayFloors(dl);
