@@ -11,6 +11,7 @@ fungi.py
 *.sym
 asm/objects.asm
 *.bps
+!Site/releases/*.bps
 *.wch
 *.log
 .rom

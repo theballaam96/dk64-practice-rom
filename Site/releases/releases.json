@@ -304,7 +304,7 @@
             "beat_pal":"https://github.com/theballaam96/dk64-practice-rom/blob/main/Site/releases/Practice%20ROM%201_4_2_PAL.bps?raw=true",
             "beat_jp":"https://github.com/theballaam96/dk64-practice-rom/blob/main/Site/releases/Practice%20ROM%201_4_2_JP.bps?raw=true",
             "lunar":"",
-            "source":"",
+            "source":"https://github.com/theballaam96/dk64-practice-rom/tree/06adbf8ebe5db940e518421c72308c55786bb270",
             "lunar_warning":false,
             "changelog":[]
          }
