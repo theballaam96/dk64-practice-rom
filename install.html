@@ -154,24 +154,6 @@
 					</ul>
 				</li>
 				<li><a class="excluded_link hovergold isversion" onclick="treeshow('support')">Support</a></li>
-				<!-- <li>
-					<span class="caret">Pre-requisites</span>
-					<ul class="nested">
-						<li><a class="excluded_link hovergold" onclick="treeshow('req_n64')">N64</a></li>
-						<li><a class="excluded_link hovergold" onclick="treeshow('req_wiiu')">Wii U VC</a></li>
-						<li><a class="excluded_link hovergold" onclick="treeshow('req_emu')">Emulators</a></li>
-					</ul>
-				</li>
-				<li>
-					<span class="caret">Patching</span>
-					<ul class="nested">
-						<li><a class="excluded_link hovergold" onclick="treeshow('patch_beat')">Beat</a></li>
-						<li><a class="excluded_link hovergold" onclick="treeshow('patch_web')">Web Patcher</a></li>
-						<li><a class="excluded_link hovergold" onclick="treeshow('patch_lunar')">Lunar IPS</a></li>
-					</ul>
-				</li>
-				<li><a class="excluded_link hovergold isversion" onclick="treeshow('wii_inject')">Inject to Wii U</a></li>
-				<li><a class="excluded_link hovergold isversion" onclick="treeshow('support')">Support</a></li>		 -->
 			</ul>
 		</div>
 		<div class="rightbox" style="flex:80%">
@@ -193,15 +175,16 @@
 					<ul>
 						<li><strong>N64 Everdrive: </strong>If you would like to play this on Nintendo 64, you will need to purchase an Everdrive. The Everdrive purchased needs to be version 2.5 or higher.</li>
 						<ul>
-							<li>Krikzz Store: <a class="excluded_link hovergold" href="https://krikzz.com/store/">Link</a></li>
+							<li><a class="excluded_link hovergold underline" href="https://everdrive.me">Everdrive Shop</a>: <a class="excluded_link hovergold underline" href="https://twitter.com/EverdriveM/status/1496849325204381701">Currently Unavailable</a></li>
 						</ul>
 						<br>
-						<li><strong>Donkey Kong 64 ROM: </strong>You will need to possess a vanilla US Donkey Kong 64 ROM.</li>
+						<li><strong>Donkey Kong 64 ROM: </strong><span class="rom_possess"></span></li>
 						<ul>
 							<li>The ROM will need to have the .z64 file format. The .n64 and .v64 file formats will not work</li>
 							<li>We <strong>cannot</strong> provide this for you. You will need to source this yourself.</li>
-							<li>The ROM will need to have the following ROM Hash: <span class="highlight">CF806FF2603640A748FCA5026DED28802F1F4A50</span>.</li>
-							<li>The 3 other releases (PAL, Japanese & Kiosk/NFR) are not currently supported with the Practice ROM.</li>
+							<li class="rom_hash_pre"></li>
+							<ul class="rom_hash_list"></ul>
+							<li class="rom_hash_post"></li>
 						</ul>
 					</ul>
 				</div>
@@ -223,16 +206,17 @@
 					<ul>
 						<li><strong>Homebrewed Wii U: </strong>If you would like to play this on Wii U, your Wii U will need to be homebrewed to enable custom software to be booted on it. Tutorials on performing the homebrew process can be found here:</li>
 						<ul>
-							<li><a class="excluded_link hovergold" href="https://www.youtube.com/watch?v=LW5QVxAlDoY&ab_channel=JackSorrell">Tutorial 1</a></li>
-							<li><a class="excluded_link hovergold" href="https://www.youtube.com/watch?v=3-qnzaxL7Bg">Tutorial 2</a></li>
+							<li><a class="excluded_link hovergold underline" href="https://www.youtube.com/watch?v=LW5QVxAlDoY&ab_channel=JackSorrell">Tutorial 1</a></li>
+							<li><a class="excluded_link hovergold underline" href="https://www.youtube.com/watch?v=3-qnzaxL7Bg">Tutorial 2</a></li>
 						</ul>
 						<br>
-						<li><strong>Donkey Kong 64 ROM: </strong>You will need to possess a vanilla US Donkey Kong 64 ROM.</li>
+						<li><strong>Donkey Kong 64 ROM: </strong><span class="rom_possess"></span></li>
 						<ul>
 							<li>The ROM will need to have the .z64 file format. The .n64 and .v64 file formats will not work</li>
 							<li>We <strong>cannot</strong> provide this for you. You will need to source this yourself.</li>
-							<li>The ROM will need to have the following ROM Hash: <span class="highlight">CF806FF2603640A748FCA5026DED28802F1F4A50</span>.</li>
-							<li>The 3 other releases (PAL, Japanese & Kiosk/NFR) are not currently supported with the Practice ROM.</li>
+							<li class="rom_hash_pre"></li>
+							<ul class="rom_hash_list"></ul>
+							<li class="rom_hash_post"></li>
 						</ul>
 					</ul>
 				</div>
@@ -258,13 +242,13 @@
 							If you wish to play this on an emulator, there are a couple emulators that you can use:
 							<ul>
 								<br>
-								<li>BizHawk - DK64 Edition: <a class="excluded_link hovergold" href="https://github.com/theballaam96/BizHawk-dk64Edition/releases/tag/DK64-1.0">Link</a></li>
+								<li>BizHawk - DK64 Edition: <a class="excluded_link hovergold underline" href="https://github.com/theballaam96/BizHawk-dk64Edition/releases/tag/DK64-1.0">Link</a></li>
 								<ul>
 									<li>This is a special build of the TASVideos BizHawk emulator that fixes some key DK64 emulation bugs for ROMs that are not the 4 vanilla DK64 ROMs</li>
 									<li>Whilst PC-intensive, this emulator is miles ahead of any other emulator right now in terms of accuracy</li>
 								</ul>
 								<br>
-								<li>Project 64 3.0: <a class="excluded_link hovergold" href="https://www.pj64-emu.com/public-releases">Link</a></li>
+								<li>Project 64 3.0: <a class="excluded_link hovergold underline" href="https://www.pj64-emu.com/public-releases">Link</a></li>
 								<ul>
 									<li>In order for the Practice ROM to behave correctly on Project64, you will need to tweak a few settings</li>
 									<ol>
@@ -280,12 +264,13 @@
 							</ul>
 						</li>
 						<br>
-						<li><strong>Donkey Kong 64 ROM: </strong>You will need to possess a vanilla US Donkey Kong 64 ROM.</li>
+						<li><strong>Donkey Kong 64 ROM: </strong><span class="rom_possess"></span></li>
 						<ul>
 							<li>The ROM will need to have the .z64 file format. The .n64 and .v64 file formats will not work</li>
 							<li>We <strong>cannot</strong> provide this for you. You will need to source this yourself.</li>
-							<li>The ROM will need to have the following ROM Hash: <span class="highlight">CF806FF2603640A748FCA5026DED28802F1F4A50</span>.</li>
-							<li>The 3 other releases (PAL, Japanese & Kiosk/NFR) are not currently supported with the Practice ROM.</li>
+							<li class="rom_hash_pre"></li>
+							<ul class="rom_hash_list"></ul>
+							<li class="rom_hash_post"></li>
 						</ul>
 					</ul>
 				</div>
@@ -304,7 +289,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Download: <a class="excluded_link hovergold" href="https://www.romhacking.net/utilities/893/">Beat</a>
+					<a class="excluded_link hovergold underline" href="https://www.romhacking.net/utilities/893/">Download Beat</a>
 					<br><br>
 					To convert your vanilla DK64 ROM to a Practice ROM with Beat, you will need to perform the following steps:
 					<ol>
@@ -330,7 +315,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Visit: <a class="excluded_link hovergold" href="https://patch.wedarobi.com/dk_practice_rom">Patcharobi</a>
+					<a class="excluded_link hovergold underline" href="https://patch.wedarobi.com/dk_practice_rom">Visit Patcharobi</a>
 					<br><br>
 					To convert your vanilla DK64 ROM to a Practice ROM with Patcharobi, you will need to perform the following steps:
 					<ol>
@@ -355,7 +340,7 @@
 				</div>
 				<div class="treebox_body">
 					<span class="warning">Lunar IPS is not supported v1.3+ and will likely produce a non-functioning Practice ROM if attempted on a v1.3+ patch</span><br><br>
-					Download: <a class="excluded_link hovergold" href="https://www.romhacking.net/utilities/240/">Lunar IPS</a>
+					<a class="excluded_link hovergold underline" href="https://www.romhacking.net/utilities/240/">Download Lunar IPS</a>
 					<br><br>
 					To convert your vanilla DK64 ROM to a Practice ROM with Lunar IPS, you will need to perform the following steps:
 					<ol>
@@ -380,14 +365,14 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Download PhacoxsInjector: <a class="excluded_link hovergold" href="https://gbatemp.net/threads/release-phacoxs-injector-nes-snes-n64-gba-nds-for-wii-u.554521/">PhacoxsInjector</a><br>
-					How to get the DK64 Base Guide: <a class="excluded_link hovergold" href="https://cheapergamer.co.uk/wii-u-usb-helper-guide/">DK64 Base</a></li><br>
-					Download the DK64 Config File: <a class="excluded_link hovergold" href="http://phacoxcll.blogspot.com/2019/09/archivos-ini-de-la-consola-virtual-de.html">DK64 Config</a><br>
+					<a class="excluded_link hovergold underline" href="https://gbatemp.net/threads/release-phacoxs-injector-nes-snes-n64-gba-nds-for-wii-u.554521/">Download PhacoxsInjector</a><br>
+					<a class="excluded_link hovergold underline" href="https://cheapergamer.co.uk/wii-u-usb-helper-guide/">How to get the DK64 Base Guide</a></li><br>
+					<a class="excluded_link hovergold underline" href="http://phacoxcll.blogspot.com/2019/09/archivos-ini-de-la-consola-virtual-de.html">Download the DK64 Config File</a><br>
 
 					<br>
 					To convert your patched Practice ROM to a Wii U inject, you will need to perform the following steps:
 					<ol>
-						<li>Homebrew your Nintendo Wii U. Tutorials for how to do so can be found <a class="excluded_link hovergold" href="https://www.youtube.com/watch?v=LW5QVxAlDoY">here</a> and <a class="excluded_link hovergold" href="https://www.youtube.com/watch?v=3-qnzaxL7Bg">here</a></li>
+						<li>Homebrew your Nintendo Wii U. Tutorials for how to do so can be found <a class="excluded_link hovergold underline" href="https://www.youtube.com/watch?v=LW5QVxAlDoY">here</a> and <a class="excluded_link hovergold underline" href="https://www.youtube.com/watch?v=3-qnzaxL7Bg">here</a></li>
 						<li>Open PhacoxsInjector</li>
 						<li>Click "Choose" and select your modified ROM that has been converted with any of the above methods</li>
 						<li>Add the Wii U "Common Key" on the settings tab, which can be found with a Google search</li>
@@ -431,7 +416,7 @@
 				<div class="treebox_body">
 					If you need any additional support in setting up the Practice ROM on your console or platform of choice, then it is advised that you join the Donkey Kong 64 speedrunning discord and post your problem in the <span class="highlight">#practice-rom</span> channel.
 					<uL>
-						<li>Donkey Kong 64 Discord: <a class="excluded_link hovergold" href="https://discord.gg/955MmbtQBP">Link</a></li>
+						<li><a class="excluded_link hovergold underline" href="https://discord.gg/955MmbtQBP">Donkey Kong 64 Discord</a></li>
 					</uL>
 					To assist us as much as possible, please mention the following in your post:
 					<ul>
@@ -475,7 +460,7 @@
 								very frequent crashes
 							</td>
 							<td>
-								Missing config file: <a class="excluded_link hovergold" href="https://youtu.be/h6Ta6cAFzEc&t=3m50s">Guide</a>
+								Missing config file: <a class="excluded_link hovergold underline" href="https://youtu.be/h6Ta6cAFzEc&t=3m50s">Guide</a>
 							</td>
 						</tr>
 						<tr>
@@ -725,7 +710,7 @@
 			var ts_items = [
 				{
 					"problem": "Cannot create patched ROM",
-					"solution": "Your input ROM is different to a good US Retail DK64 .z64 ROM. To check this, use the following SHA Checker: <a class='excluded_link hovergold' href='https://emn178.github.io/online-tools/sha256_checksum.html'>Link</a><p>The output should match the following: <span class='highlight'>b6347d9f1f75d38a88d829b4f80b1acf0d93344170a5fbe9546c484dae416ce3</span></p><p>If your output matches <span class='highlight'>5778c9ef72ef269cdcc52333710a79961a343b1f01d12189d1dbe94df3cbabed</span>, then your ROM needs to be byteswapped which can be done with this: <a class='excluded_link hovergold' href='http://sheesh.us/mods/how-to-convert-any-n64-rom-to-z64-format-using-tool64/'>Link</a></p>"
+					"solution": "Your input ROM is different to a good Retail DK64 .z64 ROM. To check this, use the <a class='excluded_link hovergold underline' href='/tools/rom_checker'>ROM Checker</a>.<p>"
 				}
 			]
 			var body_hook = document.getElementsByTagName("body")[0]
@@ -770,8 +755,56 @@
 			document.getElementById(id_).style.display = "block";
 			evt.currentTarget.classList.add("active")
 		}
+
+		function updateText() {
+			var possess_spans = document.getElementsByClassName("rom_possess")
+			for (let p = 0; p < possess_spans.length; p++) {
+				possess_spans[p].innerText = "You will need to possess a vanilla Donkey Kong 64 ROM."
+			}
+			var pre_li = document.getElementsByClassName("rom_hash_pre")
+			for (let p = 0; p < pre_li.length; p++) {
+				pre_li[p].innerText = "The ROM will need to have one of the following ROM Hashes:"
+			}
+			var pre_ul = document.getElementsByClassName("rom_hash_list")
+			for (let p = 0; p < pre_ul.length; p++) {
+				var hook = pre_ul[p];
+				var ver_hash = [
+					{
+						"name":"US (NTSC-U)",
+						"hash":"CF806FF2603640A748FCA5026DED28802F1F4A50",
+					},
+					{
+						"name":"Europe/Australia (PAL)",
+						"hash":"F96AF883845308106600D84E0618C1A066DC6676",
+					},
+					{
+						"name":"Japanese (NTSC-J)",
+						"hash":"F0AD2B2BBF04D574ED7AFBB1BB6A4F0511DCD87D"
+					}
+
+				];
+				ver_hash.forEach(ver => {
+					var name_el = document.createElement("strong")
+					var name_st = document.createTextNode(ver.name + ": ")
+					var hash_el = document.createElement("span")
+					var hash_st = document.createTextNode(ver.hash)
+					hash_el.classList.add("highlight")
+					var li = document.createElement("li")
+					name_el.appendChild(name_st)
+					hash_el.appendChild(hash_st)
+					li.appendChild(name_el)
+					li.appendChild(hash_el)
+					hook.appendChild(li)
+				})
+			}
+			var hash_post = document.getElementsByClassName("rom_hash_post")
+			for (let h = 0; h < hash_post.length; h++) {
+				hash_post[h].innerText = "The kiosk demo (Also known as the 'NFR'/'Not for Resale' version) is not supported for the Practice ROM.";
+			}
+		}
 		generalTSUpdate();
-		editButtonClickEvent()
+		editButtonClickEvent();
+		updateText();
 	</script>
 </body>
 </html>

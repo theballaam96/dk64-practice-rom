@@ -104,6 +104,8 @@
 			background-position: center center;
 			position: relative;
 			transition: 0.5s ease-in-out;
+			margin-left: 10px;
+			margin-right: 10px;
 		}
 		.tool_block .block_name {
 			color: white;
@@ -130,10 +132,15 @@
 			<div class="v_spacer"></div>
 			<div class="cen_block">
 				<h1 class="flag_title">Tools</h1>
-				<div class="flexsplitter check_contents" style="width:15%;margin-left: auto;margin-right: auto">
+				<div class="flexsplitter check_contents" style="width:30%;margin-left: auto;margin-right: auto">
 					<div class="shown_block tool_block" style="background-image:url('./Site/assets/flag.png');background-size: 150%;" onclick="goTo('/tools/flag_search')">
 						<div class="block_name">
 							Flag Search
+						</div>
+					</div>
+					<div class="shown_block tool_block" style="background-image:url('./Site/assets/float.png');background-size: 150%;" onclick="goTo('/tools/rom_checker')">
+						<div class="block_name">
+							ROM Checker
 						</div>
 					</div>
 				</div>

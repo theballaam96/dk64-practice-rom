@@ -476,7 +476,6 @@ void addToWatchFunc(int index) {
             } else {
                 _used = 0;
             }
-            dynamic_watches[i].used = _used;
             int added_watch = 0;
             for (int j = 0; j < WatchCount; j++) {
                 if ((WatchIndex[j] == 0) && (!added_watch)) {
@@ -485,6 +484,7 @@ void addToWatchFunc(int index) {
                     added_watch = 1;
                 }
             }
+            dynamic_watches[i].used = _used & added_watch;
             break;
         } else if (dynamic_watches[i].address == focused_address) {
             dynamic_watches[i].used = 0;

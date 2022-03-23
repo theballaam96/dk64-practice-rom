@@ -68,6 +68,7 @@
 				<li>
 					<span class="caret">1.4</span>
 					<ul class="nested">
+						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_142')">1.4.2</a></li>
 						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_141')">1.4.1</a></li>
 						<li><a class="excluded_link hovergold isversion" onclick="treeshow('version_140')">1.4.0</a></li>
 					</ul>
@@ -1145,6 +1146,211 @@
 				</div>
 				<download-buttons></download-buttons>
 			</div>
+			<div class="treebox hide" tree-id="version_142" version="1.4.2">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Version 1.4.2</h2>
+					</div>
+					<div style="flex:50%;text-align: right;">
+						<link-button>
+							<button class="link_button" onmouseover="toggleImage(this,true)" onmouseleave="toggleImage(this,false)">
+								<img src="./Site/assets/link.png" height="20px">
+							</button>
+						</link-button>
+					</div>
+				</div>
+				<release-date></release-date>
+				<div class="treebox_body">
+					<h3>Changelog</h3>
+					<ul class="changelog">
+						<li>Additions</li>
+						<ul>
+							<li>Info</li>
+							<ul>
+								<li>Pressing the start button on the main menu will display some information about the Practice ROM, including a getting started guide and credit to those who have contributed to making the Practice ROM.</li>
+							</ul>
+							<li>Savestates</li>
+							<ul>
+								<li>Savestates will now store more variables</li>
+								<ul>
+									<li><strong>Camera Position</strong>: The co-ordinate data of the camera to try and bring the camera position to the same place it was at state save upon load.</li>
+									<li><strong>Troff n Scoff total turned in count:</strong> The total amount of colored bananas turned into troff and scoff inside a level.</li>
+									<li><strong>Fungi Dark Attic Squawks location:</strong> Stores the position of the Squawks in Dark Room in Fungi if the Squawks has been spawned</li>
+									<li><strong>Japes Switches:</strong> Stores the 3 switches that controls whether Diddy is free or not. Only stored if in Japes map</li>
+								</ul>
+								<li>Savestate loading shortens the transition to 1 frame. This saves roughly one second per savestate load</li>
+								<li>An informative message will display upon loading a savestate to indicate what savestate has been loaded</li>
+								<li>Added an option in the Savestate menu to disable the void grace period. If disabled, this brings gameplay closer to as it should be for a true savestate.</li>
+								<li>Added button combo to save a state (L &rarr; R &rarr; D-Down)</li>
+							</ul>
+							<li>Watches</li>
+							<ul>
+								<li>More watches added</li>
+								<ul>
+									<li><strong>Fairy Viewer:</strong> Displays the screen position of a fairy and the success polygon. If the fairy dot is inside the polygon, a fairy picture will count as successful. The distance from the fairy to the player is also displayed, and colored to indicate whether the game believes a wall is intersecting the view vector.</li>
+									<li><strong>In-Game Time:</strong> Displays the current in-game time in seconds (the most granular unit that the game stores).</li>
+									<li><strong>Angle to point:</strong> Displays the angle that the kong must face to move in a straight line to a referenced point. The referenced point can be set through "Set Reference Point" in the main watches menu.</li>
+									<li><strong>Fake Key:</strong> Displays whether Key 8 is classed as fake or not. This indicates whether the game will save Key 8 or not as determined by the "Fake Key" glitch</li>
+									<li><strong>Fake Production Room:</strong> Displays whether Factory's Production Room is classed as fake or not.</li>
+									<li><strong>Object Signals:</strong> Displays the amount of signals that are passing between objects</li>
+									<li><strong>Delayed Kills Count:</strong> Displays the amount of kills that are being buffered until the next kill frame</li>
+									<li><strong>Lock Stack Count:</strong> Displays the lock stack count</li>
+									<li><strong>Loaded Actors:</strong> Displays the amount of loaded actors</li>
+									<li><strong>Scripts Running:</strong> Displays the amount of object instance scripts which are running, along with the amount of object instance scripts that have been attempted to be run.</li>
+									<li><strong>Beaver Bother:</strong></li>
+									<ul>
+										<li><strong>Bark Indicator:</strong> Turns the Klaptrap black if he is classed as "barking"</li>
+										<li><strong>Scare Indicator & Range Indicator:</strong> Turns the beaver various colors depending on how close the kong is to the beaver and whether the beaver is scared or not</li>
+										<li><strong>Timing Indicator:</strong> Flashes a teal circle for one frame on screen with a rough approximation of where the scare range is.</li>
+										<li><strong>Success Indicator:</strong> Plays a ding sound effect if you have successfully performed Double Beaver</li>
+									</ul>
+								</ul>
+								<li>An error message will display if you are trying to select a watch which would result in the watch cap being exceeded</li>
+							</ul>
+							<li>Memory Viewer</li>
+							<ul>
+								<li>Memory data size is now displayed in the top-right</li>
+								<li>Now uses Arcade Font</li>
+								<li>Pressing Z now allows you to perform extra actions with regard to the selected memory value:</li>
+								<ul>
+									<li><strong>Follow Pointer:</strong> Goes to the pointer location indicated by the memory value (Int-Only)</li>
+									<li><strong>Freeze Value:</strong> Freezes the memory value with the size selected. Option to unfreeze supplied if the value is already frozen</li>
+									<li><strong>Add as Watch:</strong> The variable type can be selected as a suboption. Watches added through this can be removed through the watches menu</li>
+								</ul>
+							</ul>
+							<li>Debug</li>
+							<ul>
+								<li>Void Map Added</li>
+								<ul>
+									<li>Displays all void zones within a 500 unit distance from each axis</li>
+									<li>Screen tri rendering is broken on Wii U. As such, complex void zones are not shown on Wii U</li>
+								</ul>
+								<li>Actor Menu</li>
+								<ul>
+									<li>Added option to change the camera's focused actor to whatever is selected by the Actor menu</li>
+									<li>Added option to show collision count tied to an actor</li>
+									<li>Added option to show latest collision to occur that is tied to an actor</li>
+									<li>Some functions are disabled for some actors</li>
+								</ul>
+							</ul>
+							<li>Flags</li>
+							<ul>
+								<li>Added Bananaports to the flag menu. Allows toggling all warps in a level group. As a result, the "Toggle All Warps" cheat has been removed from the cheat menu</li>
+								<li>Added "Llama Freed" and "Llama Spit" flags to the level modifiers menu</li>
+							</ul>
+							<li>Cheats</li>
+							<ul>
+								<li>Added the following cheats:</li>
+								<ul>
+									<li><strong>Auto-Moontail:</strong> Turns any regular tail attack as Diddy into a Moontail</li>
+									<li><strong>Auto-Startail:</strong> Turns any regular tail attack as Diddy that is done on a Simian Spring pad into a Startail. This takes priority over auto-moontail</li>
+									<li><strong>Disable Voids:</strong> Disables the ability to void</li>
+									<li><strong>Infinites:</strong> Grants the kong infinite items from a certain list (Oranges, both ammo types, crystal, film, instrument energy)</li>
+									<li><strong>Disable Locked Camera:</strong> Disables any automatic locked cameras</li>
+								</ul>
+							</ul>
+							<li>Jetpac Menu</li>
+							<ul>
+								<li>Added a menu to enable various functionality in Jetpac</li>
+								<ul>
+									<li><strong>Level Select:</strong> Change level between the 8 available in the game</li>
+									<li><strong>Restock Lives:</strong> Self-Explanatory</li>
+									<li><strong>Reset Jetpac:</strong> Resets Jetpac back to level 1 as if you booted Jetpac up from the player/control scheme selection menu. Additionally, this resets the 5000 point timer</li>
+									<li><strong>5000 Point Timer:</strong> A timer which indicates how fast you got from the beginning of the game to the frame where the game puts Rareware Coin in the first slot of the item queue. The timer pauses whilst the Jetpac Active Menu is open, and automatically resets, starts and stops where appropriate.</li>
+								</ul>
+								<li>The menu freezes gameplay inside Jetpac</li>
+							</ul>
+							<li>Arcade Menu</li>
+							<ul>
+								<li>Added a map timer which indicates how fast you beat a map inside DK Arcade.</li>
+							</ul>
+							<li>Settings</li>
+							<ul>
+								<li>More settings added</li>
+								<ul>
+									<li><strong>Input Display Type:</strong> Toggles what style of input display is used, between the pre-existing detailed input display and a new low-lag input display.</li>
+									<li><strong>Change Jetman Color:</strong> Allows Jetman to be a different color. This is also present in the Jetpac Menu.</li>
+									<li><strong>Disable Savestate Save Button Combination:</strong> Disables the savestate "save" button combination</li>
+									<li><strong>Disable Custom SFX:</strong> Disables custom sound effects that are played by the Practice ROM.</li>
+									<li><strong>Toggle Game Fixes:</strong> Toggles whether the game applies some fixes to vanilla behaviour to assist with practice.</li>
+								</ul>
+							</ul>
+							<li>General</li>
+							<ul>
+								<li>Added support for Scroll Menus</li>
+								<li>Applies some game fixes to correct some level modifiers if you are not entering a level from the portal. Whilst this isn't exactly how the game reacts, the fixes help the game being better for practice</li>
+								<li>Added NLE 40 Blueprints File States</li>
+							</ul>
+						</ul>
+						<li>Changes</li>
+						<ul>
+							<li>Active Menu</li>
+							<ul>
+								<li>Active Menu font has been changed to match the Arcade Font</li>
+								<li>Active Menu has been shifted to direct display list modifications rather than going through actor spawning</li>
+								<li>Toggles use a checkbox as opposed to "<!>"</li>
+							</ul>
+							<li>Watches</li>
+							<ul>
+								<li>Watches are no longer viewable when the memory viewer is open</li>
+							</ul>
+							<li>Cheats</li>
+							<ul>
+								<li>Auto-Phase now requires D-Up to be pressed in order for the Phase state to be applied</li>
+								<li>Some cheats have been moved around to more appropriate locations</li>
+								<li>Change Gamemode is now only 1 menu with a scroll menu</li>
+							</ul>
+							<li>General</li>
+							<ul>
+								<li>Practice ROM Version is no longer stated in the Active Menu, but instead the Main Menu</li>
+								<li>Practice ROM now uses the "Cranky's Lab" build system developed by Isotarge</li>
+								<li>Loading file states and save states that spawn you close to a DK Portal will no longer put you in the "DK Portal Exit" process</li>
+								<li>Game boot has been sped up by about 1 second</li>
+								<li>Text has been modified due to advancements in asset modification</li>
+								<li>Tag Anywhere cannot be activated if both L and R are held when the Savestate "Save" button combination is not disabled</li>
+								<li>Memory-related options are hidden on Wii U</li>
+							</ul>
+							<li>Bug Fixes</li>
+							<ul>
+								<li>Position States can now be loaded when the map index is greater than 127</li>
+								<li>Savestate load button combo functions properly when inside a previously banned map</li>
+								<li>Movement State watch no longer renders as a negative number if the movement state is over 127</li>
+								<li>Clearing a kong FTT flag in the flag menu now removes all GBs for that kong, which will fully enable a Kong FTT cutscene to be rewatched</li>
+								<li>Arcade no longer produces an ear-piercing scream if you beat the level with L to Levitate after starting to fall too far</li>
+								<li>Warping to a minigame from a minigame no longer causes the player to spawn away from the starting line</li>
+								<li>Analyze Heap readout is more accurate, taking data from the other 3 heap metas</li>
+							</ul>
+						</ul>
+						<li>Removals</li>
+						<ul>
+							<li>Corruption error has been removed due to the Active Menu technical overhaul</li>
+						</ul>
+						<li>Version Specific Stuff</li>
+						<ul>
+							<li>PAL/JP</li>
+							<ul>
+								<li>Following elements have been hidden on PAL/JP:</li>
+								<ul>
+									<li>File States</li>
+									<li>Practice ROM Version</li>
+									<li>Phase Assistant</li>
+									<li>D-Up to Auto-Phase</li>
+								</ul>
+							</ul>
+							<li>JP</li>
+							<ul>
+								<li>Following elements have been hidden on JP</li>
+								<ul>
+									<li>Main Menu Info Card</li>
+									<li>Various text changes excl. Dolby Text</li>
+								</ul>
+								<li>Added cheat to enable cancelling of Textboxes with B like how US and PAL behave.</li>
+							</ul>
+						</ul>
+					</ul>
+				</div>
+				<download-buttons></download-buttons>
+			</div>
 		</div>
 	</div>
 	<script src="./Site/script/nav.js"></script>
@@ -1193,8 +1399,6 @@
 
 			for (t = 0; t < treeboxes.length; t++) {
 				version = treeboxes[t].getAttribute("version")
-				// var link_button = treeboxes[t].getElementsByTagName("link-button")[0]
-				// link_button.childNodes[1].setAttribute("onclick","getLink('" + "?version=" + version + "')");
 				var list_items = [
 					{
 						"text": "Web Patcher",
@@ -1213,6 +1417,30 @@
 							list_items.push({
 								"text": "Beat",
 								"link": foundData.beat
+							})
+						}
+					}
+					if (foundData.beat_us) {
+						if (foundData.beat_us != "") {
+							list_items.push({
+								"text": "Beat (US)",
+								"link": foundData.beat_us
+							})
+						}
+					}
+					if (foundData.beat_pal) {
+						if (foundData.beat_pal != "") {
+							list_items.push({
+								"text": "Beat (PAL)",
+								"link": foundData.beat_pal
+							})
+						}
+					}
+					if (foundData.beat_jp) {
+						if (foundData.beat_jp != "") {
+							list_items.push({
+								"text": "Beat (JP)",
+								"link": foundData.beat_jp
 							})
 						}
 					}

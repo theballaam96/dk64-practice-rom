@@ -135,7 +135,7 @@ void openStateViewMenu(void) {
 	dk_strFormat((char *)var_map,"MAP:0X%X",states[_focused_state]->Map);
 	dk_strFormat((char *)var_exit,"EXIT:%d",states[_focused_state]->Exit);
 	dk_strFormat((char *)var_character,"CHARACTER:%d",states[_focused_state]->Character);
-	changeMenu(42);
+	changeMenu(ACTIVEMENU_SCREEN_SAVESTATE_VIEW);
 }
 
 void stateaction_save(void) {

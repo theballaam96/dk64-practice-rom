@@ -79,6 +79,57 @@
 			font-size: 12px;
 			transform: translateY(-10px);
 		}
+		.label_radio {
+			color: white;
+		}
+		footer {
+			bottom: 0%;
+			position: absolute;
+			padding: 10px;
+		}
+		.info_box {
+			border: 2px solid darkgoldenrod;
+			background: rgb(15,20,26);
+			width: 500px;
+			height: 500px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color: white;
+			padding: 20px;
+		}
+		#infobox_header {
+			text-align: center;
+			margin-block-start: 0px;
+			margin-block-end: 0px;
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
+		#infobox_release {
+			text-align: center;
+		}
+		#infobox_fast {
+			padding-top: 30px;
+		}
+		#infobox_cancel {
+			text-align: right;
+		}
+		#infobox_cancel strong {
+			cursor: pointer;
+			transition: 0.5s ease-in-out;
+		}
+		#infobox_cancel strong:hover {
+			color: darkgoldenrod;
+		}
+		.info_box_mask {
+			background: rgba(0,0,0,0.5);
+			width: 100%;
+			height: 100%;
+			position:absolute;
+			top:0%;
+			left:0%;
+		}
 	</style>
 </head>
 <body>
@@ -87,7 +138,7 @@
 		<div class="leftbox" style="flex:20%">
 			<div class="v_spacer"></div>
 			<ul class="tree">
-				<li><a class="excluded_link hovergold" href="https://dk64practicerom.com/install">Installation Guide</a></li>
+				<li><a class="excluded_link hovergold" href="/install">Installation Guide</a></li>
 				<li>
 					<span class="caret">General Controls</span>
 					<ul class="nested">
@@ -111,6 +162,7 @@
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('flags_cutscenes')">Cutscenes</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('flags_modifiers')">Level Modifiers</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('flags_ftts')">First Time Texts</a></li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('flags_bananaports')">Bananaports</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('flags_misc')">Miscellaneous</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('flags_custom')">Custom</a></li>
 							</ul>
@@ -122,6 +174,12 @@
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('savestate_save')">Save State</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('savestate_load_position')">Load State From Position</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('savestate_load_exit')">Load State From Exit</a></li>
+								<li>
+									<span class="caret">Savestate Settings</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('savestate_settings_grace')">Void Grace Period</a></li>
+									</ul>
+								</li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('savestate_view')">View State Variables</a></li>
 							</ul>
 						</li>
@@ -135,6 +193,7 @@
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_speed')">Speed</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_avgspeed')">Average Speed</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_angle')">Angle</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_angletopoint')">Angle to Point</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_floor')">Floor</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_movement_state')">Movement State</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_held_actor')">Held Actor</a></li>
@@ -147,6 +206,7 @@
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_timer')">Timer</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_giant_kosha_timer')">Giant Kosha Timer</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_intro_story_timer')">Intro Story Timer</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_igt')">In-Game Time</a></li>
 									</ul>
 								</li>
 								<li>
@@ -155,6 +215,11 @@
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_lag')">Lag</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_average')">Average Lag</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_input')">Input</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_objsignals')">Object Signals Count</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_delaykills')">Delayed Kills Count</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_lockstack')">Lock Stack Count</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_scriptrunning')">Scripts Running Count</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_loadedactor')">Loaded Actor Count</a></li>
 									</ul>
 								</li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_ssnag')">Spawn Snag Collectables</a></li>
@@ -162,8 +227,29 @@
 									<span class="caret">Assistants</span>
 									<ul class="nested">
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_phase_assistant')">Phasewalk Assistant</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_fairy')">Fairy Viewer</a></li>
 									</ul>
 								</li>
+								<li>
+									<span class="caret">Fake Items</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_key8')">Key 8</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_fakeprodroom')">Production Room</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_dynamic')">Dynamic Watches</a></li>
+								<li>
+									<span class="caret">Beaver Bother</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_beaver_bark')">Bark Indicator</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_beaver_scarerange')">Scare Indicator</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_beaver_scarerange')">Range Indicator</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_beaver_time')">Timing Indicator</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_beaver_ding')">Success Indicator</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_beaver_turnoff')">Turn off all</a></li>
+									</ul>
+								</li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_reference')">Set Reference Point</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('watch_clear')">Clear all Watches</a></li>
 							</ul>
 						</li>
@@ -171,10 +257,18 @@
 							<span class="caret">Debug</span>
 							<ul class="nested">
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_actors')">Actors</a></li>
-								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_memory')">Memory</a></li>
+								<li>
+									<span class="caret">Memory</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_memory')">Open Memory Viewer</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_managefrozen')">Manage Frozen Values</a></li>
+									</ul>
+								</li>
+								
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_heap')">Analyze Heap</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_flaglog')">Flag Log</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_spawnactors')">Spawn Actors</a></li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_voidmap')">Void Map</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('debug_corrupt')">Corrupt</a></li>
 							</ul>
 						</li>
@@ -211,7 +305,13 @@
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('file_clean')">Clean Cart</a></li>
 									</ul>
 								</li>
-								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('file_nle')">No Levels Early</a></li>
+								<li>
+									<span class="caret">No Levels Early</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('file_nlehe')">Helm Escape</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('file_nle40bp')">40 Blueprints</a></li>
+									</ul>
+								</li>
 								<li>
 									<span class="caret">101%</span>
 									<ul class="nested">
@@ -251,28 +351,37 @@
 									</ul>
 								</li>
 								<li>
+									<span class="caret">Auto-Tricks</span>
+									<ul class="nested">
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_moonkick')">Auto-Moonkick</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_phase')">D-Up to Auto-Phase</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_moontail')">Auto-Moontail</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_startail')">Auto-Startail</a></li>
+									</ul>
+								</li>
+								<li>
 									<span class="caret">Toggles</span>
 									<ul class="nested">
-										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_moonkick')">Auto Moonkick</a></li>
-										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_phase')">Auto Phase State</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_textboxes')">Enable Textbox Cancelling</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_sandstorm')">Aztec Sandstorm</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_enemies')">Enemy Spawning</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_minigametimer')">Minigame Timers</a></li>
-										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_health')">Infinite Health</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_l_cancelcs')">L to Cancel Cutscene</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_l_endminigame')">L to End Minigame</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_levitate')">L to Levitate</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_superspeed')">L to Superspeed</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_l_tbvoid')">L to Toggle TB Void</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_void')">Disable Voids</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_lockedcam')">Disable Locked Camera</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_tbvoid')">Toggle Tag Barrel Void</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_visibiilty')">Toggle Visibility</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_turnoff')">Turn off all cheats</a></li>
 									</ul>
 								</li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_toggles_infinites')">Infinites</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_undoflag')">Undo Last Flag Write</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_gaincontrol')">Gain Control</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_endminigame')">Force End Minigame</a></li>
-								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_tagallwarps')">Tag All Warps</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('cheats_transform')">Transform</a></li>
 							</ul>
 						</li>
@@ -312,13 +421,17 @@
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_kroolround')">K. Rool Round Number</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_filestart')">File Start State</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_inputstickmax')">Input Stick Max</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_inputtype')">Input Type</a></li>
 										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_console')">Console</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_customsfx')">Practice ROM Sound Effects</a></li>
+										<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_saveshorthand')">Savestate Shorthand Combo</a></li>
 									</ul>
 								</li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_fixes')">Fixes</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_kongcolors')">Change Kong Colors</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_inputquadrant')">Change Input Quadrant</a></li>
 								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_sticktest')">Run Stick Assessment Test</a></li>
-								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_reset')">Reset all settings</a></li>
+								<li><a class="excluded_link hovergold tree_item" onclick="treeshow('settings_reset')">Reset to default</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -330,14 +443,19 @@
 						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('arcade_level')">Level Select</a></li>
 						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('arcade_levitate')">Levitate Jumpman</a></li>
 						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('arcade_lives')">Restock Lives</a></li>
+						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('arcade_timer')">Map Timer</a></li>
 						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('arcade_savestate')">Save State</a></li>
 						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('arcade_loadstate')">Load State</a></li>
 					</ul>
 				</li>
 				<li>
-					<span class="caret">Error Codes</span>
+					<span class="caret">Jetpac Menu</span>
 					<ul class="nested">
-						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('error_01')">Error 01</a></li>
+						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('jetpac_level')">Level Select</a></li>
+						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('jetpac_lives')">Restock Lives</a></li>
+						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('jetpac_reset')">Reset Jetpac</a></li>
+						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('jetpac_timer')">5000 Point Timer</a></li>
+						<li><a class="excluded_link hovergold tree_item" onclick="treeshow('jetpac_color')">Jetman color</a></li>
 					</ul>
 				</li>
 				<li><a class="excluded_link hovergold" href="https://github.com/theballaam96/dk64-practice-rom/issues/new/choose">Report an Issue</a></li>
@@ -361,7 +479,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					This also applies to the Arcade Menu<br><br>
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					This also applies to the Arcade Menu and Jetpac Menu<br><br>
 					<table>
 						<tr>
 							<td>
@@ -413,6 +532,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					<table>
 						<tr>
 							<td style="width:25%">
@@ -420,6 +540,14 @@
 							</td>
 							<td>
 								Loads the selected state with the last mode that was performed (From position/From exit).
+							</td>
+						</tr>
+						<tr>
+							<td style="width:25%">
+								<span class="n64buttons l">&nbsp;</span>&rarr;<span class="n64buttons r">&nbsp;</span>&rarr;<span class="n64buttons ddown">&nbsp;</span>
+							</td>
+							<td>
+								Saves to the selected state. This functionality can be disabled in the <a class="excluded_link hovergold underline" onclick="treeshow('settings_saveshorthand')">settings menu</a>.
 							</td>
 						</tr>
 					</table>
@@ -432,6 +560,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the amount of lag currently present during gameplay. For those familiar with ScriptHawk, the conversion from Practice ROM lag watch to ScriptHawk lag watch is:<br><br>
 					<div style="text-align: center">
 						lag<span class="subscript">scripthawk</span> = lag<span class="subscript">practicerom</span> - 2
@@ -441,11 +570,67 @@
 			<div class="treebox hide" tree-id="watch_average">
 				<div class="flexsplitter">
 					<div style="flex:50%">
-						<h2 class="treebox_head">Lag Watch</h2>
+						<h2 class="treebox_head">Average Lag Watch</h2>
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the average lag over the past 16 frames
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_objsignals">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Object Signals Count Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the amount of signals which are being transmitted between objects. Useful for debugging the object signals overflow crash.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_delaykills">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Delayed Kills Count Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the amount of kills which are buffered in the game's delayed kills system. Actors who have a delayed kill are killed on the frame after the actor is pushed to the delayed kills array. Useful for debugging the delayed kills overflow crash.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_lockstack">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Lock Stack Count Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the lock stack count. Useful for debugging the lock stack overflow crash.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_scriptrunning">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Scripts Running Count Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the amount of object instance scripts which the game is running, with the amount of scripts it has attempted to run inside parenthesis. The attempt count is usually the same as the script run count, however, as soon as the script run count hits 70, the game will not be able to load another script until the script run count goes under 70. As such, this is a situation where these two figures can differ.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_loadedactor">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Loaded Actor Count Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the amount of actors which are loaded, the game can only handle 64 loaded actors (after which, <a class="excluded_link hovergold underline" href="https://www.youtube.com/watch?v=ERup7ym3Bh4&feature=youtu.be&ab_channel=Ballaam">strange effects</a> happen if the game doesn't crash).
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_position">
@@ -455,6 +640,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the X, Y and Z co-ordinates of the player. Due to technical limitations, this rounds to the nearest integer for all 3 axis.
 				</div>
 			</div>
@@ -465,6 +651,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the Y value of the player's floor
 				</div>
 			</div>
@@ -475,6 +662,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the speed of the player, irrespective of lag.
 				</div>
 			</div>
@@ -485,6 +673,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the average speed of the player over the past 64 frames, irrespective of lag.
 				</div>
 			</div>
@@ -495,6 +684,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the co-ordinates indicated by the first and second set of stored positions
 				</div>
 			</div>
@@ -505,6 +695,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the state of a selectable spawn snag collectable. There are a few messages that can be provided:
 					<table>
 						<tr>
@@ -545,12 +736,13 @@
 			<div class="treebox hide" tree-id="watch_phase_assistant">
 				<div class="flexsplitter">
 					<div style="flex:50%">
-						<h2 class="treebox_head">Phase Assistant Watches</h2>
+						<h2 class="treebox_head">Phase Assistant Watch</h2>
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
 					Displays some feedback on phasewalk attempts. Documentation of phasewalk requirements can be found here:
-					<a class="excluded_link hovergold" href="https://pastebin.com/4Ye3PyTt">Link</a>
+					<a class="excluded_link hovergold underline" href="https://pastebin.com/4Ye3PyTt">Link</a>
 					<br><br>
 					<div>The phasewalk assistant only can inform you about the sequence of inputs required to perform a phasewalk. Any inputs performed after the final Z press which cause a loss of the phase state will not be detected.
 					<br><br>
@@ -674,6 +866,208 @@
 					</table>
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="watch_fairy">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Fairy Viewer Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the screen position of the fairy along with the success polygon. If the fairy dot is inside the success polygon and the fairy satisfies the distance check, then the game will classify the fairy picture as successful.
+					<br><br>
+					To satisfy the distance check, the distance readout needs to be positive. The Practice ROM automatically color-coordinates this readout to be green if positive and non-zero, and red if negative or zero. The distance check is based on the game trying to ensure that there are no walls that intersect the vector which goes from the player to the fairy. This distance check is broken on PC emulators and Wii U VC.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_key8">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Fake Key Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays a message to indicate the <a href="https://pastebin.com/v6JLDuhJ" class="excluded_link hovergold underline">state of the Key 8 object</a> in Hideout Helm and whether it'll save to the file.<br><br>
+					Below are the messages which can be displayed:<br>
+					<table>
+						<tr>
+							<td style="width:25%">Wrong Map</td>
+							<td>Player isn't in Hideout Helm, so the Key isn't spawned into the same map as the player</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Fake</td>
+							<td>Player has not got throne room loaded, and therefore the key isn't loaded. Trying to pick up the key in this state will result in Fake Key (Key 8 not saving to the file).</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Real</td>
+							<td>Player has throne room loaded, and therefore the key is loaded. Trying to pick up the key in this state will result in the key saving to the file</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Key Obtained</td>
+							<td>Key 8 is saved to the file already, so the key isn't spawned to perform a check</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Key not in map</td>
+							<td>Key 8 isn't spawned into the map, but Key 8 hasn't been saved. This indicates that fake key has been performed.</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Unknown</td>
+							<td>Key 8 is in an unknown state. This error shouldn't appear at all, but this is more of a catch-all.</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_fakeprodroom">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Fake Production Room Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays a message to indicate the state of <a href="https://www.youtube.com/watch?v=GKZY-RtB8OY&ab_channel=LookAtTheWindow" class="excluded_link hovergold underline">Production Room</a>, and whether all the components will be moving or not.<br><br>
+					Below are the messages which can be displayed:<br>
+					<table>
+						<tr>
+							<td style="width:25%">Wrong Map</td>
+							<td>Player isn't in Frantic Factory, so the state of production room can't be checked</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Production Room Off</td>
+							<td>Production Room hasn't been turned on yet, so fake production room isn't obtainable</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Not Loaded</td>
+							<td>Production Room is on, but hasn't been loaded at all so cannot be fake</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Preparing to be fake</td>
+							<td>Production Room is partially loaded, but will fully load if you go near Production Room. To fully make it fake, you will need to go through a loading zone inside Factory</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Fake</td>
+							<td>Production Room is classed as fake. As such, some elements of production will be static when it shouldn't be in intended gameplay.</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Real</td>
+							<td>Production Room is classed as real, as such, Production Room is behaving as intended.</td>
+						</tr>
+						<tr>
+							<td style="width:25%">Unknown</td>
+							<td>Production Room is in an unknown state. This error shouldn't appear at all, but this is more of a catch-all.</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_dynamic">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Dynamic Watches</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 emu</version-list>
+					A list of watches added through the <a class="excluded_link hovergold underline" onclick="treeshow('debug_memory')">Memory Viewer</a>. Select an option to remove it from the watch list.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_beaver_bark">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Bark Indicator</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					The Klaptrap inside Beaver Bother will be colored black if the Klaptrap is classed as barking.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_beaver_scarerange">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Scared Indicator & Range Indicator</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Will color a beaver depending on whether it's scared and how close the Klaptrap is to the beaver.
+					<br><br>
+					The color code for this is as follows:
+					<h3>Color Code</h3>
+					<table>
+						<tr>
+							<td>
+								<span style="color:Red"><strong>BEAVER</strong></span>
+							</td>
+							<td>
+								Beaver is scared (with the scare indicator enabled), but the beaver is not within a 40-unit range of the Klaptrap (or the range indicator is disabled)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:RebeccaPurple"><strong>BEAVER</strong></span>
+							</td>
+							<td>
+								Beaver is scared (with the scare indicator enabled) and the beaver is within a 40-unit range of the Klaptrap (with the range indicator enabled)
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span style="color:LawnGreen"><strong>BEAVER</strong></span>
+							</td>
+							<td>
+								Beaver isn't scared (or scare indicator is disabled), but the beaver is within a 40-unit range of the Klaptrap (with the range indicator enabled)
+							</td>
+						</tr>
+					</table>			
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_beaver_time">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Timing Indicator</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					A <span style="color:rgb(0,255,198);font-weight:bold">teal</span> circle will appear with a rough approximation of where the scare range is for the frame where a player will successfully be able to perform <a href="https://www.youtube.com/watch?v=f7-YAxNKomY&ab_channel=LookAtTheWindow" class="excluded_link hovergold underline">Double Beaver</a>.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_beaver_ding">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Success Indicator</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					A bell ding sound effect will play when you have successfully performed <a href="https://www.youtube.com/watch?v=f7-YAxNKomY&ab_channel=LookAtTheWindow" class="excluded_link hovergold underline">Double Beaver</a>.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_beaver_turnoff">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Turn off all Beaver Bother Indicators</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Turns off all watches in the "Beaver Bother" menu screen.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="watch_reference">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Set Reference Point</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Sets a reference point which is used for watch calculations. Currently used for the following watches:
+					<ul>
+						<li><a class="excluded_link hovergold underline" onclick="treeshow('watch_angletopoint')">Angle to point</a></li>
+					</ul>
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="watch_clear">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -681,6 +1075,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Removes all watches from view and resets every watch to it's default state				
 				</div>
 			</div>
@@ -691,7 +1086,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays a timer which is controllable by the player, and also allows for automatic triggers for timer start and end. See <a class="excluded_link hovergold" onclick="treeshow('timer_start_l')">Timer Settings</a> for more on triggers.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays a timer which is controllable by the player, and also allows for automatic triggers for timer start and end. See <a class="excluded_link hovergold underline" onclick="treeshow('timer_start_l')">Timer Settings</a> for more on triggers.
 					<h3>Controls</h3>
 					<table>
 						<tr>
@@ -712,7 +1108,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays the timer responsible for controlling Giant Kosha's tantrums within Crystal Caves. For extensive information on how this works, look at this pastebin: <a href="https://pastebin.com/s04eUr0g" class="excluded_link hovergold">Click Here</a>.<br><br>
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the timer responsible for controlling Giant Kosha's tantrums within Crystal Caves. For extensive information on how this works, look at this pastebin: <a href="https://pastebin.com/s04eUr0g" class="excluded_link hovergold underline">Click Here</a>.<br><br>
 					The watch colors itself based on various factors about the timer.
 					<h3>Color Code</h3>
 					<table>
@@ -758,6 +1155,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the current movement state of the player as a hex value.					
 				</div>
 			</div>
@@ -768,7 +1166,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays the angle of the player converted into degrees rounded to 2 decimal places and truncated to be within 0&rarr;360 degrees (in case of the player having <em>the phase state</em>.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the angle of the player converted into degrees rounded to 2 decimal places and truncated to be within 0&rarr;360 degrees (in case of the player having <em>the phase state</em>).
 					<br><br>
 					If the player does have <em>the phase state</em>, the watch will be colored.
 					<h3>Color Code</h3>
@@ -784,6 +1183,17 @@
 					</table>				
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="watch_angletopoint">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Angle to Point Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the angle the player will have to face and move towards in order to move to the referenced point determined <a class="excluded_link hovergold underline" onclick="treeshow('watch_reference')">here</a>.			
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="watch_input">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -791,9 +1201,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays the inputs that are being read from controller 1 in a small graphic. The position of the watch and the stick threshold can be changed in the settings menu.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the inputs that are being read from controller 1 in a small graphic. The <a class="excluded_link hovergold underline" onclick="treeshow('settings_inputquadrant')">position of the display</a>, <a class="excluded_link hovergold underline" onclick="treeshow('settings_inputtype')">type</a> and the <a class="excluded_link hovergold underline" onclick="treeshow('settings_inputstickmax')">stick maximum value</a> can be changed in the settings menu.
 					<br><br>
-					Due to the graphical element of the input watch, this does cause a little extra lag.
+					There are two different styles of input that can be displayed by the Practice ROM. One, the "detailed" input, displays the input using sprites at the cost of a little more lag than the other style. The other style ("low lag" input) uses screen rectangles instead.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="watch_held_actor">
@@ -803,7 +1214,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Displays the actor index of the object that is currently being held by the player. A full list of what each actor index means can be seen <a class="excluded_link hovergold" href="https://github.com/theballaam96/theballaam96.github.io/blob/master/data/actors.json">here</a>.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the actor index of the object that is currently being held by the player. A full list of what each actor index means can be seen <a class="excluded_link hovergold underline" href="https://github.com/theballaam96/theballaam96.github.io/blob/master/data/actors.json">here</a>.
 					<br><br>
 					If you are performing <em>grabbed item manipulation</em>, then there are some extra pieces of information which can assist you with this. Since, with <em>grabbed item manipulation</em>, the actor may not exist, the actor index of your held actor is pointing to free memory and can be any value from 0&rarr;65,535.
 					<br><br>
@@ -828,6 +1240,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays the timer responsible for controlling the game's Intro Story, mainly used in speedruns for a sequence break called <em>"Intro Story Glitch"</em>
 					<h3>Color Code</h3>
 					<table>
@@ -850,6 +1263,19 @@
 					</table>				
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="watch_igt">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">In-Game Timer Watch</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays the background timer used to calculate the in-game time (IGT) on a file.
+					<br><br>
+					IGT is only calculated and saved upon the game saving in vanilla gameplay, so the time displayed with the watch is the time which would be saved if the IGT was saved at that point in time (Only if the game is in Adventure Mode or one of the two "Game Over"-related gamemodes).	
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="flags_kongs">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -857,7 +1283,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles the flags tied to whether the kongs are freed			
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles the flags tied to whether the kongs are freed.			
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_keysin">
@@ -867,7 +1294,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles the flags tied to whether the 8 boss keys are turned in or not, likewise toggles which level lobbies are open.
+					<br><br>
+					If unsetting a flag in DK Isles, you will likely need to re-warp to DK Isles to reset the map.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_keyshave">
@@ -877,7 +1307,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles the flags tied to whether the player has the 8 boss keys in the game.
+					<br><br>
+					This doesn't make the Troff 'n' Scoff portals in the levels disappear. To do this, please see <a class="excluded_link hovergold underline" href="" onclick="treeshow('flags_leveltns')">Flags: Level Troff 'n' Scoff Flags</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_levelintros">
@@ -887,6 +1320,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the level introductory cutscenes have been watched.
 					<br><br>
 					<strong>NOTE: </strong>The Factory Intro cutscene is only cleared if you have watched the "Chunky Help Me" cutscene.
@@ -899,7 +1333,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles whether the Troff 'n' Scoff portals are closed in every level
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether the Troff 'n' Scoff portals are closed in every level.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_levelboss">
@@ -909,7 +1344,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles whether the long boss introductory cutscenes for each of the 7 boss key bosses have been watched
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether the long boss introductory cutscenes for each of the 7 boss key bosses have been watched.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_cutscenes">
@@ -919,7 +1355,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles whether you have watched a particular cutscene
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether you have watched a particular cutscene.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_modifiers">
@@ -929,7 +1366,18 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles various flags which control significant aspects of levels (eg. Fungi Daytime, Galleon Water Level)
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles various flags which control significant aspects of levels:
+					<ul>
+						<li><strong>Llama:</strong> Toggles whether the Llama is freed or not. If setting the Llama to be caged, this will also set the Llama Temple Water to be warm</li>
+						<li><strong>Llama Temple Water:</strong> Toggles whether the Llama Temple water has been cooled or not. If toggled to set the Llama temple to be cool, this will also free the Llama</li>
+						<li><strong>Production Room:</strong> Toggles whether the Production Room in Factory is on or off</li>
+						<li><strong>Galleon Water Level:</strong> Toggles the water level of the water in Galleon</li>
+						<li><strong>Galleon Ship:</strong> Toggles whether the ship near the Lighthouse in Galleon has been spawned or not</li>
+						<li><strong>Fungi Time of Day:</strong> Toggles whether Fungi is set at Night or Day</li>
+						<li><strong>Giant Kosha:</strong> Toggles whether the Giant Kosha who causes rockfall in Caves is alive or not</li>
+						<li><strong>Blast-o-Matic</strong> Toggles whether the Blast-o-Matic in Hideout Helm is on or not</li>
+					</ul>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_ftts">
@@ -939,7 +1387,27 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles whether various first time texts have been watched/read
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether various first time texts have been watched/read.
+					<br><br>
+					For the Kong FTT flags, setting the FTT to "Not Watched" will reset the GB count for the selected kong in all levels. For example: Setting Diddy FTT to "Not Watched" will set the GB count in all Levels for Diddy to 0.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="flags_bananaports">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Bananaport Flags</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether a group of bananaports are tagged or not. If all flags in a level are tagged, then the checkbox will be ticked, otherwise it won't be ticked. Toggling a level's warps will toggle *all* warps in that level.
+					For some flags, the warp itself doesn't have a tagged flag, but instead a spawned flag (in the case where it's spawn it tied to a GB). In these situations, the GB it's tied to is marked as complete. These GBs are:
+					<ul>
+						<li><strong>Aztec Tunnel W5:</strong> Stealty Snoop GB</li>
+						<li><strong>Galleon Tower W4:</strong> Stealthy Snoop GB</li>
+						<li><strong>Caves Cavern W3:</strong> Krazy Kong Klamour GB</li>
+					</ul>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="flags_misc">
@@ -949,6 +1417,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles other various flags of notable importance
 				</div>
 			</div>
@@ -959,9 +1428,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles any flag you desire by modifying the target byte, bit and flag type using <span class="n64buttons dleft">&nbsp;</span> and <span class="n64buttons dright">&nbsp;</span>.
 					<br><br>
-					You can search up which flag you need to set for your desired effect here: <a class="excluded_link hovergold" href="./tools/flag_search">Flag Search</a>
+					You can search up which flag you need to set for your desired effect here: <a class="excluded_link hovergold underline" href="./tools/flag_search">Flag Search</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="savestate_change">
@@ -971,6 +1441,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes which savestate will be referenced when saving and loading state. 4 savestate slots are currently supported.
 				</div>
 			</div>
@@ -981,6 +1452,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Due to the limited amount of memory space available, the Practice ROM stores a limited amount of variables. The <em>"Save State"</em> function stores various game variables to the selected savestate object.
 					<h3>Stored variables</h3>
 					<ul>
@@ -1002,6 +1474,7 @@
 							<li>Skew Angle</li>
 							<li>Facing Angle</li>
 							<li>Floor Height</li>
+							<li>Camera Position</li>
 						</ul>
 						<li>Helm Timer Variables</li>
 						<ul>
@@ -1037,6 +1510,8 @@
 							<li>Current Map</li>
 							<li>Last entrance</li>
 							<li>Nearest Tag Barrel Height</li>
+							<li>Fungi Dark Attic Squawks Position (If saved in Dark Attic)</li>
+							<li>Japes Free Diddy Switches (If saved in Japes main map)</li>
 						</ul>
 						<li>The permanent flag block</li>
 						<li>The temporary flag block</li>
@@ -1048,8 +1523,7 @@
 						<li>RNG Value</li>
 						
 					</ul>
-					If the player warps to a bonus barrel, then the resolution of that barrel will be prevented for a technical reason.
-					<ul class="bad_savestate_maps"></ul>
+					If the player warps to a bonus barrel, <span class="bonus_caveat"></span>.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="savestate_load_position">
@@ -1059,11 +1533,12 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					If the selected savestate has save data, this function will load the data from that savestate, reset the map and will cause a transition to the stored map. The kong will spawn in the position indicated by the position data inside the savestate.
 					<br><br>
 					If the selected savestate has no save data, an error sound will play.
 					<br><br>
-					If the player warps to a bonus barrel, then the resolution of that barrel will be prevented for a technical reason.
+					If the player warps to a bonus barrel, <span class="bonus_caveat"></span>.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="savestate_load_exit">
@@ -1073,11 +1548,12 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					If the selected savestate has save data, this function will load the data from that savestate, reset the map and will cause a transition to the stored map. The kong will spawn from the entrance you last entered from when the savestate was created as stored inside the savestate object.
 					<br><br>
 					If the selected savestate has no save data, an error sound will play.
 					<br><br>
-					If the player warps to a bonus barrel, then the resolution of that barrel will be prevented for a technical reason.
+					If the player warps to a bonus barrel, <span class="bonus_caveat"></span>.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="savestate_view">
@@ -1087,6 +1563,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays some information about the savestate to assist with identifying which savestate is which:
 					<ul>
 						<li>Has Data</li>
@@ -1132,6 +1609,17 @@
 					</ul>
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="savestate_settings_grace">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Void Grace Period</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					If disabled, the game will prevent the 100-frame voiding grace period mechanic upon loading a state.					
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="warp_map">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -1139,9 +1627,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Warps to the map selected, resetting the map in the process. If the warp is to a boss, then the game will use a pre-determined Troff 'n' Scoff rather than one which the player can select.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Warps to the map selected, resetting the map and the parent map chain in the process. If the warp is to a boss, then the game will use a pre-determined Troff 'n' Scoff rather than one which the player can select.
 					<br><br>
-					If the player warps to a bonus barrel, then the resolution of that barrel will be prevented for a technical reason.
+					If the player warps to a bonus barrel, <span class="bonus_caveat"></span>.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="timer_start_l">
@@ -1151,6 +1640,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will start when Player 1 presses<span class="n64buttons l">&nbsp;</span>.
 					<br><br>
 					<strong>NOTE:</strong><span class="n64buttons l">&nbsp;</span> always starts the timer. This setting depicts that no other game variable will cause the starting of the timer.
@@ -1163,6 +1653,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will start when a map begins to load after all of the map files from ROM have been transferred to memory.
 				</div>
 			</div>
@@ -1173,6 +1664,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will start when the player presses a new button or moves the analog stick after having a neutral stick input.
 				</div>
 			</div>
@@ -1183,6 +1675,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Determines whether the timer will pause when the game's pause menu is open.
 				</div>
 			</div>
@@ -1193,6 +1686,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will finish when Player 1 presses<span class="n64buttons l">&nbsp;</span>.
 					<br><br>
 					<strong>NOTE:</strong><span class="n64buttons l">&nbsp;</span> always finishes the timer. This setting depicts that no other game variable will cause the finishing of the timer.
@@ -1205,6 +1699,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will finish when a transition begins (eg. A "DK Spin" transition or a fade transition)
 				</div>
 			</div>
@@ -1215,6 +1710,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will finish when a cutscene is registered as playing
 				</div>
 			</div>
@@ -1225,6 +1721,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will finish when a kong is registered as touching a golden banana.
 				</div>
 			</div>
@@ -1235,6 +1732,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Timer will finish as soon as a transition is completed (eg. A "DK Spin" transition or a fade transition)
 				</div>
 			</div>
@@ -1245,19 +1743,32 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
 					Sets the file state to match a completely new file, wiping all progress including move purchases
 				</div>
 			</div>
-			<div class="treebox hide" tree-id="file_nle">
+			<div class="treebox hide" tree-id="file_nlehe">
 				<div class="flexsplitter">
 					<div style="flex:50%">
-						<h2 class="treebox_head">File Status: No Levels Early</h2>
+						<h2 class="treebox_head">File Status: No Levels Early (Helm Escape)</h2>
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
 					Sets the file state to the level entry point for each level in the "Helm Escape" route of No Levels Early, and an additional state for "Takeoff Skip".
 					<br><br>
-					File State creation credit: <a class="excluded_link hovergold" href="https://www.twitch.tv/candy_boots">CandyBoots</a>
+					File State creation credit: <a class="excluded_link hovergold underline" href="https://www.twitch.tv/candy_boots">CandyBoots</a>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="file_nle40bp">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">File Status: No Levels Early (40 Blueprints)</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
+					Sets the file state to the level entry point for each level in the intermediate "40 Blueprints" route of No Levels Early, however this can be used for the beginner route.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="file_101organic">
@@ -1267,9 +1778,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
 					Sets the file state to the level entry point for each level in the "Organic Expert" route of 101%.
 					<br><br>
-					There are some minor differences between the expert route and the easier routes. These can be changed in the <a class="excluded_link hovergold" onclick="treeshow('flags_custom')">custom flags menu</a>
+					There are some minor differences between the expert route and the easier routes. These can be changed in the <a class="excluded_link hovergold underline" onclick="treeshow('flags_custom')">custom flags menu</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="file_101jfm">
@@ -1279,6 +1791,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
 					Sets the file state to the level entry point for each level in the "Japes for Moves" route of 101%.
 				</div>
 			</div>
@@ -1289,9 +1802,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us n64 wiiu emu</version-list>
 					Sets the file state to the level entry point for each level in the Glitchless Any%.
 					<br><br>
-					File State creation credit: <a class="excluded_link hovergold" href="https://www.twitch.tv/christianvegasixty4">ChristianVega64</a>
+					File State creation credit: <a class="excluded_link hovergold underline" href="https://www.twitch.tv/christianvegasixty4">ChristianVega64</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_moves_giveall">
@@ -1301,6 +1815,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Gives player 1 all moves in the game
 				</div>
 			</div>
@@ -1311,6 +1826,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Clears all moves from player 1
 				</div>
 			</div>
@@ -1321,6 +1837,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the moves for each kong that are acquired from Cranky and the flag for whether the Simian Slam cutscene has played.
 				</div>
 			</div>
@@ -1331,6 +1848,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the moves for each kong that are acquired from Candy
 				</div>
 			</div>
@@ -1341,6 +1859,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the moves for each kong that are acquired from Funky
 				</div>
 			</div>
@@ -1351,6 +1870,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles the possession of the Fairy camera/Shockwave ability that is granted by the Banana Fairy Queen
 				</div>
 			</div>
@@ -1361,6 +1881,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles the four abilities that are granted from the four training barrels in Training Grounds. The game automatically toggles the "Training Barrel Complete" flags depending on whether all 4 training barrel completion flags are set or not.
 				</div>
 			</div>
@@ -1371,6 +1892,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Set each kong's coin count to 50.
 				</div>
 			</div>
@@ -1381,6 +1903,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Set the inventory counts to the following:
 					<ul>
 						<li><strong>Standard Ammo: </strong>200</li>
@@ -1399,6 +1922,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Set the homing ammo count to 100.
 				</div>
 			</div>
@@ -1409,7 +1933,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Set the game's mode to one of 15 options. For more info, see the following wiki page: <a class="excluded_link hovergold" href="https://dk64.fandom.com/wiki/Game_Modes">Link</a>
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Set the game's mode to one of 15 options. For more info, see the following wiki page: <a class="excluded_link hovergold underline" href="https://dk64.fandom.com/wiki/Game_Modes">Link</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_skew">
@@ -1419,6 +1944,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Set the kongs rotation to 90&deg; to match a traditional front-facing skew. If the player has a 90&deg; skew already, either through the first cheat option or in-game acquisition, then this option will set the player's skew to match a back-facing skew ("Cannon Skew"/"wekS") of 270&deg;.
 				</div>
 			</div>
@@ -1429,6 +1955,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					If a cutscene is playing, selecting this option instantly cancels the cutscene
 				</div>
 			</div>
@@ -1439,7 +1966,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Gives the player their choice of the 5 barrel transform moves.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Gives the player their choice of the 5 barrel transform moves. Whether these consume crystals or not depends on the whether the <a class="excluded_link hovergold underline" onclick="treeshow('settings_transformautostock')">setting</a> is enabled or not.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_snag_visify">
@@ -1449,6 +1977,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Visifies all spawn snag collectables inside the current map and makes the collectable tangible.
 				</div>
 			</div>
@@ -1459,6 +1988,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Resets all spawn snag collectables inside the current map to their default state.
 				</div>
 			</div>
@@ -1469,6 +1999,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the speed multiplier the player will experience when<span class="n64buttons l">&nbsp;</span> is held (caps at 7x).
 				</div>
 			</div>
@@ -1479,6 +2010,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the player is visible or not. This also toggles whether the player's stored co-ordinates will be updated or not.
 				</div>
 			</div>
@@ -1489,6 +2021,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Turns off all toggles.
 				</div>
 			</div>
@@ -1499,6 +2032,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles the black "void" that is produced when you enter Tag Barrels or when a kong plays an instrument.
 				</div>
 			</div>
@@ -1509,6 +2043,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the minigame barrel timers display in whole seconds (Normal) or in milliseconds.
 					<br><br>
 					If the milliseconds option is selected, the end minigame cheat is disabled due to anti-cheat.
@@ -1521,6 +2056,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether most characters can spawn from a <em>Character Spawner</em>.<br><br>
 					Here is a list of actors which are on the exception list:
 					<ul>
@@ -1566,14 +2102,46 @@
 					</ul>
 				</div>
 			</div>
-			<div class="treebox hide" tree-id="cheats_toggles_health">
+			<div class="treebox hide" tree-id="cheats_toggles_infinites">
 				<div class="flexsplitter">
 					<div style="flex:50%">
-						<h2 class="treebox_head">Cheats: Infinite Health</h2>
+						<h2 class="treebox_head">Cheats: Infinites</h2>
 					</div>
 				</div>
 				<div class="treebox_body">
-					If enabled, the player will receive infinite health. This system has similar flaws to the "infinite health" granted if the game is in "Main Menu Mode".
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether the player is given an infinite amount of certain collectables, with individual toggles for each item:
+					<ul>
+						<li><strong>Ammo (Standard):</strong> 200 Standard Ammo</li>
+						<li><strong>Ammo (Homing):</strong> 100 Homing Ammo</li>
+						<li><strong>Crystals:</strong> 20 Crystals</li>
+						<li><strong>Health:</strong> Full health for the melons you have</li>
+						<li><strong>Instrument Energy:</strong> 10 Instrument Energy for each kong</li>
+						<li><strong>Film:</strong> 20 Film</li>
+						<li><strong>Oranges:</strong> 20 Oranges</li>
+					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_moontail">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Auto-Moontail</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					If enabled, and Diddy performs a tail stationary ground attack, the game will modify the velocity and acceleration components in the vertical direction for Diddy to emulate a moontail.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_startail">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Auto-Startail</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					If enabled, and Diddy performs a tail stationary ground attack whilst standing on a simian spring pad, the game will modify the velocity and acceleration components in the vertical direction for Diddy to emulate a startail. Performing a startail with Auto-Startail takes priority over performing a moontail with <a class="excluded_link hovergold underline" onclick="treeshow('cheats_toggles_moontail')">Auto-Moontail</a>.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_toggles_moonkick">
@@ -1583,6 +2151,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					If enabled, and DK kicks, the game will modify the gravity of the kick to emulate a moonkick.
 				</div>
 			</div>
@@ -1593,12 +2162,41 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					If enabled, the game will continually grant the player the <em>"phase state"</em>. Due to various reasons, in order to clip through a wall, you will need to perform a move which would normally be involved in a phase trick.<br>This includes:
-					<ul>
-						<li>Jumping/Falling</li>
-						<li>Crouching</li>
-						<li>Swimming</li>
-					</ul>
+					<version-list>us n64 wiiu emu</version-list>
+					If enabled, the game will continually grant the player the <em>"phase state"</em> when <span class="n64buttons dup">&nbsp;</span> is pressed.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_textboxes">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Enable Textbox Cancelling</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>jp n64 wiiu emu</version-list>
+					Cancels a textbox with a B press, bringing the US/PAL cancelling of textboxes to JP.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_void">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Disable Void</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Disables the ability to void.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="cheats_toggles_lockedcam">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Cheats: Disable Locked Camera</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Disables automatic locked cameras that the game may apply.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_toggles_sandstorm">
@@ -1608,6 +2206,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the sandstorm is active in Angry Aztec. This is only toggleable if the player is in the Angry Aztec map (if the player is not in Aztec, the menu text is displayed as "Aztec Sandstorm: Unknown").
 				</div>
 			</div>
@@ -1618,6 +2217,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Moves the player upwards upon holding the<span class="n64buttons l">&nbsp;</span> button. Pressing other buttons can adjust the rate at which you levitate.
 					<h3>Levitate Speeds</h3>
 					<table>
@@ -1655,7 +2255,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Presssing<span class="n64buttons l">&nbsp;</span> performs the "End Minigame" function as documented here: <a class="excluded_link hovergold" onclick="treeshow('cheats_endminigame')">Link</a>
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Presssing<span class="n64buttons l">&nbsp;</span> performs the "End Minigame" function as documented here: <a class="excluded_link hovergold underline" onclick="treeshow('cheats_endminigame')">Link</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_toggles_l_tbvoid">
@@ -1665,7 +2266,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Presssing<span class="n64buttons l">&nbsp;</span> performs the "Toggle Tag Barrel Void" function as documented here: <a class="excluded_link hovergold" onclick="treeshow('cheats_toggles_tbvoid')">Link</a>
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Presssing<span class="n64buttons l">&nbsp;</span> performs the "Toggle Tag Barrel Void" function as documented here: <a class="excluded_link hovergold underline" onclick="treeshow('cheats_toggles_tbvoid')">Link</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_toggles_l_cancelcs">
@@ -1675,7 +2277,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Presssing<span class="n64buttons l">&nbsp;</span> performs the "Cancel Cutscene" function as documented here: <a class="excluded_link hovergold" onclick="treeshow('cheats_cancelcs')">Link</a>
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Presssing<span class="n64buttons l">&nbsp;</span> performs the "Cancel Cutscene" function as documented here: <a class="excluded_link hovergold underline" onclick="treeshow('cheats_cancelcs')">Link</a>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_endminigame">
@@ -1685,6 +2288,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Artificially causes a successful completion of a minigame. If you are not in a minigame or the minigame isn't ready to be artificially completed, you will hear a quack sound.
 					Causes of the quack sound outside of where you are map-wise include:
 					<h3>Quack reasons</h3>
@@ -1739,19 +2343,9 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					<div class="warning">The corruption glitch is incredibly prone to crashing. Any crashes which result from using this button are a likely side-effect of corruption</div>
-					This function automatically corrupts the game in the same likeness as feather corruption.
-				</div>
-			</div>
-			<div class="treebox hide" tree-id="cheats_tagallwarps">
-				<div class="flexsplitter">
-					<div style="flex:50%">
-						<h2 class="treebox_head">Cheats: Tag All Warps</h2>
-					</div>
-				</div>
-				<div class="treebox_body">
-					This function sets the flag for all warps in the game.
-					Some warps are tied to Golden Bananas. In these scenarios, the Golden Banana flag is set instead of the warp.
+					This function automatically corrupts the game in the same likeness as <a href="https://www.youtube.com/watch?v=ERup7ym3Bh4&ab_channel=Ballaam" class="excluded_link hovergold underline">feather corruption</a>.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="cheats_undoflag">
@@ -1761,6 +2355,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Reverts the past flag write. Upon every flag write, the Practice ROM writes the flag byte & bit, the flag type and whether the flag was set to true or false. The "Undo last flag write" function writes the same flag byte, bit & type to the opposite boolean value.
 				</div>
 			</div>
@@ -1771,16 +2366,18 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					This function grants control back to the player in situations where the player does not have control.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="settings_reset">
 				<div class="flexsplitter">
 					<div style="flex:50%">
-						<h2 class="treebox_head">Settings: Reset all settings</h2>
+						<h2 class="treebox_head">Settings: Reset to default</h2>
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Resets all settings to their initial ROM Boot state
 				</div>
 			</div>
@@ -1791,6 +2388,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Runs a quick test to assess the quality of a user's stick. The Practice ROM will show some instructions for you to hold some directions on your stick (The Practice ROM will lock the player's position).
 					<br><br>
 					The game will then show some statistics of how good your stick is. For each direction, it will show the overall health, and then the health in terms of what DK64 can interpret. To bring the DK64 statistic in context:
@@ -1813,7 +2411,25 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the location of the input display when shown.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_fixes">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Fixes</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether the game applies certain fixes to assist with practice, surrounding entering the level from an exit other than from the DK Portal:
+					<ul>
+						<li><strong>Sandstorm:</strong> If enabled, loads the wall torch near DK Portal which loads whether the sandstorm in Aztec is active or not</li>
+						<li><strong>Galleon Water:</strong> If enabled, loads up switch in Lighthouse area which checks the water level flag. The fix also instantly raises the water to the raise height if the flag is enabled (as opposed to normal behaviour where this is gradual).</li>
+						<li><strong>Fungi Nighttime:</strong> If enabled, the game will load the day switch in clock area to make the sky in Fungi reflect the time of day and the music that is being played.</li>
+						<li><strong>Giant Kosha Timer:</strong> If enabled, the game will load the object responsible for controlling the giant kosha timer, meaning that the 800-frame timer will begin regardless of where you spawn in Caves.</li>
+					</ul>
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="settings_kongcolors">
@@ -1823,6 +2439,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the color of each kong based on some presets:
 					<table>
 						<tr>
@@ -1845,6 +2462,10 @@
 							<td>Chunky (Shirt)</td>
 							<td>Red, Purple & Blue, Green & Purple</td>
 						</tr>
+						<tr>
+							<td>Jetman (Entire Body)</td>
+							<td>White, Red, Green, Blue, Yellow, Purple, Cyan</td>
+						</tr>
 					</table>
 				</div>
 			</div>
@@ -1855,6 +2476,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Ties<span class="n64buttons dleft">&nbsp;</span> and<span class="n64buttons dright"></span> to Position Savestates.
 					<br>
 					Position Savestates stores the following information for player 1:
@@ -1895,6 +2517,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Ties<span class="n64buttons dleft">&nbsp;</span> and<span class="n64buttons dright"></span> to Frame Advance.
 					<br>
 					The Practice ROM "frame advance" mimics traditional frame advance found on PC emulators. To do this, the Practice ROM utilises the same mechanics used for traditionally pausing the game plus some additional patches to accomodate other game aspects, including:
@@ -1937,9 +2560,10 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Ties<span class="n64buttons ddown">&nbsp;</span> to Tag Anywhere.
 					<br>
-					<em>"Tag Anywhere"</em> allows the player to tag without utilising a Tag Barrel, popularised by the <a class="excluded_link hovergold" href="https://pastebin.com/m82XBvYm">Tag Anywhere ROM Hack</a>.
+					<em>"Tag Anywhere"</em> allows the player to tag without utilising a Tag Barrel, popularised by the <a class="excluded_link hovergold underline" href="https://pastebin.com/m82XBvYm">Tag Anywhere ROM Hack</a>.
 					<br>
 					Tag Anywhere cannot be performed under some circumstances:
 					<ul>
@@ -1973,72 +2597,76 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Lists all loaded actors in the current scenario, updating every time a new actor is loaded in or deloaded.<br>
 					The view you will get upon loading the actor list details the actor name, actor address and loaded actor index.<br><br>
 					Selecting an actor will provide a sub-menu:
 					<table>
 						<tr>
-							<td>
-								Address
-							</td>
+							<td>Address</td>
 							<td>
 								The location of the actor's data in memory.
 							</td>
 						</tr>
 						<tr>
+							<td>Name</td>
 							<td>
-								Name
-							</td>
-							<td>
-								The actor's assigned name in <a href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64.lua" class="hovergold excluded_link">ScriptHawk</a>
+								The actor's assigned name in <a href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64.lua" class="hovergold excluded_link underline">ScriptHawk</a>
 							</td>
 						</tr>
 						<tr>
-							<td>
-								Type
-							</td>
+							<td>Type</td>
 							<td>
 								The numerical value of the actor's type, for situations where multiple actor types have the same name. (eg. Zinger)
 							</td>
 						</tr>
 						<tr>
-							<td>
-								Size
-							</td>
+							<td>Size</td>
 							<td>
 								The amount of space (in bytes) that the actor takes in memory, excluding any memory space which is referenced by a pointer inside the actor space.
 							</td>
 						</tr>
 						<tr>
+							<td>X/Y/Z</td>
 							<td>
-								X/Y/Z
-							</td>
-							<td>
-								The co-ordinates of the actor in the map. This is not live-updated.
+								The co-ordinates of the actor in the map.
 							</td>
 						</tr>
 						<tr>
+							<td>Collisions</td>
 							<td>
-								Grab Actor
+								The amount of collisions that the actor is hosting.
 							</td>
+						</tr>
+						<tr>
+							<td>Last Collision</td>
+							<td>
+								The most recent collision that the actor hosted with some additional information regarding that collision (The collision target, and the collision header).
+							</td>
+						</tr>
+						<tr>
+							<td>Grab Actor</td>
 							<td>
 								Sets the actor address as the player's held actor. To warp the actor into your hands, you will need to crouch and uncrouch.
 							</td>
 						</tr>
 						<tr>
+							<td>Warp to Actor</td>
 							<td>
-								Warp to Actor
-							</td>
-							<td>
-								Warps the player to the actor (is live-updated).
+								Warps the player to the actor.
 							</td>
 						</tr>
 						<tr>
+							<td>View in Memory</td>
 							<td>
-								View in Memory
+								<div class="warning">This option is disabled on Wii U</div>
+								Opens the <a class="excluded_link hovergold underline" onclick="treeshow('debug_memory')">Memory Viewer</a>, limiting the space you can view to the space assigned to the actor.
 							</td>
+						</tr>
+						<tr>
+							<td>Focus on Actor</td>
 							<td>
-								Opens the <a class="excluded_link hovergold" onclick="treeshow('debug_memory')">Memory Viewer</a>, limiting the space you can view to the space assigned to the actor.
+								Shifts the camera's focal actor to the actor selected.
 							</td>
 						</tr>
 					</table>
@@ -2051,7 +2679,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					<div class="warning">This option is blocked on Wii U due to a crash exclusive to that console</div>
+					<version-list>us pal jp n64 emu</version-list>
 					Allows the user to view the 8MB of memory, and edit selected addresses with specific data sizes.
 					<h3>Controls</h3>
 					<table>
@@ -2076,7 +2704,7 @@
 								<span class="n64buttons l">&nbsp;</span>&rarr;<span class="n64buttons dleft">&nbsp;</span>/<span class="n64buttons dright">&nbsp;</span>
 							</td>
 							<td>
-								Changes the data size between 4-byte, 2-byte, 1-byte and hex-digit
+								Changes the data size between int, short, byte and hex-digit
 							</td>
 						</tr>
 						<tr>
@@ -2087,15 +2715,62 @@
 								Increments or decrements the value of the selected piece of data. The data will not be written to RDRAM until you let go of <span class="n64buttons l">&nbsp;</span>
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<span class="n64buttons z">&nbsp;</span>
+							</td>
+							<td>
+								Toggles a submenu which enables extra actions to be performed on the selected address.
+							</td>
+						</tr>
+					</table>
+					<h3>Extra address actions</h3>
+					<table>
+						<tr>
+							<td>
+								Follow Pointer
+							</td>
+							<td>
+								Changes the focused address to the one indicated by the pointer 
+								(Only visible if selected address is a pointer and the size is set to "int").
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Add as watch
+							</td>
+							<td>
+								Adds value as a dynamic watch, with various options on how the data will be displayed (Float is only available if the size is set to "int"). The value can be removed as a dynamic watch either by reselecting that same address and selecting "Remove as watch" or by going to the <a class="excluded_link hovergold underline" onclick="treeshow('watch_dynamic')">Dynamic Watches</a> menu.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Freeze Value
+							</td>
+							<td>
+								Freezes address to whatever value it was at point of freeze. There can only be a maximum of 8 frozen addresses at any one time. Since the value is reset back to it's freeze value at the start of the frame, anything which changes that value after the start of the frame will utilize the new value as opposed to the frozen value. This is a limitation of freezing addresses in general (regardless of whether on a Practice ROM or a PC emulator). To unfreeze a value, reselect the same address and select "Unfreeze value", or go to the <a class="excluded_link hovergold underline" onclick="treeshow('debug_managefrozen')">Manage Frozen Values</a> menu.
+							</td>
+						</tr>
 					</table>
 					Opening the memory viewer will close the active menu, and visa-versa.
 					<br><br>
 					For a list of some addresses:
 					<ul>
-						<li>ScriptHawk Watch: <a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/Watch/Donkey%20Kong%2064%20(USA).wch">Link</a></li>
-						<li>ScriptHawk LUA: <a class="excluded_link hovergold" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64.lua">Link</a></li>
-						<li>Practice ROM: <a class="excluded_link hovergold" href="https://github.com/theballaam96/dk64-practice-rom/blob/main/asm/us/symbols.asm">Link</a></li>
+						<li>ScriptHawk Watch: <a class="excluded_link hovergold underline" href="https://github.com/Isotarge/ScriptHawk/blob/master/Watch/Donkey%20Kong%2064%20(USA).wch">Link</a></li>
+						<li>ScriptHawk LUA: <a class="excluded_link hovergold underline" href="https://github.com/Isotarge/ScriptHawk/blob/master/games/dk64.lua">Link</a></li>
+						<li>Practice ROM: <a class="excluded_link hovergold underline" href="https://github.com/theballaam96/dk64-practice-rom/blob/main/include/symbols.json">Link</a></li>
 					</ul>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="debug_managefrozen">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Debug: Manage Frozen Values</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 emu</version-list>
+					Displays the values/addresses which were frozen by the <a class="excluded_link hovergold underline" onclick="treeshow('debug_memory')">Memory Viewer</a>. Selecting a line will unfreeze that value/address and remove it from the list.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="debug_heap">
@@ -2105,6 +2780,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Displays some statistics about the game's heap. Not updated in real-time.
 					<table>
 						<tr>
@@ -2136,7 +2812,7 @@
 								Total
 							</td>
 							<td>
-								The sum of the free and used bytes
+								The total amount of space allocated for dynamically placed memory outside of the framebuffer
 							</td>
 						</tr>
 					</table>
@@ -2149,7 +2825,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Lists the 10 most recently altered flags. The format of each flag in the log:
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Lists the 10 most recently altered flags. The format of each flag in the log:<br><br>
 					<div style="text-align: center">A: B>C DE F</div>
 					<table>
 						<tr>
@@ -2210,6 +2887,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Allows you to spawn any actor. Some actors will crash, depending on which map you are in and if some conditions are missing.
 					<br><br>
 					 Below is a brief key to the below table
@@ -2232,6 +2910,22 @@
 					<table id="actor_safe_table"></table>
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="debug_voidmap">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Debug: Void Map</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays a realtime map of the game's void zones, which are comprised of the void triangles inside the level (only present in some maps) and the void boundaries that encapsulate the map in a box. The game will only render triangles and boundaries which have some portion of their respective polygon within a 500 range of either (or both) of the X or Z axes.<br><br>
+					There are some caveats to the void map though:
+					<ul>
+						<li><strong>Wii U:</strong> Wii U cannot render triangles properly yet as it suffers from billboarding issues. A lot of the solutions to this issue which can be used on N64 and PC emulators do not work on Wii U. As such, the rendering is just limited to the boundaries for now</li>
+						<li><strong>Minigames:</strong> DK64 disables the ability to void during minigames. As such, to not cause confusion, the void isn't rendered when the game disables the ability to void in this way.</li>
+					</ul>
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="settings_screenratio">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -2239,6 +2933,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the screen ratio between 4:3 and 16:9
 				</div>
 			</div>
@@ -2249,6 +2944,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the camera mode between "Free Cam" and "Follow Cam"
 				</div>
 			</div>
@@ -2259,6 +2955,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles what console the Practice ROM references for tuning features. This is pre-set on the first boot of the ROM, however can be toggled here.
 				</div>
 			</div>
@@ -2269,6 +2966,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles what value the input display will use as the maximum value:
 					<table>
 						<tr>
@@ -2282,6 +2980,49 @@
 					</table>
 				</div>
 			</div>
+			<div class="treebox hide" tree-id="settings_inputtype">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Input Type</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles what type of input display is used:
+					<table>
+						<tr>
+							<td>Detailed</td>
+							<td>Uses sprites for buttons. More visually pleasing</td>
+						</tr>
+						<tr>
+							<td>Low-Lag</td>
+							<td>Uses rectangles for all drawn items. Lower lag</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_customsfx">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Practice ROM Sound Effects</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether custom sound effects that are triggered by various parts of the Practice ROM will play or not.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="settings_saveshorthand">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Settings: Savestate Shorthand Combo</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether the button combination for saving a state is enabled or not.
+				</div>
+			</div>
 			<div class="treebox hide" tree-id="settings_filestart">
 				<div class="flexsplitter">
 					<div style="flex:50%">
@@ -2289,6 +3030,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the file status will have some flags set or not upon new file creation:
 					<ul>
 						<li>Waterfall Cutscene</li>
@@ -2304,6 +3046,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles what system the Practice ROM uses for the K. Rool Round Numbers
 					<table>
 						<tr>
@@ -2324,6 +3067,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the game shows a text overlay whenever the game performs a save
 				</div>
 			</div>
@@ -2334,6 +3078,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles the amount of decimal places shown on float (non-integer) watch values
 				</div>
 			</div>
@@ -2344,7 +3089,8 @@
 					</div>
 				</div>
 				<div class="treebox_body">
-					Toggles whether the transform cheats will deplete crystals (Off) or not (On)
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Toggles whether the <a class="excluded_link hovergold underline" onclick="treeshow('cheats_transform')">transform cheats</a> will deplete crystals (Off) or not (On)
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="settings_storyskip">
@@ -2354,6 +3100,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles between whether the Practice ROM forces Story Skip to be on
 				</div>
 			</div>
@@ -2364,6 +3111,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Changes the volume of the pause menu background music between the following settings
 					<h3>Pause Menu Volume</h3>
 					<table>
@@ -2389,6 +3137,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether the game skips some of the boot sequence before getting to the main menu.
 				</div>
 			</div>
@@ -2399,6 +3148,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Toggles whether <span class="n64buttons dleft">&nbsp;</span> and <span class="n64buttons dright">&nbsp;</span> are used to navigate between Active Menu screens.
 				</div>
 			</div>
@@ -2409,6 +3159,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Loads the stored state of Arcade.
 					<br><br>
 					The Arcade Savestates can load these variables:
@@ -2434,6 +3185,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Stores the state of Arcade to memory, enabling it to be reloaded later on.
 					<br><br>
 					The Arcade Savestates save these variables:
@@ -2460,7 +3212,36 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Restocks Jumpman's lives to the maximum enabled by the Arcade mode you are in.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="arcade_timer">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Arcade Menu: Map Timer</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Displays a timer which indicates how quickly you completed a level. The timer starts, stops and resets automatically, so there's no way to control it outside of playing Arcade.<br><br>
+					Depending on the map, the timer will stop at various points:<br><br>
+					<table>
+						<tr>
+							<td style="width:25%">25m/75m</td>
+							<td>As soon as you stand on the Pauline platform</td>
+						</tr>
+						<tr>
+							<td style="width:25%">50m</td>
+							<td>As soon as DK starts to climb the ladder</td>
+						</tr>
+						<tr>
+							<td style="width:25%">100m</td>
+							<td>As soon as you touch the final rivet</td>
+						</tr>
+					</table>
+					<br>
+					These are the earliest point in the completion of a map where the frame you will transition to the next map is consistent.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="arcade_levitate">
@@ -2470,6 +3251,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Holding this option levitates Jumpman up the screen, useful for if you want to beat certain rounds quickly or get to certain places.
 				</div>
 			</div>
@@ -2480,6 +3262,7 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Allows you to change the map between the 4 Arcade screens
 				</div>
 			</div>
@@ -2490,21 +3273,67 @@
 					</div>
 				</div>
 				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
 					Allows you to change the level (difficulty) between the 9 difficulties.
 					<br><br>
 					Note: In story mode, the game overrides this upon map loads.
 				</div>
 			</div>
-			<div class="treebox hide" tree-id="error_01">
+			<div class="treebox hide" tree-id="jetpac_level">
 				<div class="flexsplitter">
 					<div style="flex:50%">
-						<h2 class="treebox_head">Error Codes: Error 01</h2>
+						<h2 class="treebox_head">Jetpac Menu: Level Select</h2>
 					</div>
 				</div>
 				<div class="treebox_body">
-					Game is close to performing corruption, a glitch where too many actors are loaded at the same time. This happens in very rare scenarios. However, if such a circumstance occurs, the game closes the Practice ROM menu to try and avoid it.
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Allows you to change the level between the 8 levels offered by Arcade.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="jetpac_lives">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Jetpac Menu: Restock Lives</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Restocks Jetman's lives to the maximum that is enabled by the Jetpac mode you are in.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="jetpac_reset">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Jetpac Menu: Reset Jetpac</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Resets Jetpac to the state it would be if you press "Start Game" upon Jetpac boot, intended for practising 5000-point runs.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="jetpac_color">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Jetpac Menu: Jetman Color</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					Changes Jetman's color between 7 custom colors. This can also be changed in the <a href="" class="excluded_link hovergold underline" onclick="treeshow('settings_kongcolors')">settings menu</a>.
+				</div>
+			</div>
+			<div class="treebox hide" tree-id="jetpac_timer">
+				<div class="flexsplitter">
+					<div style="flex:50%">
+						<h2 class="treebox_head">Jetpac Menu: 5000 Point Timer</h2>
+					</div>
+				</div>
+				<div class="treebox_body">
+					<version-list>us pal jp n64 wiiu emu</version-list>
+					A timer to measure how quickly you can get to 5000 points from the start of a Jetpac game. The timer starts, stops and resets automatically. As such, there is little you can do to control it. The timer can be manually reset by selecting the <a href="" class="excluded_link hovergold underline" onclick="treeshow('jetpac_reset')">reset jetpac</a> option.
 					<br><br>
-					If you are trying to achieve corruption, the Practice ROM has a button to do that: <a class="excluded_link hovergold" onclick="treeshow('debug_corrupt')">Link</a>
+					The timer stops as soon as the game would push Rareware Coin to the item drop queue.
 				</div>
 			</div>
 			<div class="treebox hide" tree-id="contributors">
@@ -2516,19 +3345,20 @@
 				<div class="treebox_body">
 					<h3>Code Monkeys</h3>
 					<ul>
-						<li><a class="excluded_link hovergold" href="https://www.youtube.com/channel/UCvVX57cp0B-bVCB09LWnjhw">Ballaam</a></li>
-						<li><a class="excluded_link hovergold" href="https://twitter.com/Rainchus">Rain</a></li>
-						<li><a class="excluded_link hovergold" href="https://twitter.com/Isotarge">Isotarge</a></li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://www.youtube.com/channel/UCvVX57cp0B-bVCB09LWnjhw">Ballaam</a></strong>: Main Developer</li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://twitter.com/Rainchus">Rain</a></strong>: Memory Viewer, general development assistance</li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://twitter.com/Isotarge">Isotarge</a></strong>: Asset Modification System (Cranky's Lab), general development assistance</li>
 					</ul>
 					<h3>File State Creators</h3>
 					<ul>
-						<li><a class="excluded_link hovergold" href="https://twitch.tv/candy_boots">CandyBoots</a></li>
-						<li><a class="excluded_link hovergold" href="https://twitch.tv/christianvegasixty4">ChristianVega64</a></li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://twitch.tv/candy_boots">CandyBoots</a></strong>: No Levels Early (Helm Escape)</li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://twitch.tv/christianvegasixty4">ChristianVega64</a></strong>: Glitchless Any%</li>
 					</ul>
 					<h3>Others</h3>
 					<ul>
-						<li><a class="excluded_link hovergold" href="https://twitch.tv/gloriousliar">GloriousLiar - Various vanilla modifications</a></li>
-						<li><a class="excluded_link hovergold" href="https://twitch.tv/awhitmore">Adam Whitmore - QA Testing</a></li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://twitch.tv/gloriousliar">GloriousLiar</a></strong>: Various Vanilla Modifications, general development assistance</li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://guide.wedarobi.com/">Wedarobi</a></strong>: Online patching support, general development assistance</li>
+						<li><strong><a class="excluded_link hovergold underline" href="https://twitch.tv/awhitmore">Adam Whitmore</a></strong>: N64 QA</li>
 					</ul>
 				</div>
 			</div>
@@ -2541,13 +3371,13 @@
 				<div class="treebox_body">
 					The Practice ROM repo allows any user to build a current development version of the DK64 Practice ROM. In order to build the Practice ROM, you will need the following:
 					<ul>
-						<li>A .z64 Donkey Kong 64 US <strong>Vanilla</strong> ROM</li>
+						<li>A .z64 Donkey Kong 64 <strong>Vanilla</strong> ROM</li>
 						<ul>
-							<li>ROM Hash: <span class="highlight">CF806FF2603640A748FCA5026DED28802F1F4A50</span></li>
+							<li>See the <a href="/install?guide=req_n64" class="excluded_link hovergold underline">installation guide</a> for valid ROM Hashes</li>
 							<li>The ROM must be placed in the src/rom directory of the repository.</li>
 						</ul>
 						<li>Python 3.x installed or a text editor which can run a python terminal (Eg. Sublime Text)</li>
-						<li>N64Chain: <a class="excluded_link hovergold" href="https://github.com/tj90241/n64chain/releases/tag/9.1.0">Link</a></li>
+						<li>N64Chain: <a class="excluded_link hovergold underline" href="https://github.com/tj90241/n64chain/releases/tag/9.1.0">Link</a></li>
 					</ul>
 					Once these are installed, run <span class="highlight">build.bat</span> in the src directory through a command-line interface. The structure of the command is as follows:
 					<div style="text-align: center">
@@ -2558,7 +3388,7 @@
 						<pre><code>./build.bat dk64.z64 --bps</code></pre>
 					</div>
 					<br><br>
-					Assuming your vanilla ROM is in the right directory, everything should build as normal. The output Practice ROM will be in the src/rom directory titled "<span class="highlight">dk64-practice-rom-dev.z64</span>".
+					Assuming your vanilla ROM is in the right directory, everything should build as normal. The output Practice ROM will be in the src/rom directory titled "<span class="highlight">dk64-practice-rom-dev-{version}.z64</span>". (eg. dk64-practice-rom-dev-us.z64)
 					<br><br>
 					If you have a problem with building this and have everything listed above, raise it as a GitHub issue.
 				</div>
@@ -2610,6 +3440,13 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="info_box_mask hide"></div>
+	<div class="info_box hide">
+		<div id="infobox_cancel"><strong onclick="clearInfo()">X</strong></div>
+		<h1 id="infobox_header"></h1>
+		<div id="infobox_release"></div>
+		<div id="infobox_fast"></div>
 	</div>
 	<script src="./Site/script/nav.js"></script>
 	<script src="./Site/script/tree.js"></script>
@@ -2741,6 +3578,118 @@
 			}
 		}
 		generateBadMapsList()
+
+		var version_dict = [
+			{
+				"key":"us",
+				"img":"Site/assets/versions/us.png",
+				"hover":"US Version (NTSC-U)",
+				"release":"November 22, 1999",
+				"speed":"Fastest region for pretty much everything. Heavily advised to run on this version if you have the ability to acquire a US cartridge and N64 gear.",
+				"detection":[
+					"English text with no language select in the options menu",
+					"L. Godfrey credited in the End Sequence",
+					"Yellow Cartridge with the text \"NUS-006 (USA)\" and \"NUS-NDOE-USA\" on the front"
+				]
+			},
+			{
+				"key":"pal",
+				"img":"Site/assets/versions/pal.png",
+				"hover":"Europe & Australia Version (PAL)",
+				"release":"December 6, 1999",
+				"speed":"Slowest region due to the 50Hz speed, but handy to help European and Australian runners with onboarding without having to import international components",
+				"detection":[
+					"Language select in the options menu",
+					"Fungi Boss intro doesn't contain a scene of Chunky begging",
+					"Grey Cartridge (Europe) or Yellow Cartridge (Australia) with the text \"NUS-006 (EUR)\" and \"NUS-NDOP-EUR\" on the front"
+				]
+			},
+			{
+				"key":"jp",
+				"img":"Site/assets/versions/jp.png",
+				"hover":"JP Version (NTSC-J)",
+				"release":"December 10, 1999",
+				"speed":"Slightly faster than PAL, slower than US due to lack of text skip and patched glitches.",
+				"detection":[
+					"Japanese text",
+					"Textboxes can't be cancelled with B",
+					"Grey Cartridge with a yellow sticked with \"NUS-NDOJ-JPN\" on the front"
+				]
+			},
+			{
+				"key":"n64",
+				"img":"Site/assets/versions/n64.png",
+				"hover":"Nintendo 64",
+				"release":"June 23, 1996",
+				"speed":"Slowest console due to lag and 1996 hardware limitations. Accurate to how the game was intended to run."
+			},
+			{
+				"key":"wiiu",
+				"img":"Site/assets/versions/wiiu.png",
+				"hover":"Wii U Virtual Console",
+				"release":"November 18, 2012",
+				"speed":"Fastest console, but has some input lag and the controls aren't as responsive as Nintendo 64."
+			},
+			{
+				"key":"emu",
+				"img":"Site/assets/versions/emu.png",
+				"hover":"PC Emulators",
+				"release":"Multiple",
+				"speed":"Faster than N64, not allowed for leaderboard submissions. Purely listed for ease of onboarding"
+			}
+		]
+
+		function displayVersions() {
+			var version_list = document.getElementsByTagName("version-list")
+
+			for (let v = 0; v < version_list.length; v++) {
+				version_sublist = version_list[v].innerText.split(" ");
+				version_list[v].innerText = ""
+				var div = document.createElement("div")
+
+				var works_div = document.createElement("div")
+				var works_div_txt = document.createTextNode("Available on:")
+				works_div.appendChild(works_div_txt)
+				div.appendChild(works_div)
+				version_dict.forEach(icon => {
+					if (version_sublist.indexOf(icon.key) > -1) {
+						var img_el = document.createElement("img")
+						img_el.setAttribute("src",icon.img)
+						img_el.setAttribute("title","Click for more information")
+						img_el.setAttribute("width","40px")
+						img_el.setAttribute("height","26px");
+						img_el.setAttribute("onclick","displayInfo('"+icon.key+"')")
+						img_el.style["padding-right"] = "5px";
+						img_el.style.cursor = "pointer";
+						div.appendChild(img_el)
+					}
+				})
+				div.style["padding-bottom"] = "20px";
+				version_list[v].appendChild(div)
+			}
+		}
+		displayVersions();
+		var bonus_barrel_caveats = document.getElementsByClassName("bonus_caveat")
+		for (let b = 0; b < bonus_barrel_caveats.length; b++) {
+			bonus_barrel_caveats[b].innerHTML = "then the resolution of that barrel will be prevented for a <a href='https://www.youtube.com/watch?v=sJENh05q6L8&ab_channel=LookAtTheWindow' class='excluded_link hovergold underline'>technical reason</a>";
+		}
+
+		function clearInfo() {
+			document.getElementsByClassName("info_box")[0].classList.add("hide")
+			document.getElementsByClassName("info_box_mask")[0].classList.add("hide")
+		}
+		clearInfo();
+
+		function displayInfo(key) {
+			var specific_dict = version_dict.find(item => item.key == key);
+			if (specific_dict) {
+				document.getElementById("infobox_header").innerText = specific_dict.hover;
+				document.getElementById("infobox_release").innerText = "Release Date: " + specific_dict.release;
+				document.getElementById("infobox_fast").innerHTML = "<strong>Short summary:</strong> " + specific_dict.speed;
+				document.getElementsByClassName("info_box")[0].classList.remove("hide")
+				document.getElementsByClassName("info_box_mask")[0].classList.remove("hide")
+			}
+		}
 	</script>
 </body>
 </html>

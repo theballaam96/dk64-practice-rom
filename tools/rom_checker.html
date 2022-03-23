@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ROM Checker | Donkey Kong 64 Practice ROM</title>
+	<link rel="stylesheet" href="../Site/style/nav.css">
+	<link rel="stylesheet" href="../Site/style/main.css">
+	<link rel="stylesheet" href="../Site/style/home.css">
+	<link rel="stylesheet" href="../Site/style/maps.css">
+	<link rel="stylesheet" href="../Site/style/mj.css">
+	<link rel="stylesheet" href="../Site/style/tree.css">
+	<link rel="stylesheet" href="../Site/style/n64buttons.css">
+	<link rel="stylesheet" href="../Site/style/manual.css">
+	<link rel="apple-touch-icon" sizes="57x57" href="../apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="../apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="../apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="../apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="../apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="../apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="../android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+	<link rel="manifest" href="../manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="../ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="description" content="" />
+	<style type="text/css">
+		.homebox {
+			transition: 0.5s ease-in-out;
+			cursor: default;
+		}
+		.homebox.clickable:hover {
+			border-color:red;
+		}
+		.hide {
+			display: none;
+		}
+		download-buttons {
+			display: block;
+			padding: 10px;
+		}
+		download-buttons .isdownload::before {
+			content: "\203A";
+			cursor: pointer;
+			user-select: none;
+			color: darkgoldenrod;
+			display: inline-block;
+		}
+		.changelog {
+			list-style-type: none;
+			margin:0;
+			padding:0;
+			padding-left: 10px;
+		}
+		.link_button {
+			width:fit-content;
+			width:-moz-fit-content;
+			padding:5px;
+			padding-bottom: 2px;
+			display:none;
+		}
+		input {
+			padding: 15px;
+			width: 90%;
+		}
+		.flag_title {
+			color: white;
+		}
+		.flag_info {
+			color: white;
+			padding-bottom: 20px;
+		}
+		.flag_list {
+			padding:20px;
+			color: white;
+			border: 2px solid darkgoldenrod;
+			width: 500px;
+			margin-left: auto;
+			margin-right: auto;
+
+		}
+		.flag_box {
+			color: white;
+			border: 2px solid white;
+			border-radius: 5px;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+		.f_title {
+			color: white;
+			font-weight: bold;
+			text-align: left;
+			padding-left: 10px;
+		}
+		.f_content {
+			color: white;
+			text-align: left;
+		}
+		.cen_block {
+			text-align: center;
+		}
+		.flag_internal {
+			text-align: left;
+		}
+		#disp_message {
+			padding-top: 10px;
+			text-align: center;
+		}
+		#file-selector {
+			background: gainsboro;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			font-weight: bold;
+			font-family: system-ui;
+		}
+	</style>
+</head>
+<body>
+	<nav id="navigation"></nav>
+	<div class="flexsplitter max">
+		<div class="rightbox" style="flex:80%">
+			<div class="v_spacer"></div>
+			<div class="cen_block">
+				<h1 class="flag_title">ROM Checker</h1>
+				<div class="flag_info">
+					An analysis tool to determine the properties of the ROM and whether it's supported for the Practice ROM.
+				</div>
+				<input id="file-selector" type="file">
+				<div class="flag_list hide" id="flag_list">
+					<h3 style="margin-block-start:0">ROM Information</h3>
+					<div class="flag_internal">
+						<div id="disp_header"></div>
+						<div id="disp_versenc"></div>
+						<div id="disp_verslit"></div>
+						<div id="disp_endian"></div>
+						<div id="disp_crc"></div>
+						<div id="disp_release"></div>
+						<div id="disp_hash"></div>
+						<div id="disp_message"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../Site/script/nav.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha1-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/lib-typedarrays-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+	<script>
+		document.getElementById("file-selector").addEventListener("change", function() {
+			var fr = new FileReader();
+			fr.onload = function() {
+				var data = fr.result;
+				var file_wordArr = CryptoJS.lib.WordArray.create(data);
+            	var sha1_hash = CryptoJS.SHA1(file_wordArr);
+			    var array = new Uint8Array(data);
+			    checkFile(array.filter((item,index)=>index<0x400),sha1_hash)
+			};
+			fr.readAsArrayBuffer(document.getElementById("file-selector").files[0]);
+        })
+
+		var show_output_data = false;
+        var output_data = {
+        	"header":"",
+        	"version_encode":"",
+        	"version_literal":"",
+        	"supported":false,
+        	"endianness":"",
+        	"extension":"",
+        	"CRC1":"",
+        	"CRC2":"",
+        	"release":"",
+        	"hash":"",
+        };
+        var output_data_copy = output_data;
+
+        function hex2a(hexx) {
+		    var hex = hexx.toString();//force conversion
+		    var str = '';
+		    for (var i = 0; i < hex.length; i += 2)
+		        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+		    return str;
+		}
+
+		function displayData(data) {
+			document.getElementById("flag_list").classList.remove("hide")
+
+			document.getElementById("disp_header").innerHTML = "<strong>Header</strong>: " + output_data.header;
+			document.getElementById("disp_versenc").innerHTML = "<strong>Encoded Version</strong>: " + output_data.version_encode;
+			document.getElementById("disp_verslit").innerHTML = "<strong>Game Version</strong>: " + output_data.version_literal;
+			document.getElementById("disp_endian").innerHTML = "<strong>Endianness</strong>: " + output_data.endianness + " (" + output_data.extension + ")";
+			document.getElementById("disp_crc").innerHTML = "<strong>CRC</strong>: " + output_data.CRC1 + " " + output_data.CRC2;
+			document.getElementById("disp_release").innerHTML = "<strong>Release</strong>: " + output_data.release;
+			document.getElementById("disp_hash").innerHTML = "<strong>SHA1 Hash</strong>: " + output_data.hash;
+
+			var message = "Unknown";
+			if (output_data.version_literal != "") {
+				if (output_data.version_encode[1] == "D" && (output_data.version_encode[2] == "O" || output_data.version_encode[2] == "P")) {
+					if (output_data.supported) {
+						if (data) {
+							if (data.CRC1 == output_data.CRC1 && data.CRC2 == output_data.CRC2) {
+								if (output_data.endianness == "big") {
+									if (data.sha1 == output_data.hash) {
+										message = "Supported!"
+									} else {
+										message = "SHA1 Mismatch - Bad ROM. You will need a different ROM"
+									}
+								} else {
+									message = "Wrong endianness, use Tool64 to convert to big endian"
+								}
+							} else {
+								message = "CRC Mismatch - Bad ROM. You will need a different ROM"
+							}
+						}
+					} else {
+						message = "Kiosk ROM isn't supported";
+					}
+				} else {
+					message = "Not a DK64 ROM";
+				}
+			} else {
+				message = "Couldn't detect DK64 data"
+			}
+			document.getElementById("disp_message").innerHTML = "<strong>Message</strong>: " + message;
+		}
+
+        function checkFile(array,hash) {
+        	output_data = output_data_copy;
+        	if (array[0] == 0x80) {
+        		output_data.endianness = "big";
+        		output_data.extension = ".z64";
+        	} else {
+        		output_data.endianness = "little";
+        		output_data.extension = ".n64";
+        		temp_array = array.slice();
+        		array = [];
+        		for (let i = 0; i < 0x200; i++) {
+        			array[2 * i] = temp_array[(2 * i) + 1];
+        			array[(2 * i) + 1] = temp_array[2 * i];
+        		}
+        	}
+        	output_data.hash = hash.toString().toUpperCase();
+        	var header_array = array.filter((item,index)=>index >= 0x20 && index < 0x40);
+        	var header_hex_str = "";
+        	var pass = true;
+        	header_array.forEach(item => {
+        		if (pass) {
+        			if (item == 0) {
+        				pass = false;
+        			} else {
+        				header_hex_str += item.toString(16);
+        			}
+        		}
+        	})
+        	var verenc_array = array.filter((item,index)=>index >= 0x3B && index < 0x40);
+        	var verenc_hex_str = "";
+        	pass = true;
+			verenc_array.forEach(item => {
+        		if (pass) {
+        			if (item == 0) {
+        				pass = false;
+        			} else {
+        				verenc_hex_str += item.toString(16);
+        			}
+        		}
+        	})
+        	var crc1 = array.filter((item,index)=>index >= 0x10 && index < 0x14);
+        	var crc2 = array.filter((item,index)=>index >= 0x14 && index < 0x18);
+        	var release = array.filter((item,index)=>index >= 0x0C && index < 0x10);
+        	crc1 = [...crc1].map(item=>item.toString(16).padStart(2,"0")).join("")
+        	crc2 = [...crc2].map(item=>item.toString(16).padStart(2,"0")).join("")
+        	release = [...release].map(item=>item.toString(16).padStart(2,"0")).join("")
+        	output_data.CRC1 = "0x" + crc1.toUpperCase();
+        	output_data.CRC2 = "0x" + crc2.toUpperCase();
+        	output_data.release = "0x" + release.toUpperCase();
+
+
+			var encode_data = [
+				{
+					"encoded_version":"NDOE",
+					"version_literal":"US",
+					"CRC1":"0xEC58EABF",
+					"CRC2":"0xAD7C7169",
+					"sha1":"CF806FF2603640A748FCA5026DED28802F1F4A50",
+					"supported":true,
+				},
+				{
+					"encoded_version":"NDOP",
+					"version_literal":"PAL",
+					"CRC1":"0x11936D8C",
+					"CRC2":"0x6F2C4B43",
+					"sha1":"F96AF883845308106600D84E0618C1A066DC6676",
+					"supported":true,
+				},
+				{
+					"encoded_version":"NDOJ",
+					"version_literal":"JP",
+					"CRC1":"0x053C89A7",
+					"CRC2":"0xA5064302",
+					"sha1":"F0AD2B2BBF04D574ED7AFBB1BB6A4F0511DCD87D",
+					"supported":true,
+				},
+				{
+					"encoded_version":"NDPE",
+					"version_literal":"Kiosk",
+					"CRC1":"0x0DD4ABAB",
+					"CRC2":"0xB5A2A91E",
+					"sha1":"B4717E602F07CA9BE0D4822813C658CD8B99F993",
+					"supported":false,
+				},
+			]
+
+        	output_data.header = hex2a(header_hex_str).trim();
+        	output_data.version_encode = hex2a(verenc_hex_str).trim();
+        	var verlit_data = encode_data.find(item=>item.encoded_version == output_data.version_encode);
+        	if (verlit_data) {
+        		output_data.version_literal = verlit_data.version_literal;
+        		if (output_data.header == "DONKEY KONG 64" || output_data.header == "D K DISPLAY") {
+        			output_data.supported = verlit_data.supported;
+        		}
+        	}
+        	console.log(output_data)
+        	displayData(verlit_data);
+        }
+	</script>
+</body>
+</html>

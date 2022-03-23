@@ -412,6 +412,7 @@ void clearAllWatches(void) {
 		toggleFairyViewer();
 	}
 	FairyViewerOpen = 0;
+	doubleBeaverEnabledBitfield = 0;
 	closeOverlay();
 	PhaseChecker.assistant_on = 0;
 	PhaseChecker.reason_code = 6;
@@ -555,12 +556,27 @@ static const int watch_functions[] = {
 	(int)&clearAllWatches,
 };
 
+static const char watch_access[] = {
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Player Vars
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Timers
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // System Environment
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Snag Watches
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Assistants
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Fake Items
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_EMU, // Dynamic
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Beaver Bother
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Reference Position
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Clear All
+};
+
 const Screen watch_struct = {
 	.TextArray = (int*)watch_array,
 	.FunctionArray = watch_functions,
 	.ArrayItems = 10,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 3
+	.ParentPosition = 3,
+	.hasAccessArray = 1,
+	.AccessArray = watch_access,
 };
 
 static const int watch_player_functions[] = {

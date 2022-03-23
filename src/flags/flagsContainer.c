@@ -36,6 +36,15 @@ void toggleFlag(void) {
 			_flag_state = checkFlag(_flag_index,_flag_type);
 			_flag_state = 1 ^ _flag_state;
 			setFlag(_flag_index,_flag_state,_flag_type);
+			if (_flag_index == FLAG_MODIFIER_LLAMAFREE) {
+				if (_flag_state == 0) {
+					setFlag(FLAG_MODIFIER_LLAMASPIT,0,0); // Clear Llama Spit Flag if llama is being caged
+				}
+			} else if (_flag_index == FLAG_MODIFIER_LLAMASPIT) {
+				if (_flag_state != 0) {
+					setFlag(FLAG_MODIFIER_LLAMAFREE,1,0); // Set Llama Free flag if cooling water
+				}
+			}
 		}
 	}
 	openFlagSubmenu(ActiveMenu.screenIndex);

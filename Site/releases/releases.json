@@ -296,6 +296,17 @@
             "source":"https://github.com/theballaam96/dk64-practice-rom/tree/309f2f97a25832f79c5927b01b7523a38ccbb8e0",
             "lunar_warning":false,
             "changelog":[]
+         },
+         {
+            "version":"1.4.2",
+            "release_date": "23-MAR-2022",
+            "beat_us":"https://github.com/theballaam96/dk64-practice-rom/blob/main/Site/releases/Practice%20ROM%201_4_2_US.bps?raw=true",
+            "beat_pal":"https://github.com/theballaam96/dk64-practice-rom/blob/main/Site/releases/Practice%20ROM%201_4_2_PAL.bps?raw=true",
+            "beat_jp":"https://github.com/theballaam96/dk64-practice-rom/blob/main/Site/releases/Practice%20ROM%201_4_2_JP.bps?raw=true",
+            "lunar":"",
+            "source":"",
+            "lunar_warning":false,
+            "changelog":[]
          }
       ]
    }

@@ -64,7 +64,7 @@ static char* hack_array[] = {
 
 static char* hack_true[] = {
 	hack_quickstartup_off,
-	hack_forcedstoryskip_off,
+	hack_forcedstoryskip_on,
 	0,
 	hack_dpadnavigate_off,
 	hack_transformautostock_off,
@@ -81,7 +81,7 @@ static char* hack_true[] = {
 
 static char* hack_false[] = {
 	hack_quickstartup_on,
-	hack_forcedstoryskip_on,
+	hack_forcedstoryskip_off,
 	0,
 	hack_dpadnavigate_on,
 	hack_transformautostock_on,

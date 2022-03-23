@@ -11,7 +11,7 @@
 a.hovergold {
 	transition: 0.5s;
 }
-a.hovergold:hover {
+a.hovergold:not(.underline):hover {
 	color: darkgoldenrod;
 }
 

@@ -605,11 +605,11 @@ int* displayVoid(int* dl) {
 			dl = drawBoxVoid(dl);
 			if (assignedConsole != WIIU) {
 				dl = drawText(dl, 6, 40, 100, "V", 0xFF, 0xFF, 0xFF, 0xFF);
+				dl = displayVoidFloors(dl);
 			}
-			dl = displayVoidFloors(dl);
 		}
-		dl = displayPlayerMarker(dl);
 		if (assignedConsole != WIIU) {
+			dl = displayPlayerMarker(dl);
 			dl = drawText(dl, 6, 40, 100, "VOID MAP", 0xFF, 0xFF, 0xFF, 0xFF);
 		} else {
 			dl = drawText(dl, 6, 40, 100, "VOID BOUNDARIES", 0xFF, 0xFF, 0xFF, 0xFF);

@@ -193,6 +193,8 @@
 	#define FLAG_ARCADE_ROUND1 0x82 // Arcade R1 Beaten
 	#define FLAG_RABBIT_ROUND1 0xF8 // Rabbit Race 1 Beaten
 
+	#define FLAG_MODIFIER_LLAMAFREE 0x32 // Llama Free
+	#define FLAG_MODIFIER_LLAMASPIT 0x4C // Llama Spit
 	#define FLAG_MODIFIER_PRODROOM 0x6F // Prod Room On
 	#define FLAG_MODIFIER_GALLEONWATER 0xA0 // Galleon Water Raised
 	#define FLAG_MODIFIER_GALLEONSHIP 0x9C // Galleon Ship
@@ -412,6 +414,8 @@
 	#define FLAG_ARCADE_ROUND1 0x82 // Arcade R1 Beaten
 	#define FLAG_RABBIT_ROUND1 0xF8 // Rabbit Race 1 Beaten
 
+	#define FLAG_MODIFIER_LLAMAFREE 0x32 // Llama Free
+	#define FLAG_MODIFIER_LLAMASPIT 0x4C // Llama Spit
 	#define FLAG_MODIFIER_PRODROOM 0x6F // Prod Room On
 	#define FLAG_MODIFIER_GALLEONWATER 0xA0 // Galleon Water Raised
 	#define FLAG_MODIFIER_GALLEONSHIP 0x9C // Galleon Ship
@@ -631,6 +635,8 @@
 	#define FLAG_ARCADE_ROUND1 0x83 // Arcade R1 Beaten
 	#define FLAG_RABBIT_ROUND1 0xF9 // Rabbit Race 1 Beaten
 
+	#define FLAG_MODIFIER_LLAMAFREE 0x33 // Llama Free
+	#define FLAG_MODIFIER_LLAMASPIT 0x4D // Llama Spit
 	#define FLAG_MODIFIER_PRODROOM 0x70 // Prod Room On
 	#define FLAG_MODIFIER_GALLEONWATER 0xA1 // Galleon Water Raised
 	#define FLAG_MODIFIER_GALLEONSHIP 0x9D // Galleon Ship
