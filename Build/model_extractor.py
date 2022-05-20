@@ -1,6 +1,7 @@
 from ctypes import pointer
 from inspect import trace
 import json
+from lib2to3.pytree import convert
 from turtle import update
 import zlib
 import math
@@ -104,7 +105,21 @@ def dumpModel(file):
         "display_list": display_instructions
     }
 
-def createModelFileFromBase(folder,base,obj_file,new_file):
+def convertListing(listing):
+    pre_commands = []
+    pre_lines = listing.split("\n")
+    for line in pre_lines:
+        if line.strip()[:1] != "#":
+            if line.strip() != "":
+                cmd = line.strip().split(" ")
+                new_cmd = []
+                for c in cmd:
+                    c_str = f"0x{c}"
+                    new_cmd.append(int(c_str,16))
+                pre_commands.append(new_cmd)
+    return pre_commands.copy()
+
+def createModelFileFromBase(folder,base,obj_file,new_file,double_sided,translucent):
     print(f"Making {new_file}")
     base = folder + base
     obj_file = folder + obj_file
@@ -141,7 +156,32 @@ def createModelFileFromBase(folder,base,obj_file,new_file):
     print(f"\t{tri_count} Tris")
     print(f"\t{poly_count} Polygons")
     print(f"\t{vert_count} Verts")
-    pre_listing = """
+    translucent_f3dex2 = """
+        E7 00 00 00 00 00 00 00
+        E3 00 10 01 00 00 00 00
+        D9 FF FB FF 00 00 00 00
+        D9 FF FF FF 00 00 00 01
+        D7 00 00 02 FF FF FF FF
+        D9 F9 FF FF 00 00 00 00
+        E7 00 00 00 00 00 00 00
+        E2 00 00 1C 0C 18 49 D8
+        E3 00 0A 01 00 10 00 00
+        E3 00 0F 00 00 00 00 00
+        E7 00 00 00 00 00 00 00
+        FC 12 18 03 FF FF FF F8
+        E7 00 00 00 00 00 00 00
+        FD 18 00 00 00 00 02 70
+        F5 18 00 00 07 01 40 50
+        E6 00 00 00 00 00 00 00
+        F3 00 00 00 07 3F F0 80
+        E7 00 00 00 00 00 00 00
+        F5 18 10 00 00 01 40 50
+        F2 00 00 00 00 07 C0 7C
+        E7 00 00 00 00 00 00 00
+        E3 00 10 01 00 00 00 00
+        DA 38 00 03 04 00 00 40
+    """
+    single_sided = """
         E7 00 00 00 00 00 00 00
         E3 00 0A 01 00 00 00 00
         E2 00 00 1C 00 55 20 78
@@ -152,18 +192,42 @@ def createModelFileFromBase(folder,base,obj_file,new_file):
         D9 FF FF FF 00 00 04 00
         DA 38 00 03 04 00 00 40
     """
+    double_sided_f3dex2 = """
+        E7 00 00 00 00 00 00 00
+        E3 00 0A 01 00 01 00 00
+        E2 00 00 1C 00 55 20 78
+        FC 12 18 83 FF 2F FF FF
+        D7 00 00 02 FF FF FF FF
+        E3 00 0D 01 00 00 00 00
+        E3 00 12 01 00 00 20 00
+        D9 FF FF FF 00 00 04 00
+        DA 38 00 03 04 00 00 40
+    """
+    double_sided_back = """
+        E7 00 00 00 00 00 00 00
+        E3 00 0A 01 00 01 00 00
+        E2 00 00 1C 00 55 20 78
+        FC 12 18 83 FF 2F FF FF
+        D7 00 00 02 FF FF FF FF
+        E3 00 0D 01 00 00 00 00
+        E3 00 12 01 00 00 20 00
+        D9 FF FF FF 00 00 04 00
+        DA 38 00 03 04 00 00 40
+    """
+    if translucent:
+        pre_listing = translucent_f3dex2
+    else:
+        if double_sided:
+            pre_listing = double_sided_f3dex2
+        else:
+            pre_listing = single_sided
     # Original geo mode command: D9 FF FF FF 00 00 04 00
     # Remove Z buffer Geo: D9 FF FF FE 00 00 04 00
-    pre_commands = []
-    pre_lines = pre_listing.split("\n")
-    for line in pre_lines:
-        if line.strip() != "":
-            cmd = line.strip().split(" ")
-            new_cmd = []
-            for c in cmd:
-                c_str = f"0x{c}"
-                new_cmd.append(int(c_str,16))
-            pre_commands.append(new_cmd)   
+    pre_commands = convertListing(pre_listing)
+    if translucent:
+        double_command = convertListing(translucent_f3dex2)
+    else:
+        double_command = convertListing(double_sided_back)
     mid_commands = []
     end_commands = [
         [0xDF,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
@@ -172,7 +236,7 @@ def createModelFileFromBase(folder,base,obj_file,new_file):
     gen_type = "grouped" # Types "grouped" and "glorious"
     with open(new_file,"wb") as fh:
         fh.write(bytes(model_info["header"]))
-        if len(vertex_list) < 33:
+        if len(vertex_list) < 33 and not double_sided:
             # Regular Assignment
             for vertex in vertex_list:
                 coords = []
@@ -282,26 +346,35 @@ def createModelFileFromBase(folder,base,obj_file,new_file):
                 vert_end = fh.tell()
                 for command in pre_commands:
                     fh.write(bytearray(command))
-                position = 0
-                for quad_group_index in range(len(updated_quads)):
-                    quad_group = updated_quads[quad_group_index]
-                    vert_group = vertex_grouping[quad_group_index]
-                    buffer_size = len(vert_group)
-                    buffer_upper = buffer_size >> 4
-                    buffer_lower = (buffer_size << 4) & 0xFF
-                    position_arr = signedtobytearray(position * 0x10)
-                    # start = getStart(buffer_size)
-                    start = buffer_size * 2
-                    if quad_group_index != 0:
-                        for command in mid_commands:
+                lim = 1
+                if double_sided:
+                    lim = 2
+                for l in range(lim):
+                    if l == 1:
+                        for command in double_command:
                             fh.write(bytearray(command))
-                    fh.write(bytearray([0x01,buffer_upper,buffer_lower,start,0x03,0x00,position_arr[0],position_arr[1]]))
-                    for quad in quad_group:
-                        if len(quad) == 4:
-                            fh.write(bytearray([0x06,int(quad[0])*2,int(quad[1])*2,int(quad[2])*2,0x00,int(quad[0])*2,int(quad[2])*2,int(quad[3])*2]))
-                        elif len(quad) == 3:
-                            fh.write(bytearray([0x05,int(quad[0])*2,int(quad[1])*2,int(quad[2])*2,0x00,0x00,0x00,0x00]))
-                    position += buffer_size
+                    position = 0
+                    for quad_group_index in range(len(updated_quads)):
+                        quad_group = updated_quads[quad_group_index]
+                        vert_group = vertex_grouping[quad_group_index]
+                        buffer_size = len(vert_group)
+                        buffer_upper = buffer_size >> 4
+                        buffer_lower = (buffer_size << 4) & 0xFF
+                        position_arr = signedtobytearray(position * 0x10)
+                        # start = getStart(buffer_size)
+                        start = buffer_size * 2
+                        if quad_group_index != 0:
+                            for command in mid_commands:
+                                fh.write(bytearray(command))
+                        fh.write(bytearray([0x01,buffer_upper,buffer_lower,start,0x03,0x00,position_arr[0],position_arr[1]]))
+                        for quad in quad_group:
+                            if l == 1:
+                                quad.reverse()
+                            if len(quad) == 4:
+                                fh.write(bytearray([0x06,int(quad[0])*2,int(quad[1])*2,int(quad[2])*2,0x00,int(quad[0])*2,int(quad[2])*2,int(quad[3])*2]))
+                            elif len(quad) == 3:
+                                fh.write(bytearray([0x05,int(quad[0])*2,int(quad[1])*2,int(quad[2])*2,0x00,0x00,0x00,0x00]))
+                        position += buffer_size
                 for command in end_commands:
                     fh.write(bytearray(command))
             elif gen_type == "glorious":
@@ -385,19 +458,25 @@ createModelFileFromBase(
     rt,
     "base.bin",
     "cube/cube.obj",
-    "cube.bin"
+    "cube.bin",
+    False,
+    True
 )
 createModelFileFromBase(
     rt,
     "base.bin",
     "cylinder/cylinder.obj",
-    "cylinder.bin"
+    "cylinder.bin",
+    False,
+    True
 )
 createModelFileFromBase(
     rt,
     "base.bin",
     "sphere/sphere.obj",
-    "sphere.bin"
+    "sphere.bin",
+    False,
+    True
 )
 cleanup = [
     "base.bin",

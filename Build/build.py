@@ -497,9 +497,9 @@ bins = [
 	"wrinkly_text",
 	"menu_text",
 	"klumsy_text",
-	"assets/Non-Code/cube",
-	"assets/Non-Code/cylinder",
-	"assets/Non-Code/sphere",
+	"assets/Non-Code/Models/cube",
+	"assets/Non-Code/Models/cylinder",
+	"assets/Non-Code/Models/sphere",
 ]
 for x in bins:
 	pth = x + ".bin"

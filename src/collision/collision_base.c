@@ -94,6 +94,6 @@ void collisionCode(void) {
         }
     }
     actor->obj_props_bitfield &= 0xFFFF7FFF;
-    actor->shadow_intensity = 50;
+    actor->shadow_intensity = 120;
     renderActor(CurrentActorPointer_0,0);
 }
