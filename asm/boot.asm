@@ -269,6 +269,9 @@ lockedCamHook:
 doubleBeaverHook:
 	J 	doubleBeaverCode
 	NOP
+GuardSphereStoreHook:
+	J 	GuardSphereStoreCode
+	NOP
 
 loadExtraHooks:
 	LUI t3, hi(pauseHook)
@@ -409,6 +412,12 @@ loadExtraHooks:
 	LUI t4, hi(doubleBeaverHookWrite)
 	SW t3, lo(doubleBeaverHookWrite) (t4) // Store Hook
 	SW r0, lo(doubleBeaverHookWrite)+4 (t4) // Store NOP
+
+	LUI t3, hi(GuardSphereStoreHook)
+	LW t3, lo(GuardSphereStoreHook) (t3)
+	LUI t4, hi(guardStoreHookWrite)
+	SW t3, lo(guardStoreHookWrite) (t4) // Store Hook
+	SW r0, lo(guardStoreHookWrite)+4 (t4) // Store NOP
 	
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

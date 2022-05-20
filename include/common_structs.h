@@ -10,8 +10,17 @@ typedef struct shortPos {
 	/* 0x004 */ short zPos;
 } shortPos;
 
+typedef struct renderingParamsData {
+	/* 0x000 */ char unk_00[0x34];
+	/* 0x034 */ float scale_x;
+	/* 0x038 */ float scale_y;
+	/* 0x03C */ float scale_z;
+} renderingParamsData;
+
 typedef struct actorData {
-	/* 0x000 */ char unk_00[0x58];
+	/* 0x000 */ void* model_pointer;
+	/* 0x004 */ renderingParamsData* render_pointer;
+	/* 0x008 */ char unk_08[0x58-0x8];
 	/* 0x058 */ int actorType;
 	/* 0x05C */ char unk_5C[0x60-0x5C];
 	/* 0x060 */ unsigned int obj_props_bitfield;
@@ -23,9 +32,14 @@ typedef struct actorData {
 	/* 0x0B8 */ float hSpeed;
 	/* 0x0BC */ char unk_BC[0xE6-0xBC];
 	/* 0x0E6 */ short facing_angle;
-	/* 0x0E8 */ char unk_E8[0x13C-0xE8];
+	/* 0x0E8 */ char unk_E8[0x128-0xE8];
+	/* 0x128 */ short shadow_intensity;
+	/* 0x12A */ short draw_distance;
+	/* 0x12C */ char unk_12C[0x13C-0x12C];
 	/* 0x13C */ void* collision_queue_pointer;
-	/* 0x140 */ char unk_140[0x154-0x140];
+	/* 0x140 */ char unk_140[0x144-0x140];
+	/* 0x144 */ char noclip;
+	/* 0x145 */ char unk_145[0x154-0x145];
 	/* 0x154 */ unsigned char control_state;
 	/* 0x155 */ char control_state_progress;
 	/* 0x156 */ char unk_156[0x16A-0x156];
@@ -860,6 +874,26 @@ typedef struct parentMaps {
 	/* 0x01C */ int behaviour_load;
 	/* 0x020 */ char unk_1C[0xC0-0x20];
 } parentMaps;
+
+typedef struct LZTrigger {
+	/* 0x000 */ shortPos position;
+	/* 0x006 */ short radius;
+	/* 0x008 */ short height;
+	/* 0x00A */ short unk0A;
+	/* 0x00C */ char activation_type;
+	/* 0x00D */ char unk_0D[0x10-0xD];
+	/* 0x010 */ short trigger_type;
+	/* 0x012 */ short map;
+	/* 0x014 */ short exit;
+	/* 0x016 */ short unk_16;
+	/* 0x018 */ short unk_18;
+	/* 0x01A */ short cutscene_is_tied;
+	/* 0x01C */ short cutscene_activated;
+	/* 0x01E */ short shift_camera_to_kong;
+	/* 0x020 */ char unk_20[0x38-0x20];
+	/* 0x038 */ char not_in_zone;
+	/* 0x039 */ char active;
+} LZTrigger;
 
 typedef struct hud_element {
 	/* 0x000 */ void* item_count_pointer;

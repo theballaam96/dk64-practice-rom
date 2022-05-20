@@ -1,6 +1,7 @@
 @echo off
 set src_file=%1
 set bps_arg=%2
+set python_ver="python"
 echo Started: %date% %time%
 mkdir obj
 
@@ -13,7 +14,8 @@ GOTO finish
 
 :valid_name
 echo %src_file% > .rom
-python detect_version.py
+echo Building...
+%python_ver% detect_version.py
 set /p vfile=< .version
 set jl_file="asm/us/jump_list.asm"
 set ml_file="asm/us/main.asm"
@@ -33,25 +35,25 @@ GOTO finish
 :compile
 echo valid version
 
-python build/heap_handle.py
+%python_ver% build/heap_handle.py
 set /p heap_size=< heap.shrink
 echo Honey, I shrunk the heap by %heap_size% bytes
-python build/symbols_generator.py
-python build/screen_generator.py
-python build\compile.py
+%python_ver% build/symbols_generator.py
+%python_ver% build/screen_generator.py
+%python_ver% build\compile.py
 build\armips.exe %jl_file%
-python build\build.py
+%python_ver% build\build.py
 build\armips.exe %ml_file% -sym rom\dk64-practice-rom-dev.sym
 rmdir /s /q .\obj > NUL
-python build\correct_file_size.py
+%python_ver% build\correct_file_size.py
 build\n64crc.exe rom\dk64-practice-rom-dev.z64
 
 if "%vfile" == "0" GOTO dump
 GOTO cleanup
 
 :dump
-python build\dump_pointer_tables_vanilla.py
-python build\dump_pointer_tables_modified.py
+%python_ver% build\dump_pointer_tables_vanilla.py
+%python_ver% build\dump_pointer_tables_modified.py
 
 :cleanup
 del rom\dk64-practice-rom-temp.z64
@@ -60,7 +62,7 @@ if "%bps_arg%" == "--bps" (
 	echo Building BPS Patch
 	build\flips.exe --create "rom\temp_rom.z64" "rom\dk64-practice-rom-dev.z64" %final_bps%
 )
-python build/segmentFile.py
+%python_ver% build/segmentFile.py
 del heap.shrink
 
 :finish

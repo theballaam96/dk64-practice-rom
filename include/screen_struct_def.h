@@ -117,3 +117,6 @@ extern const Screen memory_struct;
 extern Screen freeze_screen_struct;
 extern Screen dynwatch_manage_struct;
 extern const Screen beaver_struct;
+extern const Screen colroot_struct;
+extern const Screen triggers_struct;
+extern const Screen colmisc_struct;

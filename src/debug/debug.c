@@ -80,7 +80,7 @@ const Screen debug_struct = {
 	.FunctionArray = debug_functions,
 	.ArrayItems = 7, // 8
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 4,
+	.ParentPosition = 5,
 	.hasAccessArray = 1,
 	.AccessArray = debug_access
 };

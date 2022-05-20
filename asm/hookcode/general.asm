@@ -481,3 +481,16 @@
 			NOP
 			J 		doubleBeaverHookWrite+0x24
 			NOP
+
+	GuardSphereStoreCode:
+		SW 		t4, 0x28 (sp)
+		SW 		t3, 0x24 (sp)
+		LW 		t4, 0x0 (s0)
+		LW 		t3, 0x5C (sp)
+		SW 		t3, 0x1BC (t4)
+		LW 		t3, 0x64 (sp)
+		SW 		t3, 0x1B8 (t4)
+		LW 		t4, 0x28 (sp)
+		J 		guardStoreHookWrite+0x8
+		LW 		t3, 0x24 (sp)
+		

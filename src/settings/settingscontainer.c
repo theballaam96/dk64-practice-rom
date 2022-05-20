@@ -39,5 +39,5 @@ const Screen settings_struct = {
 	.FunctionArray = settings_functions,
 	.ArrayItems = 9,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 8
+	.ParentPosition = 9
 };

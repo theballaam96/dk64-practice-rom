@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 121/121(100.0%)
-		Vanilla Vars: 165/165(100.0%)
-		Hack Vars: 111/111(100.0%)
-		Code: 58/58(100.0%)
-		Overall: 455/455(100.0%)
+		Functions: 121/123(98.37%)
+		Vanilla Vars: 166/168(98.81%)
+		Hack Vars: 113/113(100.0%)
+		Code: 58/59(98.31%)
+		Overall: 458/463(98.92%)
 */
 
 //functions
@@ -93,6 +93,7 @@
 .definelabel deleteAllActorSpawners, 0x80687AA8
 .definelabel complexFree, 0x8060ED78
 .definelabel getModel2AndActorInfo, 0x8062FBB8
+//.definelabel changeActorColor
 .definelabel isBalloonOrPatch, 0x80686E84
 .definelabel enableComplexFree, 0x80669434
 .definelabel complexFreeWrapper, 0x80669444
@@ -107,6 +108,7 @@
 .definelabel getPointerTable14Texture, 0x8068A3EC
 .definelabel cancelPausedCutscenes, 0x8061A594
 .definelabel processPhase, 0x806DE764
+//.definelabel renderActor
 .definelabel getParentMapIndexFromCurrentMap, 0x805FDA2C
 .definelabel getCenterOffset, 0x806FB184
 .definelabel setWaterHeight, 0x8065F308
@@ -177,6 +179,7 @@
 .definelabel ChimpyCam, 0x80743DF0
 .definelabel ScreenRatio, 0x80743D80
 .definelabel CurrentActorPointer, 0x807FBFB4
+.definelabel CurrentActorPointer_0, 0x807FBFB0
 .definelabel LoadedActorCount, 0x807FBFA5
 .definelabel LoadedActorArray, 0x807FBDA0
 .definelabel SpawnerMasterData, 0x807FE118
@@ -257,6 +260,8 @@
 .definelabel MapVoid_MaxX, 0x807F6458
 .definelabel MapVoid_MaxZ, 0x807F645A
 .definelabel MapVertsPointer, 0x807F6258
+//.definelabel TriggerCount
+//.definelabel TriggerArray
 .definelabel balloonPatchCounts, 0x807FC878
 .definelabel coloredBananaCounts, 0x807F65C0
 .definelabel objectSignalsCount, 0x807FC448
@@ -394,6 +399,7 @@
 .definelabel jetpacTimerState, 0x807FFC7D // u8
 .definelabel jetmanColorIndex, 0x807FFC7E // u8
 .definelabel disableMapGeometry, 0x807FFC7F // u8
+.definelabel triggers_viewable, 0x807FFF8D // u8
 .definelabel customCollisionVerts, 0x807FFC80 // ptr
 .definelabel vanillaVertBase, 0x807FFC84 // ptr
 .definelabel objectSignalsCountCopy, 0x807FFC88 // u8
@@ -413,6 +419,7 @@
 .definelabel disableLockedCam, 0x807FFF8B // u8
 .definelabel dynamic_watches, 0x807FFEB0 // 0x8 x 4
 .definelabel doubleBeaverEnabledBitfield, 0x807FFF8C // u8
+.definelabel altCollisionEnabled, 0x807FFF62 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731720
@@ -473,6 +480,7 @@
 .definelabel jetpacPauseHookWrite, 0x80017954
 .definelabel jetpac5000HookWrite, 0x8001ADC0
 .definelabel doubleBeaverHookWrite, 0x806AC298
+//.definelabel guardStoreHookWrite
 
 .definelabel customCodeStart, 0x805d6600
 .definelabel customCodeUpper, 0x805d

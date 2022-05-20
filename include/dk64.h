@@ -118,6 +118,7 @@ extern int getParentDataIndex(int map);
 extern void setWaterHeight(int chunk, float height, float delta);
 extern void updateObjectScript(void* behaviour_pointer);
 extern void executeBehaviourScript(void* behaviour_pointer, int unk0);
+extern void changeActorColor(int red, int green, int blue, int alpha);
 
 extern int* initDisplayList(int* dl);
 extern int getTextStyleHeight(int style);
@@ -125,6 +126,7 @@ extern int* displayText(int* dl, int style, int x, int y, void* text_pointer, ch
 extern int* displayImage(int* dl, int texture_index, int unk3, codecs codec_index, int width, int height, int x, int y, float xScale, float yScale, int unk11, float unk12);
 extern void getScreenPosition(float x, float y, float z, float* x_store, float* y_store, int unk8, float scale, char player_index);
 extern int* textDraw(int* dl, int style, int x, int y, char* str);
+extern void renderActor(void* actor, int unk0);
 
 //vanilla data
 extern float TransitionSpeed;
@@ -169,6 +171,7 @@ extern unsigned short PositionFacingAngle;
 extern char ChimpyCam;
 extern char ScreenRatio;
 extern int* CurrentActorPointer;
+extern void* CurrentActorPointer_0;
 extern char LoadedActorCount;
 extern loadedActorArr LoadedActorArray[64];
 extern SpawnerMasterInfo SpawnerMasterData;
@@ -252,6 +255,9 @@ extern short MapVoid_MinX;
 extern short MapVoid_MinZ;
 extern short MapVoid_MaxX;
 extern short MapVoid_MaxZ;
+
+extern short TriggerCount;
+extern LZTrigger* TriggerArray;
 
 extern unsigned short balloonPatchCounts[221];
 extern unsigned short coloredBananaCounts[8];
@@ -408,6 +414,8 @@ extern unsigned char scriptsNotAutoloading;
 extern char disableLockedCam;
 extern dynamicWatchStruct dynamic_watches[4];
 extern unsigned char doubleBeaverEnabledBitfield;
+extern unsigned char triggers_viewable;
+extern unsigned char altCollisionEnabled;
 
 // Code
 extern int debugColumnLoop;

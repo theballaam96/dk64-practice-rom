@@ -649,6 +649,12 @@
 			}
 		},
 		{
+			"name":"changeActorColor",
+			"versions":{
+				"us":"0x807149C8"
+			}
+		},
+		{
 			"name":"isBalloonOrPatch",
 			"versions":{
 				"us":"0x80688C84",
@@ -758,6 +764,12 @@
 				"us":"0x806DF494",
 				"pal":"0x806D98B4",
 				"jp":"0x806DE764"
+			}
+		},
+		{
+			"name":"renderActor",
+			"versions":{
+				"us":"0x806319C4"
 			}
 		},
 		{
@@ -1304,6 +1316,14 @@
 				"us":"0x807FBB44",
 				"pal":"0x807FBA64",
 				"jp":"0x807FBFB4"
+			}
+		},
+		{
+			"name":"CurrentActorPointer_0",
+			"versions":{
+				"us":"0x807FBB40",
+				"pal":"0x807FBA60",
+				"jp":"0x807FBFB0"
 			}
 		},
 		{
@@ -1944,6 +1964,18 @@
 				"us":"0x807F5DE8",
 				"pal":"0x807F5D08",
 				"jp":"0x807F6258"
+			}
+		},
+		{
+			"name":"TriggerCount",
+			"versions":{
+				"us":"0x807FDCB0"
+			}
+		},
+		{
+			"name":"TriggerArray",
+			"versions":{
+				"us":"0x807FDCB4"
 			}
 		},
 		{
@@ -2753,6 +2785,11 @@
 			"size_comment":"u8"
 		},
 		{
+			"name":"triggers_viewable",
+			"address":"0x807FFF8D",
+			"size_comment":"u8"
+		},
+		{
 			"name":"customCollisionVerts",
 			"address":"0x807FFC80",
 			"size_comment":"ptr"
@@ -2845,6 +2882,11 @@
 		{
 			"name":"doubleBeaverEnabledBitfield",
 			"address":"0x807FFF8C",
+			"size_comment":"u8"
+		},
+		{
+			"name":"altCollisionEnabled",
+			"address":"0x807FFF62",
 			"size_comment":"u8"
 		}
 	],
@@ -3311,6 +3353,12 @@
 				"us":"0x806AD728",
 				"pal":"0x806A7388",
 				"jp":"0x806AC298"
+			}
+		},
+		{
+			"name":"guardStoreHookWrite",
+			"versions":{
+				"us":"0x806AE4AC"
 			}
 		}
 	]

@@ -80,5 +80,5 @@ const Screen timersettings_struct = {
 	.FunctionArray = timersettings_functions,
 	.ArrayItems = 3,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 5
+	.ParentPosition = 6
 };

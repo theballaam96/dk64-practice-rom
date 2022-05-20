@@ -221,7 +221,7 @@ const Screen filestates_main_struct = {
 	.FunctionArray = filestates_main_functions,
 	.ArrayItems = 4,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 6
+	.ParentPosition = 7
 };
 
 static const char* filestates_nlemain_array[] = {

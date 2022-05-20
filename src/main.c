@@ -106,6 +106,8 @@ void cFuncLoop(void) {
 	}
 	SavePromptIsSaving = 0;
 	displayInput(); // Constant
+	parseLoadingZones();
+	controlGuardSpheres();
 	if (DisablePositionButtons == 1) {
 		toggleFrameAdvanceState(); // DisablePositionButtons == 1
 		initFrameAdvance(); // DisablePositionButtons == 1

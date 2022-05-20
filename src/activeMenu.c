@@ -6,6 +6,7 @@ static const char* main_array[] = {
 	"FLAGS",
 	"SAVE STATES",
 	"WATCHES",
+	"COLLISION",
 	"DEBUG",
 	"TIMER SETTINGS",
 	"FILE STATES",
@@ -13,12 +14,13 @@ static const char* main_array[] = {
 	"SETTINGS"
 };
 
-static const int main_functions[9];
+static const int main_functions[10];
 static const char main_access[] = {
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Warp
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Flags
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Save States
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Watches
+	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Collision
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Debug
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // Timer Settings
 	ACCESS_US | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU, // File States
@@ -29,7 +31,7 @@ static const char main_access[] = {
 const Screen main_struct = {
 	.TextArray = (int*)main_array,
 	.FunctionArray = main_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 10,
 	.ParentScreen = 0,
 	.ParentPosition = 0,
 	.hasAccessArray = 1,
@@ -395,6 +397,7 @@ static const int main_functions[] = {
 	(int)&openFlagsMainMenu,
 	(int)&openStateMenu,
 	(int)&openWatchMenu,
+	(int)&openCollisionRootMenu,
 	(int)&openDebugMenu,
 	(int)&openTimerSettingsMenu,
 	(int)&openFileStateMainMenu,

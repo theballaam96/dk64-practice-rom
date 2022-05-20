@@ -59,6 +59,11 @@ void initHack(void) {
 		style2Mtx[0x5] = base_mtx;
 		style2Mtx[0xF] = 10;
 		colorMenuSky();
+		if (ROM_VERSION == 0) {
+			*(char*)(0x8074D8D5) = 2; // Change Actor 1 to 3D Model
+			*(short*)(0x8074DB48) = 20; // Change paad size to 0x30
+			*(int*)(0x8074C0A4) = (int)&collisionCode;
+		}
 		for (int i = 0; i < WatchCount; i++) {
 			ViewedSnagWatches[i] = -1;
 		}

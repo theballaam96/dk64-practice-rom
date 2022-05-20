@@ -549,6 +549,21 @@
 			"index_var":"ACTIVEMENU_SCREEN_WATCH_DOUBLEBEAVER",
 			"struct":"beaver_struct",
 			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_COLLISION_ROOT",
+			"struct":"colroot_struct",
+			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_COLLISION_TRIGGERS",
+			"struct":"triggers_struct",
+			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_COLLISION_MISC",
+			"struct":"colmisc_struct",
+			"const":true
 		}
 	]
 }

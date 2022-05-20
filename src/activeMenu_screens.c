@@ -118,4 +118,7 @@ const Screen* menu_screens[] = {
 	&freeze_screen_struct,
 	&dynwatch_manage_struct,
 	&beaver_struct,
+	&colroot_struct,
+	&triggers_struct,
+	&colmisc_struct,
 };

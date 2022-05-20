@@ -222,6 +222,13 @@ extern void preload_map_voids(void);
 extern void openStateSettingsMenu(void);
 
 extern void openFixesMenu(void);
+extern void parseLoadingZones(void);
+extern void spawnCollision(int subtype, float x, float y, float z, float height, float width, float depth, void* uuid, int red, int green, int blue, int alpha, int force_y);
+extern void* getCollisionUUID(actorData* actor);
+extern void collisionCode(void);
+extern void openCollisionRootMenu(void);
+extern void controlGuardSpheres(void);
+extern void openCollisionMisc(void);
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

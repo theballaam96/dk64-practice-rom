@@ -57,5 +57,5 @@ const Screen cheats_struct = {
 	.FunctionArray = cheats_functions,
 	.ArrayItems = 12,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
-	.ParentPosition = 7
+	.ParentPosition = 8
 };

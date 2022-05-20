@@ -16,6 +16,7 @@ from snag_bins_builder import *
 from font_image_builder import build_font
 from filestatewriter import writeFileStatesToDict, wipeStateFiles
 from heap_handle import getHeapLocation, getHeapSize
+import model_extractor
 import check_unused
 
 ROMName = "rom/temp_rom.z64"
@@ -210,6 +211,31 @@ base_file_dict = [
 		"do_not_extract": True,
 		"do_not_compress": True,
 		"versions":[0,1,2],
+	},
+	{
+		"name": "Cube Model",
+		"pointer_table_index": 5,
+		"file_index": 0xE7,
+		"source_file": "assets/Non-Code/Models/cube.bin",
+		"do_not_delete_source": True,
+		"versions": [0,1,2]
+	},
+	{
+		"name": "Cylinder Model",
+		"pointer_table_index": 5,
+		"file_index": 0x8E,
+		"source_file": "assets/Non-Code/Models/cylinder.bin",
+		"do_not_delete_source": True,
+		"versions": [0,1,2]
+	},
+	{
+		"name": "Sphere Model",
+		"pointer_table_index": 5,
+		"file_index": 0xBB,
+		# "file_index": 0x77,
+		"source_file": "assets/Non-Code/Models/sphere.bin",
+		"do_not_delete_source": True,
+		"versions": [0,1,2]
 	},
 ]
 
@@ -471,6 +497,9 @@ bins = [
 	"wrinkly_text",
 	"menu_text",
 	"klumsy_text",
+	"assets/Non-Code/cube",
+	"assets/Non-Code/cylinder",
+	"assets/Non-Code/sphere",
 ]
 for x in bins:
 	pth = x + ".bin"
