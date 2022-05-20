@@ -1,3 +1,4 @@
+from ctypes import pointer
 import hashlib
 from map_names import maps
 from typing import BinaryIO
@@ -372,7 +373,7 @@ def getFileInfo(pointer_table_index : int, file_index : int):
 
 	return pointer_table_files[pointer_table_index][pointer_tables[pointer_table_index]["entries"][file_index]["new_sha1"]]
 
-def replaceROMFile(pointer_table_index : int, file_index : int, data: bytes, uncompressed_size : int, filename : str = ""):
+def replaceROMFile(rom: BinaryIO, pointer_table_index : int, file_index : int, data: bytes, uncompressed_size : int, filename : str = ""):
 	# TODO: Get this working
 	if pointer_table_index == 8 and file_index == 0:
 		print(" - WARNING: Tried to replace Test Map cutscenes. This will replace global cutscenes, so it has been disabled for now to prevent crashes.")
@@ -393,6 +394,21 @@ def replaceROMFile(pointer_table_index : int, file_index : int, data: bytes, unc
 	}
 
 	# Update the entry in the pointer table to point to the new data
+	if file_index >= len(pointer_tables[pointer_table_index]["entries"]):
+		diff = file_index - len(pointer_tables[pointer_table_index]["entries"]) + 1
+		print(f"Appending data: {diff} extra entries")
+		for d in range(diff):
+			pointer_tables[pointer_table_index]["entries"].append({
+				"index": file_index,
+				"bit_set": False,
+				"original_sha1": "",
+			})
+		rom.seek(main_pointer_table_offset + (4 * len(pointer_tables)) + (4 * pointer_table_index))
+		rom.write((file_index + 1).to_bytes(4,"big"))
+		pointer_tables[pointer_table_index]["num_entries"] = file_index + 1
+
+	print(pointer_tables[pointer_table_index])
+
 	pointer_tables[pointer_table_index]["entries"][file_index]["new_sha1"] = dataSHA1Hash
 
 	if len(filename) > 0:

@@ -6,9 +6,9 @@
 	Stats:
 		Functions: 121/123(98.37%)
 		Vanilla Vars: 166/168(98.81%)
-		Hack Vars: 114/114(100.0%)
+		Hack Vars: 113/113(100.0%)
 		Code: 58/59(98.31%)
-		Overall: 459/464(98.92%)
+		Overall: 458/463(98.92%)
 */
 
 //functions
@@ -420,7 +420,6 @@
 .definelabel dynamic_watches, 0x807FFEB0 // 0x8 x 4
 .definelabel doubleBeaverEnabledBitfield, 0x807FFF8C // u8
 .definelabel altCollisionEnabled, 0x807FFF62 // u8
-.definelabel modelROMLocations, 0x807FFC94 // 0x4 x 4
 
 // Code
 .definelabel debugColumnLoop, 0x80731720

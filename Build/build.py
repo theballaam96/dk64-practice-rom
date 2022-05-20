@@ -215,26 +215,31 @@ base_file_dict = [
 	{
 		"name": "Cube Model",
 		"pointer_table_index": 5,
-		"file_index": 0xE7,
+		# "file_index": 0xE7,
+		"file_index": 0xEC,
 		"source_file": "assets/Non-Code/Models/cube.bin",
 		"do_not_delete_source": True,
-		"versions": [0,1,2]
+		"do_not_extract": True,
+		"versions": [0,1,2],
 	},
 	{
 		"name": "Cylinder Model",
 		"pointer_table_index": 5,
-		"file_index": 0x8E,
+		# "file_index": 0x8E,
+		"file_index": 0xED,
 		"source_file": "assets/Non-Code/Models/cylinder.bin",
 		"do_not_delete_source": True,
+		"do_not_extract": True,
 		"versions": [0,1,2]
 	},
 	{
 		"name": "Sphere Model",
 		"pointer_table_index": 5,
-		"file_index": 0xBB,
-		# "file_index": 0x77,
+		# "file_index": 0xBB,
+		"file_index": 0xEE,
 		"source_file": "assets/Non-Code/Models/sphere.bin",
 		"do_not_delete_source": True,
+		"do_not_extract": True,
 		"versions": [0,1,2]
 	},
 ]
@@ -450,7 +455,7 @@ with open(newROMName, "r+b") as fh:
 			print(" - Writing " + x["output_file"] + " (" + hex(len(compress)) + ") to ROM")
 			if "pointer_table_index" in x and "file_index" in x:
 				# More complicated write, update the pointer tables to point to the new data
-				replaceROMFile(x["pointer_table_index"], x["file_index"], compress, uncompressed_size)
+				replaceROMFile(fh, x["pointer_table_index"], x["file_index"], compress, uncompressed_size)
 			elif "start" in x:
 				if isROMAddressOverlay(x["start"]):
 					replaceOverlayData(x["start"], compress)

@@ -15,7 +15,8 @@ typedef struct collision_paad {
     /* 0x013 */ char fade_countdown;
 } collision_paad;
 
-static const unsigned char collision_models[] = {0xE8,0x8F,0xBC};
+// static const unsigned char collision_models[] = {0xE8,0x8F,0xBC};
+static const unsigned char collision_models[] = {0xED,0xEE,0xEF};
 
 void spawnCollision(int subtype, float x, float y, float z, float height, float width, float depth, void* uuid, int red, int green, int blue, int alpha, int force_y) {
     for (int i = 0; i < ActorCount; i++) {
