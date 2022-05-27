@@ -23,6 +23,8 @@ void spawnLoadingZone(float x, float y, float z, int radius, int height, void* u
     int blue = trigger_rgb[type] & 0xFF;
     // y -= (5.0f * r_f);
     spawnCollision(1,x,y,z,h_f,r_f,r_f,uuid,red,green,blue,0x80,height==-1);
+    actorData* cyl = (actorData*)(CurrentActorPointer);
+    cyl->noclip = 1;
 }
 
 #define TRIGGERVIEWER_UD -1 // Undefined

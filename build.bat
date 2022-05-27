@@ -48,10 +48,11 @@ rmdir /s /q .\obj > NUL
 %python_ver% build\correct_file_size.py
 build\n64crc.exe rom\dk64-practice-rom-dev.z64
 
-if "%vfile" == "0" GOTO dump
+if "%vfile%" == "0" GOTO dump
 GOTO cleanup
 
 :dump
+echo Dumping pointer tables
 %python_ver% build\dump_pointer_tables_vanilla.py
 %python_ver% build\dump_pointer_tables_modified.py
 
