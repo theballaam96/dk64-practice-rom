@@ -417,6 +417,7 @@ extern unsigned char doubleBeaverEnabledBitfield;
 extern unsigned char triggers_viewable;
 extern unsigned char altCollisionEnabled;
 extern unsigned char collisiondrawmode;
+extern char disablelightning;
 
 // Code
 extern int debugColumnLoop;

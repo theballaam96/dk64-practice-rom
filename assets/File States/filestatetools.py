@@ -58,5 +58,5 @@ def clearFlag(file,byte,bit):
 		print("Wiped " + hex(byte) + ">" + str(bit))
 
 
-print(hex(checkFlag("./Glitchless/RAM Dump/helm.bin",0x4D,1)))
-clearFlag("./Glitchless/RAM Dump/helm.bin",0x4D,1)
+print(hex(checkFlag("./101/RAM Dump/aztec2_organic_alt.bin",0x9,6)))
+setFlag("./101/RAM Dump/aztec2_organic_alt.bin",0x9,6)

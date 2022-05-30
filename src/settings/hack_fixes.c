@@ -39,7 +39,6 @@ void toggleObjectScriptLoads(void) {
 	} else {
 		scriptsNotAutoloading |= shift;
 	}
-	TestVariable = scriptsNotAutoloading;
 	saveSettings();
 	openFixesMenu();
 };

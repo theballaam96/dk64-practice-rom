@@ -49,6 +49,7 @@ state_files = [
 			"helm_organic.bin",
 			"castle_organic.bin",
 			"aztec2_organic.bin",
+			"aztec2_organic_alt.bin",
 			"caves2_organic.bin",
 			"japes2_organic.bin",
 			"fungi.bin",

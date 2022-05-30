@@ -20,6 +20,7 @@ static const file_state_indexes filestates_101org_stateindex[] = {
 	_101ORG_GALLEON,
 	_101ORG_HELM,
 	_101ORG_CASTLE,
+	_101ORG_AZTEC2_ALT,
 	_101ORG_AZTEC2,
 	_101ORG_CAVES2,
 	_101ORG_JAPES2,
@@ -354,7 +355,8 @@ static const char* filestates_101org_array[] = {
 	"GALLEON",
 	"HELM",
 	"CASTLE",
-	"AZTEC 2",
+	"AZTEC 2 <BEGINNER>",
+	"AZTEC 2 <EXPERT>",
 	"CAVES 2",
 	"JAPES 2",
 	"FUNGI"
@@ -371,13 +373,14 @@ static const int filestates_101org_functions[] = {
 	(int)&loadOtherStates,
 	(int)&loadOtherStates,
 	(int)&loadOtherStates,
+	(int)&loadOtherStates,
 	(int)&loadOtherStates
 };
 
 const Screen filestates_101org_struct = {
 	.TextArray = (int*)filestates_101org_array,
 	.FunctionArray = filestates_101org_functions,
-	.ArrayItems = 11,
+	.ArrayItems = 12,
 	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
 	.ParentPosition = 0
 };

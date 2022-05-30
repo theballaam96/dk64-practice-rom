@@ -4,7 +4,7 @@ static char colors_dk_1[] = "DK: BLUE";
 static char colors_dk_2[] = "DK: GREEN";
 static char colors_dk_3[] = "DK: PURPLE";
 
-static char colors_di_1[] = "DIDDY: Dark BLUE";
+static char colors_di_1[] = "DIDDY: DARK BLUE";
 static char colors_di_2[] = "DIDDY: YELLOW";
 static char colors_di_3[] = "DIDDY: LIGHT BLUE";
 
@@ -83,7 +83,11 @@ void openKongColorsMenu(void) {
 
 void changeKongColor(void) {
 	int _color = kongcolors[(int)ActiveMenu.positionIndex];
-	if (_color > 2) {
+	int lim = 2;
+	if (ActiveMenu.positionIndex == 3) {
+		lim = 1;
+	}
+	if (_color > lim) {
 		_color = 0;
 	};
 	kongcolors[(int)ActiveMenu.positionIndex] = _color + 1;

@@ -35,6 +35,7 @@ void tbarrelSetFlag(void) {
 		_bool = checkFlag(FLAG_TBARREL_DIVE + i,0) & _bool;
 	}
 	setFlag(FLAG_TBARREL_COMPLETE,_bool,0);
+	TestVariable = 1; // Not sure why, but this prevents a crash
 }
 
 static const char* flagmenu_tbarrels_array[] = {

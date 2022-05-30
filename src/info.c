@@ -117,7 +117,7 @@ int* displayInfo(int* dl) {
 			case 3:
 				for (int i = 0; i < sizeof(info_3)/4;i++) {
 					if (info_3[i]) {
-						dl = drawInfoText(dl, TestVariable, y, (char*)info_3[i]);
+						dl = drawInfoText(dl, 0, y, (char*)info_3[i]);
 					}
 					y += getYDiff(info_3[i]);
 				}

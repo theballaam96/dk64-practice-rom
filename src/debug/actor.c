@@ -116,6 +116,7 @@ void openActorMenu(void) {
 		actor_array[i] = actorscreen_viewed[i];
 	}
 	actor_struct.ArrayItems = shown_items;
+	ActiveMenu.totalItems = shown_items;
 	shown_items = loaded_shown;
 	if ((LoadedActorCount - startingActorIndex) > 10) {
 		actor_array[shown_items] = actorscreen_viewmore;

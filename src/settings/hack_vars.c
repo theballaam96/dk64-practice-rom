@@ -45,6 +45,9 @@ static char hack_sfx_on[] = "} PRACTICE ROM SOUND EFFECTS";
 static char hack_savecombo_off[] = "{ SAVESTATE SHORTHAND COMBO";
 static char hack_savecombo_on[] = "} SAVESTATE SHORTHAND COMBO";
 
+static char hack_castle_on[] = "} LIGHTNING EFFECTS";
+static char hack_castle_off[] = "{ LIGHTNING EFFECTS";
+
 static char* hack_array[] = {
 	hack_quickstartup_on,
 	hack_forcedstoryskip_on,
@@ -60,6 +63,7 @@ static char* hack_array[] = {
 	hack_console_none,
 	hack_sfx_on,
 	hack_savecombo_on,
+	hack_castle_on,
 };
 
 static char* hack_true[] = {
@@ -77,6 +81,7 @@ static char* hack_true[] = {
 	0,
 	hack_sfx_off,
 	hack_savecombo_off,
+	hack_castle_off,
 };
 
 static char* hack_false[] = {
@@ -94,6 +99,7 @@ static char* hack_false[] = {
 	0,
 	hack_sfx_on,
 	hack_savecombo_on,
+	hack_castle_on,
 };
 
 static char* hack_addr[] = {
@@ -111,6 +117,7 @@ static char* hack_addr[] = {
 	0,
 	(char*)&disableCustomSFX,
 	(char*)&disableSavestateCombo,
+	(char*)&disablelightning,
 };
 
 static char* hack_console_list[] = {
@@ -190,6 +197,12 @@ void toggleConsole(void) {
 	openHackVarsMenu();
 }
 
+void controlLightning(void) {
+	if (disablelightning) {
+
+	}
+}
+
 void toggleSetting(void) {
 	int pos = ActiveMenu.positionIndex;
 	if (hack_addr[pos] != 0) {
@@ -199,6 +212,11 @@ void toggleSetting(void) {
 	if (hack_addr[pos] == (char*)&InputDisplayType) {
 		closeOverlay();
 		spawnOverlay();
+	}
+	if (hack_addr[pos] == (char*)&disablelightning) {
+		if (disablelightning) {
+			
+		}
 	}
 	openHackVarsMenu();
 }

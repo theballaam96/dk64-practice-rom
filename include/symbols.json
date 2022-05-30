@@ -2893,6 +2893,11 @@
 			"name":"collisiondrawmode",
 			"address":"0x807FFF63",
 			"size_comment":"u8"
+		},
+		{
+			"name":"disablelightning",
+			"address":"0x807FFF64",
+			"size_comment":"u8"
 		}
 	],
 	"code":[
