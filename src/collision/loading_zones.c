@@ -23,8 +23,6 @@ void spawnLoadingZone(float x, float y, float z, int radius, int height, void* u
     int blue = trigger_rgb[type] & 0xFF;
     // y -= (5.0f * r_f);
     spawnCollision(1,x,y,z,h_f,r_f,r_f,uuid,red,green,blue,0x80,height==-1);
-    actorData* cyl = (actorData*)(CurrentActorPointer);
-    cyl->noclip = 1;
 }
 
 #define TRIGGERVIEWER_UD -1 // Undefined
@@ -159,7 +157,24 @@ static char* triggers_array[] = {
     "TURN OFF ALL",
 };
 
+static char drawmode_translucent[] = "DRAW MODE:TRANSLUCENT";
+static char drawmode_faketranslucent[] = "DRAW MODE:FAKE TRANSLUCENT";
+static char drawmode_opaque[] = "DRAW MODE:OPAQUE";
+
+static char* drawmode_array[] = {
+    drawmode_translucent,
+    drawmode_faketranslucent,
+    drawmode_opaque,
+};
+
+static char* colroot_array[] = {
+	"TRIGGERS",
+    "MISC",
+    drawmode_translucent,
+};
+
 void openCollisionRootMenu(void) {
+    colroot_array[2] = drawmode_array[(int)collisiondrawmode];
 	changeMenu(ACTIVEMENU_SCREEN_COLLISION_ROOT);
 }
 
@@ -172,6 +187,12 @@ void openTriggersMenu(void) {
         }
     }
     changeMenu(ACTIVEMENU_SCREEN_COLLISION_TRIGGERS);
+}
+
+void toggledrawmode(void) {
+    collisiondrawmode = (collisiondrawmode + 1) % 3;
+    destroyAllCollision();
+    openCollisionRootMenu();
 }
 
 void toggleTrigger(void) {
@@ -195,25 +216,14 @@ void toggleTrigger(void) {
 
 void toggleAllTriggers(void) {
     triggers_viewable = 0;
-    for (int i = 0; i < ActorCount; i++) {
-        actorData* actor = (actorData*)(ActorArray[i]);
-        if (actor) {
-            if (actor->actorType == 1) {
-                deleteActorContainer(actor);
-            }
-        }
-    }
+    destroyAllCollision();
     openTriggersMenu();
 }
-
-static char* colroot_array[] = {
-	"TRIGGERS",
-    "MISC",
-};
 
 static const int colroot_functions[] = {
 	(int)&openTriggersMenu,
     (int)&openCollisionMisc,
+    (int)&toggledrawmode,
 };
 
 static const int triggers_functions[] = {
@@ -230,7 +240,7 @@ static const int triggers_functions[] = {
 const Screen colroot_struct = {
 	.TextArray = (int*)colroot_array,
 	.FunctionArray = colroot_functions,
-	.ArrayItems = 2,
+	.ArrayItems = 3,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 4,
 };

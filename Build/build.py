@@ -26,6 +26,9 @@ if os.path.exists(newROMName):
     os.remove(newROMName)
 shutil.copyfile(ROMName, newROMName)
 
+three_d_shape_models = ["cube","cylinder","sphere"]
+three_d_shape_resolutions = ["","_simple"]
+
 base_file_dict = [
 	{
 		"name": "Menu Text",
@@ -212,37 +215,24 @@ base_file_dict = [
 		"do_not_compress": True,
 		"versions":[0,1,2],
 	},
-	{
-		"name": "Cube Model",
-		"pointer_table_index": 5,
-		# "file_index": 0xE7,
-		"file_index": 0xEC,
-		"source_file": "assets/Non-Code/Models/cube.bin",
-		"do_not_delete_source": True,
-		"do_not_extract": True,
-		"versions": [0,1,2],
-	},
-	{
-		"name": "Cylinder Model",
-		"pointer_table_index": 5,
-		# "file_index": 0x8E,
-		"file_index": 0xED,
-		"source_file": "assets/Non-Code/Models/cylinder.bin",
-		"do_not_delete_source": True,
-		"do_not_extract": True,
-		"versions": [0,1,2]
-	},
-	{
-		"name": "Sphere Model",
-		"pointer_table_index": 5,
-		# "file_index": 0xBB,
-		"file_index": 0xEE,
-		"source_file": "assets/Non-Code/Models/sphere.bin",
-		"do_not_delete_source": True,
-		"do_not_extract": True,
-		"versions": [0,1,2]
-	},
 ]
+
+model_file_index = 0xEC
+for resolution in three_d_shape_resolutions:
+	for model in three_d_shape_models:
+		res_name = resolution
+		if not res_name == "":
+			res_name = f" ({resolution.replace('_','').strip().capitalize()})"
+		base_file_dict.append({
+			"name": f"{model.replace('_','').strip().capitalize()} Model{res_name}",
+			"pointer_table_index": 5,
+			"file_index": model_file_index,
+			"source_file": f"assets/Non-Code/Models/{model}{resolution}.bin",
+			"do_not_delete_source": True,
+			"do_not_extract": True,
+			"versions": [0,1,2]
+		})
+		model_file_index += 1
 
 progress_index = 0;
 def printProgress(sub):
@@ -502,16 +492,16 @@ bins = [
 	"wrinkly_text",
 	"menu_text",
 	"klumsy_text",
-	"assets/Non-Code/Models/cube",
-	"assets/Non-Code/Models/cylinder",
-	"assets/Non-Code/Models/sphere",
 ]
+for resolution in three_d_shape_resolutions:
+	for model in three_d_shape_models:
+		bins.append(f"assets/Non-Code/Models/{model}{resolution}")
 for x in bins:
 	pth = x + ".bin"
 	if os.path.exists(pth):
 		os.remove(pth)
 	else:
-		print(x + "doesn't exist")
+		print(x + " doesn't exist")
 wipeStateFiles();
 
 printProgress("Generating BizHawk RAM watch")

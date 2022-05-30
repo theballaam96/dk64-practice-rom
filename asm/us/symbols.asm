@@ -6,9 +6,9 @@
 	Stats:
 		Functions: 123/123(100.0%)
 		Vanilla Vars: 168/168(100.0%)
-		Hack Vars: 113/113(100.0%)
-		Code: 59/59(100.0%)
-		Overall: 463/463(100.0%)
+		Hack Vars: 114/114(100.0%)
+		Code: 60/60(100.0%)
+		Overall: 465/465(100.0%)
 */
 
 //functions
@@ -420,6 +420,7 @@
 .definelabel dynamic_watches, 0x807FFEB0 // 0x8 x 4
 .definelabel doubleBeaverEnabledBitfield, 0x807FFF8C // u8
 .definelabel altCollisionEnabled, 0x807FFF62 // u8
+.definelabel collisiondrawmode, 0x807FFF63 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78
@@ -481,8 +482,9 @@
 .definelabel jetpac5000HookWrite, 0x80027DB0
 .definelabel doubleBeaverHookWrite, 0x806AD728
 .definelabel guardStoreHookWrite, 0x806AE4AC
+.definelabel guardLightHookWrite, 0x806AE4C4
 
-.definelabel customCodeStart, 0x805d8e00
+.definelabel customCodeStart, 0x805d7e00
 .definelabel customCodeUpper, 0x805d
-.definelabel customCodeLower, 0x8e00
-.definelabel customCodeSize, 0x22000
+.definelabel customCodeLower, 0x7e00
+.definelabel customCodeSize, 0x23000

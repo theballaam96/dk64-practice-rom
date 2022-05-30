@@ -494,7 +494,7 @@ def writeModifiedPointerTablesToROM(fh : BinaryIO):
 	# Recompute the pointer tables using the new file addresses and write them in the reserved space
 	for x in reversed(pointer_tables):
 		fh.seek(main_pointer_table_offset + (26 * 4))
-		print(f"Pointer Table {x['index']}. New Location: {hex(main_pointer_table_offset + int.from_bytes(fh.read(4),'big'))}. Write Location:")
+		# print(f"Pointer Table {x['index']}. New Location: {hex(main_pointer_table_offset + int.from_bytes(fh.read(4),'big'))}. Write Location:")
 		if not shouldWritePointerTable(x["index"]):
 			continue
 

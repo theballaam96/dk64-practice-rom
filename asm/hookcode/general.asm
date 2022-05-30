@@ -493,4 +493,24 @@
 		LW 		t4, 0x28 (sp)
 		J 		guardStoreHookWrite+0x8
 		LW 		t3, 0x24 (sp)
+
+	GuardSphereLightCode:
+		LUI 	t5, hi(altCollisionEnabled)
+		LBU 	t5, lo(altCollisionEnabled) (t5)
+		ANDI 	t5, t5, 1 // Check Snoop Spheres
+		SWC1 	f18, 0x18 (sp)
+		BEQZ 	t5, GuardSphereLightCode_Render
+		NOP
+		LUI 	t5, hi(collisiondrawmode)
+		LBU 	t5, lo(collisiondrawmode) (t5)
+		BNEZ 	t5, GuardSphereLightCode_Finish
+		NOP
+
+		GuardSphereLightCode_Render:
+			JAL 	0x8065A708
+			NOP
+
+		GuardSphereLightCode_Finish:
+			J 	guardLightHookWrite+0x8
+			NOP
 		

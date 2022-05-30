@@ -229,6 +229,7 @@ extern void collisionCode(void);
 extern void openCollisionRootMenu(void);
 extern void controlGuardSpheres(void);
 extern void openCollisionMisc(void);
+extern void destroyAllCollision(void);
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

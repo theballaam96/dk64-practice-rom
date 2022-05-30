@@ -1,18 +1,9 @@
 #include "../../include/common.h"
 
-typedef struct guard_paad {
-    /* 0x000 */ char unk_00[0x3C];
-    /* 0x03C */ actorData* tied_sphere;
-    /* 0x040 */ float sphere_x;
-    /* 0x044 */ float sphere_z;
-} guard_paad;
-
 void spawnGuardSphere(actorData* actor) {
     guard_paad* paad = actor->paad;
     float sphere_radius = 70.0f * 0.055f;
     spawnCollision(2,paad->sphere_x,actor->yPos-70.0f,paad->sphere_z,sphere_radius,sphere_radius,sphere_radius,actor,0xFF,0x00,0x00,0x80,0);
-    actorData* sphere = (actorData*)(CurrentActorPointer);
-    sphere->noclip = 1;
 }
 
 static const unsigned char snoop_maps[] = {0xB,0x41,0x7E,0x7F,0x80};
@@ -75,17 +66,7 @@ void toggleMisc(void) {
     } else {
         altCollisionEnabled |= shift;
     }
-    for (int i = 0; i < ActorCount; i++) {
-        actorData* actor = (actorData*)(ActorArray[i]);
-        if (actor) {
-            if (actor->actorType == 1) {
-                deleteActorContainer(actor);
-            } else if (actor->actorType == 259) {
-                guard_paad* paad = actor->paad;
-                paad->tied_sphere = 0;
-            }
-        }
-    }
+    destroyAllCollision();
     openCollisionMisc();
 }
 

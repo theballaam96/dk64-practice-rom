@@ -6,10 +6,11 @@ from turtle import update
 import zlib
 import math
 import os
+import struct
 
 pre = "" # Change to "../" if you want to run locally
 rt = f"{pre}assets/Non-Code/Models/" # Modify to be your models directory
-base_model = 0x24 # Mad Jack. The base model file that your new models will be transplanted onto (Not related to the file index it's saved at)
+base_model = 0x7b # Cannon. The base model file that your new models will be transplanted onto (Not related to the file index it's saved at)
 
 def extractBase():
     rom = f"{pre}rom/dk64.z64"
@@ -44,12 +45,22 @@ def signedtobytearray(num):
         sign_bit = 0x80
     return [int(num / 256) | sign_bit, int(num % 256)]
 
+def int_to_float(val):
+    if val == 0:
+        return 0
+    return struct.unpack("!f", bytes.fromhex(hex(val).split("0x")[1]))[0]
+
 def dumpModel(file):
     info_file = file.replace(".bin",".txt")
     with open(file,"r+b") as model:
         pointers = []
         for x in range(5):
             pointers.append(int.from_bytes(model.read(4),"big"))
+        model.seek(0x1C)
+        bounds = []
+        for x in range(2):
+            bounds.append(unsignedshorttosigned(int.from_bytes(model.read(2),"big")))
+        footer_vert_count = int.from_bytes(model.read(1),"big")
         model.seek(0)
         header = model.read(0x28)
         vertex_info = (pointers[1]-pointers[0]) + 0x28
@@ -57,12 +68,14 @@ def dumpModel(file):
         vertex_start = 0x28
         vertex_end = vertex_start + (int.from_bytes(model.read(4),"big")-pointers[0])
         vertex_count = int((vertex_end-vertex_start)/16)
+        footer_start = model.tell() + 4
         footer = model.read()
         vertices = []
         for x in range(vertex_count):
             file_start = 0x28 + (16 * x)
             model.seek(file_start)
             vertex = {
+                "index": x,
                 "offset": hex(file_start)
             }
             params = ["x","y","z","control","u","v"]
@@ -81,16 +94,38 @@ def dumpModel(file):
             dl_0 = hex(int.from_bytes(model.read(4),"big"))
             dl_1 = hex(int.from_bytes(model.read(4),"big"))
             display_instructions.append(f"{dl_0} {dl_1}")
+        footer_data = []
+        for x in range(footer_vert_count):
+            model.seek(footer_start + (x * 0x10))
+            c = []
+            for y in range(3):
+                c.append(int_to_float(int.from_bytes(model.read(4),"big")))
+            i = []
+            for y in range(3):
+                i.append(int.from_bytes(model.read(1),"big"))
+            footer_data.append({
+                "index": x,
+                "offset": hex(footer_start + (x * 0x10)),
+                "coords": c.copy(),
+                "verts": i.copy()
+            })
+            
         with open(info_file,"w") as info:
             info.write("POINTERS\n")
             for pointer in pointers:
-                info.write(f"\t{hex(pointer)}\n")
+                info.write(f"\t{hex(pointer)} ({hex(pointer + 0x28 - pointers[0])})\n")
+            info.write("Y BOUNDS\n")
+            for bound in bounds:
+                info.write(f"\t{bound}\n")
             info.write("VERTICES\n")
             for vertex in vertices:
-                info.write(f"\t{vertex['offset']}: {vertex}\n")
+                info.write(f"\t{vertex['index']}: {vertex}\n")
             info.write("DISPLAY LIST\n")
             for dl in display_instructions:
                 info.write(f"\t{dl}\n")
+            info.write("FOOTER VERTS\n")
+            for vert in footer_data:
+                info.write(f"\t{vert['index']}: {vert}\n")
     header_bytes = []
     footer_bytes = []
     for x in header:
@@ -119,7 +154,7 @@ def convertListing(listing):
                 pre_commands.append(new_cmd)
     return pre_commands.copy()
 
-def createModelFileFromBase(folder,base,obj_file,new_file,double_sided,translucent):
+def createModelFileFromBase(folder,base,obj_file,new_file,double_sided,translucent,dim0,dim1,dim2):
     print(f"Making {new_file}")
     base = folder + base
     obj_file = folder + obj_file
@@ -451,33 +486,31 @@ def createModelFileFromBase(folder,base,obj_file,new_file,double_sided,transluce
         file_end_pointer = model_info["pointers"][0] + file_end - 0x28
         fh.seek(0x10)
         fh.write(file_end_pointer.to_bytes(4,"big"))
+        fh.seek(0x1C)
+        fh.write(bytearray(signedtobytearray(dim0)))
+        fh.seek(0x1E)
+        fh.write(bytearray(signedtobytearray(dim1)))
+        # fh.seek(0x20)
+        # fh.write(bytearray(signedtobytearray(dim2)))
     #dumpModel(new_file)
 
 extractBase()
-createModelFileFromBase(
-    rt,
-    "base.bin",
-    "cube/cube.obj",
-    "cube.bin",
-    False,
-    True
-)
-createModelFileFromBase(
-    rt,
-    "base.bin",
-    "cylinder/cylinder.obj",
-    "cylinder.bin",
-    False,
-    True
-)
-createModelFileFromBase(
-    rt,
-    "base.bin",
-    "sphere/sphere.obj",
-    "sphere.bin",
-    False,
-    True
-)
+model_list = ["cube","cylinder","sphere"]
+for model in model_list:
+    suf_idx = 0
+    for suf in ["","_simple"]:
+        createModelFileFromBase(
+            rt,
+            "base.bin",
+            f"{model}/{model}.obj",
+            f"{model}{suf}.bin",
+            False,
+            suf_idx == 0,
+            -83,
+            198,
+            0x0601,
+        )
+        suf_idx += 1
 cleanup = [
     "base.bin",
     "base.dump",

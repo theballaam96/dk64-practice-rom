@@ -272,6 +272,9 @@ doubleBeaverHook:
 GuardSphereStoreHook:
 	J 	GuardSphereStoreCode
 	NOP
+GuardSphereLightHook:
+	J 	GuardSphereLightCode
+	NOP
 
 loadExtraHooks:
 	LUI t3, hi(pauseHook)
@@ -418,6 +421,12 @@ loadExtraHooks:
 	LUI t4, hi(guardStoreHookWrite)
 	SW t3, lo(guardStoreHookWrite) (t4) // Store Hook
 	SW r0, lo(guardStoreHookWrite)+4 (t4) // Store NOP
+
+	LUI t3, hi(GuardSphereLightHook)
+	LW t3, lo(GuardSphereLightHook) (t3)
+	LUI t4, hi(guardLightHookWrite)
+	SW t3, lo(guardLightHookWrite) (t4) // Store Hook
+	SW r0, lo(guardLightHookWrite)+4 (t4) // Store NOP
 	
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

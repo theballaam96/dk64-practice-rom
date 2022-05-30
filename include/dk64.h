@@ -416,6 +416,7 @@ extern dynamicWatchStruct dynamic_watches[4];
 extern unsigned char doubleBeaverEnabledBitfield;
 extern unsigned char triggers_viewable;
 extern unsigned char altCollisionEnabled;
+extern unsigned char collisiondrawmode;
 
 // Code
 extern int debugColumnLoop;

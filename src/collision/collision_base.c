@@ -30,7 +30,11 @@ void spawnCollision(int subtype, float x, float y, float z, float height, float 
             }
         }
     }
-    spawnActor(1,collision_models[subtype]);
+    int model_offset = 0;
+    if (collisiondrawmode > 0) {
+        model_offset = sizeof(collision_models);
+    }
+    spawnActor(1,collision_models[subtype] + model_offset);
     actorData* actor = (actorData*)CurrentActorPointer;
     actor->xPos = x;
     actor->yPos = y;
@@ -39,6 +43,7 @@ void spawnCollision(int subtype, float x, float y, float z, float height, float 
     actor->green = green;
     actor->blue = blue;
     actor->obj_props_bitfield |= 0x00800000;
+    actor->noclip = 1;
     collision_paad* paad = (collision_paad*)actor->paad;
     if (paad) {
         paad->countdown = 1;
@@ -56,6 +61,20 @@ void* getCollisionUUID(actorData* actor) {
     return paad->attached_attribute;
 }
 
+void destroyAllCollision(void) {
+    for (int i = 0; i < ActorCount; i++) {
+        actorData* actor = (actorData*)(ActorArray[i]);
+        if (actor) {
+            if (actor->actorType == 1) {
+                deleteActorContainer(actor);
+            } else if (actor->actorType == 259) {
+                guard_paad* paad = actor->paad;
+                paad->tied_sphere = 0;
+            }
+        }
+    }
+}
+
 #define FADE_LIMIT 5
 void collisionCode(void) { 
     actorData* actor = (actorData*)CurrentActorPointer_0;
@@ -65,6 +84,14 @@ void collisionCode(void) {
         actor->noclip = 1;
         if (paad) {
             paad->fade_countdown = FADE_LIMIT;
+        }
+        if (collisiondrawmode != 2) {
+            actor->obj_props_bitfield &= 0xFFFF7FFF;
+            if (collisiondrawmode == 0) {
+                actor->shadow_intensity = 120;
+            } else {
+                actor->shadow_intensity = 50;
+            }
         }
     }
     if (paad) {
@@ -94,7 +121,5 @@ void collisionCode(void) {
             }
         }
     }
-    actor->obj_props_bitfield &= 0xFFFF7FFF;
-    actor->shadow_intensity = 120;
     renderActor(CurrentActorPointer_0,0);
 }

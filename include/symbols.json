@@ -2888,6 +2888,11 @@
 			"name":"altCollisionEnabled",
 			"address":"0x807FFF62",
 			"size_comment":"u8"
+		},
+		{
+			"name":"collisiondrawmode",
+			"address":"0x807FFF63",
+			"size_comment":"u8"
 		}
 	],
 	"code":[
@@ -3359,6 +3364,12 @@
 			"name":"guardStoreHookWrite",
 			"versions":{
 				"us":"0x806AE4AC"
+			}
+		},
+		{
+			"name":"guardLightHookWrite",
+			"versions":{
+				"us":"0x806AE4C4"
 			}
 		}
 	]

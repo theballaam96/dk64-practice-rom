@@ -1082,3 +1082,10 @@ typedef struct dynamicWatchStruct {
 	/* 0x006 */ char watch_index;
 	/* 0x007 */ char used;
 } dynamicWatchStruct;
+
+typedef struct guard_paad {
+    /* 0x000 */ char unk_00[0x3C];
+    /* 0x03C */ actorData* tied_sphere;
+    /* 0x040 */ float sphere_x;
+    /* 0x044 */ float sphere_z;
+} guard_paad;

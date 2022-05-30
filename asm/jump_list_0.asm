@@ -1,2 +1,2 @@
-.headersize 0x7FFFF400 ; Same for both JP/US
-.org customBootCodeStart
+.headersize customCodeStart - 0x2000000
+.org customCodeStart
