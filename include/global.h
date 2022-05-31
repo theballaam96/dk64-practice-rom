@@ -214,6 +214,7 @@ extern void startTest(void);
 extern void loadSettings(void);
 extern void saveSettings(void);
 extern void resetSettings(void);
+extern void controlLightning(void);
 
 extern void spawnOverlay(void);
 extern void closeOverlay(void);

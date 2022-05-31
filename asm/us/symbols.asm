@@ -6,9 +6,9 @@
 	Stats:
 		Functions: 123/123(100.0%)
 		Vanilla Vars: 168/168(100.0%)
-		Hack Vars: 114/114(100.0%)
+		Hack Vars: 115/115(100.0%)
 		Code: 60/60(100.0%)
-		Overall: 465/465(100.0%)
+		Overall: 466/466(100.0%)
 */
 
 //functions
@@ -421,6 +421,7 @@
 .definelabel doubleBeaverEnabledBitfield, 0x807FFF8C // u8
 .definelabel altCollisionEnabled, 0x807FFF62 // u8
 .definelabel collisiondrawmode, 0x807FFF63 // u8
+.definelabel disablelightning, 0x807FFF64 // u8
 
 // Code
 .definelabel debugColumnLoop, 0x80731F78

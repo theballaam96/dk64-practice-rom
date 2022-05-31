@@ -197,9 +197,22 @@ void toggleConsole(void) {
 	openHackVarsMenu();
 }
 
+void lightning_handle(int disable) {
+	if (
+		(CurrentMap == 0x6F) || // Pufftoss
+		(CurrentMap == 8) || // Japes Dillo
+		(CurrentMap == 0x57) || // Castle
+		(CurrentMap == 0xC7) // King Kut Out
+	) {
+		actorData* lzcontroller = (actorData*)findActorWithType(0xC);
+		char* lzpaad = (char*)lzcontroller->paad;
+		*(char*)(lzpaad) = 3 - disable;
+	}
+}
+
 void controlLightning(void) {
 	if (disablelightning) {
-
+		lightning_handle(TimerData.Mode != 1);
 	}
 }
 
@@ -214,9 +227,11 @@ void toggleSetting(void) {
 		spawnOverlay();
 	}
 	if (hack_addr[pos] == (char*)&disablelightning) {
-		if (disablelightning) {
-			
+		int handle_byte = 0;
+		if (TimerData.Mode != 1) {
+			handle_byte = disablelightning;
 		}
+		lightning_handle(handle_byte);
 	}
 	openHackVarsMenu();
 }
@@ -236,12 +251,13 @@ static const int hack_functions[] = {
 	(int)&toggleConsole,
 	(int)&toggleSetting,
 	(int)&toggleSetting,
+	(int)&toggleSetting,
 };
 
 const Screen hack_struct = {
 	.TextArray = (int*)hack_array,
 	.FunctionArray = hack_functions,
-	.ArrayItems = 14,
+	.ArrayItems = 15,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 3
 };

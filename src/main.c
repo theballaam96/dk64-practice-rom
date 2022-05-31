@@ -124,6 +124,7 @@ void cFuncLoop(void) {
 	writeFlagsToLog(); // Constant
 	changeTimer_spawnTimer(); // ConvertTimerCountdown > 0
 	controlFairyViewer(); // FairyViewerOpen
+	controlLightning();
 };
 
 void arcadeFuncLoop(void) {
