@@ -166,7 +166,7 @@ int* displayInfo(int* dl) {
 	} else {
 		if (!watchActive && (ROM_VERSION == 0)) {
 			dl = drawTextContainer(dl, 1, 25, 525, "DK64 PRACTICE ROM", 0xFF, 0xFF, 0xFF, 0xFF, 0);
-			dl = drawTextContainer(dl, 1, 25, 550, "VERSION 1.4.3", 0xFF, 0xFF, 0xFF, 0xFF, 0);		
+			dl = drawTextContainer(dl, 1, 25, 550, "VERSION 1.4.3 DEV", 0xFF, 0xFF, 0xFF, 0xFF, 0);		
 		}
 		dl = drawTextContainer(dl, 6, 25, 80, INFO_TEXT, 0xFF, 0, 0, 0xFF, 0);
 		if (ROM_VERSION == 0) {
