@@ -4,17 +4,20 @@ static char* fixes_true[] = {
 	"{ AUTO-LOAD SANDSTORM",
 	"{ AUTO-LOAD GALLEON WATER",
 	"{ AUTO-LOAD FUNGI NIGHTTIME",
-	"{ AUTO-LOAD GIANT KOSHA TIMER"
+	"{ AUTO-LOAD GIANT KOSHA TIMER",
+	"} OBJECT CHANGE PARENT CHECKS"
 };
 
 static char* fixes_false[] = {
 	"} AUTO-LOAD SANDSTORM",
 	"} AUTO-LOAD GALLEON WATER",
 	"} AUTO-LOAD FUNGI NIGHTTIME",
-	"} AUTO-LOAD GIANT KOSHA TIMER"
+	"} AUTO-LOAD GIANT KOSHA TIMER",
+	"{ OBJECT CHANGE PARENT CHECKS"
 };
 
 static char* fixes_array[] = {
+	0,
 	0,
 	0,
 	0,
@@ -48,12 +51,13 @@ static const int fixes_functions[] = {
 	(int)&toggleObjectScriptLoads,
 	(int)&toggleObjectScriptLoads,
 	(int)&toggleObjectScriptLoads,
+	(int)&toggleObjectScriptLoads,
 };
 
 const Screen fixes_struct = {
 	.TextArray = (int*)fixes_array,
 	.FunctionArray = fixes_functions,
-	.ArrayItems = 4,
+	.ArrayItems = 5,
 	.ParentScreen = ACTIVEMENU_SCREEN_SETTINGS_ROOT,
 	.ParentPosition = 4
 };

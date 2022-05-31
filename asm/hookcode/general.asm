@@ -513,4 +513,17 @@
 		GuardSphereLightCode_Finish:
 			J 	guardLightHookWrite+0x8
 			NOP
+
+	ParentCheckBypass:
+		LUI 	a2, hi(scriptsNotAutoloading)
+		LBU 	a2, lo(scriptsNotAutoloading) (a2)
+		ANDI 	a2, a2, 0x10
+		BEQZ 	a2, ParentCheckBypass_Finish
+		ADDIU 	v0, r0, 0
+		JAL 	checkParent
+		LH 		a2, 0x6 (s1)
+
+		ParentCheckBypass_Finish:
+			J 		parentCheckBypassHookWrite+0x8
+			NOP
 		

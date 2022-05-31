@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 121/123(98.37%)
+		Functions: 121/124(97.58%)
 		Vanilla Vars: 166/168(98.81%)
 		Hack Vars: 115/115(100.0%)
-		Code: 58/60(96.67%)
-		Overall: 460/466(98.71%)
+		Code: 58/61(95.08%)
+		Overall: 460/468(98.29%)
 */
 
 //functions
@@ -24,6 +24,7 @@
 .definelabel getTimestamp, 0x800062C0
 .definelabel dmaFileTransfer, 0x800004CC
 .definelabel deleteActor, 0x80671A04
+//.definelabel checkParent
 .definelabel spawnActor, 0x806713D8
 .definelabel spawnTextOverlay, 0x806967D4
 .definelabel dk_sqrt, 0x8000AE70
@@ -484,6 +485,7 @@
 .definelabel doubleBeaverHookWrite, 0x806A7388
 //.definelabel guardStoreHookWrite
 //.definelabel guardLightHookWrite
+//.definelabel parentCheckBypassHookWrite
 
 .definelabel customCodeStart, 0x805d0e00
 .definelabel customCodeUpper, 0x805d
