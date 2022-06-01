@@ -1,5 +1,24 @@
 {
     "files.associations": {
-        "common.h": "c"
+        "common.h": "c",
+        "ed64_x.h": "c",
+        "pi.h": "c",
+        "sd_host.h": "c",
+        "util.h": "c",
+        "gbi.h": "c",
+        "message.h": "c",
+        "n64.h": "c",
+        "io.h": "c",
+        "sd.h": "c",
+        "ed64_io.h": "c",
+        "iodev.h": "c",
+        "hb_io.h": "c",
+        "param.h": "c",
+        "wordsize.h": "c",
+        "types.h": "c",
+        "struct_timespec.h": "c",
+        "clock_t.h": "c",
+        "struct_itimerspec.h": "c",
+        "time_t.h": "c"
     }
 }

@@ -431,6 +431,24 @@
 		  }
 	   },
 	   {
+		   "name":"__osPiGetAccess",
+		   "versions":{
+			   "us":"0x8000BB00"
+		   }
+	   },
+	   {
+		   "name":"__osPiRelAccess",
+		   "versions":{
+			   "us":"0x8000BB44"
+		   }
+	   },
+	   {
+		   "name":"__osEventStateTab",
+		   "versions":{
+			   "us":"0x80013B10"
+		   }
+	   },
+	   {
 		  "name":"__osDisableInt",
 		  "versions":{
 			 "us":"0x80009020",

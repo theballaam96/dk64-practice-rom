@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 121/124(97.58%)
+		Functions: 121/127(95.28%)
 		Vanilla Vars: 166/168(98.81%)
 		Hack Vars: 115/115(100.0%)
 		Code: 58/61(95.08%)
-		Overall: 460/468(98.29%)
+		Overall: 460/471(97.66%)
 */
 
 //functions
@@ -66,6 +66,9 @@
 .definelabel __osRecvMesg, 0x800049A0
 .definelabel __osEPiStartDMA, 0x80007180
 .definelabel __osPiRawReadIo, 0x800048B0
+//.definelabel __osPiGetAccess
+//.definelabel __osPiRelAccess
+//.definelabel __osEventStateTab
 .definelabel __osDisableInt, 0x80009210
 .definelabel __osRestoreInt, 0x80009230
 .definelabel __osVirtualToPhysical, 0x80009390
@@ -487,7 +490,7 @@
 //.definelabel guardLightHookWrite
 //.definelabel parentCheckBypassHookWrite
 
-.definelabel customCodeStart, 0x805d5600
+.definelabel customCodeStart, 0x805d2600
 .definelabel customCodeUpper, 0x805d
-.definelabel customCodeLower, 0x5600
-.definelabel customCodeSize, 0x23000
+.definelabel customCodeLower, 0x2600
+.definelabel customCodeSize, 0x26000

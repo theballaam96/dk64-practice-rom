@@ -1,6 +1,8 @@
 #ifndef _ULTRA64_H_
 #define _ULTRA64_H_
 
+#define _FINALROM
+
 #include "./ultra64/abi.h"
 #include "./ultra64/gbi.h"
 #include "./ultra64/gu.h"

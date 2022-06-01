@@ -3,33 +3,33 @@
 		{
 			"name":"customCodeStart",
 			"versions":{
-				"us":"0x805d7e00",
-				"pal":"0x805d0e00",
-				"jp":"0x805d5600"
+				"us":"0x805d4e00",
+				"pal":"0x805cde00",
+				"jp":"0x805d2600"
 			}
 		},
 		{
 			"name":"customCodeUpper",
 			"versions":{
 				"us":"0x805d",
-				"pal":"0x805d",
+				"pal":"0x805c",
 				"jp":"0x805d"
 			}
 		},
 		{
 			"name":"customCodeLower",
 			"versions":{
-				"us":"0x7e00",
-				"pal":"0xe00",
-				"jp":"0x5600"
+				"us":"0x4e00",
+				"pal":"0xde00",
+				"jp":"0x2600"
 			}
 		},
 		{
 			"name":"customCodeSize",
 			"versions":{
-				"us":"0x23000",
-				"pal":"0x23000",
-				"jp":"0x23000"
+				"us":"0x26000",
+				"pal":"0x26000",
+				"jp":"0x26000"
 			}
 		}
 	]

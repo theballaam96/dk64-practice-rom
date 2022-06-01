@@ -1,5 +1,3 @@
-#define NULL 0
-
 // N64 Buttons
 #define L_Button 0x0020
 #define D_Up 0x0800
