@@ -1,59 +1,5 @@
 #include "../../include/common.h"
 
-static const char viewed_lag[] = "} LAG";
-static const char viewed_avglag[] = "} AVERAGE LAG";
-static const char viewed_speed[] = "} SPEED";
-static const char viewed_timer[] = "} TIMER";
-static const char viewed_gktimer[] = "} GIANT KOSHA TIMER";
-static const char viewed_movement[] = "} MOVEMENT STATE";
-static const char viewed_angle[] = "} ANGLE";
-static const char viewed_input[] = "} INPUT";
-static const char viewed_heldactor[] = "} HELD ACTOR";
-static const char viewed_isg[] = "} INTRO STORY TIMER";
-static const char viewed_position[] = "} POSITION";
-static const char viewed_storedposition1[] = "} STORED POSITION 1";
-static const char viewed_storedposition2[] = "} STORED POSITION 2";
-static const char viewed_floor[] = "} FLOOR";
-static const char viewed_phaseassistant[] = "} PHASEWALK ASSISTANT";
-static const char viewed_avgspd[] = "} AVERAGE SPEED";
-static const char viewed_igt[] = "} IN-GAME TIME";
-static const char viewed_anglepoint[] = "} ANGLE TO POINT";
-static const char viewed_fakekey[] = "} KEY 8";
-static const char viewed_prodroom[] = "} PRODUCTION ROOM";
-static const char viewed_objsignals[] = "} OBJECT SIGNALS COUNT";
-static const char viewed_delayedkills[] = "} DELAYED KILLS COUNT";
-static const char viewed_lockStack[] = "} LOCK STACK COUNT";
-static const char viewed_scriptRun[] = "} SCRIPTS RUNNING COUNT";
-static const char viewed_loadedActorCount[] = "} LOADED ACTOR COUNT";
-static const char viewed_fairy[] = "} FAIRY VIEWER";
-
-static const char change_lag[] = "{ LAG";
-static const char change_avglag[] = "{ AVERAGE LAG";
-static const char change_speed[] = "{ SPEED";
-static const char change_timer[] = "{ TIMER";
-static const char change_gktimer[] = "{ GIANT KOSHA TIMER";
-static const char change_movement[] = "{ MOVEMENT STATE";
-static const char change_angle[] = "{ ANGLE";
-static const char change_input[] = "{ INPUT";
-static const char change_heldactor[] = "{ HELD ACTOR";
-static const char change_isg[] = "{ INTRO STORY TIMER";
-static const char change_position[] = "{ POSITION";
-static const char change_storedposition1[] = "{ STORED POSITION 1";
-static const char change_storedposition2[] = "{ STORED POSITION 2";
-static const char change_floor[] = "{ FLOOR";
-static const char change_phaseassistant[] = "{ PHASEWALK ASSISTANT";
-static const char change_avgspd[] = "{ AVERAGE SPEED";
-static const char change_igt[] = "{ IN-GAME TIME";
-static const char change_anglepoint[] = "{ ANGLE TO POINT";
-static const char change_fakekey[] = "{ KEY 8";
-static const char change_prodroom[] = "{ PRODUCTION ROOM";
-static const char change_objsignals[] = "{ OBJECT SIGNALS COUNT";
-static const char change_delayedkills[] = "{ DELAYED KILLS COUNT";
-static const char change_lockStack[] = "{ LOCK STACK COUNT";
-static const char change_scriptRun[] = "{ SCRIPTS RUNNING COUNT";
-static const char change_loadedActorCount[] = "{ LOADED ACTOR COUNT";
-static const char change_fairy[] = "{ FAIRY VIEWER";
-
 static const char phasereason_0[] = "SUCCESSFUL"; // Phasewalk has been successful
 static const char phasereason_1[] = "LOW MAG DIFF (DOWN TOO SLOW)"; // Down flick too slow, not satisfying the 14-magnitude difference rule
 static const char phasereason_2[] = "POTENTIALLY INSUFFICIENT SPEED"; // No fast acceleration/Not enough power in fast accel
@@ -83,12 +29,6 @@ static const char fakeprodroom_3[] = "NOT LOADED";
 static const char fakeprodroom_4[] = "PREPARING BEING FAKE";
 static const char fakeprodroom_5[] = "FAKE";
 static const char fakeprodroom_6[] = "REAL";
-
-static const char watches_player_indexes[] = {11,3,17,7,19,14,6,9,12,13};
-static const char watches_timers_indexes[] = {4,5,10,18};
-static const char watches_sysenv_indexes[] = {1,2,8,22,23,24,25,26};
-static const char watches_assist_indexes[] = {16,-1};
-static const char watches_fake_indexes[] = {20,21};
 
 static int watch_cache_slot0[] = {0,0,0,0};
 static int watch_cache_slot1[] = {0,0,0,0};
@@ -183,140 +123,6 @@ void checkWatchCapacity(void) {
 	}
 }
 
-static const char* watch_listed_array[] = {
-	change_lag,
-	change_avglag,
-	change_speed,
-	change_timer,
-	change_gktimer,
-	change_movement,
-	change_angle,
-	change_input,
-	change_heldactor,
-	change_isg,
-	change_position,
-	change_storedposition1,
-	change_storedposition2,
-	change_floor,
-	0,
-	change_phaseassistant,
-	change_avgspd,
-	change_igt,
-	change_anglepoint,
-	change_fakekey,
-	change_prodroom,
-	change_objsignals,
-	change_delayedkills,
-	change_lockStack,
-	change_scriptRun,
-	change_loadedActorCount,
-	0,
-	change_fairy,
-};
-
-static const char* watch_viewed_array[] = {
-	viewed_lag,
-	viewed_avglag,
-	viewed_speed,
-	viewed_timer,
-	viewed_gktimer,
-	viewed_movement,
-	viewed_angle,
-	viewed_input,
-	viewed_heldactor,
-	viewed_isg,
-	viewed_position,
-	viewed_storedposition1,
-	viewed_storedposition2,
-	viewed_floor,
-	0,
-	viewed_phaseassistant,
-	viewed_avgspd,
-	viewed_igt,
-	viewed_anglepoint,
-	viewed_fakekey,
-	viewed_prodroom,
-	viewed_objsignals,
-	viewed_delayedkills,
-	viewed_lockStack,
-	viewed_scriptRun,
-	viewed_loadedActorCount,
-	0,
-	viewed_fairy,
-};
-
-static const char* watch_change_array[] = {
-	change_lag,
-	change_avglag,
-	change_speed,
-	change_timer,
-	change_gktimer,
-	change_movement,
-	change_angle,
-	change_input,
-	change_heldactor,
-	change_isg,
-	change_position,
-	change_storedposition1,
-	change_storedposition2,
-	change_floor,
-	0,
-	change_phaseassistant,
-	change_avgspd,
-	change_igt,
-	change_anglepoint,
-	change_fakekey,
-	change_prodroom,
-	change_objsignals,
-	change_delayedkills,
-	change_lockStack,
-	change_scriptRun,
-	change_loadedActorCount,
-	0,
-	change_fairy,
-};
-
-static const char* watch_player_array[] = {
-	change_position,
-	change_speed,
-	change_avgspd,
-	change_angle,
-	change_anglepoint,
-	change_floor,
-	change_movement,
-	change_heldactor,
-	change_storedposition1,
-	change_storedposition2,
-};
-
-static const char* watch_timers_array[] = {
-	change_timer,
-	change_gktimer,
-	change_isg,
-	change_igt,
-};
-
-static const char* watch_sysenv_array[] = {
-	change_lag,
-	change_avglag,
-	change_input,
-	change_objsignals,
-	change_delayedkills,
-	change_lockStack,
-	change_scriptRun,
-	change_loadedActorCount,
-};
-
-static const char* watch_assist_array[] = {
-	change_phaseassistant,
-	change_fairy,
-};
-
-static const char* watch_fake_array[] = {
-	change_fakekey,
-	change_prodroom,
-};
-
 static char float_str[22] = {};
 //static float test_floats[2] = {};
 
@@ -324,8 +130,6 @@ void openWatchMenu(void) {
 	changeMenu(ACTIVEMENU_SCREEN_WATCH_ROOT);
 };
 
-#define INPUT_VIEWER_INDEX 7
-#define FAIRY_VIEWER_INDEX 27
 void updateWatchText(void) {
 	int _index;
 	int watch_index = 0;
@@ -339,16 +143,16 @@ void updateWatchText(void) {
 		}
 	}
 	if (InputDisplayOpen) {
-		watch_listed_array[INPUT_VIEWER_INDEX] = watch_viewed_array[INPUT_VIEWER_INDEX];
+		watch_listed_array[WATCH_INPUT_INDEX - 1] = watch_viewed_array[WATCH_INPUT_INDEX - 1];
 	} else {
-		watch_listed_array[INPUT_VIEWER_INDEX] = watch_change_array[INPUT_VIEWER_INDEX];
+		watch_listed_array[WATCH_INPUT_INDEX - 1] = watch_change_array[WATCH_INPUT_INDEX - 1];
 	}
 	if (FairyViewerOpen) {
-		watch_listed_array[FAIRY_VIEWER_INDEX] = watch_viewed_array[FAIRY_VIEWER_INDEX];
+		watch_listed_array[WATCH_FAIRY_INDEX - 1] = watch_viewed_array[WATCH_FAIRY_INDEX - 1];
 	} else {
-		watch_listed_array[FAIRY_VIEWER_INDEX] = watch_change_array[FAIRY_VIEWER_INDEX];
+		watch_listed_array[WATCH_FAIRY_INDEX - 1] = watch_change_array[WATCH_FAIRY_INDEX - 1];
 	}
-	watch_assist_array[1] = watch_listed_array[FAIRY_VIEWER_INDEX];
+	watch_assist_array[1] = watch_listed_array[WATCH_FAIRY_INDEX - 1];
 	for (int i = 0; i < sizeof(watches_player_indexes); i++) {
 		watch_index = (int)watches_player_indexes[i] - 1;
 		if (watch_index > -1) {
@@ -579,91 +383,9 @@ const Screen watch_struct = {
 	.AccessArray = watch_access,
 };
 
-static const int watch_player_functions[] = {
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-};
-
-const Screen watch_player_struct = {
-	.TextArray = (int*)watch_player_array,
-	.FunctionArray = watch_player_functions,
-	.ArrayItems = 10,
-	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
-	.ParentPosition = 0
-};
-
-static const int watch_timers_functions[] = {
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-};
-
-const Screen watch_timers_struct = {
-	.TextArray = (int*)watch_timers_array,
-	.FunctionArray = watch_timers_functions,
-	.ArrayItems = 4,
-	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
-	.ParentPosition = 1
-};
-
-static const int watch_sysenv_functions[] = {
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&toggleInputDisplay,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-	(int)&setWatch,
-};
-
-const Screen watch_sysenv_struct = {
-	.TextArray = (int*)watch_sysenv_array,
-	.FunctionArray = watch_sysenv_functions,
-	.ArrayItems = 8,
-	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
-	.ParentPosition = 2
-};
-
-static const int watch_assist_functions[] = {
-	(int)&togglePhaseAssistant,
-	(int)&fairyViewerContainerToggle,
-};
-
-static const char watch_assist_access[] = {
+const char watch_assist_access[] = {
 	ACCESS_US | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
 	ACCESS_US | ACCESS_PAL | ACCESS_JP | ACCESS_N64 | ACCESS_WIIU | ACCESS_EMU,
-};
-
-const Screen watch_assist_struct = {
-	.TextArray = (int*)watch_assist_array,
-	.FunctionArray = watch_assist_functions,
-	.ArrayItems = 2,
-	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
-	.ParentPosition = 4,
-	.hasAccessArray = 1,
-	.AccessArray = watch_assist_access
-};
-
-static const int watch_fake_functions[] = {
-	(int)&setWatch,
-	(int)&setWatch,
-};
-
-const Screen watch_fake_struct = {
-	.TextArray = (int*)watch_fake_array,
-	.FunctionArray = watch_fake_functions,
-	.ArrayItems = 2,
-	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
-	.ParentPosition = 5
 };
 
 void clampWatchFloats(void) {
@@ -834,18 +556,18 @@ void handleWatch(void) {
 				watch_present = 1;
 				colorWatch(0xFF,0xFF,0xFF,j);
 				switch(WatchIndex[j]) {
-					case 1:
+					case WATCH_LAG_INDEX:
 						{
 							// Lag
-							if ((watch_cache_array[j][1] != StoredLag) || (watch_cache_array[j][0] != 1)) {
+							if ((watch_cache_array[j][1] != StoredLag) || (watch_cache_array[j][0] != WATCH_LAG_INDEX)) {
 								headerFormatter("LAG: ",0,StoredLag,INT_TYPE,j);
 								//dk_strFormat((char *)WatchTextSpace[j],"LAG: %d",StoredLag);
 							}
-							watch_cache_array[j][0] = 1;
+							watch_cache_array[j][0] = WATCH_LAG_INDEX;
 							watch_cache_array[j][1] = StoredLag;
 						}
 						break;
-					case 2:
+					case WATCH_AVGLAG_INDEX:
 						{
 							// Average Lag
 							int _lagsum = 0;
@@ -853,17 +575,17 @@ void handleWatch(void) {
 								_lagsum += PreviousLagArray[k];
 							}
 							AverageLag = (float)(_lagsum) / 16;
-							if ((watch_cache_array[j][1] != _lagsum) || (watch_cache_array[j][0] != 2)) {
+							if ((watch_cache_array[j][1] != _lagsum) || (watch_cache_array[j][0] != WATCH_AVGLAG_INDEX)) {
 								headerFormatter("AVERAGE LAG: ",AverageLag,0,FLOAT_TYPE,j);
 								// floatToString(AverageLag,float_str,Precision);
 								// stringConcat((char *)WatchTextSpace[j],"AVERAGE LAG: ",float_str);
 								//dk_strFormat((char *)WatchTextSpace[j],"AVERAGE LAG: %f",AverageLag);
 							}
-							watch_cache_array[j][0] = 2;
+							watch_cache_array[j][0] = WATCH_AVGLAG_INDEX;
 							watch_cache_array[j][1] = _lagsum;
 						}
 						break;
-					case 3:
+					case WATCH_SPEED_INDEX:
 						{
 							// Speed
 							float _speed = 0;
@@ -876,14 +598,14 @@ void handleWatch(void) {
 									}
 								}
 							}
-							if ((watch_cache_slotf[j] != _speed) || (watch_cache_array[j][0] != 3)) {
+							if ((watch_cache_slotf[j] != _speed) || (watch_cache_array[j][0] != WATCH_SPEED_INDEX)) {
 								headerFormatter("SPEED: ",_speed,0,FLOAT_TYPE,j);
 							}
-							watch_cache_array[j][0] = 3;
+							watch_cache_array[j][0] = WATCH_SPEED_INDEX;
 							watch_cache_slotf[j] = _speed;
 						}
 						break;
-					case 4:
+					case WATCH_TIMER_INDEX:
 						{
 							// Timer
 							float _time = 0;
@@ -892,18 +614,18 @@ void handleWatch(void) {
 							_time = _time / HERTZ;
 							_timemins = (int)(float)(_time / HERTZ);
 							_time = _time - (60 * _timemins);
-							if ((watch_cache_array[j][1] != TimerData.TimerPostReduction) || (watch_cache_array[j][0] != 4)) {
+							if ((watch_cache_array[j][1] != TimerData.TimerPostReduction) || (watch_cache_array[j][0] != WATCH_TIMER_INDEX)) {
 								if (_time >= 10) {
 									dk_strFormat((char *)WatchTextSpace[j],"TIME: %2d:%f",_timemins,_time);
 								} else {
 									dk_strFormat((char *)WatchTextSpace[j],"TIME: %2d:0%f",_timemins,_time);
 								}
 							}
-							watch_cache_array[j][0] = 4;
+							watch_cache_array[j][0] = WATCH_TIMER_INDEX;
 							watch_cache_array[j][1] = TimerData.TimerPostReduction;
 						}
 						break;
-					case 5:
+					case WATCH_GKTIMER_INDEX:
 						{
 							// GK Timer
 							short _chunk = 0;
@@ -914,10 +636,10 @@ void handleWatch(void) {
 										GiantKoshaTimerValue = GiantKoshaTimerAddress->timer;
 									}
 								}
-								if ((watch_cache_array[j][1] != GiantKoshaTimerValue) || (watch_cache_array[j][0] != 5)) {
+								if ((watch_cache_array[j][1] != GiantKoshaTimerValue) || (watch_cache_array[j][0] != WATCH_GKTIMER_INDEX)) {
 									headerFormatter("KOSHA TIMER: ",0,GiantKoshaTimerValue,INT_TYPE,j);
 								}
-								watch_cache_array[j][0] = 5;
+								watch_cache_array[j][0] = WATCH_GKTIMER_INDEX;
 								watch_cache_array[j][1] = GiantKoshaTimerValue;
 								if (GiantKoshaTimerValue < 51) {
 									colorWatch(0x8B,0x00,0x00,j);
@@ -938,54 +660,54 @@ void handleWatch(void) {
 									}
 								}
 							} else {
-								if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != 5)) {
+								if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != WATCH_GKTIMER_INDEX)) {
 									stringConcat((char *)WatchTextSpace[j],"THIS AIN'T CAVES BUD","");
 									//dk_strFormat((char *)WatchTextSpace[j],"THIS AIN'T CAVES BUD");
 								}
-								watch_cache_array[j][0] = 5;
+								watch_cache_array[j][0] = WATCH_GKTIMER_INDEX;
 								watch_cache_array[j][1] = -1;
 							};
 						}
 						break;
-					case 6:
+					case WATCH_MOVEMENT_INDEX:
 						{
 							// Movement
 							int _movement_state = 0;
 							if (Player) {
 								_movement_state = Player->control_state;
-								if ((watch_cache_array[j][1] != _movement_state) || (watch_cache_array[j][0] != 6)) {
+								if ((watch_cache_array[j][1] != _movement_state) || (watch_cache_array[j][0] != WATCH_MOVEMENT_INDEX)) {
 									dk_strFormat((char *)WatchTextSpace[j],"MOVEMENT STATE: 0x%X",_movement_state);
 								}
-								watch_cache_array[j][0] = 6;
+								watch_cache_array[j][0] = WATCH_MOVEMENT_INDEX;
 								watch_cache_array[j][1] = _movement_state;
 							} else {
-								watch_cache_array[j][0] = 6;
+								watch_cache_array[j][0] = WATCH_MOVEMENT_INDEX;
 								watch_cache_array[j][1] = -1;
 							};
 						}
 						break;
-					case 7:
+					case WATCH_ANGLE_INDEX:
 						{
 							// Angle
 							float _angle = 0;
 							if (Player) {
 								_angle = Player->facing_angle % 4096;
 								_angle = (_angle / 4096) * 360;
-								if ((watch_cache_array[j][1] != Player->facing_angle) || (watch_cache_array[j][0] != 7)) {
+								if ((watch_cache_array[j][1] != Player->facing_angle) || (watch_cache_array[j][0] != WATCH_ANGLE_INDEX)) {
 									headerFormatter("ANGLE: ",_angle,0,FLOAT_TYPE,j);
 								}
-								watch_cache_array[j][0] = 7;
+								watch_cache_array[j][0] = WATCH_ANGLE_INDEX;
 								watch_cache_array[j][1] = Player->facing_angle;
 								if (Player->facing_angle >= 4096) {
 									colorWatch(0xFF,0x45,0x00,j);
 								};
 							} else {
-								watch_cache_array[j][0] = 7;
+								watch_cache_array[j][0] = WATCH_ANGLE_INDEX;
 								watch_cache_array[j][1] = -1;
 							};
 						}
 						break;
-					case 9:
+					case WATCH_HELDACTOR_INDEX:
 						{
 							// Held Actor
 							short held_actor_index = 0;
@@ -995,22 +717,22 @@ void handleWatch(void) {
 									if (isAddressActor(Player->held_actor)) {
 										colorWatch(0xFF,0x45,0x00,j);
 									}
-									if ((watch_cache_array[j][1] != held_actor_index) || (watch_cache_array[j][0] != 9)) {
+									if ((watch_cache_array[j][1] != held_actor_index) || (watch_cache_array[j][0] != WATCH_HELDACTOR_INDEX)) {
 										headerFormatter("HELD ACTOR: ",0,held_actor_index,INT_TYPE,j);
 									}
-									watch_cache_array[j][0] = 9;
+									watch_cache_array[j][0] = WATCH_HELDACTOR_INDEX;
 									watch_cache_array[j][1] = held_actor_index;
 								} else {
-									if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != 9)) {
+									if ((watch_cache_array[j][1] != -1) || (watch_cache_array[j][0] != WATCH_HELDACTOR_INDEX)) {
 										stringConcat((char *)WatchTextSpace[j],"NO ACTOR HELD","");
 									}
-									watch_cache_array[j][0] = 9;
+									watch_cache_array[j][0] = WATCH_HELDACTOR_INDEX;
 									watch_cache_array[j][1] = -1;
 								};
 							};
 						}
 						break;
-					case 10:
+					case WATCH_ISG_INDEX:
 						{
 							// ISG Timer
 							float _isgtime;
@@ -1045,18 +767,18 @@ void handleWatch(void) {
 							_isgsecs = _isgtime / 100;
 							_isgmins = (int)(float)(_isgsecs / HERTZ);
 							_isgsecs = _isgsecs - (60 * _isgmins);
-							if ((watch_cache_array[j][1] != ISGTimer) || (watch_cache_array[j][0] != 10)) {
+							if ((watch_cache_array[j][1] != ISGTimer) || (watch_cache_array[j][0] != WATCH_ISG_INDEX)) {
 								if (_isgsecs >= 10) {
 									dk_strFormat((char *)WatchTextSpace[j], "ISG TIME: %d:%f",_isgmins,_isgsecs);
 								} else {
 									dk_strFormat((char *)WatchTextSpace[j], "ISG TIME: %d:0%f",_isgmins,_isgsecs);
 								}
 							}
-							watch_cache_array[j][0] = 10;
+							watch_cache_array[j][0] = WATCH_ISG_INDEX;
 							watch_cache_array[j][1] = ISGTimer;
 						}
 						break;
-					case 11:
+					case WATCH_POSITION_INDEX:
 						{
 							int _x = 0;
 							int _y = 0;
@@ -1066,7 +788,7 @@ void handleWatch(void) {
 								_y = Player->yPos;
 								_z = Player->zPos;
 							}
-							if (((watch_cache_array[j][1] != _x) || (watch_cache_array[j][2] != _y) || (watch_cache_array[j][3] != _z)) || (watch_cache_array[j][0] != 11)) {
+							if (((watch_cache_array[j][1] != _x) || (watch_cache_array[j][2] != _y) || (watch_cache_array[j][3] != _z)) || (watch_cache_array[j][0] != WATCH_POSITION_INDEX)) {
 								// intToStr(_x,float_str,0);
 								// stringConcat((char*)WatchTextSpace[j],"POSITION",float_str);
 								// intToStr(_y,float_str,0);
@@ -1075,13 +797,13 @@ void handleWatch(void) {
 								// stringConcat((char*)WatchTextSpace[j],(char*)WatchTextSpace[j],float_str);
 								dk_strFormat((char *)WatchTextSpace[j], "POSITION: %d, %d, %d",_x,_y,_z);
 							}
-							watch_cache_array[j][0] = 11;
+							watch_cache_array[j][0] = WATCH_POSITION_INDEX;
 							watch_cache_array[j][1] = _x;
 							watch_cache_array[j][2] = _y;
 							watch_cache_array[j][3] = _z;
 						}
 						break;
-					case 12:
+					case WATCH_STOREDPOSITION1_INDEX:
 						{
 							short xStored = 0;
 							short yStored = 0;
@@ -1095,16 +817,16 @@ void handleWatch(void) {
 									}
 								}
 							}
-							if (((watch_cache_array[j][1] != xStored) || (watch_cache_array[j][2] != yStored) || (watch_cache_array[j][3] != zStored)) || (watch_cache_array[j][0] != 12)) {
+							if (((watch_cache_array[j][1] != xStored) || (watch_cache_array[j][2] != yStored) || (watch_cache_array[j][3] != zStored)) || (watch_cache_array[j][0] != WATCH_STOREDPOSITION1_INDEX)) {
 								dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 1: %d, %d, %d",xStored,yStored,zStored);
 							}
-							watch_cache_array[j][0] = 12;
+							watch_cache_array[j][0] = WATCH_STOREDPOSITION1_INDEX;
 							watch_cache_array[j][1] = xStored;
 							watch_cache_array[j][2] = yStored;
 							watch_cache_array[j][3] = zStored;
 						}
 						break;
-					case 13:
+					case WATCH_STOREDPOSITION2_INDEX:
 						{
 							short xStored = 0;
 							short yStored = 0;
@@ -1118,29 +840,29 @@ void handleWatch(void) {
 									}
 								}
 							}
-							if (((watch_cache_array[j][1] != xStored) || (watch_cache_array[j][2] != yStored) || (watch_cache_array[j][3] != zStored)) || (watch_cache_array[j][0] != 13)) {
+							if (((watch_cache_array[j][1] != xStored) || (watch_cache_array[j][2] != yStored) || (watch_cache_array[j][3] != zStored)) || (watch_cache_array[j][0] != WATCH_STOREDPOSITION2_INDEX)) {
 								dk_strFormat((char *)WatchTextSpace[j], "STORED POSITION 2: %d, %d, %d",xStored,yStored,zStored);
 							}
-							watch_cache_array[j][0] = 13;
+							watch_cache_array[j][0] = WATCH_STOREDPOSITION2_INDEX;
 							watch_cache_array[j][1] = xStored;
 							watch_cache_array[j][2] = yStored;
 							watch_cache_array[j][3] = zStored;
 						}
 						break;
-					case 14:
+					case WATCH_FLOOR_INDEX:
 						{
 							float _floor = 0;
 							if (Player) {
 								_floor = Player->floor;
 							}
-							if ((watch_cache_slotf[j] != _floor) || (watch_cache_array[j][0] != 14)) {
+							if ((watch_cache_slotf[j] != _floor) || (watch_cache_array[j][0] != WATCH_FLOOR_INDEX)) {
 								headerFormatter("FLOOR: ",_floor,0,FLOAT_TYPE,j);
 							}
-							watch_cache_array[j][0] = 14;
+							watch_cache_array[j][0] = WATCH_FLOOR_INDEX;
 							watch_cache_slotf[j] = _floor;
 						}
 						break;
-					case 15:
+					case WATCH_SPAWNSNAG_INDEX:
 						// Snag Watches
 						{
 							int snag_list_index = ViewedSnagWatches[j];
@@ -1170,7 +892,7 @@ void handleWatch(void) {
 							if (_m2_index < 0) {
 								snag_state.spawned = -1;
 							}
-							if (((watch_cache_array[j][1] != snag_list_index) || (watch_cache_array[j][2] != CurrentMap) || (watch_cache_array[j][3] != snag_state.data)) || (watch_cache_array[j][0] != 15)) {
+							if (((watch_cache_array[j][1] != snag_list_index) || (watch_cache_array[j][2] != CurrentMap) || (watch_cache_array[j][3] != snag_state.data)) || (watch_cache_array[j][0] != WATCH_SPAWNSNAG_INDEX)) {
 								if (CurrentMap == _map) {
 									if (_m2_index > -1) {
 										if (snag_state.state) {
@@ -1192,23 +914,23 @@ void handleWatch(void) {
 									colorWatch(0xFF,0x45,0x00,j);
 								}
 							}
-							watch_cache_array[j][0] = 15;
+							watch_cache_array[j][0] = WATCH_SPAWNSNAG_INDEX;
 							watch_cache_array[j][1] = snag_list_index;
 							watch_cache_array[j][2] = CurrentMap;
 							watch_cache_array[j][3] = snag_state.data;
 						}
 						break;
-					case 16:
+					case WATCH_PHASEASSISTANT_INDEX:
 						// Phasewalk Assistant
 						{
-							if ((watch_cache_array[j][1] != PhaseChecker.reason_code) || (watch_cache_array[j][0] != 16)) {
+							if ((watch_cache_array[j][1] != PhaseChecker.reason_code) || (watch_cache_array[j][0] != WATCH_PHASEASSISTANT_INDEX)) {
 								stringConcat((char *)WatchTextSpace[j],"PWALK: ",(char*)phasereason_list[(int)PhaseChecker.reason_code]);
 							}
-							watch_cache_array[j][0] = 16;
+							watch_cache_array[j][0] = WATCH_PHASEASSISTANT_INDEX;
 							watch_cache_array[j][1] = PhaseChecker.reason_code;
 						}
 						break;
-					case 17:
+					case WATCH_AVGSPD_INDEX:
 						// Avg Speed
 						{
 							int _spdsum = 0;
@@ -1217,14 +939,14 @@ void handleWatch(void) {
 								_spdsum += past_speeds[k];
 							}
 							_avgspd = (float)(_spdsum) / 64;
-							if ((watch_cache_array[j][1] != _spdsum) || (watch_cache_array[j][0] != 17)) {
+							if ((watch_cache_array[j][1] != _spdsum) || (watch_cache_array[j][0] != WATCH_AVGSPD_INDEX)) {
 								headerFormatter("AVERAGE SPEED: ",_avgspd,0,FLOAT_TYPE,j);
 							}
-							watch_cache_array[j][0] = 17;
+							watch_cache_array[j][0] = WATCH_AVGSPD_INDEX;
 							watch_cache_array[j][1] = _spdsum;
 						}
 						break;
-					case 18:
+					case WATCH_IGT_INDEX:
 						// IGT
 						{
 							int state = IGT_STATE_LOCKED;
@@ -1241,17 +963,17 @@ void handleWatch(void) {
 							} else {
 								igt_secs = IGT;
 							}
-							if ((watch_cache_array[j][1] != igt_secs) || (watch_cache_array[j][0] != 18)) {
+							if ((watch_cache_array[j][1] != igt_secs) || (watch_cache_array[j][0] != WATCH_IGT_INDEX)) {
 								int igt_split_secs = igt_secs % HERTZ;
 								int igt_split_mins = ((igt_secs % 3600) - igt_split_secs) / 60;
 								int igt_split_hours = (igt_secs - (60 * igt_split_mins) - igt_split_secs) / 3600;
 								dk_strFormat((char *)WatchTextSpace[j], "IGT: %d:%02d:%02d",igt_split_hours,igt_split_mins,igt_split_secs);
 							}
-							watch_cache_array[j][0] = 18;
+							watch_cache_array[j][0] = WATCH_IGT_INDEX;
 							watch_cache_array[j][1] = igt_secs;
 						}
 						break;
-					case 19:
+					case WATCH_ANGLEPOINT_INDEX:
 						// Point Angle
 						{
 							if (player_ref_bool) {
@@ -1273,17 +995,17 @@ void handleWatch(void) {
 								// angle_units = angle_units % 4096;
 								// float angle_units_f = angle_units;
 								// float angle_rounded = angle_units_f * (360 / 4096);
-								if ((watch_cache_slotf[j] != angle) || (watch_cache_array[j][0] != 19)) {
+								if ((watch_cache_slotf[j] != angle) || (watch_cache_array[j][0] != WATCH_ANGLEPOINT_INDEX)) {
 									headerFormatter("ANGLE TO POINT: ",angle,0,FLOAT_TYPE,j);
 								}
 								watch_cache_slotf[j] = angle;
 							} else {
 								stringConcat((char *)WatchTextSpace[j],"ANGLE TO POINT: UNDEFINED","");
 							}
-							watch_cache_array[j][0] = 19;
+							watch_cache_array[j][0] = WATCH_ANGLEPOINT_INDEX;
 						}
 						break;
-					case 20:
+					case WATCH_FAKEKEY_INDEX:
 						// Fake Key
 						{
 							/*
@@ -1294,17 +1016,17 @@ void handleWatch(void) {
 								4 = Unknown
 							*/
 							int fakekey_status = getFakeKeyStatus(); 
-							if ((watch_cache_array[j][1] != fakekey_status) || (watch_cache_array[j][0] != 20)) {
+							if ((watch_cache_array[j][1] != fakekey_status) || (watch_cache_array[j][0] != WATCH_FAKEKEY_INDEX)) {
 								if (fakekey_status > 5) {
 									fakekey_status = 4; // Unknown
 								}
 								stringConcat((char *)WatchTextSpace[j],"KEY 8: ",(char*)fakekey_list[fakekey_status]);
 							}
-							watch_cache_array[j][0] = 20;
+							watch_cache_array[j][0] = WATCH_FAKEKEY_INDEX;
 							watch_cache_array[j][1] = fakekey_status;
 						}
 						break;
-					case 21:
+					case WATCH_PRODROOM_INDEX:
 						// Fake Production Room
 						{
 							/*
@@ -1318,63 +1040,63 @@ void handleWatch(void) {
 							*/
 							int fakeprod_status = getFakeProdRoomStatus(); 
 							if (fakeprod_status != 2) {
-								if ((watch_cache_array[j][1] != fakeprod_status) || (watch_cache_array[j][0] != 21)) {
+								if ((watch_cache_array[j][1] != fakeprod_status) || (watch_cache_array[j][0] != WATCH_PRODROOM_INDEX)) {
 									if (fakeprod_status > 6) {
 										fakeprod_status = 2; // Unknown
 									}
 									stringConcat((char *)WatchTextSpace[j],"PROD ROOM: ",(char*)fakeprodroom_list[fakeprod_status]);
 								}
-								watch_cache_array[j][0] = 21;
+								watch_cache_array[j][0] = WATCH_PRODROOM_INDEX;
 								watch_cache_array[j][1] = fakeprod_status;
 							}
 						}
 						break;
-					case 22:
+					case WATCH_OBJSIGNALS_INDEX:
 						// Object Signals Count
-						if ((watch_cache_array[j][1] != objectSignalsCountCopy) || (watch_cache_array[j][0] != 22)) {
+						if ((watch_cache_array[j][1] != objectSignalsCountCopy) || (watch_cache_array[j][0] != WATCH_OBJSIGNALS_INDEX)) {
 							headerFormatter("OBJECT SIGNALS COUNT: ",0,objectSignalsCountCopy,INT_TYPE,j);
 						}
-						watch_cache_array[j][0] = 22;
+						watch_cache_array[j][0] = WATCH_OBJSIGNALS_INDEX;
 						watch_cache_array[j][1] = objectSignalsCountCopy;
 						break;
-					case 23:
+					case WATCH_DELAYEDKILLS_INDEX:
 						// Delayed Kills Count
-						if ((watch_cache_array[j][1] != delayedKillsCountCopy) || (watch_cache_array[j][0] != 23)) {
+						if ((watch_cache_array[j][1] != delayedKillsCountCopy) || (watch_cache_array[j][0] != WATCH_DELAYEDKILLS_INDEX)) {
 							headerFormatter("DELAYED KILLS COUNT: ",0,delayedKillsCountCopy,INT_TYPE,j);
 						}
-						watch_cache_array[j][0] = 23;
+						watch_cache_array[j][0] = WATCH_DELAYEDKILLS_INDEX;
 						watch_cache_array[j][1] = delayedKillsCountCopy;
 						break;
-					case 24:
+					case WATCH_LOCKSTACK_INDEX:
 						// Lock Stack Count
-						if ((watch_cache_array[j][1] != lockStackCountCopy) || (watch_cache_array[j][0] != 24)) {
+						if ((watch_cache_array[j][1] != lockStackCountCopy) || (watch_cache_array[j][0] != WATCH_LOCKSTACK_INDEX)) {
 							headerFormatter("LOCK STACK COUNT: ",0,lockStackCountCopy,INT_TYPE,j);
 						}
-						watch_cache_array[j][0] = 24;
+						watch_cache_array[j][0] = WATCH_LOCKSTACK_INDEX;
 						watch_cache_array[j][1] = lockStackCountCopy;
 						break;
-					case 25:
+					case WATCH_SCRIPTRUN_INDEX:
 						// Scripts Running Count
 						if (
 							(watch_cache_array[j][1] != scriptsRunningCount) || 
 							(watch_cache_array[j][2] != scriptsAttemptLoadCount) || 
-							(watch_cache_array[j][0] != 25)
+							(watch_cache_array[j][0] != WATCH_SCRIPTRUN_INDEX)
 						) {
 							dk_strFormat((char *)WatchTextSpace[j], "SCRIPTS RUNNING: %d (%d)",scriptsRunningCount,scriptsAttemptLoadCount);
 						}
-						watch_cache_array[j][0] = 25;
+						watch_cache_array[j][0] = WATCH_SCRIPTRUN_INDEX;
 						watch_cache_array[j][1] = scriptsRunningCount;
 						watch_cache_array[j][2] = scriptsAttemptLoadCount;
 						break;
-					case 26:
+					case WATCH_LOADEDACTORCOUNT_INDEX:
 						// Loaded Actor Count
-						if ((watch_cache_array[j][1] != LoadedActorCount) || (watch_cache_array[j][0] != 26)) {
+						if ((watch_cache_array[j][1] != LoadedActorCount) || (watch_cache_array[j][0] != WATCH_LOADEDACTORCOUNT_INDEX)) {
 							headerFormatter("ACTORS LOADED: ",0,LoadedActorCount,INT_TYPE,j);
 						}
-						watch_cache_array[j][0] = 26;
+						watch_cache_array[j][0] = WATCH_LOADEDACTORCOUNT_INDEX;
 						watch_cache_array[j][1] = LoadedActorCount;
 						break;
-					case 27:
+					case WATCH_DYNWATCH_INDEX:
 						// Dynamic Watches
 						{
 							int dyn_index = -1;
@@ -1416,7 +1138,7 @@ void handleWatch(void) {
 								if ((watch_cache_array[j][1] != hex_value)
 									|| (watch_cache_array[j][2] != dynamic_watches[dyn_index].size)
 									|| (watch_cache_array[j][3] != (int)dynamic_watches[dyn_index].address)
-									|| (watch_cache_array[j][0] != 27)) {
+									|| (watch_cache_array[j][0] != WATCH_DYNWATCH_INDEX)) {
 									if (_type == 0) {
 										dk_strFormat((char *)WatchTextSpace[j], "0X%X:%u",dynamic_watches[dyn_index].address,u_val);
 									} else if (_type == 1) {
@@ -1427,11 +1149,32 @@ void handleWatch(void) {
 										dk_strFormat((char *)WatchTextSpace[j], "0X%X:%f",dynamic_watches[dyn_index].address,f_val);
 									}
 								}
-								watch_cache_array[j][0] = 27;
+								watch_cache_array[j][0] = WATCH_DYNWATCH_INDEX;
 								watch_cache_array[j][1] = hex_value;
 								watch_cache_array[j][2] = dynamic_watches[dyn_index].size;
 								watch_cache_array[j][3] = (int)dynamic_watches[dyn_index].address;
 							}
+						}
+						break;
+					case WATCH_2015FILE_INDEX:
+						// 2015 MMM File Watch
+						{
+							int file_slot_index = 0;
+							if (CurrentMap == 0x50) {
+								file_slot_index = File;
+							} else {
+								for (int k = 0; k < 4; k++) {
+									if (EEPROMSlots[k] == File) {
+										file_slot_index = k;
+									}
+								}
+							}
+							file_slot_index += 1;
+							if ((watch_cache_array[j][1] != file_slot_index) || (watch_cache_array[j][0] != WATCH_2015FILE_INDEX)) {
+								headerFormatter("2015 MMM FILE: ",0,file_slot_index,INT_TYPE,j);
+							}
+							watch_cache_array[j][0] = WATCH_2015FILE_INDEX;
+							watch_cache_array[j][1] = file_slot_index;
 						}
 					break;
 				}

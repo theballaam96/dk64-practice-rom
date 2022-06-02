@@ -23,5 +23,6 @@
 #include "global.h"
 #include "screens_list.h"
 #include "vars.h"
+#include "watch_list.h"
 
 #endif

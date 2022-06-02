@@ -212,7 +212,7 @@ void toggleSnagWatch(void) {
 			checkWatchCapacity();
 			while (i < WatchCount) {
 				if (WatchIndex[i] == 0) {
-					WatchIndex[i] = 15;
+					WatchIndex[i] = WATCH_SPAWNSNAG_INDEX;
 					ViewedSnagWatches[i] = list_index;
 					dk_strFormat((char *)snagwatch_names_array[i],"%s",SnagCapitalsTable->actor_name[list_index]);
 					colorWatch(0xFF,0xFF,0xFF,i);

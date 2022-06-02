@@ -121,7 +121,7 @@ void timerReady(void) {
 void handleTimer(void) {
 	char _contains_timer = 0;
 	for (int i = 0; i < WatchCount; i++) {
-		if (WatchIndex[i] == 4) { // 4 = Timer Watch "Watch index"
+		if (WatchIndex[i] == WATCH_TIMER_INDEX) { // 4 = Timer Watch "Watch index"
 			_contains_timer = 1;
 		}
 	};

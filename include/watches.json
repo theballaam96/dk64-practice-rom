@@ -1,0 +1,163 @@
+{
+    "parents":[
+       {
+          "watch_type":"player",
+          "position":0,
+          "watches":[
+             {
+                "text":"Position",
+                "prop":"position"
+             },
+             {
+                "text":"Speed",
+                "prop":"speed"
+             },
+             {
+                "text":"Average Speed",
+                "prop":"avgspd"
+             },
+             {
+                "text":"Angle",
+                "prop":"angle"
+             },
+             {
+                "text":"Angle to Point",
+                "prop":"anglepoint"
+             },
+             {
+                "text":"Floor",
+                "prop":"floor"
+             },
+             {
+                "text":"Movement State",
+                "prop":"movement"
+             },
+             {
+                "text":"Held Actor",
+                "prop":"heldactor"
+             },
+             {
+                "text":"Stored Position 1",
+                "prop":"storedposition1"
+             },
+             {
+                "text":"Stored Position 2",
+                "prop":"storedposition2"
+             }
+          ]
+       },
+       {
+          "watch_type":"sysenv",
+          "position":2,
+          "watches":[
+             {
+                "text":"Lag",
+                "prop":"lag"
+             },
+             {
+                "text":"Average Lag",
+                "prop":"avglag"
+             },
+             {
+                "text":"Input",
+                "prop":"input",
+                "func":"toggleInputDisplay"
+             },
+             {
+                "text":"Object Signals Count",
+                "prop":"objsignals"
+             },
+             {
+                "text":"Delayed Kills Count",
+                "prop":"delayedkills"
+             },
+             {
+                "text":"Lock Stack Count",
+                "prop":"lockStack"
+             },
+             {
+                "text":"Scripts Running Count",
+                "prop":"scriptRun"
+             },
+             {
+                "text":"Loaded Actor Count",
+                "prop":"loadedActorCount"
+             },
+             {
+                "text":"2015 MMM File",
+                "prop":"2015file"
+             }
+          ]
+       },
+       {
+          "watch_type":"timers",
+          "position":1,
+          "watches":[
+             {
+                "text":"Timer",
+                "prop":"timer"
+             },
+             {
+                "text":"Giant Kosha Timer",
+                "prop":"gktimer"
+             },
+             {
+                "text":"Intro Story Timer",
+                "prop":"isg"
+             },
+             {
+                "text":"In-Game Time",
+                "prop":"igt"
+             }
+          ]
+       },
+       {
+          "watch_type":"assist",
+          "position":4,
+          "access":true,
+          "watches":[
+             {
+                "text":"Phasewalk Assistant",
+                "prop":"phaseassistant",
+                "func":"togglePhaseAssistant"
+             },
+             {
+                "text":"Fairy Viewer",
+                "prop":"fairy",
+                "func":"fairyViewerContainerToggle",
+                "null_index":true
+             }
+          ]
+       },
+       {
+          "watch_type":"fake",
+          "position":5,
+          "watches":[
+             {
+                "text":"Key 8",
+                "prop":"fakekey"
+             },
+             {
+                "text":"Production Room",
+                "prop":"prodroom"
+             }
+          ]
+       },
+       {
+          "watch_type":"vacant",
+          "vacant":true,
+          "watches":[
+             {
+                "text":"Spawn Snag",
+                "prop":"spawnsnag",
+                "vacant":true
+             },
+             {
+                "text":"Dynamic Watches",
+                "prop":"dynwatch",
+                "vacant":true
+             }
+          ]
+       }
+    ]
+ }

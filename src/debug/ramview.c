@@ -480,7 +480,7 @@ void addToWatchFunc(int index) {
             for (int j = 0; j < WatchCount; j++) {
                 if ((WatchIndex[j] == 0) && (!added_watch)) {
                     dynamic_watches[i].watch_index = j;
-                    WatchIndex[j] = 27;
+                    WatchIndex[j] = WATCH_DYNWATCH_INDEX;
                     added_watch = 1;
                 }
             }

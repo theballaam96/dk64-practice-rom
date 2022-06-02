@@ -242,6 +242,8 @@ extern char* snagwatch_names_array[];
 extern const snagTableInfo snag_data[];
 extern flagLogData* flagLog_currentfitems[];
 
+extern const char watch_assist_access[];
+
 extern spriteDisplay* displaySlots[13];
 extern spriteControl* spriteSlots[13];
 extern otherSpriteControl* otherSpriteData[13];

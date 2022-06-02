@@ -40,6 +40,7 @@ set /p heap_size=< heap.shrink
 echo Honey, I shrunk the heap by %heap_size% bytes
 %python_ver% build/symbols_generator.py
 %python_ver% build/screen_generator.py
+%python_ver% build/watch_generator.py
 %python_ver% build\compile.py
 build\armips.exe %jl_file%
 %python_ver% build\build.py

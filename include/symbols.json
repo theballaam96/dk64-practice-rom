@@ -1985,10 +1985,22 @@
 		  }
 	   },
 	   {
-		   "name":"DKTVCounter",
-		   "versions":{
-			   "us":"0x80755328"
-		   }
+		  "name":"DKTVCounter",
+		  "versions":{
+			 "us":"0x80755328"
+		  }
+	   },
+	   {
+		  "name":"EEPROMSlots",
+		  "versions":{
+			 "us":"0x807EDEA8"
+		  }
+	   },
+	   {
+		  "name":"File",
+		  "versions":{
+			 "us":"0x807467C8"
+		  }
 	   },
 	   {
 		  "name":"balloonPatchCounts",

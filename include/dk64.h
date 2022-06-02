@@ -152,6 +152,8 @@ extern char BetaNinRWSkip;
 extern char LogosDestMap;
 extern char LogosDestMode;
 extern char Gamemode;
+extern unsigned char EEPROMSlots[4];
+extern unsigned char File;
 extern int* ObjectModel2Pointer;
 extern int ObjectModel2Timer;
 extern int ObjectModel2Count;
