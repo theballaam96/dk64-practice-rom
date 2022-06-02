@@ -5,10 +5,10 @@
 	Thanks.
 	Stats:
 		Functions: 121/124(97.58%)
-		Vanilla Vars: 166/168(98.81%)
+		Vanilla Vars: 166/169(98.22%)
 		Hack Vars: 115/115(100.0%)
 		Code: 58/61(95.08%)
-		Overall: 460/468(98.29%)
+		Overall: 460/469(98.08%)
 */
 
 //functions
@@ -263,6 +263,7 @@
 .definelabel MapVertsPointer, 0x807F5D08
 //.definelabel TriggerCount
 //.definelabel TriggerArray
+//.definelabel DKTVCounter
 .definelabel balloonPatchCounts, 0x807FC328
 .definelabel coloredBananaCounts, 0x807F6070
 .definelabel objectSignalsCount, 0x807FBEF8

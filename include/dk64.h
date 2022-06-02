@@ -267,6 +267,7 @@ extern unsigned int heap_arena_count;
 extern heap_arena_struct heap_arena_meta[5];
 extern int* fbufferPointers[2];
 extern int* heap_end_pointer;
+extern unsigned char DKTVCounter;
 
 extern char arcadeMap;
 extern char arcadeMode;

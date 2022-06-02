@@ -390,6 +390,11 @@ void loadVars(int instant_load) {
 			if (tag_found_addr) {
 				tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 			}
+			if (states[_focused_state]->is_visible) {
+				Player->obj_props_bitfield |= 0x40000004;
+			} else {
+				Player->obj_props_bitfield &= 0xBFFFFFFB;
+			}
 			clearDKPortal();
 			if (states[_focused_state]->dark_attic_squawks_spawned) {
 				if (CurrentMap == 56) {
@@ -450,6 +455,7 @@ void savestateHandler(int action) {
 							states[_focused_state]->yPos = Player->yPos;
 							states[_focused_state]->zPos = Player->zPos;
 							states[_focused_state]->floor = Player->floor;
+							states[_focused_state]->is_visible = (Player->obj_props_bitfield & 0x4) != 0;
 							if (Player->camera_pointer) {
 								states[_focused_state]->camera_angle = Player->camera_pointer->facing_angle;
 							}
@@ -591,6 +597,8 @@ void savestateHandler(int action) {
 						}
 						states[_focused_state]->nearest_tag_enabled = tag_found;
 						states[_focused_state]->nearest_tag_oscillation_timer = tag_y;
+						states[_focused_state]->dktv_demo = DKTVCounter;
+						states[_focused_state]->gamemode = Gamemode;
 						dk_memcpy((int *)states[_focused_state]->InventoryBase,&CollectableBase,0xC);
 						dk_memcpy((int *)states[_focused_state]->TempFlagBlock,&TempFlagBlock,0x10);
 						break;
@@ -648,6 +656,9 @@ void savestateHandler(int action) {
 							dk_memcpy(&MovesBase,(int *)states[_focused_state]->KongBase,0x1D8);
 							dk_memcpy(&TempFlagBlock,(int *)states[_focused_state]->TempFlagBlock,0x10);
 							StoredDamage = states[_focused_state]->stored_damage;
+							DKTVCounter = states[_focused_state]->dktv_demo;
+							Gamemode = states[_focused_state]->gamemode;
+							Mode = Gamemode;
 							dk_memcpy(&CollectableBase,(int *)states[_focused_state]->InventoryBase,0xC);
 							Character = states[_focused_state]->Character;
 							HelmTimerShown = 0; // Prevent Game Over fadeout
