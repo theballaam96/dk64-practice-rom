@@ -526,4 +526,12 @@
 		ParentCheckBypass_Finish:
 			J 		parentCheckBypassHookWrite+0x8
 			NOP
+	
+	initCode:
+		JAL 		playSound
+		SW 			r0, 0x14 (sp)
+		JAL 		quickInit
+		NOP
+		J 			initHookWrite+0x8
+		NOP
 		

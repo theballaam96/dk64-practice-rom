@@ -5,10 +5,10 @@
 	Thanks.
 	Stats:
 		Functions: 121/124(97.58%)
-		Vanilla Vars: 166/171(97.08%)
+		Vanilla Vars: 166/172(96.51%)
 		Hack Vars: 115/115(100.0%)
-		Code: 58/61(95.08%)
-		Overall: 460/471(97.66%)
+		Code: 58/62(93.55%)
+		Overall: 460/473(97.25%)
 */
 
 //functions
@@ -266,6 +266,7 @@
 //.definelabel DKTVCounter
 //.definelabel EEPROMSlots
 //.definelabel File
+//.definelabel EEPROMStorage
 .definelabel balloonPatchCounts, 0x807FC878
 .definelabel coloredBananaCounts, 0x807F65C0
 .definelabel objectSignalsCount, 0x807FC448
@@ -489,6 +490,7 @@
 //.definelabel guardStoreHookWrite
 //.definelabel guardLightHookWrite
 //.definelabel parentCheckBypassHookWrite
+//.definelabel initHookWrite
 
 .definelabel customCodeStart, 0x805d5600
 .definelabel customCodeUpper, 0x805d

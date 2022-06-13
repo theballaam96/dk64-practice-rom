@@ -96,7 +96,7 @@ void cFuncLoop(void) {
 	handleFrozenValues();
 	handleSquawksTimer();
 	//correctTagCode();
-	initHack(); // Map == 0x28
+	initHack(0); // Map == 0x28
 	shorthandSavestate(); // Constant
 	ramViewUpdate(); // RAM Viewer Open
 	if (TransitionSpeed < 0) {

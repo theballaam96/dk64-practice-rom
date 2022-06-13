@@ -2003,6 +2003,12 @@
 		  }
 	   },
 	   {
+		  "name":"EEPROMStorage",
+		  "versions":{
+			 "us":"0x807ED6A8"
+		  }
+	   },
+	   {
 		  "name":"balloonPatchCounts",
 		  "versions":{
 			 "us":"0x807FC408",
@@ -3405,6 +3411,12 @@
 		  "name":"parentCheckBypassHookWrite",
 		  "versions":{
 			 "us":"0x806416B4"
+		  }
+	   },
+	   {
+		  "name":"initHookWrite",
+		  "versions":{
+			 "us":"0x805FBDEC"
 		  }
 	   }
 	]

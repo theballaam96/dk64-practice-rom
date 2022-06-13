@@ -40,6 +40,13 @@ START:
 		LUI t3, hi(eepromPatch)
 		SW r0, lo(eepromPatch) (t3)
 
+		// Write Init Hook
+		LUI t3, hi(initHook)
+		LW t3, lo(initHook) (t3)
+		LUI t4, hi(initHookWrite)
+		SW t3, lo(initHookWrite) (t4) // Store Hook
+		SW r0, lo(initHookWrite + 0x4) (t4) // Store NOP
+
 		//write per frame hook
 		//
 		LUI t3, hi(mainASMFunctionJump)
@@ -277,6 +284,9 @@ GuardSphereLightHook:
 	NOP
 ParentCheckBypassHook:
 	J 	ParentCheckBypass
+	NOP
+initHook:
+	J 	initCode
 	NOP
 
 loadExtraHooks:
