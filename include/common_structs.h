@@ -264,9 +264,11 @@ typedef struct Savestate {
 	/* 0x3AC */ short dark_attic_squawks_angle;
 	/* 0x3AE */ char dark_attic_squawks_spawned;
 	/* 0x3AF */ unsigned char japes_freediddy_switches_pressed_bitfield;
-	/* 0x3B0 */ unsigned char gamemode;
-	/* 0x3B1 */ unsigned char is_visible;
-	/* 0x3B2 */ unsigned char dktv_demo;
+	/* 0x3B0 */ unsigned char eeprom_allocation[4];
+	/* 0x3B4 */ unsigned char gamemode;
+	/* 0x3B5 */ unsigned char is_visible;
+	/* 0x3B6 */ unsigned char dktv_demo;
+	/* 0x3B7 */ unsigned char file;
 } Savestate;
 
 typedef struct Screen {

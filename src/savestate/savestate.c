@@ -286,6 +286,75 @@ void handleSquawksTimer(void) {
 	}
 }
 
+#define EEPROM_FILE_SIZE 0x1A8
+
+void performEEPROMCorrection(void) {
+	int _focused_state = FocusedSavestate;
+	int difference_allocation = 0;
+	int new_swap_index = 0;
+	for (int i = 0; i < 4; i++) {
+		int old_value = states[_focused_state]->eeprom_allocation[i];
+		int new_value = EEPROMSlots[i];
+		difference_allocation |= ((new_value != old_value) || (new_value == 3)) << i;
+		if (new_value == 3) {
+			new_swap_index = i;
+		}
+	}
+	if (difference_allocation != 0) {
+		// Has Differences that need adjusting
+		int still_different = 1;
+		int initial_swap = 0;
+		for (int i = 0; i < 4; i++) {
+			if (still_different) {
+				if (initial_swap) {
+					int slot_file = states[_focused_state]->eeprom_allocation[new_swap_index];
+					int found_slot = -1;
+					for (int j = 0; j < 4; j++) {
+						if (EEPROMSlots[i] == slot_file) {
+							found_slot = i;
+						}
+					}
+					if (found_slot == -1) {
+						return;
+					} else {
+						EEPROMSlots[new_swap_index] = EEPROMSlots[found_slot];
+						void* dest_storage = (void*)((int)&EEPROMStorage + (EEPROM_FILE_SIZE * new_swap_index));
+						void* src_storage = (void*)((int)&EEPROMStorage + (EEPROM_FILE_SIZE * found_slot));
+						dk_memcpy(dest_storage,src_storage,EEPROM_FILE_SIZE);
+						EEPROMSlots[found_slot] = 3;
+						wipeMemory(src_storage,EEPROM_FILE_SIZE);
+						new_swap_index = found_slot;
+						still_different = 0;
+						for (int j = 0; j < 4; j++) {
+							if (EEPROMSlots[j] != states[_focused_state]->eeprom_allocation[j]) {
+								still_different = 1;
+							}
+						}
+					}
+				} else {
+					if (difference_allocation & (1 << i)) {
+						EEPROMSlots[new_swap_index] = EEPROMSlots[i];
+						void* dest_storage = (void*)((int)&EEPROMStorage + (EEPROM_FILE_SIZE * new_swap_index));
+						void* src_storage = (void*)((int)&EEPROMStorage + (EEPROM_FILE_SIZE * i));
+						dk_memcpy(dest_storage,src_storage,EEPROM_FILE_SIZE);
+						EEPROMSlots[i] = 3;
+						wipeMemory(src_storage,EEPROM_FILE_SIZE);
+						new_swap_index = i;
+						still_different = 0;
+						for (int j = 0; j < 4; j++) {
+							if (EEPROMSlots[j] != states[_focused_state]->eeprom_allocation[j]) {
+								still_different = 1;
+							}
+						}
+					}
+				}
+			} else {
+				return;
+			}
+		}
+	}
+}
+
 void loadVars(int instant_load) {
 	int _focused_state = FocusedSavestate;
 	tagBarrel* tag_found_addr = 0;
@@ -396,6 +465,7 @@ void loadVars(int instant_load) {
 				Player->obj_props_bitfield &= 0xBFFFFFFB;
 			}
 			clearDKPortal();
+			performEEPROMCorrection();
 			if (states[_focused_state]->dark_attic_squawks_spawned) {
 				if (CurrentMap == 56) {
 					// In Dark Attic
@@ -599,6 +669,10 @@ void savestateHandler(int action) {
 						states[_focused_state]->nearest_tag_oscillation_timer = tag_y;
 						states[_focused_state]->dktv_demo = DKTVCounter;
 						states[_focused_state]->gamemode = Gamemode;
+						states[_focused_state]->file = File;
+						for (int i = 0; i < 4; i++) {
+							states[_focused_state]->eeprom_allocation[i] = EEPROMSlots[i];
+						}
 						dk_memcpy((int *)states[_focused_state]->InventoryBase,&CollectableBase,0xC);
 						dk_memcpy((int *)states[_focused_state]->TempFlagBlock,&TempFlagBlock,0x10);
 						break;
@@ -614,6 +688,7 @@ void savestateHandler(int action) {
 							TimerData.TimerPostReduction = 0;
 							HasNeutralStickInput = 0;
 							resetMap();
+							File = states[_focused_state]->file;
 							int* _perm_flag_block = getFlagBlockAddress(0);
 							if (_perm_flag_block) {
 								dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);

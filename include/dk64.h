@@ -260,6 +260,7 @@ extern short MapVoid_MaxZ;
 
 extern short TriggerCount;
 extern LZTrigger* TriggerArray;
+extern int EEPROMStorage;
 
 extern unsigned short balloonPatchCounts[221];
 extern unsigned short coloredBananaCounts[8];
