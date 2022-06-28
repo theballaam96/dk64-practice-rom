@@ -689,6 +689,7 @@ void savestateHandler(int action) {
 							HasNeutralStickInput = 0;
 							resetMap();
 							File = states[_focused_state]->file;
+							performEEPROMCorrection();
 							int* _perm_flag_block = getFlagBlockAddress(0);
 							if (_perm_flag_block) {
 								dk_memcpy(_perm_flag_block,(int *)states[_focused_state]->PermanentFlagBlock,0x13C);

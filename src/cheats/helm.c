@@ -6,6 +6,7 @@ void changeHelmTime(int difference) {
         new_time = 0;
     }
     HelmStartTime = new_time;
+    HelmTimerShown = 1;
 }
 
 void inc10mins(void) {
@@ -35,11 +36,13 @@ void dec10s(void) {
 void helm_timeout(void) {
     int diff = 0 - HelmCurrentTime;
     HelmStartTime += diff;
+    HelmTimerShown = 1;
 }
 
 void helm_10mins(void) {
     int diff = (10 * 60) - HelmCurrentTime;
     HelmStartTime += diff;
+    HelmTimerShown = 1;
 }
 
 void helm_infinite(void) {
@@ -47,6 +50,7 @@ void helm_infinite(void) {
     if (diff > 0) {
         HelmStartTime += diff;
     }
+    HelmTimerShown = 1;
 }
 
 static char* helmtimer_array[] = {
