@@ -120,3 +120,4 @@ extern const Screen beaver_struct;
 extern const Screen colroot_struct;
 extern const Screen triggers_struct;
 extern const Screen colmisc_struct;
+extern const Screen helmtimer_struct;

@@ -5,10 +5,10 @@
 	Thanks.
 	Stats:
 		Functions: 121/124(97.58%)
-		Vanilla Vars: 166/172(96.51%)
+		Vanilla Vars: 167/173(96.53%)
 		Hack Vars: 115/115(100.0%)
 		Code: 58/62(93.55%)
-		Overall: 460/473(97.25%)
+		Overall: 461/474(97.26%)
 */
 
 //functions
@@ -214,6 +214,7 @@
 .definelabel PauseTimestampMinor, 0x80743E84
 .definelabel HelmStartTimestampMajor, 0x80755400
 .definelabel HelmStartTimestampMinor, 0x80755404
+.definelabel HelmCurrentTime, 0x80755408
 .definelabel HelmStartTime, 0x8075540C
 .definelabel p1PressedButtons, 0x807ED1B8
 .definelabel p1HeldButtons, 0x807ED1C8

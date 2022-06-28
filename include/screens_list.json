@@ -564,6 +564,11 @@
 			"index_var":"ACTIVEMENU_SCREEN_COLLISION_MISC",
 			"struct":"colmisc_struct",
 			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_CHEATS_HELMTIMER",
+			"struct":"helmtimer_struct",
+			"const":true
 		}
 	]
 }

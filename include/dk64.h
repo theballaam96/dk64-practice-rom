@@ -208,6 +208,7 @@ extern unsigned int PauseTimestampMajor;
 extern unsigned int PauseTimestampMinor;
 extern unsigned int HelmStartTimestampMajor;
 extern unsigned int HelmStartTimestampMinor;
+extern int HelmCurrentTime;
 extern int HelmStartTime;
 extern short p1PressedButtons;
 extern short p1HeldButtons;

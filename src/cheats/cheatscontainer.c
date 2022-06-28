@@ -17,6 +17,7 @@ static const char* cheats_array[] = {
 	"GAIN CONTROL",
 	"FORCE END MINIGAME",
 	"TRANSFORM",
+	"HELM TIMER CONTROL",
 };
 
 void openCheatsMenu(void) {
@@ -37,6 +38,10 @@ void undoLastFlagWrite(void) {
 	}
 }
 
+void openHelmControl(void) {
+	changeMenu(ACTIVEMENU_SCREEN_CHEATS_HELMTIMER);
+}
+
 static const int cheats_functions[] = {
 	(int)&openMovesetInventoryMenu,
 	(int)&openGamemodeMenu,
@@ -50,12 +55,13 @@ static const int cheats_functions[] = {
 	(int)&gainControl,
 	(int)&endMinigame,
 	(int)&openTransformMenu,
+	(int)&openHelmControl,
 };
 
 const Screen cheats_struct = {
 	.TextArray = (int*)cheats_array,
 	.FunctionArray = cheats_functions,
-	.ArrayItems = 12,
+	.ArrayItems = 13,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 8
 };
