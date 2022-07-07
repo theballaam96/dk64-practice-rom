@@ -58,7 +58,7 @@ HEAP_START_US 	= 0x805D7E00
 HEAP_START_PAL 	= 0x805D0E00
 HEAP_START_JP 	= 0x805D5600
 
-all         : ./test.sh $(DK_ALL)
+all         : $(DK_ALL)
 clean       :
 	rm -rf $(BUILDDIR)
 	rm -f dk-us.z64 dk-pal.z64 dk-jp.z64 
