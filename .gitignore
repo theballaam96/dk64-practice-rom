@@ -16,6 +16,7 @@ asm/objects.asm
 .rom
 .version
 heap.shrink
+build/
 
 include/rom_version.h
 Build/n64chain/*

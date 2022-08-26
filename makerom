@@ -1,3 +1,1 @@
-#!/bin/sh
-
 gru lua/makerom.lua "$@"
