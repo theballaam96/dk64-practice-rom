@@ -86,7 +86,8 @@ void initHack(int source) {
 
 void quickInit(void) {
 	initHack(1);
-	initiateTransition(0x50,0);
+	initiateTransitionFade(0x51, 0, 5);
+	CutsceneWillPlay = 0;
 	Gamemode = 5;
 	Mode = 5;
 }

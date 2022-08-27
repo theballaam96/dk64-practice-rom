@@ -103,6 +103,12 @@
 		  }
 	   },
 	   {
+		  "name":"getRNGLower31",
+		  "versions":{
+			 "us":"0x80611A44"
+		  }
+	   },
+	   {
 		  "name":"spawnActor",
 		  "versions":{
 			 "us":"0x80677FA8",

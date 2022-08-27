@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 121/124(97.58%)
+		Functions: 121/125(96.8%)
 		Vanilla Vars: 167/173(96.53%)
 		Hack Vars: 115/115(100.0%)
 		Code: 58/62(93.55%)
-		Overall: 461/474(97.26%)
+		Overall: 461/475(97.05%)
 */
 
 //functions
@@ -25,6 +25,7 @@
 .definelabel dmaFileTransfer, 0x800004CC
 .definelabel deleteActor, 0x80671A04
 //.definelabel checkParent
+//.definelabel getRNGLower31
 .definelabel spawnActor, 0x806713D8
 .definelabel spawnTextOverlay, 0x806967D4
 .definelabel dk_sqrt, 0x8000AE70
@@ -493,7 +494,7 @@
 //.definelabel parentCheckBypassHookWrite
 //.definelabel initHookWrite
 
-.definelabel customCodeStart, 0x805d0e00
-.definelabel customCodeUpper, 0x805d
-.definelabel customCodeLower, 0xe00
-.definelabel customCodeSize, 0x23000
+.definelabel customCodeStart, 0x805cfe00
+.definelabel customCodeUpper, 0x805c
+.definelabel customCodeLower, 0xfe00
+.definelabel customCodeSize, 0x24000

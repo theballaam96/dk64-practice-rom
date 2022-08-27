@@ -441,11 +441,11 @@ loadExtraHooks:
 	SW t3, lo(guardLightHookWrite) (t4) // Store Hook
 	SW r0, lo(guardLightHookWrite)+4 (t4) // Store NOP
 
-	LUI t3, hi(ParentCheckBypassHook)
-	LW t3, lo(ParentCheckBypassHook) (t3)
-	LUI t4, hi(parentCheckBypassHookWrite)
-	SW t3, lo(parentCheckBypassHookWrite) (t4) // Store Hook
-	SW r0, lo(parentCheckBypassHookWrite)+4 (t4) // Store NOP
+	//LUI t3, hi(ParentCheckBypassHook)
+	//LW t3, lo(ParentCheckBypassHook) (t3)
+	//LUI t4, hi(parentCheckBypassHookWrite)
+	//SW t3, lo(parentCheckBypassHookWrite) (t4) // Store Hook
+	//SW r0, lo(parentCheckBypassHookWrite)+4 (t4) // Store NOP
 	
 	LUI t3, hi(kongHook)
 	LW t3, lo(kongHook) (t3)

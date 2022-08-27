@@ -76,6 +76,7 @@ extern int isSingleOrBunch(int object_type);
 extern int* getPointerTable14Texture(int texture_index);
 extern void cancelPausedCutscenes(void);
 extern int getCenterOffset(int style, char* str);
+extern int getRNGLower31(void);
 
 extern void setArcadeTextXY(int x, int y);
 extern void spawnArcadeText(void* dl, void* text_pointer);
