@@ -13,5 +13,12 @@ void fileInit(void) {
 				setFlag(FLAG_FTT_CHUNKY,1,0); // Chunky FTT
 			}
 		}
+	} else {
+		if ((CutsceneActive == 6) && (CurrentMap == 0x50)) {
+			if (!checkFlag(FLAG_ESCAPE, 0) && (DestMap == 0x22)) {
+				DestMap = 0xB0;
+				DestExit = 1;
+			}
+		}
 	}
 }
