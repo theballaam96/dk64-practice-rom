@@ -199,6 +199,12 @@ void controlConsoleMenu(void) {
 			}
 		} else if (NewlyPressedControllerInput.Buttons & A_Button) {
 			assignedConsole = 1 + menu_slot;
+			int gfb_start = (int)getFlagBlockAddress(1);
+			*(int*)(gfb_start) = -1;
+			*(int*)(gfb_start + 4) = -1;
+			for (int i = 0; i < 0x40; i++) {
+				setFlag(i, 1, 1);
+			}
 			saveSettings();
 			playSFX(69);
 			initiateTransitionFade(0x50,0,5);

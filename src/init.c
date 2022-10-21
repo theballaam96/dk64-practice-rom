@@ -69,12 +69,6 @@ void initHack(int source) {
 				ViewedSnagWatches[i] = -1;
 			}
 			loadExtraHooks();
-			if (StoredSettings.console == 0) {
-				int gfb_start = (int)getFlagBlockAddress(1);
-				*(int*)(gfb_start) = -1;
-				*(int*)(gfb_start + 4) = -1;
-				SaveToGlobal();
-			}
 			if (StoredSettings.console > 0) {
 				DestMap = 0x50;
 			}
