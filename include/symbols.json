@@ -343,6 +343,12 @@
 		  }
 	   },
 	   {
+		  "name":"setModel",
+		  "versions":{
+			 "us":"0x80613194"
+		  }
+	   },
+	   {
 		  "name":"textOverlayCode",
 		  "versions":{
 			 "us":"0x8069DA54",

@@ -136,8 +136,8 @@
 		SH 		v0, 0x2 (s0)
 		LHU 	v0, 0x4 (t2)
 		SH 		v0, 0x4 (s0)
-		LUI 	t2, hi(CurrentActorPointer-4)
-		LW 		t2, lo(CurrentActorPointer-4) (t2)
+		LUI 	t2, hi(CurrentActorPointer_0)
+		LW 		t2, lo(CurrentActorPointer_0) (t2)
 		LUI 	s0, hi(FairyViewerFocus)
 		SW 		t2, lo(FairyViewerFocus) (s0)
 		LUI 	t2, hi(SwapObject)
@@ -237,8 +237,8 @@
 
 	pauseMenu97Code:
 		LUI 	v0, hi(PausePointer)
-		LUI 	v1, hi(CurrentActorPointer-4)
-		LW 		v1, lo(CurrentActorPointer-4) (v1)
+		LUI 	v1, hi(CurrentActorPointer_0)
+		LW 		v1, lo(CurrentActorPointer_0) (v1)
 		SW 		v1, lo(PausePointer) (v0)
 		LUI 	v0, hi(CurrentMap)
 		J 		pause97HookWrite+8
@@ -246,8 +246,8 @@
 
 	pauseMenu343Code:
 		LUI 	t6, hi(PausePointer)
-		LUI 	t7, hi(CurrentActorPointer-4)
-		LW 		t7, lo(CurrentActorPointer-4) (t7)
+		LUI 	t7, hi(CurrentActorPointer_0)
+		LW 		t7, lo(CurrentActorPointer_0) (t7)
 		SB 		t7, lo(PausePointer) (t6)
 		ADDIU 	sp, sp, -0x30
 		J 		pause343HookWrite+8

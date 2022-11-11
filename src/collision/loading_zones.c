@@ -191,8 +191,30 @@ void openTriggersMenu(void) {
 }
 
 void toggledrawmode(void) {
+    int old_col_mode = collisiondrawmode;
     collisiondrawmode = (collisiondrawmode + 1) % 3;
-    destroyAllCollision();
+    for (int i = 0; i < LoadedActorCount; i++) {
+        actorData* actor = (actorData*)LoadedActorArray[i].actor;
+        if (actor->actorType == 1) {
+            collision_paad* paad = actor->paad;
+            int old_model = getCollisionModel(paad->subtype, old_col_mode);
+            int new_model = getCollisionModel(paad->subtype, collisiondrawmode);
+            if (old_model != new_model) {
+                actor->model = 0;
+                setModel(actor, new_model);
+            }
+            if (collisiondrawmode != 2) {
+                actor->obj_props_bitfield &= 0xFFFF7FFF;
+                if (collisiondrawmode == 0) {
+                    actor->shadow_intensity = 120;
+                } else {
+                    actor->shadow_intensity = 50;
+                }
+            } else {
+                actor->obj_props_bitfield |= 0x8000;
+            }
+        }
+    }
     openCollisionRootMenu();
 }
 

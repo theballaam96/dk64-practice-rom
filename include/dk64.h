@@ -53,6 +53,7 @@ extern void spawnTagActors(void* paad);
 extern void isolateSongChannel(int song, int channel, int unk0);
 extern void textOverlayCode(void);
 extern void spawnTransferredActor(void);
+extern void setModel(void* actor, int model);
 extern void resolveMovementBox(void* spawner);
 extern void wipeMemory(void* location, int size);
 extern int getNewSaveTime();

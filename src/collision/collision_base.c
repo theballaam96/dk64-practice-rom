@@ -45,6 +45,19 @@ void spawnCollision(int subtype, float x, float y, float z, float height, float 
     }
 }
 
+int getCollisionModel(int subtype, int drawmode) {
+    int model_offset = 0;
+    if (drawmode > 0) {
+        model_offset = sizeof(collision_models);
+    }
+    return collision_models[subtype] + model_offset;
+}
+
+void spawnUnitSphere(float x_center, float y_center, float z_center, float radius, void* uuid, int red, int green, int blue, int alpha, int follow) {
+    float scaled_radius = radius * 0.055f;
+    spawnCollision(COLLISION_SPHERE, x_center, y_center - radius, z_center, scaled_radius, scaled_radius, scaled_radius, uuid, red, green, blue, alpha, follow);
+}
+
 void* getCollisionUUID(actorData* actor) {
     collision_paad* paad = (collision_paad*)(actor->paad);
     return paad->attached_attribute;
@@ -62,6 +75,7 @@ void destroyAllCollision(void) {
             }
         }
     }
+    resetQuadCache();
 }
 
 #define FADE_LIMIT 5

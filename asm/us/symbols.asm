@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 132/132(100.0%)
+		Functions: 133/133(100.0%)
 		Vanilla Vars: 176/176(100.0%)
 		Hack Vars: 116/116(100.0%)
 		Code: 62/62(100.0%)
-		Overall: 486/486(100.0%)
+		Overall: 487/487(100.0%)
 */
 
 //functions
@@ -57,6 +57,7 @@
 .definelabel tagFunc_3, 0x80627878
 .definelabel isolateSongChannel, 0x80602CE0
 .definelabel spawnTagActors, 0x80682E38
+.definelabel setModel, 0x80613194
 .definelabel textOverlayCode, 0x8069DA54
 .definelabel spawnTransferredActor, 0x806C80E4
 .definelabel resolveMovementBox, 0x8072827C

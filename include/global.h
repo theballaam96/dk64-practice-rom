@@ -226,6 +226,7 @@ extern void openStateSettingsMenu(void);
 extern void openFixesMenu(void);
 extern void parseLoadingZones(void);
 extern void spawnCollision(int subtype, float x, float y, float z, float height, float width, float depth, void* uuid, int red, int green, int blue, int alpha, int force_y);
+extern void spawnUnitSphere(float x_center, float y_center, float z_center, float radius, void* uuid, int red, int green, int blue, int alpha, int follow);
 extern void* getCollisionUUID(actorData* actor);
 extern void collisionCode(void);
 extern void openCollisionRootMenu(void);
@@ -234,6 +235,8 @@ extern void openCollisionMisc(void);
 extern void destroyAllCollision(void);
 extern void openModelTwoMenu(void);
 extern void handlePlayerCollision(void);
+extern void resetQuadCache(void);
+extern int getCollisionModel(int subtype, int drawmode);
 
 
 extern const Screen* menu_screens[];

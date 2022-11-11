@@ -20,7 +20,9 @@ typedef struct renderingParamsData {
 typedef struct actorData {
 	/* 0x000 */ void* model_pointer;
 	/* 0x004 */ renderingParamsData* render_pointer;
-	/* 0x008 */ char unk_08[0x58-0x8];
+	/* 0x008 */ char unk_08[0x50-0x8];
+	/* 0x050 */ void* model;
+	/* 0x054 */ char unk_54[0x58-0x54];
 	/* 0x058 */ int actorType;
 	/* 0x05C */ char unk_5C[0x60-0x5C];
 	/* 0x060 */ unsigned int obj_props_bitfield;

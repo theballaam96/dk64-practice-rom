@@ -1,16 +1,19 @@
 #include "../../include/common.h"
 
-static char m2colname_player[30] = "";
+static char m2colname_player[31] = "";
 static char m2colname_unload[30] = "";
+static char m2colname_item[30] = "";
 
 static char* modeltwocol_toggleheads[] = {
-    "PLAYER COLLISION",
+    "PLAYER ITEM COLLISION SPHERE",
     "HIDE UNLOADED ITEMS",
+    "ITEM COLLISIONS"
 };
 
 static char* modeltwocol_array[] = {
     m2colname_player,
     m2colname_unload,
+    m2colname_item,
 };
 
 void openModelTwoMenu(void) {
@@ -40,16 +43,50 @@ void toggleModelTwoItem(void) {
             }
         }
     }
+    resetQuadCache();
     openModelTwoMenu();
 }
 
-
+typedef struct sphere_cache_struct {
+    /* 0x000 */ void* actor;
+    /* 0x004 */ short id;
+} sphere_cache_struct;
 
 static int quad_cache_x = -100;
 static int quad_cache_z = -100;
 static unsigned char object_item_cache[0x56];
+static sphere_cache_struct item_sphere_cache[50];
+
+void wipeSphereCache(void) {
+    for (int i = 0; i < 50; i++) {
+        if (ObjectModel2Timer < 2) {
+            item_sphere_cache[i].actor = 0;
+            item_sphere_cache[i].id = -1;
+        } else {
+            actorData* actor = item_sphere_cache[i].actor;
+            if (isRDRAM(actor)) {
+                if (actor->actorType == 1) {
+                    deleteActorContainer(actor);
+                    item_sphere_cache[i].actor = 0;
+                    item_sphere_cache[i].id = -1;
+                }
+            }
+        }
+    }
+}
 
 void handlePlayerCollision(void) {
+    if (ObjectModel2Timer < 2) {
+        resetQuadCache();
+    }
+    int player_quad_x = Player->xPos / 500;
+    int player_quad_z = Player->zPos / 500;
+    int update = 0;
+    if ((player_quad_x != quad_cache_x) || (player_quad_z != quad_cache_z)) {
+        update = 1;
+    }
+    quad_cache_x = player_quad_x;
+    quad_cache_z = player_quad_z;
     if (modeltwo_viewable & 1) {
         // Player Collision
         if (Player) {
@@ -70,7 +107,7 @@ void handlePlayerCollision(void) {
             if (actor) {
                 // Actor found
                 actor->xPos = PlayerCollisions[0].x;
-                actor->yPos = PlayerCollisions[0].y;
+                actor->yPos = PlayerCollisions[0].y - PlayerCollisions[0].scale;
                 actor->zPos = PlayerCollisions[0].z;
                 renderingParamsData* render = actor->render_pointer;
                 if (render) {
@@ -82,24 +119,11 @@ void handlePlayerCollision(void) {
             } else {
                 // No actor
                 player_collision_data* collision = (player_collision_data*)&PlayerCollisions[0];
-                float ref_scale = collision->scale * 0.055f;
-                spawnCollision(2, collision->x, collision->y - collision->scale, collision->z, ref_scale, ref_scale, ref_scale, Player, 0xFF, 0, 0, 0x80, 0);
+                spawnUnitSphere(collision->x, collision->y, collision->z, collision->scale, Player, 0xFF, 0, 0, 0x80, 0);
             }
         }
     }
     if (modeltwo_viewable & 2) {
-        if (ObjectModel2Timer < 2) {
-            quad_cache_x = -100;
-            quad_cache_z = -100;
-        }
-        int player_quad_x = Player->xPos / 500;
-        int player_quad_z = Player->zPos / 500;
-        int update = 0;
-        if ((player_quad_x != quad_cache_x) || (player_quad_z != quad_cache_z)) {
-            update = 1;
-        }
-        quad_cache_x = player_quad_x;
-        quad_cache_z = player_quad_z;
         if (update) {
             for (int i = 0; i < ObjectModel2Count; i++) {
                 ModelTwoData* item = (ModelTwoData*)&ObjectModel2Pointer[i];
@@ -124,9 +148,79 @@ void handlePlayerCollision(void) {
             }
         }
     }
+    if (modeltwo_viewable & 4) {
+        if (update) {
+            // Replace object
+            wipeSphereCache();
+            int placement_index = 0;
+            for (int i = 0; i < ObjectModel2Count; i++) {
+                ModelTwoData* item = (ModelTwoData*)&ObjectModel2Pointer[i];
+                int type = item->object_type;
+                int offset = type >> 3;
+                int shift = type & 7;
+                if (object_item_cache[offset] & (1 << shift)) {
+                    int item_quad_x = item->x / 500;
+                    int item_quad_z = item->z / 500;
+                    if ((item_quad_x == player_quad_x) && (item_quad_z == player_quad_z)) {
+                        int j = 0;
+                        modeltwo_collision_info* info = 0;
+                        while (j < 42) {
+                            if (ModelTwoCollisionInfo[j].type == type) {
+                                info = (modeltwo_collision_info*)&ModelTwoCollisionInfo[j];
+                                break;
+                            }
+                            j++;
+                        }
+                        if (info->hitbox_scale != 0) {
+                            spawnUnitSphere(item->x, item->y + info->hitbox_y_center, item->z, info->hitbox_scale, item, 0, 0xFF, 0, 0xFF, 0);
+                            item_sphere_cache[placement_index].actor = CurrentActorPointer;
+                            item_sphere_cache[placement_index].id = item->object_id;
+                            placement_index += 1;
+                        }
+                    }
+                }
+            }
+        } else {
+            // for (int i = 0; i < 50; i++) {
+            //     int k = 0;
+            //     while ()
+            //     ModelTwoData* object = item_sphere_cache[i].modeltwo;
+            //     if (object) {
+            //         actorData* actor = item_sphere_cache[i].actor;
+            //         if (object->object_id == item_sphere_cache[i].id) {
+            //             int j = 0;
+            //             modeltwo_collision_info* info = 0;
+            //             while (j < 42) {
+            //                 if (ModelTwoCollisionInfo[j].type == object->object_type) {
+            //                     info = (modeltwo_collision_info*)&ModelTwoCollisionInfo[j];
+            //                     break;
+            //                 }
+            //                 j++;
+            //             }
+            //             if (info) {
+            //                 if (info->hitbox_scale != 0) {
+            //                     actor->xPos = object->x;
+            //                     actor->yPos = object->y + info->hitbox_y_center - info->hitbox_scale;
+            //                     actor->zPos = object->z;
+            //                 }
+            //             }
+            //         } else {
+            //             if (isRDRAM(actor)) {
+            //                 if (actor->actorType == 1) {
+            //                     item_sphere_cache[i].modeltwo = 0;
+            //                     deleteActorContainer(actor);
+            //                     item_sphere_cache[i].actor = 0;
+            //                     item_sphere_cache[i].id = -1;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+        }
+    }
 }
 
-void resetQuadrantScales(void) {
+void updateItemCache(void) {
     for (int i = 0; i < sizeof(object_item_cache); i++) {
         object_item_cache[i] = 0;
     }
@@ -146,6 +240,15 @@ void resetQuadrantScales(void) {
             object_item_cache[offset] |= (1 << shift);
         }
     }
+}
+
+void resetQuadCache(void) {
+    quad_cache_x = -100;
+    quad_cache_z = -100;
+}
+
+void resetQuadrantScales(void) {
+    updateItemCache();
     for (int i = 0; i < ObjectModel2Count; i++) {
         ModelTwoData* item = (ModelTwoData*)&ObjectModel2Pointer[i];
         ModelTwoModel* model = item->model;
@@ -153,24 +256,30 @@ void resetQuadrantScales(void) {
             model->scale = item->scale;
         }
     }
-    quad_cache_x = -100;
-    quad_cache_z = -100;
+}
+
+void resetQuadrantSpheres(void) {
+    updateItemCache();
+    wipeSphereCache();
+    toggleModelTwoItem();
 }
 
 void toggleQuadrant(void) {
     resetQuadrantScales();
+    wipeSphereCache();
     toggleModelTwoItem();
 }
 
 static const int modeltwocol_functions[] = {
     (int)&toggleModelTwoItem,
     (int)&toggleQuadrant,
+    (int)&resetQuadrantSpheres,
 };
 
 const Screen modeltwocol_struct = {
 	.TextArray = (int*)modeltwocol_array,
 	.FunctionArray = modeltwocol_functions,
-	.ArrayItems = 2,
+	.ArrayItems = 3,
 	.ParentScreen = ACTIVEMENU_SCREEN_COLLISION_ROOT,
 	.ParentPosition = 1,
 };
