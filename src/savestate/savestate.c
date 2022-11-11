@@ -355,6 +355,13 @@ void performEEPROMCorrection(void) {
 	}
 }
 
+int forceSpawnTag(actorSpawnerData* spawner) {
+	if (ObjectModel2Timer < 3) {
+		return 1;
+	}
+	return spawnTagBarrel(spawner);
+}
+
 void loadVars(int instant_load) {
 	int _focused_state = FocusedSavestate;
 	tagBarrel* tag_found_addr = 0;
@@ -459,6 +466,25 @@ void loadVars(int instant_load) {
 			if (tag_found_addr) {
 				tag_found_addr->tag_oscillation_timer = states[_focused_state]->nearest_tag_oscillation_timer;
 			}
+			// Handle all tag inits
+			actorSpawnerData* focused_spawner = ActorSpawnerPointer;
+			if (focused_spawner) {
+				while (focused_spawner) {
+					int is_tag_reload = 0;
+					for (int i = 0; i < 32; i++) {
+						if (states[_focused_state]->tags_entered[i].id == focused_spawner->id) {
+							is_tag_reload = 1;
+						}
+					}
+					if (is_tag_reload) {
+						focused_spawner->spawning_code = (int)&forceSpawnTag;
+					}
+					focused_spawner = focused_spawner->next_spawner;
+					if (focused_spawner == 0) {
+						break;
+					}
+				}
+			}
 			if (states[_focused_state]->is_visible) {
 				Player->obj_props_bitfield |= 0x40000004;
 			} else {
@@ -551,6 +577,43 @@ void savestateHandler(int action) {
 						}
 						for (int i = 0; i < 7; i++) {
 							states[_focused_state]->cbs_turned_in[i] = CBTurnedInArray[i];
+						}
+						// Tags Entered
+						for (int i = 0; i < 32; i++) {
+							states[_focused_state]->tags_entered[i].id = -1;
+						}
+						states[_focused_state]->tag_global.is_locked = 0;
+						states[_focused_state]->tag_global.tb_void = 0;
+						states[_focused_state]->tag_global.focus = -1;
+						int tag_index = 0;
+						int focused_id = -1;
+						for (int i = 0; i < ActorCount; i++) {
+							actorData* actor = (actorData*)ActorArray[i];
+							if (actor) {
+								int type = actor->actorType;
+								if ((type == 98) || (type == 136) || (type == 137)) {
+									if (actor->control_state == 1) {
+										tag_paad* paad = actor->paad;
+										states[_focused_state]->tags_entered[tag_index].id = getActorSpawnerIDFromTiedActor(actor);
+										states[_focused_state]->tags_entered[tag_index].kickout_timer = paad->kickout_timer;
+										states[_focused_state]->tags_entered[tag_index].kong = paad->current_index;
+										if (actor == Player->camera_pointer->focused_actor_pointer) {
+											focused_id = getActorSpawnerIDFromTiedActor(actor);
+										}
+										tag_index += 1;
+									}
+								}
+							}
+						}
+						if (tag_index > 0) {
+							// Found tag
+							if (Player->camera_pointer->camera_state == 9) {
+								states[_focused_state]->tag_global.is_locked = 1;
+							}
+							if ((TBVoidByte & 0x30) == 0) {
+								states[_focused_state]->tag_global.tb_void = 1;
+							}
+							states[_focused_state]->tag_global.focus = focused_id;
 						}
 						// Dark Attic Squawks
 						int squawks_spawned = 0;
@@ -776,8 +839,96 @@ void shorthandSavestate(void) {
 	}
 };
 
+void specialTagEnterInit(actorData* actor, int kickout, int kong) {
+	tag_paad* paad = actor->paad;
+	paad->associated_player = Player;
+	actor->control_state = 1;
+	actor->control_state_progress = 0;
+	paad->kickout_timer = kickout;
+	paad->scroll_timer = 0;
+	paad->current_index = kong;
+	paad->previous_index = kong;
+	actor->noclip = 1;
+	actorData* player_actor = (actorData*)Player;
+	tagFunc_0(Player, player_actor->paad);
+	tagFunc_1(&paad->unk_x, &paad->unk_y, &paad->unk_z, Player->chunk);
+	tagFunc_2(1.0f, 1.0f, 1.0f, Player->chunk);
+	spawnTagActors(paad);
+	if (CurrentMap != 0x11) {
+		playSong(0x65, 0x3F800000);
+		isolateSongChannel(0x65, 0x7E - TagInstrumentChannels[kong], 1);
+	}
+}
+
+static char delayed_load = 0;
+
 void savestateLoadMapLoadVars(void) {
 	if ((TransitionSpeed < 0) && (ObjectModel2Timer < 2) && (LoadVarsOnMapLoad == 1)) {
 		loadVars(0);
+		delayed_load = 1;
+	} else if ((ObjectModel2Timer > 2) && (delayed_load)) {
+		actorSpawnerData* spawner = ActorSpawnerPointer;
+		int state = FocusedSavestate;
+		int has_tag = 0;
+		if (states[state]->HasData) {
+			if (spawner) {
+				while (spawner) {
+					int is_tag_reload = 0;
+					int tag_index = -1;
+					for (int i = 0; i < 32; i++) {
+						if (states[state]->tags_entered[i].id == spawner->id) {
+							is_tag_reload = 1;
+							tag_index = i;
+							if (states[state]->tag_global.is_locked) {
+								int focus = states[state]->tag_global.focus;
+								if ((focus > -1) && (focus == spawner->id)) {
+									Player->camera_pointer->focused_actor_pointer = spawner->tied_actor;
+									playCutscene(spawner->tied_actor, 14, 0xC);
+									actorData* tied_actor = spawner->tied_actor;
+									if (tied_actor) {
+										tag_paad* paad = tied_actor->paad;
+										paad->unk38 = Player->facing_angle;
+									}
+								}
+							}
+						}
+					}
+					if (is_tag_reload) {
+						specialTagEnterInit((actorData*)spawner->tied_actor, states[state]->tags_entered[tag_index].kickout_timer, states[state]->tags_entered[tag_index].kong);
+						has_tag = 1;
+					}
+					spawner = spawner->next_spawner;
+					if (spawner == 0) {
+						break;
+					}
+				}
+			}
+		}
+		if (has_tag) {
+			if (states[state]->tag_global.is_locked) {
+				Player->camera_pointer->camera_state = 9;
+				if (SwapObject) {
+					for (int i = 0; i < 4; i++) {
+						SwapObject->cameraPositions[i].xPos = states[state]->cameraPos.xPos;
+						SwapObject->cameraPositions[i].yPos = states[state]->cameraPos.yPos;
+						SwapObject->cameraPositions[i].zPos = states[state]->cameraPos.zPos;
+					}
+				}
+				if (Camera) {
+					Camera->viewportX = states[state]->cameraPos.xPos;
+					Camera->viewportY = states[state]->cameraPos.yPos;
+					Camera->viewportZ = states[state]->cameraPos.zPos;
+					Camera->viewportRotation = states[state]->camera_rotation;
+				}
+				if (Player->camera_pointer) {
+					Player->camera_pointer->facing_angle = states[state]->camera_angle;
+				}
+				tagFunc_3(Player->camera_pointer);
+			}
+			if (states[state]->tag_global.tb_void) {
+				TBVoidByte &= 0xCF;
+			}
+		}
+		delayed_load = 0;
 	}
 }

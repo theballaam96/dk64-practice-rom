@@ -301,6 +301,48 @@
 		  }
 	   },
 	   {
+		  "name":"spawnTagBarrel",
+		  "versions":{
+			 "us":"0x80689EA4"
+		  }
+	   },
+	   {
+		  "name":"tagFunc_0",
+		  "versions":{
+			 "us":"0x806C9304"
+		  }
+	   },
+	   {
+		  "name":"tagFunc_1",
+		  "versions":{
+			 "us":"0x80659620"
+		  }
+	   },
+	   {
+		  "name":"tagFunc_2",
+		  "versions":{
+			 "us":"0x80659670"
+		  }
+	   },
+	   {
+		  "name":"tagFunc_3",
+		  "versions":{
+			 "us":"0x80627878"
+		  }
+	   },
+	   {
+		  "name":"isolateSongChannel",
+		  "versions":{
+			 "us":"0x80602CE0"
+		  }
+	   },
+	   {
+		  "name":"spawnTagActors",
+		  "versions":{
+			 "us":"0x80682E38"
+		  }
+	   },
+	   {
 		  "name":"textOverlayCode",
 		  "versions":{
 			 "us":"0x8069DA54",
@@ -2096,6 +2138,12 @@
 		  "name":"ModelTwoCollisionInfo",
 		  "versions":{
 			 "us":"0x80753EF0"
+		  }
+	   },
+	   {
+		  "name":"TagInstrumentChannels",
+		  "versions":{
+			 "us":"0x8074E848"
 		  }
 	   },
 	   {

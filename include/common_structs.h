@@ -218,6 +218,17 @@ typedef struct TextOverlay {
 	/* 0x178 */ char* string;
 } TextOverlay;
 
+typedef struct tag_savestate_info {
+	/* 0x000 */ short kickout_timer;
+	/* 0x002 */ char id;
+	/* 0x003 */ char kong;
+} tag_savestate_info;
+
+typedef struct tag_global_savestate_info {
+	/* 0x000 */ char focus;
+	/* 0x001 */ char is_locked;
+	/* 0x002 */ char tb_void;
+} tag_global_savestate_info;
 typedef struct Savestate {
 	/* 0x000 */ char InventoryBase[0xC];
 	/* 0x00C */ unsigned short facing_angle;
@@ -269,6 +280,8 @@ typedef struct Savestate {
 	/* 0x3B5 */ unsigned char is_visible;
 	/* 0x3B6 */ unsigned char dktv_demo;
 	/* 0x3B7 */ unsigned char file;
+	/* 0x3B8 */ tag_savestate_info tags_entered[32];
+	/* 0x438 */ tag_global_savestate_info tag_global;
 } Savestate;
 
 typedef struct Screen {
@@ -711,9 +724,10 @@ typedef struct actorSpawnerData {
 	/* 0x004 */ floatPos positions;
 	/* 0x010 */ char unk_10[0x44-0x10];
 	/* 0x044 */ void* tied_actor;
-	/* 0x048 */ char unk_48[0x5A-0x58];
+	/* 0x048 */ char unk_48[0x5A-0x48];
 	/* 0x05A */ short id;
-	/* 0x05C */ char unk_5C[0x64-0x5C];
+	/* 0x05C */ int spawning_code;
+	/* 0x060 */ char unk_5C[0x64-0x60];
 	/* 0x064 */ void* previous_spawner;
 	/* 0x068 */ void* next_spawner;
 } actorSpawnerData;
@@ -1149,6 +1163,11 @@ typedef struct tag_paad {
 	/* 0x020 */ char unk20[0x22-0x20];
 	/* 0x022 */ short stored_facing_angle;
 	/* 0x024 */ float y_oscillation;
-	/* 0x028 */ char unk28[0x3C - 0x28];
+	/* 0x028 */ char unk28[0x2C - 0x28];
+	/* 0x02C */ float unk_x;
+	/* 0x030 */ float unk_y;
+	/* 0x034 */ float unk_z;
+	/* 0x038 */ short unk38;
+	/* 0x03A */ char unk3A[0x3C - 0x3A];
 	/* 0x03C */ int kickout_timer;
 } tag_paad;

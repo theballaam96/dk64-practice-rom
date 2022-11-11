@@ -99,7 +99,7 @@ void cFuncLoop(void) {
 	initHack(0); // Map == 0x28
 	shorthandSavestate(); // Constant
 	ramViewUpdate(); // RAM Viewer Open
-	if (TransitionSpeed < 0) {
+	if (ObjectModel2Timer <= 5) {
 		savestateLoadMapLoadVars(); // LoadVarsOnMapLoad
 		fileStateMapLoadVars();
 		loadMapVars_0();

@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 121/125(96.8%)
-		Vanilla Vars: 167/175(95.43%)
+		Functions: 121/132(91.67%)
+		Vanilla Vars: 167/176(94.89%)
 		Hack Vars: 116/116(100.0%)
 		Code: 58/62(93.55%)
-		Overall: 462/478(96.65%)
+		Overall: 462/486(95.06%)
 */
 
 //functions
@@ -50,6 +50,13 @@
 .definelabel osWritebackDCacheAll, 0x80005550
 .definelabel copyFromROM, 0x80608B30
 .definelabel getActorSpawnerIDFromTiedActor, 0x80687068
+//.definelabel spawnTagBarrel
+//.definelabel tagFunc_0
+//.definelabel tagFunc_1
+//.definelabel tagFunc_2
+//.definelabel tagFunc_3
+//.definelabel isolateSongChannel
+//.definelabel spawnTagActors
 .definelabel textOverlayCode, 0x8069BF74
 .definelabel spawnTransferredActor, 0x806C6E28
 .definelabel resolveMovementBox, 0x80727A18
@@ -279,6 +286,7 @@
 .definelabel scriptsLoadedArray, 0x807F6520
 //.definelabel PlayerCollisions
 //.definelabel ModelTwoCollisionInfo
+//.definelabel TagInstrumentChannels
 .definelabel StoredSettings, 0x807EDA10
 .definelabel SetupCheck1, 0x8074F9D0
 .definelabel SetupCheck2, 0x80747638
@@ -497,7 +505,7 @@
 //.definelabel parentCheckBypassHookWrite
 //.definelabel initHookWrite
 
-.definelabel customCodeStart, 0x805d4600
+.definelabel customCodeStart, 0x805d3600
 .definelabel customCodeUpper, 0x805d
-.definelabel customCodeLower, 0x4600
-.definelabel customCodeSize, 0x24000
+.definelabel customCodeLower, 0x3600
+.definelabel customCodeSize, 0x25000
