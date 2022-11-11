@@ -42,7 +42,7 @@ int getFakeProdRoomStatus(void) {
 	*/
 	if (CurrentMap == FRANTIC_FACTORY) {
 		if (checkFlag(FLAG_MODIFIER_PRODROOM,0)) {
-			int* m2location = ObjectModel2Pointer;
+			int* m2location = (int*)ObjectModel2Pointer;
 			int lms_index = -1;
 			int crusher_index = -1;
 			if (ObjectModel2Pointer) {

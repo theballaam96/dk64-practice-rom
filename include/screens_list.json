@@ -566,6 +566,11 @@
 			"const":true
 		},
 		{
+			"index_var":"ACTIVEMENU_SCREEN_COLLISION_MODELTWO",
+			"struct":"modeltwocol_struct",
+			"const":true
+		},
+		{
 			"index_var":"ACTIVEMENU_SCREEN_CHEATS_HELMTIMER",
 			"struct":"helmtimer_struct",
 			"const":true

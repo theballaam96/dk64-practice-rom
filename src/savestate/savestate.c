@@ -388,7 +388,7 @@ void loadVars(int instant_load) {
 	}
 	RNG = states[_focused_state]->rng;
 	if (Player) {
-		int* m2location = ObjectModel2Pointer;
+		int* m2location = (int*)ObjectModel2Pointer;
 		int switch_press_state = states[_focused_state]->japes_freediddy_switches_pressed_bitfield;
 		if (CurrentMap == 7) {
 			if (!checkFlag(FLAG_KONG_DIDDY,0)) {
@@ -558,7 +558,7 @@ void savestateHandler(int action) {
 						float squawks_y = 0;
 						float squawks_z = 0;
 						short squawks_a = 0;
-						int* m2location = ObjectModel2Pointer;
+						int* m2location = (int*)ObjectModel2Pointer;
 						if (CurrentMap == 56) {
 							// In Dark Attic
 							if (m2location) {

@@ -433,8 +433,21 @@ typedef struct snagData {
 	/* 0x09B */ char resettrigger;
 } snagData;
 
+typedef struct ModelTwoModel {
+	/* 0x000 */ float x;
+	/* 0x004 */ float y;
+	/* 0x008 */ float z;
+	/* 0x00C */ float scale;
+} ModelTwoModel;
+
 typedef struct ModelTwoData {
-	/* 0x000 */ char unk_00[0x7C];
+	/* 0x000 */ float x;
+	/* 0x004 */ float y;
+	/* 0x008 */ float z;
+	/* 0x00C */ float scale;
+	/* 0x010 */ char unk_10[0x20-0x10];
+	/* 0x020 */ ModelTwoModel* model;
+	/* 0x024 */ char unk_24[0x7C-0x24];
 	/* 0x07C */ void* behaviour_pointer;
 	/* 0x080 */ char unk_80[0x84-0x80];
 	/* 0x084 */ short object_type;
@@ -1095,3 +1108,47 @@ typedef struct guard_paad {
     /* 0x040 */ float sphere_x;
     /* 0x044 */ float sphere_z;
 } guard_paad;
+
+typedef struct collision_paad {
+    /* 0x000 */ void* attached_attribute;
+    /* 0x004 */ float xScale;
+    /* 0x008 */ float yScale;
+    /* 0x00C */ float zScale;
+    /* 0x010 */ char countdown;
+    /* 0x011 */ char subtype;
+    /* 0x012 */ char force_y;
+    /* 0x013 */ char fade_countdown;
+} collision_paad;
+
+typedef struct player_collision_data {
+	/* 0x000 */ float x;
+	/* 0x004 */ float y;
+	/* 0x008 */ float z;
+	/* 0x00C */ float scale;
+} player_collision_data;
+
+typedef struct modeltwo_collision_info {
+    /* 0x000 */ unsigned short type;
+    /* 0x002 */ char collectable_type;
+    /* 0x003 */ char unk3;
+    /* 0x004 */ float unk4;
+    /* 0x008 */ float unk8;
+    /* 0x00C */ short intended_actor;
+    /* 0x00E */ short actor_equivalent;
+    /* 0x010 */ short hitbox_y_center;
+    /* 0x012 */ short hitbox_scale;
+} modeltwo_collision_info;
+
+typedef struct tag_paad {
+	/* 0x000 */ void* associated_player;
+	/* 0x004 */ short scroll_timer;
+	/* 0x006 */ unsigned char current_index;
+	/* 0x007 */ unsigned char previous_index;
+	/* 0x008 */ void* tag_actor_pointers[5];
+	/* 0x01C */ void* unk1C;
+	/* 0x020 */ char unk20[0x22-0x20];
+	/* 0x022 */ short stored_facing_angle;
+	/* 0x024 */ float y_oscillation;
+	/* 0x028 */ char unk28[0x3C - 0x28];
+	/* 0x03C */ int kickout_timer;
+} tag_paad;

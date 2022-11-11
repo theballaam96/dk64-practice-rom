@@ -28,25 +28,26 @@ extern const char* watch_sysenv_array[9];
 #define WATCH_LOADEDACTORCOUNT_INDEX 18
 #define WATCH_2015FILE_INDEX 19
 extern const char watches_sysenv_indexes[9];
-extern const char* watch_timers_array[4];
+extern const char* watch_timers_array[5];
 #define WATCH_TIMER_INDEX 20
 #define WATCH_GKTIMER_INDEX 21
 #define WATCH_ISG_INDEX 22
-#define WATCH_IGT_INDEX 23
-extern const char watches_timers_indexes[4];
+#define WATCH_TAGKICKOUT_INDEX 23
+#define WATCH_IGT_INDEX 24
+extern const char watches_timers_indexes[5];
 extern const char* watch_assist_array[2];
-#define WATCH_PHASEASSISTANT_INDEX 24
-#define WATCH_FAIRY_INDEX 25
+#define WATCH_PHASEASSISTANT_INDEX 25
+#define WATCH_FAIRY_INDEX 26
 extern const char watches_assist_indexes[2];
 extern const char* watch_fake_array[2];
-#define WATCH_FAKEKEY_INDEX 26
-#define WATCH_PRODROOM_INDEX 27
+#define WATCH_FAKEKEY_INDEX 27
+#define WATCH_PRODROOM_INDEX 28
 extern const char watches_fake_indexes[2];
-#define WATCH_SPAWNSNAG_INDEX 28
-#define WATCH_DYNWATCH_INDEX 29
-extern const char* watch_viewed_array[29];
-extern const char* watch_change_array[29];
-extern const char* watch_listed_array[29];
+#define WATCH_SPAWNSNAG_INDEX 29
+#define WATCH_DYNWATCH_INDEX 30
+extern const char* watch_viewed_array[30];
+extern const char* watch_change_array[30];
+extern const char* watch_listed_array[30];
 
 extern void setWatch(void);
 extern void toggleInputDisplay(void);

@@ -79,5 +79,5 @@ const Screen colmisc_struct = {
 	.FunctionArray = colmisc_functions,
 	.ArrayItems = 1,
 	.ParentScreen = ACTIVEMENU_SCREEN_COLLISION_ROOT,
-	.ParentPosition = 1,
+	.ParentPosition = 2,
 };

@@ -18,7 +18,7 @@ void tickTimerReady(void) {
 void checkTouchingGB(void) {
 	unsigned short _touch_id;
 	short _touch_index;
-	int* m2location = ObjectModel2Pointer;
+	int* m2location = (int*)ObjectModel2Pointer;
 	TouchingGB = 0;
 	if (ModelTwoTouchCount) {
 		for (int i = 0; i < ModelTwoTouchCount; i++) {

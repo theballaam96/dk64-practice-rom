@@ -868,7 +868,7 @@ void handleWatch(void) {
 							int snag_list_index = ViewedSnagWatches[j];
 							int _map = snag_data[snag_list_index].map;
 							int _id = snag_data[snag_list_index].om2_id;
-							int* m2location = ObjectModel2Pointer;
+							int* m2location = (int*)ObjectModel2Pointer;
 							encodedSnagState snag_state = {
 								.state = -1,
 								.check = -1,
@@ -1175,6 +1175,34 @@ void handleWatch(void) {
 							}
 							watch_cache_array[j][0] = WATCH_2015FILE_INDEX;
 							watch_cache_array[j][1] = file_slot_index;
+						}
+					case WATCH_TAGKICKOUT_INDEX:
+						// Lowest Tag Kickout Timer
+						{
+							int lowest_kickout = 9999;
+							int found_tag = 0;
+							for (int k = 0; k < LoadedActorCount; k++) {
+								actorData* actor = LoadedActorArray[k].actor;
+								if (actor) {
+									int actorType = actor->actorType;
+									if ((actorType == 98) || (actorType == 136) || (actorType == 137)) {
+										tag_paad* paad = actor->paad;
+										int kickout = 9000 - paad->kickout_timer;
+										if (lowest_kickout > kickout) {
+											lowest_kickout = kickout;
+											found_tag = 1;
+										}
+									}
+								}
+							}
+							if (!found_tag) {
+								lowest_kickout = 9000;
+							}
+							if ((watch_cache_array[j][1] != lowest_kickout) || (watch_cache_array[j][0] != WATCH_TAGKICKOUT_INDEX)) {
+								headerFormatter("TAG KICKOUT TIMER: ",0,lowest_kickout,INT_TYPE,j);
+							}
+							watch_cache_array[j][0] = WATCH_TAGKICKOUT_INDEX;
+							watch_cache_array[j][1] = lowest_kickout;
 						}
 					break;
 				}

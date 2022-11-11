@@ -107,6 +107,7 @@ void cFuncLoop(void) {
 	SavePromptIsSaving = 0;
 	displayInput(); // Constant
 	parseLoadingZones();
+	handlePlayerCollision();
 	controlGuardSpheres();
 	if (DisablePositionButtons == 1) {
 		toggleFrameAdvanceState(); // DisablePositionButtons == 1

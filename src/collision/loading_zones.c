@@ -169,12 +169,13 @@ static char* drawmode_array[] = {
 
 static char* colroot_array[] = {
 	"TRIGGERS",
+    "MODEL TWO",
     "MISC",
     drawmode_translucent,
 };
 
 void openCollisionRootMenu(void) {
-    colroot_array[2] = drawmode_array[(int)collisiondrawmode];
+    colroot_array[3] = drawmode_array[(int)collisiondrawmode];
 	changeMenu(ACTIVEMENU_SCREEN_COLLISION_ROOT);
 }
 
@@ -222,6 +223,7 @@ void toggleAllTriggers(void) {
 
 static const int colroot_functions[] = {
 	(int)&openTriggersMenu,
+    (int)&openModelTwoMenu,
     (int)&openCollisionMisc,
     (int)&toggledrawmode,
 };
@@ -240,7 +242,7 @@ static const int triggers_functions[] = {
 const Screen colroot_struct = {
 	.TextArray = (int*)colroot_array,
 	.FunctionArray = colroot_functions,
-	.ArrayItems = 3,
+	.ArrayItems = 4,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 4,
 };

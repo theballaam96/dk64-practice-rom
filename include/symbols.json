@@ -2087,6 +2087,18 @@
 		  }
 	   },
 	   {
+		  "name":"PlayerCollisions",
+		  "versions":{
+			 "us":"0x807FD740"
+		  }
+	   },
+	   {
+		  "name":"ModelTwoCollisionInfo",
+		  "versions":{
+			 "us":"0x80753EF0"
+		  }
+	   },
+	   {
 		  "name":"StoredSettings",
 		  "versions":{
 			 "us":"0x807ED5A0",
@@ -2831,6 +2843,11 @@
 	   {
 		  "name":"triggers_viewable",
 		  "address":"0x807FFF8D",
+		  "size_comment":"u8"
+	   },
+	   {
+		  "name":"modeltwo_viewable",
+		  "address":"0x807FFF8E",
 		  "size_comment":"u8"
 	   },
 	   {

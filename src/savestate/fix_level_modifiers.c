@@ -12,7 +12,7 @@ void loadObjScript(int obj_instance_id) {
 		scriptsRunningCount = script_index + 1;
 		scriptsLoadedArray[script_index] = obj_instance_id;
 		int obj_idx = convertIDToIndex(obj_instance_id);
-		int* m2location = ObjectModel2Pointer;
+		int* m2location = (int*)ObjectModel2Pointer;
 		ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,obj_idx);
 		int* behav = _object->behaviour_pointer;
 		updateObjectScript(behav);

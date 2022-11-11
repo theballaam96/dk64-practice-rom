@@ -106,6 +106,10 @@
                 "prop":"isg"
              },
              {
+                "text":"Tag Kickout Timer",
+                "prop":"tagkickout"
+             },
+             {
                 "text":"In-Game Time",
                 "prop":"igt"
              }

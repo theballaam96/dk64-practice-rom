@@ -11,7 +11,7 @@ void openSnagMenu(void) {
 
 void visifySnagGBs(void) {
 	int _count = ObjectModel2Count;
-	int* m2location = ObjectModel2Pointer;
+	int* m2location = (int*)ObjectModel2Pointer;
 	for (int i = 0; i < _count; i++) {
 		ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,i);
 		if ((_object->object_type == 0x74) || (_object->object_type == 0x90)) {
@@ -26,7 +26,7 @@ void visifySnagGBs(void) {
 
 void resetSnagGBs(void) {
 	int _count = ObjectModel2Count;
-	int* m2location = ObjectModel2Pointer;
+	int* m2location = (int*)ObjectModel2Pointer;
 	for (int i = 0; i < _count; i++) {
 		ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,i);
 		if ((_object->object_type == 0x74) || (_object->object_type == 0x90)) {

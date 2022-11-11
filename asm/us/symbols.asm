@@ -5,10 +5,10 @@
 	Thanks.
 	Stats:
 		Functions: 125/125(100.0%)
-		Vanilla Vars: 173/173(100.0%)
-		Hack Vars: 115/115(100.0%)
+		Vanilla Vars: 175/175(100.0%)
+		Hack Vars: 116/116(100.0%)
 		Code: 62/62(100.0%)
-		Overall: 475/475(100.0%)
+		Overall: 478/478(100.0%)
 */
 
 //functions
@@ -277,6 +277,8 @@
 .definelabel scriptsRunningCount, 0x807F60A8
 .definelabel scriptsAttemptLoadCount, 0x807F7140
 .definelabel scriptsLoadedArray, 0x807F60B0
+.definelabel PlayerCollisions, 0x807FD740
+.definelabel ModelTwoCollisionInfo, 0x80753EF0
 .definelabel StoredSettings, 0x807ED5A0
 .definelabel SetupCheck1, 0x807500B0
 .definelabel SetupCheck2, 0x80747D78
@@ -407,6 +409,7 @@
 .definelabel jetmanColorIndex, 0x807FFC7E // u8
 .definelabel disableMapGeometry, 0x807FFC7F // u8
 .definelabel triggers_viewable, 0x807FFF8D // u8
+.definelabel modeltwo_viewable, 0x807FFF8E // u8
 .definelabel customCollisionVerts, 0x807FFC80 // ptr
 .definelabel vanillaVertBase, 0x807FFC84 // ptr
 .definelabel objectSignalsCountCopy, 0x807FFC88 // u8

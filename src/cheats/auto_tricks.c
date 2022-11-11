@@ -64,7 +64,7 @@ void DiddyMoonMoves(void) {
 			if (Player->control_state == 0x26) {
 				if (Player->control_state_progress == 0) {
 					if ((Player->touching_object == 1) && (AutoStartailOn)) {
-						int* m2location = ObjectModel2Pointer;
+						int* m2location = (int*)ObjectModel2Pointer;
 						int pad_index = convertSubIDToIndex(Player->standing_on_index);
 						if (pad_index > -1) {
 							ModelTwoData* _object = getObjectArrayAddr(m2location,0x90,pad_index);

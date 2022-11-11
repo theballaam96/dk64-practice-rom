@@ -2,7 +2,7 @@
 
 void getSandstormAddress(void) {
 	short _torch_index = -1;
-	int* m2location = ObjectModel2Pointer;
+	int* m2location = (int*)ObjectModel2Pointer;
 	if (CurrentMap == 0x26) {
 		if (ObjectModel2Timer == 1) {
 			_torch_index = convertIDToIndex(0xC1);

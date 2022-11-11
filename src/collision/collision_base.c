@@ -4,17 +4,6 @@
 #define COLLISION_CYLINDER 1
 #define COLLISION_SPHERE 2
 
-typedef struct collision_paad {
-    /* 0x000 */ void* attached_attribute;
-    /* 0x004 */ float xScale;
-    /* 0x008 */ float yScale;
-    /* 0x00C */ float zScale;
-    /* 0x010 */ char countdown;
-    /* 0x011 */ char subtype;
-    /* 0x012 */ char force_y;
-    /* 0x013 */ char fade_countdown;
-} collision_paad;
-
 // static const unsigned char collision_models[] = {0xE8,0x8F,0xBC};
 static const unsigned char collision_models[] = {0xED,0xEE,0xEF};
 

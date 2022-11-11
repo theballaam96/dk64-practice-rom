@@ -121,5 +121,6 @@ const Screen* menu_screens[] = {
 	&colroot_struct,
 	&triggers_struct,
 	&colmisc_struct,
+	&modeltwocol_struct,
 	&helmtimer_struct,
 };

@@ -58,23 +58,25 @@ static const char viewed_gktimer[] = "} GIANT KOSHA TIMER";
 static const char change_gktimer[] = "{ GIANT KOSHA TIMER";
 static const char viewed_isg[] = "} INTRO STORY TIMER";
 static const char change_isg[] = "{ INTRO STORY TIMER";
+static const char viewed_tagkickout[] = "} TAG KICKOUT TIMER";
+static const char change_tagkickout[] = "{ TAG KICKOUT TIMER";
 static const char viewed_igt[] = "} IN-GAME TIME";
 static const char change_igt[] = "{ IN-GAME TIME";
-const char watches_timers_indexes[] = {20,21,22,23};
+const char watches_timers_indexes[] = {20,21,22,23,24};
 
 // assist
 static const char viewed_phaseassistant[] = "} PHASEWALK ASSISTANT";
 static const char change_phaseassistant[] = "{ PHASEWALK ASSISTANT";
 static const char viewed_fairy[] = "} FAIRY VIEWER";
 static const char change_fairy[] = "{ FAIRY VIEWER";
-const char watches_assist_indexes[] = {24,-1};
+const char watches_assist_indexes[] = {25,-1};
 
 // fake
 static const char viewed_fakekey[] = "} KEY 8";
 static const char change_fakekey[] = "{ KEY 8";
 static const char viewed_prodroom[] = "} PRODUCTION ROOM";
 static const char change_prodroom[] = "{ PRODUCTION ROOM";
-const char watches_fake_indexes[] = {26,27};
+const char watches_fake_indexes[] = {27,28};
 
 const char* watch_viewed_array[] = {
 	viewed_position,
@@ -99,6 +101,7 @@ const char* watch_viewed_array[] = {
 	viewed_timer,
 	viewed_gktimer,
 	viewed_isg,
+	viewed_tagkickout,
 	viewed_igt,
 	viewed_phaseassistant,
 	viewed_fairy,
@@ -131,6 +134,7 @@ const char* watch_listed_array[] = {
 	change_timer,
 	change_gktimer,
 	change_isg,
+	change_tagkickout,
 	change_igt,
 	change_phaseassistant,
 	change_fairy,
@@ -163,6 +167,7 @@ const char* watch_change_array[] = {
 	change_timer,
 	change_gktimer,
 	change_isg,
+	change_tagkickout,
 	change_igt,
 	change_phaseassistant,
 	change_fairy,
@@ -242,10 +247,12 @@ const char* watch_timers_array[] = {
 	change_timer,
 	change_gktimer,
 	change_isg,
+	change_tagkickout,
 	change_igt,
 };
 
 const int watch_timers_functions[] = {
+	(int)&setWatch,
 	(int)&setWatch,
 	(int)&setWatch,
 	(int)&setWatch,
@@ -255,7 +262,7 @@ const int watch_timers_functions[] = {
 const Screen watch_timers_struct = {
 	.TextArray = (int*)watch_timers_array,
 	.FunctionArray = watch_timers_functions,
-	.ArrayItems = 4,
+	.ArrayItems = 5,
 	.ParentScreen = ACTIVEMENU_SCREEN_WATCH_ROOT,
 	.ParentPosition = 1,
 };

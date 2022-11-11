@@ -155,7 +155,7 @@ extern char LogosDestMode;
 extern char Gamemode;
 extern unsigned char EEPROMSlots[4];
 extern unsigned char File;
-extern int* ObjectModel2Pointer;
+extern ModelTwoData* ObjectModel2Pointer;
 extern int ObjectModel2Timer;
 extern int ObjectModel2Count;
 extern int ObjectModel2Count_Dupe;
@@ -305,6 +305,8 @@ extern short delayedKillsCount;
 extern int lockStackCount;
 extern short scriptsRunningCount;
 extern unsigned char scriptsAttemptLoadCount;
+extern player_collision_data PlayerCollisions[4];
+extern modeltwo_collision_info ModelTwoCollisionInfo[42];
 
 //hack data
 extern int TestVariable;
@@ -421,6 +423,7 @@ extern char disableLockedCam;
 extern dynamicWatchStruct dynamic_watches[4];
 extern unsigned char doubleBeaverEnabledBitfield;
 extern unsigned char triggers_viewable;
+extern unsigned char modeltwo_viewable;
 extern unsigned char altCollisionEnabled;
 extern unsigned char collisiondrawmode;
 extern char disablelightning;
