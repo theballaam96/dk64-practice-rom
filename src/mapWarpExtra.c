@@ -548,6 +548,24 @@ void setDataStates(int state, int eightbit) {
 	eightbit_state = eightbit;
 }
 
+static const unsigned char unused_minigame_maps[] = {
+	117, // Snide: KKosh
+	123, // Snide: Batty BB
+	137, // Snide: BBother
+	138, // Snide: SSeek
+	143, // Snide: Krazy KK
+	66, // Unused: MMMaul (Hard)
+	124, // Unused: MMMaul (Insane)
+	147, // Unused: PPPanic (Hard)
+	135, // Unused: SSSortie (Hard)
+	132, // Unused: SSSalvage (Hard)
+	67, // Unused: SSnatch (Normal)
+	75, // Unused: SSnatch (Hard)
+	125, // Unused: SSnatch (Insane)
+	127, // Unused: SSnoop (Easy)
+	128, // Unused: SSnoop (Hard)
+};
+
 void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 	// Fixes some minor bugs with the following map categories
 		// Crowns
@@ -576,6 +594,13 @@ void handleMapWarping(int map, int exit, int levelIndex, load_modes load_mode) {
 				barrel_index = i;
 			} else if (barrel_index == -1) {
 				barrel_index = i;
+			}
+		}
+	}
+	if (barrel_index == -1) {
+		for (int i = 0; i < sizeof(unused_minigame_maps); i++) {
+			if (map == unused_minigame_maps[i]) {
+				barrel_index = 0; // Default
 			}
 		}
 	}

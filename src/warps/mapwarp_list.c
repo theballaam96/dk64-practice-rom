@@ -39,6 +39,8 @@ const MapWarp* warping_struct[] = {
 	&map_bonuscastle_struct,
 	&map_bonushelm_struct,
 	&map_bonusisles_struct,
+	&map_bonussnide_struct,
+	&map_bonusunused_struct,
 };
 
 const int maps_container_functions[] = {

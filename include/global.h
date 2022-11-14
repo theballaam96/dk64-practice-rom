@@ -293,6 +293,8 @@ extern const MapWarp map_bonuscaves_struct;
 extern const MapWarp map_bonuscastle_struct;
 extern const MapWarp map_bonushelm_struct;
 extern const MapWarp map_bonusisles_struct;
+extern const MapWarp map_bonussnide_struct;
+extern const MapWarp map_bonusunused_struct;
 
 extern const flagMenuData flagmenu_kongmenu;
 extern const flagMenuData flagmenu_keysinmenu;

@@ -38,6 +38,18 @@ static const file_state_indexes filestates_101jfm_stateindex[] = {
 	_101JFM_CAVES,
 	_101GEN_FUNGI,
 };
+static const file_state_indexes filestates_101wbr_stateindex[] = {
+	_101FH_AZTEC1,
+	_101FH_CASTLE1,
+	_101FH_JAPES,
+	_101FH_FACTORY,
+	_101FH_GALLEON,
+	_101FH_HELM,
+	_101FH_CASTLE2,
+	_101FH_AZTEC2,
+	_101FH_CAVES,
+	_101FH_FUNGI,
+};
 static const file_state_indexes filestates_101ffm_stateindex[] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 static const file_state_indexes filestates_glitchless_stateindex[] = {
 	GLITCHLESS_ANY_JAPES1,
@@ -95,6 +107,10 @@ void openFileState101JFMMenu(void) {
 
 void openFileState101FFMMenu(void) {
 	changeMenu(ACTIVEMENU_SCREEN_FILE_101FFM);
+}
+
+void openFileState101WBRMenu(void) {
+	changeMenu(ACTIVEMENU_SCREEN_FILE_101WBR);
 }
 
 void openFileStateGlitchlessMenu(void) {
@@ -179,6 +195,10 @@ void loadFileState(void) {
 		case ACTIVEMENU_SCREEN_FILE_101FFM:
 			// 101% FFM Route
 			_stateindex = (int)filestates_101ffm_stateindex[_position];
+			break;
+		case ACTIVEMENU_SCREEN_FILE_101WBR:
+			// 101% WBR (Fun Hideout) Route
+			_stateindex = (int)filestates_101wbr_stateindex[_position];
 			break;
 		case ACTIVEMENU_SCREEN_FILE_GLITCHLESSANY:
 			_stateindex = (int)filestates_glitchless_stateindex[_position];
@@ -314,19 +334,21 @@ const Screen filestates_nle_struct = {
 static const char* filestates_101main_array[] = {
 	"ORGANIC ROUTE",
 	"JAPES FOR MOVES ROUTE",
+	"WRONG BARREL RESOLUTION ROUTE",
 	"FACTORY FOR MOVES ROUTE",
 };
 
 static const int filestates_101main_functions[] = {
 	(int)&openFileState101OrganicMenu,
 	(int)&openFileState101JFMMenu,
+	(int)&openFileState101WBRMenu,
 	(int)&openFileState101FFMMenu,
 };
 
 const Screen filestates_101main_struct = {
 	.TextArray = (int*)filestates_101main_array,
 	.FunctionArray = filestates_101main_functions,
-	.ArrayItems = 2,
+	.ArrayItems = 3,
 	.ParentScreen = ACTIVEMENU_SCREEN_FILE_ROOT,
 	.ParentPosition = 2
 };
@@ -419,6 +441,40 @@ const Screen filestates_101jfm_struct = {
 	.ParentPosition = 1
 };
 
+static const char* filestates_101wbr_array[] = {
+	"AZTEC 1",
+	"CASTLE 1",
+	"JAPES",
+	"FACTORY",
+	"GALLEON",
+	"HELM",
+	"CASTLE 2",
+	"AZTEC 2",
+	"CAVES",
+	"FUNGI 2"
+};
+
+static const int filestates_101wbr_functions[] = {
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates,
+	(int)&loadOtherStates
+};
+
+const Screen filestates_101wbr_struct = {
+	.TextArray = (int*)filestates_101wbr_array,
+	.FunctionArray = filestates_101wbr_functions,
+	.ArrayItems = 10,
+	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
+	.ParentPosition = 2
+};
+
 static const char* filestates_101ffm_array[] = {
 	"AZTEC 1",
 	"CASTLE 1",
@@ -450,7 +506,7 @@ const Screen filestates_101ffm_struct = {
 	.FunctionArray = filestates_101ffm_functions,
 	.ArrayItems = 10,
 	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
-	.ParentPosition = 2
+	.ParentPosition = 3
 };
 
 static const char* filestates_glitchless_array[] = {

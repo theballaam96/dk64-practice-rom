@@ -206,6 +206,11 @@
 			"const":true
 		},
 		{
+			"index_var":"ACTIVEMENU_SCREEN_FILE_101WBR",
+			"struct":"filestates_101wbr_struct",
+			"const":true
+		},
+		{
 			"index_var":"ACTIVEMENU_SCREEN_SAVESTATE_VIEW",
 			"struct":"viewstate_struct",
 			"const":true
@@ -478,6 +483,16 @@
 		{
 			"index_var":"ACTIVEMENU_SCREEN_MAP_BONUS_ISLES",
 			"struct":"bonusisles_mapwarp_struct",
+			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_MAP_BONUS_SNIDE",
+			"struct":"bonussnide_mapwarp_struct",
+			"const":true
+		},
+		{
+			"index_var":"ACTIVEMENU_SCREEN_MAP_BONUS_UNUSED",
+			"struct":"bonusunused_mapwarp_struct",
 			"const":true
 		},
 		{

@@ -18,6 +18,16 @@ static const char mapBonusSSnatch[] = "STASH SNATCH";
 static const char mapBonusSSnoop[] = "STEALTHY SNOOP";
 static const char mapBonusTTTrouble[] = "TEETERING TURTLE TROUBLE";
 
+static const char mapBonusMMMaulHard[] = "MAD MAZE MAUL <120 SECONDS>";
+static const char mapBonusMMMaulInsane[] = "MAD MAZE MAUL <125 SECONDS>";
+static const char mapBonusSSnatchNormal[] = "STASH SNATCH <16 COINS>";
+static const char mapBonusSSnatchHard[] = "STASH SNATCH <4 COINS>";
+static const char mapBonusSSnatchInsane[] = "STASH SNATCH <33 COINS>";
+static const char mapBonusSSSortieHard[] = "SPEEDY SWING SORTIE <ZINGERS>";
+static const char mapBonusSSSalvageHard[] = "SPLISH SPLASH SALVAGE <15 COINS>";
+static const char mapBonusSSnoopEasy[] = "STEALTHY SNOOP <60 SECONDS>";
+static const char mapBonusSSnoopHard[] = "STEALTHY SNOOP <90 SECONDS>";
+static const char mapBonusPPPanicHard[] = "PERIL PATH PANIC <12 FAIRIES>";
 
 void openBonusMainMenu(void) {
 	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_ROOT);
@@ -59,6 +69,14 @@ void openBonusIslesMenu(void) {
 	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_ISLES);
 }
 
+void openBonusSnideMenu(void) {
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_SNIDE);
+}
+
+void openBonusUnusedMenu(void) {
+	changeMenu(ACTIVEMENU_SCREEN_MAP_BONUS_UNUSED);
+}
+
 void initMapWarpLast(void) {
 	setDataStates(0,0);
 	warpToMap();
@@ -80,6 +98,8 @@ static const char* bonusmain_mapwarp_array[] = {
 	"CASTLE BARRELS",
 	"HELM BARRELS",
 	"ISLES BARRELS",
+	"SNIDE MINIGAMES",
+	"UNUSED MINIGAMES",
 };
 
 static const int bonusmain_mapwarp_functions[] = {
@@ -91,13 +111,15 @@ static const int bonusmain_mapwarp_functions[] = {
 	(int)&openBonusCavesMenu,
 	(int)&openBonusCastleMenu,
 	(int)&openBonusHelmMenu,
-	(int)&openBonusIslesMenu
+	(int)&openBonusIslesMenu,
+	(int)&openBonusSnideMenu,
+	(int)&openBonusUnusedMenu,
 };
 
 const Screen bonusmain_mapwarp_struct = {
 	.TextArray = (int*)bonusmain_mapwarp_array,
 	.FunctionArray = bonusmain_mapwarp_functions,
-	.ArrayItems = 9,
+	.ArrayItems = 11,
 	.ParentScreen = ACTIVEMENU_SCREEN_MAP_ROOT,
 	.ParentPosition = 10
 };
@@ -582,4 +604,136 @@ const Screen bonusisles_mapwarp_struct = {
 	.ArrayItems = 5,
 	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
 	.ParentPosition = 8
+};
+
+///////////
+// SNIDE //
+///////////
+
+static const unsigned char bonussnide_destmap[] = {
+	117, // KKosh
+	123, // Batty BB
+	137, // BBother
+	138, // SSeek
+	143, // Krazy KK
+	146, // PPPanic
+	150, // BBBash
+	120, // TTTrouble
+};
+
+static const unsigned char bonussnide_destexit[] = {
+	0, // KKosh
+	0, // Batty BB
+	0, // BBother
+	0, // SSeek
+	0, // Krazy KK
+	0, // PPPanic
+	0, // BBBash
+	0, // TTTrouble
+};
+
+const MapWarp map_bonussnide_struct = {
+	.maps = bonussnide_destmap,
+	.exits = bonussnide_destexit,
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_SNIDE
+};
+
+static const char* bonussnide_mapwarp_array[] = {
+	mapBonusKKosh,
+	mapBonusBBBandit,
+	mapBonusBBother,
+	mapBonusSSeek,
+	mapBonusKrazyKK,
+	mapBonusPPPanic,
+	mapBonusBBBash,
+	mapBonusTTTrouble,
+};
+
+static const int bonussnide_mapwarp_functions[] = {
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+};
+
+const Screen bonussnide_mapwarp_struct = {
+	.TextArray = (int*)bonussnide_mapwarp_array,
+	.FunctionArray = bonussnide_mapwarp_functions,
+	.ArrayItems = 8,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
+	.ParentPosition = 9
+};
+
+////////////
+// UNUSED //
+////////////
+
+static const unsigned char bonusunused_destmap[] = {
+	66, // MMMaul (Hard)
+	124, // MMMaul (Insane)
+	147, // PPPanic (Hard)
+	135, // SSSortie (Hard)
+	132, // SSSalvage (Hard)
+	67, // SSnatch (Normal)
+	75, // SSnatch (Hard)
+	125, // SSnatch (Insane)
+	127, // SSnoop (Easy)
+	128, // SSnoop (Hard)
+};
+
+static const unsigned char bonusunused_destexit[] = {
+	0, // MMMaul (Hard)
+	0, // MMMaul (Insane)
+	0, // PPPanic (Hard)
+	0, // SSSortie (Hard)
+	0, // SSSalvage (Hard)
+	0, // SSnatch (Normal)
+	0, // SSnatch (Hard)
+	0, // SSnatch (Insane)
+	0, // SSnoop (Easy)
+	0, // SSnoop (Hard)
+};
+
+const MapWarp map_bonusunused_struct = {
+	.maps = bonusunused_destmap,
+	.exits = bonusunused_destexit,
+	.screen = ACTIVEMENU_SCREEN_MAP_BONUS_UNUSED
+};
+
+static const char* bonusunused_mapwarp_array[] = {
+	mapBonusMMMaulHard,
+	mapBonusMMMaulInsane,
+	mapBonusPPPanicHard,
+	mapBonusSSSortieHard,
+	mapBonusSSSalvageHard,
+	mapBonusSSnatchNormal,
+	mapBonusSSnatchHard,
+	mapBonusSSnatchInsane,
+	mapBonusSSnoopEasy,
+	mapBonusSSnoopHard,
+};
+
+static const int bonusunused_mapwarp_functions[] = {
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+	(int)&initMapWarpLast,
+};
+
+const Screen bonusunused_mapwarp_struct = {
+	.TextArray = (int*)bonusunused_mapwarp_array,
+	.FunctionArray = bonusunused_mapwarp_functions,
+	.ArrayItems = 10,
+	.ParentScreen = ACTIVEMENU_SCREEN_MAP_BONUS_ROOT,
+	.ParentPosition = 10
 };

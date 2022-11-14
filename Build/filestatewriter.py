@@ -62,6 +62,16 @@ state_files = [
 			"castle2_jfm.bin",
 			"aztec2_jfm.bin",
 			"caves_jfm.bin",
+			"aztec1_fh.bin",
+			"castle1_fh.bin",
+			"japes_fh.bin",
+			"factory_fh.bin",
+			"galleon_fh.bin",
+			"helm_fh.bin",
+			"castle2_fh.bin",
+			"aztec2_fh.bin",
+			"caves_fh.bin",
+			"fungi_fh.bin"
 		]
 	},
 	{
