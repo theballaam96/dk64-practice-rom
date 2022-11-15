@@ -68,6 +68,7 @@ state_files = [
 			"factory_fh.bin",
 			"galleon_fh.bin",
 			"helm_fh.bin",
+			"helm2_fh.bin",
 			"castle2_fh.bin",
 			"aztec2_fh.bin",
 			"caves_fh.bin",

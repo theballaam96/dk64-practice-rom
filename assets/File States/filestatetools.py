@@ -66,17 +66,17 @@ def addGB(file, kong, level):
 		fh.seek(0x7FC950 + (kong * 0x5E) + 0x42 + (2 * level))
 		fh.write((old + 1).to_bytes(2, "big"))
 
-# for x in ("helm","castle2","aztec2","caves","fungi"):
+# for x in ["helm2"]:
 # 	print(x)
 # 	print(hex(checkFlag(f"./101/RAM Dump/{x}_fh.bin",0x35,1)))
 # 	print(hex(checkFlag(f"./101/RAM Dump/{x}_fh.bin",0x35,3)))
-# 	# print(getGBCount(f"./101/RAM Dump/{x}_fh.bin", 3, 7))
+# 	print(getGBCount(f"./101/RAM Dump/{x}_fh.bin", 3, 7))
 # 	setFlag(f"./101/RAM Dump/{x}_fh.bin",0x35,1)
 # 	setFlag(f"./101/RAM Dump/{x}_fh.bin",0x35,3)
-# 	# addGB(f"./101/RAM Dump/{x}_fh.bin", 3, 7)
+# 	addGB(f"./101/RAM Dump/{x}_fh.bin", 3, 7)
 # 	print(hex(checkFlag(f"./101/RAM Dump/{x}_fh.bin",0x35,1)))
 # 	print(hex(checkFlag(f"./101/RAM Dump/{x}_fh.bin",0x35,3)))
-# 	# print(getGBCount(f"./101/RAM Dump/{x}_fh.bin", 3, 7))
+# 	print(getGBCount(f"./101/RAM Dump/{x}_fh.bin", 3, 7))
 # 	print("")
 
 # print(hex(checkFlag("./101/RAM Dump/castle2_fh.bin",0x3F,1)))

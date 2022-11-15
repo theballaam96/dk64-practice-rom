@@ -44,7 +44,8 @@ static const file_state_indexes filestates_101wbr_stateindex[] = {
 	_101FH_JAPES,
 	_101FH_FACTORY,
 	_101FH_GALLEON,
-	_101FH_HELM,
+	_101FH_HELM1,
+	_101FH_HELM2,
 	_101FH_CASTLE2,
 	_101FH_AZTEC2,
 	_101FH_CAVES,
@@ -447,7 +448,8 @@ static const char* filestates_101wbr_array[] = {
 	"JAPES",
 	"FACTORY",
 	"GALLEON",
-	"HELM",
+	"HELM 1",
+	"HELM 2",
 	"CASTLE 2",
 	"AZTEC 2",
 	"CAVES",
@@ -464,13 +466,14 @@ static const int filestates_101wbr_functions[] = {
 	(int)&loadOtherStates,
 	(int)&loadOtherStates,
 	(int)&loadOtherStates,
+	(int)&loadOtherStates,
 	(int)&loadOtherStates
 };
 
 const Screen filestates_101wbr_struct = {
 	.TextArray = (int*)filestates_101wbr_array,
 	.FunctionArray = filestates_101wbr_functions,
-	.ArrayItems = 10,
+	.ArrayItems = 11,
 	.ParentScreen = ACTIVEMENU_SCREEN_FILE_101ROOT,
 	.ParentPosition = 2
 };
