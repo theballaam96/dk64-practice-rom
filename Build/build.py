@@ -215,6 +215,14 @@ base_file_dict = [
 		"do_not_compress": True,
 		"versions":[0,1,2],
 	},
+	{
+		"name": "Test Room floor geo",
+		"pointer_table_index": 1,
+		"file_index": 0,
+		"source_file": "build/newgeo_0.bin",
+		"do_not_delete_source": True,
+		"versions": [0, 1, 2],
+	}
 ]
 
 model_file_index = 0xEC
