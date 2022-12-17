@@ -87,12 +87,12 @@ def getFile(table_name: str, map_index: int, starting_verts: list = []):
 starting_dl = (
     (0xE7000000, 0x00000000),
     (0xE3000A01, 0x00000000),
-    (0xE200001C, 0x00552078),
+    (0xE200001C, 0x0C184DD8),
     (0xFC41FE83, 0xFFFFF9FC),
     (0xD7000002, 0xFFFFFFFF),
     (0xE3000D01, 0x00000000),
     (0xE3001201, 0x00002000),
-    (0xD9FFFFFF, 0x00000400),
+    (0xD9FFFFFF, 0x00000401),
 )
 
 joining_dl = (
