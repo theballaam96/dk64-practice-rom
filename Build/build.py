@@ -18,6 +18,7 @@ from filestatewriter import writeFileStatesToDict, wipeStateFiles
 from heap_handle import getHeapLocation, getHeapSize
 import model_extractor
 import check_unused
+import build_collision_geo
 
 ROMName = "rom/temp_rom.z64"
 newROMName = "rom/dk64-practice-rom.z64"
@@ -218,8 +219,8 @@ base_file_dict = [
 	{
 		"name": "Test Room floor geo",
 		"pointer_table_index": 1,
-		"file_index": 0,
-		"source_file": "build/newgeo_0.bin",
+		"file_index": 0x0,
+		"source_file": "newgeo_0.bin",
 		"do_not_delete_source": True,
 		"versions": [0, 1, 2],
 	}
