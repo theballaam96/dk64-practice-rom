@@ -250,7 +250,7 @@ def makeNewGeoFile(reference: str, map_index: int):
         return
     else:
         ref_data, verts = getFile(reference, map_index)
-    getFile("geometry", map_index)
+    getFile("geometry", 0)
     with open(temp_name, "rb") as fh:
         with open(getFileName(map_index), "w+b") as fg:
             fh.seek(0x34)
@@ -456,5 +456,9 @@ def makeNewGeoFile(reference: str, map_index: int):
                 if cv < 0:
                     cv += 65536
                 fg.write(cv.to_bytes(2, "big"))
+    getFile("geometry", map_index)
+    with open(temp_name, "rb") as fh:
+        with open(getFileName(map_index), "r+b") as fg:
+            fg.write(fh.read(0x30))
 
-makeNewGeoFile("both",0)
+makeNewGeoFile("both",0x2A)

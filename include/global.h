@@ -197,6 +197,11 @@ extern void cancelTextbox(void);
 extern int* displayFloors(int* dl);
 extern void openInfinitesMenu(void);
 
+extern void toggleFreecam(void);
+extern int getFreecamState(void);
+extern int* showFreecamAttributes(int* dl);
+extern void setFreecam(int value);
+
 extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);
 extern void finishLoadingArcadeState(void);
@@ -238,6 +243,7 @@ extern void handlePlayerCollision(void);
 extern void resetQuadCache(void);
 extern int getCollisionModel(int subtype, int drawmode);
 
+extern void applyButtonBans_New(subinput_struct* input);
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

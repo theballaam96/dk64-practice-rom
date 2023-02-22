@@ -1,4 +1,4 @@
-heap_size = 0x25000;
+heap_size = 0x28000;
 
 def getHeapLocation(offset):
 	return heap_size + offset;

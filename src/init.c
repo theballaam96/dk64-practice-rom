@@ -68,6 +68,9 @@ void initHack(int source) {
 			for (int i = 0; i < WatchCount; i++) {
 				ViewedSnagWatches[i] = -1;
 			}
+			*(int*)(0x8060AD7C) = 0x0C000000 | (((int)&applyButtonBans_New & 0xFFFFFF) >> 2); // Change write
+			*(int*)(0x8060ADA0) = 0x0C000000 | (((int)&applyButtonBans_New & 0xFFFFFF) >> 2); // Change write
+			*(int*)(0x8060AE40) = 0x0C000000 | (((int)&applyButtonBans_New & 0xFFFFFF) >> 2); // Change write
 			loadExtraHooks();
 			if (StoredSettings.console > 0) {
 				DestMap = 0x50;

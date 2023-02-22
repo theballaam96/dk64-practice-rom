@@ -1176,6 +1176,7 @@ void handleWatch(void) {
 							watch_cache_array[j][0] = WATCH_2015FILE_INDEX;
 							watch_cache_array[j][1] = file_slot_index;
 						}
+						break;
 					case WATCH_TAGKICKOUT_INDEX:
 						// Lowest Tag Kickout Timer
 						{

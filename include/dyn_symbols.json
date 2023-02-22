@@ -3,9 +3,9 @@
 		{
 			"name":"customCodeStart",
 			"versions":{
-				"us":"0x805d5e00",
-				"pal":"0x805cee00",
-				"jp":"0x805d3600"
+				"us":"0x805d2e00",
+				"pal":"0x805cbe00",
+				"jp":"0x805d0600"
 			}
 		},
 		{
@@ -19,17 +19,17 @@
 		{
 			"name":"customCodeLower",
 			"versions":{
-				"us":"0x5e00",
-				"pal":"0xee00",
-				"jp":"0x3600"
+				"us":"0x2e00",
+				"pal":"0xbe00",
+				"jp":"0x600"
 			}
 		},
 		{
 			"name":"customCodeSize",
 			"versions":{
-				"us":"0x25000",
-				"pal":"0x25000",
-				"jp":"0x25000"
+				"us":"0x28000",
+				"pal":"0x28000",
+				"jp":"0x28000"
 			}
 		}
 	]

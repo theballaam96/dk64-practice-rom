@@ -423,7 +423,10 @@ typedef struct GiantKoshaData {
 
 typedef struct SwapObjectData {
 	/* 0x000 */ char unk_00[0x210];
-	/* 0x210 */ floatPos cameraPositions[4];
+	/* 0x210 */ floatPos camera_position;
+	/* 0x21C */ floatPos camera_render_point;
+	/* 0x228 */ floatPos camera_focus_point;
+	/* 0x234 */ floatPos camera_unk_position;
 	/* 0x240 */ char unk_21C[0x284-0x240];
 	/* 0x284 */ float near;
 	/* 0x288 */ char unk_288[0x29C-0x288];
@@ -1184,3 +1187,8 @@ typedef struct tag_paad {
 	/* 0x03A */ char unk3A[0x3C - 0x3A];
 	/* 0x03C */ int kickout_timer;
 } tag_paad;
+
+typedef struct subinput_struct {
+    /* 0x000 */ Controller controller;
+    /* 0x004 */ int unk4;
+} subinput_struct;

@@ -434,11 +434,18 @@ void loadVars(int instant_load) {
 			Player->skew_angle = states[_focused_state]->skew_angle;
 			Player->floor = states[_focused_state]->floor;
 			if (SwapObject) {
-				for (int i = 0; i < 4; i++) {
-					SwapObject->cameraPositions[i].xPos = states[_focused_state]->cameraPos.xPos;
-					SwapObject->cameraPositions[i].yPos = states[_focused_state]->cameraPos.yPos;
-					SwapObject->cameraPositions[i].zPos = states[_focused_state]->cameraPos.zPos;
-				}
+				SwapObject->camera_position.xPos = states[_focused_state]->cameraPos.xPos;
+				SwapObject->camera_position.yPos = states[_focused_state]->cameraPos.yPos;
+				SwapObject->camera_position.zPos = states[_focused_state]->cameraPos.zPos;
+				SwapObject->camera_render_point.xPos = states[_focused_state]->cameraPos.xPos;
+				SwapObject->camera_render_point.yPos = states[_focused_state]->cameraPos.yPos;
+				SwapObject->camera_render_point.zPos = states[_focused_state]->cameraPos.zPos;
+				SwapObject->camera_focus_point.xPos = states[_focused_state]->cameraPos.xPos;
+				SwapObject->camera_focus_point.yPos = states[_focused_state]->cameraPos.yPos;
+				SwapObject->camera_focus_point.zPos = states[_focused_state]->cameraPos.zPos;
+				SwapObject->camera_unk_position.xPos = states[_focused_state]->cameraPos.xPos;
+				SwapObject->camera_unk_position.yPos = states[_focused_state]->cameraPos.yPos;
+				SwapObject->camera_unk_position.zPos = states[_focused_state]->cameraPos.zPos;
 			}
 			if (Camera) {
 				Camera->viewportX = states[_focused_state]->cameraPos.xPos;
@@ -568,9 +575,9 @@ void savestateHandler(int action) {
 						states[_focused_state]->stored_damage = StoredDamage;
 						states[_focused_state]->rng = RNG;
 						if (SwapObject) {
-							states[_focused_state]->cameraPos.xPos = SwapObject->cameraPositions[0].xPos;
-							states[_focused_state]->cameraPos.yPos = SwapObject->cameraPositions[0].yPos;
-							states[_focused_state]->cameraPos.zPos = SwapObject->cameraPositions[0].zPos;
+							states[_focused_state]->cameraPos.xPos = SwapObject->camera_position.xPos;
+							states[_focused_state]->cameraPos.yPos = SwapObject->camera_position.yPos;
+							states[_focused_state]->cameraPos.zPos = SwapObject->camera_position.zPos;
 						}
 						if (Camera) {
 							states[_focused_state]->camera_rotation = Camera->viewportRotation;
@@ -908,11 +915,18 @@ void savestateLoadMapLoadVars(void) {
 			if (states[state]->tag_global.is_locked) {
 				Player->camera_pointer->camera_state = 9;
 				if (SwapObject) {
-					for (int i = 0; i < 4; i++) {
-						SwapObject->cameraPositions[i].xPos = states[state]->cameraPos.xPos;
-						SwapObject->cameraPositions[i].yPos = states[state]->cameraPos.yPos;
-						SwapObject->cameraPositions[i].zPos = states[state]->cameraPos.zPos;
-					}
+					SwapObject->camera_position.xPos = states[state]->cameraPos.xPos;
+					SwapObject->camera_position.yPos = states[state]->cameraPos.yPos;
+					SwapObject->camera_position.zPos = states[state]->cameraPos.zPos;
+					SwapObject->camera_render_point.xPos = states[state]->cameraPos.xPos;
+					SwapObject->camera_render_point.yPos = states[state]->cameraPos.yPos;
+					SwapObject->camera_render_point.zPos = states[state]->cameraPos.zPos;
+					SwapObject->camera_focus_point.xPos = states[state]->cameraPos.xPos;
+					SwapObject->camera_focus_point.yPos = states[state]->cameraPos.yPos;
+					SwapObject->camera_focus_point.zPos = states[state]->cameraPos.zPos;
+					SwapObject->camera_unk_position.xPos = states[state]->cameraPos.xPos;
+					SwapObject->camera_unk_position.yPos = states[state]->cameraPos.yPos;
+					SwapObject->camera_unk_position.zPos = states[state]->cameraPos.zPos;
 				}
 				if (Camera) {
 					Camera->viewportX = states[state]->cameraPos.xPos;

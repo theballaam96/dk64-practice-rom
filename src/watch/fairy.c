@@ -68,8 +68,8 @@ void controlFairyViewer(void) {
 			show_dot = 1;
 			if (Player) {
 				if ((Player->control_state > 1) && ((Player->control_state < 6) || (Player->control_state == 100)) && (CutsceneActive == 0)) {
-					xDist = SwapObject->cameraPositions[0].xPos - FairyViewerFocus->xPos;
-					zDist = SwapObject->cameraPositions[0].zPos - FairyViewerFocus->zPos;
+					xDist = SwapObject->camera_position.xPos - FairyViewerFocus->xPos;
+					zDist = SwapObject->camera_position.zPos - FairyViewerFocus->zPos;
 					if (Player->control_state != 100) {
 						actorData* vehicle = Player->vehicle_actor_pointer;
 						int pass = 1;

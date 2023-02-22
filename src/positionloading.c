@@ -25,9 +25,9 @@ void handlePositionSavestates(void) {
 						pos_states[_focused_state]->yPos = Player->yPos;
 						pos_states[_focused_state]->zPos = Player->zPos;
 						if (SwapObject) {
-							pos_states[_focused_state]->xCamera = SwapObject->cameraPositions[0].xPos;
-							pos_states[_focused_state]->yCamera = SwapObject->cameraPositions[0].yPos;
-							pos_states[_focused_state]->zCamera = SwapObject->cameraPositions[0].zPos;
+							pos_states[_focused_state]->xCamera = SwapObject->camera_position.xPos;
+							pos_states[_focused_state]->yCamera = SwapObject->camera_position.yPos;
+							pos_states[_focused_state]->zCamera = SwapObject->camera_position.zPos;
 						}
 						if (Camera) {
 							pos_states[_focused_state]->cameraRotation = Camera->viewportRotation;
@@ -70,11 +70,18 @@ void handlePositionSavestates(void) {
 								Player->zPos = pos_states[_focused_state]->zPos;
 								Player->floor = pos_states[_focused_state]->yFloor;
 								if (SwapObject) {
-									for (int i = 0; i < 4; i++) {
-										SwapObject->cameraPositions[i].xPos = pos_states[_focused_state]->xCamera;
-										SwapObject->cameraPositions[i].yPos = pos_states[_focused_state]->yCamera;
-										SwapObject->cameraPositions[i].zPos = pos_states[_focused_state]->zCamera;
-									}
+									SwapObject->camera_position.xPos = pos_states[_focused_state]->xCamera;
+									SwapObject->camera_position.yPos = pos_states[_focused_state]->yCamera;
+									SwapObject->camera_position.zPos = pos_states[_focused_state]->zCamera;
+									SwapObject->camera_render_point.xPos = pos_states[_focused_state]->xCamera;
+									SwapObject->camera_render_point.yPos = pos_states[_focused_state]->yCamera;
+									SwapObject->camera_render_point.zPos = pos_states[_focused_state]->zCamera;
+									SwapObject->camera_focus_point.xPos = pos_states[_focused_state]->xCamera;
+									SwapObject->camera_focus_point.yPos = pos_states[_focused_state]->yCamera;
+									SwapObject->camera_focus_point.zPos = pos_states[_focused_state]->zCamera;
+									SwapObject->camera_unk_position.xPos = pos_states[_focused_state]->xCamera;
+									SwapObject->camera_unk_position.yPos = pos_states[_focused_state]->yCamera;
+									SwapObject->camera_unk_position.zPos = pos_states[_focused_state]->zCamera;
 								}
 								if (Camera) {
 									Camera->viewportX = pos_states[_focused_state]->xCamera;

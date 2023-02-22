@@ -35,7 +35,6 @@ static int snake_direction = 0; // Right, bottom, left, top
 #define SNAKE_SQUARE_SIZE 8
 
 void updateSnake(void) {
-	int rng = getRNGLower31() & 7;
 	int target_direction = 0;
 	if (snake_y[0] < fruit_y) {
 		target_direction = 1;

@@ -2,6 +2,8 @@
 
 static const char cheats_instantskew[] = "ACQUIRE REGULAR SKEW";
 static const char cheats_instantskew_inverse[] = "ACQUIRE CANNON SKEW";
+static const char cheats_freecam_on[] = "} FREECAM";
+static const char cheats_freecam_off[] = "{ FREECAM";
 //static const char cheats_killboss[] = "KILL BOSS";
 
 static const char* cheats_array[] = {
@@ -18,6 +20,7 @@ static const char* cheats_array[] = {
 	"FORCE END MINIGAME",
 	"TRANSFORM",
 	"HELM TIMER CONTROL",
+	cheats_freecam_off,
 };
 
 void openCheatsMenu(void) {
@@ -27,6 +30,11 @@ void openCheatsMenu(void) {
 		} else {
 			cheats_array[3] = cheats_instantskew;
 		}
+	}
+	if (getFreecamState()) {
+		cheats_array[13] = cheats_freecam_on;
+	} else {
+		cheats_array[13] = cheats_freecam_off;
 	}
 	changeMenu(ACTIVEMENU_SCREEN_CHEATS_ROOT);
 }
@@ -56,12 +64,13 @@ static const int cheats_functions[] = {
 	(int)&endMinigame,
 	(int)&openTransformMenu,
 	(int)&openHelmControl,
+	(int)&toggleFreecam,
 };
 
 const Screen cheats_struct = {
 	.TextArray = (int*)cheats_array,
 	.FunctionArray = cheats_functions,
-	.ArrayItems = 13,
+	.ArrayItems = 14,
 	.ParentScreen = ACTIVEMENU_SCREEN_ROOT,
 	.ParentPosition = 8
 };

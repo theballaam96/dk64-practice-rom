@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 121/133(90.98%)
+		Functions: 121/136(88.97%)
 		Vanilla Vars: 167/176(94.89%)
 		Hack Vars: 116/116(100.0%)
 		Code: 58/62(93.55%)
-		Overall: 462/487(94.87%)
+		Overall: 462/490(94.29%)
 */
 
 //functions
@@ -87,6 +87,9 @@
 .definelabel loadExits, 0x806C3550
 .definelabel updateModel2Allowances, 0x8062B2CC
 .definelabel handleSetup, 0x80681B20
+//.definelabel getControllerContainer
+//.definelabel determineZRatioMovement
+//.definelabel determineXRatioMovement
 .definelabel ObjectModel2Something, 0x8065D1C0
 .definelabel loadEnemies, 0x8071F2C8
 .definelabel extraEnemyParser, 0x80664864
@@ -506,7 +509,7 @@
 //.definelabel parentCheckBypassHookWrite
 //.definelabel initHookWrite
 
-.definelabel customCodeStart, 0x805cee00
+.definelabel customCodeStart, 0x805cbe00
 .definelabel customCodeUpper, 0x805c
-.definelabel customCodeLower, 0xee00
-.definelabel customCodeSize, 0x25000
+.definelabel customCodeLower, 0xbe00
+.definelabel customCodeSize, 0x28000

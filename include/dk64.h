@@ -136,6 +136,9 @@ extern int* displayImage(int* dl, int texture_index, int unk3, codecs codec_inde
 extern void getScreenPosition(float x, float y, float z, float* x_store, float* y_store, int unk8, float scale, char player_index);
 extern int* textDraw(int* dl, int style, int x, int y, char* str);
 extern void renderActor(void* actor, int unk0);
+extern void getControllerContainer(void* input);
+extern float determineXRatioMovement(int angle);
+extern float determineZRatioMovement(int angle);
 
 //vanilla data
 extern float TransitionSpeed;

@@ -103,6 +103,8 @@ void cFuncLoop(void) {
 		savestateLoadMapLoadVars(); // LoadVarsOnMapLoad
 		fileStateMapLoadVars();
 		loadMapVars_0();
+		setFreecam(0);
+		*(int*)(0x8063FA48) = 0x27BDFF38;
 	}
 	SavePromptIsSaving = 0;
 	displayInput(); // Constant
@@ -170,6 +172,7 @@ int* displayListModifiers(int* dl) {
 		dl = drawPixelTextContainer(dl, 185, 207, (char *)stateLoadstr, 0xFF, 0xFF, 0xFF, 0xFF, 1);
 	}
 	dl = displaySavePrompt(dl);
+	dl = showFreecamAttributes(dl);
 	if (NoVacantWatchTimer > 0) {
 		dl = drawPixelTextContainer(dl, 130, 207, "NO VACANT WATCH SLOTS", 0xFF, 0xFF, 0xFF, 0xFF, 1);
 	}

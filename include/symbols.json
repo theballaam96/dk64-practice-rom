@@ -581,6 +581,24 @@
 		  }
 	   },
 	   {
+		  "name":"getControllerContainer",
+		  "versions":{
+			 "us":"0x8060AC34"
+		  }
+	   },
+	   {
+		  "name":"determineZRatioMovement",
+		  "versions":{
+			 "us":"0x80612790"
+		  }
+	   },
+	   {
+		  "name":"determineXRatioMovement",
+		  "versions":{
+			 "us":"0x80612794"
+		  }
+	   },
+	   {
 		  "name":"ObjectModel2Something",
 		  "versions":{
 			 "us":"0x80663DA0",
