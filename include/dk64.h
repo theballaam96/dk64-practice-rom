@@ -139,6 +139,7 @@ extern void renderActor(void* actor, int unk0);
 extern void getControllerContainer(void* input);
 extern float determineXRatioMovement(int angle);
 extern float determineZRatioMovement(int angle);
+extern void lagHookWrite(void);
 
 //vanilla data
 extern float TransitionSpeed;

@@ -72,6 +72,7 @@ void initHack(int source) {
 			*(int*)(0x8060ADA0) = 0x0C000000 | (((int)&applyButtonBans_New & 0xFFFFFF) >> 2); // Change write
 			*(int*)(0x8060AE40) = 0x0C000000 | (((int)&applyButtonBans_New & 0xFFFFFF) >> 2); // Change write
 			loadExtraHooks();
+			*(int*)(0x805FC19C) = 0x0C000000 | (((int)&handleLagCalculation & 0xFFFFFF) >> 2); // Change write
 			if (StoredSettings.console > 0) {
 				DestMap = 0x50;
 			}

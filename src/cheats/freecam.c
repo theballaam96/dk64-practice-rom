@@ -43,7 +43,7 @@ int* showFreecamAttributes(int* dl) {
     return dl;
 }
 
-#define POS_CHANGE 10
+#define POS_CHANGE 20
 #define FOCUS_DIFF 100
 
 int deg_to_dk64u(float deg) {
@@ -57,6 +57,12 @@ float dk64u_to_deg(int dk64u) {
     deg *= 360;
     deg /= 4096;
     return deg;
+}
+
+void applyStickThresholds(int* value) {
+    if ((*value > -5) && (*value < 5)) {
+        *value = 0;
+    }
 }
 
 void newCameraCode(void) {
@@ -74,6 +80,10 @@ void newCameraCode(void) {
         - Stick: Change Position
         - C-Buttons: Change angle
     */
+    int stick_x = ControllerInput.stickX;
+    int stick_y = ControllerInput.stickY;
+    applyStickThresholds(&stick_x);
+    applyStickThresholds(&stick_y);
     if (kong_frozen) {
         if (SwapObject) {
             if (ControllerInput.Buttons & A_Button) {
@@ -99,12 +109,12 @@ void newCameraCode(void) {
                 }
                 Camera->viewportXRotation = dk64u_to_deg(y_rot);
             }
-            Camera->viewportRotation = (Camera->viewportRotation - ControllerInput.stickX) % 4096;
+            Camera->viewportRotation = (Camera->viewportRotation - stick_x) % 4096;
             // Change Position
             float x_ratio = determineXRatioMovement(Camera->viewportRotation);
             float z_ratio = determineZRatioMovement(Camera->viewportRotation);
-            float x_diff = x_ratio * (ControllerInput.stickY >> 3);
-            float z_diff = z_ratio * (ControllerInput.stickY >> 3);
+            float x_diff = x_ratio * (stick_y >> 3);
+            float z_diff = z_ratio * (stick_y >> 3);
             SwapObject->camera_position.xPos += x_diff;
             SwapObject->camera_position.zPos += z_diff;
             // Fix focus point

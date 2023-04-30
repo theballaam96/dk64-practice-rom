@@ -201,6 +201,7 @@ extern void toggleFreecam(void);
 extern int getFreecamState(void);
 extern int* showFreecamAttributes(int* dl);
 extern void setFreecam(int value);
+extern void handleLagCalculation(void);
 
 extern void toggleArcadeMenu(void);
 extern void controlArcadeMenuActions(void);
