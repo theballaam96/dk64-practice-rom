@@ -26,6 +26,7 @@ extern int getTimestampDiff(unsigned int major, unsigned int minor);
 extern void patchHook(unsigned int hook_rdram_location, int offset_in_hook_list, char hook_byte_size);
 extern void* dk_memcpy(void* _dest, void* _src, int size);
 extern void getTimestampDiffInTicks(unsigned int major, unsigned int minor);
+extern void logTimestampInternal(void);
 extern int timestampDiffToMilliseconds(unsigned int major, unsigned int minor);
 extern void timestampAdd(int* timestamp1, int* timestamp2);
 extern void SaveToGlobal();
@@ -119,6 +120,9 @@ extern void __osPiRawReadIo(int a0, void* a1);
 extern int __osDisableInt();
 extern void __osRestoreInt(int mask);
 extern unsigned int __osVirtualToPhysical(void* addr);
+extern void __osPiGetAccess(void);
+extern void __osPiRelAccess(void);
+extern int __osGetCount(void);
 extern void copyFunc(int rom_offset, int size, void* write_location);
 extern void* getMapData(data_indexes data_idx, int _index, char compressbyte0, char compressbyte1);
 extern void loadSetup(void* setup_file, int unk0, int unk1);
@@ -140,6 +144,10 @@ extern void getControllerContainer(void* input);
 extern float determineXRatioMovement(int angle);
 extern float determineZRatioMovement(int angle);
 extern void lagHookWrite(void);
+extern void handleController(void);
+extern void renderFrame(void);
+
+extern void CrashHandler(void* data);
 
 //vanilla data
 extern float TransitionSpeed;

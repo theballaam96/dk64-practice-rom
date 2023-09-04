@@ -1,5 +1,20 @@
 #include "../include/common.h"
 
+void updateActiveMenu(void) {
+	changeCustomFlagVariable(); // Active Menu Open
+	moveSlot(); // Active Menu Open
+	confirmOption(); // Active Menu Open
+	menuShortcutButtons(); // Active Menu Open
+	shouldRefreshTOMenu(); // Active Menu Open
+	runTest(); // Active Menu Open
+	toggleSelectedActor(); // Active Menu Open
+	customHideHUD();
+	hideRacePosition(0);
+	if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_DEBUG_ACTORDETAILS) {
+		updateActorScreen();
+	}
+}
+
 void cFuncLoop(void) {
 	ClosingMenu = 0;
 	IsPauseMenuOpen = 0;
@@ -14,18 +29,7 @@ void cFuncLoop(void) {
 		controlConsoleMenu();
 	} else {
 		if (ActiveMenu.isOpen) {
-			changeCustomFlagVariable(); // Active Menu Open
-			moveSlot(); // Active Menu Open
-			confirmOption(); // Active Menu Open
-			menuShortcutButtons(); // Active Menu Open
-			shouldRefreshTOMenu(); // Active Menu Open
-			runTest(); // Active Menu Open
-			toggleSelectedActor(); // Active Menu Open
-			customHideHUD();
-			hideRacePosition(0);
-			if (ActiveMenu.screenIndex == ACTIVEMENU_SCREEN_DEBUG_ACTORDETAILS) {
-				updateActorScreen();
-			}
+			updateActiveMenu();
 		} else {
 			if (ClosingMenu == 0) {
 				levitate(); // Active Menu Closed
@@ -111,10 +115,12 @@ void cFuncLoop(void) {
 	parseLoadingZones();
 	handlePlayerCollision();
 	controlGuardSpheres();
-	if (DisablePositionButtons == 1) {
-		toggleFrameAdvanceState(); // DisablePositionButtons == 1
-		initFrameAdvance(); // DisablePositionButtons == 1
-		exitFrameAdvance(); // DisablePositionButtons == 1
+	if (!USE_TRUE_FRAMEADVANCE) {
+		if (DisablePositionButtons == 1) {
+			toggleFrameAdvanceState(); // DisablePositionButtons == 1
+			initFrameAdvance(); // DisablePositionButtons == 1
+			exitFrameAdvance(); // DisablePositionButtons == 1
+		}
 	}
 	if (DisableForcedStorySkip == 0) {
 		StorySkip = 1;
@@ -128,6 +134,9 @@ void cFuncLoop(void) {
 	changeTimer_spawnTimer(); // ConvertTimerCountdown > 0
 	controlFairyViewer(); // FairyViewerOpen
 	controlLightning();
+	if (USE_TRUE_FRAMEADVANCE) {
+		newFrameAdvance();
+	}
 };
 
 void arcadeFuncLoop(void) {

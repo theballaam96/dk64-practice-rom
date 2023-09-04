@@ -93,3 +93,71 @@ void exitFrameAdvance(void) {
 		}
 	}
 }
+
+int checkFAInput(void) {
+	if (DisablePositionButtons == 1) {
+		if ((ActiveMenu.isOpen == 0) && (RAMDisplayOpen == 0)) {
+			if (ClosingMenu == 0) {
+				if (NewlyPressedControllerInput.Buttons & D_Right) {
+					ArtificialPauseOn = 1 ^ ArtificialPauseOn;
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
+void setFrozenState(int state) {
+	*(int*)(0xA4600024) = 0x05;
+	*(int*)(0xA4600024) = 0x0C;
+	*(int*)(0xA4600024) = 0x0D;
+	*(int*)(0xA4600024) = 0x02;
+	__osPiGetAccess();
+	if (*(int*)(0xA4600010) & 3) {
+		while (*(int*)(0xA4600010) & 3) {}
+	}
+	if (state == 0) {
+		*(int*)(0xAFF70000) = 0;
+	} else {
+		*(int*)(0xAFF70000) = -1;
+	}
+	__osPiRelAccess();
+}
+
+void PracticeMenuControls(void) {
+	if (ActiveMenu.isOpen) {
+		updateActiveMenu();
+	}
+	toggleMenu();
+}
+
+void newFrameAdvance(void) {
+	int altered = checkFAInput();
+	int ts_lo = 0;
+	int ts_hi = 0;
+	if ((altered) && (ArtificialPauseOn)) {
+		setFrozenState(1);
+		// Store Timestamp
+		int disable = __osDisableInt();
+		__osGetCount();
+		ts_hi = CurrentTimestampMajor;
+		ts_lo = CurrentTimestampMinor;
+		__osRestoreInt(disable);
+	}
+	while (ArtificialPauseOn) {
+		renderFrame();
+		handleController();
+		//PracticeMenuControls();
+		FrameLag = FrameReal; // Fix Arbitrary Lag Boosting
+		if (!altered) {
+			checkFAInput();
+		}
+		if (!ArtificialPauseOn) {
+			setFrozenState(0);
+			CurrentTimestampMajor = ts_hi;
+			CurrentTimestampMinor = ts_lo;
+		}
+		altered = 0;
+	}
+}

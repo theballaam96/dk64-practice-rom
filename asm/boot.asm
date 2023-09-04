@@ -197,6 +197,17 @@ timestampAdd:
 	JR 		ra
 	SD 		t0, lo(TempTimestampStorageMajor) (t6)
 
+logTimestampInternal:
+	ADDIU 	sp, sp, -0xA8
+	SW 		ra, 0x4C (sp)
+	JAL 	getTimestamp
+	SW 		a1, 0x44 (sp)
+	SW 		v0, TempTimestampStorageMajor
+	SW 		v1, TempTimestampStorageMinor
+	LW 		ra, 0x4C (SP)
+	JR 		ra
+	ADDIU 	sp, sp, 0xA8
+
 bootSpeedupFunc:
 	JAL bootSpeedup
 	NOP

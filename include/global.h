@@ -245,6 +245,14 @@ extern void resetQuadCache(void);
 extern int getCollisionModel(int subtype, int drawmode);
 
 extern void applyButtonBans_New(subinput_struct* input);
+extern void newFrameAdvance(void);
+extern void updateActiveMenu(void);
+
+extern void initTS(void);
+extern void ts_debug(void);
+extern void ts_save(void);
+extern void ts_frameloop(void);
+extern void ts_vimgrmain(void);
 
 extern const Screen* menu_screens[];
 extern const MapWarp* warping_struct[WarpScreens];

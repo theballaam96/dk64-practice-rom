@@ -509,6 +509,24 @@
 		  }
 	   },
 	   {
+		"name":"__osPiGetAccess",
+		"versions":{
+		   "us":"0x8000BB00"
+		}
+	   },
+	   {
+		"name":"__osPiRelAccess",
+		"versions":{
+		   "us":"0x8000BB44"
+		}
+	   },
+	   {
+		"name":"__osGetCount",
+		"versions":{
+		   "us":"0x8000A360"
+		}
+	   },
+	   {
 		  "name":"copyFunc",
 		  "versions":{
 			 "us":"0x805FB750",
@@ -593,9 +611,27 @@
 		  }
 	   },
 	   {
+		  "name":"CrashHandler",
+		  "versions":{
+			 "us":"0x80731E68"
+		  }
+	   },
+	   {
 		  "name":"determineXRatioMovement",
 		  "versions":{
 			 "us":"0x80612794"
+		  }
+	   },
+	   {
+		  "name":"handleController",
+		  "versions":{
+			 "us":"0x8060AC7C"
+		  }
+	   },
+	   {
+		  "name":"renderFrame",
+		  "versions":{
+			 "us":"0x8060A9BC"
 		  }
 	   },
 	   {

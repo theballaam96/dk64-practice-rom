@@ -24,5 +24,8 @@
 #include "screens_list.h"
 #include "vars.h"
 #include "watch_list.h"
+#include "macro.h"
+#include "hooks.h"
+#define USE_TRUE_FRAMEADVANCE 0
 
 #endif

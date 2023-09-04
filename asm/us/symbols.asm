@@ -4,11 +4,11 @@
 	To make amendments, see include/symbols.json and build/symbols_generator.py.
 	Thanks.
 	Stats:
-		Functions: 136/136(100.0%)
+		Functions: 142/142(100.0%)
 		Vanilla Vars: 176/176(100.0%)
 		Hack Vars: 116/116(100.0%)
 		Code: 62/62(100.0%)
-		Overall: 490/490(100.0%)
+		Overall: 496/496(100.0%)
 */
 
 //functions
@@ -78,6 +78,9 @@
 .definelabel __osDisableInt, 0x80009020
 .definelabel __osRestoreInt, 0x80009040
 .definelabel __osVirtualToPhysical, 0x80008FA0
+.definelabel __osPiGetAccess, 0x8000BB00
+.definelabel __osPiRelAccess, 0x8000BB44
+.definelabel __osGetCount, 0x8000A360
 .definelabel copyFunc, 0x805FB750
 .definelabel getMapData, 0x8066B0F8
 .definelabel loadSetup, 0x806886E0
@@ -89,7 +92,10 @@
 .definelabel handleSetup, 0x806886E0
 .definelabel getControllerContainer, 0x8060AC34
 .definelabel determineZRatioMovement, 0x80612790
+.definelabel CrashHandler, 0x80731E68
 .definelabel determineXRatioMovement, 0x80612794
+.definelabel handleController, 0x8060AC7C
+.definelabel renderFrame, 0x8060A9BC
 .definelabel ObjectModel2Something, 0x80663DA0
 .definelabel loadEnemies, 0x80724C78
 .definelabel extraEnemyParser, 0x8066B434

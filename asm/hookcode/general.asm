@@ -535,3 +535,26 @@
 		J 			initHookWrite+0x8
 		NOP
 		
+	ts_debughook:
+		jal 		ts_debug
+		nop
+		j 			0x8060EED0
+		lw 			$a0, 0x68 ($sp)
+
+	ts_savehook:
+		jal 		ts_save
+		nop
+		j 			0x8060e158
+		or 			$a0, $s0, $zero
+
+	ts_frameloopend:
+		jal 		ts_frameloop
+		nop
+		j 			0x805FC094
+		sb 			$t4, 0x44F0 ($at)
+		
+	ts_vimgrhook:
+		jal 		ts_vimgrmain
+		nop
+		j 			0x80004E84
+		sw 			$t7, 0x4 ($s1)
